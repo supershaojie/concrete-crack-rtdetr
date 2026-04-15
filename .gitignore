@@ -1,0 +1,33 @@
+# dataset images and labels
+datasets/crack_det/images/
+datasets/crack_det/labels/
+
+# training outputs
+runs/
+**/runs/
+
+# model weights
+*.pt
+*.pth
+*.onnx
+*.engine
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.cache
+
+# package metadata
+*.egg-info/
+
+# IDE settings
+.idea/
+.vscode/
+
+# logs
+*.log
+
+# system files
+.DS_Store
+Thumbs.db
