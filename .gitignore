@@ -1,33 +1,81 @@
-# dataset images and labels
+# =========================
+# IDE / Editor
+# =========================
+.idea/
+.vscode/
+ultralytics-main/.idea/
+datasets/.idea/
+
+# =========================
+# Python cache
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Virtual environments
+# =========================
+venv/
+.venv/
+env/
+conda-env/
+
+# =========================
+# Local datasets
+# =========================
+datasets/crack_raw/
 datasets/crack_det/images/
 datasets/crack_det/labels/
 
-# training outputs
-runs/
-**/runs/
+# Ignore image files globally to avoid uploading datasets accidentally
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.tif
+*.tiff
 
-# model weights
+# =========================
+# Logs and outputs
+# =========================
+logs/
+runs/
+outputs/
+checkpoints/
+weights/
+ultralytics-main/runs/
+ultralytics-main/logs/
+ultralytics-main/weights/
+
+# =========================
+# Model weights
+# =========================
 *.pt
 *.pth
 *.onnx
 *.engine
+*.ckpt
+*.safetensors
 
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
-*.cache
-
-# package metadata
+# =========================
+# Build / package artifacts
+# =========================
 *.egg-info/
+ultralytics-main/ultralytics.egg-info/
+build/
+dist/
 
-# IDE settings
-.idea/
-.vscode/
+# =========================
+# Optional Ultralytics official project files
+# Not necessary for your research project
+# =========================
+ultralytics-main/.github/
+ultralytics-main/docker/
+ultralytics-main/docs/
 
-# logs
-*.log
-
-# system files
+# =========================
+# System files
+# =========================
 .DS_Store
 Thumbs.db
