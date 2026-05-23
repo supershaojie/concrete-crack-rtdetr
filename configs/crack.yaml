@@ -1,4 +1,4 @@
-path: D:/MyProjects/Crack_REDETR/datasets/crack_det
+path: D:/MyProjects/Crack_RTDETR/datasets/crack_det
 train: images/train
 val: images/val
 test: images/test

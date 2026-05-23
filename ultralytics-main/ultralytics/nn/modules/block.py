@@ -526,9 +526,9 @@ class ResNetBlock(nn.Module):
         """
         super().__init__()
         c3 = e * c2
-        self.cv1 = Conv(c1, c2, k=1, s=1, act=True)
-        self.cv2 = Conv(c2, c2, k=3, s=s, p=1, act=True)
-        self.cv3 = Conv(c2, c3, k=1, act=False)
+        self.cv1 = Conv(c1, c2, k=3 if e == 1 else 1, s=s if e == 1 else 1, p=1 if e == 1 else None, act=True)
+        self.cv2 = Conv(c2, c2, k=3, s=1 if e == 1 else s, p=1, act=False if e == 1 else True)
+        self.cv3 = nn.Identity() if e == 1 else Conv(c2, c3, k=1, act=False)
         self.shortcut = nn.Sequential(Conv(c1, c3, k=1, s=s, act=False)) if s != 1 or c1 != c3 else nn.Identity()
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:

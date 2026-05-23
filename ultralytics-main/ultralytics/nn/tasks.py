@@ -1673,7 +1673,7 @@ def parse_model(d, ch, verbose=True):
                 args.insert(4, n)  # number of repeats
                 n = 1
         elif m is ResNetLayer:
-            c2 = args[1] if args[3] else args[1] * 4
+            c2 = args[1] if args[3] else args[1] * (args[5] if len(args) > 5 else 4)
         elif m is torch.nn.BatchNorm2d:
             args = [ch[f]]
         elif m is Concat:
