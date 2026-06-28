@@ -1,182 +1,167 @@
-# -*- coding: utf-8 -*-
-"""
-check_image_label_pairs.py
+from __future__ import annotations
 
-功能：
-检查 images_renamed 和 labels_raw 是否对应。
-
-主要检查：
-1. 有图片但没有标签
-2. 有标签但没有图片
-3. YOLO 标签格式是否正常
-4. 前 700 张是否都有标签
-5. 701~1440 是否还没有标签或部分有标签
-"""
-
+from collections import Counter
 from pathlib import Path
-import csv
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[1]
 
-IMAGE_DIR = PROJECT_ROOT / "datasets" / "crack_raw" / "images_renamed"
-LABEL_DIR = PROJECT_ROOT / "datasets" / "crack_raw" / "labels_raw"
-META_DIR = PROJECT_ROOT / "datasets" / "crack_raw" / "meta"
+IMAGE_DIR = ROOT / "datasets" / "crack_raw" / "images_renamed"
+LABEL_DIR = ROOT / "datasets" / "crack_raw" / "labels_raw"
+LOG_DIR = ROOT / "logs"
 
-IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
+IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"}
+ALLOWED_CLASSES = {"0"}
 
-EXPECTED_OLD_LABEL_NUM = 700
 
+def check_label_file(label_path: Path) -> list[str]:
+    errors: list[str] = []
 
-def check_yolo_label(label_path: Path):
-    """
-    检查 YOLO bbox 标签格式：
-    class x_center y_center width height
+    lines = label_path.read_text(encoding="utf-8").splitlines()
 
-    每行 5 列；
-    class 是整数；
-    坐标在 0~1 范围内。
-    """
-    errors = []
+    for line_no, line in enumerate(lines, start=1):
+        line = line.strip()
 
-    text = label_path.read_text(encoding="utf-8").strip()
+        if not line:
+            continue
 
-    # 空标签不一定是错，有些图片可能无目标。
-    # 但裂缝检测通常每张图都有裂缝，所以这里只记录为空。
-    if text == "":
-        errors.append("empty_label")
-        return errors
-
-    lines = text.splitlines()
-
-    for line_idx, line in enumerate(lines, start=1):
-        parts = line.strip().split()
+        parts = line.split()
 
         if len(parts) != 5:
-            errors.append(f"line_{line_idx}: column_count_not_5")
+            errors.append(f"{label_path.name} line {line_no}: expected 5 values, got {len(parts)}")
             continue
 
         cls, x, y, w, h = parts
 
-        try:
-            cls_int = int(cls)
-        except Exception:
-            errors.append(f"line_{line_idx}: class_not_int")
-            continue
+        if cls not in ALLOWED_CLASSES:
+            errors.append(f"{label_path.name} line {line_no}: invalid class id {cls}")
 
         try:
-            vals = [float(x), float(y), float(w), float(h)]
-        except Exception:
-            errors.append(f"line_{line_idx}: bbox_not_float")
+            x, y, w, h = map(float, (x, y, w, h))
+        except ValueError:
+            errors.append(f"{label_path.name} line {line_no}: bbox values are not numbers")
             continue
 
-        for name, value in zip(["x", "y", "w", "h"], vals):
-            if value < 0 or value > 1:
-                errors.append(f"line_{line_idx}: {name}_out_of_range_{value}")
-
-        if vals[2] <= 0 or vals[3] <= 0:
-            errors.append(f"line_{line_idx}: width_or_height_le_0")
+        if not (0 <= x <= 1 and 0 <= y <= 1 and 0 < w <= 1 and 0 < h <= 1):
+            errors.append(
+                f"{label_path.name} line {line_no}: bbox out of range "
+                f"x={x}, y={y}, w={w}, h={h}"
+            )
 
     return errors
 
 
-def main():
-    print("=" * 80)
-    print("检查图片和标签是否对应")
-    print("=" * 80)
-    print(f"图片目录: {IMAGE_DIR}")
-    print(f"标签目录: {LABEL_DIR}")
-    print("=" * 80)
+def main() -> None:
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
 
     if not IMAGE_DIR.exists():
-        raise FileNotFoundError(f"图片目录不存在: {IMAGE_DIR}")
+        raise FileNotFoundError(f"Image folder not found: {IMAGE_DIR}")
 
     if not LABEL_DIR.exists():
-        raise FileNotFoundError(f"标签目录不存在: {LABEL_DIR}")
-
-    META_DIR.mkdir(parents=True, exist_ok=True)
+        raise FileNotFoundError(f"Label folder not found: {LABEL_DIR}")
 
     image_files = sorted(
-        [p for p in IMAGE_DIR.iterdir() if p.is_file() and p.suffix.lower() in IMAGE_EXTS],
-        key=lambda x: x.name.lower()
+        p for p in IMAGE_DIR.iterdir()
+        if p.is_file() and p.suffix.lower() in IMAGE_EXTS
     )
 
     label_files = sorted(
-        [p for p in LABEL_DIR.iterdir() if p.is_file() and p.suffix.lower() == ".txt"],
-        key=lambda x: x.name.lower()
+        p for p in LABEL_DIR.iterdir()
+        if p.is_file() and p.suffix.lower() == ".txt"
     )
 
-    image_stems = {p.stem for p in image_files}
-    label_stems = {p.stem for p in label_files}
+    image_stems = Counter(p.stem for p in image_files)
+    label_stems = Counter(p.stem for p in label_files)
 
-    images_without_labels = sorted(image_stems - label_stems)
-    labels_without_images = sorted(label_stems - image_stems)
-    matched = sorted(image_stems & label_stems)
+    errors: list[str] = []
+    warnings: list[str] = []
 
-    print(f"图片数量: {len(image_files)}")
-    print(f"标签数量: {len(label_files)}")
-    print(f"图片和标签匹配数量: {len(matched)}")
-    print(f"有图片但没有标签数量: {len(images_without_labels)}")
-    print(f"有标签但没有图片数量: {len(labels_without_images)}")
+    duplicate_images = [stem for stem, count in image_stems.items() if count > 1]
+    duplicate_labels = [stem for stem, count in label_stems.items() if count > 1]
 
-    print("\n前 20 个没有标签的图片：")
-    for stem in images_without_labels[:20]:
-        print(f"  {stem}")
+    for stem in duplicate_images:
+        errors.append(f"duplicate image stem: {stem}")
 
-    print("\n前 20 个没有对应图片的标签：")
-    for stem in labels_without_images[:20]:
-        print(f"  {stem}")
+    for stem in duplicate_labels:
+        errors.append(f"duplicate label stem: {stem}")
 
-    # 检查前 700
-    missing_in_first_700 = []
-    for i in range(1, EXPECTED_OLD_LABEL_NUM + 1):
-        stem = f"crack_{i:05d}"
-        if stem not in image_stems:
-            missing_in_first_700.append((stem, "missing_image"))
-        elif stem not in label_stems:
-            missing_in_first_700.append((stem, "missing_label"))
+    for img_path in image_files:
+        label_path = LABEL_DIR / f"{img_path.stem}.txt"
 
-    print("\n前 700 张检查：")
-    if not missing_in_first_700:
-        print("  前 700 张图片和标签文件名全部对应。")
-    else:
-        print(f"  前 700 张存在问题数量: {len(missing_in_first_700)}")
-        for item in missing_in_first_700[:50]:
-            print(" ", item)
+        if not label_path.exists():
+            errors.append(f"missing label for image: {img_path.name}")
+            continue
 
-    # 检查标签格式
-    label_errors = []
+        label_errors = check_label_file(label_path)
+
+        if label_errors:
+            errors.extend(label_errors)
+
     for label_path in label_files:
-        errors = check_yolo_label(label_path)
+        if label_path.stem not in image_stems:
+            errors.append(f"label has no matching image: {label_path.name}")
+
+    empty_labels = []
+    total_boxes = 0
+
+    for label_path in label_files:
+        lines = [
+            line.strip()
+            for line in label_path.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
+
+        if not lines:
+            empty_labels.append(label_path.name)
+
+        total_boxes += len(lines)
+
+    if empty_labels:
+        warnings.append(f"empty label files: {len(empty_labels)}")
+
+    matched = len([img for img in image_files if (LABEL_DIR / f"{img.stem}.txt").exists()])
+
+    log_path = LOG_DIR / "01_check_dataset_log.txt"
+
+    with log_path.open("w", encoding="utf-8") as f:
+        f.write("Dataset check log\n")
+        f.write("=================\n\n")
+        f.write(f"Image dir: {IMAGE_DIR}\n")
+        f.write(f"Label dir: {LABEL_DIR}\n\n")
+        f.write(f"Images: {len(image_files)}\n")
+        f.write(f"Labels: {len(label_files)}\n")
+        f.write(f"Matched image-label pairs: {matched}\n")
+        f.write(f"Total boxes: {total_boxes}\n")
+        f.write(f"Empty label files: {len(empty_labels)}\n\n")
+
+        if warnings:
+            f.write("Warnings:\n")
+            for item in warnings:
+                f.write(f"- {item}\n")
+            f.write("\n")
+
         if errors:
-            label_errors.append({
-                "label": label_path.name,
-                "errors": "; ".join(errors)
-            })
+            f.write("Errors:\n")
+            for item in errors:
+                f.write(f"- {item}\n")
+        else:
+            f.write("No errors found.\n")
 
-    print("\n标签格式检查：")
-    print(f"  存在格式问题的标签数量: {len(label_errors)}")
+    print("Dataset check finished.")
+    print(f"Images: {len(image_files)}")
+    print(f"Labels: {len(label_files)}")
+    print(f"Matched pairs: {matched}")
+    print(f"Total boxes: {total_boxes}")
+    print(f"Empty label files: {len(empty_labels)}")
+    print(f"Log saved to: {log_path}")
 
-    # 输出报告
-    report_csv = META_DIR / "image_label_pair_check_report.csv"
-    with open(report_csv, "w", newline="", encoding="utf-8-sig") as f:
-        writer = csv.writer(f)
-        writer.writerow(["type", "name", "detail"])
+    if warnings:
+        print(f"Warnings: {len(warnings)}")
 
-        for stem in images_without_labels:
-            writer.writerow(["image_without_label", stem, ""])
-
-        for stem in labels_without_images:
-            writer.writerow(["label_without_image", stem, ""])
-
-        for stem, detail in missing_in_first_700:
-            writer.writerow(["first_700_problem", stem, detail])
-
-        for item in label_errors:
-            writer.writerow(["label_format_error", item["label"], item["errors"]])
-
-    print(f"\n检查报告已保存: {report_csv}")
-    print("=" * 80)
+    if errors:
+        print(f"Errors: {len(errors)}")
+        print("Please fix errors before splitting dataset.")
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

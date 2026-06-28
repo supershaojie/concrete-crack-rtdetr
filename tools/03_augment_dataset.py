@@ -1,274 +1,464 @@
-# -*- coding: utf-8 -*-
-"""
-03_augment_dataset.py
+from __future__ import annotations
 
-功能：
-1. 读取 split_raw 中的 train / val / test 数据
-2. 对每张图生成以下 6 个版本：
-   - 原图
-   - 水平翻转 (hf)
-   - 垂直翻转 (vf)
-   - 亮度增强 (bu)
-   - 亮度减弱 (bd)
-   - 对比度增强 (cu)
-3. 将增强后的图片和标签保存到 augmented 目录中
-4. 自动同步修改翻转后的 YOLO 标签
-
-输入目录：
-datasets/crack_raw/split_raw/images/{train,val,test}
-datasets/crack_raw/split_raw/labels/{train,val,test}
-
-输出目录：
-datasets/crack_raw/augmented/images/{train,val,test}
-datasets/crack_raw/augmented/labels/{train,val,test}
-"""
-
-from pathlib import Path
-from PIL import Image, ImageEnhance
+import csv
 import shutil
+from pathlib import Path
+
+import cv2
+import numpy as np
 
 
-# =========================
-# 1. 路径配置
-# =========================
+ROOT = Path(__file__).resolve().parents[1]
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+SPLIT_DIR = ROOT / "datasets" / "crack_raw" / "split_raw"
+DET_DIR = ROOT / "datasets" / "crack_det"
+CONFIGS_DIR = ROOT / "configs"
+LOG_DIR = ROOT / "logs"
 
-SPLIT_ROOT = PROJECT_ROOT / "datasets" / "crack_raw" / "split_raw"
-AUG_ROOT = PROJECT_ROOT / "datasets" / "crack_raw" / "augmented"
-
-IMAGE_SETS = ["train", "val", "test"]
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"}
-
-# 亮度和对比度增强系数
-BRIGHTNESS_UP_FACTOR = 1.25
-BRIGHTNESS_DOWN_FACTOR = 0.75
-CONTRAST_UP_FACTOR = 1.3
+JPEG_QUALITY = 95
 
 
-# =========================
-# 2. 工具函数
-# =========================
-
-def ensure_dir(path: Path):
-    """创建目录"""
+def reset_dir(path: Path) -> None:
+    if path.exists():
+        shutil.rmtree(path)
     path.mkdir(parents=True, exist_ok=True)
 
 
-def clear_dir(path: Path):
-    """清空目录中的内容"""
-    if path.exists():
-        for item in path.iterdir():
-            if item.is_file():
-                item.unlink()
-            elif item.is_dir():
-                shutil.rmtree(item)
+def list_images(path: Path) -> list[Path]:
+    if not path.exists():
+        return []
+
+    return sorted(
+        p for p in path.iterdir()
+        if p.is_file() and p.suffix.lower() in IMAGE_EXTS
+    )
 
 
-def get_image_files(images_dir: Path):
-    """获取目录下所有图片文件"""
-    image_files = []
-    for p in images_dir.iterdir():
-        if p.is_file() and p.suffix.lower() in IMAGE_EXTS:
-            image_files.append(p)
-    return sorted(image_files)
+def imread_unicode(path: Path) -> np.ndarray:
+    data = np.fromfile(str(path), dtype=np.uint8)
+    img = cv2.imdecode(data, cv2.IMREAD_COLOR)
+
+    if img is None:
+        raise RuntimeError(f"Failed to read image: {path}")
+
+    return img
 
 
-def read_yolo_label(label_path: Path):
-    """
-    读取 YOLO 标签
-    返回：
-        boxes: list of [cls_id, x, y, w, h]
-    """
-    boxes = []
-    if not label_path.exists():
-        return boxes
+def imwrite_unicode(path: Path, img: np.ndarray) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
 
-    try:
-        with open(label_path, "r", encoding="utf-8") as f:
-            lines = [line.strip() for line in f.readlines() if line.strip()]
-    except UnicodeDecodeError:
-        with open(label_path, "r", encoding="gbk") as f:
-            lines = [line.strip() for line in f.readlines() if line.strip()]
+    ok, buf = cv2.imencode(
+        ".jpg",
+        img,
+        [int(cv2.IMWRITE_JPEG_QUALITY), JPEG_QUALITY],
+    )
 
-    for line in lines:
-        parts = line.split()
-        if len(parts) != 5:
+    if not ok:
+        raise RuntimeError(f"Failed to encode image: {path}")
+
+    buf.tofile(str(path))
+
+
+def read_labels(path: Path) -> list[list]:
+    labels: list[list] = []
+
+    if not path.exists():
+        raise FileNotFoundError(f"Label file not found: {path}")
+
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+
+        if not line:
             continue
-        cls_id = int(float(parts[0]))
+
+        parts = line.split()
+
+        if len(parts) != 5:
+            raise ValueError(f"Invalid label line in {path}: {line}")
+
+        cls = parts[0]
         x, y, w, h = map(float, parts[1:])
-        boxes.append([cls_id, x, y, w, h])
+        labels.append([cls, x, y, w, h])
 
-    return boxes
-
-
-def write_yolo_label(label_path: Path, boxes):
-    """写入 YOLO 标签"""
-    with open(label_path, "w", encoding="utf-8") as f:
-        for box in boxes:
-            cls_id, x, y, w, h = box
-            f.write(f"{cls_id} {x:.6f} {y:.6f} {w:.6f} {h:.6f}\n")
+    return labels
 
 
-def transform_boxes_hflip(boxes):
-    """水平翻转标签：x -> 1 - x"""
-    new_boxes = []
-    for cls_id, x, y, w, h in boxes:
-        new_x = 1.0 - x
-        new_boxes.append([cls_id, new_x, y, w, h])
-    return new_boxes
+def write_labels(path: Path, labels: list[list]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    lines = []
+
+    for cls, x, y, w, h in labels:
+        x = min(max(float(x), 0.0), 1.0)
+        y = min(max(float(y), 0.0), 1.0)
+        w = min(max(float(w), 0.0), 1.0)
+        h = min(max(float(h), 0.0), 1.0)
+
+        if w <= 0 or h <= 0:
+            continue
+
+        lines.append(f"{cls} {x:.6f} {y:.6f} {w:.6f} {h:.6f}")
+
+    path.write_text("\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
 
 
-def transform_boxes_vflip(boxes):
-    """垂直翻转标签：y -> 1 - y"""
-    new_boxes = []
-    for cls_id, x, y, w, h in boxes:
-        new_y = 1.0 - y
-        new_boxes.append([cls_id, x, new_y, w, h])
-    return new_boxes
+def yolo_to_xyxy(label: list, img_w: int, img_h: int) -> tuple[str, float, float, float, float]:
+    cls, x, y, w, h = label
+
+    cx = x * img_w
+    cy = y * img_h
+    bw = w * img_w
+    bh = h * img_h
+
+    x1 = cx - bw / 2
+    y1 = cy - bh / 2
+    x2 = cx + bw / 2
+    y2 = cy + bh / 2
+
+    return cls, x1, y1, x2, y2
 
 
-def save_image(image: Image.Image, save_path: Path):
-    """保存图片"""
-    ensure_dir(save_path.parent)
+def xyxy_to_yolo(
+    cls: str,
+    x1: float,
+    y1: float,
+    x2: float,
+    y2: float,
+    img_w: int,
+    img_h: int,
+) -> list | None:
+    x1 = min(max(x1, 0), img_w - 1)
+    y1 = min(max(y1, 0), img_h - 1)
+    x2 = min(max(x2, 0), img_w - 1)
+    y2 = min(max(y2, 0), img_h - 1)
 
-    # 对 JPEG 图片更稳妥地转成 RGB
-    if save_path.suffix.lower() in {".jpg", ".jpeg"}:
-        if image.mode != "RGB":
-            image = image.convert("RGB")
+    bw = x2 - x1
+    bh = y2 - y1
 
-    image.save(save_path)
+    if bw < 2 or bh < 2:
+        return None
 
+    cx = x1 + bw / 2
+    cy = y1 + bh / 2
 
-def augment_one_image(image_path: Path, label_path: Path, out_img_dir: Path, out_lbl_dir: Path):
-    """
-    对单张图片做增强并保存
-    输出 6 个版本：
-    1. 原图
-    2. hf
-    3. vf
-    4. bu
-    5. bd
-    6. cu
-    """
-    stem = image_path.stem
-    suffix = image_path.suffix
-
-    # 读取图片和标签
-    image = Image.open(image_path)
-    boxes = read_yolo_label(label_path)
-
-    # ---------- 1. 原图 ----------
-    save_image(image, out_img_dir / f"{stem}{suffix}")
-    write_yolo_label(out_lbl_dir / f"{stem}.txt", boxes)
-
-    # ---------- 2. 水平翻转 ----------
-    img_hf = image.transpose(Image.FLIP_LEFT_RIGHT)
-    boxes_hf = transform_boxes_hflip(boxes)
-    save_image(img_hf, out_img_dir / f"{stem}_aug_hf{suffix}")
-    write_yolo_label(out_lbl_dir / f"{stem}_aug_hf.txt", boxes_hf)
-
-    # ---------- 3. 垂直翻转 ----------
-    img_vf = image.transpose(Image.FLIP_TOP_BOTTOM)
-    boxes_vf = transform_boxes_vflip(boxes)
-    save_image(img_vf, out_img_dir / f"{stem}_aug_vf{suffix}")
-    write_yolo_label(out_lbl_dir / f"{stem}_aug_vf.txt", boxes_vf)
-
-    # ---------- 4. 亮度增强 ----------
-    enhancer_bu = ImageEnhance.Brightness(image)
-    img_bu = enhancer_bu.enhance(BRIGHTNESS_UP_FACTOR)
-    save_image(img_bu, out_img_dir / f"{stem}_aug_bu{suffix}")
-    write_yolo_label(out_lbl_dir / f"{stem}_aug_bu.txt", boxes)
-
-    # ---------- 5. 亮度减弱 ----------
-    enhancer_bd = ImageEnhance.Brightness(image)
-    img_bd = enhancer_bd.enhance(BRIGHTNESS_DOWN_FACTOR)
-    save_image(img_bd, out_img_dir / f"{stem}_aug_bd{suffix}")
-    write_yolo_label(out_lbl_dir / f"{stem}_aug_bd.txt", boxes)
-
-    # ---------- 6. 对比度增强 ----------
-    enhancer_cu = ImageEnhance.Contrast(image)
-    img_cu = enhancer_cu.enhance(CONTRAST_UP_FACTOR)
-    save_image(img_cu, out_img_dir / f"{stem}_aug_cu{suffix}")
-    write_yolo_label(out_lbl_dir / f"{stem}_aug_cu.txt", boxes)
+    return [cls, cx / img_w, cy / img_h, bw / img_w, bh / img_h]
 
 
-def process_one_split(split_name: str):
-    """处理一个数据集划分：train / val / test"""
-    in_img_dir = SPLIT_ROOT / "images" / split_name
-    in_lbl_dir = SPLIT_ROOT / "labels" / split_name
+def hflip(img: np.ndarray, labels: list[list]) -> tuple[np.ndarray, list[list]]:
+    out = cv2.flip(img, 1)
 
-    out_img_dir = AUG_ROOT / "images" / split_name
-    out_lbl_dir = AUG_ROOT / "labels" / split_name
+    new_labels = []
+    for cls, x, y, w, h in labels:
+        new_labels.append([cls, 1.0 - x, y, w, h])
 
-    ensure_dir(out_img_dir)
-    ensure_dir(out_lbl_dir)
+    return out, new_labels
 
-    # 清空旧结果
-    clear_dir(out_img_dir)
-    clear_dir(out_lbl_dir)
 
-    image_files = get_image_files(in_img_dir)
+def vflip(img: np.ndarray, labels: list[list]) -> tuple[np.ndarray, list[list]]:
+    out = cv2.flip(img, 0)
 
-    print(f"\n开始增强 {split_name} 集，共 {len(image_files)} 张原图...")
+    new_labels = []
+    for cls, x, y, w, h in labels:
+        new_labels.append([cls, x, 1.0 - y, w, h])
+
+    return out, new_labels
+
+
+def affine_transform(
+    img: np.ndarray,
+    labels: list[list],
+    angle: float,
+    scale: float = 1.0,
+    tx_ratio: float = 0.0,
+    ty_ratio: float = 0.0,
+) -> tuple[np.ndarray, list[list]]:
+    img_h, img_w = img.shape[:2]
+
+    center = (img_w / 2, img_h / 2)
+    matrix = cv2.getRotationMatrix2D(center, angle, scale)
+    matrix[0, 2] += tx_ratio * img_w
+    matrix[1, 2] += ty_ratio * img_h
+
+    out = cv2.warpAffine(
+        img,
+        matrix,
+        (img_w, img_h),
+        flags=cv2.INTER_LINEAR,
+        borderMode=cv2.BORDER_REFLECT_101,
+    )
+
+    new_labels = []
+
+    for label in labels:
+        cls, x1, y1, x2, y2 = yolo_to_xyxy(label, img_w, img_h)
+
+        corners = np.array(
+            [
+                [x1, y1],
+                [x2, y1],
+                [x2, y2],
+                [x1, y2],
+            ],
+            dtype=np.float32,
+        )
+
+        ones = np.ones((4, 1), dtype=np.float32)
+        corners_h = np.hstack([corners, ones])
+        transformed = corners_h @ matrix.T
+
+        nx1 = float(transformed[:, 0].min())
+        ny1 = float(transformed[:, 1].min())
+        nx2 = float(transformed[:, 0].max())
+        ny2 = float(transformed[:, 1].max())
+
+        new_label = xyxy_to_yolo(cls, nx1, ny1, nx2, ny2, img_w, img_h)
+
+        if new_label is not None:
+            new_labels.append(new_label)
+
+    if labels and not new_labels:
+        return img, labels
+
+    return out, new_labels
+
+
+def brightness_up(img: np.ndarray, labels: list[list]) -> tuple[np.ndarray, list[list]]:
+    out = cv2.convertScaleAbs(img, alpha=1.0, beta=30)
+    return out, [label.copy() for label in labels]
+
+
+def brightness_down(img: np.ndarray, labels: list[list]) -> tuple[np.ndarray, list[list]]:
+    out = cv2.convertScaleAbs(img, alpha=1.0, beta=-30)
+    return out, [label.copy() for label in labels]
+
+
+def contrast_up(img: np.ndarray, labels: list[list]) -> tuple[np.ndarray, list[list]]:
+    out = cv2.convertScaleAbs(img, alpha=1.35, beta=0)
+    return out, [label.copy() for label in labels]
+
+
+def gaussian_noise(img: np.ndarray, labels: list[list]) -> tuple[np.ndarray, list[list]]:
+    rng = np.random.default_rng(seed=42)
+    noise = rng.normal(0, 8, img.shape).astype(np.float32)
+    out = img.astype(np.float32) + noise
+    out = np.clip(out, 0, 255).astype(np.uint8)
+    return out, [label.copy() for label in labels]
+
+
+def clahe_enhance(img: np.ndarray, labels: list[list]) -> tuple[np.ndarray, list[list]]:
+    lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
+    l_channel, a_channel, b_channel = cv2.split(lab)
+
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+    l_channel = clahe.apply(l_channel)
+
+    lab = cv2.merge([l_channel, a_channel, b_channel])
+    out = cv2.cvtColor(lab, cv2.COLOR_LAB2BGR)
+
+    return out, [label.copy() for label in labels]
+
+
+def rotate_pos(img: np.ndarray, labels: list[list]) -> tuple[np.ndarray, list[list]]:
+    return affine_transform(img, labels, angle=8.0)
+
+
+def rotate_neg(img: np.ndarray, labels: list[list]) -> tuple[np.ndarray, list[list]]:
+    return affine_transform(img, labels, angle=-8.0)
+
+
+AUGMENTATIONS = [
+    ("hflip", hflip),
+    ("vflip", vflip),
+    ("rotate_pos", rotate_pos),
+    ("rotate_neg", rotate_neg),
+    ("brightness_up", brightness_up),
+    ("brightness_down", brightness_down),
+    ("contrast_up", contrast_up),
+    ("gaussian_noise", gaussian_noise),
+    ("clahe", clahe_enhance),
+]
+
+
+def copy_original_split(split: str, manifest_rows: list[list[str]]) -> int:
+    src_img_dir = SPLIT_DIR / "images" / split
+    src_lab_dir = SPLIT_DIR / "labels" / split
+
+    dst_img_dir = DET_DIR / "images" / split
+    dst_lab_dir = DET_DIR / "labels" / split
+
+    dst_img_dir.mkdir(parents=True, exist_ok=True)
+    dst_lab_dir.mkdir(parents=True, exist_ok=True)
 
     count = 0
-    for image_path in image_files:
-        stem = image_path.stem
-        label_path = in_lbl_dir / f"{stem}.txt"
+
+    for img_path in list_images(src_img_dir):
+        label_path = src_lab_dir / f"{img_path.stem}.txt"
 
         if not label_path.exists():
-            print(f"[跳过] 找不到对应标签: {label_path.name}")
+            print(f"[WARN] Missing label, skipped: {img_path.name}")
             continue
 
-        augment_one_image(image_path, label_path, out_img_dir, out_lbl_dir)
+        dst_img_path = dst_img_dir / img_path.name
+        dst_lab_path = dst_lab_dir / label_path.name
+
+        shutil.copy2(img_path, dst_img_path)
+        shutil.copy2(label_path, dst_lab_path)
+
+        manifest_rows.append(
+            [
+                split,
+                "original",
+                img_path.name,
+                dst_img_path.name,
+                label_path.name,
+                dst_lab_path.name,
+            ]
+        )
+
         count += 1
 
-        if count % 50 == 0:
-            print(f"  已处理 {count} / {len(image_files)}")
-
-    final_img_num = len(list(out_img_dir.iterdir()))
-    final_lbl_num = len(list(out_lbl_dir.iterdir()))
-
-    print(f"{split_name} 集增强完成：")
-    print(f"  原始样本数: {count}")
-    print(f"  增强后图片数: {final_img_num}")
-    print(f"  增强后标签数: {final_lbl_num}")
+    return count
 
 
-# =========================
-# 3. 主函数
-# =========================
+def write_yaml() -> None:
+    CONFIGS_DIR.mkdir(parents=True, exist_ok=True)
 
-def main():
-    print("=" * 80)
-    print("开始对 split_raw 数据集进行增强")
-    print("=" * 80)
-    print(f"输入目录: {SPLIT_ROOT}")
-    print(f"输出目录: {AUG_ROOT}")
-    print(f"亮度增强系数: {BRIGHTNESS_UP_FACTOR}")
-    print(f"亮度减弱系数: {BRIGHTNESS_DOWN_FACTOR}")
-    print(f"对比度增强系数: {CONTRAST_UP_FACTOR}")
-    print("-" * 80)
+    yaml_text = (
+        f"path: {DET_DIR.as_posix()}\n"
+        "train: images/train\n"
+        "val: images/val\n"
+        "test: images/test\n\n"
+        "names:\n"
+        "  0: crack\n"
+    )
 
-    # 检查输入目录是否存在
-    for split_name in IMAGE_SETS:
-        in_img_dir = SPLIT_ROOT / "images" / split_name
-        in_lbl_dir = SPLIT_ROOT / "labels" / split_name
+    (DET_DIR / "crack.yaml").write_text(yaml_text, encoding="utf-8")
+    (CONFIGS_DIR / "crack.yaml").write_text(yaml_text, encoding="utf-8")
 
-        if not in_img_dir.exists():
-            raise FileNotFoundError(f"输入图片目录不存在: {in_img_dir}")
-        if not in_lbl_dir.exists():
-            raise FileNotFoundError(f"输入标签目录不存在: {in_lbl_dir}")
 
-    # 处理 train / val / test
-    for split_name in IMAGE_SETS:
-        process_one_split(split_name)
+def main() -> None:
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
 
-    print("\n" + "=" * 80)
-    print("所有数据集增强完成。")
-    print("你可以进入下一步：检查增强结果 / 组装最终数据集。")
-    print("=" * 80)
+    if not SPLIT_DIR.exists():
+        raise FileNotFoundError(
+            f"Split dataset not found: {SPLIT_DIR}\n"
+            "Please run tools/02_split_dataset.py first."
+        )
+
+    reset_dir(DET_DIR)
+
+    manifest_rows: list[list[str]] = []
+
+    train_original = copy_original_split("train", manifest_rows)
+    val_original = copy_original_split("val", manifest_rows)
+    test_original = copy_original_split("test", manifest_rows)
+
+    train_img_dir = SPLIT_DIR / "images" / "train"
+    train_lab_dir = SPLIT_DIR / "labels" / "train"
+
+    dst_train_img_dir = DET_DIR / "images" / "train"
+    dst_train_lab_dir = DET_DIR / "labels" / "train"
+
+    train_images = list_images(train_img_dir)
+
+    created = 0
+    failed = 0
+
+    for img_path in train_images:
+        label_path = train_lab_dir / f"{img_path.stem}.txt"
+
+        try:
+            img = imread_unicode(img_path)
+            labels = read_labels(label_path)
+
+            for aug_name, aug_func in AUGMENTATIONS:
+                aug_img, aug_labels = aug_func(img, labels)
+
+                out_stem = f"{img_path.stem}_{aug_name}"
+                out_img_path = dst_train_img_dir / f"{out_stem}.jpg"
+                out_lab_path = dst_train_lab_dir / f"{out_stem}.txt"
+
+                imwrite_unicode(out_img_path, aug_img)
+                write_labels(out_lab_path, aug_labels)
+
+                manifest_rows.append(
+                    [
+                        "train",
+                        aug_name,
+                        img_path.name,
+                        out_img_path.name,
+                        label_path.name,
+                        out_lab_path.name,
+                    ]
+                )
+
+                created += 1
+
+        except Exception as e:
+            failed += 1
+            print(f"[WARN] Failed to augment {img_path.name}: {e}")
+
+    write_yaml()
+
+    manifest_path = DET_DIR / "augmentation_manifest.csv"
+
+    with manifest_path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(
+            [
+                "split",
+                "augmentation",
+                "source_image",
+                "output_image",
+                "source_label",
+                "output_label",
+            ]
+        )
+        writer.writerows(manifest_rows)
+
+    final_train = len(list_images(DET_DIR / "images" / "train"))
+    final_val = len(list_images(DET_DIR / "images" / "val"))
+    final_test = len(list_images(DET_DIR / "images" / "test"))
+    final_total = final_train + final_val + final_test
+
+    log_path = LOG_DIR / "03_augment_dataset_log.txt"
+
+    with log_path.open("w", encoding="utf-8") as f:
+        f.write("Dataset augmentation log\n")
+        f.write("========================\n\n")
+        f.write("Augmentation strategy: deterministic single-operation offline augmentation\n")
+        f.write("Only the training set is augmented. Validation and test sets remain unchanged.\n\n")
+        f.write(f"Input split dir: {SPLIT_DIR}\n")
+        f.write(f"Output det dir: {DET_DIR}\n\n")
+        f.write(f"Train original: {train_original}\n")
+        f.write(f"Val original: {val_original}\n")
+        f.write(f"Test original: {test_original}\n\n")
+        f.write(f"Augmentations per train image: {len(AUGMENTATIONS)}\n")
+        f.write(f"Augmentation types: {', '.join(name for name, _ in AUGMENTATIONS)}\n")
+        f.write(f"Augmented created: {created}\n")
+        f.write(f"Augmentation failed: {failed}\n\n")
+        f.write(f"Final train: {final_train}\n")
+        f.write(f"Final val: {final_val}\n")
+        f.write(f"Final test: {final_test}\n")
+        f.write(f"Final total: {final_total}\n")
+        f.write(f"Manifest: {manifest_path}\n")
+
+    print("Augmentation finished.")
+    print(f"Strategy: deterministic single-operation offline augmentation")
+    print(f"Train original: {train_original}")
+    print(f"Val original: {val_original}")
+    print(f"Test original: {test_original}")
+    print(f"Augmentations per train image: {len(AUGMENTATIONS)}")
+    print(f"Augmented created: {created}")
+    print(f"Augmentation failed: {failed}")
+    print(f"Final train: {final_train}")
+    print(f"Final val: {final_val}")
+    print(f"Final test: {final_test}")
+    print(f"Final total: {final_total}")
+    print(f"Manifest: {manifest_path}")
+    print(f"YAML: {CONFIGS_DIR / 'crack.yaml'}")
+    print(f"Log: {log_path}")
 
 
 if __name__ == "__main__":
