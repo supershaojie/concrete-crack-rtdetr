@@ -79,3 +79,4 @@ ultralytics-main/docs/
 # =========================
 .DS_Store
 Thumbs.db
+runs_server/
