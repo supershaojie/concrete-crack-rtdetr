@@ -27,6 +27,9 @@ conda-env/
 datasets/crack_raw/
 datasets/crack_det/images/
 datasets/crack_det/labels/
+datasets/crack_det/split_manifest.csv
+datasets/crack_det/*.cache
+datasets/crack_det_augfirst_shuffle/
 
 # Ignore image files globally to avoid uploading datasets accidentally
 *.jpg
@@ -41,6 +44,7 @@ datasets/crack_det/labels/
 # =========================
 logs/
 runs/
+runs_server/
 outputs/
 checkpoints/
 weights/
@@ -80,3 +84,4 @@ ultralytics-main/docs/
 .DS_Store
 Thumbs.db
 runs_server/
+

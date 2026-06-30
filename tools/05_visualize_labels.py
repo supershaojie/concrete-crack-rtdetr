@@ -12,8 +12,8 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 
 DET_DIR = ROOT / "datasets" / "crack_det"
-OUT_DIR = ROOT / "datasets" / "crack_raw" / "vis_check" / "crack_det"
 LOG_DIR = ROOT / "logs"
+OUT_DIR = LOG_DIR / "vis_check" / "crack_det"
 
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"}
 
@@ -167,8 +167,13 @@ def draw_labels(img_path: Path, label_path: Path, out_path: Path) -> tuple[int, 
 
 def get_aug_type(stem: str) -> str:
     aug_types = [
+        "original",
         "hflip",
         "vflip",
+        "brightness_contrast",
+        "clahe_gamma",
+        "noise",
+        "blur",
         "rotate_pos",
         "rotate_neg",
         "brightness_up",
@@ -224,7 +229,7 @@ def sample_split_images(split: str, images: list[Path]) -> list[tuple[str, Path]
         sample_n = min(50, len(images))
 
     sampled = rng.sample(images, sample_n)
-    return [("original", p) for p in sampled]
+    return [(get_aug_type(p.stem), p) for p in sampled]
 
 
 def visualize_split(split: str) -> tuple[int, int, int]:
