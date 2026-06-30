@@ -27,6 +27,7 @@ conda-env/
 datasets/crack_raw/
 datasets/crack_det/images/
 datasets/crack_det/labels/
+datasets/crack_det_augfirst_shuffle/
 
 # Ignore image files globally to avoid uploading datasets accidentally
 *.jpg

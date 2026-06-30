@@ -1,0 +1,7 @@
+path: D:/MyProjects/Crack_RTDETR/datasets/crack_det_augfirst_shuffle
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: crack
