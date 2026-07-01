@@ -28,6 +28,8 @@ from ultralytics.nn.modules import (
     A2C2f,
     AConv,
     ADown,
+    BasicBlock,
+    Blocks,
     Bottleneck,
     BottleneckCSP,
     C2f,
@@ -41,6 +43,7 @@ from ultralytics.nn.modules import (
     CBLinear,
     Classify,
     Concat,
+    ConvNormLayer,
     Conv,
     Conv2,
     ConvTranspose,
@@ -1578,6 +1581,7 @@ def parse_model(d, ch, verbose=True):
             Conv,
             ConvTranspose,
             GhostConv,
+            ConvNormLayer,
             Bottleneck,
             GhostBottleneck,
             SPP,
@@ -1666,6 +1670,10 @@ def parse_model(d, ch, verbose=True):
                 legacy = False
         elif m is AIFI:
             args = [ch[f], *args]
+        elif m is Blocks:
+            block_type = globals()[args[1]] if isinstance(args[1], str) else args[1]
+            c1, c2 = ch[f], args[0] * block_type.expansion
+            args = [c1, args[0], block_type, *args[2:]]
         elif m in frozenset({HGStem, HGBlock}):
             c1, cm, c2 = ch[f], args[0], args[1]
             args = [c1, cm, c2, *args[2:]]

@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from collections import OrderedDict
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -28,6 +30,8 @@ __all__ = (
     "AConv",
     "ADown",
     "Attention",
+    "BasicBlock",
+    "Blocks",
     "BNContrastiveHead",
     "Bottleneck",
     "BottleneckCSP",
@@ -41,6 +45,7 @@ __all__ = (
     "CBFuse",
     "CBLinear",
     "ContrastiveHead",
+    "ConvNormLayer",
     "GhostBottleneck",
     "HGBlock",
     "HGStem",
@@ -565,6 +570,143 @@ class ResNetLayer(nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Forward pass through the ResNet layer."""
         return self.layer(x)
+
+
+def _get_activation(act: str | nn.Module | None, inplace: bool = True) -> nn.Module:
+    """Return an activation module for the lightweight RT-DETR ResNet backbone."""
+    if act is None:
+        return nn.Identity()
+    if isinstance(act, nn.Module):
+        return act
+
+    act = act.lower()
+    if act == "silu":
+        m = nn.SiLU()
+    elif act == "relu":
+        m = nn.ReLU()
+    elif act == "leaky_relu":
+        m = nn.LeakyReLU()
+    elif act == "gelu":
+        m = nn.GELU()
+    else:
+        raise RuntimeError(f"Unsupported activation: {act}")
+
+    if hasattr(m, "inplace"):
+        m.inplace = inplace
+    return m
+
+
+class ConvNormLayer(nn.Module):
+    """Conv2d + BatchNorm2d + optional activation used by lightweight RT-DETR ResNet backbones."""
+
+    def __init__(
+        self,
+        ch_in: int,
+        ch_out: int,
+        kernel_size: int,
+        stride: int,
+        padding: int | None = None,
+        bias: bool = False,
+        act: str | nn.Module | None = None,
+    ):
+        """Initialize the convolution, normalization and activation layers."""
+        super().__init__()
+        self.conv = nn.Conv2d(
+            ch_in,
+            ch_out,
+            kernel_size,
+            stride,
+            padding=(kernel_size - 1) // 2 if padding is None else padding,
+            bias=bias,
+        )
+        self.norm = nn.BatchNorm2d(ch_out)
+        self.act = _get_activation(act)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Apply convolution, normalization and activation."""
+        return self.act(self.norm(self.conv(x)))
+
+    def forward_fuse(self, x: torch.Tensor) -> torch.Tensor:
+        """Apply fused convolution and activation."""
+        return self.act(self.conv(x))
+
+
+class BasicBlock(nn.Module):
+    """Basic residual block used by lightweight RT-DETR ResNet-18 backbones."""
+
+    expansion = 1
+
+    def __init__(
+        self,
+        ch_in: int,
+        ch_out: int,
+        stride: int,
+        shortcut: bool,
+        act: str | nn.Module | None = "relu",
+        variant: str = "d",
+    ):
+        """Initialize a two-convolution residual block."""
+        super().__init__()
+        self.shortcut = shortcut
+
+        if not shortcut:
+            if variant == "d" and stride == 2:
+                self.short = nn.Sequential(
+                    OrderedDict(
+                        [
+                            ("pool", nn.AvgPool2d(2, 2, 0, ceil_mode=True)),
+                            ("conv", ConvNormLayer(ch_in, ch_out, 1, 1)),
+                        ]
+                    )
+                )
+            else:
+                self.short = ConvNormLayer(ch_in, ch_out, 1, stride)
+
+        self.branch2a = ConvNormLayer(ch_in, ch_out, 3, stride, act=act)
+        self.branch2b = ConvNormLayer(ch_out, ch_out, 3, 1, act=None)
+        self.act = _get_activation(act)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Forward pass with residual addition."""
+        out = self.branch2b(self.branch2a(x))
+        short = x if self.shortcut else self.short(x)
+        return self.act(out + short)
+
+
+class Blocks(nn.Module):
+    """Stack of residual blocks for lightweight RT-DETR ResNet stages."""
+
+    def __init__(
+        self,
+        ch_in: int,
+        ch_out: int,
+        block: type[nn.Module],
+        count: int,
+        stage_num: int,
+        act: str | nn.Module | None = "relu",
+        variant: str = "d",
+    ):
+        """Initialize a ResNet stage."""
+        super().__init__()
+        blocks = []
+        for i in range(count):
+            blocks.append(
+                block(
+                    ch_in,
+                    ch_out,
+                    stride=2 if i == 0 and stage_num != 2 else 1,
+                    shortcut=False if i == 0 else True,
+                    variant=variant,
+                    act=act,
+                )
+            )
+            if i == 0:
+                ch_in = ch_out * block.expansion
+        self.blocks = nn.Sequential(*blocks)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Forward pass through the residual block stack."""
+        return self.blocks(x)
 
 
 class MaxSigmoidAttnBlock(nn.Module):
