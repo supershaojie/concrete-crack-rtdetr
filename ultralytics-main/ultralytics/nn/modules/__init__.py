@@ -64,6 +64,7 @@ from .block import (
     TorchVision,
 )
 from .cscef import CSCEF
+from .cscef_v2 import CSCEFv2
 from .conv import (
     CBAM,
     ChannelAttention,
@@ -147,6 +148,7 @@ __all__ = (
     "CBFuse",
     "CBLinear",
     "CSCEF",
+    "CSCEFv2",
     "ChannelAttention",
     "Classify",
     "Concat",
