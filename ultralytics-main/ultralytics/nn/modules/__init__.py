@@ -96,6 +96,7 @@ from .head import (
     YOLOESegment26,
     v10Detect,
 )
+from .obp_aifi import AdaptiveOrthogonalMixer, OBPAIFI
 from .transformer import (
     AIFI,
     MLP,
@@ -111,6 +112,7 @@ from .transformer import (
 
 __all__ = (
     "AIFI",
+    "AdaptiveOrthogonalMixer",
     "C1",
     "C2",
     "C2PSA",
@@ -123,6 +125,7 @@ __all__ = (
     "MLP",
     "OBB",
     "OBB26",
+    "OBPAIFI",
     "PSA",
     "SPP",
     "SPPELAN",
