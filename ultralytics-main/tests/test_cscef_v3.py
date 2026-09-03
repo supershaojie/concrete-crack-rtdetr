@@ -10,6 +10,7 @@ import inspect
 from io import BytesIO
 from pathlib import Path
 import py_compile
+import sys
 from tempfile import TemporaryDirectory
 import unittest
 
@@ -50,6 +51,19 @@ def channel_direction(values: list[float], height: int = 3, width: int = 4) -> t
 
 class CSCEFv3Test(unittest.TestCase):
     """Exercise CSCEF-v3 modules and complete RT-DETR models without training."""
+
+    def test_audit_hash_normalizes_text_line_endings(self):
+        """Require the audit tool to hash equivalent LF, CRLF, and CR text identically."""
+        tools_dir = ROOT / "tools"
+        sys.path.insert(0, str(tools_dir))
+        try:
+            from audit_rtdetr_r18_lite_cscef_v3 import canonical_lf_sha256 as audit_canonical_lf_sha256
+        finally:
+            sys.path.remove(str(tools_dir))
+
+        lf = b"first line\nsecond line\n"
+        self.assertEqual(audit_canonical_lf_sha256(lf), audit_canonical_lf_sha256(lf.replace(b"\n", b"\r\n")))
+        self.assertEqual(audit_canonical_lf_sha256(lf), audit_canonical_lf_sha256(lf.replace(b"\n", b"\r")))
 
     def test_py_compile_and_public_import(self):
         """Compile every new Python entry point and import CSCEFv3 through the public module package."""

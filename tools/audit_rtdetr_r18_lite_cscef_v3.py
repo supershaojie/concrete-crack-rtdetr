@@ -22,10 +22,10 @@ DEFAULT_SOURCE = ROOT / "weights" / "rtdetr_r18_lite_imagenet_backbone_init.pt"
 DEFAULT_INITIALIZED = ROOT / "weights" / "rtdetr_r18_lite_cscef_v3_imagenet_backbone_init.pt"
 PROTECTED_SHA256 = {
     BASE_CFG: "3493d693cbef958a38a2a135822a6c5379b65804905bc71566e395069e8f4f16",
-    V1_CFG: "863ed9f2786737bbc0f96879b5f79c65b8a72fba2f65094cd64624ff54f70820",
+    V1_CFG: "27545ed78ed8308f8c0e5f18abfecdcfc5a0ef69cdf1c605467d564e432bf895",
     V2_CFG: "8275efea9212131799508c57da8c411baf89625cac0be05f9a5c42c3410b906e",
     ULTRALYTICS_ROOT / "ultralytics" / "nn" / "modules" / "cscef.py": (
-        "9c6ade426fa468915e8325fb88b40e31facc3bff41472866e96aefdc11ae3cbf"
+        "6826911701ce14b08bb99945fa7790897d9389838a78cd3227c5514c0d945cda"
     ),
     ULTRALYTICS_ROOT / "ultralytics" / "nn" / "modules" / "cscef_v2.py": (
         "050aa1c9e2a2fc5ffd83bd217cf859fb9607c9f00b7ba405af4e78faf625b9aa"
@@ -65,13 +65,18 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def canonical_lf_sha256(data: bytes) -> str:
+    """Hash text bytes after normalizing CRLF and CR line endings to canonical LF."""
+    canonical = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(canonical).hexdigest()
+
+
 def file_sha256(path: Path) -> str:
-    """Return a file digest without depending on checkpoint utilities."""
-    digest = hashlib.sha256()
-    with path.open("rb") as file:
-        for chunk in iter(lambda: file.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    """Return a digest, canonicalizing line endings for Python and YAML text files."""
+    data = path.read_bytes()
+    if path.suffix.lower() in {".py", ".yaml", ".yml"}:
+        return canonical_lf_sha256(data)
+    return hashlib.sha256(data).hexdigest()
 
 
 def verify_protected_files() -> None:
