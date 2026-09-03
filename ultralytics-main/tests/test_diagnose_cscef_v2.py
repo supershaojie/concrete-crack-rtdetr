@@ -9,7 +9,9 @@ import json
 from pathlib import Path
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
+from unittest import mock
 
 import torch
 import torch.nn as nn
@@ -20,6 +22,9 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from tools import diagnose_cscef_v2 as diagnostic  # noqa: E402
+from ultralytics import RTDETR  # noqa: E402
+from ultralytics.models.rtdetr.val import RTDETRValidator  # noqa: E402
+from ultralytics.models.yolo.detect import DetectionValidator  # noqa: E402
 from ultralytics.nn.modules import CSCEFv2  # noqa: E402
 
 
@@ -140,6 +145,15 @@ class DiagnosticHelpersTest(unittest.TestCase):
         self.assertEqual(summary["positive_infinity_count"], 1)
         self.assertEqual(summary["negative_infinity_count"], 1)
 
+    def test_large_activation_sampling_indices_never_round_out_of_bounds(self):
+        length = 16 * 256 * 80 * 80
+        indices = diagnostic.evenly_spaced_integer_indices(length, 4096)
+        self.assertEqual(indices.dtype, torch.int64)
+        self.assertEqual(indices[0].item(), 0)
+        self.assertEqual(indices[-1].item(), length - 1)
+        self.assertGreaterEqual(indices.min().item(), 0)
+        self.assertLess(indices.max().item(), length)
+
     def test_gt_box_mapping_uses_expected_gate_cells(self):
         masks, counts, invalid = diagnostic.build_gt_masks(
             torch.tensor([[0.5, 0.5, 0.5, 0.5]]), torch.tensor([0]), 1, 4, 4
@@ -165,6 +179,78 @@ class DiagnosticHelpersTest(unittest.TestCase):
         self.assertEqual(counts, [0, 0])
         self.assertEqual(invalid, 0)
 
+    def test_batch_index_equal_to_batch_size_is_rejected_on_cpu(self):
+        with self.assertRaisesRegex(diagnostic.InvalidBatchIndexError, "outside"):
+            diagnostic.build_gt_masks(torch.ones(1, 4), torch.tensor([2], device="cpu"), 2, 4, 4)
+
+    def test_negative_batch_index_is_rejected_on_cpu(self):
+        with self.assertRaisesRegex(diagnostic.InvalidBatchIndexError, "batch_idx.*-1"):
+            diagnostic.build_gt_masks(torch.ones(1, 4), torch.tensor([-1], device="cpu"), 2, 4, 4)
+
+    def test_out_of_range_batch_index_error_records_paths_and_index(self):
+        with self.assertRaises(diagnostic.InvalidBatchIndexError) as caught:
+            diagnostic.build_gt_masks(
+                torch.ones(1, 4), torch.tensor([3]), 2, 4, 4, ["first.png", "second.png"]
+            )
+        message = str(caught.exception)
+        self.assertIn("'batch_idx': 3", message)
+        self.assertIn("first.png", message)
+        self.assertIn("second.png", message)
+
+    def test_gt_coordinates_are_clipped_to_gate_extent(self):
+        boxes = torch.tensor([[-0.1, -0.1, 1.0, 1.0], [1.1, 1.1, 1.0, 1.0]])
+        masks, counts, invalid = diagnostic.build_gt_masks(boxes, torch.tensor([0, 0]), 1, 4, 4)
+        self.assertTrue(masks[0, 0, 0].item())
+        self.assertTrue(masks[0, 3, 3].item())
+        self.assertEqual(counts, [2])
+        self.assertEqual(invalid, 0)
+
+    def test_warmup_forward_is_ignored_by_collector(self):
+        module = CSCEFv2(8, 8, hidden_channels=4).eval()
+        collector = diagnostic.ActivationCollector(module)
+        try:
+            with torch.no_grad():
+                module([torch.randn(1, 8, 4, 4), torch.randn(1, 8, 2, 2)])
+            self.assertEqual(collector.stats["gate"].count, 0)
+            self.assertIsNone(collector._pending)
+            self.assertIsNone(collector.runtime_context["current_batch_index"])
+        finally:
+            collector.close()
+
+    def test_forward_hook_returns_none_and_does_not_replace_output(self):
+        module = CSCEFv2(8, 8, hidden_channels=4).eval()
+        collector = diagnostic.ActivationCollector(module)
+        lateral = torch.randn(1, 8, 4, 4)
+        semantic = torch.randn(1, 8, 2, 2)
+        try:
+            with torch.no_grad():
+                output = module([lateral, semantic])
+            expected = output.clone()
+            collector.begin_batch(
+                0,
+                {"img": torch.zeros(1, 3, 32, 32), "batch_idx": torch.empty(0), "im_file": ["image.png"]},
+            )
+            returned = collector._forward_hook(module, ([lateral, semantic],), output)
+            self.assertIsNone(returned)
+            torch.testing.assert_close(output, expected, rtol=0, atol=0)
+        finally:
+            collector.close()
+
+    def test_gate_cannot_be_joined_to_the_next_batch(self):
+        module = CSCEFv2(8, 8, hidden_channels=4).eval()
+        collector = diagnostic.ActivationCollector(module)
+        try:
+            collector.begin_batch(0)
+            with torch.no_grad():
+                module([torch.randn(1, 8, 4, 4), torch.randn(1, 8, 2, 2)])
+            with self.assertRaisesRegex(RuntimeError, "batch mismatch"):
+                collector.finish_batch(
+                    1,
+                    {"bboxes": torch.empty(0, 4), "batch_idx": torch.empty(0), "im_file": ["next.png"]},
+                )
+        finally:
+            collector.close()
+
     def test_collector_aligns_one_gate_with_same_batch_labels(self):
         module = CSCEFv2(8, 8, hidden_channels=4).eval()
         collector = diagnostic.ActivationCollector(module)
@@ -189,6 +275,107 @@ class DiagnosticHelpersTest(unittest.TestCase):
             self.assertEqual([row["image_path"] for row in collector.per_image_rows], ["positive.png", "empty.png"])
         finally:
             collector.close()
+
+    def test_official_rtdetr_task_map_does_not_select_generic_validator(self):
+        selected = RTDETR.task_map.fget(None)["detect"]["validator"]
+        self.assertIs(selected, RTDETRValidator)
+        self.assertIsNot(selected, DetectionValidator)
+
+    def test_diagnostic_validator_must_be_rtdetr_validator_subclass(self):
+        with self.assertRaisesRegex(TypeError, "RTDETRValidator subclass"):
+            diagnostic.require_rtdetr_validator(DetectionValidator, RTDETRValidator)
+        validator = diagnostic.make_diagnostic_validator(RTDETRValidator, None, RTDETRValidator)
+        diagnostic.require_rtdetr_validator(validator, RTDETRValidator)
+        self.assertTrue(issubclass(validator, RTDETRValidator))
+
+    def test_cuda_device_assert_is_marked_unrecoverable(self):
+        self.assertTrue(diagnostic.is_unrecoverable_cuda_error("CUDA error: device-side assert triggered"))
+        self.assertTrue(diagnostic.is_unrecoverable_cuda_error("IndexKernel.cu: index out of bounds"))
+        self.assertFalse(diagnostic.is_unrecoverable_cuda_error("ordinary validation error"))
+
+    def test_metric_extraction_accepts_rtdetr_validator_results_object(self):
+        metrics = SimpleNamespace(
+            results_dict={
+                "metrics/precision(B)": 0.1,
+                "metrics/recall(B)": 0.2,
+                "metrics/mAP50(B)": 0.3,
+                "metrics/mAP50-95(B)": 0.4,
+                "fitness": 0.5,
+            }
+        )
+        self.assertEqual(
+            diagnostic.extract_metrics(metrics),
+            {"precision": 0.1, "recall": 0.2, "mAP50": 0.3, "mAP50-95": 0.4, "fitness": 0.5},
+        )
+
+    def test_original_failure_still_writes_terminal_artifacts(self):
+        class FakeUltralytics:
+            __version__ = "8.4.21"
+            __file__ = str(ROOT / "ultralytics-main" / "ultralytics" / "__init__.py")
+
+        class FakeWrapper:
+            def __init__(self, _weights):
+                self.model = nn.Sequential(CSCEFv2(8, 8, hidden_channels=4))
+
+        class FakeRTDETRValidator:
+            pass
+
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            weights = directory / "best.pt"
+            data = directory / "data.yaml"
+            weights.write_bytes(b"read-only checkpoint")
+            data.write_text("names: [crack]\n", encoding="utf-8")
+            args = argparse.Namespace(
+                weights=weights,
+                data=data,
+                split="val",
+                imgsz=640,
+                batch=16,
+                workers=8,
+                device="cpu",
+                project=directory / "diagnostics",
+                name="failed_original",
+                seed=42,
+                stats_max_batches=0,
+                variants="original",
+                plots=False,
+                overwrite=False,
+            )
+            failure = diagnostic.failed_metric_row(
+                "original", diagnostic.sha256_file(weights), diagnostic.sha256_file(data), "synthetic traceback"
+            )
+            audit = {
+                "variant": "original",
+                "wrapper_class": "RTDETR",
+                "model_class": "RTDETRDetectionModel",
+                "validator_class": "CSCEFDiagnosticValidator",
+                "validator_module": "ultralytics.models.rtdetr.val",
+                "task": "detect",
+                "model_nc": 1,
+                "dataset_nc": 1,
+                "cscef_v2_instance_count": 1,
+            }
+            with mock.patch.object(
+                diagnostic,
+                "import_local_ultralytics",
+                return_value=(FakeUltralytics, FakeWrapper, FakeRTDETRValidator),
+            ), mock.patch.object(diagnostic, "dataset_class_count", return_value=1), mock.patch.object(
+                diagnostic, "run_variant", return_value=(failure, None, audit, False)
+            ):
+                self.assertEqual(diagnostic.run(args), 1)
+            output = args.project / args.name
+            for filename in (
+                "run_manifest.json",
+                "variant_metrics.json",
+                "variant_metrics.csv",
+                "diagnostic_report.md",
+                "diagnostic.log",
+            ):
+                self.assertTrue((output / filename).is_file(), filename)
+            saved = json.loads((output / "variant_metrics.json").read_text(encoding="utf-8"))
+            self.assertEqual(saved[0]["status"], "failed")
+            self.assertEqual(saved[0]["error"], "synthetic traceback")
 
     def test_metric_csv_and_json_have_complete_fields(self):
         row = {field: None for field in diagnostic.METRIC_FIELDS}

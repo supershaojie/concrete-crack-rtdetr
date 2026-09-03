@@ -63,6 +63,16 @@ RATIO_QUANTILES = (0.05, 0.25, 0.50, 0.75, 0.95)
 POST_TRAINING_WARNING = (
     "这些干预是在训练完成后的分布外修改，只能用于原因诊断，不能作为正式消融结果或论文性能结果。"
 )
+CUDA_CONTEXT_ERROR_MARKERS = (
+    "device-side assert",
+    "indexkernel.cu",
+    "illegal memory access",
+    "unspecified launch failure",
+)
+
+
+class InvalidBatchIndexError(ValueError):
+    """Raised after invalid GT batch indices are detected safely on CPU."""
 
 
 def sha256_file(path: Path) -> str:
@@ -167,6 +177,11 @@ def find_unique_cscef_v2(model: nn.Module) -> nn.Module:
     if len(matches) != 1:
         raise RuntimeError(f"Checkpoint model contains {len(matches)} CSCEFv2 modules; expected exactly one.")
     return matches[0]
+
+
+def count_cscef_v2_modules(model: nn.Module) -> int:
+    """Count CSCEFv2 instances without assuming a graph-layer index."""
+    return sum(module.__class__.__name__ == "CSCEFv2" for module in model.modules())
 
 
 def find_unique_edge_group_norm(module: nn.Module) -> nn.GroupNorm:
@@ -300,8 +315,10 @@ class OnlineTensorStats:
         if take == finite.numel():
             candidates = finite.cpu().tolist()
         else:
-            # Evenly spaced candidates avoid allocating a full random permutation for large feature maps.
-            indices = torch.linspace(0, finite.numel() - 1, steps=take, device=finite.device).long()
+            # Integer arithmetic is essential here. A float32 linspace can round ``length - 1`` up to ``length``
+            # once an activation exceeds 2**24 elements (C10: 16*256*80*80 = 26,214,400), causing a CUDA
+            # IndexKernel device-side assert at ``finite[indices]``.
+            indices = evenly_spaced_integer_indices(finite.numel(), take, finite.device)
             candidates = finite[indices].cpu().tolist()
         for candidate in candidates:
             self.sample_candidates_seen += 1
@@ -336,6 +353,18 @@ class OnlineTensorStats:
         return result
 
 
+def evenly_spaced_integer_indices(length: int, count: int, device: torch.device | str = "cpu") -> torch.Tensor:
+    """Return monotonically increasing in-range sample indices using only int64 arithmetic."""
+    if length <= 0:
+        raise ValueError("Sampling length must be positive.")
+    if count <= 0 or count > length:
+        raise ValueError("Sampling count must satisfy 0 < count <= length.")
+    if count == 1:
+        return torch.zeros(1, dtype=torch.int64, device=device)
+    positions = torch.arange(count, dtype=torch.int64, device=device)
+    return torch.div(positions * (length - 1), count - 1, rounding_mode="floor")
+
+
 def _quantile_name(quantile: float) -> str:
     return f"q{int(round(quantile * 100)):02d}"
 
@@ -348,18 +377,39 @@ def summarize_small_tensor(tensor: torch.Tensor, quantiles: tuple[float, ...]) -
     return stats.summary(quantiles)
 
 
+def validate_batch_indices_on_cpu(
+    batch_indices: torch.Tensor,
+    batch_size: int,
+    image_paths: list[str] | tuple[str, ...] | None = None,
+) -> torch.Tensor:
+    """Copy GT batch indices to CPU and reject out-of-range values before any tensor indexing."""
+    if batch_size <= 0:
+        raise ValueError("Batch size must be positive.")
+    indices = torch.as_tensor(batch_indices).detach().long().cpu().reshape(-1)
+    invalid_mask = (indices < 0) | (indices >= batch_size)
+    if invalid_mask.any():
+        positions = torch.nonzero(invalid_mask, as_tuple=False).reshape(-1).tolist()
+        details = [{"object_position": position, "batch_idx": int(indices[position])} for position in positions]
+        paths = [] if image_paths is None else [str(path) for path in image_paths]
+        raise InvalidBatchIndexError(
+            f"GT batch_idx outside [0, {batch_size}): {details}; current_batch_paths={paths}"
+        )
+    return indices
+
+
 def build_gt_masks(
     bboxes_xywhn: torch.Tensor,
     batch_indices: torch.Tensor,
     batch_size: int,
     height: int,
     width: int,
+    image_paths: list[str] | tuple[str, ...] | None = None,
 ) -> tuple[torch.Tensor, list[int], int]:
     """Map normalized xywh boxes to unions of intersecting gate cells for their matching images."""
     if batch_size <= 0 or height <= 0 or width <= 0:
         raise ValueError("Mask dimensions must be positive.")
     boxes = torch.as_tensor(bboxes_xywhn).detach().float().cpu().reshape(-1, 4)
-    indices = torch.as_tensor(batch_indices).detach().long().cpu().reshape(-1)
+    indices = validate_batch_indices_on_cpu(batch_indices, batch_size, image_paths)
     if boxes.shape[0] != indices.shape[0]:
         raise ValueError("bboxes and batch_indices must contain the same number of objects.")
     masks = torch.zeros((batch_size, height, width), dtype=torch.bool)
@@ -367,7 +417,7 @@ def build_gt_masks(
     invalid_boxes = 0
     for box, image_index in zip(boxes, indices):
         image_index = int(image_index.item())
-        if image_index < 0 or image_index >= batch_size or not torch.isfinite(box).all():
+        if not torch.isfinite(box).all():
             invalid_boxes += 1
             continue
         cx, cy, box_width, box_height = (float(item) for item in box)
@@ -386,9 +436,10 @@ def build_gt_masks(
 class ActivationCollector:
     """Collect original-model activation statistics with strict validator-batch alignment."""
 
-    def __init__(self, module: nn.Module, max_batches: int = 0, seed: int = 42) -> None:
+    def __init__(self, module: nn.Module, max_batches: int = 0, seed: int = 42, variant: str = "original") -> None:
         self.module = module
         self.max_batches = max_batches
+        self.variant = variant
         names = (
             "raw_consistency",
             "standardized_similarity",
@@ -433,6 +484,15 @@ class ActivationCollector:
         self._active_batch: int | None = None
         self._capture_enabled = False
         self._pending: dict[str, Any] | None = None
+        self.runtime_context: dict[str, Any] = {
+            "variant": variant,
+            "current_batch_index": None,
+            "current_image_paths": [],
+            "current_batch_size": None,
+            "gate_shape": None,
+            "gt_batch_idx_min": None,
+            "gt_batch_idx_max": None,
+        }
         self._hook = module.register_forward_hook(self._forward_hook)
 
     def close(self) -> None:
@@ -441,7 +501,7 @@ class ActivationCollector:
         self._pending = None
         self._active_batch = None
 
-    def begin_batch(self, batch_index: int) -> None:
+    def begin_batch(self, batch_index: int, batch: dict[str, Any] | None = None) -> None:
         """Arm the hook immediately after this exact validation batch is preprocessed."""
         if self._active_batch is not None:
             raise RuntimeError("Activation collector saw a new batch before the previous batch was finalized.")
@@ -449,10 +509,30 @@ class ActivationCollector:
         self._capture_enabled = self.max_batches == 0 or batch_index < self.max_batches
         self._pending = None
         self.started_batches += 1
+        self.runtime_context.update(
+            {
+                "current_batch_index": int(batch_index),
+                "current_image_paths": [] if batch is None else [str(path) for path in batch.get("im_file", [])],
+                "current_batch_size": None if batch is None else int(batch["img"].shape[0]),
+                "gate_shape": None,
+                "gt_batch_idx_min": None,
+                "gt_batch_idx_max": None,
+            }
+        )
+        if batch is not None:
+            indices = torch.as_tensor(batch.get("batch_idx", torch.empty(0))).detach().long().cpu().reshape(-1)
+            if indices.numel():
+                self.runtime_context["gt_batch_idx_min"] = int(indices.min().item())
+                self.runtime_context["gt_batch_idx_max"] = int(indices.max().item())
+            validate_batch_indices_on_cpu(
+                indices,
+                self.runtime_context["current_batch_size"],
+                self.runtime_context["current_image_paths"],
+            )
 
     def _forward_hook(self, module: nn.Module, hook_inputs: tuple[Any, ...], output: torch.Tensor) -> None:
         if self._active_batch is None or not self._capture_enabled:
-            return  # Ignores validator warmup and batches beyond --stats-max-batches.
+            return None  # Ignores validator warmup and batches beyond --stats-max-batches.
         if self._pending is not None:
             raise RuntimeError("CSCEFv2 ran more than once for one validation batch; alignment is ambiguous.")
         if len(hook_inputs) != 1 or not isinstance(hook_inputs[0], (list, tuple)) or len(hook_inputs[0]) != 2:
@@ -471,6 +551,7 @@ class ActivationCollector:
             standardized_unclipped = centered * torch.rsqrt(variance + module.eps)
             standardized = standardized_unclipped.clamp(-module.similarity_clip, module.similarity_clip)
             gate = torch.sigmoid(module._effective_temperature() * standardized)
+            self.runtime_context["gate_shape"] = list(gate.squeeze(1).shape)
             edge = module._scharr_magnitude(lateral_embedding)
             calibrated_edge = module.edge_calibration(edge)
             residual = module.output_projection(calibrated_edge * gate.to(calibrated_edge.dtype))
@@ -538,6 +619,7 @@ class ActivationCollector:
                 "gate_means": gate_means.detach().float().cpu(),
                 "gate_stds": gate_stds.detach().float().cpu(),
             }
+        return None  # A forward hook returning None cannot replace or modify the model output.
 
     def finish_batch(self, batch_index: int, batch: dict[str, Any]) -> None:
         """Join the captured gate to labels from the same validator local batch object."""
@@ -550,11 +632,11 @@ class ActivationCollector:
                 raise RuntimeError("No uniquely aligned CSCEFv2 activation was captured for this validation batch.")
             gates = self._pending["gate"]
             batch_size, height, width = gates.shape
+            paths = batch.get("im_file", [""] * batch_size)
             masks, box_counts, invalid_boxes = build_gt_masks(
-                batch["bboxes"], batch["batch_idx"], batch_size, height, width
+                batch["bboxes"], batch["batch_idx"], batch_size, height, width, paths
             )
             self.invalid_gt_boxes += invalid_boxes
-            paths = batch.get("im_file", [""] * batch_size)
             for image_index in range(batch_size):
                 gate = gates[image_index]
                 mask = masks[image_index]
@@ -833,14 +915,27 @@ def import_local_ultralytics() -> tuple[Any, type[nn.Module], type[Any]]:
     return ultralytics, RTDETR, RTDETRValidator
 
 
-def make_diagnostic_validator(base_class: type[Any], collector: ActivationCollector | None) -> type[Any]:
-    """Create a validator that provides an unambiguous gate/GT batch join."""
+def require_rtdetr_validator(validator_class: type[Any], rtdetr_validator_class: type[Any]) -> None:
+    """Fail before GPU inference unless the selected validator is RTDETRValidator or a subclass."""
+    if not isinstance(validator_class, type) or not issubclass(validator_class, rtdetr_validator_class):
+        name = getattr(validator_class, "__name__", repr(validator_class))
+        raise TypeError(f"Refusing validation with {name}; an RTDETRValidator subclass is required.")
 
-    class DiagnosticRTDETRValidator(base_class):
+
+def make_diagnostic_validator(
+    base_class: type[Any],
+    collector: ActivationCollector | None,
+    rtdetr_validator_class: type[Any] | None = None,
+) -> type[Any]:
+    """Create a validator that provides an unambiguous gate/GT batch join."""
+    if rtdetr_validator_class is not None:
+        require_rtdetr_validator(base_class, rtdetr_validator_class)
+
+    class CSCEFDiagnosticValidator(base_class):
         def preprocess(self, batch: dict[str, Any]) -> dict[str, Any]:
             processed = super().preprocess(batch)
             if collector is not None:
-                collector.begin_batch(self.batch_i)
+                collector.begin_batch(self.batch_i, processed)
             return processed
 
         def update_metrics(self, preds: Any, batch: dict[str, Any]) -> None:
@@ -848,8 +943,64 @@ def make_diagnostic_validator(base_class: type[Any], collector: ActivationCollec
                 collector.finish_batch(self.batch_i, batch)
             return super().update_metrics(preds, batch)
 
-    DiagnosticRTDETRValidator.__name__ = "DiagnosticRTDETRValidator"
-    return DiagnosticRTDETRValidator
+    CSCEFDiagnosticValidator.__name__ = "CSCEFDiagnosticValidator"
+    return CSCEFDiagnosticValidator
+
+
+def model_class_count(model: nn.Module) -> int | None:
+    """Read the detector class count without making graph-index assumptions."""
+    names = getattr(model, "names", None)
+    if isinstance(names, (dict, list, tuple)):
+        return len(names)
+    for module in reversed(list(model.modules())):
+        value = getattr(module, "nc", None)
+        if isinstance(value, int) and value > 0:
+            return value
+    return None
+
+
+def dataset_class_count(data_path: Path, ultralytics: Any) -> int | None:
+    """Read dataset nc/names with the repository's YAML loader."""
+    data = ultralytics.utils.YAML.load(data_path)
+    names = data.get("names")
+    if isinstance(names, (dict, list, tuple)):
+        return len(names)
+    value = data.get("nc")
+    return int(value) if isinstance(value, int) else None
+
+
+def build_runtime_audit(
+    wrapper: Any,
+    validator_class: type[Any],
+    rtdetr_validator_class: type[Any],
+    dataset_nc: int | None,
+    variant: str,
+) -> dict[str, Any]:
+    """Record and enforce the RT-DETR validation stack before GPU validation."""
+    require_rtdetr_validator(validator_class, rtdetr_validator_class)
+    cscef_count = count_cscef_v2_modules(wrapper.model)
+    if cscef_count != 1:
+        raise RuntimeError(f"Expected exactly one CSCEFv2 module, found {cscef_count}.")
+    return {
+        "variant": variant,
+        "wrapper_class": wrapper.__class__.__name__,
+        "wrapper_module": wrapper.__class__.__module__,
+        "model_class": wrapper.model.__class__.__name__,
+        "model_module": wrapper.model.__class__.__module__,
+        "validator_class": validator_class.__name__,
+        "validator_module": validator_class.__module__,
+        "validator_is_rtdetr": issubclass(validator_class, rtdetr_validator_class),
+        "task": getattr(wrapper, "task", None),
+        "model_nc": model_class_count(wrapper.model),
+        "dataset_nc": dataset_nc,
+        "cscef_v2_instance_count": cscef_count,
+    }
+
+
+def is_unrecoverable_cuda_error(error: BaseException | str) -> bool:
+    """Return whether an error indicates that the current CUDA context must not be reused."""
+    message = str(error).lower()
+    return any(marker in message for marker in CUDA_CONTEXT_ERROR_MARKERS)
 
 
 def extract_metrics(metrics: Any) -> dict[str, float]:
@@ -903,12 +1054,15 @@ def run_variant(
     weights_hash: str,
     data_hash: str,
     rtdetr_class: type[nn.Module],
-    validator_class: type[Any],
-) -> tuple[dict[str, Any], ActivationCollector | None]:
-    """Reload the checkpoint, apply one temporary intervention, and validate."""
+    rtdetr_validator_class: type[Any],
+    dataset_nc: int | None,
+) -> tuple[dict[str, Any], ActivationCollector | None, dict[str, Any], bool]:
+    """Reload the checkpoint and validate through ``RTDETR.val`` with a verified RT-DETR validator."""
     started = time.perf_counter()
     collector: ActivationCollector | None = None
     wrapper = None
+    runtime_audit: dict[str, Any] = {"variant": variant}
+    unrecoverable_cuda_error = False
     row = {field: None for field in METRIC_FIELDS}
     row.update(
         {
@@ -923,27 +1077,57 @@ def run_variant(
         wrapper = rtdetr_class(str(Path(args.weights).resolve()))
         target = find_unique_cscef_v2(wrapper.model)
         target.eval()
+        official_validator_class = wrapper.task_map[wrapper.task]["validator"]
+        require_rtdetr_validator(official_validator_class, rtdetr_validator_class)
         if variant == "original":
-            collector = ActivationCollector(target, max_batches=args.stats_max_batches, seed=args.seed)
-        diagnostic_validator = make_diagnostic_validator(validator_class, collector)
-        validator = diagnostic_validator(
-            args=validation_arguments(args, output, variant), _callbacks=wrapper.callbacks
+            collector = ActivationCollector(
+                target, max_batches=args.stats_max_batches, seed=args.seed, variant=variant
+            )
+            selected_validator_class = make_diagnostic_validator(
+                official_validator_class, collector, rtdetr_validator_class
+            )
+        else:
+            selected_validator_class = official_validator_class
+        runtime_audit = build_runtime_audit(
+            wrapper, selected_validator_class, rtdetr_validator_class, dataset_nc, variant
         )
+        logging.getLogger("cscef_v2_diagnostic").info("Runtime audit: %s", runtime_audit)
         with temporary_intervention(target, variant), torch.no_grad():
-            validator(model=wrapper.model)
-        row.update(extract_metrics(validator.metrics))
+            # Use the RTDETR wrapper's official Model.val entry. The original variant supplies a strict
+            # RTDETRValidator subclass solely to join side-channel activations to the same validator batch.
+            if variant == "original":
+                metrics = wrapper.val(
+                    validator=selected_validator_class, **validation_arguments(args, output, variant)
+                )
+            else:
+                metrics = wrapper.val(**validation_arguments(args, output, variant))
+        row.update(extract_metrics(metrics))
         row["status"] = "success"
-    except Exception:
+    except Exception as error:
         row["error"] = traceback.format_exc()
+        unrecoverable_cuda_error = is_unrecoverable_cuda_error(error) or is_unrecoverable_cuda_error(row["error"])
+        runtime_audit["unrecoverable_cuda_error"] = unrecoverable_cuda_error
+        if collector is not None:
+            runtime_audit["failure_context"] = dict(collector.runtime_context)
     finally:
         row["elapsed_seconds"] = time.perf_counter() - started
         if collector is not None:
             collector.close()
         del wrapper
         gc.collect()
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
-    return row, collector
+        # Any CUDA API call after a device-side assert can raise again and prevent failure artifacts from being saved.
+        if not unrecoverable_cuda_error and torch.cuda.is_available():
+            try:
+                torch.cuda.empty_cache()
+            except Exception as error:
+                cleanup_traceback = traceback.format_exc()
+                row["status"] = "failed"
+                row["error"] = (row["error"] or "") + "\nCUDA cleanup failure:\n" + cleanup_traceback
+                unrecoverable_cuda_error = is_unrecoverable_cuda_error(error) or is_unrecoverable_cuda_error(
+                    cleanup_traceback
+                )
+                runtime_audit["unrecoverable_cuda_error"] = unrecoverable_cuda_error
+    return row, collector, runtime_audit, unrecoverable_cuda_error
 
 
 def environment_info(ultralytics: Any) -> dict[str, Any]:
@@ -980,7 +1164,7 @@ def generate_report(
     output: Path,
     manifest: dict[str, Any],
     rows: list[dict[str, Any]],
-    parameters: dict[str, Any],
+    parameters: dict[str, Any] | None,
     activations: dict[str, Any] | None,
 ) -> None:
     """Generate an objective, non-causal Markdown summary."""
@@ -1047,16 +1231,35 @@ def generate_report(
             "- Gate/label alignment uses the same preprocessed validator batch and fails on missing or duplicate captures; "
             "details and skip counts are in `activation_stats.json`.",
         ]
-    shared_bias = parameters["shared_group_norm"]["bias"]
-    edge_bias = parameters["edge_calibration_group_norm"]["bias"]
     lines += [
         "",
         "## Normalization bias state",
         "",
-        f"- Shared GroupNorm bias: mean={_format_number(shared_bias['mean'])}, "
-        f"std={_format_number(shared_bias['std'])}, L2={_format_number(shared_bias['l2_norm'])}.",
-        f"- Edge-calibration GroupNorm bias: mean={_format_number(edge_bias['mean'])}, "
-        f"std={_format_number(edge_bias['std'])}, L2={_format_number(edge_bias['l2_norm'])}.",
+    ]
+    if parameters is None:
+        lines.append("- Parameter audit was unavailable because the run failed before it completed.")
+    else:
+        shared_bias = parameters["shared_group_norm"]["bias"]
+        edge_bias = parameters["edge_calibration_group_norm"]["bias"]
+        lines += [
+            f"- Shared GroupNorm bias: mean={_format_number(shared_bias['mean'])}, "
+            f"std={_format_number(shared_bias['std'])}, L2={_format_number(shared_bias['l2_norm'])}.",
+            f"- Edge-calibration GroupNorm bias: mean={_format_number(edge_bias['mean'])}, "
+            f"std={_format_number(edge_bias['std'])}, L2={_format_number(edge_bias['l2_norm'])}.",
+        ]
+    lines += [
+        "",
+        "## Runtime validation audit",
+        "",
+    ]
+    for audit in manifest.get("runtime_audits", []):
+        lines.append(
+            f"- `{audit.get('variant')}`: wrapper=`{audit.get('wrapper_class')}`, "
+            f"model=`{audit.get('model_class')}`, validator=`{audit.get('validator_module')}."
+            f"{audit.get('validator_class')}`, task=`{audit.get('task')}`, model_nc={audit.get('model_nc')}, "
+            f"dataset_nc={audit.get('dataset_nc')}, CSCEF-v2 count={audit.get('cscef_v2_instance_count')}."
+        )
+    lines += [
         "",
         "## Hypothesis evidence",
         "",
@@ -1172,8 +1375,30 @@ def create_plots(
         plt.close(fig)
 
 
+def failed_metric_row(
+    variant: str,
+    weights_hash: str,
+    data_hash: str,
+    error: str,
+    elapsed_seconds: float = 0.0,
+) -> dict[str, Any]:
+    """Create a schema-complete failure row without inventing metric values."""
+    row = {field: None for field in METRIC_FIELDS}
+    row.update(
+        {
+            "variant": variant,
+            "weights_sha256": weights_hash,
+            "data_sha256": data_hash,
+            "elapsed_seconds": elapsed_seconds,
+            "status": "failed",
+            "error": error,
+        }
+    )
+    return row
+
+
 def run(args: argparse.Namespace) -> int:
-    """Execute diagnostics and return a process status code."""
+    """Execute diagnostics and persist terminal artifacts even when validation fails."""
     validate_args(args)
     args.weights = Path(args.weights).expanduser().resolve()
     args.data = Path(args.data).expanduser().resolve()
@@ -1191,9 +1416,10 @@ def run(args: argparse.Namespace) -> int:
 
     weights_hash_before = sha256_file(args.weights)
     data_hash = sha256_file(args.data)
-    ultralytics, rtdetr_class, validator_class = import_local_ultralytics()
+    ultralytics, rtdetr_class, rtdetr_validator_class = import_local_ultralytics()
     state = git_state()
     environment = environment_info(ultralytics)
+    dataset_nc = dataset_class_count(args.data, ultralytics)
     arguments = vars(args).copy()
     arguments["weights"] = str(args.weights)
     arguments["data"] = str(args.data)
@@ -1211,6 +1437,8 @@ def run(args: argparse.Namespace) -> int:
         "fixed_validation": {"conf": 0.001, "iou": 0.7, "max_det": 300, "augment": False, "split": "val"},
         "git": state,
         "environment": environment,
+        "dataset_nc": dataset_nc,
+        "runtime_audits": [],
         "warning": POST_TRAINING_WARNING,
     }
     write_json(output / "run_manifest.json", manifest)
@@ -1218,61 +1446,150 @@ def run(args: argparse.Namespace) -> int:
     write_environment_text(output / "environment.txt", environment)
     write_git_text(output / "git_state.txt", state)
 
-    logger.info("Loading checkpoint once for module discovery and parameter audit (no validation).")
-    audit_wrapper = rtdetr_class(str(args.weights))
-    audit_module = find_unique_cscef_v2(audit_wrapper.model)
-    parameters = parameter_audit(audit_module)
-    write_json(output / "module_parameter_stats.json", parameters)
-    del audit_module, audit_wrapper
-    gc.collect()
-
     rows: list[dict[str, Any]] = []
+    parameters: dict[str, Any] | None = None
     original_collector: ActivationCollector | None = None
     activation_data: dict[str, Any] | None = None
+    current_variant: str | None = None
+    orchestration_error: str | None = None
+    fatal_cuda_error = False
+    weights_hash_after: str | None = None
     (output / "variants").mkdir(exist_ok=True)
-    for variant in selected_variants:
-        logger.info("Starting variant %s from a fresh checkpoint load.", variant)
-        row, collector = run_variant(
-            variant, args, output, weights_hash_before, data_hash, rtdetr_class, validator_class
+    try:
+        logger.info("Loading checkpoint once for module discovery and parameter audit (no validation).")
+        audit_wrapper = rtdetr_class(str(args.weights))
+        audit_module = find_unique_cscef_v2(audit_wrapper.model)
+        parameters = parameter_audit(audit_module)
+        write_json(output / "module_parameter_stats.json", parameters)
+        del audit_module, audit_wrapper
+        gc.collect()
+
+        for variant in selected_variants:
+            current_variant = variant
+            manifest["current_variant"] = variant
+            write_json(output / "run_manifest.json", manifest)
+            logger.info("Starting variant %s from a fresh checkpoint load.", variant)
+            row, collector, runtime_audit, variant_fatal_cuda = run_variant(
+                variant,
+                args,
+                output,
+                weights_hash_before,
+                data_hash,
+                rtdetr_class,
+                rtdetr_validator_class,
+                dataset_nc,
+            )
+            rows.append(row)
+            manifest["runtime_audits"].append(runtime_audit)
+            write_metric_artifacts(output, rows)
+            write_json(output / "run_manifest.json", manifest)
+            if variant == "original" and row["status"] == "success" and collector is not None:
+                original_collector = collector
+                activation_data = collector.as_dict()
+                write_json(output / "activation_stats.json", activation_data)
+                write_per_image_csv(output / "per_image_gate_stats.csv", collector.per_image_rows)
+            if row["status"] == "success":
+                logger.info("Variant %s completed successfully.", variant)
+            else:
+                logger.error("Variant %s failed:\n%s", variant, row["error"])
+            if variant_fatal_cuda:
+                fatal_cuda_error = True
+                logger.critical(
+                    "Stopping immediately after %s because a CUDA device-side failure made the context untrustworthy.",
+                    variant,
+                )
+                break
+
+        if args.plots and not fatal_cuda_error:
+            create_plots(output, original_collector, rows)
+    except Exception as error:
+        orchestration_error = traceback.format_exc()
+        fatal_cuda_error = fatal_cuda_error or is_unrecoverable_cuda_error(error) or is_unrecoverable_cuda_error(
+            orchestration_error
         )
-        rows.append(row)
+        logger.exception("Diagnostic orchestration failed.")
+        if current_variant is not None and all(row["variant"] != current_variant for row in rows):
+            rows.append(failed_metric_row(current_variant, weights_hash_before, data_hash, orchestration_error))
+    finally:
+        # These artifacts use CPU/file operations only and are safe to write after a poisoned CUDA context.
         write_metric_artifacts(output, rows)
-        if variant == "original" and row["status"] == "success" and collector is not None:
-            original_collector = collector
-            activation_data = collector.as_dict()
-            write_json(output / "activation_stats.json", activation_data)
-            write_per_image_csv(output / "per_image_gate_stats.csv", collector.per_image_rows)
-        if row["status"] == "success":
-            logger.info("Variant %s completed successfully.", variant)
-        else:
-            logger.error("Variant %s failed:\n%s", variant, row["error"])
-
-    if activation_data is None:
-        write_json(
-            output / "activation_stats.json",
-            {"status": "not_collected", "reason": "The original variant was not selected or did not succeed."},
+        if parameters is None:
+            write_json(
+                output / "module_parameter_stats.json",
+                {"status": "not_available", "error": orchestration_error},
+            )
+        if activation_data is None:
+            failure_context = next(
+                (
+                    audit.get("failure_context")
+                    for audit in reversed(manifest.get("runtime_audits", []))
+                    if audit.get("failure_context") is not None
+                ),
+                None,
+            )
+            write_json(
+                output / "activation_stats.json",
+                {
+                    "status": "not_collected",
+                    "reason": "The original variant was not selected or did not succeed.",
+                    "failure_context": failure_context,
+                },
+            )
+            write_per_image_csv(output / "per_image_gate_stats.csv", [])
+        try:
+            weights_hash_after = sha256_file(args.weights)
+        except Exception:
+            logger.exception("Could not calculate the final checkpoint hash.")
+        failures = [row["variant"] for row in rows if row["status"] != "success"]
+        manifest.update(
+            {
+                "weights_sha256_after": weights_hash_after,
+                "weights_unchanged": weights_hash_after == weights_hash_before,
+                "failed_variants": failures,
+                "fatal_cuda_context_error": fatal_cuda_error,
+                "orchestration_error": orchestration_error,
+                "finished_at_local": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+                "status": "failed"
+                if failures or orchestration_error or weights_hash_after != weights_hash_before
+                else "success",
+            }
         )
-        write_per_image_csv(output / "per_image_gate_stats.csv", [])
-    if args.plots:
-        create_plots(output, original_collector, rows)
-    generate_report(output, manifest, rows, parameters, activation_data)
+        write_json(output / "run_manifest.json", manifest)
+        try:
+            generate_report(output, manifest, rows, parameters, activation_data)
+        except Exception:
+            report_error = traceback.format_exc()
+            logger.exception("Could not generate the full diagnostic report.")
+            orchestration_error = orchestration_error or report_error
+            manifest["report_error"] = report_error
+            manifest["orchestration_error"] = orchestration_error
+            manifest["status"] = "failed"
+            write_json(output / "run_manifest.json", manifest)
+            (output / "diagnostic_report.md").write_text(
+                "# CSCEF-v2 validation diagnostic\n\n"
+                f"{POST_TRAINING_WARNING}\n\n"
+                "The full report failed to render. See `run_manifest.json`, `variant_metrics.json`, and "
+                "`diagnostic.log` for preserved failure details.\n",
+                encoding="utf-8",
+            )
 
-    weights_hash_after = sha256_file(args.weights)
-    manifest["weights_sha256_after"] = weights_hash_after
-    manifest["weights_unchanged"] = weights_hash_after == weights_hash_before
-    failures = [row["variant"] for row in rows if row["status"] != "success"]
-    manifest["failed_variants"] = failures
-    manifest["finished_at_local"] = time.strftime("%Y-%m-%dT%H:%M:%S%z")
-    manifest["status"] = "failed" if failures or weights_hash_after != weights_hash_before else "success"
-    write_json(output / "run_manifest.json", manifest)
+    exit_code = 0
     if weights_hash_after != weights_hash_before:
-        logger.critical("Checkpoint SHA256 changed during diagnostics; refusing success.")
-        return 2
-    if failures:
-        logger.error("Diagnostics completed with failed variants: %s", failures)
-        return 1
-    logger.info("Diagnostics completed; checkpoint SHA256 is unchanged.")
-    return 0
+        logger.critical("Checkpoint SHA256 changed or could not be verified; refusing success.")
+        exit_code = 2
+    elif fatal_cuda_error:
+        exit_code = 3
+    elif orchestration_error:
+        exit_code = 2
+    else:
+        failures = [row["variant"] for row in rows if row["status"] != "success"]
+        if failures:
+            logger.error("Diagnostics completed with failed variants: %s", failures)
+            exit_code = 1
+        else:
+            logger.info("Diagnostics completed; checkpoint SHA256 is unchanged.")
+    logging.shutdown()
+    return exit_code
 
 
 def main(argv: list[str] | None = None) -> int:
