@@ -20,14 +20,20 @@ V2_CFG = MODEL_DIR / "rtdetr-resnet18-lite-cscef-v2.yaml"
 PROTECTED_SHA256 = {
     MODEL_DIR / "rtdetr-resnet18-lite.yaml": "3493d693cbef958a38a2a135822a6c5379b65804905bc71566e395069e8f4f16",
     MODEL_DIR
-    / "rtdetr-resnet18-lite-cscef.yaml": "863ed9f2786737bbc0f96879b5f79c65b8a72fba2f65094cd64624ff54f70820",
+    / "rtdetr-resnet18-lite-cscef.yaml": "27545ed78ed8308f8c0e5f18abfecdcfc5a0ef69cdf1c605467d564e432bf895",
     ROOT
     / "ultralytics-main"
     / "ultralytics"
     / "nn"
     / "modules"
-    / "cscef.py": "9c6ade426fa468915e8325fb88b40e31facc3bff41472866e96aefdc11ae3cbf",
+    / "cscef.py": "6826911701ce14b08bb99945fa7790897d9389838a78cd3227c5514c0d945cda",
 }
+
+
+def canonical_lf_sha256(data: bytes) -> str:
+    """Hash text bytes after normalizing CRLF and CR line endings to canonical LF."""
+    canonical = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(canonical).hexdigest()
 
 
 class CSCEFv2Test(unittest.TestCase):
@@ -209,11 +215,17 @@ class CSCEFv2Test(unittest.TestCase):
                 gc.collect()
 
     def test_protected_baseline_and_cscef_v1_files_unchanged(self):
-        """Pin the exact baseline and CSCEF-v1 source/config bytes from fa829d3."""
+        """Pin canonical-LF baseline and CSCEF-v1 source/config content from fa829d3."""
         for path, expected in PROTECTED_SHA256.items():
             with self.subTest(path=path):
-                actual = hashlib.sha256(path.read_bytes()).hexdigest()
+                actual = canonical_lf_sha256(path.read_bytes())
                 self.assertEqual(actual, expected)
+
+    def test_canonical_hash_normalizes_text_line_endings(self):
+        """Treat LF, CRLF, and legacy CR representations of the same text identically."""
+        lf = b"first line\nsecond line\n"
+        self.assertEqual(canonical_lf_sha256(lf), canonical_lf_sha256(lf.replace(b"\n", b"\r\n")))
+        self.assertEqual(canonical_lf_sha256(lf), canonical_lf_sha256(lf.replace(b"\n", b"\r")))
 
     @unittest.skipUnless(torch.cuda.is_available(), "CUDA is unavailable")
     def test_cuda_module_fp32_and_amp(self):
