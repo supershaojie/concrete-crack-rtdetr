@@ -329,6 +329,38 @@ class CSCEFv3Test(unittest.TestCase):
                     self.assertTrue(torch.isfinite(parameter.grad).all().item())
 
     @unittest.skipUnless(torch.cuda.is_available(), "CUDA is unavailable")
+    def test_cuda_half_model_direct_forward_without_autocast(self):
+        """Match validator inference with an explicitly half module and inputs, without autocast."""
+        module = CSCEFv3(16, 16, hidden_channels=8).cuda().half()
+        lateral = torch.randn(2, 16, 8, 10, device="cuda", dtype=torch.float16, requires_grad=True)
+        semantic = torch.randn(2, 16, 4, 5, device="cuda", dtype=torch.float16, requires_grad=True)
+        magnitude = module._compute_scharr_magnitude(torch.randn(1, 8, 8, 10, device="cuda", dtype=torch.float16))
+        self.assertEqual(magnitude.dtype, torch.float32)
+
+        output = module([lateral, semantic])
+        self.assertEqual(output.shape, lateral.shape)
+        self.assertEqual(output.dtype, torch.float16)
+        self.assertTrue(torch.isfinite(output).all().item())
+        output.float().square().mean().backward()
+        for parameter in module.parameters():
+            self.assertIsNotNone(parameter.grad)
+            self.assertTrue(torch.isfinite(parameter.grad).all().item())
+
+    @unittest.skipUnless(torch.cuda.is_available(), "CUDA is unavailable")
+    def test_complete_model_cuda_half_640_direct_forward_without_autocast(self):
+        """Run the validator-equivalent explicit FP16 model and 640x640 input path without autocast."""
+        model = RTDETRDetectionModel(str(V3_CFG), ch=3, nc=1, verbose=False).eval().cuda().half()
+        image = torch.zeros(1, 3, 640, 640, device="cuda", dtype=torch.float16)
+        with torch.no_grad():
+            output = model(image)
+        self.assertIsInstance(output, tuple)
+        self.assertEqual(output[0].shape, (1, 300, 5))
+        self.assertTrue(torch.isfinite(output[0]).all().item())
+        del output, image, model
+        gc.collect()
+        torch.cuda.empty_cache()
+
+    @unittest.skipUnless(torch.cuda.is_available(), "CUDA is unavailable")
     def test_complete_model_cuda_fp32_and_amp(self):
         """Run complete nc=1 RT-DETR CUDA FP32 and AMP inference."""
         for use_amp in (False, True):

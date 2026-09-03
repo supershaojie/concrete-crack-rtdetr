@@ -173,9 +173,15 @@ class CSCEFv3(nn.Module):
         gate = self._compute_discrepancy_gate(lateral_embedding, semantic_embedding)
 
         edge_magnitude = self._compute_scharr_magnitude(lateral_embedding)
-        edge_feature = self.edge_activation(self.edge_norm(self.depthwise_conv(edge_magnitude)))
+        edge_for_conv = edge_magnitude.to(
+            device=self.depthwise_conv.weight.device,
+            dtype=self.depthwise_conv.weight.dtype,
+        )
+        edge_feature = self.edge_activation(self.edge_norm(self.depthwise_conv(edge_for_conv)))
         residual_raw = self.output_projection(edge_feature)
         residual_normalized = self._match_residual_rms(x_lateral, residual_raw)
 
-        delta = self._effective_alpha() * gate * residual_normalized
+        gate_for_residual = gate.to(device=residual_normalized.device, dtype=residual_normalized.dtype)
+        alpha = self._effective_alpha().to(device=residual_normalized.device, dtype=residual_normalized.dtype)
+        delta = alpha * gate_for_residual * residual_normalized
         return x_lateral + delta.to(dtype=x_lateral.dtype)
