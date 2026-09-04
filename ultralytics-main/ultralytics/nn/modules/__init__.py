@@ -96,6 +96,7 @@ from .head import (
     YOLOESegment26,
     v10Detect,
 )
+from .gsdr_aifi import GSDRAIFI, SparseDeformableRelation
 from .transformer import (
     AIFI,
     MLP,
@@ -111,6 +112,8 @@ from .transformer import (
 
 __all__ = (
     "AIFI",
+    "GSDRAIFI",
+    "SparseDeformableRelation",
     "C1",
     "C2",
     "C2PSA",
