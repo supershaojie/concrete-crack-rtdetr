@@ -68,6 +68,7 @@ from .cscef_v2 import CSCEFv2
 from .cscef_v3 import CSCEFv3
 from .cscef_v4 import CSCEFv4
 from .cscef_v5 import CSCEFv5
+from .cscef_v51 import CSCEFv51
 from .conv import (
     CBAM,
     ChannelAttention,
@@ -155,6 +156,7 @@ __all__ = (
     "CSCEFv3",
     "CSCEFv4",
     "CSCEFv5",
+    "CSCEFv51",
     "ChannelAttention",
     "Classify",
     "Concat",

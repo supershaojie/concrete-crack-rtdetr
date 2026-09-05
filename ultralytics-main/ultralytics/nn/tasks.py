@@ -46,6 +46,7 @@ from ultralytics.nn.modules import (
     CSCEFv3,
     CSCEFv4,
     CSCEFv5,
+    CSCEFv51,
     Classify,
     Concat,
     ConvNormLayer,
@@ -1689,7 +1690,7 @@ def parse_model(d, ch, verbose=True):
             c2 = args[1] if args[3] else args[1] * (args[5] if len(args) > 5 else 4)
         elif m is torch.nn.BatchNorm2d:
             args = [ch[f]]
-        elif m in {CSCEF, CSCEFv2, CSCEFv3, CSCEFv4, CSCEFv5}:
+        elif m in {CSCEF, CSCEFv2, CSCEFv3, CSCEFv4, CSCEFv5, CSCEFv51}:
             if not isinstance(f, (list, tuple)) or len(f) != 2:
                 raise ValueError(f"{m.__name__} requires exactly two input layers: [lateral, semantic].")
             c_lateral, c_semantic = (ch[x] for x in f)

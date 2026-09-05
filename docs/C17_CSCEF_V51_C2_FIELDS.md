@@ -1,0 +1,121 @@
+# C17：C2 全字段对照
+
+来源：C15 完整附件内 `baseline_c2/training/args.yaml`；测试 fixture 为原文件的逐字节副本。
+
+原文件 SHA256：`ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd`。
+
+共 109 个字段，106 个保持原值和类型；仅 `model`、`name`、`save_dir` 改变。`project`、`data` 均保留服务器原路径。
+
+此表是从附件原始配置调用生产 `build_locked_args` 生成的服务器目标对照，不代表已在 Windows 完成服务器数据路径检查或开始训练。正式工具仍直接读取服务器原始 C2 args.yaml，不以此文档或测试 fixture 替代。
+
+| 字段 | C2 原值 | C17 目标值 | 结果 |
+|---|---|---|---|
+| `agnostic_nms` | `false` | `false` | 一致 |
+| `amp` | `true` | `true` | 一致 |
+| `angle` | `1.0` | `1.0` | 一致 |
+| `augment` | `false` | `false` | 一致 |
+| `auto_augment` | `null` | `null` | 一致 |
+| `batch` | `16` | `16` | 一致 |
+| `bgr` | `0.0` | `0.0` | 一致 |
+| `box` | `7.5` | `7.5` | 一致 |
+| `cache` | `false` | `false` | 一致 |
+| `cfg` | `null` | `null` | 一致 |
+| `classes` | `null` | `null` | 一致 |
+| `close_mosaic` | `10` | `10` | 一致 |
+| `cls` | `0.5` | `0.5` | 一致 |
+| `compile` | `false` | `false` | 一致 |
+| `conf` | `null` | `null` | 一致 |
+| `copy_paste` | `0` | `0` | 一致 |
+| `copy_paste_mode` | `"flip"` | `"flip"` | 一致 |
+| `cos_lr` | `true` | `true` | 一致 |
+| `cutmix` | `0` | `0` | 一致 |
+| `data` | `"/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml"` | `"/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml"` | 一致 |
+| `degrees` | `5` | `5` | 一致 |
+| `deterministic` | `true` | `true` | 一致 |
+| `device` | `"0"` | `"0"` | 一致 |
+| `dfl` | `1.5` | `1.5` | 一致 |
+| `dnn` | `false` | `false` | 一致 |
+| `dropout` | `0.0` | `0.0` | 一致 |
+| `dynamic` | `false` | `false` | 一致 |
+| `embed` | `null` | `null` | 一致 |
+| `end2end` | `null` | `null` | 一致 |
+| `epochs` | `200` | `200` | 一致 |
+| `erasing` | `0` | `0` | 一致 |
+| `exist_ok` | `false` | `false` | 一致 |
+| `fliplr` | `0.5` | `0.5` | 一致 |
+| `flipud` | `0.2` | `0.2` | 一致 |
+| `format` | `"torchscript"` | `"torchscript"` | 一致 |
+| `fraction` | `1.0` | `1.0` | 一致 |
+| `freeze` | `null` | `null` | 一致 |
+| `half` | `false` | `false` | 一致 |
+| `hsv_h` | `0.015` | `0.015` | 一致 |
+| `hsv_s` | `0.5` | `0.5` | 一致 |
+| `hsv_v` | `0.35` | `0.35` | 一致 |
+| `imgsz` | `640` | `640` | 一致 |
+| `int8` | `false` | `false` | 一致 |
+| `iou` | `0.7` | `0.7` | 一致 |
+| `keras` | `false` | `false` | 一致 |
+| `kobj` | `1.0` | `1.0` | 一致 |
+| `line_width` | `null` | `null` | 一致 |
+| `lr0` | `0.0005` | `0.0005` | 一致 |
+| `lrf` | `0.01` | `0.01` | 一致 |
+| `mask_ratio` | `4` | `4` | 一致 |
+| `max_det` | `300` | `300` | 一致 |
+| `mixup` | `0.05` | `0.05` | 一致 |
+| `mode` | `"train"` | `"train"` | 一致 |
+| `model` | `"/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt"` | `"/root/autodl-tmp/projects/Crack_RTDETR_cscef_v51/weights/rtdetr_r18_lite_cscef_v51_imagenet_backbone_init.pt"` | 允许变化 |
+| `momentum` | `0.937` | `0.937` | 一致 |
+| `mosaic` | `0.8` | `0.8` | 一致 |
+| `multi_scale` | `0.0` | `0.0` | 一致 |
+| `name` | `"c2_rtdetr_r18_lite_e200_b16_onlineaug"` | `"c17_rtdetr_r18_lite_cscef_v51_e200_b16_onlineaug"` | 允许变化 |
+| `nbs` | `64` | `64` | 一致 |
+| `nms` | `false` | `false` | 一致 |
+| `opset` | `null` | `null` | 一致 |
+| `optimize` | `false` | `false` | 一致 |
+| `optimizer` | `"AdamW"` | `"AdamW"` | 一致 |
+| `overlap_mask` | `true` | `true` | 一致 |
+| `patience` | `50` | `50` | 一致 |
+| `perspective` | `0.0002` | `0.0002` | 一致 |
+| `plots` | `true` | `true` | 一致 |
+| `pose` | `12.0` | `12.0` | 一致 |
+| `pretrained` | `true` | `true` | 一致 |
+| `profile` | `false` | `false` | 一致 |
+| `project` | `"/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series"` | `"/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series"` | 一致 |
+| `rect` | `false` | `false` | 一致 |
+| `resume` | `false` | `false` | 一致 |
+| `retina_masks` | `false` | `false` | 一致 |
+| `rle` | `1.0` | `1.0` | 一致 |
+| `save` | `true` | `true` | 一致 |
+| `save_conf` | `false` | `false` | 一致 |
+| `save_crop` | `false` | `false` | 一致 |
+| `save_dir` | `"/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug"` | `"/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c17_rtdetr_r18_lite_cscef_v51_e200_b16_onlineaug"` | 允许变化 |
+| `save_frames` | `false` | `false` | 一致 |
+| `save_json` | `false` | `false` | 一致 |
+| `save_period` | `-1` | `-1` | 一致 |
+| `save_txt` | `false` | `false` | 一致 |
+| `scale` | `0.4` | `0.4` | 一致 |
+| `seed` | `42` | `42` | 一致 |
+| `shear` | `1.5` | `1.5` | 一致 |
+| `show` | `false` | `false` | 一致 |
+| `show_boxes` | `true` | `true` | 一致 |
+| `show_conf` | `true` | `true` | 一致 |
+| `show_labels` | `true` | `true` | 一致 |
+| `simplify` | `true` | `true` | 一致 |
+| `single_cls` | `false` | `false` | 一致 |
+| `source` | `null` | `null` | 一致 |
+| `split` | `"val"` | `"val"` | 一致 |
+| `stream_buffer` | `false` | `false` | 一致 |
+| `task` | `"detect"` | `"detect"` | 一致 |
+| `time` | `null` | `null` | 一致 |
+| `tracker` | `"botsort.yaml"` | `"botsort.yaml"` | 一致 |
+| `translate` | `0.1` | `0.1` | 一致 |
+| `val` | `true` | `true` | 一致 |
+| `verbose` | `true` | `true` | 一致 |
+| `vid_stride` | `1` | `1` | 一致 |
+| `visualize` | `false` | `false` | 一致 |
+| `warmup_bias_lr` | `0.1` | `0.1` | 一致 |
+| `warmup_epochs` | `5` | `5` | 一致 |
+| `warmup_momentum` | `0.8` | `0.8` | 一致 |
+| `weight_decay` | `0.0001` | `0.0001` | 一致 |
+| `workers` | `8` | `8` | 一致 |
+| `workspace` | `null` | `null` | 一致 |
