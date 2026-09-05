@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import nullcontext
 from copy import deepcopy
 import gc
 import hashlib
@@ -22,6 +23,15 @@ from ultralytics.nn.modules import CSCEFv4, CSCEFv5
 from ultralytics.utils import YAML
 from ultralytics.utils.patches import torch_load
 from ultralytics.utils.torch_utils import init_seeds
+
+
+def audit_autocast_context(device: str | torch.device, use_amp: bool):
+    """Create a fresh context; non-AMP audits must not construct FP16 autocast on PyTorch 2.1."""
+    if not use_amp:
+        return nullcontext()
+    if torch.device(device).type != "cuda":
+        raise ValueError("FP16 AMP audit requires CUDA")
+    return torch.autocast(device_type="cuda", dtype=torch.float16)
 
 
 def verify_topology() -> dict:
@@ -77,7 +87,7 @@ def audit_module(mode: str = "cpu_fp32") -> dict:
     probe = torch.randn(lateral.shape, device=device)
 
     def forward():
-        with torch.autocast(device_type=device, dtype=torch.float16, enabled=use_amp):
+        with audit_autocast_context(device, use_amp):
             return module([lateral, semantic])
 
     forward_rng = torch.get_rng_state().clone()
@@ -110,7 +120,7 @@ def audit_module(mode: str = "cpu_fp32") -> dict:
         second_gradients[name] = magnitude
     require(semantic.grad is not None and torch.isfinite(semantic.grad).all().item()
             and torch.count_nonzero(semantic.grad).item() > 0, "Semantic input receives no usable gradient.")
-    with torch.no_grad(), torch.autocast(device_type=device, dtype=torch.float16, enabled=use_amp):
+    with torch.no_grad(), audit_autocast_context(device, use_amp):
         altered = module([lateral, -semantic])
     semantic_difference = float((output.float() - altered.float()).abs().max())
     require(semantic_difference > 0, "Activated residual does not depend on semantic content.")
@@ -218,7 +228,7 @@ def audit_cuda(model: torch.nn.Module) -> dict:
         if mode == "cuda_half":
             actual.half()
         image = torch.rand(1, 3, 640, 640, device="cuda", dtype=torch.float16 if mode == "cuda_half" else torch.float32)
-        with torch.inference_mode(), torch.autocast("cuda", dtype=torch.float16, enabled=mode == "cuda_amp_fp16"):
+        with torch.inference_mode(), audit_autocast_context("cuda", mode == "cuda_amp_fp16"):
             output = actual(image)[0]
         require(output.shape == (1, 300, 5) and torch.isfinite(output).all().item(), f"{mode}: complete 640 forward failed.")
         report["modes"][mode] = {"module": module_report, "full_shape": list(output.shape),

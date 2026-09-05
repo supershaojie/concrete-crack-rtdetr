@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import nullcontext
 from copy import deepcopy
 from io import BytesIO
 import json
@@ -11,14 +12,14 @@ import py_compile
 import sys
 from tempfile import TemporaryDirectory
 import unittest
-from unittest.mock import patch
+from unittest.mock import call, patch
 
 import torch
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools"))
 
-from audit_rtdetr_r18_lite_cscef_v5 import audit_module, audit_structure, verify_topology
+from audit_rtdetr_r18_lite_cscef_v5 import audit_autocast_context, audit_module, audit_structure, verify_topology
 from init_rtdetr_r18_lite_cscef_v5_controlled import NEW_SUFFIXES, SOURCE_SHA256, initialize, read_source, sha256
 from train_rtdetr_r18_lite_cscef_v5 import C2_KEY_FIELDS, build_locked_args, execute, prepare
 from ultralytics.cfg import DEFAULT_CFG_DICT
@@ -65,6 +66,43 @@ class TestCSCEFv5(unittest.TestCase):
 
     def test_cpu_two_stage_gradients_and_semantic_dependence(self):
         self.assertEqual(audit_module()["status"], "passed")
+
+    def test_non_amp_audits_do_not_construct_autocast(self):
+        with patch("audit_rtdetr_r18_lite_cscef_v5.torch.autocast") as autocast:
+            contexts = []
+            for device in ("cpu", "cuda", torch.device("cuda:0")):
+                context = audit_autocast_context(device, False)
+                self.assertIsInstance(context, nullcontext)
+                self.assertTrue(all(context is not previous for previous in contexts))
+                contexts.append(context)
+                with context:
+                    pass
+            with self.assertRaisesRegex(ValueError, "FP16 AMP audit requires CUDA"):
+                audit_autocast_context("cpu", True)
+            autocast.assert_not_called()
+
+    def test_cuda_amp_audit_constructs_a_fresh_fp16_context(self):
+        with patch("audit_rtdetr_r18_lite_cscef_v5.torch.autocast", side_effect=lambda **kwargs: nullcontext()) as autocast:
+            first = audit_autocast_context("cuda", True)
+            with first:
+                pass
+            second = audit_autocast_context(torch.device("cuda:0"), True)
+            with second:
+                pass
+            self.assertIsNot(first, second)
+            self.assertEqual(autocast.call_args_list, [call(device_type="cuda", dtype=torch.float16)] * 2)
+
+    def test_cpu_audit_with_legacy_autocast_constructor_restriction(self):
+        """Run the real CPU audit while reproducing PyTorch 2.1's FP16 constructor rejection."""
+        real_autocast = torch.autocast
+
+        def legacy_autocast(device_type, dtype=None, **kwargs):
+            if torch.device(device_type).type == "cpu" and dtype == torch.float16:
+                raise RuntimeError("Currently, AutocastCPU only support Bfloat16 as the autocast_cpu_dtype")
+            return real_autocast(device_type=device_type, dtype=dtype, **kwargs)
+
+        with patch("audit_rtdetr_r18_lite_cscef_v5.torch.autocast", side_effect=legacy_autocast):
+            self.assertEqual(audit_module("cpu_fp32")["status"], "passed")
 
     def test_zero_constant_random_and_small_spatial(self):
         module = CSCEFv5(256, 256)
