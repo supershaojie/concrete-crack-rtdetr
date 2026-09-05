@@ -1,0 +1,638 @@
+{
+  "runtime": {
+    "ultralytics_file": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\cscef-v5\\ultralytics-main\\ultralytics\\__init__.py",
+    "ultralytics_version": "8.4.21",
+    "torch_version": "2.7.1+cu118",
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "cuda_available": true,
+    "git_commit": "f34502c43a88edc9cb1076bd996b9c3fc2d23e31",
+    "git_status": [
+      " M ultralytics-main/ultralytics/nn/modules/__init__.py",
+      " M ultralytics-main/ultralytics/nn/tasks.py",
+      "?? tools/audit_rtdetr_r18_lite_cscef_v5.py",
+      "?? tools/init_rtdetr_r18_lite_cscef_v5_controlled.py",
+      "?? tools/train_rtdetr_r18_lite_cscef_v5.py",
+      "?? ultralytics-main/tests/test_cscef_v5.py",
+      "?? ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v5.yaml",
+      "?? ultralytics-main/ultralytics/nn/modules/cscef_v5.py"
+    ],
+    "code_sha256": {
+      "ultralytics-main/ultralytics/nn/modules/cscef_v5.py": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+      "ultralytics-main/ultralytics/nn/modules/__init__.py": "eb4d05851dc2d91a12cd7dcf7eb4074e5710c4eef1084577036f1ca9f986fd1e",
+      "ultralytics-main/ultralytics/nn/tasks.py": "a2703b06c4bfe63dfabeec1f9edccbd34203408ee5eca8f4101dba02ee23af5a",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v5.yaml": "158c81388429dafccff995586837996c2503ee0d7c2c0237dc5e8822ea8f0fca",
+      "tools/init_rtdetr_r18_lite_cscef_v5_controlled.py": "8c62aba1e096edacbf47699a6738c2523822f7e8eb31053ee65208a0f89be64d",
+      "tools/audit_rtdetr_r18_lite_cscef_v5.py": "6507d8867a08c106e561a0c3d99f8a2888ba3237489375d52faa6d7592260c89"
+    }
+  },
+  "status": "passed",
+  "datasets_used": false,
+  "rng_scope": "CLI runs in its own process; do not import and run this audit inside training",
+  "topology": {
+    "insertion": [
+      [
+        17,
+        16
+      ],
+      1,
+      "CSCEFv5",
+      []
+    ],
+    "concat": [
+      [
+        16,
+        18
+      ],
+      1,
+      "Concat",
+      [
+        1
+      ]
+    ],
+    "decoder": [
+      [
+        20,
+        23,
+        26
+      ],
+      1,
+      "RTDETRDecoder",
+      [
+        "nc",
+        256,
+        300,
+        4,
+        8,
+        3
+      ]
+    ],
+    "v4_only_class_changed": true
+  },
+  "structure": {
+    "v4_formula_exact": true,
+    "scharr_and_boundaries_exact": true,
+    "max_abs": 0.0,
+    "detached": true
+  },
+  "module_cpu": {
+    "mode": "cpu_fp32",
+    "identity_exact": true,
+    "construction_rng_preserved": true,
+    "forward_rng_preserved": true,
+    "first_backward_abs_sum": {
+      "lateral_projection.weight": 0.0,
+      "semantic_projection.weight": 0.0,
+      "mix_projection.weight": 0.0,
+      "depthwise_conv.weight": 0.0,
+      "output_projection.weight": 9547.921875
+    },
+    "after_projection_update_abs_sum": {
+      "lateral_projection.weight": 532.23974609375,
+      "semantic_projection.weight": 668.8280029296875,
+      "mix_projection.weight": 181.96524047851562,
+      "depthwise_conv.weight": 28.207881927490234,
+      "output_projection.weight": 9547.921875
+    },
+    "semantic_change_max_abs": 0.01767931878566742,
+    "output_dtype": "torch.float32",
+    "status": "passed"
+  },
+  "initialization": {
+    "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "initialized_sha256": "04150fe8020b8177cc24568510c98bdb22faccc597cc9925842024ebc4ae895e",
+    "reloads": {
+      "raw": {
+        "states_exact": 540,
+        "differences": [],
+        "output_projection_zero": true
+      },
+      "RTDETR(checkpoint)": {
+        "states_exact": 540,
+        "differences": [],
+        "output_projection_zero": true
+      },
+      "RTDETR(YAML).load(checkpoint)": {
+        "states_exact": 540,
+        "differences": [],
+        "output_projection_zero": true
+      }
+    },
+    "entry_point": "RTDETRTrainer.get_model (unchanged implementation, __new__ fixture avoids dataset I/O)",
+    "entry_point_source_sha256": "0c84872cc8004899970eff6ebc1c6b03935ffe520c9831cca6a72af4cd7cf909",
+    "seed": 42,
+    "deterministic": true,
+    "ranks": "single process RANK=-1",
+    "classes": {
+      "1": {
+        "compared": 533,
+        "differences": [],
+        "five_classification_weights": [
+          {
+            "baseline": "model.26.denoising_class_embed.weight",
+            "target": "model.27.denoising_class_embed.weight",
+            "baseline_shape": [
+              1,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "baseline": "model.26.enc_score_head.weight",
+            "target": "model.27.enc_score_head.weight",
+            "baseline_shape": [
+              1,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "baseline": "model.26.dec_score_head.0.weight",
+            "target": "model.27.dec_score_head.0.weight",
+            "baseline_shape": [
+              1,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "baseline": "model.26.dec_score_head.1.weight",
+            "target": "model.27.dec_score_head.1.weight",
+            "baseline_shape": [
+              1,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "baseline": "model.26.dec_score_head.2.weight",
+            "target": "model.27.dec_score_head.2.weight",
+            "baseline_shape": [
+              1,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          }
+        ],
+        "cpu_rng_equal_after_build_load": true,
+        "cpu_rng_sha256": "56d92305bf6a905f97e53274b72c054f1e7f6cc622da31c27453c0d304e1ee3f",
+        "cpu_fp32_640_outputs": [
+          {
+            "tensor": "output.0",
+            "shape": [
+              1,
+              300,
+              5
+            ],
+            "max_abs": 0.0,
+            "equal": true
+          },
+          {
+            "tensor": "output.1.0",
+            "shape": [
+              1,
+              1,
+              300,
+              4
+            ],
+            "max_abs": 0.0,
+            "equal": true
+          },
+          {
+            "tensor": "output.1.1",
+            "shape": [
+              1,
+              1,
+              300,
+              1
+            ],
+            "max_abs": 0.0,
+            "equal": true
+          },
+          {
+            "tensor": "output.1.2",
+            "shape": [
+              1,
+              300,
+              4
+            ],
+            "max_abs": 0.0,
+            "equal": true
+          },
+          {
+            "tensor": "output.1.3",
+            "shape": [
+              1,
+              300,
+              1
+            ],
+            "max_abs": 0.0,
+            "equal": true
+          }
+        ],
+        "equal": 533
+      },
+      "80": {
+        "compared": 533,
+        "differences": [],
+        "five_classification_weights": [
+          {
+            "baseline": "model.26.denoising_class_embed.weight",
+            "target": "model.27.denoising_class_embed.weight",
+            "baseline_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              80,
+              256
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "baseline": "model.26.enc_score_head.weight",
+            "target": "model.27.enc_score_head.weight",
+            "baseline_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              80,
+              256
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "baseline": "model.26.dec_score_head.0.weight",
+            "target": "model.27.dec_score_head.0.weight",
+            "baseline_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              80,
+              256
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "baseline": "model.26.dec_score_head.1.weight",
+            "target": "model.27.dec_score_head.1.weight",
+            "baseline_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              80,
+              256
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "baseline": "model.26.dec_score_head.2.weight",
+            "target": "model.27.dec_score_head.2.weight",
+            "baseline_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              80,
+              256
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          }
+        ],
+        "cpu_rng_equal_after_build_load": true,
+        "cpu_rng_sha256": "63fec366eec8e8f6fee973d0b47a1581cf84ddf0bdc09f2027266f98c6c0745b",
+        "cpu_fp32_640_outputs": [
+          {
+            "tensor": "output.0",
+            "shape": [
+              1,
+              300,
+              84
+            ],
+            "max_abs": 0.0,
+            "equal": true
+          },
+          {
+            "tensor": "output.1.0",
+            "shape": [
+              1,
+              1,
+              300,
+              4
+            ],
+            "max_abs": 0.0,
+            "equal": true
+          },
+          {
+            "tensor": "output.1.1",
+            "shape": [
+              1,
+              1,
+              300,
+              80
+            ],
+            "max_abs": 0.0,
+            "equal": true
+          },
+          {
+            "tensor": "output.1.2",
+            "shape": [
+              1,
+              300,
+              4
+            ],
+            "max_abs": 0.0,
+            "equal": true
+          },
+          {
+            "tensor": "output.1.3",
+            "shape": [
+              1,
+              300,
+              80
+            ],
+            "max_abs": 0.0,
+            "equal": true
+          }
+        ],
+        "equal": 533
+      }
+    },
+    "nc80_checkpoint_summary": {
+      "compared": 533,
+      "equal": 533,
+      "differences": []
+    }
+  },
+  "complexity": {
+    "scope": "model.info/THOP; functional Scharr convolutions, avg_pool2d and pointwise math are NOT fully counted",
+    "module_parameters": 26912,
+    "C2": {
+      "unfused_parameters": 20082772,
+      "unfused_gflops": 58.276608,
+      "fused_parameters": 19877716,
+      "fused_gflops": 57.1657728
+    },
+    "V5": {
+      "unfused_parameters": 20109684,
+      "unfused_gflops": 58.6210816,
+      "fused_parameters": 19904628,
+      "fused_gflops": 57.5102464
+    }
+  },
+  "cuda": {
+    "status": "passed",
+    "device": "NVIDIA GeForce RTX 2060",
+    "modes": {
+      "cuda_fp32": {
+        "module": {
+          "mode": "cuda_fp32",
+          "identity_exact": true,
+          "construction_rng_preserved": true,
+          "forward_rng_preserved": true,
+          "first_backward_abs_sum": {
+            "lateral_projection.weight": 0.0,
+            "semantic_projection.weight": 0.0,
+            "mix_projection.weight": 0.0,
+            "depthwise_conv.weight": 0.0,
+            "output_projection.weight": 9553.5634765625
+          },
+          "after_projection_update_abs_sum": {
+            "lateral_projection.weight": 536.097412109375,
+            "semantic_projection.weight": 806.6356811523438,
+            "mix_projection.weight": 200.93785095214844,
+            "depthwise_conv.weight": 28.155380249023438,
+            "output_projection.weight": 9553.5634765625
+          },
+          "semantic_change_max_abs": 0.017749786376953125,
+          "output_dtype": "torch.float32",
+          "status": "passed"
+        },
+        "full_shape": [
+          1,
+          300,
+          5
+        ],
+        "full_dtype": "torch.float32",
+        "full_finite": true
+      },
+      "cuda_amp_fp16": {
+        "module": {
+          "mode": "cuda_amp_fp16",
+          "identity_exact": true,
+          "construction_rng_preserved": true,
+          "forward_rng_preserved": true,
+          "first_backward_abs_sum": {
+            "lateral_projection.weight": 0.0,
+            "semantic_projection.weight": 0.0,
+            "mix_projection.weight": 0.0,
+            "depthwise_conv.weight": 0.0,
+            "output_projection.weight": 10218.736328125
+          },
+          "after_projection_update_abs_sum": {
+            "lateral_projection.weight": 582.85205078125,
+            "semantic_projection.weight": 724.802001953125,
+            "mix_projection.weight": 205.24713134765625,
+            "depthwise_conv.weight": 33.352394104003906,
+            "output_projection.weight": 10218.736328125
+          },
+          "semantic_change_max_abs": 0.0152587890625,
+          "output_dtype": "torch.float16",
+          "status": "passed"
+        },
+        "full_shape": [
+          1,
+          300,
+          5
+        ],
+        "full_dtype": "torch.float32",
+        "full_finite": true
+      },
+      "cuda_half": {
+        "module": {
+          "mode": "cuda_half",
+          "identity_exact": true,
+          "construction_rng_preserved": true,
+          "forward_rng_preserved": true,
+          "first_backward_abs_sum": {
+            "lateral_projection.weight": 0.0,
+            "semantic_projection.weight": 0.0,
+            "mix_projection.weight": 0.0,
+            "depthwise_conv.weight": 0.0,
+            "output_projection.weight": 10049.525390625
+          },
+          "after_projection_update_abs_sum": {
+            "lateral_projection.weight": 589.3751220703125,
+            "semantic_projection.weight": 903.2836303710938,
+            "mix_projection.weight": 223.98971557617188,
+            "depthwise_conv.weight": 31.871112823486328,
+            "output_projection.weight": 10049.525390625
+          },
+          "semantic_change_max_abs": 0.021484375,
+          "output_dtype": "torch.float16",
+          "status": "passed"
+        },
+        "full_shape": [
+          1,
+          300,
+          5
+        ],
+        "full_dtype": "torch.float16",
+        "full_finite": true
+      }
+    }
+  },
+  "generated_utc": "2026-09-05T07:27:17.162233+00:00",
+  "validation_context": "Pre-commit worktree at V4 HEAD; canonical-LF code digests identify tested code. No datasets or real training. Synthetic mocked launcher tests do not verify original server C2 args.",
+  "artifacts": {
+    "outputs\\cscef_v5\\audit.json": {
+      "sha256": "8ba20c75be5863a03330b973bb829623c80d272dce6a8626531b3a0d54a3a340",
+      "bytes": 548599
+    },
+    "outputs\\cscef_v5\\initialization.json": {
+      "sha256": "44d8870ad9879658632d329c891e844674142650f55ec2726ecf46a823dff3ae",
+      "bytes": 149026
+    },
+    "weights\\rtdetr_r18_lite_cscef_v5_imagenet_backbone_init.pt": {
+      "sha256": "04150fe8020b8177cc24568510c98bdb22faccc597cc9925842024ebc4ae895e",
+      "bytes": 81212737
+    },
+    "outputs\\cscef_v5_audit_console.log": {
+      "sha256": "af98360e349df08dff62f1358f92530704ee8df52dde84b1cb7db558374ebca4",
+      "bytes": 1582
+    },
+    "outputs\\cscef_v5_init_console.log": {
+      "sha256": "71fb7774fb2a5aace293fe134992efc3cebbe3479206ca14ac17cf21e654b12b",
+      "bytes": 2438
+    },
+    "outputs\\cscef_v5_tests_console.log": {
+      "sha256": "46886a0f406908d393e0658477f4bf67db04e18521998b716f17fdb69b2add69",
+      "bytes": 1579
+    },
+    "outputs\\cscef_v4_regression_console.log": {
+      "sha256": "92efc230f2361f5d0d07600cb797ad8ad2f9bae568b669b687a9ca8d1b77f766",
+      "bytes": 4566
+    },
+    "outputs\\baseline_smoke_console.log": {
+      "sha256": "c369a654b2cc4e353098fae046cf82338efb7d048c7aaf01186f2296b7d55c3d",
+      "bytes": 275
+    },
+    "outputs\\cscef_v5_missing_c2_console.log": {
+      "sha256": "66bc7587ae920999ed9c090ee3757045da936278dde213c1faa74c6271d92eeb",
+      "bytes": 761
+    }
+  },
+  "tests": {
+    "CSCEFv5": {
+      "run": 15,
+      "passed": 15,
+      "skipped": 0
+    },
+    "CSCEFv4_regression": {
+      "run": 21,
+      "passed": 21,
+      "skipped": 0
+    },
+    "baseline_smoke": "passed nc=80 model.info",
+    "three_cli_help": "passed",
+    "missing_authoritative_C2_args": "refused as expected",
+    "launcher_tests": "synthetic configuration and mock API only; no training"
+  },
+  "additional_tested_files_sha256": {
+    "tools/train_rtdetr_r18_lite_cscef_v5.py": "c607dc96cc6310f00ce3e7d556fc3befdefa65590283bb98f57e13256e3ae514",
+    "ultralytics-main/tests/test_cscef_v5.py": "2bdf51572f720550d32ad0bf29e79a4ca2b6cc12903a413d01b830703eef8445"
+  },
+  "user_input_files_sha256": {
+    "C13_analysis.md": "5cdec4e99df1b274dd20355a70f69afb0808b16d57dc6bb8d972fa76bb66d53d",
+    "C13_CSCEF_v5_Codex_prompt.md": "9c7d42dfa4be13aa8ce59bcb6ea1b16869f0186f553e303421c2a75aa188b9b6",
+    "c13_v4_diagnostic_summary.tar.gz": "455bcc87dfd70fcda3b5d38e4345f8883f6a009d8744ac44c57bb9e838161d8f"
+  },
+  "C13_reference": {
+    "archive_verified_sha256": "455bcc87dfd70fcda3b5d38e4345f8883f6a009d8744ac44c57bb9e838161d8f",
+    "embedded_audit_equals_standalone": true,
+    "source_commit": "f34502c43a88edc9cb1076bd996b9c3fc2d23e31",
+    "original_nc1_audit": {
+      "status": "completed",
+      "meaning": "reconstructed nc=1 build/load audit, not proof of every runtime state in the original training job",
+      "baseline_init_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+      "v4_init_sha256": "755e7ad3d3b21cc2beb882321155857b394f3a9e3e7e7dd87a9148534d62ff2d",
+      "unchanged_tensors_compared": 533,
+      "differences": [
+        {
+          "baseline": "model.26.denoising_class_embed.weight",
+          "target": "model.27.denoising_class_embed.weight",
+          "max_abs": 3.4243671894073486
+        },
+        {
+          "baseline": "model.26.enc_score_head.weight",
+          "target": "model.27.enc_score_head.weight",
+          "max_abs": 0.11323623359203339
+        },
+        {
+          "baseline": "model.26.dec_score_head.0.weight",
+          "target": "model.27.dec_score_head.0.weight",
+          "max_abs": 0.11908407509326935
+        },
+        {
+          "baseline": "model.26.dec_score_head.1.weight",
+          "target": "model.27.dec_score_head.1.weight",
+          "max_abs": 0.11826573312282562
+        },
+        {
+          "baseline": "model.26.dec_score_head.2.weight",
+          "target": "model.27.dec_score_head.2.weight",
+          "max_abs": 0.11506693810224533
+        }
+      ],
+      "cpu_rng_equal_after_build": false
+    },
+    "val_map50_95": {
+      "original": 0.4535164022750374,
+      "bypass": 0.4539054566504036,
+      "no_structure": 0.4521300101083782,
+      "no_bandpass": 0.45347915276533,
+      "v3_gate": 0.4535637415582635
+    },
+    "not_rerun_in_this_task": true
+  },
+  "not_executed": [
+    "Original server C2 args full-field comparison (file unavailable locally)",
+    "Linux/server environment revalidation",
+    "Ultralytics training AMP preflight (check_amp)",
+    "Real tmux launch and real training lifecycle",
+    "Formal training",
+    "val/test dataset evaluation"
+  ]
+}
