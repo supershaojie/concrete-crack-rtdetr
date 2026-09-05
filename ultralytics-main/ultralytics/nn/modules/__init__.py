@@ -98,6 +98,7 @@ from .head import (
 )
 from .gsdr_aifi import GSDRAIFI, SparseDeformableRelation
 from .gsdr_aifi_v2 import GSDRAIFIV2, SparseDeformableRelationV2
+from .gsdr_aifi_v3 import GSDRAIFIV3, QueryLocalDeformableRelationV3
 from .transformer import (
     AIFI,
     MLP,
@@ -116,6 +117,8 @@ __all__ = (
     "GSDRAIFI",
     "SparseDeformableRelation",
     "GSDRAIFIV2",
+    "GSDRAIFIV3",
+    "QueryLocalDeformableRelationV3",
     "SparseDeformableRelationV2",
     "C1",
     "C2",
