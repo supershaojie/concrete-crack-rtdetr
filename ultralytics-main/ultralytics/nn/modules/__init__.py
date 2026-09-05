@@ -97,6 +97,7 @@ from .head import (
     v10Detect,
 )
 from .gsdr_aifi import GSDRAIFI, SparseDeformableRelation
+from .gsdr_aifi_v2 import GSDRAIFIV2, SparseDeformableRelationV2
 from .transformer import (
     AIFI,
     MLP,
@@ -114,6 +115,8 @@ __all__ = (
     "AIFI",
     "GSDRAIFI",
     "SparseDeformableRelation",
+    "GSDRAIFIV2",
+    "SparseDeformableRelationV2",
     "C1",
     "C2",
     "C2PSA",
