@@ -1,0 +1,2 @@
+# Keep the executable server workflow readable by Bash after Windows checkouts.
+tools/autodl_c19.sh text eol=lf
