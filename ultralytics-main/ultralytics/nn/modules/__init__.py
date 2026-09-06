@@ -109,7 +109,11 @@ from .transformer import (
     TransformerLayer,
 )
 
+from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
+
 __all__ = (
+    "CrackBoundaryRefinement",
+    "RTDETRDecoderCBR",
     "AIFI",
     "C1",
     "C2",

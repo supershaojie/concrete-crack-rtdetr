@@ -1,0 +1,1102 @@
+{
+  "scope": "Offline comparison; model points to LOCAL controlled init. Server prepare regenerates against original server C2 args.",
+  "allowed_changes": [
+    "model",
+    "name",
+    "save_dir"
+  ],
+  "target": {
+    "task": "detect",
+    "mode": "train",
+    "model": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\cbr\\weights\\rtdetr_r18_lite_cbr_imagenet_backbone_init.pt",
+    "data": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "epochs": 200,
+    "time": null,
+    "patience": 50,
+    "batch": 16,
+    "imgsz": 640,
+    "save": true,
+    "save_period": -1,
+    "cache": false,
+    "device": "0",
+    "workers": 8,
+    "project": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "name": "c19_rtdetr_r18_lite_cbr_e200_b16_onlineaug",
+    "exist_ok": false,
+    "pretrained": true,
+    "optimizer": "AdamW",
+    "verbose": true,
+    "seed": 42,
+    "deterministic": true,
+    "single_cls": false,
+    "rect": false,
+    "cos_lr": true,
+    "close_mosaic": 10,
+    "resume": false,
+    "amp": true,
+    "fraction": 1.0,
+    "profile": false,
+    "freeze": null,
+    "multi_scale": 0.0,
+    "compile": false,
+    "overlap_mask": true,
+    "mask_ratio": 4,
+    "dropout": 0.0,
+    "val": true,
+    "split": "val",
+    "save_json": false,
+    "conf": null,
+    "iou": 0.7,
+    "max_det": 300,
+    "half": false,
+    "dnn": false,
+    "plots": true,
+    "end2end": null,
+    "source": null,
+    "vid_stride": 1,
+    "stream_buffer": false,
+    "visualize": false,
+    "augment": false,
+    "agnostic_nms": false,
+    "classes": null,
+    "retina_masks": false,
+    "embed": null,
+    "show": false,
+    "save_frames": false,
+    "save_txt": false,
+    "save_conf": false,
+    "save_crop": false,
+    "show_labels": true,
+    "show_conf": true,
+    "show_boxes": true,
+    "line_width": null,
+    "format": "torchscript",
+    "keras": false,
+    "optimize": false,
+    "int8": false,
+    "dynamic": false,
+    "simplify": true,
+    "opset": null,
+    "workspace": null,
+    "nms": false,
+    "lr0": 0.0005,
+    "lrf": 0.01,
+    "momentum": 0.937,
+    "weight_decay": 0.0001,
+    "warmup_epochs": 5,
+    "warmup_momentum": 0.8,
+    "warmup_bias_lr": 0.1,
+    "box": 7.5,
+    "cls": 0.5,
+    "dfl": 1.5,
+    "pose": 12.0,
+    "kobj": 1.0,
+    "rle": 1.0,
+    "angle": 1.0,
+    "nbs": 64,
+    "hsv_h": 0.015,
+    "hsv_s": 0.5,
+    "hsv_v": 0.35,
+    "degrees": 5,
+    "translate": 0.1,
+    "scale": 0.4,
+    "shear": 1.5,
+    "perspective": 0.0002,
+    "flipud": 0.2,
+    "fliplr": 0.5,
+    "bgr": 0.0,
+    "mosaic": 0.8,
+    "mixup": 0.05,
+    "cutmix": 0,
+    "copy_paste": 0,
+    "copy_paste_mode": "flip",
+    "auto_augment": null,
+    "erasing": 0,
+    "cfg": null,
+    "tracker": "botsort.yaml",
+    "save_dir": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_rtdetr_r18_lite_cbr_e200_b16_onlineaug"
+  },
+  "fields": [
+    {
+      "field": "agnostic_nms",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "amp",
+      "C2": true,
+      "CBR": true,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "angle",
+      "C2": 1.0,
+      "CBR": 1.0,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "augment",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "auto_augment",
+      "C2": null,
+      "CBR": null,
+      "equal": true,
+      "C2_type": "NoneType",
+      "CBR_type": "NoneType",
+      "change_allowed": false
+    },
+    {
+      "field": "batch",
+      "C2": 16,
+      "CBR": 16,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "bgr",
+      "C2": 0.0,
+      "CBR": 0.0,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "box",
+      "C2": 7.5,
+      "CBR": 7.5,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "cache",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "cfg",
+      "C2": null,
+      "CBR": null,
+      "equal": true,
+      "C2_type": "NoneType",
+      "CBR_type": "NoneType",
+      "change_allowed": false
+    },
+    {
+      "field": "classes",
+      "C2": null,
+      "CBR": null,
+      "equal": true,
+      "C2_type": "NoneType",
+      "CBR_type": "NoneType",
+      "change_allowed": false
+    },
+    {
+      "field": "close_mosaic",
+      "C2": 10,
+      "CBR": 10,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "cls",
+      "C2": 0.5,
+      "CBR": 0.5,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "compile",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "conf",
+      "C2": null,
+      "CBR": null,
+      "equal": true,
+      "C2_type": "NoneType",
+      "CBR_type": "NoneType",
+      "change_allowed": false
+    },
+    {
+      "field": "copy_paste",
+      "C2": 0,
+      "CBR": 0,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "copy_paste_mode",
+      "C2": "flip",
+      "CBR": "flip",
+      "equal": true,
+      "C2_type": "str",
+      "CBR_type": "str",
+      "change_allowed": false
+    },
+    {
+      "field": "cos_lr",
+      "C2": true,
+      "CBR": true,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "cutmix",
+      "C2": 0,
+      "CBR": 0,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "data",
+      "C2": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+      "CBR": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+      "equal": true,
+      "C2_type": "str",
+      "CBR_type": "str",
+      "change_allowed": false
+    },
+    {
+      "field": "degrees",
+      "C2": 5,
+      "CBR": 5,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "deterministic",
+      "C2": true,
+      "CBR": true,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "device",
+      "C2": "0",
+      "CBR": "0",
+      "equal": true,
+      "C2_type": "str",
+      "CBR_type": "str",
+      "change_allowed": false
+    },
+    {
+      "field": "dfl",
+      "C2": 1.5,
+      "CBR": 1.5,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "dnn",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "dropout",
+      "C2": 0.0,
+      "CBR": 0.0,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "dynamic",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "embed",
+      "C2": null,
+      "CBR": null,
+      "equal": true,
+      "C2_type": "NoneType",
+      "CBR_type": "NoneType",
+      "change_allowed": false
+    },
+    {
+      "field": "end2end",
+      "C2": null,
+      "CBR": null,
+      "equal": true,
+      "C2_type": "NoneType",
+      "CBR_type": "NoneType",
+      "change_allowed": false
+    },
+    {
+      "field": "epochs",
+      "C2": 200,
+      "CBR": 200,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "erasing",
+      "C2": 0,
+      "CBR": 0,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "exist_ok",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "fliplr",
+      "C2": 0.5,
+      "CBR": 0.5,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "flipud",
+      "C2": 0.2,
+      "CBR": 0.2,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "format",
+      "C2": "torchscript",
+      "CBR": "torchscript",
+      "equal": true,
+      "C2_type": "str",
+      "CBR_type": "str",
+      "change_allowed": false
+    },
+    {
+      "field": "fraction",
+      "C2": 1.0,
+      "CBR": 1.0,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "freeze",
+      "C2": null,
+      "CBR": null,
+      "equal": true,
+      "C2_type": "NoneType",
+      "CBR_type": "NoneType",
+      "change_allowed": false
+    },
+    {
+      "field": "half",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "hsv_h",
+      "C2": 0.015,
+      "CBR": 0.015,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "hsv_s",
+      "C2": 0.5,
+      "CBR": 0.5,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "hsv_v",
+      "C2": 0.35,
+      "CBR": 0.35,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "imgsz",
+      "C2": 640,
+      "CBR": 640,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "int8",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "iou",
+      "C2": 0.7,
+      "CBR": 0.7,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "keras",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "kobj",
+      "C2": 1.0,
+      "CBR": 1.0,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "line_width",
+      "C2": null,
+      "CBR": null,
+      "equal": true,
+      "C2_type": "NoneType",
+      "CBR_type": "NoneType",
+      "change_allowed": false
+    },
+    {
+      "field": "lr0",
+      "C2": 0.0005,
+      "CBR": 0.0005,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "lrf",
+      "C2": 0.01,
+      "CBR": 0.01,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "mask_ratio",
+      "C2": 4,
+      "CBR": 4,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "max_det",
+      "C2": 300,
+      "CBR": 300,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "mixup",
+      "C2": 0.05,
+      "CBR": 0.05,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "mode",
+      "C2": "train",
+      "CBR": "train",
+      "equal": true,
+      "C2_type": "str",
+      "CBR_type": "str",
+      "change_allowed": false
+    },
+    {
+      "field": "model",
+      "C2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+      "CBR": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\cbr\\weights\\rtdetr_r18_lite_cbr_imagenet_backbone_init.pt",
+      "equal": false,
+      "C2_type": "str",
+      "CBR_type": "str",
+      "change_allowed": true
+    },
+    {
+      "field": "momentum",
+      "C2": 0.937,
+      "CBR": 0.937,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "mosaic",
+      "C2": 0.8,
+      "CBR": 0.8,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "multi_scale",
+      "C2": 0.0,
+      "CBR": 0.0,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "name",
+      "C2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "CBR": "c19_rtdetr_r18_lite_cbr_e200_b16_onlineaug",
+      "equal": false,
+      "C2_type": "str",
+      "CBR_type": "str",
+      "change_allowed": true
+    },
+    {
+      "field": "nbs",
+      "C2": 64,
+      "CBR": 64,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "nms",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "opset",
+      "C2": null,
+      "CBR": null,
+      "equal": true,
+      "C2_type": "NoneType",
+      "CBR_type": "NoneType",
+      "change_allowed": false
+    },
+    {
+      "field": "optimize",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "optimizer",
+      "C2": "AdamW",
+      "CBR": "AdamW",
+      "equal": true,
+      "C2_type": "str",
+      "CBR_type": "str",
+      "change_allowed": false
+    },
+    {
+      "field": "overlap_mask",
+      "C2": true,
+      "CBR": true,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "patience",
+      "C2": 50,
+      "CBR": 50,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "perspective",
+      "C2": 0.0002,
+      "CBR": 0.0002,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "plots",
+      "C2": true,
+      "CBR": true,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "pose",
+      "C2": 12.0,
+      "CBR": 12.0,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "pretrained",
+      "C2": true,
+      "CBR": true,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "profile",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "project",
+      "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+      "CBR": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+      "equal": true,
+      "C2_type": "str",
+      "CBR_type": "str",
+      "change_allowed": false
+    },
+    {
+      "field": "rect",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "resume",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "retina_masks",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "rle",
+      "C2": 1.0,
+      "CBR": 1.0,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "save",
+      "C2": true,
+      "CBR": true,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "save_conf",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "save_crop",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "save_dir",
+      "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "CBR": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_rtdetr_r18_lite_cbr_e200_b16_onlineaug",
+      "equal": false,
+      "C2_type": "str",
+      "CBR_type": "str",
+      "change_allowed": true
+    },
+    {
+      "field": "save_frames",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "save_json",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "save_period",
+      "C2": -1,
+      "CBR": -1,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "save_txt",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "scale",
+      "C2": 0.4,
+      "CBR": 0.4,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "seed",
+      "C2": 42,
+      "CBR": 42,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "shear",
+      "C2": 1.5,
+      "CBR": 1.5,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "show",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "show_boxes",
+      "C2": true,
+      "CBR": true,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "show_conf",
+      "C2": true,
+      "CBR": true,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "show_labels",
+      "C2": true,
+      "CBR": true,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "simplify",
+      "C2": true,
+      "CBR": true,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "single_cls",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "source",
+      "C2": null,
+      "CBR": null,
+      "equal": true,
+      "C2_type": "NoneType",
+      "CBR_type": "NoneType",
+      "change_allowed": false
+    },
+    {
+      "field": "split",
+      "C2": "val",
+      "CBR": "val",
+      "equal": true,
+      "C2_type": "str",
+      "CBR_type": "str",
+      "change_allowed": false
+    },
+    {
+      "field": "stream_buffer",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "task",
+      "C2": "detect",
+      "CBR": "detect",
+      "equal": true,
+      "C2_type": "str",
+      "CBR_type": "str",
+      "change_allowed": false
+    },
+    {
+      "field": "time",
+      "C2": null,
+      "CBR": null,
+      "equal": true,
+      "C2_type": "NoneType",
+      "CBR_type": "NoneType",
+      "change_allowed": false
+    },
+    {
+      "field": "tracker",
+      "C2": "botsort.yaml",
+      "CBR": "botsort.yaml",
+      "equal": true,
+      "C2_type": "str",
+      "CBR_type": "str",
+      "change_allowed": false
+    },
+    {
+      "field": "translate",
+      "C2": 0.1,
+      "CBR": 0.1,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "val",
+      "C2": true,
+      "CBR": true,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "verbose",
+      "C2": true,
+      "CBR": true,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "vid_stride",
+      "C2": 1,
+      "CBR": 1,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "visualize",
+      "C2": false,
+      "CBR": false,
+      "equal": true,
+      "C2_type": "bool",
+      "CBR_type": "bool",
+      "change_allowed": false
+    },
+    {
+      "field": "warmup_bias_lr",
+      "C2": 0.1,
+      "CBR": 0.1,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "warmup_epochs",
+      "C2": 5,
+      "CBR": 5,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "warmup_momentum",
+      "C2": 0.8,
+      "CBR": 0.8,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "weight_decay",
+      "C2": 0.0001,
+      "CBR": 0.0001,
+      "equal": true,
+      "C2_type": "float",
+      "CBR_type": "float",
+      "change_allowed": false
+    },
+    {
+      "field": "workers",
+      "C2": 8,
+      "CBR": 8,
+      "equal": true,
+      "C2_type": "int",
+      "CBR_type": "int",
+      "change_allowed": false
+    },
+    {
+      "field": "workspace",
+      "C2": null,
+      "CBR": null,
+      "equal": true,
+      "C2_type": "NoneType",
+      "CBR_type": "NoneType",
+      "change_allowed": false
+    }
+  ]
+}

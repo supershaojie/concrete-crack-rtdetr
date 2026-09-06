@@ -1,0 +1,648 @@
+{
+  "status": "local_validation_passed_server_2.1.2_unverified",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "torch_version": "2.7.1+cu118",
+    "torch_cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics_version": "8.4.21",
+    "ultralytics_file": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\cbr\\ultralytics-main\\ultralytics\\__init__.py"
+  },
+  "audit_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\cbr\\outputs\\cbr\\audit_final.json",
+  "audit_sha256": "9f8021b224a45f6650a160320d5b69f31a19855f568d8851e66d7d2553408844",
+  "init_sha256": "485afe77734a30a2189ab2dfc753d88113b15850c78de8f457b46f334d6ffb68",
+  "classes": {
+    "1": {
+      "status": "passed",
+      "total_states": 547,
+      "common_states_exact": 533,
+      "classification_states_exact": 9,
+      "cpu_640_outputs": [
+        {
+          "tensor": "output.0",
+          "shape": [
+            1,
+            300,
+            5
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.0",
+          "shape": [
+            1,
+            1,
+            300,
+            4
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.1",
+          "shape": [
+            1,
+            1,
+            300,
+            1
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.2",
+          "shape": [
+            1,
+            300,
+            4
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.3",
+          "shape": [
+            1,
+            300,
+            1
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        }
+      ],
+      "real_train_api": {
+        "status": "passed",
+        "states_exact": 547,
+        "args_fields": 109,
+        "rng_equal": true,
+        "inherited_get_model": true,
+        "dataset_io": false,
+        "optimizer_steps": 0
+      }
+    },
+    "80": {
+      "status": "passed",
+      "total_states": 547,
+      "common_states_exact": 533,
+      "classification_states_exact": 9,
+      "cpu_640_outputs": [
+        {
+          "tensor": "output.0",
+          "shape": [
+            1,
+            300,
+            84
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.0",
+          "shape": [
+            1,
+            1,
+            300,
+            4
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.1",
+          "shape": [
+            1,
+            1,
+            300,
+            80
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.2",
+          "shape": [
+            1,
+            300,
+            4
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.3",
+          "shape": [
+            1,
+            300,
+            80
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        }
+      ],
+      "real_train_api": {
+        "status": "passed",
+        "states_exact": 547,
+        "args_fields": 109,
+        "rng_equal": true,
+        "inherited_get_model": true,
+        "dataset_io": false,
+        "optimizer_steps": 0
+      }
+    }
+  },
+  "optimizer_new_parameters": [
+    {
+      "name": "model.26.cbr.p3_proj.weight",
+      "numel": 16384,
+      "group": "weight",
+      "weight_decay": 0.0001,
+      "warmup_start_lr": 0.0
+    },
+    {
+      "name": "model.26.cbr.p3_proj.bias",
+      "numel": 64,
+      "group": "bias",
+      "weight_decay": 0.0,
+      "warmup_start_lr": 0.1
+    },
+    {
+      "name": "model.26.cbr.query_proj.weight",
+      "numel": 16384,
+      "group": "weight",
+      "weight_decay": 0.0001,
+      "warmup_start_lr": 0.0
+    },
+    {
+      "name": "model.26.cbr.query_proj.bias",
+      "numel": 64,
+      "group": "bias",
+      "weight_decay": 0.0,
+      "warmup_start_lr": 0.1
+    },
+    {
+      "name": "model.26.cbr.evidence_proj.weight",
+      "numel": 8192,
+      "group": "weight",
+      "weight_decay": 0.0001,
+      "warmup_start_lr": 0.0
+    },
+    {
+      "name": "model.26.cbr.evidence_proj.bias",
+      "numel": 64,
+      "group": "bias",
+      "weight_decay": 0.0,
+      "warmup_start_lr": 0.1
+    },
+    {
+      "name": "model.26.cbr.side_embed.weight",
+      "numel": 256,
+      "group": "weight",
+      "weight_decay": 0.0001,
+      "warmup_start_lr": 0.0
+    },
+    {
+      "name": "model.26.cbr.geometry_proj.weight",
+      "numel": 128,
+      "group": "weight",
+      "weight_decay": 0.0001,
+      "warmup_start_lr": 0.0
+    },
+    {
+      "name": "model.26.cbr.geometry_proj.bias",
+      "numel": 64,
+      "group": "bias",
+      "weight_decay": 0.0,
+      "warmup_start_lr": 0.1
+    },
+    {
+      "name": "model.26.cbr.score.weight",
+      "numel": 64,
+      "group": "weight",
+      "weight_decay": 0.0001,
+      "warmup_start_lr": 0.0
+    },
+    {
+      "name": "model.26.cbr.offset_hidden.weight",
+      "numel": 4096,
+      "group": "weight",
+      "weight_decay": 0.0001,
+      "warmup_start_lr": 0.0
+    },
+    {
+      "name": "model.26.cbr.offset_hidden.bias",
+      "numel": 64,
+      "group": "bias",
+      "weight_decay": 0.0,
+      "warmup_start_lr": 0.1
+    },
+    {
+      "name": "model.26.cbr.offset_out.weight",
+      "numel": 64,
+      "group": "weight",
+      "weight_decay": 0.0001,
+      "warmup_start_lr": 0.0
+    },
+    {
+      "name": "model.26.cbr.offset_out.bias",
+      "numel": 1,
+      "group": "bias",
+      "weight_decay": 0.0,
+      "warmup_start_lr": 0.1
+    }
+  ],
+  "regressions": {
+    "test_cbr.py": {
+      "run": 3,
+      "failures": 0,
+      "errors": 0,
+      "log": "outputs\\cbr\\test_cbr.py.log"
+    },
+    "test_cbr_tools.py": {
+      "run": 3,
+      "failures": 0,
+      "errors": 0,
+      "log": "outputs\\cbr\\test_cbr_tools.py.log"
+    }
+  },
+  "precision": {
+    "cpu": "passed",
+    "cuda": {
+      "fp32": {
+        "mode": "fp32",
+        "shape": [
+          1,
+          300,
+          5
+        ],
+        "output_dtype": "torch.float32",
+        "synthetic_steps": [
+          {
+            "gt_count": 0,
+            "loss": 561.14697265625,
+            "cbr_gradients": {
+              "p3_proj.weight": null,
+              "p3_proj.bias": null,
+              "query_proj.weight": null,
+              "query_proj.bias": null,
+              "evidence_proj.weight": null,
+              "evidence_proj.bias": null,
+              "side_embed.weight": null,
+              "geometry_proj.weight": null,
+              "geometry_proj.bias": null,
+              "score.weight": null,
+              "offset_hidden.weight": null,
+              "offset_hidden.bias": null,
+              "offset_out.weight": null,
+              "offset_out.bias": null
+            }
+          },
+          {
+            "gt_count": 3,
+            "loss": 50.2212028503418,
+            "cbr_gradients": {
+              "p3_proj.weight": 0.0,
+              "p3_proj.bias": 0.0,
+              "query_proj.weight": 0.0,
+              "query_proj.bias": 0.0,
+              "evidence_proj.weight": 0.0,
+              "evidence_proj.bias": 0.0,
+              "side_embed.weight": 0.0,
+              "geometry_proj.weight": 0.0,
+              "geometry_proj.bias": 0.0,
+              "score.weight": 0.0,
+              "offset_hidden.weight": 0.0,
+              "offset_hidden.bias": 0.0,
+              "offset_out.weight": 1.2537555694580078,
+              "offset_out.bias": 0.08216384053230286
+            }
+          },
+          {
+            "gt_count": 3,
+            "loss": 41.16061019897461,
+            "cbr_gradients": {
+              "p3_proj.weight": 0.06467247754335403,
+              "p3_proj.bias": 0.0003073744592256844,
+              "query_proj.weight": 0.14801353216171265,
+              "query_proj.bias": 0.0005597022245638072,
+              "evidence_proj.weight": 0.02943837270140648,
+              "evidence_proj.bias": 0.0005597022245638072,
+              "side_embed.weight": 0.0018471168586984277,
+              "geometry_proj.weight": 0.0004076373006682843,
+              "geometry_proj.bias": 0.0005597022245638072,
+              "score.weight": 1.1251990144955926e-05,
+              "offset_hidden.weight": 0.06559157371520996,
+              "offset_hidden.bias": 0.0007801811443641782,
+              "offset_out.weight": 1.2783024311065674,
+              "offset_out.bias": 0.03359893336892128
+            }
+          }
+        ],
+        "status": "passed"
+      },
+      "amp": {
+        "mode": "amp",
+        "shape": [
+          1,
+          300,
+          5
+        ],
+        "output_dtype": "torch.float32",
+        "synthetic_steps": [
+          {
+            "gt_count": 0,
+            "loss": 560.256591796875,
+            "cbr_gradients": {
+              "p3_proj.weight": null,
+              "p3_proj.bias": null,
+              "query_proj.weight": null,
+              "query_proj.bias": null,
+              "evidence_proj.weight": null,
+              "evidence_proj.bias": null,
+              "side_embed.weight": null,
+              "geometry_proj.weight": null,
+              "geometry_proj.bias": null,
+              "score.weight": null,
+              "offset_hidden.weight": null,
+              "offset_hidden.bias": null,
+              "offset_out.weight": null,
+              "offset_out.bias": null
+            }
+          },
+          {
+            "gt_count": 3,
+            "loss": 50.31166458129883,
+            "cbr_gradients": {
+              "p3_proj.weight": 0.0,
+              "p3_proj.bias": 0.0,
+              "query_proj.weight": 0.0,
+              "query_proj.bias": 0.0,
+              "evidence_proj.weight": 0.0,
+              "evidence_proj.bias": 0.0,
+              "side_embed.weight": 0.0,
+              "geometry_proj.weight": 0.0,
+              "geometry_proj.bias": 0.0,
+              "score.weight": 0.0,
+              "offset_hidden.weight": 0.0,
+              "offset_hidden.bias": 0.0,
+              "offset_out.weight": 1.2689875364303589,
+              "offset_out.bias": 0.0821533203125
+            }
+          },
+          {
+            "gt_count": 3,
+            "loss": 41.38852310180664,
+            "cbr_gradients": {
+              "p3_proj.weight": 0.06744661182165146,
+              "p3_proj.bias": 0.000274494756013155,
+              "query_proj.weight": 0.14536266028881073,
+              "query_proj.bias": 0.0005167722702026367,
+              "evidence_proj.weight": 0.029888350516557693,
+              "evidence_proj.bias": 0.0005167569033801556,
+              "side_embed.weight": 0.001899471739307046,
+              "geometry_proj.weight": 0.00040335487574338913,
+              "geometry_proj.bias": 0.0005167722702026367,
+              "score.weight": 8.357287697435822e-06,
+              "offset_hidden.weight": 0.062993623316288,
+              "offset_hidden.bias": 0.0006383266299962997,
+              "offset_out.weight": 1.1853395700454712,
+              "offset_out.bias": 0.0208587646484375
+            }
+          }
+        ],
+        "status": "passed"
+      },
+      "half": {
+        "mode": "half",
+        "shape": [
+          1,
+          300,
+          5
+        ],
+        "output_dtype": "torch.float32",
+        "status": "passed"
+      },
+      "status": "passed"
+    }
+  },
+  "benchmark": {
+    "device": "cuda",
+    "batch": 1,
+    "imgsz": 640,
+    "dtype": "FP32",
+    "warmup": 3,
+    "iterations": 10,
+    "note": "Unfused complete-model forward; same random image. Not dataset validator speed.",
+    "C2": {
+      "parameters": 20082772,
+      "ms_per_image": 32.97325999999998,
+      "peak_allocated_bytes": 220806656
+    },
+    "C19": {
+      "parameters": 20128661,
+      "ms_per_image": 31.924649999999843,
+      "peak_allocated_bytes": 220992512
+    }
+  },
+  "real_data_smoke": {
+    "status": "passed",
+    "initial_states_exact": 547,
+    "debug_only": true,
+    "source_fixture": "16 train and 4 val images copied from local real dataset; original cache location not writable",
+    "recipe_differences": {
+      "data": {
+        "C2": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+        "smoke": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\cbr\\outputs\\cbr\\real_data_fixture\\data.yaml"
+      },
+      "batch": {
+        "C2": 16,
+        "smoke": 2
+      },
+      "save": {
+        "C2": true,
+        "smoke": false
+      },
+      "workers": {
+        "C2": 8,
+        "smoke": 0
+      },
+      "project": {
+        "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+        "smoke": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\cbr\\outputs\\cbr"
+      },
+      "name": {
+        "C2": "c19_rtdetr_r18_lite_cbr_e200_b16_onlineaug",
+        "smoke": "smoke_final"
+      },
+      "val": {
+        "C2": true,
+        "smoke": false
+      },
+      "plots": {
+        "C2": true,
+        "smoke": false
+      },
+      "save_dir": {
+        "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_rtdetr_r18_lite_cbr_e200_b16_onlineaug",
+        "smoke": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\cbr\\outputs\\cbr\\smoke_final"
+      }
+    },
+    "scaler_init_scale": 128,
+    "steps": [
+      {
+        "step": 0,
+        "loss": 62.18618392944336,
+        "gt_count": 7,
+        "dn_num_split": [
+          200,
+          300
+        ],
+        "cbr_gradients": {
+          "p3_proj.weight": 0.0,
+          "p3_proj.bias": 0.0,
+          "query_proj.weight": 0.0,
+          "query_proj.bias": 0.0,
+          "evidence_proj.weight": 0.0,
+          "evidence_proj.bias": 0.0,
+          "side_embed.weight": 0.0,
+          "geometry_proj.weight": 0.0,
+          "geometry_proj.bias": 0.0,
+          "score.weight": 0.0,
+          "offset_hidden.weight": 0.0,
+          "offset_hidden.bias": 0.0,
+          "offset_out.weight": 1.41085946559906,
+          "offset_out.bias": 0.148681640625
+        },
+        "image_files": [
+          "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\cbr\\outputs\\cbr\\real_data_fixture\\images\\train\\crack_000004_brightness_contrast_strong.jpg",
+          "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\cbr\\outputs\\cbr\\real_data_fixture\\images\\train\\crack_000001_noise_blur_strong.jpg"
+        ]
+      },
+      {
+        "step": 1,
+        "loss": 52.4483528137207,
+        "gt_count": 6,
+        "dn_num_split": [
+          200,
+          300
+        ],
+        "cbr_gradients": {
+          "p3_proj.weight": 0.05619453638792038,
+          "p3_proj.bias": 0.00019754189997911453,
+          "query_proj.weight": 0.1546497642993927,
+          "query_proj.bias": 0.0005166418850421906,
+          "evidence_proj.weight": 0.023584745824337006,
+          "evidence_proj.bias": 0.0005166861228644848,
+          "side_embed.weight": 0.001496814889833331,
+          "geometry_proj.weight": 0.0003803335130214691,
+          "geometry_proj.bias": 0.0005166418850421906,
+          "score.weight": 7.700891001150012e-05,
+          "offset_hidden.weight": 0.061559904366731644,
+          "offset_hidden.bias": 0.0014257561415433884,
+          "offset_out.weight": 1.31731116771698,
+          "offset_out.bias": 0.08624267578125
+        },
+        "image_files": [
+          "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\cbr\\outputs\\cbr\\real_data_fixture\\images\\train\\crack_000003_clahe_gamma_strong.jpg",
+          "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\cbr\\outputs\\cbr\\real_data_fixture\\images\\train\\crack_000001_vflip.jpg"
+        ]
+      },
+      {
+        "step": 2,
+        "loss": 40.35700988769531,
+        "gt_count": 6,
+        "dn_num_split": [
+          200,
+          300
+        ],
+        "cbr_gradients": {
+          "p3_proj.weight": 0.07153528928756714,
+          "p3_proj.bias": 0.000350309070199728,
+          "query_proj.weight": 0.20142756402492523,
+          "query_proj.bias": 0.0007029972039163113,
+          "evidence_proj.weight": 0.025363042950630188,
+          "evidence_proj.bias": 0.0007029641419649124,
+          "side_embed.weight": 0.0013611582107841969,
+          "geometry_proj.weight": 0.0004424573853611946,
+          "geometry_proj.bias": 0.0007029972039163113,
+          "score.weight": 5.06264841533266e-05,
+          "offset_hidden.weight": 0.07434993982315063,
+          "offset_hidden.bias": 0.0010783122852444649,
+          "offset_out.weight": 1.1850416660308838,
+          "offset_out.bias": 0.04327392578125
+        },
+        "image_files": [
+          "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\cbr\\outputs\\cbr\\real_data_fixture\\images\\train\\crack_000001_clahe_gamma_strong.jpg",
+          "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\cbr\\outputs\\cbr\\real_data_fixture\\images\\train\\crack_000002_clahe_gamma_strong.jpg"
+        ]
+      }
+    ],
+    "checkpoint_reload": [
+      {
+        "tensor": "output.0",
+        "shape": [
+          2,
+          300,
+          5
+        ],
+        "equal": true,
+        "max_abs": 0.0
+      },
+      {
+        "tensor": "output.1.0",
+        "shape": [
+          1,
+          2,
+          300,
+          4
+        ],
+        "equal": true,
+        "max_abs": 0.0
+      },
+      {
+        "tensor": "output.1.1",
+        "shape": [
+          1,
+          2,
+          300,
+          1
+        ],
+        "equal": true,
+        "max_abs": 0.0
+      },
+      {
+        "tensor": "output.1.2",
+        "shape": [
+          2,
+          300,
+          4
+        ],
+        "equal": true,
+        "max_abs": 0.0
+      },
+      {
+        "tensor": "output.1.3",
+        "shape": [
+          2,
+          300,
+          1
+        ],
+        "equal": true,
+        "max_abs": 0.0
+      }
+    ]
+  },
+  "tool_evaluation_smoke": {
+    "images": 4,
+    "data": "real copied val images",
+    "weights": "untrained C2 nc=1 and 3-step C19 debug checkpoint",
+    "status": "completed",
+    "not_experiment_metrics": true
+  },
+  "not_executed": [
+    "server PyTorch 2.1.2",
+    "formal tmux training",
+    "200-epoch experiment",
+    "formal val/test or C19 vs C2 performance conclusion"
+  ]
+}

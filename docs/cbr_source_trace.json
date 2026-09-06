@@ -1,0 +1,57 @@
+{
+  "directory": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main",
+  "archive": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-20260623.zip",
+  "archive_sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+  "c18_archive": "D:\\rtdetr跑结果\\c18 r18-lite-gsdr-aifi-v3\\c18_diagnostic_20260906_222023_846012466.tar.gz",
+  "c18_archive_sha256": "78e7ede64c86719874783e1842fb3e938e73670e8859af3b23d4353f52d363d4",
+  "files": {
+    "ultralytics/nn/extra_modules/block.py": {
+      "directory_sha256": "e3e3617c89bd7caf350d2601740f2e399847a16a3a659d7b3e40010b88498cd2",
+      "zip_entries": [
+        "RTDETR-main/ultralytics/nn/extra_modules/block.py"
+      ],
+      "zip_identical": true
+    },
+    "ultralytics/nn/extra_modules/FreqFusion.py": {
+      "directory_sha256": "82475bfd37734b999fe823be06b21faae3a03bfa2dc8fc3d71a609d9cef2407f",
+      "zip_entries": [
+        "RTDETR-main/ultralytics/nn/extra_modules/FreqFusion.py"
+      ],
+      "zip_identical": true
+    },
+    "ultralytics/nn/extra_modules/LPRM.py": {
+      "directory_sha256": "ab6b82b51bce468a8cdc3b6c6cf18522d8b9345bcf434e603644d4d4ae5484a3",
+      "zip_entries": [
+        "RTDETR-main/ultralytics/nn/extra_modules/LPRM.py"
+      ],
+      "zip_identical": true
+    },
+    "ultralytics/__init__.py": {
+      "directory_sha256": "8b07d79a12d1aaa22ee1116b987c5da69062171b6e9a2007d5773e775b34ec07",
+      "zip_entries": [
+        "RTDETR-main/ultralytics/__init__.py"
+      ],
+      "zip_identical": true
+    }
+  },
+  "named_refinement_files": [],
+  "c18_commit": "10e72ebbbf3af1808c3bfbe9cb10ea9fe2483529",
+  "c18_verified_core": {
+    "ultralytics-main/ultralytics/nn/modules/head.py": {
+      "c2_canonical_sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+      "c18_audit_sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+      "equal": true
+    },
+    "ultralytics-main/ultralytics/models/utils/loss.py": {
+      "c2_canonical_sha256": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75",
+      "c18_audit_sha256": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75",
+      "equal": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/transformer.py": {
+      "c2_canonical_sha256": "8986f3f58a5e30a42545f544f1a35f5e5861b13ee5d4507d8b2afab1c41df782",
+      "c18_audit_sha256": "8986f3f58a5e30a42545f544f1a35f5e5861b13ee5d4507d8b2afab1c41df782",
+      "equal": true
+    }
+  },
+  "c18_tasks_note": "No source file in archive; inspected local C18 worktree registration diff against C2. Its digest differs because GSDR classes are registered."
+}

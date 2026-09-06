@@ -66,6 +66,7 @@ from ultralytics.nn.modules import (
     RepVGGDW,
     ResNetLayer,
     RTDETRDecoder,
+    RTDETRDecoderCBR,
     SCDown,
     Segment,
     Segment26,
@@ -815,7 +816,7 @@ class RTDETRDetectionModel(DetectionModel):
             [loss[k].detach() for k in ["loss_giou", "loss_class", "loss_bbox"]], device=img.device
         )
 
-    def predict(self, x, profile=False, visualize=False, batch=None, augment=False, embed=None):
+    def predict(self, x, profile=False, visualize=False, batch=None, augment=False, embed=None, cbr_diagnostics=False):
         """Perform a forward pass through the model.
 
         Args:
@@ -846,6 +847,10 @@ class RTDETRDetectionModel(DetectionModel):
                 if m.i == max_idx:
                     return torch.unbind(torch.cat(embeddings, 1), dim=0)
         head = self.model[-1]
+        if cbr_diagnostics:
+            if not isinstance(head, RTDETRDecoderCBR):
+                raise ValueError("CBR diagnostics require a CBR head.")
+            return head.forward_with_diagnostics([y[j] for j in head.f], batch)
         x = head([y[j] for j in head.f], batch)  # head inference
         return x
 
@@ -1710,7 +1715,7 @@ def parse_model(d, ch, verbose=True):
             args.append([ch[x] for x in f])
         elif m is ImagePoolingAttn:
             args.insert(1, [ch[x] for x in f])  # channels as second arg
-        elif m is RTDETRDecoder:  # special case, channels arg must be passed in index 1
+        elif m in {RTDETRDecoder, RTDETRDecoderCBR}:  # special case, channels arg must be passed in index 1
             args.insert(1, [ch[x] for x in f])
         elif m is CBLinear:
             c2 = args[0]
