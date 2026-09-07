@@ -1,0 +1,58 @@
+{
+  "C2_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+  "C17_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+  "C19_commit": "025997e3c51eaf6933534308a95da6ebf97bff53",
+  "packages": {
+    "C17": {
+      "path": "D:\\rtdetr跑结果\\c17 r18 lite cs v5.1\\c17_cscef_v51_complete_20260906_153449_116232399.tar.gz",
+      "sha256": "c94cc1f590451728ce4e6cedd3fa973606ad263a09308f7f10f43d592b05a571",
+      "git_evidence": {
+        "c17_cscef_v51_complete_20260906_153449_116232399/source/source_commit.txt": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139\n",
+        "c17_cscef_v51_complete_20260906_153449_116232399/source/git_status.txt": ""
+      },
+      "checked_sources": {
+        "ultralytics-main/ultralytics/nn/modules/cscef_v5.py": {
+          "package_matches_commit": true,
+          "sha256_lf": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474"
+        },
+        "ultralytics-main/ultralytics/nn/modules/cscef_v51.py": {
+          "package_matches_commit": true,
+          "sha256_lf": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c"
+        },
+        "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v51.yaml": {
+          "package_matches_commit": true,
+          "sha256_lf": "d366dd5bf9b4e8fef7b879e0a09dfe0d88bb42ef0ac251d880ec6d6a98871d5e"
+        }
+      }
+    },
+    "C19": {
+      "path": "D:\\rtdetr跑结果\\c19 CBR\\c19_cbr_test_small_20260907_132852_339107473.tar.gz",
+      "sha256": "83d557d4315ebd6bb2d1b4e2a18f444b84eaaad2734fda59f02475c38e247d24",
+      "git_evidence": {
+        "c19_cbr_test_small_20260907_132852_339107473/source/git.json": "{\n  \"commit\": \"025997e3c51eaf6933534308a95da6ebf97bff53\",\n  \"branch\": \"exp-rtdetr-r18-lite-cbr\",\n  \"status\": \"\"\n}"
+      },
+      "checked_sources": {
+        "ultralytics-main/ultralytics/nn/modules/cbr.py": {
+          "package_matches_commit": true,
+          "sha256_lf": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+        },
+        "ultralytics-main/ultralytics/nn/modules/transformer.py": {
+          "package_matches_commit": true,
+          "sha256_lf": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602"
+        }
+      }
+    }
+  },
+  "C2_109_fields_match_C17_package": true,
+  "reference_paths": {
+    "directory": "D:/7.1 rtdetr改/魔鬼面具_RTDETR/RTDETR-main",
+    "archive": "D:/7.1 rtdetr改/魔鬼面具_RTDETR/RTDETR-20260623.zip",
+    "both_accessible": true,
+    "scope": "Existence checked in C20; algorithms copied only from verified C17/C19 commits and packages. No module-package code imported.",
+    "accessible_files_checked_by_existence_only": [
+      "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\block.py",
+      "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\FreqFusion.py",
+      "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\LPRM.py"
+    ]
+  }
+}

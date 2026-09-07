@@ -67,6 +67,7 @@ from ultralytics.nn.modules import (
     ResNetLayer,
     RTDETRDecoder,
     RTDETRDecoderCBR,
+    CSCEFv51,
     SCDown,
     Segment,
     Segment26,
@@ -1689,6 +1690,9 @@ def parse_model(d, ch, verbose=True):
             c2 = args[1] if args[3] else args[1] * (args[5] if len(args) > 5 else 4)
         elif m is torch.nn.BatchNorm2d:
             args = [ch[f]]
+        elif m is CSCEFv51:
+            c2 = ch[f[0]]
+            args = [ch[f[0]], ch[f[1]], *args]
         elif m is Concat:
             c2 = sum(ch[x] for x in f)
         elif m in frozenset(

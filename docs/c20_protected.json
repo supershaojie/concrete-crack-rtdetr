@@ -1,0 +1,21 @@
+{
+  "reference_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+  "files": {
+    "ultralytics-main/ultralytics/nn/modules/head.py": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+    "ultralytics-main/ultralytics/models/utils/loss.py": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75",
+    "ultralytics-main/ultralytics/models/utils/ops.py": "7d520895c245adafb06b07c6b330dabbd6a36a69cd0fe742cd71f2797f474dde",
+    "ultralytics-main/ultralytics/models/rtdetr/train.py": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+    "ultralytics-main/ultralytics/models/rtdetr/val.py": "f7974365832f0eb2e146571a591150f268d42ecb89e12e96f2518d4251a63a6a",
+    "ultralytics-main/ultralytics/engine/trainer.py": "18125ba895b64961cf0f7db29214aca27392176e65d72a9166fa818f00a1033a",
+    "ultralytics-main/ultralytics/cfg/default.yaml": "3ef9fcf96280ba18b761a6165f7d77e14630b6759d5b32b28cd9d31025734dca",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite.yaml": "3493d693cbef958a38a2a135822a6c5379b65804905bc71566e395069e8f4f16",
+    "tools/init_rtdetr_r18_lite_imagenet_backbone.py": "1ee77782f64b7e310a14c436a15807ffdca57725a4f1cd9b5a684e9d054df87a",
+    "ultralytics-main/tests/fixtures/c2_original_args.yaml": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+    "ultralytics-main/ultralytics/assets/bus.jpg": "c02019c4979c191eb739ddd944445ef408dad5679acab6fd520ef9d434bfbc63",
+    "ultralytics-main/ultralytics/nn/modules/cscef_v5.py": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+    "ultralytics-main/ultralytics/nn/modules/cscef_v51.py": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v51.yaml": "d366dd5bf9b4e8fef7b879e0a09dfe0d88bb42ef0ac251d880ec6d6a98871d5e",
+    "ultralytics-main/ultralytics/nn/modules/cbr.py": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+    "ultralytics-main/ultralytics/nn/modules/transformer.py": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602"
+  }
+}
