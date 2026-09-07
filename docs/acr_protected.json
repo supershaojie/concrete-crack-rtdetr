@@ -1,0 +1,17 @@
+{
+  "reference_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+  "files": {
+    "ultralytics-main/ultralytics/nn/modules/cscef_v51.py": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+    "ultralytics-main/ultralytics/nn/modules/cscef_v5.py": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite.yaml": "3493d693cbef958a38a2a135822a6c5379b65804905bc71566e395069e8f4f16",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v51.yaml": "d366dd5bf9b4e8fef7b879e0a09dfe0d88bb42ef0ac251d880ec6d6a98871d5e",
+    "ultralytics-main/ultralytics/models/rtdetr/train.py": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+    "ultralytics-main/ultralytics/models/rtdetr/val.py": "f7974365832f0eb2e146571a591150f268d42ecb89e12e96f2518d4251a63a6a",
+    "ultralytics-main/ultralytics/models/utils/ops.py": "7d520895c245adafb06b07c6b330dabbd6a36a69cd0fe742cd71f2797f474dde",
+    "ultralytics-main/ultralytics/models/utils/loss.py": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75",
+    "ultralytics-main/ultralytics/utils/loss.py": "47ef8869db5caa09f303ce9446921f77e9bc2a552956ba7e3c76410c8e4c5fc8",
+    "ultralytics-main/ultralytics/utils/tal.py": "37494f68725dc9a134dbb8be5db218c1b02bfd8cbf448d6bf50058c631ce4a81",
+    "ultralytics-main/ultralytics/engine/trainer.py": "18125ba895b64961cf0f7db29214aca27392176e65d72a9166fa818f00a1033a",
+    "ultralytics-main/ultralytics/cfg/default.yaml": "3ef9fcf96280ba18b761a6165f7d77e14630b6759d5b32b28cd9d31025734dca"
+  }
+}

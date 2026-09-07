@@ -20,7 +20,7 @@ from .conv import Conv, DWConv
 from .transformer import MLP, DeformableTransformerDecoder, DeformableTransformerDecoderLayer
 from .utils import bias_init_with_prob, linear_init
 
-__all__ = "OBB", "Classify", "Detect", "Pose", "RTDETRDecoder", "Segment", "YOLOEDetect", "YOLOESegment", "v10Detect"
+__all__ = "OBB", "Classify", "Detect", "Pose", "RTDETRDecoder", "RTDETRDecoderACR", "Segment", "YOLOEDetect", "YOLOESegment", "v10Detect"
 
 
 class Detect(nn.Module):
@@ -1468,6 +1468,7 @@ class RTDETRDecoder(nn.Module):
         label_noise_ratio: float = 0.5,
         box_noise_scale: float = 1.0,
         learnt_init_query: bool = False,
+        acr: bool = False,
     ):
         """Initialize the RTDETRDecoder module with the given parameters.
 
@@ -1494,6 +1495,7 @@ class RTDETRDecoder(nn.Module):
         self.nl = len(ch)  # num level
         self.nc = nc
         self.num_queries = nq
+        self.acr = acr
         self.num_decoder_layers = ndl
 
         # Backbone feature projection
@@ -1502,7 +1504,7 @@ class RTDETRDecoder(nn.Module):
         # self.input_proj = nn.ModuleList(Conv(x, hd, act=False) for x in ch)
 
         # Transformer module
-        decoder_layer = DeformableTransformerDecoderLayer(hd, nh, d_ffn, dropout, act, self.nl, ndp)
+        decoder_layer = DeformableTransformerDecoderLayer(hd, nh, d_ffn, dropout, act, self.nl, ndp, acr=acr)
         self.decoder = DeformableTransformerDecoder(hd, decoder_layer, ndl, eval_idx)
 
         # Denoising part
@@ -1559,6 +1561,15 @@ class RTDETRDecoder(nn.Module):
 
         embed, refer_bbox, enc_bboxes, enc_scores = self._get_decoder_input(feats, shapes, dn_embed, dn_bbox)
 
+        # get_cdn_group and _get_decoder_input prepend DN; validate before sigmoid.
+        if getattr(self, "acr", False) and dn_meta is not None:
+            dn = int(dn_meta["dn_num_split"][0])
+            if (dn_bbox is None or dn_embed is None or dn_bbox.shape[1] != dn
+                    or dn_embed.shape[1] != dn or embed.shape[1] != dn + self.num_queries
+                    or not torch.equal(refer_bbox[:, :dn], dn_bbox)
+                    or not torch.equal(embed[:, :dn], dn_embed)):
+                raise ValueError("ACR requires the native DN-prefix / regular-suffix layout")
+
         # Decoder
         dec_bboxes, dec_scores = self.decoder(
             embed,
@@ -1569,6 +1580,8 @@ class RTDETRDecoder(nn.Module):
             self.dec_score_head,
             self.query_pos_head,
             attn_mask=attn_mask,
+            num_queries=self.num_queries,
+            dn_meta=dn_meta,
         )
         x = dec_bboxes, dec_scores, enc_bboxes, enc_scores, dn_meta
         if self.training:
@@ -1776,3 +1789,11 @@ class v10Detect(Detect):
     def fuse(self):
         """Remove the one2many head for inference optimization."""
         self.cv2 = self.cv3 = None
+
+
+class RTDETRDecoderACR(RTDETRDecoder):
+    """RT-DETR head with ACR query self-attention and unchanged deformable cross-attention."""
+
+    def __init__(self, *args, **kwargs):
+        kwargs["acr"] = True
+        super().__init__(*args, **kwargs)

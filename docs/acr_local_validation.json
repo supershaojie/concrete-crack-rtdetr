@@ -1,0 +1,558 @@
+{
+  "environment": {
+    "ultralytics_file": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\acr\\ultralytics-main\\ultralytics\\__init__.py",
+    "ultralytics_version": "8.4.21",
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "torch_version": "2.7.1+cu118",
+    "torch_cuda": "11.8",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "git_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139"
+  },
+  "local_only": true,
+  "formal_training_started": false,
+  "server_executed": false,
+  "variants": {
+    "c22": {
+      "status": "passed",
+      "source_hashes_match_delivery": true,
+      "comparison_tensors": 1116,
+      "maximum_absolute_error": 0.0,
+      "all_bitwise_equal": true,
+      "nc1_parameters": 20084620,
+      "initialization": {
+        "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+        "initialized_sha256": "f1356488e1748f37c31ccb9c1e4f63426cc920a02974c0a0984eaa58e6f653b5",
+        "common_c2_states": 533,
+        "new_acr_states": 12,
+        "new_acr_parameters": 1848
+      },
+      "cpu": "passed",
+      "cuda": "passed",
+      "native_amp": "passed",
+      "regressions": {
+        "test_acr.py": {
+          "run": 6,
+          "failures": 0,
+          "errors": 0
+        },
+        "test_acr_tools.py": {
+          "run": 5,
+          "failures": 0,
+          "errors": 0
+        }
+      },
+      "topology": {
+        "self_attention": {
+          "model.26.decoder.layers.0.self_attn": {
+            "class": "CoverageRelationSelfAttention",
+            "query": [
+              300,
+              1,
+              256
+            ],
+            "reference": [
+              1,
+              300,
+              4
+            ],
+            "range": [
+              0.01875000074505806,
+              0.981249988079071
+            ],
+            "output": [
+              300,
+              1,
+              256
+            ],
+            "added_parameters": 616
+          },
+          "model.26.decoder.layers.1.self_attn": {
+            "class": "CoverageRelationSelfAttention",
+            "query": [
+              300,
+              1,
+              256
+            ],
+            "reference": [
+              1,
+              300,
+              4
+            ],
+            "range": [
+              0.01875000074505806,
+              0.981249988079071
+            ],
+            "output": [
+              300,
+              1,
+              256
+            ],
+            "added_parameters": 616
+          },
+          "model.26.decoder.layers.2.self_attn": {
+            "class": "CoverageRelationSelfAttention",
+            "query": [
+              300,
+              1,
+              256
+            ],
+            "reference": [
+              1,
+              300,
+              4
+            ],
+            "range": [
+              0.01875000074505806,
+              0.981249988079071
+            ],
+            "output": [
+              300,
+              1,
+              256
+            ],
+            "added_parameters": 616
+          }
+        },
+        "pyramid": [
+          [
+            1,
+            256,
+            80,
+            80
+          ],
+          [
+            1,
+            256,
+            40,
+            40
+          ],
+          [
+            1,
+            256,
+            20,
+            20
+          ]
+        ],
+        "decoder_inputs": [
+          19,
+          22,
+          25
+        ],
+        "added_parameters": 1848,
+        "all_parameters_independent": true,
+        "cross_attention": "MSDeformAttn"
+      },
+      "optimizer_counts": {
+        "weight": 123,
+        "bn": 81,
+        "bias": 134
+      },
+      "benchmark": {
+        "device": "cuda",
+        "batch": 1,
+        "imgsz": 640,
+        "dtype": "FP32",
+        "warmup": 3,
+        "iterations": 10,
+        "note": "Unfused complete-model forward; same random image. Not dataset validator speed.",
+        "reference": {
+          "parameters": 20082772,
+          "ms_per_image": 42.38171000000008,
+          "peak_allocated_bytes": 187776512
+        },
+        "ACR": {
+          "parameters": 20084620,
+          "ms_per_image": 59.035829999999834,
+          "peak_allocated_bytes": 187787264
+        }
+      },
+      "smoke": {
+        "status": "passed",
+        "losses": [
+          63.057613372802734,
+          36.9255256652832,
+          35.99574661254883
+        ],
+        "dn_splits": [
+          [
+            200,
+            300
+          ],
+          [
+            192,
+            300
+          ],
+          [
+            198,
+            300
+          ]
+        ],
+        "shapes": [
+          [
+            2,
+            3,
+            640,
+            640
+          ],
+          [
+            2,
+            3,
+            640,
+            640
+          ],
+          [
+            2,
+            3,
+            640,
+            640
+          ]
+        ],
+        "peak_allocated_bytes": [
+          2471590400,
+          1359480320,
+          1361822720
+        ],
+        "elapsed_ms": [
+          1836.4037999999994,
+          365.3326999999962,
+          309.50880000000325
+        ],
+        "real_fp32_backward_loss": 62.85269546508789,
+        "real_initial_loss": 62.90375900268555,
+        "matching_calls": 4,
+        "optimizer_steps": [
+          3
+        ],
+        "terminal_batch": {
+          "batch_size": 1,
+          "loss": 33.29304122924805,
+          "gradients": {
+            "model.26.decoder.layers.0.self_attn.acr_geometry_proj.weight": 4.89354133605957e-05,
+            "model.26.decoder.layers.0.self_attn.acr_geometry_proj.bias": 5.125999450683594e-06,
+            "model.26.decoder.layers.0.self_attn.acr_head.weight": 0.10368680953979492,
+            "model.26.decoder.layers.0.self_attn.acr_head.bias": 0.0001925826072692871,
+            "model.26.decoder.layers.1.self_attn.acr_geometry_proj.weight": 1.1980533599853516e-05,
+            "model.26.decoder.layers.1.self_attn.acr_geometry_proj.bias": 1.3709068298339844e-06,
+            "model.26.decoder.layers.1.self_attn.acr_head.weight": 0.01587045192718506,
+            "model.26.decoder.layers.1.self_attn.acr_head.bias": 0.0003120303153991699,
+            "model.26.decoder.layers.2.self_attn.acr_geometry_proj.weight": 4.76837158203125e-07,
+            "model.26.decoder.layers.2.self_attn.acr_geometry_proj.bias": 5.960464477539063e-08,
+            "model.26.decoder.layers.2.self_attn.acr_head.weight": 0.006081640720367432,
+            "model.26.decoder.layers.2.self_attn.acr_head.bias": 2.47955322265625e-05
+          },
+          "optimizer_updates": 0
+        },
+        "trained_half": {
+          "shape": [
+            2,
+            300,
+            5
+          ],
+          "finite": true
+        },
+        "post_smoke_init": {
+          "clean_checkpoint": true,
+          "unchanged_sha256": true,
+          "all_states_exact": true,
+          "status": "passed"
+        }
+      },
+      "pipeline": {
+        "val": {
+          "status": "completed",
+          "images": 4,
+          "checkpoint_sha256": "6e7b0298a7230f58753b4ffe3e0d55e5cb938907b2e72b6f284f96b2865c779b",
+          "postprocess_policy": "corrected",
+          "historical_mask_issue_triggered": false,
+          "postprocess_affected_images": 0
+        },
+        "test": {
+          "status": "completed",
+          "images": 4,
+          "checkpoint_sha256": "6e7b0298a7230f58753b4ffe3e0d55e5cb938907b2e72b6f284f96b2865c779b",
+          "postprocess_policy": "corrected",
+          "historical_mask_issue_triggered": false,
+          "postprocess_affected_images": 0
+        }
+      }
+    },
+    "c23": {
+      "status": "passed",
+      "source_hashes_match_delivery": true,
+      "comparison_tensors": 1131,
+      "maximum_absolute_error": 0.0,
+      "all_bitwise_equal": true,
+      "nc1_parameters": 20111532,
+      "initialization": {
+        "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+        "initialized_sha256": "5c1f44eb076ed3de40d4be320ae739a94e4721ed02ca1848bacb6a3ebc152ed1",
+        "common_c2_states": 533,
+        "new_acr_states": 12,
+        "new_acr_parameters": 1848
+      },
+      "cpu": "passed",
+      "cuda": "passed",
+      "native_amp": "passed",
+      "regressions": {
+        "test_acr.py": {
+          "run": 6,
+          "failures": 0,
+          "errors": 0
+        },
+        "test_acr_tools.py": {
+          "run": 5,
+          "failures": 0,
+          "errors": 0
+        }
+      },
+      "topology": {
+        "self_attention": {
+          "model.27.decoder.layers.0.self_attn": {
+            "class": "CoverageRelationSelfAttention",
+            "query": [
+              300,
+              1,
+              256
+            ],
+            "reference": [
+              1,
+              300,
+              4
+            ],
+            "range": [
+              0.01875000074505806,
+              0.981249988079071
+            ],
+            "output": [
+              300,
+              1,
+              256
+            ],
+            "added_parameters": 616
+          },
+          "model.27.decoder.layers.1.self_attn": {
+            "class": "CoverageRelationSelfAttention",
+            "query": [
+              300,
+              1,
+              256
+            ],
+            "reference": [
+              1,
+              300,
+              4
+            ],
+            "range": [
+              0.01875000074505806,
+              0.981249988079071
+            ],
+            "output": [
+              300,
+              1,
+              256
+            ],
+            "added_parameters": 616
+          },
+          "model.27.decoder.layers.2.self_attn": {
+            "class": "CoverageRelationSelfAttention",
+            "query": [
+              300,
+              1,
+              256
+            ],
+            "reference": [
+              1,
+              300,
+              4
+            ],
+            "range": [
+              0.01875000074505806,
+              0.981249988079071
+            ],
+            "output": [
+              300,
+              1,
+              256
+            ],
+            "added_parameters": 616
+          }
+        },
+        "pyramid": [
+          [
+            1,
+            256,
+            80,
+            80
+          ],
+          [
+            1,
+            256,
+            40,
+            40
+          ],
+          [
+            1,
+            256,
+            20,
+            20
+          ]
+        ],
+        "decoder_inputs": [
+          20,
+          23,
+          26
+        ],
+        "added_parameters": 1848,
+        "all_parameters_independent": true,
+        "cross_attention": "MSDeformAttn"
+      },
+      "optimizer_counts": {
+        "weight": 128,
+        "bn": 81,
+        "bias": 134
+      },
+      "benchmark": {
+        "device": "cuda",
+        "batch": 1,
+        "imgsz": 640,
+        "dtype": "FP32",
+        "warmup": 3,
+        "iterations": 10,
+        "note": "Unfused complete-model forward; same random image. Not dataset validator speed.",
+        "reference": {
+          "parameters": 20109684,
+          "ms_per_image": 38.88908999999927,
+          "peak_allocated_bytes": 191655936
+        },
+        "ACR": {
+          "parameters": 20111532,
+          "ms_per_image": 36.03846000000033,
+          "peak_allocated_bytes": 193685504
+        }
+      },
+      "smoke": {
+        "status": "passed",
+        "losses": [
+          63.057613372802734,
+          36.93144607543945,
+          36.002498626708984
+        ],
+        "dn_splits": [
+          [
+            200,
+            300
+          ],
+          [
+            192,
+            300
+          ],
+          [
+            198,
+            300
+          ]
+        ],
+        "shapes": [
+          [
+            2,
+            3,
+            640,
+            640
+          ],
+          [
+            2,
+            3,
+            640,
+            640
+          ],
+          [
+            2,
+            3,
+            640,
+            640
+          ]
+        ],
+        "peak_allocated_bytes": [
+          2533514752,
+          1390214656,
+          1394288128
+        ],
+        "elapsed_ms": [
+          1831.3514000000027,
+          280.9244000000035,
+          276.0201999999907
+        ],
+        "real_fp32_backward_loss": 62.85269546508789,
+        "real_initial_loss": 62.90375900268555,
+        "matching_calls": 4,
+        "optimizer_steps": [
+          3
+        ],
+        "terminal_batch": {
+          "batch_size": 1,
+          "loss": 33.45889663696289,
+          "gradients": {
+            "model.27.decoder.layers.0.self_attn.acr_geometry_proj.weight": 4.8160552978515625e-05,
+            "model.27.decoder.layers.0.self_attn.acr_geometry_proj.bias": 4.231929779052734e-06,
+            "model.27.decoder.layers.0.self_attn.acr_head.weight": 0.10452479124069214,
+            "model.27.decoder.layers.0.self_attn.acr_head.bias": 0.0002582073211669922,
+            "model.27.decoder.layers.1.self_attn.acr_geometry_proj.weight": 2.2709369659423828e-05,
+            "model.27.decoder.layers.1.self_attn.acr_geometry_proj.bias": 2.682209014892578e-06,
+            "model.27.decoder.layers.1.self_attn.acr_head.weight": 0.013229548931121826,
+            "model.27.decoder.layers.1.self_attn.acr_head.bias": 0.00034290552139282227,
+            "model.27.decoder.layers.2.self_attn.acr_geometry_proj.weight": 4.76837158203125e-07,
+            "model.27.decoder.layers.2.self_attn.acr_geometry_proj.bias": 5.960464477539063e-08,
+            "model.27.decoder.layers.2.self_attn.acr_head.weight": 0.004601180553436279,
+            "model.27.decoder.layers.2.self_attn.acr_head.bias": 2.9921531677246094e-05
+          },
+          "optimizer_updates": 0
+        },
+        "trained_half": {
+          "shape": [
+            2,
+            300,
+            5
+          ],
+          "finite": true
+        },
+        "post_smoke_init": {
+          "clean_checkpoint": true,
+          "unchanged_sha256": true,
+          "all_states_exact": true,
+          "status": "passed"
+        }
+      },
+      "pipeline": {
+        "val": {
+          "status": "completed",
+          "images": 4,
+          "checkpoint_sha256": "5b5e17ea8d1310948b128edd4958a3fd29fe4186acefdfce0be8ab8abab402eb",
+          "postprocess_policy": "corrected",
+          "historical_mask_issue_triggered": false,
+          "postprocess_affected_images": 0
+        },
+        "test": {
+          "status": "completed",
+          "images": 4,
+          "checkpoint_sha256": "5b5e17ea8d1310948b128edd4958a3fd29fe4186acefdfce0be8ab8abab402eb",
+          "postprocess_policy": "corrected",
+          "historical_mask_issue_triggered": false,
+          "postprocess_affected_images": 0
+        }
+      }
+    }
+  },
+  "limitations": [
+    "AutoDL PyTorch 2.1.2, server batch16, full dataset and tmux lifecycle have not been run.",
+    "Local real smoke batch2, first32 train images and 4 val/4 test copies; no formal training or accuracy conclusion.",
+    "Short sequential 10-iteration timing is noisy; no speedup claim. First smoke step includes extra FP32 backward.",
+    "Original RT-DETR CUDA grid_sample backward is nondeterministic with warn_only, inherited from C2.",
+    "Internal training validation/best selection keeps original sorting-mask behavior; compare independent corrected full val across all models."
+  ],
+  "development_failures_resolved": [
+    "Initial native AMP helper absent; copied trusted bus/helper resources; final native AMP passed.",
+    "Isolated reference loss fixture lacked trainer nc attribute; supplied native head nc in fixture.",
+    "Optimizer step scalar could reload on CPU; diagnostic comparison canonicalizes both to CPU.",
+    "C23 lock unit fixture needed an isolated combination-review mock; production review gate remains required."
+  ]
+}

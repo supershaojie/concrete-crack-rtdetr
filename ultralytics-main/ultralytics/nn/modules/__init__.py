@@ -17,6 +17,8 @@ Examples:
     >>> subprocess.run(f"onnxslim {f} {f} && open {f}", shell=True, check=True)  # pip install onnxslim
 """
 
+from .acr import CoverageRelationSelfAttention
+from .head import RTDETRDecoderACR
 from .block import (
     C1,
     C2,
@@ -187,6 +189,8 @@ __all__ = (
     "Pose26",
     "Proto",
     "RTDETRDecoder",
+    "RTDETRDecoderACR",
+    "CoverageRelationSelfAttention",
     "RepC3",
     "RepConv",
     "RepNCSPELAN4",

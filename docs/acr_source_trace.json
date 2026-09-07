@@ -1,0 +1,62 @@
+{
+  "branch": "codex/acr-query-attention",
+  "base_c17_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+  "c2_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+  "worktree": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\acr",
+  "remote": "https://github.com/supershaojie/concrete-crack-rtdetr.git",
+  "instructions": "No AGENTS.md found at workspace/ancestor paths or under D:/MyProjects; user full request implemented.",
+  "ledger_read": "experiment_records/rtdetr_resnet18_config_log.md; existing branch/worktree inventory; C21 docs; local result directories",
+  "experiment_numbers": {
+    "C21": "Existing SALA, preserved",
+    "C22": "C2+ACR-SA; local c22 ACR-SA folder existed empty, not modified",
+    "C23": "CSCEFv51+ACR-SA, unused in checked inventories"
+  },
+  "module_package": {
+    "zip": "D:/7.1 rtdetr改/魔鬼面具_RTDETR/RTDETR-20260623.zip",
+    "sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+    "viewed_file": "D:/7.1 rtdetr改/魔鬼面具_RTDETR/RTDETR-main/ultralytics/nn/extra_modules/transformer.py",
+    "viewed_file_and_zip_member_sha256": "e14e25e61b83c070892582f90c6f5f407caf3457ef57c5909ffa8a0d646cf22f",
+    "read_lines": [
+      816,
+      951
+    ],
+    "classes": [
+      "DynamicPosBias",
+      "DPB_Attention"
+    ],
+    "relationship": "Read geometry-to-head-bias pattern only; no package code imported or copied into ACR. Package positions are feature-grid coordinates, ACR describes candidate boxes."
+  },
+  "papers": [
+    {
+      "url": "https://arxiv.org/abs/2304.08069",
+      "read": "abstract page, 2026-09-08; no claimed paper reproduction"
+    },
+    {
+      "url": "https://arxiv.org/abs/2407.11699",
+      "read": "abstract page, 2026-09-08; no claimed paper reproduction"
+    },
+    {
+      "url": "https://arxiv.org/abs/2108.00154",
+      "read": "abstract page, 2026-09-08; no claimed paper reproduction"
+    },
+    {
+      "url": "https://arxiv.org/abs/2512.13876",
+      "read": "abstract page, 2026-09-08; no claimed paper reproduction"
+    },
+    {
+      "url": "https://arxiv.org/abs/2605.23507",
+      "read": "abstract page, 2026-09-08; no claimed paper reproduction"
+    }
+  ],
+  "c17_protected_sources_exact": {
+    "ultralytics-main/ultralytics/nn/modules/cscef_v51.py": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+    "ultralytics-main/ultralytics/nn/modules/cscef_v5.py": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v51.yaml": "d366dd5bf9b4e8fef7b879e0a09dfe0d88bb42ef0ac251d880ec6d6a98871d5e"
+  },
+  "c2_args": "D:\\rtdetr跑结果\\c2 200e在线\\c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053\\train_run\\args.yaml",
+  "c2_args_sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+  "init_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "workflow_reference": "C21 lifecycle tools at 9621aeb691a59f01ae06320569e50240d690c096; adapted for ACR/two variants; no SALA algorithm added",
+  "formal_training_started": false,
+  "server_executed": false
+}

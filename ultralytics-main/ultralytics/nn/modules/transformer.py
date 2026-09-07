@@ -612,6 +612,7 @@ class DeformableTransformerDecoderLayer(nn.Module):
         act: nn.Module = nn.ReLU(),
         n_levels: int = 4,
         n_points: int = 4,
+        acr: bool = False,
     ):
         """Initialize the DeformableTransformerDecoderLayer with the given parameters.
 
@@ -627,7 +628,12 @@ class DeformableTransformerDecoderLayer(nn.Module):
         super().__init__()
 
         # Self attention
-        self.self_attn = nn.MultiheadAttention(d_model, n_heads, dropout=dropout)
+        if acr:
+            from .acr import CoverageRelationSelfAttention
+
+            self.self_attn = CoverageRelationSelfAttention(d_model, n_heads, dropout=dropout)
+        else:
+            self.self_attn = nn.MultiheadAttention(d_model, n_heads, dropout=dropout)
         self.dropout1 = nn.Dropout(dropout)
         self.norm1 = nn.LayerNorm(d_model)
 
@@ -671,6 +677,8 @@ class DeformableTransformerDecoderLayer(nn.Module):
         padding_mask: torch.Tensor | None = None,
         attn_mask: torch.Tensor | None = None,
         query_pos: torch.Tensor | None = None,
+        num_queries: int | None = None,
+        dn_meta: dict | None = None,
     ) -> torch.Tensor:
         """Perform the forward pass through the entire decoder layer.
 
@@ -688,7 +696,12 @@ class DeformableTransformerDecoderLayer(nn.Module):
         """
         # Self attention
         q = k = self.with_pos_embed(embed, query_pos)
-        tgt = self.self_attn(q.transpose(0, 1), k.transpose(0, 1), embed.transpose(0, 1), attn_mask=attn_mask)[
+        from .acr import CoverageRelationSelfAttention
+
+        relation = dict(refer_bbox=refer_bbox, num_queries=num_queries, dn_meta=dn_meta) if isinstance(
+            self.self_attn, CoverageRelationSelfAttention
+        ) else {}
+        tgt = self.self_attn(q.transpose(0, 1), k.transpose(0, 1), embed.transpose(0, 1), attn_mask=attn_mask, **relation)[
             0
         ].transpose(0, 1)
         embed = embed + self.dropout1(tgt)
@@ -747,6 +760,8 @@ class DeformableTransformerDecoder(nn.Module):
         pos_mlp: nn.Module,
         attn_mask: torch.Tensor | None = None,
         padding_mask: torch.Tensor | None = None,
+        num_queries: int | None = None,
+        dn_meta: dict | None = None,
     ):
         """Perform the forward pass through the entire decoder.
 
@@ -771,7 +786,8 @@ class DeformableTransformerDecoder(nn.Module):
         last_refined_bbox = None
         refer_bbox = refer_bbox.sigmoid()
         for i, layer in enumerate(self.layers):
-            output = layer(output, refer_bbox, feats, shapes, padding_mask, attn_mask, pos_mlp(refer_bbox))
+            output = layer(output, refer_bbox, feats, shapes, padding_mask, attn_mask, pos_mlp(refer_bbox),
+                           num_queries=num_queries, dn_meta=dn_meta)
 
             bbox = bbox_head[i](output)
             refined_bbox = torch.sigmoid(bbox + inverse_sigmoid(refer_bbox))
