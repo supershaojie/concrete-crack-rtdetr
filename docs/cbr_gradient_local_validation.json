@@ -1,0 +1,111 @@
+{
+  "status": "local_passed_server_unverified",
+  "base_commit": "d73391f1b8496b16d9b6ba06429c6393b1a21eda",
+  "branch": "codex/diag-c20-cbr-gradcheck",
+  "worktree": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\diag-c20-cbr-gradcheck",
+  "AGENTS_md": "No AGENTS.md found in repository, parents, or current C20/diagnostic worktrees.",
+  "prior_package": {
+    "path": "D:\\rtdetr跑结果\\c20 cs+cbr\\cbr_rescue_step1.tar.gz",
+    "bytes": 7986300,
+    "sha256": "8b90e4e28f42ca44581271b9820c8cb5d5a14f427a5054b02f78f6038be05a9f",
+    "verified_members": 24,
+    "summary_sha256": "44f1272ab52408fefb8f4ceb663eaa41fc965654f767939533df1220f1472523"
+  },
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "8.4.21",
+    "ultralytics_file": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\diag-c20-cbr-gradcheck\\ultralytics-main\\ultralytics\\__init__.py",
+    "mode": "Local synthetic tests: FP32 autograd; native training routes with other modules eval; TF32 off for CUDA",
+    "seed": 42,
+    "deterministic_warn_only": true,
+    "diagnosis_timing_is_not_inference_performance": true
+  },
+  "tests": {
+    "command": "python tools/test_cbr_gradients.py",
+    "count": 8,
+    "passed": 8,
+    "scope": [
+      "Independent CBR leaves: detach only P3/query; CBR parameter and original-box gradients retained.",
+      "Actual C19/C20 native DN, auxiliary and VFL losses; exactly one predict; raw/loss/matches/quality targets identical.",
+      "Non-equivalent B forward rejected before any gradient read; hooks/modes/requires_grad restored on injected exception.",
+      "All parameters, buffers and .grad unchanged; frozen checkpoint flags re-enabled only in memory and restored.",
+      "Empty GT reports missing box supervision without falsely calling CBR frozen.",
+      "First-batch A repeat noise, null cosine near noise, no recommendation from one negative batch or C19-equivalent pattern.",
+      "Fixed 16-image 4x4 CPU 128px synthetic C19 runner and reused package completed; no val/test.",
+      "Synthetic C20 CUDA 640px batch1, 300 normal +200 DN queries; native graph gradients/Jacobian/state checks passed."
+    ],
+    "log_sha256": "3ac6b45f93a9ec923626e659f770cf2c53f0e7e1a1465f519687be60f80a433b",
+    "log_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\diag-c20-cbr-gradcheck\\outputs\\cbr_gradient_local_tests\\final_tests.log"
+  },
+  "other_checks": {
+    "python_compile": "passed (three new Python files)",
+    "bash_syntax_and_help": "passed with standard /usr/bin:/bin PATH",
+    "CLI_help": "passed without loading torch",
+    "source_protection": "All existing C20 files and seven step-1 files unchanged; source-role hashes verified."
+  },
+  "synthetic_cuda_640_evidence": {
+    "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\diag-c20-cbr-gradcheck\\outputs\\cbr_gradient_local_tests\\synthetic_cuda_640.json",
+    "sha256": "707916fa9e9efcbfd56070eb1a2b278efb79c49e79d74b314455ecbf50ba3b47",
+    "loss_terms": 12,
+    "matcher_calls": 4,
+    "DN_queries": 200,
+    "box_jacobian": {
+      "applicable": true,
+      "rho": 0.1,
+      "passed": true,
+      "max_abs_error": 4.76837158203125e-07,
+      "gradient_by_coordinate": {
+        "cx": 9.534564465845886,
+        "cy": 3.698223232000376,
+        "w": 5.029211208765611,
+        "h": 7.91037052932444
+      }
+    },
+    "first_A_repeat_noise_norms": {
+      "neck_p3": 1.4197057502506504e-07,
+      "decoder_last": 2.006614255732829e-07,
+      "cbr": 8.122535059146379e-10,
+      "box_head_last": 0.0,
+      "cscef_projection": 2.0916965171103203e-08,
+      "cscef_all": 2.3501132808171207e-08,
+      "input_boxes": 0.0
+    }
+  },
+  "protected_modules_before_and_after": {
+    "ultralytics-main/ultralytics/nn/modules/cscef_v5.py": {
+      "raw_sha256": "34ee32def9202525e21bcae2577322277003cd5d087c9bb902399cdd1e72e280",
+      "canonical_lf_sha256": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+      "source_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139"
+    },
+    "ultralytics-main/ultralytics/nn/modules/cscef_v51.py": {
+      "raw_sha256": "c6c97516a76fd0c264f64d4e8862054330531d599f972992d66505403615f3e1",
+      "canonical_lf_sha256": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+      "source_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139"
+    },
+    "ultralytics-main/ultralytics/nn/modules/cbr.py": {
+      "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+      "canonical_lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "source_commit": "025997e3c51eaf6933534308a95da6ebf97bff53"
+    }
+  },
+  "new_file_canonical_sha256": {
+    "tools/cbr_gradient_probe.py": "6a3c8cf69e77702bc49402c65a9d7de1634237fd72ed778eb4399d0e9628714c",
+    "tools/diagnose_cbr_gradients.py": "0d35a6069188c416f821a14a0f310e67e3202968a142d75b6869b4cf60d10b0b",
+    "tools/autodl_cbr_gradcheck.sh": "26ea73fd1838d1ea11638f43895b5085f770fcd44b188164821692f9bd21eb8a",
+    "tools/test_cbr_gradients.py": "9d2f0a4fe571572e62f6d7f8f3f19158a4017880b6c1a8f6864a2118468c6d89",
+    "docs/CBR_GRADIENT_CHECK.md": "da82371f5e7d1e4bac7280fb174b631ecfbff647052ced0a9229195537d31e5e"
+  },
+  "not_verified": [
+    "No usable server connection supplied or found; no server gradient run executed.",
+    "Final C19/C20 best checkpoints unavailable locally; no real gradient conclusion or CBR-v2 selection.",
+    "Server PyTorch2.1.2+cu121/RTX4090 and real 640px batch4 remain unverified.",
+    "Actual fixed16 train identities, real loss/DN/gradient statistics, decision and final evidence package remain pending.",
+    "The local CUDA 640 test used batch1 and synthetic weights, not the server budget or experimental weights."
+  ],
+  "no_training": "No optimizer, backward(), parameter/buffer update, GradScaler, EMA, epoch, training checkpoint or full val/test run."
+}
