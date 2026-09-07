@@ -32,7 +32,9 @@
     "scheduler": "Inference mocked only for scheduler tests; no mismatch and late C17/C19 mismatch cover automatic four-model val/test re-evaluation and export.",
     "package": "Member and archive hashes verified, weights/path escape/overwrite rejected, incompressible >20MiB fixture rejected without archive creation.",
     "shell": "bash -n passed; wrapper help passed with standard Git Bash /usr/bin:/bin PATH.",
-    "python": "py_compile passed for all four Python task files."
+    "python": "py_compile passed for all four Python task files.",
+    "committed_cli_missing_checkpoint_guard": "Real CLI on clean committed worktree failed at missing required C2 path, saved failed summary/console log, and verified source_before == source_after. No replacement weight or experimental metric used.",
+    "server_fetch_sources": "C17 is not an ancestor of C20; server commands explicitly fetch the exact C17 and C19 source commits required for module hash verification."
   },
   "test_log": {
     "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\diag-c20-cbr-rescue\\outputs\\cbr_rescue_local_tests\\test_results.log",
@@ -63,7 +65,7 @@
     "tools/diagnose_cbr_rescue.py": "5002752b80d7a6bfe0d9cbf35045a9ccee82c59a82a46b4ebd25c15cc7883591",
     "tools/autodl_cbr_rescue.sh": "58688b608414ecd64282a536e86662daca74c9dd738ed0dff9a5c1bda0bfa6d6",
     "tools/test_cbr_rescue.py": "3100f29783c1cd7fb9ae3fc341744059fff18920cda3313d3fb4416ac116ccb8",
-    "docs/CBR_RESCUE_DIAGNOSTICS.md": "0f204f2001937f342f72f9f99dd796cb64360d9e8d05b6424791118c9f46c360"
+    "docs/CBR_RESCUE_DIAGNOSTICS.md": "3369da82f3a485a33b846753ae4139511f6326a191bc8f9dd3bbf48dcf6ef1f1"
   },
   "not_verified": [
     "No usable AutoDL server connection was available; no remote commands executed.",

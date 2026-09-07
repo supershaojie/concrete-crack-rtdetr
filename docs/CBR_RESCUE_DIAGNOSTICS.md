@@ -62,6 +62,10 @@ MAIN='/root/autodl-tmp/projects/Crack_RTDETR'
 WT='/root/autodl-tmp/projects/Crack_RTDETR_diag_c20_cbr_rescue'
 BRANCH='codex/diag-c20-cbr-rescue'
 git -C "$MAIN" fetch origin "refs/heads/$BRANCH:refs/remotes/origin/$BRANCH"
+# C17 is not an ancestor of C20: explicitly fetch both module-source commits for hash verification.
+git -C "$MAIN" fetch origin \
+  '0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139' \
+  '025997e3c51eaf6933534308a95da6ebf97bff53'
 REV="$(git -C "$MAIN" rev-parse "refs/remotes/origin/$BRANCH")"
 printf 'Diagnosis commit: %s\n' "$REV"
 test ! -e "$WT"
