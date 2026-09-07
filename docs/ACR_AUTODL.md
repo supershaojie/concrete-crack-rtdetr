@@ -17,6 +17,39 @@ git rev-parse HEAD
 
 使用 detached worktree 执行已提交版本，避免服务器同名本地分支冲突；不会切换主仓库分支。已有该 worktree 时先用 `git worktree list`、其中的 `git status` 和 `git rev-parse HEAD` 核对，不删除或覆盖。
 
+## C22 直接启动（本次选择）
+
+服务器原 `prepare` 在 GPU `torch.quantile` 处显存不足后，用户明确选择跳过本次完整预检。无需再次运行 prepare，也无需把失败标记改为 passed：
+
+```bash
+cd /root/autodl-tmp/projects/Crack_RTDETR-acr
+bash tools/autodl_acr.sh start-direct c22
+bash tools/autodl_acr.sh status c22
+tail -F outputs/c22/launch_direct/console.log
+# 可选，进入同一个训练终端；Ctrl-b 然后 d 可离开并保留训练
+tmux attach -t acr_c22_rtdetr_r18_lite_acr_e200_b16_onlineaug
+```
+
+`start-direct` 只为 C22 提供。它读取 C2 实际 109 字段 args，保留全部训练配方，仅改 model/name/save_dir；正式训练仍是 200 epochs、640、batch16、seed42、workers8、原 AdamW/AMP/增强。没有自动降 batch、AMP 关闭或 loss 替换。
+
+直接入口在全新的 `outputs/c22/launch_direct/` 下生成 `c22_acr_controlled_init.pt`，源权重仍是主仓库规定文件，SHA256 必须为 `fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e`。它只执行 CPU 构建、公共状态映射及 checkpoint 加载核对，不执行独立模型 FP32 前向对照、三批 smoke 或诊断统计。不会使用之前 prepare 的初始化文件、smoke 模型或审计报告。
+
+原生训练仍正常加载数据、检查 AMP、构建 optimizer/EMA。直接入口补齐原生 AMP 所需资源，但不提前单独调用 AMP 测试。实际 `Model.train()` 使用继承原 RTDETRTrainer 的 `ACRDirectTrainer`：沿用同一构造器和加载顺序，逐键检查 536 个从干净 checkpoint 加载的状态，以及 nc=80→1 时原生重新初始化的 9 个分类状态。启动时只核对这个实际模型、空 optimizer、初始 EMA 和原始参数；没有另一套独立训练模型或额外更新。
+
+独立记录如下；`status`、`val`、`test`、`pack` 自动选择直接启动目录，tmux 名、正式 run 路径、日志和退出码管理保持一致：
+
+- `direct_launch.json`、`launch_plan.json`：明确 `launch_mode=direct`、`full_preflight=not_run` 及跳过项目。
+- `initialization.json`：统一源权重 hash、公共状态逐键映射、新初始化 hash。
+- `training_setup.json`：实际 nc=1 权重来源/状态 hash、所有 optimizer 分组、EMA 和参数核对。这里的 passed 仅表示训练必需的构建和映射核对通过，**不表示完整预检通过**。
+- `statistics.json`：统计关闭；`allocation.jsonl` 为空。不调用 `_record_stats`，没有分位数或额外注意力熵计算。
+- `console.log`、`bootstrap.log`、`tmux.json`、`exit_code.json`、`process_exit_code.json`：沿用原后台管理。
+
+旧 `outputs/c22/launch/prepare.state`、失败 audit、日志及 smoke 保持原样。任何已有正式 run、原子启动锁、同名 tmux、训练进程或历史正式 dispatch 都会阻止重复启动；已有 `launch_direct` 目录也不会覆盖。正常 `start` 仍要求完整 prepare 成功，未修改这条入口的规则。直接训练完成后正常执行本文 val/test/pack，结果包包含 `FULL_PREFLIGHT_NOT_RUN.txt`，不伪造缺失 audit。
+
+普通 start 也默认关闭额外统计，需要时可显式 `ACR_STATS_INTERVAL=200 bash tools/autodl_acr.sh start c22`；这会有额外显存成本。直接入口固定为 0。ACR 十维公式、0.5 上限、注意力、梯度及 DN 掩码均未修改。
+
+同步已有 worktree 时使用最终交付回复中的固定 SHA 命令。先确认没有运行中的 ACR 训练，再 fetch；未提交源码和未跟踪文件用具名 `git stash push -u` 保留，保存当前提交的备份引用，然后 `git switch --detach` 到核对后的 SHA。不要执行 reset --hard、git clean 或自动 stash pop。被忽略的 outputs/、weights/、runs/ 不会被 stash -u 搬走；失败报告保留原路径。stash 中的本地补丁之后单独查看，不自动混入新启动代码。
+
 ## 单模块（默认 C22）
 
 ```bash

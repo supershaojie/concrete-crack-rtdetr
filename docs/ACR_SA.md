@@ -58,7 +58,7 @@ C23 在 layer18 保持 `CSCEFv51([17,16], [])`，拼接 `[16,18]`、原输入顺
 
 ## 诊断、评估和研究边界
 
-每层默认每 200 次训练调用记录常规非对角偏置分位数、`abs(bias)>.45` 比例、允许位置的注意力熵。诊断熵从 FP32 QK 的 dropout 前 softmax 重算，只保存标量，不参与模型输出；不逐批保存矩阵。固定 val 顺序前 32 张保存预测框、分数、GT、文件 hash，不保存图片。重复候选诊断定义为：score≥.25、同类、预测对 IoU≥.7、两者各自最佳同类 GT IoU≥.5 且关联同一 GT，计无序对；所有重叠框不自动视为错误。
+正式训练默认关闭额外关系统计（`acr_stats_interval=0`），不会调用 `_record_stats`，不计算分位数或额外的注意力熵。原来的每 200 次调用自动开启行为已取消。完整 prepare 后的普通 start 可显式设置 `ACR_STATS_INTERVAL=200` 按需记录；`start-direct c22` 固定关闭统计。开启时仍按原方法记录常规非对角偏置分位数、`abs(bias)>.45` 比例和允许位置的注意力熵；诊断熵从 FP32 QK 的 dropout 前 softmax 重算，只保存标量，不参与模型输出，也不逐批保存矩阵。独立 val 工具保持原有按需诊断流程。固定 val 顺序前 32 张保存预测框、分数、GT、文件 hash，不保存图片。重复候选诊断定义为：score≥.25、同类、预测对 IoU≥.7、两者各自最佳同类 GT IoU≥.5 且关联同一 GT，计无序对；所有重叠框不自动视为错误。
 
 公共原 RTDETRValidator 存在“排序后的 pred 用排序前 score mask”问题。原文件保持以保留训练/历史口径；`tools/acr_results.py` 默认 `--policy corrected`，排序后用对应分数过滤，记录 `historical_mask_issue_triggered/postprocess_affected_images`。同一入口支持 C2、C17、C22、C23，支持 `--policy historical` 另目录复现历史规则。**不能将 corrected 新模型指标直接与历史旧指标对比**；必须以同工具、同 settings 对 C2/C17 重评。完整 val mAP50–95 为主指标，另报 AP75、Precision、Recall、速度，资源取审计和实际运行记录。训练 CSV/最佳权重选择仍沿用 C2 原训练验证口径；该局限必须与独立 corrected val 一起解释。
 

@@ -16,10 +16,11 @@ import traceback
 import uuid
 
 from init_acr import (
-    DEFAULT_OUTPUT, ROOT, SOURCE_SHA256, ACR_CFG, clean_checkpoint, require, runtime_info, sha256,
+    DEFAULT_OUTPUT, DEFAULT_SOURCE, ROOT, SOURCE_SHA256, ACR_CFG, clean_checkpoint, require, runtime_info, sha256,
     verify_module, verify_protected, write_json, branch_modules, VARIANT,
 )
 from ultralytics import RTDETR
+from ultralytics.models.rtdetr.train import RTDETRTrainer
 from ultralytics.cfg import DEFAULT_CFG_DICT, get_cfg
 from ultralytics.utils import YAML
 from ultralytics.utils.patches import torch_load
@@ -29,6 +30,7 @@ DEFAULT_C2_ARGS = SERVER_ROOT / "runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlin
 DEFAULT_NAME = ("c23_rtdetr_r18_lite_cscef_v51_acr_e200_b16_onlineaug" if VARIANT == "c23"
                 else "c22_rtdetr_r18_lite_acr_e200_b16_onlineaug")
 ALLOWED_CHANGES = {"model", "name", "save_dir"}
+DIRECT_SKIPPED = ["independent_fp32_comparison", "three_batch_smoke", "diagnostic_statistics"]
 # Sanity checks supplement, and NEVER replace, reading the full authoritative file.
 C2_KEY_FIELDS = {
     "epochs": 200, "patience": 50, "batch": 16, "imgsz": 640, "device": "0", "workers": 8,
@@ -136,6 +138,7 @@ def prepare(args: argparse.Namespace) -> tuple[dict, Path]:
         "audit_report": str(args.audit_report.resolve()), "audit_sha256": sha256(args.audit_report),
         "data_config_sha256": sha256(data_path), "target_args": target, "field_comparison": rows,
         "allowed_changes": sorted(ALLOWED_CHANGES),
+        "launch_mode": "prepared", "stats_interval": getattr(args, "stats_interval", 0),
         "note": "No dataset loaded, no training or val/test evaluation executed by preparation.",
     }
     args.report_dir.mkdir(parents=True, exist_ok=True)
@@ -154,6 +157,60 @@ def prepare(args: argparse.Namespace) -> tuple[dict, Path]:
     return plan, plan_path
 
 
+def prepare_direct(args):
+    """Only create the locked recipe and clean mapped weights; never call the full prepare/audit."""
+    from init_acr import initialize
+    from acr_resources import ensure_resources
+
+    require(VARIANT == "c22", "start-direct is currently authorized only for C22.")
+    require(args.stats_interval == 0, "Direct mode does not run diagnostic statistics.")
+    report_dir = args.report_dir.resolve()
+    initialized = report_dir / "c22_acr_controlled_init.pt"
+    target, rows = build_locked_args(YAML.load(args.c2_args), initialized, args.name)
+    verify_protected()
+    runtime = runtime_info()
+    require(not runtime["git_status"], "Commit or preserve uncommitted source changes before starting.")
+    require(Path(target["data"]).is_file(), f"Missing original C2 data config: {target['data']}")
+    run = Path(target["save_dir"])
+    require(not run.exists() and not run.with_name(run.name + ".acr.launch.lock").exists(),
+            f"Existing training result/claim; preserve it and use status: {run}")
+    # The regular launch may have a failed prepare. Only dispatch/process evidence blocks a new launch.
+    for previous in {report_dir, ROOT / "outputs/c22/launch"}:
+        assert_no_active_launch({"report_dir": str(previous), "target_args": target})
+    report_dir.mkdir(parents=True, exist_ok=False)
+    record = {"launch_mode": "direct", "full_preflight": "not_run", "skipped": DIRECT_SKIPPED,
+              "status": "initializing", "created_utc": datetime.now(timezone.utc).isoformat(),
+              "runtime": runtime, "source": str(args.source.resolve()), "source_sha256": SOURCE_SHA256,
+              "stats_interval": 0,
+              "note": "User explicitly chose to skip full server prepare. Previous prepare reports are retained and not used."}
+    write_json(report_dir / "direct_launch.json", record)
+    try:
+        # Assets for the unchanged native training AMP check; this does not execute any AMP/FP32 test.
+        write_json(report_dir / "resources.json", ensure_resources())
+        initialization = initialize(args.source, initialized)
+        initialization_path = report_dir / "initialization.json"
+        write_json(initialization_path, initialization)
+        plan = {"report_dir": str(report_dir), "launch_mode": "direct", "full_preflight": "not_run",
+                "skipped": DIRECT_SKIPPED, "stats_interval": 0, "status": "prepared_no_training",
+                "variant": VARIANT, "runtime": runtime, "c2_args": str(args.c2_args.resolve()),
+                "c2_args_sha256": sha256(args.c2_args), "initialized": str(initialized),
+                "initialized_sha256": sha256(initialized), "model_yaml": str(ACR_CFG),
+                "initialization_report": str(initialization_path), "initialization_sha256": sha256(initialization_path),
+                "data_config_sha256": sha256(Path(target["data"])), "target_args": target,
+                "field_comparison": rows, "allowed_changes": sorted(ALLOWED_CHANGES)}
+        plan_path = report_dir / "launch_plan.json"
+        write_json(plan_path, plan)
+        YAML.save(report_dir / "train_args.yaml", target)
+        record.update(status="ready_for_dispatch", initialized_sha256=plan["initialized_sha256"])
+        write_json(report_dir / "direct_launch.json", record)
+        print(f"Direct launch: full preflight NOT RUN; clean initialization and {len(rows)} C2 fields recorded in {report_dir}")
+        return plan, plan_path
+    except BaseException as error:
+        record.update(status="failed_before_dispatch", error=repr(error))
+        write_json(report_dir / "direct_launch.json", record)
+        raise
+
+
 def recheck(plan):
     require(plan["variant"] == VARIANT, "ACR_VARIANT differs from preparation")
     runtime = runtime_info()
@@ -163,8 +220,9 @@ def recheck(plan):
     for key in ("python", "torch_version", "torch_cuda", "gpu", "ultralytics_file"):
         require(runtime[key] == plan["runtime"][key], f"Launch environment changed: {key}")
     verify_protected()
-    for name, key in (("c2_args", "c2_args_sha256"), ("initialized", "initialized_sha256"),
-                      ("audit_report", "audit_sha256")):
+    evidence = (("initialization_report", "initialization_sha256") if plan.get("launch_mode") == "direct"
+                else ("audit_report", "audit_sha256"))
+    for name, key in (("c2_args", "c2_args_sha256"), ("initialized", "initialized_sha256"), evidence):
         require(sha256(Path(plan[name])) == plan[key], f"{name} changed before launch.")
     require(sha256(Path(plan["target_args"]["data"])) == plan["data_config_sha256"], "Data config changed.")
     rebuilt, _ = build_locked_args(YAML.load(plan["c2_args"]), Path(plan["initialized"]), plan["target_args"]["name"])
@@ -184,7 +242,8 @@ def claim_launch(plan):
     lock = target.with_name(target.name + ".acr.launch.lock")
     token = uuid.uuid4().hex
     with lock.open("x", encoding="utf-8") as file:
-        json.dump({"token": token, "pid": os.getpid(), "git_commit": plan["runtime"]["git_commit"]}, file)
+        json.dump({"token": token, "pid": os.getpid(), "git_commit": plan["runtime"]["git_commit"],
+                   "report_dir": plan["report_dir"], "launch_mode": plan.get("launch_mode", "prepared")}, file)
     return token
 
 
@@ -229,13 +288,26 @@ def launch_status(report_dir, name):
         if shutil.which("tmux"):
             active = subprocess.run(["tmux", "has-session", "-t", session], capture_output=True).returncode == 0
     records = {n: json.loads((report_dir / n).read_text(encoding="utf-8"))
-               for n in ("tmux.json", "exit_code.json", "process_exit_code.json", "preflight.json")
+               for n in ("tmux.json", "exit_code.json", "process_exit_code.json", "preflight.json",
+                         "direct_launch.json", "training_setup.json", "statistics.json")
                if (report_dir / n).is_file()}
+    # Full state/optimizer/source manifests stay in their files; status remains readable during training.
+    for name in ("direct_launch.json", "training_setup.json"):
+        if name in records:
+            row = records[name]
+            records[name] = {k: v for k, v in row.items() if k not in {"runtime", "initialization", "optimizer_parameters"}}
+            records[name]["report_path"] = str(report_dir / name)
+            if "runtime" in row:
+                records[name]["git_commit"] = row["runtime"].get("git_commit")
     plan_path = report_dir / "launch_plan.json"
-    target = Path(json.loads(plan_path.read_text(encoding="utf-8"))["target_args"]["save_dir"]) if plan_path.exists() else None
+    plan = json.loads(plan_path.read_text(encoding="utf-8")) if plan_path.exists() else {}
+    target = Path(plan["target_args"]["save_dir"]) if plan else None
     lock = target.with_name(target.name + ".acr.launch.lock") if target else None
     marker = report_dir / "prepare.state"
-    return {"prepare_state": marker.read_text().strip() if marker.is_file() else "not_run",
+    direct_record = records.get("direct_launch.json", {})
+    return {"report_dir": str(report_dir), "launch_mode": plan.get("launch_mode", direct_record.get("launch_mode", "prepared")),
+            "full_preflight": plan.get("full_preflight", direct_record.get("full_preflight", "see_prepare_state")),
+            "prepare_state": marker.read_text().strip() if marker.is_file() else "not_run",
             "session": session, "tmux_active": active, "processes": processes, "records": records,
             "run": str(target) if target else None, "run_exists": target.exists() if target else False,
             "launch_lock": str(lock) if lock else None, "lock_exists": lock.exists() if lock else False,
@@ -263,6 +335,40 @@ def actual_args_check(actual, expected):
     require(not differences, f"Actual training recipe changed: {differences}")
 
 
+class ACRDirectTrainer(RTDETRTrainer):
+    """Record the real nc=1 construction/load, without an independent model forward or optimizer step."""
+
+    def get_model(self, cfg=None, weights=None, verbose=True):
+        import torch
+        from audit_acr import state_hashes
+
+        require(self.data["nc"] == 1 and weights is not None, "Direct launch requires nc=1 and clean mapped weights.")
+        # Same native constructor, in the same RNG position as RTDETRTrainer.get_model.
+        model = super().get_model(cfg=cfg, weights=None, verbose=verbose)
+        source, fresh = weights.state_dict(), model.state_dict()
+        require(source.keys() == fresh.keys(), "Checkpoint/actual trainer state keys differ.")
+        prefix = f"model.{len(model.model) - 1}."
+        classification = {prefix + "denoising_class_embed.weight"}
+        classification.update(prefix + name + suffix for name in
+                              ("enc_score_head", "dec_score_head.0", "dec_score_head.1", "dec_score_head.2")
+                              for suffix in (".weight", ".bias"))
+        changed = {key for key in fresh if source[key].shape != fresh[key].shape}
+        require(changed == classification, "Only the nine native nc=80 -> nc=1 classification states may be rebuilt.")
+        fresh_classification = {key: fresh[key].clone() for key in changed}
+        model.load(weights)  # Unchanged native loading; verify every resulting state explicitly below.
+        rows = []
+        for key, value in model.state_dict().items():
+            expected = fresh_classification[key] if key in changed else source[key]
+            require(torch.equal(value, expected), f"Actual trainer weight mapping differs: {key}")
+            rows.append({"key": key, "shape": list(value.shape), "equal": True,
+                         "origin": "native_fresh_nc1" if key in changed else "clean_controlled_checkpoint"})
+        verify_module(model)
+        self.acr_direct_mapping = {"status": "passed", "scope": "actual trainer weight mapping only",
+                                   "states": rows, "state_sha256": state_hashes(model),
+                                   "source_nc": weights.model[-1].nc, "target_nc": 1}
+        return model
+
+
 def install_preflight(model, plan, report_dir):
     """Inspect the model actually constructed by train(); never construct or reseed another head here."""
     def before_data(trainer):
@@ -276,22 +382,46 @@ def install_preflight(model, plan, report_dir):
         require(trainer.amp is True, "Native AMP check disabled AMP; stop without changing the recipe.")
         require(trainer.data["nc"] == 1, "Expected the C2 one-class dataset.")
         verify_module(trainer.model)
-        audit = json.loads(Path(plan["audit_report"]).read_text(encoding="utf-8"))
         actual = state_hashes(trainer.model)
-        require(actual == audit["initialization"]["classes"]["1"]["state_sha256"],
-                "Actual trainer initialization differs from audited nc=1 states; no training allowed.")
         groups = optimizer_rows(trainer.model, trainer.optimizer)
-        require(groups == audit["optimizer"]["all_parameters"], "Actual trainer optimizer groups differ from audit.")
+        direct = plan.get("launch_mode") == "direct"
+        if direct:
+            mapping = trainer.acr_direct_mapping
+            require(actual == mapping["state_sha256"], "Actual nc=1 states changed during native training setup.")
+            for row in groups:
+                if ".acr_" in row["name"]:
+                    group = "bias" if row["name"].endswith(".bias") else "weight"
+                    require(row["group"] == group and row["weight_decay"] == (0.0 if group == "bias" else 0.0001),
+                            f"Incorrect ACR optimizer group: {row}")
+        else:
+            audit = json.loads(Path(plan["audit_report"]).read_text(encoding="utf-8"))
+            require(actual == audit["initialization"]["classes"]["1"]["state_sha256"],
+                    "Actual trainer initialization differs from audited nc=1 states; no training allowed.")
+            require(groups == audit["optimizer"]["all_parameters"], "Actual trainer optimizer groups differ from audit.")
         require(not trainer.optimizer.state, "Optimizer already contains trained state.")
         require(trainer.ema.updates == 0, "EMA already contains trained updates.")
         require(state_hashes(trainer.ema.ema) == actual, "Initial EMA differs from model states.")
         YAML.save(report_dir / "actual_train_args.yaml", vars(trainer.args))
-        write_json(report_dir / "preflight.json", {"status": "passed", "all_states_exact": len(actual),
+        setup = {"status": "passed", "all_states_exact": len(actual),
                    "optimizer_parameters_exact": len(groups), "optimizer_empty": True, "ema_updates": 0, "ema_states_exact": True,
-                   "args_fields": len(vars(trainer.args)), "git_commit": plan["runtime"]["git_commit"]})
+                   "args_fields": len(vars(trainer.args)), "git_commit": plan["runtime"]["git_commit"]}
+        if direct:
+            setup.update(scope="native training setup and weight mapping only", full_preflight="not_run",
+                         initialization=mapping, optimizer_parameters=groups)
+        write_json(report_dir / ("training_setup.json" if direct else "preflight.json"), setup)
 
     def enable_allocation_logging(trainer):
-        for module in branch_modules(trainer.model).values(): module.acr_stats_interval = 200
+        interval = plan.get("stats_interval", 0)
+        require(isinstance(interval, int) and interval >= 0, "Invalid statistics interval.")
+        require(plan.get("launch_mode") != "direct" or interval == 0, "Direct statistics must stay disabled.")
+        # Reset checkpoint attributes too; no quantile/entropy computation or callback scanning when disabled.
+        for network in (trainer.model, trainer.ema.ema):
+            for module in branch_modules(network).values():
+                module.acr_stats_interval = interval
+                module.acr_calls = 0
+                module.acr_last_stats = None
+        write_json(report_dir / "statistics.json", {"enabled": interval > 0, "interval": interval})
+        (report_dir / "allocation.jsonl").touch(exist_ok=False)
 
     def allocation_logging(trainer):
         rows = {}
@@ -304,7 +434,8 @@ def install_preflight(model, plan, report_dir):
                 file.write(json.dumps({'epoch':trainer.epoch, 'layers':rows}, allow_nan=False) + '\n')
 
     model.add_callback('on_train_start', enable_allocation_logging)
-    model.add_callback('on_train_batch_end', allocation_logging)
+    if plan.get("stats_interval", 0) > 0:
+        model.add_callback('on_train_batch_end', allocation_logging)
     model.add_callback("on_pretrain_routine_start", before_data)
     model.add_callback("on_train_start", before_first_batch)
 
@@ -332,7 +463,10 @@ def execute(plan: dict, report_dir: Path, token: str) -> None:
                 model = RTDETR(plan["initialized"])
                 verify_module(model.model)
                 install_preflight(model, plan, report_dir)
-                model.train(**deepcopy(plan["target_args"]))
+                if plan.get("launch_mode") == "direct":
+                    model.train(trainer=ACRDirectTrainer, **deepcopy(plan["target_args"]))
+                else:
+                    model.train(**deepcopy(plan["target_args"]))
                 exit_code = 0
             except BaseException as error:
                 if isinstance(error, KeyboardInterrupt):
@@ -358,6 +492,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--c2-args", type=Path, default=DEFAULT_C2_ARGS, help="Original complete C2 args; required, no fallback.")
     parser.add_argument("--initialized", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--source", type=Path, default=DEFAULT_SOURCE, help="Direct mode unified source; SHA256 is enforced.")
+    parser.add_argument("--direct", action="store_true", help="C22: skip full prepare, generate fresh clean weights, then launch.")
+    parser.add_argument("--stats-interval", type=int, default=0, help="Optional prepared-mode diagnostics; 0 disables extra statistics.")
     parser.add_argument("--audit-report", type=Path, default=ROOT / "outputs/acr/audit.json")
     parser.add_argument("--name", default=DEFAULT_NAME)
     parser.add_argument("--report-dir", type=Path, default=ROOT / "outputs/acr/launch_acr")
@@ -368,6 +505,8 @@ def main() -> None:
     parser.add_argument("--claim-token", help=argparse.SUPPRESS)
     parser.add_argument("--status", action="store_true", help="Read session/process/log/exit status; no plan or training.")
     args = parser.parse_args()
+    require(args.stats_interval >= 0, "Statistics interval must be nonnegative.")
+    require(not args.direct or (args.tmux or args.execute), "--direct requires an explicit --tmux or --execute launch.")
     if args.status:
         print(json.dumps(launch_status(args.report_dir, args.name), indent=2, ensure_ascii=False))
         return
@@ -376,11 +515,11 @@ def main() -> None:
         plan = json.loads(args.run_plan.read_text(encoding="utf-8"))
         execute(plan, args.run_plan.resolve().parent, args.claim_token)
         return
-    if args.tmux or args.execute:
+    if (args.tmux or args.execute) and not args.direct:
         marker = args.report_dir / "prepare.state"
         require(marker.is_file() and marker.read_text().strip() == "passed",
                 "Latest prepare did not complete successfully; run bash tools/autodl_acr.sh prepare and inspect its error logs.")
-    plan, _ = prepare(args)
+    plan, _ = prepare_direct(args) if args.direct else prepare(args)
     if args.tmux:
         require(os.name == "posix", "tmux launch is intended for the Linux server.")
         token = claim_launch(plan)

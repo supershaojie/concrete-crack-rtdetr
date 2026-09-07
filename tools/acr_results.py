@@ -201,9 +201,16 @@ def package(run, launch, val, test, output):
             add(folder / name, f"evaluation/{split}/{name}")
     for name in ("args.yaml", "results.csv", "results.png"):
         add(run / name, "training/" + name)
-    for name in ("initialization.json", "audit.json", "launch_plan.json", "train_args.yaml", "actual_train_args.yaml",
-                 "preflight.json", "tmux.json", "exit_code.json", "process_exit_code.json", "resources.json"):
+    plan = json.loads((launch / "launch_plan.json").read_text(encoding="utf-8"))
+    direct = plan.get("launch_mode") == "direct"
+    evidence = (("direct_launch.json", "training_setup.json") if direct else ("audit.json", "preflight.json"))
+    for name in ("initialization.json", "launch_plan.json", "train_args.yaml", "actual_train_args.yaml",
+                 "tmux.json", "exit_code.json", "process_exit_code.json", "resources.json", *evidence):
         add(launch / name, "launch/" + name)
+    if direct:
+        files["launch/FULL_PREFLIGHT_NOT_RUN.txt"] = b"User selected start-direct. Independent FP32 comparison, three-batch smoke and diagnostics were not run.\n"
+    if (launch / "statistics.json").is_file():
+        add(launch / "statistics.json", "launch/statistics.json")
     for name in ('console.log', 'bootstrap.log', 'allocation.jsonl'):
         add(launch / name, 'launch/' + name)
     if (launch / 'combination_review.json').is_file():

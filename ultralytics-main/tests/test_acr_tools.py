@@ -75,6 +75,20 @@ class ToolsTests(unittest.TestCase):
             inventory=json.loads(archive.with_name(archive.name+'.inventory.json').read_text())
             self.assertEqual(inventory['sha256'],sha256(archive))
             with self.assertRaises(RuntimeError):package(run,launch,val,test,archive)
+            # Direct training has its own honest setup record and never needs the old failed audit.
+            (launch/'launch_plan.json').write_text(json.dumps({'launch_mode':'direct'}),encoding='utf8')
+            for n in ('audit.json','preflight.json'):(launch/n).unlink()
+            for n in ('direct_launch.json','training_setup.json','statistics.json'):
+                (launch/n).write_text(json.dumps({'full_preflight':'not_run'}),encoding='utf8')
+            direct_archive=root/'direct-package.tar.gz'
+            package(run,launch,val,test,direct_archive)
+            with tarfile.open(direct_archive) as tar:
+                names=tar.getnames()
+                self.assertIn('launch/FULL_PREFLIGHT_NOT_RUN.txt',names)
+                self.assertIn('launch/training_setup.json',names)
+                self.assertNotIn('launch/audit.json',names)
+                self.assertNotIn('launch/preflight.json',names)
+                self.assertFalse(any(n.endswith(('.pt','.jpg','.jpeg')) for n in names))
 
     def test_supervisor_retains_child_failure(self):
         import subprocess

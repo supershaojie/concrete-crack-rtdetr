@@ -1,16 +1,28 @@
 #!/usr/bin/env bash
-# Usage: bash tools/autodl_acr.sh prepare|start|status|val|test|pack [c22|c23]
-# prepare exits after checks and isolated smoke. Only explicit start trains.
+# Usage: bash tools/autodl_acr.sh prepare|start|start-direct|status|val|test|pack [c22|c23]
+# prepare exits after checks and isolated smoke. start-direct c22 skips that full preflight.
 set -Eeuo pipefail
 MODE="${1:-prepare}"
 export ACR_VARIANT="${2:-c22}"
-case "$MODE" in prepare|start|status|val|test|pack) ;; *) echo 'Unknown command'; exit 2 ;; esac
+case "$MODE" in prepare|start|start-direct|status|val|test|pack) ;; *) echo 'Unknown command'; exit 2 ;; esac
 case "$ACR_VARIANT" in c22|c23) ;; *) echo 'Variant must be c22 or c23'; exit 2 ;; esac
+if [[ "$MODE" == start-direct && "$ACR_VARIANT" != c22 ]]; then
+    echo 'start-direct is currently available only for c22'; exit 2
+fi
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 MAIN=/root/autodl-tmp/projects/Crack_RTDETR
 NAME=c22_rtdetr_r18_lite_acr_e200_b16_onlineaug
 if [[ "$ACR_VARIANT" == c23 ]]; then NAME=c23_rtdetr_r18_lite_cscef_v51_acr_e200_b16_onlineaug; fi
 REPORT="$ROOT/outputs/$ACR_VARIANT/launch"
+DIRECT_REPORT="$ROOT/outputs/$ACR_VARIANT/launch_direct"
+if [[ "$MODE" == start-direct ]]; then
+    REPORT="$DIRECT_REPORT"
+elif [[ "$MODE" == status || "$MODE" == val || "$MODE" == test || "$MODE" == pack ]]; then
+    # Failed full prepare remains in launch/. Follow direct records unless a regular run was dispatched.
+    if [[ -d "$DIRECT_REPORT" && ! -e "$REPORT/tmux.json" && ! -e "$REPORT/exit_code.json" && ! -e "$REPORT/process_exit_code.json" ]]; then
+        REPORT="$DIRECT_REPORT"
+    fi
+fi
 INIT="$ROOT/weights/${ACR_VARIANT}_acr_controlled_init.pt"
 SOURCE="$MAIN/weights/rtdetr_r18_lite_imagenet_backbone_init.pt"
 C2_ARGS="$MAIN/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug/args.yaml"
@@ -69,14 +81,22 @@ case "$MODE" in
             --report "$AUDIT" 2>&1 | tee "$REPORT/audit_$STAMP.console.log"
         cp "$AUDIT" "$REPORT/audit.json"
         python tools/train_acr.py --c2-args "$C2_ARGS" --initialized "$INIT" --audit-report "$REPORT/audit.json" \
-            --name "$NAME" --report-dir "$REPORT"
+            --name "$NAME" --report-dir "$REPORT" --stats-interval "${ACR_STATS_INTERVAL:-0}"
         printf 'passed\n' > "$REPORT/prepare.state"
         echo "Prepared $ACR_VARIANT. Formal training has NOT started. Plan: $REPORT/launch_plan.json"
         ;;
     start)
         command -v tmux >/dev/null
         python tools/train_acr.py --c2-args "$C2_ARGS" --initialized "$INIT" --audit-report "$REPORT/audit.json" \
-            --name "$NAME" --report-dir "$REPORT" --tmux
+            --name "$NAME" --report-dir "$REPORT" --stats-interval "${ACR_STATS_INTERVAL:-0}" --tmux
+        ;;
+    start-direct)
+        command -v tmux >/dev/null
+        # Share the prepare lock, but neither read nor update its success/failure marker or reports.
+        exec 9>"$ROOT/outputs/$ACR_VARIANT/prepare.lock"
+        flock -n 9 || { echo 'Another prepare/direct initialization is running'; exit 1; }
+        python tools/train_acr.py --direct --source "$SOURCE" --c2-args "$C2_ARGS" \
+            --name "$NAME" --report-dir "$REPORT" --stats-interval 0 --tmux
         ;;
     status)
         python tools/train_acr.py --name "$NAME" --report-dir "$REPORT" --status

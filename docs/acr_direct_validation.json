@@ -1,0 +1,235 @@
+{
+  "scope": "Local one-batch comparison, not full server preflight",
+  "formal_epochs_run": 0,
+  "real_batch_size": 2,
+  "local_imgsz": 320,
+  "native_server_amp_check": "not_run",
+  "training_setup_callbacks": "dataset-free fixture",
+  "torch": "2.7.1+cu118",
+  "cuda": "11.8",
+  "gpu": "NVIDIA GeForce RTX 2060",
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "data_sha256": "44ccfa161f5c4107cfdd38b4b3fe4e0a173fe27ee26c26de49c8a32d5dc81d8e",
+  "initialization": {
+    "status": "passed",
+    "new_parameters": 1848,
+    "constructor_common_states_and_rng_equal": true,
+    "reloads": {
+      "raw": {
+        "status": "passed",
+        "states_exact": 545
+      },
+      "RTDETR(checkpoint)": {
+        "status": "passed",
+        "states_exact": 545
+      },
+      "RTDETR(YAML).load(checkpoint)": {
+        "status": "passed",
+        "states_exact": 545
+      }
+    },
+    "exact_source_states": 533
+  },
+  "recipe_changes": [
+    "model",
+    "name",
+    "save_dir"
+  ],
+  "actual_train_api": {
+    "all_states_exact": 545,
+    "optimizer_parameters_exact": 338,
+    "optimizer_empty": true,
+    "ema_updates": 0,
+    "ema_states_exact": true,
+    "args_fields": 109,
+    "full_preflight": "not_run",
+    "rng_equal": true
+  },
+  "real_gt_count": 7,
+  "comparisons": [
+    {
+      "device": "cpu",
+      "amp": false,
+      "dn_num_split": [
+        200,
+        300
+      ],
+      "loss": 57.898441314697266,
+      "outputs_max_abs": 0.0,
+      "outputs_bitwise_equal": true,
+      "gradients_finite": true,
+      "gradient_difference": {
+        "max_abs": 0.0,
+        "bitwise_equal": true,
+        "outside_tolerance_tensors": 0,
+        "largest": [
+          {
+            "key": "model.0.conv.weight",
+            "max_abs": 0.0,
+            "equal": true,
+            "within_tolerance": true
+          },
+          {
+            "key": "model.0.norm.weight",
+            "max_abs": 0.0,
+            "equal": true,
+            "within_tolerance": true
+          },
+          {
+            "key": "model.0.norm.bias",
+            "max_abs": 0.0,
+            "equal": true,
+            "within_tolerance": true
+          }
+        ]
+      },
+      "native_repeat_gradient_control": null,
+      "gradient_note": "CUDA grid_sample backward warns it is nondeterministic; exact whole-model gradient equality is not claimed.",
+      "atol": 1e-06,
+      "rtol": 1e-05,
+      "status": "passed"
+    },
+    {
+      "device": "cuda",
+      "amp": false,
+      "dn_num_split": [
+        200,
+        300
+      ],
+      "loss": 57.94734573364258,
+      "outputs_max_abs": 0.0,
+      "outputs_bitwise_equal": true,
+      "gradients_finite": true,
+      "gradient_difference": {
+        "max_abs": 0.00015735626220703125,
+        "bitwise_equal": false,
+        "outside_tolerance_tensors": 42,
+        "largest": [
+          {
+            "key": "model.1.conv.weight",
+            "max_abs": 0.00015735626220703125,
+            "equal": false,
+            "within_tolerance": false
+          },
+          {
+            "key": "model.0.conv.weight",
+            "max_abs": 9.703636169433594e-05,
+            "equal": false,
+            "within_tolerance": false
+          },
+          {
+            "key": "model.2.conv.weight",
+            "max_abs": 5.7220458984375e-05,
+            "equal": false,
+            "within_tolerance": false
+          }
+        ]
+      },
+      "native_repeat_gradient_control": {
+        "max_abs": 0.00011444091796875,
+        "bitwise_equal": false,
+        "outside_tolerance_tensors": 46,
+        "largest": [
+          {
+            "key": "model.1.conv.weight",
+            "max_abs": 0.00011444091796875,
+            "equal": false,
+            "within_tolerance": false
+          },
+          {
+            "key": "model.0.conv.weight",
+            "max_abs": 9.322166442871094e-05,
+            "equal": false,
+            "within_tolerance": false
+          },
+          {
+            "key": "model.2.conv.weight",
+            "max_abs": 3.719329833984375e-05,
+            "equal": false,
+            "within_tolerance": false
+          }
+        ]
+      },
+      "gradient_note": "CUDA grid_sample backward warns it is nondeterministic; exact whole-model gradient equality is not claimed.",
+      "atol": 1e-06,
+      "rtol": 1e-05,
+      "status": "passed"
+    },
+    {
+      "device": "cuda",
+      "amp": true,
+      "dn_num_split": [
+        200,
+        300
+      ],
+      "loss": 57.96541213989258,
+      "outputs_max_abs": 0.0,
+      "outputs_bitwise_equal": true,
+      "gradients_finite": true,
+      "gradient_difference": {
+        "max_abs": 0.02734375,
+        "bitwise_equal": false,
+        "outside_tolerance_tensors": 218,
+        "largest": [
+          {
+            "key": "model.0.conv.weight",
+            "max_abs": 0.02734375,
+            "equal": false,
+            "within_tolerance": false
+          },
+          {
+            "key": "model.1.conv.weight",
+            "max_abs": 0.015625,
+            "equal": false,
+            "within_tolerance": false
+          },
+          {
+            "key": "model.2.conv.weight",
+            "max_abs": 0.01171875,
+            "equal": false,
+            "within_tolerance": false
+          }
+        ]
+      },
+      "native_repeat_gradient_control": {
+        "max_abs": 0.0390625,
+        "bitwise_equal": false,
+        "outside_tolerance_tensors": 218,
+        "largest": [
+          {
+            "key": "model.0.conv.weight",
+            "max_abs": 0.0390625,
+            "equal": false,
+            "within_tolerance": false
+          },
+          {
+            "key": "model.1.conv.weight",
+            "max_abs": 0.0234375,
+            "equal": false,
+            "within_tolerance": false
+          },
+          {
+            "key": "model.2.conv.weight",
+            "max_abs": 0.013671875,
+            "equal": false,
+            "within_tolerance": false
+          }
+        ]
+      },
+      "gradient_note": "CUDA grid_sample backward warns it is nondeterministic; exact whole-model gradient equality is not claimed.",
+      "atol": 1e-06,
+      "rtol": 1e-05,
+      "status": "passed"
+    }
+  ],
+  "status": "passed",
+  "clean_initialization_unchanged": true,
+  "source_unchanged": true,
+  "base_commit": "ed366ebdb514a83a5504243213a1580bf74a1a48",
+  "regression_tests": {
+    "passed": 16,
+    "bash_syntax": "passed",
+    "full_preflight_executed": false,
+    "scope": "Geometry, masks, statistics switch, direct routing, immutable evidence, claims, package and supervisor"
+  }
+}
