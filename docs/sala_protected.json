@@ -1,0 +1,19 @@
+{
+  "reference_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+  "files": {
+    "ultralytics-main/ultralytics/nn/modules/block.py": "7ee11e94e88c89abc1a6cce14b99e41fe6f1d2d6a8bb031bd4d45184609ca882",
+    "ultralytics-main/ultralytics/nn/modules/conv.py": "c802f36ea1596d8910f2b651d57877b50a4960857b97cbb5a20d44a1dbbaa774",
+    "ultralytics-main/ultralytics/nn/modules/utils.py": "bcf0492178d3924b5d6a5f5808906b7aec6214172b70bfeb21b3aab308b17164",
+    "ultralytics-main/ultralytics/models/rtdetr/train.py": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+    "ultralytics-main/ultralytics/models/rtdetr/val.py": "f7974365832f0eb2e146571a591150f268d42ecb89e12e96f2518d4251a63a6a",
+    "ultralytics-main/ultralytics/models/utils/ops.py": "7d520895c245adafb06b07c6b330dabbd6a36a69cd0fe742cd71f2797f474dde",
+    "ultralytics-main/ultralytics/models/utils/loss.py": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75",
+    "ultralytics-main/ultralytics/utils/loss.py": "47ef8869db5caa09f303ce9446921f77e9bc2a552956ba7e3c76410c8e4c5fc8",
+    "ultralytics-main/ultralytics/data/augment.py": "5c2f4eb3582616858e7e8b09a4d7c2d5b544aa72dc8999f5a95b299136dd19c8",
+    "ultralytics-main/ultralytics/engine/trainer.py": "18125ba895b64961cf0f7db29214aca27392176e65d72a9166fa818f00a1033a",
+    "ultralytics-main/ultralytics/engine/model.py": "45af5b44eb627e9f15e621509c8f4aad5213c28591deba8d279681af0bd83ae1",
+    "ultralytics-main/ultralytics/cfg/default.yaml": "3ef9fcf96280ba18b761a6165f7d77e14630b6759d5b32b28cd9d31025734dca",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite.yaml": "3493d693cbef958a38a2a135822a6c5379b65804905bc71566e395069e8f4f16",
+    "configs/crack_autodl.yaml": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa"
+  }
+}

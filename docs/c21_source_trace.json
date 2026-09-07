@@ -1,0 +1,23 @@
+{
+  "experiment": "C21 C2 + SALA",
+  "base_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+  "branch": "codex/c21-rtdetr-r18-lite-sala",
+  "implementation_origin": "Original C2 worktree; no CSCEF/CBR model changes copied",
+  "workflow_reference": "C20 tools at 81d5f0175e0168e022f29feb1ceb54de8a52deb5; adapted experiment lifecycle only",
+  "task_document": {
+    "path": "D:\\rtdetr跑结果\\c21 SALA\\SALA_Codex_Task.md",
+    "sha256": "c5a962a1f1e0816b26654a2436813323317636cde51753ea42cc64d71f22a650",
+    "fully_read": true
+  },
+  "optional_reference_module_package": "Not used or read; exact supplied design sufficient",
+  "c2_args_sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+  "source_initialization_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "preserved_worktrees": [
+    "cscef-v51",
+    "cbr",
+    "cscef-cbr",
+    "diag-c20-cbr-gradcheck",
+    "diag-c20-cbr-rescue"
+  ],
+  "formal_training_started": false
+}

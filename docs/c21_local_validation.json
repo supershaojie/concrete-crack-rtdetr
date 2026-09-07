@@ -1,0 +1,1386 @@
+{
+  "status": "passed_local_only",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "torch_version": "2.7.1+cu118",
+    "torch_cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics_version": "8.4.21",
+    "ultralytics_file": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\sala\\ultralytics-main\\ultralytics\\__init__.py"
+  },
+  "audit_commit_note": "Validated the C2-based working tree before committing. Complete canonical source hashes in full audit identify the tested implementation. AutoDL must rerun audit on its actual clean commit.",
+  "topology": {
+    "cross_attention": {
+      "model.26.decoder.layers.0.cross_attn": {
+        "class": "SALAMSDeformAttn",
+        "query": [
+          1,
+          300,
+          256
+        ],
+        "reference_boxes": [
+          1,
+          300,
+          1,
+          4
+        ],
+        "value": [
+          1,
+          8400,
+          256
+        ],
+        "value_shapes": [
+          [
+            80,
+            80
+          ],
+          [
+            40,
+            40
+          ],
+          [
+            20,
+            20
+          ]
+        ],
+        "output": [
+          1,
+          300,
+          256
+        ],
+        "parameters": 214280,
+        "added_parameters": 8680
+      },
+      "model.26.decoder.layers.1.cross_attn": {
+        "class": "SALAMSDeformAttn",
+        "query": [
+          1,
+          300,
+          256
+        ],
+        "reference_boxes": [
+          1,
+          300,
+          1,
+          4
+        ],
+        "value": [
+          1,
+          8400,
+          256
+        ],
+        "value_shapes": [
+          [
+            80,
+            80
+          ],
+          [
+            40,
+            40
+          ],
+          [
+            20,
+            20
+          ]
+        ],
+        "output": [
+          1,
+          300,
+          256
+        ],
+        "parameters": 214280,
+        "added_parameters": 8680
+      },
+      "model.26.decoder.layers.2.cross_attn": {
+        "class": "SALAMSDeformAttn",
+        "query": [
+          1,
+          300,
+          256
+        ],
+        "reference_boxes": [
+          1,
+          300,
+          1,
+          4
+        ],
+        "value": [
+          1,
+          8400,
+          256
+        ],
+        "value_shapes": [
+          [
+            80,
+            80
+          ],
+          [
+            40,
+            40
+          ],
+          [
+            20,
+            20
+          ]
+        ],
+        "output": [
+          1,
+          300,
+          256
+        ],
+        "parameters": 214280,
+        "added_parameters": 8680
+      }
+    },
+    "distinct_module_objects": 3,
+    "all_parameters_independent": true,
+    "decoder_inputs": [
+      19,
+      22,
+      25
+    ],
+    "complete_attention_parameters": 642840,
+    "added_parameters": 26040
+  },
+  "initialization": {
+    "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "output_sha256": "537f449c4dbc0ca0db482feef50279029ec0b3ede567225a2eaf4c40e174f8d4",
+    "common_states": 533,
+    "total_states": 554,
+    "new_states": 21,
+    "classes": {
+      "1": {
+        "parameters": 20108812,
+        "common_states_exact": 533,
+        "classification_states": [
+          {
+            "key": "model.26.denoising_class_embed.weight",
+            "shape": [
+              1,
+              256
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.enc_score_head.weight",
+            "shape": [
+              1,
+              256
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.enc_score_head.bias",
+            "shape": [
+              1
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.dec_score_head.0.weight",
+            "shape": [
+              1,
+              256
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.dec_score_head.0.bias",
+            "shape": [
+              1
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.dec_score_head.1.weight",
+            "shape": [
+              1,
+              256
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.dec_score_head.1.bias",
+            "shape": [
+              1
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.dec_score_head.2.weight",
+            "shape": [
+              1,
+              256
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.dec_score_head.2.bias",
+            "shape": [
+              1
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          }
+        ],
+        "cpu_rng_equal": true,
+        "cuda_rng_equal": true,
+        "real_train_api": {
+          "status": "passed",
+          "states_exact": 554,
+          "args_fields": 109,
+          "rng_equal": true,
+          "inherited_get_model": true,
+          "dataset_io": false,
+          "optimizer_steps": 0
+        }
+      },
+      "80": {
+        "parameters": 20210248,
+        "common_states_exact": 533,
+        "classification_states": [
+          {
+            "key": "model.26.denoising_class_embed.weight",
+            "shape": [
+              80,
+              256
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.enc_score_head.weight",
+            "shape": [
+              80,
+              256
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.enc_score_head.bias",
+            "shape": [
+              80
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.dec_score_head.0.weight",
+            "shape": [
+              80,
+              256
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.dec_score_head.0.bias",
+            "shape": [
+              80
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.dec_score_head.1.weight",
+            "shape": [
+              80,
+              256
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.dec_score_head.1.bias",
+            "shape": [
+              80
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.dec_score_head.2.weight",
+            "shape": [
+              80,
+              256
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          },
+          {
+            "key": "model.26.dec_score_head.2.bias",
+            "shape": [
+              80
+            ],
+            "dtype": "torch.float32",
+            "equal": true
+          }
+        ],
+        "cpu_rng_equal": true,
+        "cuda_rng_equal": true,
+        "real_train_api": {
+          "status": "passed",
+          "states_exact": 554,
+          "args_fields": 109,
+          "rng_equal": true,
+          "inherited_get_model": true,
+          "dataset_io": false,
+          "optimizer_steps": 0
+        }
+      }
+    }
+  },
+  "precision": {
+    "cpu": {
+      "status": "passed",
+      "mode": "fp32",
+      "output_dtype": "torch.float32",
+      "complete_model_640_batch1": [
+        {
+          "tensor": "output.0",
+          "shape": [
+            1,
+            300,
+            5
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.0",
+          "shape": [
+            1,
+            1,
+            300,
+            4
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.1",
+          "shape": [
+            1,
+            1,
+            300,
+            1
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.2",
+          "shape": [
+            1,
+            300,
+            4
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.3",
+          "shape": [
+            1,
+            300,
+            1
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        }
+      ],
+      "complete_model_320x640": [
+        {
+          "tensor": "output.0",
+          "shape": [
+            1,
+            300,
+            5
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.0",
+          "shape": [
+            1,
+            1,
+            300,
+            4
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.1",
+          "shape": [
+            1,
+            1,
+            300,
+            1
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.2",
+          "shape": [
+            1,
+            300,
+            4
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "tensor": "output.1.3",
+          "shape": [
+            1,
+            300,
+            1
+          ],
+          "equal": true,
+          "max_abs": 0.0
+        }
+      ],
+      "training_dn": {
+        "outputs": [
+          {
+            "tensor": "output.0",
+            "shape": [
+              3,
+              2,
+              500,
+              4
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1",
+            "shape": [
+              3,
+              2,
+              500,
+              1
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.2",
+            "shape": [
+              2,
+              300,
+              4
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.3",
+            "shape": [
+              2,
+              300,
+              1
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.4.dn_pos_idx.0",
+            "shape": [
+              50
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.4.dn_pos_idx.1",
+            "shape": [
+              100
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          }
+        ],
+        "dn_num_split": [
+          200,
+          300
+        ],
+        "input": [
+          2,
+          3,
+          640,
+          640
+        ],
+        "note": "Forward equality only; real-data backward in separate smoke."
+      }
+    },
+    "cuda": {
+      "fp32": {
+        "status": "passed",
+        "mode": "fp32",
+        "output_dtype": "torch.float32",
+        "complete_model_640_batch1": [
+          {
+            "tensor": "output.0",
+            "shape": [
+              1,
+              300,
+              5
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.0",
+            "shape": [
+              1,
+              1,
+              300,
+              4
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.1",
+            "shape": [
+              1,
+              1,
+              300,
+              1
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.2",
+            "shape": [
+              1,
+              300,
+              4
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.3",
+            "shape": [
+              1,
+              300,
+              1
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          }
+        ],
+        "complete_model_320x640": [
+          {
+            "tensor": "output.0",
+            "shape": [
+              1,
+              300,
+              5
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.0",
+            "shape": [
+              1,
+              1,
+              300,
+              4
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.1",
+            "shape": [
+              1,
+              1,
+              300,
+              1
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.2",
+            "shape": [
+              1,
+              300,
+              4
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.3",
+            "shape": [
+              1,
+              300,
+              1
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          }
+        ],
+        "training_dn": {
+          "outputs": [
+            {
+              "tensor": "output.0",
+              "shape": [
+                3,
+                2,
+                500,
+                4
+              ],
+              "equal": true,
+              "max_abs": 0.0
+            },
+            {
+              "tensor": "output.1",
+              "shape": [
+                3,
+                2,
+                500,
+                1
+              ],
+              "equal": true,
+              "max_abs": 0.0
+            },
+            {
+              "tensor": "output.2",
+              "shape": [
+                2,
+                300,
+                4
+              ],
+              "equal": true,
+              "max_abs": 0.0
+            },
+            {
+              "tensor": "output.3",
+              "shape": [
+                2,
+                300,
+                1
+              ],
+              "equal": true,
+              "max_abs": 0.0
+            },
+            {
+              "tensor": "output.4.dn_pos_idx.0",
+              "shape": [
+                50
+              ],
+              "equal": true,
+              "max_abs": 0.0
+            },
+            {
+              "tensor": "output.4.dn_pos_idx.1",
+              "shape": [
+                100
+              ],
+              "equal": true,
+              "max_abs": 0.0
+            }
+          ],
+          "dn_num_split": [
+            200,
+            300
+          ],
+          "input": [
+            2,
+            3,
+            640,
+            640
+          ],
+          "note": "Forward equality only; real-data backward in separate smoke."
+        }
+      },
+      "amp": {
+        "status": "passed",
+        "mode": "amp",
+        "output_dtype": "torch.float32",
+        "complete_model_640_batch1": [
+          {
+            "tensor": "output.0",
+            "shape": [
+              1,
+              300,
+              5
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.0",
+            "shape": [
+              1,
+              1,
+              300,
+              4
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.1",
+            "shape": [
+              1,
+              1,
+              300,
+              1
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.2",
+            "shape": [
+              1,
+              300,
+              4
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.3",
+            "shape": [
+              1,
+              300,
+              1
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          }
+        ],
+        "complete_model_320x640": [
+          {
+            "tensor": "output.0",
+            "shape": [
+              1,
+              300,
+              5
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.0",
+            "shape": [
+              1,
+              1,
+              300,
+              4
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.1",
+            "shape": [
+              1,
+              1,
+              300,
+              1
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.2",
+            "shape": [
+              1,
+              300,
+              4
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.3",
+            "shape": [
+              1,
+              300,
+              1
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          }
+        ],
+        "training_dn": {
+          "outputs": [
+            {
+              "tensor": "output.0",
+              "shape": [
+                3,
+                2,
+                500,
+                4
+              ],
+              "equal": true,
+              "max_abs": 0.0
+            },
+            {
+              "tensor": "output.1",
+              "shape": [
+                3,
+                2,
+                500,
+                1
+              ],
+              "equal": true,
+              "max_abs": 0.0
+            },
+            {
+              "tensor": "output.2",
+              "shape": [
+                2,
+                300,
+                4
+              ],
+              "equal": true,
+              "max_abs": 0.0
+            },
+            {
+              "tensor": "output.3",
+              "shape": [
+                2,
+                300,
+                1
+              ],
+              "equal": true,
+              "max_abs": 0.0
+            },
+            {
+              "tensor": "output.4.dn_pos_idx.0",
+              "shape": [
+                50
+              ],
+              "equal": true,
+              "max_abs": 0.0
+            },
+            {
+              "tensor": "output.4.dn_pos_idx.1",
+              "shape": [
+                100
+              ],
+              "equal": true,
+              "max_abs": 0.0
+            }
+          ],
+          "dn_num_split": [
+            200,
+            300
+          ],
+          "input": [
+            2,
+            3,
+            640,
+            640
+          ],
+          "note": "Forward equality only; real-data backward in separate smoke."
+        }
+      },
+      "half": {
+        "status": "passed",
+        "mode": "half",
+        "output_dtype": "torch.float16",
+        "complete_model_640_batch1": [
+          {
+            "tensor": "output.0",
+            "shape": [
+              1,
+              300,
+              5
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.0",
+            "shape": [
+              1,
+              1,
+              300,
+              4
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.1",
+            "shape": [
+              1,
+              1,
+              300,
+              1
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.2",
+            "shape": [
+              1,
+              300,
+              4
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.3",
+            "shape": [
+              1,
+              300,
+              1
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          }
+        ],
+        "complete_model_320x640": [
+          {
+            "tensor": "output.0",
+            "shape": [
+              1,
+              300,
+              5
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.0",
+            "shape": [
+              1,
+              1,
+              300,
+              4
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.1",
+            "shape": [
+              1,
+              1,
+              300,
+              1
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.2",
+            "shape": [
+              1,
+              300,
+              4
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          },
+          {
+            "tensor": "output.1.3",
+            "shape": [
+              1,
+              300,
+              1
+            ],
+            "equal": true,
+            "max_abs": 0.0
+          }
+        ],
+        "training_dn": null
+      },
+      "status": "passed"
+    }
+  },
+  "regressions": {
+    "test_sala.py": {
+      "run": 4,
+      "failures": 0,
+      "errors": 0,
+      "log": "outputs\\c21\\local\\test_sala.py.log"
+    },
+    "test_c21_tools.py": {
+      "run": 4,
+      "failures": 0,
+      "errors": 0,
+      "log": "outputs\\c21\\local\\test_c21_tools.py.log"
+    }
+  },
+  "optimizer": {
+    "counts": {
+      "weight": 129,
+      "bn": 81,
+      "bias": 137
+    },
+    "baseline_counts": {
+      "weight": 117,
+      "bn": 81,
+      "bias": 128
+    },
+    "new_parameters": [
+      {
+        "name": "model.26.decoder.layers.0.cross_attn.sala_level_embedding",
+        "numel": 96,
+        "group": "weight",
+        "weight_decay": 0.0001,
+        "warmup_start_lr": 0.0
+      },
+      {
+        "name": "model.26.decoder.layers.0.cross_attn.sala_query_proj.weight",
+        "numel": 8192,
+        "group": "weight",
+        "weight_decay": 0.0001,
+        "warmup_start_lr": 0.0
+      },
+      {
+        "name": "model.26.decoder.layers.0.cross_attn.sala_query_proj.bias",
+        "numel": 32,
+        "group": "bias",
+        "weight_decay": 0.0,
+        "warmup_start_lr": 0.1
+      },
+      {
+        "name": "model.26.decoder.layers.0.cross_attn.sala_geometry_proj.weight",
+        "numel": 64,
+        "group": "weight",
+        "weight_decay": 0.0001,
+        "warmup_start_lr": 0.0
+      },
+      {
+        "name": "model.26.decoder.layers.0.cross_attn.sala_geometry_proj.bias",
+        "numel": 32,
+        "group": "bias",
+        "weight_decay": 0.0,
+        "warmup_start_lr": 0.1
+      },
+      {
+        "name": "model.26.decoder.layers.0.cross_attn.sala_level_head.weight",
+        "numel": 256,
+        "group": "weight",
+        "weight_decay": 0.0001,
+        "warmup_start_lr": 0.0
+      },
+      {
+        "name": "model.26.decoder.layers.0.cross_attn.sala_level_head.bias",
+        "numel": 8,
+        "group": "bias",
+        "weight_decay": 0.0,
+        "warmup_start_lr": 0.1
+      },
+      {
+        "name": "model.26.decoder.layers.1.cross_attn.sala_level_embedding",
+        "numel": 96,
+        "group": "weight",
+        "weight_decay": 0.0001,
+        "warmup_start_lr": 0.0
+      },
+      {
+        "name": "model.26.decoder.layers.1.cross_attn.sala_query_proj.weight",
+        "numel": 8192,
+        "group": "weight",
+        "weight_decay": 0.0001,
+        "warmup_start_lr": 0.0
+      },
+      {
+        "name": "model.26.decoder.layers.1.cross_attn.sala_query_proj.bias",
+        "numel": 32,
+        "group": "bias",
+        "weight_decay": 0.0,
+        "warmup_start_lr": 0.1
+      },
+      {
+        "name": "model.26.decoder.layers.1.cross_attn.sala_geometry_proj.weight",
+        "numel": 64,
+        "group": "weight",
+        "weight_decay": 0.0001,
+        "warmup_start_lr": 0.0
+      },
+      {
+        "name": "model.26.decoder.layers.1.cross_attn.sala_geometry_proj.bias",
+        "numel": 32,
+        "group": "bias",
+        "weight_decay": 0.0,
+        "warmup_start_lr": 0.1
+      },
+      {
+        "name": "model.26.decoder.layers.1.cross_attn.sala_level_head.weight",
+        "numel": 256,
+        "group": "weight",
+        "weight_decay": 0.0001,
+        "warmup_start_lr": 0.0
+      },
+      {
+        "name": "model.26.decoder.layers.1.cross_attn.sala_level_head.bias",
+        "numel": 8,
+        "group": "bias",
+        "weight_decay": 0.0,
+        "warmup_start_lr": 0.1
+      },
+      {
+        "name": "model.26.decoder.layers.2.cross_attn.sala_level_embedding",
+        "numel": 96,
+        "group": "weight",
+        "weight_decay": 0.0001,
+        "warmup_start_lr": 0.0
+      },
+      {
+        "name": "model.26.decoder.layers.2.cross_attn.sala_query_proj.weight",
+        "numel": 8192,
+        "group": "weight",
+        "weight_decay": 0.0001,
+        "warmup_start_lr": 0.0
+      },
+      {
+        "name": "model.26.decoder.layers.2.cross_attn.sala_query_proj.bias",
+        "numel": 32,
+        "group": "bias",
+        "weight_decay": 0.0,
+        "warmup_start_lr": 0.1
+      },
+      {
+        "name": "model.26.decoder.layers.2.cross_attn.sala_geometry_proj.weight",
+        "numel": 64,
+        "group": "weight",
+        "weight_decay": 0.0001,
+        "warmup_start_lr": 0.0
+      },
+      {
+        "name": "model.26.decoder.layers.2.cross_attn.sala_geometry_proj.bias",
+        "numel": 32,
+        "group": "bias",
+        "weight_decay": 0.0,
+        "warmup_start_lr": 0.1
+      },
+      {
+        "name": "model.26.decoder.layers.2.cross_attn.sala_level_head.weight",
+        "numel": 256,
+        "group": "weight",
+        "weight_decay": 0.0001,
+        "warmup_start_lr": 0.0
+      },
+      {
+        "name": "model.26.decoder.layers.2.cross_attn.sala_level_head.bias",
+        "numel": 8,
+        "group": "bias",
+        "weight_decay": 0.0,
+        "warmup_start_lr": 0.1
+      }
+    ],
+    "common_membership_equal": true,
+    "no_missing_or_duplicate_parameters": true
+  },
+  "real_data_smoke": {
+    "status": "passed",
+    "dataset": "32 unchanged real training images and labels copied from the local C2 dataset; 4 val + 4 test for tool checks; manifest in evidence",
+    "batch": 2,
+    "imgsz": 640,
+    "amp": true,
+    "optimizer_steps": 3,
+    "losses": [
+      56.5608024597168,
+      44.6787223815918,
+      43.11984634399414
+    ],
+    "dn_num_split": [
+      [
+        200,
+        300
+      ],
+      [
+        200,
+        300
+      ],
+      [
+        198,
+        300
+      ]
+    ],
+    "first_step_head_weight_nonzero": true,
+    "first_step_upstream_zero": true,
+    "last_step_all_new_tensors_finite_nonzero": true,
+    "final_gradients": {
+      "model.26.decoder.layers.0.cross_attn.sala_level_embedding": 0.0005597863346338272,
+      "model.26.decoder.layers.0.cross_attn.sala_query_proj.weight": 0.016722936183214188,
+      "model.26.decoder.layers.0.cross_attn.sala_query_proj.bias": 8.661579340696335e-05,
+      "model.26.decoder.layers.0.cross_attn.sala_geometry_proj.weight": 0.0007692454382777214,
+      "model.26.decoder.layers.0.cross_attn.sala_geometry_proj.bias": 8.661579340696335e-05,
+      "model.26.decoder.layers.0.cross_attn.sala_level_head.weight": 0.5908960103988647,
+      "model.26.decoder.layers.0.cross_attn.sala_level_head.bias": 3.2694078981876373e-06,
+      "model.26.decoder.layers.1.cross_attn.sala_level_embedding": 5.6760385632514954e-05,
+      "model.26.decoder.layers.1.cross_attn.sala_query_proj.weight": 0.001404487993568182,
+      "model.26.decoder.layers.1.cross_attn.sala_query_proj.bias": 5.2745454013347626e-06,
+      "model.26.decoder.layers.1.cross_attn.sala_geometry_proj.weight": 6.311805918812752e-05,
+      "model.26.decoder.layers.1.cross_attn.sala_geometry_proj.bias": 5.2745454013347626e-06,
+      "model.26.decoder.layers.1.cross_attn.sala_level_head.weight": 0.08190645277500153,
+      "model.26.decoder.layers.1.cross_attn.sala_level_head.bias": 2.628657966852188e-06,
+      "model.26.decoder.layers.2.cross_attn.sala_level_embedding": 4.8039015382528305e-05,
+      "model.26.decoder.layers.2.cross_attn.sala_query_proj.weight": 0.00109810009598732,
+      "model.26.decoder.layers.2.cross_attn.sala_query_proj.bias": 6.306450814008713e-06,
+      "model.26.decoder.layers.2.cross_attn.sala_geometry_proj.weight": 6.982078775763512e-05,
+      "model.26.decoder.layers.2.cross_attn.sala_geometry_proj.bias": 6.306450814008713e-06,
+      "model.26.decoder.layers.2.cross_attn.sala_level_head.weight": 0.06519439071416855,
+      "model.26.decoder.layers.2.cross_attn.sala_level_head.bias": 2.8517097234725952e-06
+    },
+    "real_640_fp32_backward": {
+      "loss": 56.424861907958984,
+      "gradients": {
+        "model.26.decoder.layers.0.cross_attn.sala_level_embedding": 0.0,
+        "model.26.decoder.layers.0.cross_attn.sala_query_proj.weight": 0.0,
+        "model.26.decoder.layers.0.cross_attn.sala_query_proj.bias": 0.0,
+        "model.26.decoder.layers.0.cross_attn.sala_geometry_proj.weight": 0.0,
+        "model.26.decoder.layers.0.cross_attn.sala_geometry_proj.bias": 0.0,
+        "model.26.decoder.layers.0.cross_attn.sala_level_head.weight": 1.029746174812317,
+        "model.26.decoder.layers.0.cross_attn.sala_level_head.bias": 1.0011717677116394e-08,
+        "model.26.decoder.layers.1.cross_attn.sala_level_embedding": 0.0,
+        "model.26.decoder.layers.1.cross_attn.sala_query_proj.weight": 0.0,
+        "model.26.decoder.layers.1.cross_attn.sala_query_proj.bias": 0.0,
+        "model.26.decoder.layers.1.cross_attn.sala_geometry_proj.weight": 0.0,
+        "model.26.decoder.layers.1.cross_attn.sala_geometry_proj.bias": 0.0,
+        "model.26.decoder.layers.1.cross_attn.sala_level_head.weight": 1.1128697395324707,
+        "model.26.decoder.layers.1.cross_attn.sala_level_head.bias": 8.847564458847046e-09,
+        "model.26.decoder.layers.2.cross_attn.sala_level_embedding": 0.0,
+        "model.26.decoder.layers.2.cross_attn.sala_query_proj.weight": 0.0,
+        "model.26.decoder.layers.2.cross_attn.sala_query_proj.bias": 0.0,
+        "model.26.decoder.layers.2.cross_attn.sala_geometry_proj.weight": 0.0,
+        "model.26.decoder.layers.2.cross_attn.sala_geometry_proj.bias": 0.0,
+        "model.26.decoder.layers.2.cross_attn.sala_level_head.weight": 0.5431633591651917,
+        "model.26.decoder.layers.2.cross_attn.sala_level_head.bias": 3.14321368932724e-09
+      }
+    },
+    "checkpoint_reload": [
+      {
+        "tensor": "output.0",
+        "shape": [
+          2,
+          300,
+          5
+        ],
+        "equal": true,
+        "max_abs": 0.0
+      },
+      {
+        "tensor": "output.1.0",
+        "shape": [
+          1,
+          2,
+          300,
+          4
+        ],
+        "equal": true,
+        "max_abs": 0.0
+      },
+      {
+        "tensor": "output.1.1",
+        "shape": [
+          1,
+          2,
+          300,
+          1
+        ],
+        "equal": true,
+        "max_abs": 0.0
+      },
+      {
+        "tensor": "output.1.2",
+        "shape": [
+          2,
+          300,
+          4
+        ],
+        "equal": true,
+        "max_abs": 0.0
+      },
+      {
+        "tensor": "output.1.3",
+        "shape": [
+          2,
+          300,
+          1
+        ],
+        "equal": true,
+        "max_abs": 0.0
+      }
+    ],
+    "trained_half_forward": {
+      "shape": [
+        2,
+        300,
+        5
+      ],
+      "finite": true
+    }
+  },
+  "formal_initialization_unchanged": {
+    "clean_checkpoint": true,
+    "unchanged_sha256": true,
+    "all_states_exact": true,
+    "status": "passed"
+  },
+  "benchmark": {
+    "device": "cuda",
+    "batch": 1,
+    "imgsz": 640,
+    "dtype": "FP32",
+    "warmup": 3,
+    "iterations": 10,
+    "note": "Unfused complete-model forward; same random image. Not dataset validator speed.",
+    "C2": {
+      "parameters": 20082772,
+      "ms_per_image": 32.67120999999982,
+      "peak_allocated_bytes": 187776512
+    },
+    "C21": {
+      "parameters": 20108812,
+      "ms_per_image": 32.84780999999981,
+      "peak_allocated_bytes": 187885568
+    }
+  },
+  "tool_validation": {
+    "bash_syntax": "passed with Git for Windows bash -n",
+    "val": {
+      "split": "val",
+      "images": 4,
+      "batch": 2,
+      "weights": "independent three-step smoke checkpoint"
+    },
+    "test": {
+      "split": "test",
+      "images": 4,
+      "batch": 2,
+      "same_weight_as_val": true
+    },
+    "pack": "unit fixture ~80 KiB, matching checkpoint guard and exclusions passed; no formal package fabricated",
+    "supervisor": "child exit 7 retained exactly; duplicate launch lock rejected"
+  },
+  "limitations": [
+    "AutoDL PyTorch 2.1.2 and tmux lifecycle not executed locally; prepare must verify there.",
+    "Formal 200-epoch training and full trained-best val/test not started; no accuracy improvement claim.",
+    "Native YOLO26n AMP helper skipped on this local environment; explicit SALA FP32/AMP/half plus real AMP backward/update checks passed.",
+    "Original CUDA grid_sample backward warns about nondeterminism despite deterministic=True warn_only; no deterministic training trajectory claim.",
+    "Latency is a short, unfused local random-input probe; no stable speed advantage, production FPS or measured GFLOPs claimed."
+  ]
+}

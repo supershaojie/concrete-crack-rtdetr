@@ -20,7 +20,7 @@ from .conv import Conv, DWConv
 from .transformer import MLP, DeformableTransformerDecoder, DeformableTransformerDecoderLayer
 from .utils import bias_init_with_prob, linear_init
 
-__all__ = "OBB", "Classify", "Detect", "Pose", "RTDETRDecoder", "Segment", "YOLOEDetect", "YOLOESegment", "v10Detect"
+__all__ = "OBB", "Classify", "Detect", "Pose", "RTDETRDecoder", "RTDETRDecoderSALA", "Segment", "YOLOEDetect", "YOLOESegment", "v10Detect"
 
 
 class Detect(nn.Module):
@@ -1468,6 +1468,7 @@ class RTDETRDecoder(nn.Module):
         label_noise_ratio: float = 0.5,
         box_noise_scale: float = 1.0,
         learnt_init_query: bool = False,
+        sala: bool = False,
     ):
         """Initialize the RTDETRDecoder module with the given parameters.
 
@@ -1487,6 +1488,7 @@ class RTDETRDecoder(nn.Module):
             label_noise_ratio (float): Label noise ratio.
             box_noise_scale (float): Box noise scale.
             learnt_init_query (bool): Whether to learn initial query embeddings.
+            sala (bool): Replace each decoder cross-attention with SALAMSDeformAttn.
         """
         super().__init__()
         self.hidden_dim = hd
@@ -1502,7 +1504,7 @@ class RTDETRDecoder(nn.Module):
         # self.input_proj = nn.ModuleList(Conv(x, hd, act=False) for x in ch)
 
         # Transformer module
-        decoder_layer = DeformableTransformerDecoderLayer(hd, nh, d_ffn, dropout, act, self.nl, ndp)
+        decoder_layer = DeformableTransformerDecoderLayer(hd, nh, d_ffn, dropout, act, self.nl, ndp, sala=sala)
         self.decoder = DeformableTransformerDecoder(hd, decoder_layer, ndl, eval_idx)
 
         # Denoising part
@@ -1776,3 +1778,13 @@ class v10Detect(Detect):
     def fuse(self):
         """Remove the one2many head for inference optimization."""
         self.cv2 = self.cv3 = None
+
+
+class RTDETRDecoderSALA(RTDETRDecoder):
+    """RT-DETR head selecting SALA in every original cloned decoder layer."""
+
+    def __init__(self, nc=80, ch=(512, 1024, 2048), hd=256, nq=300, ndp=4, nh=8, ndl=6,
+                 d_ffn=1024, dropout=0.0, act=nn.ReLU(), eval_idx=-1, nd=100,
+                 label_noise_ratio=0.5, box_noise_scale=1.0, learnt_init_query=False):
+        super().__init__(nc, ch, hd, nq, ndp, nh, ndl, d_ffn, dropout, act, eval_idx, nd,
+                         label_noise_ratio, box_noise_scale, learnt_init_query, sala=True)

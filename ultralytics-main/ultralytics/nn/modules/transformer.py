@@ -612,6 +612,7 @@ class DeformableTransformerDecoderLayer(nn.Module):
         act: nn.Module = nn.ReLU(),
         n_levels: int = 4,
         n_points: int = 4,
+        sala: bool = False,
     ):
         """Initialize the DeformableTransformerDecoderLayer with the given parameters.
 
@@ -623,6 +624,7 @@ class DeformableTransformerDecoderLayer(nn.Module):
             act (nn.Module): Activation function.
             n_levels (int): Number of feature levels.
             n_points (int): Number of sampling points.
+            sala (bool): Use box-grid conditioned SALA cross-attention (default preserves baseline).
         """
         super().__init__()
 
@@ -632,7 +634,12 @@ class DeformableTransformerDecoderLayer(nn.Module):
         self.norm1 = nn.LayerNorm(d_model)
 
         # Cross attention
-        self.cross_attn = MSDeformAttn(d_model, n_levels, n_heads, n_points)
+        if sala:
+            from .sala import SALAMSDeformAttn
+
+            self.cross_attn = SALAMSDeformAttn(d_model, n_levels, n_heads, n_points)
+        else:
+            self.cross_attn = MSDeformAttn(d_model, n_levels, n_heads, n_points)
         self.dropout2 = nn.Dropout(dropout)
         self.norm2 = nn.LayerNorm(d_model)
 

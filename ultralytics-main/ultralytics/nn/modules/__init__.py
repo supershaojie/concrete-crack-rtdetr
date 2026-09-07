@@ -88,6 +88,7 @@ from .head import (
     Pose,
     Pose26,
     RTDETRDecoder,
+    RTDETRDecoderSALA,
     Segment,
     Segment26,
     WorldDetect,
@@ -96,6 +97,7 @@ from .head import (
     YOLOESegment26,
     v10Detect,
 )
+from .sala import SALAMSDeformAttn
 from .transformer import (
     AIFI,
     MLP,
@@ -175,6 +177,8 @@ __all__ = (
     "Pose26",
     "Proto",
     "RTDETRDecoder",
+    "RTDETRDecoderSALA",
+    "SALAMSDeformAttn",
     "RepC3",
     "RepConv",
     "RepNCSPELAN4",
