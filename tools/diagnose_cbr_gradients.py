@@ -98,7 +98,8 @@ def check_model(name, weights, dataset, fixed, data, settings, output):
     if nc_missing:
         model.nc = head.nc  # metadata normally attached by the native trainer
     require(model.nc == head.nc == len(model.names), "Class metadata mismatch.")
-    if not hasattr(model, "criterion"):
+    # Native strip_optimizer() preserves the attribute but sets it to None in best.pt.
+    if getattr(model, "criterion", None) is None:
         model.criterion = model.init_criterion()
     require((roles["cscef_all"] is not None) == (name == "C20"), f"Incorrect {name} CSCEF topology.")
     loss_config = {"class": type(model.criterion).__name__, "gain": model.criterion.loss_gain,

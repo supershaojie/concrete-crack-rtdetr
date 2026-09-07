@@ -19,7 +19,7 @@ sys.path.insert(0, str(ROOT / "ultralytics-main"))
 import torch
 from PIL import Image
 from ultralytics.nn.modules.cbr import CrackBoundaryRefinement
-from ultralytics.nn.tasks import RTDETRDetectionModel
+from ultralytics.nn.tasks import RTDETRDetectionModel, load_checkpoint
 from cbr_gradient_probe import (objects, mixed_graph_mode, capture_forward, loss_observer, state_record,
     probe_batch, gradient_read, stats_for_group, decide, DECISION_RULE)
 from diagnose_cbr_gradients import choose_images, fixed_data, verify_fixed, check_model
@@ -211,16 +211,74 @@ class GradientTests(unittest.TestCase):
         self.assertEqual(len({row["image"] for row in selected}), 16)
         self.assertEqual(choose_images(ordered), (ordered, selected))
         verify_fixed(fixed)
-        m = model_fixture(False)
-        checkpoint = self.root / "synthetic.pt"
-        torch.save({"model": m, "train_args": {}}, checkpoint)
-        before = sha256(checkpoint)
-        result = check_model("C19", checkpoint, dataset, fixed, data, settings, out)
-        self.assertEqual(len(result["batches"]), 4)
-        self.assertEqual([b["images"] for b in result["batches"]],
-                         [[r["image"] for r in fixed["rows"][i:i+4]] for i in range(0, 16, 4)])
-        self.assertEqual(sha256(checkpoint), before)
-        self.assertEqual(json.loads((out/'C19/state_before.json').read_text()), json.loads((out/'C19/state_after.json').read_text()))
+        for criterion_state in ("missing", "none", "existing"):
+            with self.subTest(criterion_state=criterion_state):
+                m = model_fixture(False)
+                if criterion_state == "missing":
+                    del m.criterion
+                elif criterion_state == "none":
+                    m.criterion = None  # strip_optimizer stores this in real best.pt files
+                else:
+                    # A non-default matcher cost makes accidental reinitialization observable.
+                    # Only this synthetic fixture changes; production loss configuration is untouched.
+                    m.criterion.matcher.cost_gain["class"] = 1.75
+                checkpoint = self.root / f"synthetic_{criterion_state}.pt"
+                torch.save({"model": m, "train_args": {}}, checkpoint)
+                before = sha256(checkpoint)
+                case_out = out / criterion_state
+                case_out.mkdir()
+                loaded = {}
+
+                def observe_load(*args, **kwargs):
+                    # Exercise the real checkpoint loader, rather than return a prepared model.
+                    model, ckpt = load_checkpoint(*args, **kwargs)
+                    criterion = getattr(model, "criterion", None)
+                    self.assertEqual(hasattr(model, "criterion"), criterion_state != "missing")
+                    self.assertEqual(criterion is None, criterion_state != "existing")
+                    loaded.update(model=model, criterion=criterion, state=state_record(model))
+                    if criterion is not None:
+                        loaded.update(gain=criterion.loss_gain, matcher=criterion.matcher,
+                                      cost=criterion.matcher.cost_gain)
+                    return model, ckpt
+
+                with patch("ultralytics.nn.tasks.load_checkpoint", side_effect=observe_load) as loader, \
+                     patch.object(RTDETRDetectionModel, "init_criterion", autospec=True,
+                                  side_effect=RTDETRDetectionModel.init_criterion) as initialize, \
+                     patch.object(torch.optim.Optimizer, "__init__", side_effect=AssertionError("optimizer forbidden")), \
+                     patch.object(torch.Tensor, "backward", side_effect=AssertionError("use autograd.grad only")):
+                    result = check_model("C19", checkpoint, dataset, fixed, data, settings, case_out)
+                loader.assert_called_once()
+                if criterion_state == "existing":
+                    initialize.assert_not_called()
+                    self.assertIs(loaded["model"].criterion, loaded["criterion"])
+                    self.assertIs(loaded["model"].criterion.loss_gain, loaded["gain"])
+                    self.assertIs(loaded["model"].criterion.matcher, loaded["matcher"])
+                    self.assertIs(loaded["model"].criterion.matcher.cost_gain, loaded["cost"])
+                    self.assertEqual(result["loss_configuration"]["matcher_cost"]["class"], 1.75)
+                else:
+                    initialize.assert_called_once_with(loaded["model"])
+                    self.assertIsNotNone(loaded["model"].criterion)
+                self.assertEqual(result["status"], "completed")
+                self.assertEqual(len(result["batches"]), 4)
+                self.assertEqual([b["images"] for b in result["batches"]],
+                                 [[r["image"] for r in fixed["rows"][i:i+4]] for i in range(0, 16, 4)])
+                for batch in result["batches"]:
+                    self.assertTrue(batch["outputs_equal_bitwise"])
+                    self.assertEqual(batch["loss_A"], batch["loss_B"])
+                    self.assertTrue(batch["loss_and_matching_equal"])
+                    self.assertGreater(batch["DN"]["queries_per_image"], 0)
+                    self.assertTrue(all(batch["nonzero_B_gradients"].values()))
+                    self.assertTrue(batch["box_path_jacobian"]["passed"])
+                    self.assertTrue(batch["parameters_buffers_grad_unchanged"])
+                self.assertEqual(sha256(checkpoint), before)
+                self.assertEqual(json.loads((case_out/'C19/state_before.json').read_text()),
+                                 json.loads((case_out/'C19/state_after.json').read_text()))
+                self.assertEqual(state_record(loaded["model"]), loaded["state"])
+                self.assertTrue(all(not p.requires_grad for p in loaded["model"].parameters()))
+                self.assertTrue(all(not mod.training for name, mod in loaded["model"].named_modules()
+                                    if name != "criterion" and not name.startswith("criterion.")))
+                verify_fixed(fixed)
+                del m, loaded
         self.assertFalse(list(self.root.rglob("*.cache")))
         # Exercise reused packer on actual gradient reports, excluding synthetic checkpoint/images.
         (out / "console.log").write_text("Synthetic gradient tool verification only.\n")
