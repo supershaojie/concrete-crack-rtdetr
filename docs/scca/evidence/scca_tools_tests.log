@@ -1,0 +1,12 @@
+test_corrected_sort_threshold (test_scca_tools.TestSCCATools) ... ok
+test_direct_dispatch_no_prepare_and_duplicate_lock (test_scca_tools.TestSCCATools) ... ok
+test_original_oom_guard_is_exhausted_before_batch (test_scca_tools.TestSCCATools) ... ok
+test_pack_excludes_weights_and_images_and_protects_old (test_scca_tools.TestSCCATools) ... ok
+test_recipe_all_109_fields_and_reject_drift (test_scca_tools.TestSCCATools) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.076s
+
+OK
+Started c24: tmux scca-c24; log D:\MyProjects\Crack_RTDETR\outputs\worktrees\scca\outputs\tmp12ayalv1\launch\console.log; 完整服务器预检未执行
+D:\MyProjects\Crack_RTDETR\outputs\worktrees\scca\outputs\tmp0im0ig1n\result.tar.gz 686 6f9a9713d277a1bcd752e0f4bda014c7b64c15c60aed9ca655d19cf496fe33ae

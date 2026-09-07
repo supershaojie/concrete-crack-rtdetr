@@ -1,0 +1,470 @@
+{
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\scca\\ultralytics-main\\ultralytics\\__init__.py",
+    "commit": "ed366ebdb514a83a5504243213a1580bf74a1a48"
+  },
+  "formal_training_started": false,
+  "full_server_preflight": "NOT_RUN",
+  "variants": {
+    "c24": {
+      "parameters_nc80": 20249748,
+      "increment": 65540,
+      "nc1_loading": {
+        "nc_source": 80,
+        "nc_target": 1,
+        "loaded_exact": 529,
+        "missing": [],
+        "unexpected": [],
+        "classification_shape_skips": [
+          "model.26.dec_score_head.0.bias",
+          "model.26.dec_score_head.0.weight",
+          "model.26.dec_score_head.1.bias",
+          "model.26.dec_score_head.1.weight",
+          "model.26.dec_score_head.2.bias",
+          "model.26.dec_score_head.2.weight",
+          "model.26.denoising_class_embed.weight",
+          "model.26.enc_score_head.bias",
+          "model.26.enc_score_head.weight"
+        ]
+      },
+      "parameters_nc1": 20148312,
+      "baseline_parameters_nc1": 20082772,
+      "fp32_max_abs": {
+        "1x3x640x640": 0.0,
+        "1x3x160x192": 0.0
+      },
+      "cpu_native": {
+        "amp": false,
+        "debug_scaler_init_scale": 128,
+        "optimizer_occurrences": {
+          "model.9.scca_temperature_raw": 1,
+          "model.9.scca_q.weight": 1,
+          "model.9.scca_k.weight": 1,
+          "model.9.scca_v.weight": 1,
+          "model.9.scca_o.weight": 1
+        },
+        "steps": [
+          {
+            "step": 0,
+            "batch": 2,
+            "image_size": 160,
+            "loss": 125.93330383300781,
+            "loss_items": [
+              1.777778148651123,
+              15.734150886535645,
+              1.5
+            ],
+            "dn_num_split": [
+              200,
+              300
+            ],
+            "max_gradients": {
+              "model.9.scca_temperature_raw": 0.0,
+              "model.9.scca_q.weight": 0.0,
+              "model.9.scca_k.weight": 0.0,
+              "model.9.scca_v.weight": 0.0,
+              "model.9.scca_o.weight": 0.19992603361606598
+            },
+            "max_updates": {
+              "model.9.scca_temperature_raw": 0.0,
+              "model.9.scca_q.weight": 1.4901161193847656e-08,
+              "model.9.scca_k.weight": 1.4901161193847656e-08,
+              "model.9.scca_v.weight": 1.4901161193847656e-08,
+              "model.9.scca_o.weight": 0.0005000000237487257
+            }
+          },
+          {
+            "step": 1,
+            "batch": 1,
+            "image_size": 160,
+            "loss": 63.972686767578125,
+            "loss_items": [
+              1.753983497619629,
+              0.7378141283988953,
+              1.4578659534454346
+            ],
+            "dn_num_split": [
+              200,
+              300
+            ],
+            "max_gradients": {
+              "model.9.scca_temperature_raw": 0.000528446224052459,
+              "model.9.scca_q.weight": 0.0009750797762535512,
+              "model.9.scca_k.weight": 0.0009442081209272146,
+              "model.9.scca_v.weight": 0.007018501870334148,
+              "model.9.scca_o.weight": 0.27014195919036865
+            },
+            "max_updates": {
+              "model.9.scca_temperature_raw": 0.0003649514983408153,
+              "model.9.scca_q.weight": 0.00036497414112091064,
+              "model.9.scca_k.weight": 0.00036497414112091064,
+              "model.9.scca_v.weight": 0.00036497414112091064,
+              "model.9.scca_o.weight": 0.0005002563120797276
+            }
+          }
+        ]
+      },
+      "cuda_amp_native": {
+        "amp": true,
+        "debug_scaler_init_scale": 128,
+        "optimizer_occurrences": {
+          "model.9.scca_temperature_raw": 1,
+          "model.9.scca_q.weight": 1,
+          "model.9.scca_k.weight": 1,
+          "model.9.scca_v.weight": 1,
+          "model.9.scca_o.weight": 1
+        },
+        "steps": [
+          {
+            "step": 0,
+            "batch": 2,
+            "image_size": 160,
+            "loss": 127.13719177246094,
+            "loss_items": [
+              1.666813850402832,
+              15.913854598999023,
+              1.9994020462036133
+            ],
+            "dn_num_split": [
+              200,
+              300
+            ],
+            "max_gradients": {
+              "model.9.scca_temperature_raw": 0.0,
+              "model.9.scca_q.weight": 0.0,
+              "model.9.scca_k.weight": 0.0,
+              "model.9.scca_v.weight": 0.0,
+              "model.9.scca_o.weight": 0.1318359375
+            },
+            "max_updates": {
+              "model.9.scca_temperature_raw": 0.0,
+              "model.9.scca_q.weight": 1.4901161193847656e-08,
+              "model.9.scca_k.weight": 1.4901161193847656e-08,
+              "model.9.scca_v.weight": 1.4901161193847656e-08,
+              "model.9.scca_o.weight": 0.0005000000237487257
+            }
+          },
+          {
+            "step": 1,
+            "batch": 1,
+            "image_size": 160,
+            "loss": 63.98896789550781,
+            "loss_items": [
+              1.7986905574798584,
+              0.7991886734962463,
+              1.5048143863677979
+            ],
+            "dn_num_split": [
+              200,
+              300
+            ],
+            "max_gradients": {
+              "model.9.scca_temperature_raw": 0.0003331689222250134,
+              "model.9.scca_q.weight": 0.00035190582275390625,
+              "model.9.scca_k.weight": 0.0007052421569824219,
+              "model.9.scca_v.weight": 0.0032901763916015625,
+              "model.9.scca_o.weight": 0.1031494140625
+            },
+            "max_updates": {
+              "model.9.scca_temperature_raw": 0.0003649457939900458,
+              "model.9.scca_q.weight": 0.0003649592399597168,
+              "model.9.scca_k.weight": 0.00036497414112091064,
+              "model.9.scca_v.weight": 0.00036497414112091064,
+              "model.9.scca_o.weight": 0.0005002561374567449
+            }
+          }
+        ]
+      },
+      "real_model_half": "passed, batch1 160x192",
+      "cost_batch1_160": {
+        "baseline": {
+          "mean_ms": 24.206839999999907,
+          "peak_allocated_bytes": 156069376
+        },
+        "scca": {
+          "mean_ms": 25.661240000000163,
+          "peak_allocated_bytes": 155774976
+        }
+      },
+      "initialization": {
+        "source": "D:\\MyProjects\\Crack_RTDETR\\weights\\rtdetr_r18_lite_imagenet_backbone_init.pt",
+        "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+        "c2_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+        "c17_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+        "variant": "c24",
+        "seed": 42,
+        "source_states": 533,
+        "missing_source": [],
+        "unexpected_source": [],
+        "shape_mismatches": [],
+        "new_scca_states": [
+          "model.9.scca_k.weight",
+          "model.9.scca_o.weight",
+          "model.9.scca_q.weight",
+          "model.9.scca_temperature_raw",
+          "model.9.scca_v.weight"
+        ],
+        "retained_c17_states": [],
+        "new_scca_parameters": 65540,
+        "public_constructor_equal": true,
+        "storage": "FP32, original half source values exactly promoted",
+        "runtime": {
+          "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+          "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "torch": "2.7.1+cu118",
+          "cuda": "11.8",
+          "gpu": "NVIDIA GeForce RTX 2060",
+          "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\scca\\ultralytics-main\\ultralytics\\__init__.py",
+          "commit": "ed366ebdb514a83a5504243213a1580bf74a1a48"
+        },
+        "output": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\scca\\outputs\\scca_check_v2\\c24_fresh_init.pt",
+        "output_sha256": "da326771c3ce795599e7a984f09665da33e706449dc3d38fb6587576045a9b28",
+        "reload_exact": true,
+        "status": "passed"
+      },
+      "recipe_changed_fields": [
+        "model",
+        "name",
+        "save_dir"
+      ],
+      "status": "passed"
+    },
+    "c25": {
+      "parameters_nc80": 20276660,
+      "increment": 65540,
+      "nc1_loading": {
+        "nc_source": 80,
+        "nc_target": 1,
+        "loaded_exact": 536,
+        "missing": [],
+        "unexpected": [],
+        "classification_shape_skips": [
+          "model.27.dec_score_head.0.bias",
+          "model.27.dec_score_head.0.weight",
+          "model.27.dec_score_head.1.bias",
+          "model.27.dec_score_head.1.weight",
+          "model.27.dec_score_head.2.bias",
+          "model.27.dec_score_head.2.weight",
+          "model.27.denoising_class_embed.weight",
+          "model.27.enc_score_head.bias",
+          "model.27.enc_score_head.weight"
+        ]
+      },
+      "parameters_nc1": 20175224,
+      "baseline_parameters_nc1": 20109684,
+      "fp32_max_abs": {
+        "1x3x640x640": 0.0,
+        "1x3x160x192": 0.0
+      },
+      "cpu_native": {
+        "amp": false,
+        "debug_scaler_init_scale": 128,
+        "optimizer_occurrences": {
+          "model.9.scca_temperature_raw": 1,
+          "model.9.scca_q.weight": 1,
+          "model.9.scca_k.weight": 1,
+          "model.9.scca_v.weight": 1,
+          "model.9.scca_o.weight": 1
+        },
+        "steps": [
+          {
+            "step": 0,
+            "batch": 2,
+            "image_size": 160,
+            "loss": 120.8820571899414,
+            "loss_items": [
+              1.2222232818603516,
+              16.685914993286133,
+              1.0000001192092896
+            ],
+            "dn_num_split": [
+              200,
+              300
+            ],
+            "max_gradients": {
+              "model.9.scca_temperature_raw": 0.0,
+              "model.9.scca_q.weight": 0.0,
+              "model.9.scca_k.weight": 0.0,
+              "model.9.scca_v.weight": 0.0,
+              "model.9.scca_o.weight": 0.12358362227678299
+            },
+            "max_updates": {
+              "model.9.scca_temperature_raw": 0.0,
+              "model.9.scca_q.weight": 1.4901161193847656e-08,
+              "model.9.scca_k.weight": 1.4901161193847656e-08,
+              "model.9.scca_v.weight": 1.4901161193847656e-08,
+              "model.9.scca_o.weight": 0.0005000000237487257
+            }
+          },
+          {
+            "step": 1,
+            "batch": 1,
+            "image_size": 160,
+            "loss": 57.59202194213867,
+            "loss_items": [
+              0.6806358098983765,
+              1.5361003875732422,
+              0.539379358291626
+            ],
+            "dn_num_split": [
+              200,
+              300
+            ],
+            "max_gradients": {
+              "model.9.scca_temperature_raw": 0.0008633154211565852,
+              "model.9.scca_q.weight": 0.0006139273755252361,
+              "model.9.scca_k.weight": 0.0006246487610042095,
+              "model.9.scca_v.weight": 0.00510307727381587,
+              "model.9.scca_o.weight": 0.2094397097826004
+            },
+            "max_updates": {
+              "model.9.scca_temperature_raw": 0.0003649552527349442,
+              "model.9.scca_q.weight": 0.0003649592399597168,
+              "model.9.scca_k.weight": 0.00036497414112091064,
+              "model.9.scca_v.weight": 0.00036497414112091064,
+              "model.9.scca_o.weight": 0.0005002561374567449
+            }
+          }
+        ]
+      },
+      "cuda_amp_native": {
+        "amp": true,
+        "debug_scaler_init_scale": 128,
+        "optimizer_occurrences": {
+          "model.9.scca_temperature_raw": 1,
+          "model.9.scca_q.weight": 1,
+          "model.9.scca_k.weight": 1,
+          "model.9.scca_v.weight": 1,
+          "model.9.scca_o.weight": 1
+        },
+        "steps": [
+          {
+            "step": 0,
+            "batch": 2,
+            "image_size": 160,
+            "loss": 126.02261352539062,
+            "loss_items": [
+              2.055788993835449,
+              15.714651107788086,
+              1.5002562999725342
+            ],
+            "dn_num_split": [
+              200,
+              300
+            ],
+            "max_gradients": {
+              "model.9.scca_temperature_raw": 0.0,
+              "model.9.scca_q.weight": 0.0,
+              "model.9.scca_k.weight": 0.0,
+              "model.9.scca_v.weight": 0.0,
+              "model.9.scca_o.weight": 0.1807861328125
+            },
+            "max_updates": {
+              "model.9.scca_temperature_raw": 0.0,
+              "model.9.scca_q.weight": 1.4901161193847656e-08,
+              "model.9.scca_k.weight": 1.4901161193847656e-08,
+              "model.9.scca_v.weight": 1.4901161193847656e-08,
+              "model.9.scca_o.weight": 0.0005000000237487257
+            }
+          },
+          {
+            "step": 1,
+            "batch": 1,
+            "image_size": 160,
+            "loss": 57.56798553466797,
+            "loss_items": [
+              0.6797885894775391,
+              1.931757926940918,
+              0.5291830897331238
+            ],
+            "dn_num_split": [
+              200,
+              300
+            ],
+            "max_gradients": {
+              "model.9.scca_temperature_raw": 0.0007913722656667233,
+              "model.9.scca_q.weight": 0.0005545616149902344,
+              "model.9.scca_k.weight": 0.0009288787841796875,
+              "model.9.scca_v.weight": 0.0024776458740234375,
+              "model.9.scca_o.weight": 0.139892578125
+            },
+            "max_updates": {
+              "model.9.scca_temperature_raw": 0.00036495475796982646,
+              "model.9.scca_q.weight": 0.0003649592399597168,
+              "model.9.scca_k.weight": 0.00036497414112091064,
+              "model.9.scca_v.weight": 0.00036497414112091064,
+              "model.9.scca_o.weight": 0.0005002560210414231
+            }
+          }
+        ]
+      },
+      "real_model_half": "passed, batch1 160x192",
+      "cost_batch1_160": {
+        "baseline": {
+          "mean_ms": 25.469340000000074,
+          "peak_allocated_bytes": 156642304
+        },
+        "scca": {
+          "mean_ms": 26.591889999999907,
+          "peak_allocated_bytes": 156347904
+        }
+      },
+      "initialization": {
+        "source": "D:\\MyProjects\\Crack_RTDETR\\weights\\rtdetr_r18_lite_imagenet_backbone_init.pt",
+        "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+        "c2_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+        "c17_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+        "variant": "c25",
+        "seed": 42,
+        "source_states": 533,
+        "missing_source": [],
+        "unexpected_source": [],
+        "shape_mismatches": [],
+        "new_scca_states": [
+          "model.9.scca_k.weight",
+          "model.9.scca_o.weight",
+          "model.9.scca_q.weight",
+          "model.9.scca_temperature_raw",
+          "model.9.scca_v.weight"
+        ],
+        "retained_c17_states": [
+          "model.18.depthwise_conv.weight",
+          "model.18.lateral_projection.weight",
+          "model.18.mix_projection.weight",
+          "model.18.output_projection.weight",
+          "model.18.scharr_x",
+          "model.18.scharr_y",
+          "model.18.semantic_projection.weight"
+        ],
+        "new_scca_parameters": 65540,
+        "public_constructor_equal": true,
+        "storage": "FP32, original half source values exactly promoted",
+        "runtime": {
+          "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+          "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "torch": "2.7.1+cu118",
+          "cuda": "11.8",
+          "gpu": "NVIDIA GeForce RTX 2060",
+          "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\scca\\ultralytics-main\\ultralytics\\__init__.py",
+          "commit": "ed366ebdb514a83a5504243213a1580bf74a1a48"
+        },
+        "output": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\scca\\outputs\\scca_check_v2\\c25_fresh_init.pt",
+        "output_sha256": "728dd6d25b83fc77da81e85ad69b800a5c7689779162dad90471630c06f303dc",
+        "reload_exact": true,
+        "status": "passed"
+      },
+      "recipe_changed_fields": [
+        "model",
+        "name",
+        "save_dir"
+      ],
+      "status": "passed"
+    }
+  },
+  "scope": "Synthetic native loss/DN at 160, batch2 then batch1; FP32 network inference at 640 and non-square 160x192"
+}

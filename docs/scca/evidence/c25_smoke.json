@@ -1,0 +1,154 @@
+{
+  "status": "passed",
+  "debug_only": true,
+  "formal_training_started": false,
+  "variant": "c25",
+  "debug_recipe_differences": {
+    "model": [
+      "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+      "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\scca\\outputs\\smoke_c25_v1\\independent_smoke_init.pt"
+    ],
+    "data": [
+      "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+      "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\acr\\outputs\\local_data\\data.yaml"
+    ],
+    "batch": [
+      16,
+      2
+    ],
+    "imgsz": [
+      640,
+      320
+    ],
+    "save": [
+      true,
+      false
+    ],
+    "workers": [
+      8,
+      0
+    ],
+    "project": [
+      "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+      "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\scca\\outputs\\smoke_c25_v1"
+    ],
+    "name": [
+      "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "run"
+    ],
+    "val": [
+      true,
+      false
+    ],
+    "plots": [
+      true,
+      false
+    ],
+    "save_dir": [
+      "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\scca\\outputs\\smoke_c25_v1\\run"
+    ]
+  },
+  "debug_scaler_init_scale": 128,
+  "schedule": "Native train API + _setup_train + two direct optimizer updates; no epoch loop",
+  "data_sha256": "44ccfa161f5c4107cfdd38b4b3fe4e0a173fe27ee26c26de49c8a32d5dc81d8e",
+  "steps": [
+    {
+      "loss": 51.25440979003906,
+      "loss_items": [
+        1.7674641609191895,
+        3.735625982284546,
+        1.3651859760284424
+      ],
+      "image_shape": [
+        2,
+        3,
+        320,
+        320
+      ],
+      "dn_num_split": [
+        200,
+        300
+      ],
+      "max_gradients": {
+        "model.9.scca_temperature_raw": 0.0,
+        "model.9.scca_q.weight": 0.0,
+        "model.9.scca_k.weight": 0.0,
+        "model.9.scca_v.weight": 0.0,
+        "model.9.scca_o.weight": 0.056976318359375
+      },
+      "max_updates": {
+        "model.9.scca_temperature_raw": 0.0,
+        "model.9.scca_q.weight": 1.4901161193847656e-08,
+        "model.9.scca_k.weight": 1.4901161193847656e-08,
+        "model.9.scca_v.weight": 1.4901161193847656e-08,
+        "model.9.scca_o.weight": 0.0004999976954422891
+      },
+      "images": [
+        "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\acr\\outputs\\local_data\\images\\train\\crack_000004_brightness_contrast_strong.jpg",
+        "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\acr\\outputs\\local_data\\images\\train\\crack_000005_hflip.jpg"
+      ]
+    },
+    {
+      "loss": 42.8857307434082,
+      "loss_items": [
+        1.8947906494140625,
+        0.25998973846435547,
+        1.6545145511627197
+      ],
+      "image_shape": [
+        1,
+        3,
+        320,
+        320
+      ],
+      "dn_num_split": [
+        198,
+        300
+      ],
+      "max_gradients": {
+        "model.9.scca_temperature_raw": 0.00013307602785062045,
+        "model.9.scca_q.weight": 0.00021791458129882812,
+        "model.9.scca_k.weight": 0.00021195411682128906,
+        "model.9.scca_v.weight": 0.0015478134155273438,
+        "model.9.scca_o.weight": 0.046722412109375
+      },
+      "max_updates": {
+        "model.9.scca_temperature_raw": 0.00036391415051184595,
+        "model.9.scca_q.weight": 0.0003643110394477844,
+        "model.9.scca_k.weight": 0.0003642961382865906,
+        "model.9.scca_v.weight": 0.00036487728357315063,
+        "model.9.scca_o.weight": 0.0005002488614991307
+      },
+      "images": [
+        "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\acr\\outputs\\local_data\\images\\train\\crack_000004_original.jpg"
+      ]
+    }
+  ],
+  "nc1_loading": {
+    "nc_source": 80,
+    "nc_target": 1,
+    "loaded_exact": 536,
+    "missing": [],
+    "unexpected": [],
+    "classification_shape_skips": [
+      "model.27.dec_score_head.0.bias",
+      "model.27.dec_score_head.0.weight",
+      "model.27.dec_score_head.1.bias",
+      "model.27.dec_score_head.1.weight",
+      "model.27.dec_score_head.2.bias",
+      "model.27.dec_score_head.2.weight",
+      "model.27.denoising_class_embed.weight",
+      "model.27.enc_score_head.bias",
+      "model.27.enc_score_head.weight"
+    ]
+  },
+  "native_amp": true,
+  "fresh_optimizer_ema": true,
+  "optimizer_steps": [
+    2
+  ],
+  "updated_checkpoint_max_abs": 0.0,
+  "updated_half": "passed",
+  "optimizer_reload_max_abs": 0.0
+}

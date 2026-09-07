@@ -1,0 +1,11 @@
+test_constructor_rng_common_parameters_and_independence (test_acr.ACRTests) ... ok
+test_geometry_detach_and_two_step_learning (test_acr.ACRTests) ... ok
+test_geometry_fixed_order_direction_bounds (test_acr.ACRTests) ... ok
+test_native_mha_equivalence_dropout_masks_and_dtypes (test_acr.ACRTests) ... ok
+test_nonzero_bias_dn_masks_padding_and_entropy (test_acr.ACRTests) ... ok
+test_original_reference_and_feature_gradients_retained (test_acr.ACRTests) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 2.373s
+
+OK

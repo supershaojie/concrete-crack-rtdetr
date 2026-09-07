@@ -1,0 +1,10 @@
+test_amp_and_real_half (test_scca_aifi.TestSCCAAIFI) ... ok
+test_literal_formula_and_conditioning (test_scca_aifi.TestSCCAAIFI) ... ok
+test_rng_and_public_states (test_scca_aifi.TestSCCAAIFI) ... ok
+test_two_updates_and_input_gradients (test_scca_aifi.TestSCCAAIFI) ... ok
+test_zero_alignment_and_single_mha (test_scca_aifi.TestSCCAAIFI) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 2.215s
+
+OK

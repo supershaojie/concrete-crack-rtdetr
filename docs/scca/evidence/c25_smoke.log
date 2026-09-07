@@ -1,0 +1,54 @@
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+Ultralytics 8.4.21  Python-3.9.25 torch-2.7.1+cu118 CUDA:0 (NVIDIA GeForce RTX 2060, 6144MiB)
+[34m[1mengine\trainer: [0magnostic_nms=False, amp=True, angle=1.0, augment=False, auto_augment=None, batch=2, bgr=0.0, box=7.5, cache=False, cfg=None, classes=None, close_mosaic=10, cls=0.5, compile=False, conf=None, copy_paste=0, copy_paste_mode=flip, cos_lr=True, cutmix=0, data=D:\MyProjects\Crack_RTDETR\outputs\worktrees\acr\outputs\local_data\data.yaml, degrees=5, deterministic=True, device=0, dfl=1.5, dnn=False, dropout=0.0, dynamic=False, embed=None, end2end=None, epochs=200, erasing=0, exist_ok=False, fliplr=0.5, flipud=0.2, format=torchscript, fraction=1.0, freeze=None, half=False, hsv_h=0.015, hsv_s=0.5, hsv_v=0.35, imgsz=320, int8=False, iou=0.7, keras=False, kobj=1.0, line_width=None, lr0=0.0005, lrf=0.01, mask_ratio=4, max_det=300, mixup=0.05, mode=train, model=D:\MyProjects\Crack_RTDETR\outputs\worktrees\scca\outputs\smoke_c25_v1\independent_smoke_init.pt, momentum=0.937, mosaic=0.8, multi_scale=0.0, name=run, nbs=64, nms=False, opset=None, optimize=False, optimizer=AdamW, overlap_mask=True, patience=50, perspective=0.0002, plots=False, pose=12.0, pretrained=True, profile=False, project=D:\MyProjects\Crack_RTDETR\outputs\worktrees\scca\outputs\smoke_c25_v1, rect=False, resume=False, retina_masks=False, rle=1.0, save=False, save_conf=False, save_crop=False, save_dir=D:\MyProjects\Crack_RTDETR\outputs\worktrees\scca\outputs\smoke_c25_v1\run, save_frames=False, save_json=False, save_period=-1, save_txt=False, scale=0.4, seed=42, shear=1.5, show=False, show_boxes=True, show_conf=True, show_labels=True, simplify=True, single_cls=False, source=None, split=val, stream_buffer=False, task=detect, time=None, tracker=botsort.yaml, translate=0.1, val=False, verbose=True, vid_stride=1, visualize=False, warmup_bias_lr=0.1, warmup_epochs=5, warmup_momentum=0.8, weight_decay=0.0001, workers=0, workspace=None
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+
+                   from  n    params  module                                       arguments
+  0                  -1  1       928  ultralytics.nn.modules.block.ConvNormLayer   [3, 32, 3, 2, None, False, 'relu']
+  1                  -1  1      9280  ultralytics.nn.modules.block.ConvNormLayer   [32, 32, 3, 1, None, False, 'relu']
+  2                  -1  1     18560  ultralytics.nn.modules.block.ConvNormLayer   [32, 64, 3, 1, None, False, 'relu']
+  3                  -1  1         0  torch.nn.modules.pooling.MaxPool2d           [3, 2, 1]
+  4                  -1  1    152192  ultralytics.nn.modules.block.Blocks          [64, 64, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 2, 'relu']
+  5                  -1  1    525568  ultralytics.nn.modules.block.Blocks          [64, 128, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 3, 'relu']
+  6                  -1  1   2099712  ultralytics.nn.modules.block.Blocks          [128, 256, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 4, 'relu']
+  7                  -1  1   8393728  ultralytics.nn.modules.block.Blocks          [256, 512, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 5, 'relu']
+  8                  -1  1    131584  ultralytics.nn.modules.conv.Conv             [512, 256, 1, 1, None, 1, 1, False]
+  9                  -1  1    855300  ultralytics.nn.modules.scca_aifi.SCCAAIFI    [256, 1024, 8]
+ 10                  -1  1     66048  ultralytics.nn.modules.conv.Conv             [256, 256, 1, 1]
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']
+ 12                   6  1     66048  ultralytics.nn.modules.conv.Conv             [256, 256, 1, 1, None, 1, 1, False]
+ 13            [-2, -1]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 14                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]
+ 15                  -1  1     66048  ultralytics.nn.modules.conv.Conv             [256, 256, 1, 1]
+ 16                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']
+ 17                   5  1     33280  ultralytics.nn.modules.conv.Conv             [128, 256, 1, 1, None, 1, 1, False]
+ 18            [17, 16]  1     26912  ultralytics.nn.modules.cscef_v51.CSCEFv51    [256, 256]
+ 19            [16, 18]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 20                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]
+ 21                  -1  1    590336  ultralytics.nn.modules.conv.Conv             [256, 256, 3, 2]
+ 22            [-1, 15]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 23                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]
+ 24                  -1  1    590336  ultralytics.nn.modules.conv.Conv             [256, 256, 3, 2]
+ 25            [-1, 10]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 26                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]
+ 27        [20, 23, 26]  1   3917684  ultralytics.nn.modules.head.RTDETRDecoder    [1, [256, 256, 256], 256, 300, 4, 8, 3]
+rtdetr-resnet18-lite-cscef-scca summary: 308 layers, 20,175,224 parameters, 20,175,224 gradients, 58.7 GFLOPs
+
+Transferred 536/545 items from pretrained weights
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks...
+[34m[1mAMP: [0mchecks passed
+[34m[1mtrain: [0mFast image access  (ping: 0.10.0 ms, read: 2545.5481.4 MB/s, size: 5173.9 KB)
+
+[K[34m[1mtrain: [0mScanning D:\MyProjects\Crack_RTDETR\outputs\worktrees\acr\outputs\local_data\labels\train.cache... 32 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 32/32  0.0s
+[34m[1mval: [0mFast image access  (ping: 0.10.0 ms, read: 2364.6519.0 MB/s, size: 4288.9 KB)
+
+[K[34m[1mval: [0mScanning D:\MyProjects\Crack_RTDETR\outputs\worktrees\acr\outputs\local_data\labels\val.cache... 4 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 4/4  0.0s
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 127 weight(decay=0.0001), 128 bias(decay=0.0)
+D:\MyProjects\Crack_RTDETR\outputs\worktrees\scca\tools\smoke_scca.py:45: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  self.scaler = torch.cuda.amp.GradScaler(enabled=self.amp, init_scale=128)
+D:\miniconda3\envs\rtdetr\lib\site-packages\torch\autograd\graph.py:824: UserWarning: grid_sampler_2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\aten\src\ATen\Context.cpp:97.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 127 weight(decay=0.0001), 128 bias(decay=0.0)

@@ -1,0 +1,112 @@
+{
+  "checkpoint_sha256": "5bd47bb0fe885886c10364327f7c1c097276308a60aeeefe74bdc49d875b00a6",
+  "images": [
+    {
+      "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\acr\\outputs\\local_data\\images\\val\\crack_000002_brightness_contrast_strong.jpg",
+      "sha256": "4f99331b5653b251b266076440da155b1abb2e1d2c9e118045737bd4058bd799"
+    },
+    {
+      "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\acr\\outputs\\local_data\\images\\val\\crack_000002_noise_blur_strong.jpg",
+      "sha256": "966bb5a5c97958de4d3799eb2cbf8b41085710a63ba7f3ab7f27d0999ecfa826"
+    },
+    {
+      "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\acr\\outputs\\local_data\\images\\val\\crack_000004_noise_blur_strong.jpg",
+      "sha256": "b131bb355ac19ba3c3407a4bb9604bcd970ad5db3a60027cb9441d8221e61356"
+    },
+    {
+      "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\acr\\outputs\\local_data\\images\\val\\crack_000004_vflip.jpg",
+      "sha256": "1f589727592f32318d1ca14ecfcf93d4e026d5590523bd496783f021fb151485"
+    }
+  ],
+  "statistics": [
+    {
+      "r_X": 0.006330664887102222,
+      "r_S": 0.01625818623706032,
+      "rms_D": 0.00593573646619916,
+      "rms_X": 0.9376165866851807,
+      "rms_S": 0.3650921583175659,
+      "small_X_denominator": false,
+      "small_S_denominator": false,
+      "temperatures": [
+        0.9995005130767822,
+        1.0005041360855103,
+        1.0004987716674805,
+        0.9994956851005554
+      ],
+      "entropy_by_head": [
+        2.7312638759613037,
+        2.722790479660034,
+        2.683462619781494,
+        2.707026243209839
+      ],
+      "S_spatial_variation_rms": 0.008089998736977577
+    },
+    {
+      "r_X": 0.0062614233250243,
+      "r_S": 0.01607234265708095,
+      "rms_D": 0.0062921191565692425,
+      "rms_X": 1.0049023628234863,
+      "rms_S": 0.39148736000061035,
+      "small_X_denominator": false,
+      "small_S_denominator": false,
+      "temperatures": [
+        0.9995005130767822,
+        1.0005041360855103,
+        1.0004987716674805,
+        0.9994956851005554
+      ],
+      "entropy_by_head": [
+        2.724461555480957,
+        2.710900068283081,
+        2.670959711074829,
+        2.6954874992370605
+      ],
+      "S_spatial_variation_rms": 0.009662595577538013
+    },
+    {
+      "r_X": 0.006161868569225626,
+      "r_S": 0.015719872764835024,
+      "rms_D": 0.006118401885032654,
+      "rms_X": 0.9929458498954773,
+      "rms_S": 0.3892144560813904,
+      "small_X_denominator": false,
+      "small_S_denominator": false,
+      "temperatures": [
+        0.9995005130767822,
+        1.0005041360855103,
+        1.0004987716674805,
+        0.9994956851005554
+      ],
+      "entropy_by_head": [
+        2.7263641357421875,
+        2.7116172313690186,
+        2.6719207763671875,
+        2.694955348968506
+      ],
+      "S_spatial_variation_rms": 0.008984745480120182
+    },
+    {
+      "r_X": 0.006163714092940482,
+      "r_S": 0.015731943189810516,
+      "rms_D": 0.006118041463196278,
+      "rms_X": 0.992590069770813,
+      "rms_S": 0.38889291882514954,
+      "small_X_denominator": false,
+      "small_S_denominator": false,
+      "temperatures": [
+        0.9995005130767822,
+        1.0005041360855103,
+        1.0004987716674805,
+        0.9994956851005554
+      ],
+      "entropy_by_head": [
+        2.7277796268463135,
+        2.712463617324829,
+        2.6722869873046875,
+        2.695094585418701
+      ],
+      "S_spatial_variation_rms": 0.008996881544589996
+    }
+  ],
+  "note": "Exact scalar RMS/variation reductions; only four small attention matrices reach CPU. Small denominators marked separately. Not full metrics."
+}

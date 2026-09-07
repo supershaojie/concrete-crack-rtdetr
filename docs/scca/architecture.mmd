@@ -1,0 +1,30 @@
+flowchart TD
+  F["F: B × C × H × W"] --> X["Flatten: X = B × N × C; N = HW"]
+  X --> POS["Original AIFI position P; unchanged W/H order"]
+  POS --> MHA["Original spatial MHA: Q=K=X+P, V=X; once"]
+  X --> MHA
+  MHA --> S["S: B × N × C, after output projection, before dropout1"]
+  S --> LNS["LN over C, no affine"] --> Q["Q: Linear C→64, no bias"]
+  X --> LNX["LN over C, no affine"]
+  LNX --> K["K: Linear C→64, no bias"]
+  LNX --> V["V: Linear C→64, no bias; content unchanged"]
+  Q --> CQ["B × 4 × 16 × N; center and L2 normalize over N"]
+  K --> CK["B × 4 × 16 × N; center and L2 normalize over N"]
+  CQ --> A["Ac = softmax_last(tau · Qhat Khatᵀ); B × 4 × 16 × 16"]
+  CK --> A
+  TAU["4 learned t; tau = exp(ln4 · tanh(t)); t initially zero"] --> A
+  A --> U["Uc = Ac V; FP32 core; inverse reshape B × N × 64"]
+  V --> U
+  U --> O["Linear O: 64→C, no bias; zero initialization"]
+  O --> D["D: B × N × C"]
+  S --> DROP["Original dropout1"]
+  X --> ADD["X + dropout1(S) + D"]
+  DROP --> ADD
+  D --> ADD
+  ADD --> N1["Original norm1"]
+  N1 --> FFN["Original fc1 → act → dropout → fc2"]
+  FFN --> D2["Original dropout2"]
+  D2 --> N2["Original residual + norm2"]
+  N1 --> N2
+  N2 --> OUT["Restore B × C × H × W; unchanged neck"]
+  OUT --> NECK["C24: original C2 neck; C25: C17 CSCEFv51 at layer18"]

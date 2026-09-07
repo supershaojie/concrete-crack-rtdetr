@@ -104,6 +104,7 @@ from .head import (
     YOLOESegment26,
     v10Detect,
 )
+from .scca_aifi import SCCAAIFI
 from .transformer import (
     AIFI,
     MLP,
@@ -119,6 +120,7 @@ from .transformer import (
 
 __all__ = (
     "AIFI",
+    "SCCAAIFI",
     "C1",
     "C2",
     "C2PSA",

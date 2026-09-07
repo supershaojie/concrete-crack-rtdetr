@@ -1,0 +1,20 @@
+{
+  "branch": "codex/scca-aifi",
+  "base_commit": "ed366ebdb514a83a5504243213a1580bf74a1a48",
+  "c2": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+  "c17": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+  "experiment_numbers": [
+    "C24",
+    "C25"
+  ],
+  "reference_file": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\CAFM.py",
+  "reference_file_sha256": "74377b3d2eb98b9902fb19dbfe6e7990dfd40df459f96910b6d5518ce8504158",
+  "reference_archive": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-20260623.zip",
+  "reference_archive_sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+  "archive_member": "RTDETR-main/ultralytics/nn/extra_modules/CAFM.py",
+  "member_sha256": "74377b3d2eb98b9902fb19dbfe6e7990dfd40df459f96910b6d5518ce8504158",
+  "yaml_only_aifi_replaced": true,
+  "python310_syntax": "passed",
+  "formal_training_started": false,
+  "server_executed": false
+}

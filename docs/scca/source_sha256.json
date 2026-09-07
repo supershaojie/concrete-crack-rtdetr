@@ -1,0 +1,18 @@
+{
+  "normalization": "LF newlines; validation performed before final commit; parent commit in runtime is not delivery SHA",
+  "files": {
+    "tools/autodl_scca.sh": "161253aa5d2a0b56cee6f8e010b66e4a1f11feaf0ef473a743fa8207baf8c074",
+    "tools/check_scca.py": "4affc4c062b5856ec6888bbc2db66aff0a34bbcce0c6f83c353db9a4036cfcdb",
+    "tools/init_scca.py": "b0959dcce21b1ab52f38ce468dc2a940641ace0b87dd262b880013bd6dcda8be",
+    "tools/scca_results.py": "14c396e0ca5cb310bac7fd8e48151a88d5148ca8a2bd6c84367557b2f95b04b1",
+    "tools/smoke_scca.py": "5a35b01dd43cc91b9e037c66c77122598e559d6ddb05169124d7879af57a3370",
+    "tools/train_scca.py": "25529678ef1ea11bf994e1de9533f447d994a8f0ab0cea8a03e7df991db1f946",
+    "ultralytics-main/tests/test_scca_aifi.py": "eea5281ba1c34bd6fbbdbaae3d9cc5961961168f5633de9c108ae3203d49ea63",
+    "ultralytics-main/tests/test_scca_tools.py": "e2559e757f69d5ef48ffda97ca3865f5ece61379f6ce468336d261ceddd60332",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-scca.yaml": "4fb3dafb1863e8681ba43516f296daf1f4168174c7417470e7a76a49f648b364",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-scca.yaml": "985f4e30f4c706627079e9d56e392faa07e50053756ad122191a55396ac09123",
+    "ultralytics-main/ultralytics/nn/modules/__init__.py": "705a98e916eb488c68931de75fbb393a5d2d0fe6ce0718cb0d59318a18ca14c1",
+    "ultralytics-main/ultralytics/nn/modules/scca_aifi.py": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca",
+    "ultralytics-main/ultralytics/nn/tasks.py": "0e39086dc2d3358e3c03e4e0df87ca18ab91724975f2671139659919e7958f1f"
+  }
+}
