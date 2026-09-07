@@ -1,0 +1,76 @@
+{
+  "status": "local_passed_server_unverified",
+  "base_commit": "81d5f0175e0168e022f29feb1ceb54de8a52deb5",
+  "branch": "codex/diag-c20-cbr-rescue",
+  "worktree": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\diag-c20-cbr-rescue",
+  "AGENTS_md": "No AGENTS.md found in repository, parent directories or C20/diagnostic worktree.",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "8.4.21",
+    "ultralytics_file": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\diag-c20-cbr-rescue\\ultralytics-main\\ultralytics\\__init__.py",
+    "mode": "unfused FP32 eval + torch.inference_mode; no autocast; TF32 disabled",
+    "seed": 42,
+    "deterministic_warn_only": true,
+    "diagnosis_timing_is_not_inference_performance": true
+  },
+  "validation": {
+    "unittest": {
+      "command": "python tools/test_cbr_rescue.py",
+      "tests": 13,
+      "result": "passed"
+    },
+    "synthetic_real_model_pipeline": "C2/C17/C19/C20; CPU FP32, 2 synthetic 128px images, 300 queries; native metrics; no optimizer/backward/training.",
+    "synthetic_C20_CUDA": "640px, batch1, 300 queries; nonzero synthetic CSCEF/CBR parameters; ordinary vs diagnostic after within atol=1e-6 rtol=1e-5; hooks removed.",
+    "native_preprocess": "Read-only subclass vs native RTDETRDataset tensors exactly equal on fixtures.",
+    "mask": "Known mismatch and score==conf boundary, unaffected old/aligned equivalence, <=16 examples, raw output unchanged.",
+    "pairing": "Before-only one-to-one identity held after swapped boxes; low IoU, empty GT/candidates, signed edges and saturation.",
+    "scheduler": "Inference mocked only for scheduler tests; no mismatch and late C17/C19 mismatch cover automatic four-model val/test re-evaluation and export.",
+    "package": "Member and archive hashes verified, weights/path escape/overwrite rejected, incompressible >20MiB fixture rejected without archive creation.",
+    "shell": "bash -n passed; wrapper help passed with standard Git Bash /usr/bin:/bin PATH.",
+    "python": "py_compile passed for all four Python task files."
+  },
+  "test_log": {
+    "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\diag-c20-cbr-rescue\\outputs\\cbr_rescue_local_tests\\test_results.log",
+    "sha256": "4426c639c8a40936dfe169560c65fc48965013f1d9b8a98f20d5dd20adfb1380",
+    "ending": "sed. Assuming scale='l'.\nC20 val: 2/2 images; mask mismatches=0\nRandom 128px fixtures only; build no optimizer, loss, backward, train or smoke. ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 9.279s\n\nOK\n"
+  },
+  "protected_modules_before_and_after": {
+    "ultralytics-main/ultralytics/nn/modules/cscef_v5.py": {
+      "raw_sha256": "34ee32def9202525e21bcae2577322277003cd5d087c9bb902399cdd1e72e280",
+      "canonical_lf_sha256": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+      "source_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139"
+    },
+    "ultralytics-main/ultralytics/nn/modules/cscef_v51.py": {
+      "raw_sha256": "c6c97516a76fd0c264f64d4e8862054330531d599f972992d66505403615f3e1",
+      "canonical_lf_sha256": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+      "source_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139"
+    },
+    "ultralytics-main/ultralytics/nn/modules/cbr.py": {
+      "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+      "canonical_lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "source_commit": "025997e3c51eaf6933534308a95da6ebf97bff53"
+    }
+  },
+  "base_protection": "All pre-existing tracked C20 files equal to base under LF canonicalization; C17/C19 module source hashes verified.",
+  "task_code_hashes": {
+    "tools/cbr_rescue_common.py": "94152679ca8869e9b6f11acf70c8490368f7ed769393bc30a6e2b2e92032d973",
+    "tools/cbr_rescue_analysis.py": "31595ad8ff2fe7581442abc7f52e41c45b8377fb2dae48705307ad1687bfca91",
+    "tools/diagnose_cbr_rescue.py": "5002752b80d7a6bfe0d9cbf35045a9ccee82c59a82a46b4ebd25c15cc7883591",
+    "tools/autodl_cbr_rescue.sh": "58688b608414ecd64282a536e86662daca74c9dd738ed0dff9a5c1bda0bfa6d6",
+    "tools/test_cbr_rescue.py": "3100f29783c1cd7fb9ae3fc341744059fff18920cda3313d3fb4416ac116ccb8",
+    "docs/CBR_RESCUE_DIAGNOSTICS.md": "0f204f2001937f342f72f9f99dd796cb64360d9e8d05b6424791118c9f46c360"
+  },
+  "not_verified": [
+    "No usable AutoDL server connection was available; no remote commands executed.",
+    "Final C17/C19/C20 checkpoints unavailable locally; no real model val/test metrics claimed.",
+    "Actual server PyTorch2.1.2/CUDA/RTX4090 runtime and checkpoint/data hashes remain to be checked by run.",
+    "Original fixed32 sample identity, actual split counts, trained CSCEF/CBR behavior and complete val before/after metrics remain unverified.",
+    "Real completed diagnosis archive size/hash remain unknown; pack enforces <=20MiB at execution.",
+    "No CBR-v2 design, gradient checks, hyperparameter scans or formal training performed."
+  ]
+}
