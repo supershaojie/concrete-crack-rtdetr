@@ -1,0 +1,26 @@
+test_coordinates_signed_evidence_and_bounds (test_cbr.CBRTests) ... ok
+test_head_zero_equivalence_dn_gradient_and_nonzero_return (test_cbr.CBRTests) ... ok
+test_query_feature_sensitivity_and_gradients_after_update (test_cbr.CBRTests) ... ok
+test_amp_and_real_half (test_scca_aifi.TestSCCAAIFI) ... ok
+test_literal_formula_and_conditioning (test_scca_aifi.TestSCCAAIFI) ... ok
+test_rng_and_public_states (test_scca_aifi.TestSCCAAIFI) ... ok
+test_two_updates_and_input_gradients (test_scca_aifi.TestSCCAAIFI) ... ok
+test_zero_alignment_and_single_mha (test_scca_aifi.TestSCCAAIFI) ... ok
+test_corrected_sort_threshold (test_scca_tools.TestSCCATools) ... ok
+test_direct_dispatch_no_prepare_and_duplicate_lock (test_scca_tools.TestSCCATools) ... ok
+test_original_oom_guard_is_exhausted_before_batch (test_scca_tools.TestSCCATools) ... ok
+test_pack_excludes_weights_and_images_and_protects_old (test_scca_tools.TestSCCATools) ... ok
+test_recipe_all_109_fields_and_reject_drift (test_scca_tools.TestSCCATools) ... ok
+test_constructor_rng_common_parameters_and_independence (test_acr.ACRTests) ... ok
+test_geometry_detach_and_two_step_learning (test_acr.ACRTests) ... ok
+test_geometry_fixed_order_direction_bounds (test_acr.ACRTests) ... ok
+test_native_mha_equivalence_dropout_masks_and_dtypes (test_acr.ACRTests) ... ok
+test_nonzero_bias_dn_masks_padding_and_entropy (test_acr.ACRTests) ... ok
+test_original_reference_and_feature_gradients_retained (test_acr.ACRTests) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 1.685s
+
+OK
+Started c24: tmux scca-c24; log D:\MyProjects\Crack_RTDETR\outputs\worktrees\c26\outputs\tmp96byv63s\launch\console.log; 完整服务器预检未执行
+D:\MyProjects\Crack_RTDETR\outputs\worktrees\c26\outputs\tmp_a_ayz3q\result.tar.gz 686 1cfd96dde857318ab8609ae05058058c2665646f31c520ef38354918ba5b6822

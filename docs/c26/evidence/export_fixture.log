@@ -1,0 +1,39 @@
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+test_three_image_stream_same_pass_and_test_selection (test_c26_export.TestC26Export) ... D:\miniconda3\envs\rtdetr\lib\site-packages\matplotlib\_fontconfig_pattern.py:64: PyparsingDeprecationWarning: 'oneOf' deprecated - use 'one_of'
+  prop = Group((name + Suppress("=") + comma_separated(value)) | oneOf(_CONSTANTS))
+D:\miniconda3\envs\rtdetr\lib\site-packages\matplotlib\_fontconfig_pattern.py:85: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+  parse = parser.parseString(pattern)
+D:\miniconda3\envs\rtdetr\lib\site-packages\matplotlib\_fontconfig_pattern.py:89: PyparsingDeprecationWarning: 'resetCache' deprecated - use 'reset_cache'
+  parser.resetCache()
+Ultralytics 8.4.21  Python-3.9.25 torch-2.7.1+cu118 CPU (Intel Core i7-10750H 2.60GHz)
+rtdetr-resnet18-lite-cbr-scca summary: 228 layers, 19,989,145 parameters, 16,018,841 gradients, 57.5 GFLOPs
+[34m[1mval: [0mFast image access  (ping: 0.10.0 ms, read: 16.01.5 MB/s, size: 1.5 KB)
+
+[K[34m[1mval: [0mScanning D:\MyProjects\Crack_RTDETR\outputs\worktrees\c26\outputs\c26_export_jvw6s6lh\labels... 3 images, 1 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 3/3 601.6it/s 0.0s
+[34m[1mval: [0mNew cache created: D:\MyProjects\Crack_RTDETR\outputs\worktrees\c26\outputs\c26_export_jvw6s6lh\labels.cache
+
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 1/1 1.0it/s 1.0s
+D:\miniconda3\envs\rtdetr\lib\site-packages\matplotlib\_mathtext.py:45: PyparsingDeprecationWarning: 'enablePackrat' deprecated - use 'enable_packrat'
+  ParserElement.enablePackrat()
+In D:\miniconda3\envs\rtdetr\lib\site-packages\matplotlib\mpl-data\stylelib\classic.mplstyle: 'parseString' deprecated - use 'parse_string'
+In D:\miniconda3\envs\rtdetr\lib\site-packages\matplotlib\mpl-data\stylelib\classic.mplstyle: 'resetCache' deprecated - use 'reset_cache'
+                   all          3          2          0          0          0          0
+Speed: 1.1ms preprocess, 295.1ms inference, 0.0ms loss, 0.8ms postprocess per image
+Results saved to [1mD:\MyProjects\Crack_RTDETR\outputs\worktrees\c26\outputs\c26_export_jvw6s6lh\val\plots[0m
+Ultralytics 8.4.21  Python-3.9.25 torch-2.7.1+cu118 CPU (Intel Core i7-10750H 2.60GHz)
+rtdetr-resnet18-lite-cbr-scca summary: 228 layers, 19,989,145 parameters, 16,018,841 gradients, 57.5 GFLOPs
+[34m[1mval: [0mFast image access  (ping: 0.00.0 ms, read: 22.62.3 MB/s, size: 1.5 KB)
+
+[K[34m[1mval: [0mScanning D:\MyProjects\Crack_RTDETR\outputs\worktrees\c26\outputs\c26_export_jvw6s6lh\labels.cache... 3 images, 1 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 3/3  0.0s
+
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 1/1 1.1it/s 0.9s
+                   all          3          2          0          0          0          0
+Speed: 1.0ms preprocess, 295.0ms inference, 0.0ms loss, 0.8ms postprocess per image
+Results saved to [1mD:\MyProjects\Crack_RTDETR\outputs\worktrees\c26\outputs\c26_export_jvw6s6lh\test\plots[0m
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 8.708s
+
+OK

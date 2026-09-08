@@ -1,0 +1,75 @@
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 543/552 items from pretrained weights
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 524/533 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+D:\MyProjects\Crack_RTDETR\outputs\worktrees\c26\tools\check_c26.py:75: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=amp, init_scale=128.)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 543/552 items from pretrained weights
+{
+  "status": "passed",
+  "parameters": {
+    "c2": 20082772,
+    "c19": 20128661,
+    "c24": 20148312,
+    "c26": 20194201
+  },
+  "nc1_loading": {
+    "nc_source": 80,
+    "nc_target": 1,
+    "loaded_exact": 543,
+    "missing": [],
+    "unexpected": [],
+    "classification_shape_skips": [
+      "model.26.dec_score_head.0.bias",
+      "model.26.dec_score_head.0.weight",
+      "model.26.dec_score_head.1.bias",
+      "model.26.dec_score_head.1.weight",
+      "model.26.dec_score_head.2.bias",
+      "model.26.dec_score_head.2.weight",
+      "model.26.denoising_class_embed.weight",
+      "model.26.enc_score_head.bias",
+      "model.26.enc_score_head.weight"
+    ]
+  },
+  "zero_fp32_max_abs": {
+    "1x3x640x640": 0.0,
+    "1x3x160x192": 0.0
+  },
+  "native_training_api": {
+    "nc_source": 80,
+    "nc_target": 1,
+    "loaded_exact": 543,
+    "missing": [],
+    "unexpected": [],
+    "classification_shape_skips": [
+      "model.26.dec_score_head.0.bias",
+      "model.26.dec_score_head.0.weight",
+      "model.26.dec_score_head.1.bias",
+      "model.26.dec_score_head.1.weight",
+      "model.26.dec_score_head.2.bias",
+      "model.26.dec_score_head.2.weight",
+      "model.26.denoising_class_embed.weight",
+      "model.26.enc_score_head.bias",
+      "model.26.enc_score_head.weight"
+    ],
+    "public_RTDETR_train_rebuild": "passed; stopped before training setup"
+  }
+}

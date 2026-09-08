@@ -1,0 +1,14 @@
+test_final_query_matches_last_emitted_layer_and_legacy_tuple (test_c26.TestC26) ... ok
+test_only_two_yaml_substitutions (test_c26.TestC26) ... ok
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+test_strict_c26_and_old_c24_checks_remain_distinct (test_c26.TestC26) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 2.936s
+
+OK

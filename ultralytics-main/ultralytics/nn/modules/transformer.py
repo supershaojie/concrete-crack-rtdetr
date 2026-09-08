@@ -762,6 +762,7 @@ class DeformableTransformerDecoder(nn.Module):
         padding_mask: torch.Tensor | None = None,
         num_queries: int | None = None,
         dn_meta: dict | None = None,
+        return_final_query: bool = False,
     ):
         """Perform the forward pass through the entire decoder.
 
@@ -779,6 +780,7 @@ class DeformableTransformerDecoder(nn.Module):
         Returns:
             dec_bboxes (torch.Tensor): Decoded bounding boxes.
             dec_cls (torch.Tensor): Decoded classification scores.
+            final_query (torch.Tensor): Only when return_final_query=True; matches the last emitted layer.
         """
         output = embed
         dec_bboxes = []
@@ -806,4 +808,6 @@ class DeformableTransformerDecoder(nn.Module):
             last_refined_bbox = refined_bbox
             refer_bbox = refined_bbox.detach() if self.training else refined_bbox
 
-        return torch.stack(dec_bboxes), torch.stack(dec_cls)
+        result = torch.stack(dec_bboxes), torch.stack(dec_cls)
+        # The query matches the last appended box, in both train and eval (C19 interface).
+        return (*result, output) if return_final_query else result

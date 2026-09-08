@@ -1,0 +1,765 @@
+[
+  {
+    "field": "agnostic_nms",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "amp",
+    "type": "bool",
+    "C2": true,
+    "C26": true,
+    "changed": false
+  },
+  {
+    "field": "angle",
+    "type": "float",
+    "C2": 1.0,
+    "C26": 1.0,
+    "changed": false
+  },
+  {
+    "field": "augment",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "auto_augment",
+    "type": "NoneType",
+    "C2": null,
+    "C26": null,
+    "changed": false
+  },
+  {
+    "field": "batch",
+    "type": "int",
+    "C2": 16,
+    "C26": 16,
+    "changed": false
+  },
+  {
+    "field": "bgr",
+    "type": "float",
+    "C2": 0.0,
+    "C26": 0.0,
+    "changed": false
+  },
+  {
+    "field": "box",
+    "type": "float",
+    "C2": 7.5,
+    "C26": 7.5,
+    "changed": false
+  },
+  {
+    "field": "cache",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "cfg",
+    "type": "NoneType",
+    "C2": null,
+    "C26": null,
+    "changed": false
+  },
+  {
+    "field": "classes",
+    "type": "NoneType",
+    "C2": null,
+    "C26": null,
+    "changed": false
+  },
+  {
+    "field": "close_mosaic",
+    "type": "int",
+    "C2": 10,
+    "C26": 10,
+    "changed": false
+  },
+  {
+    "field": "cls",
+    "type": "float",
+    "C2": 0.5,
+    "C26": 0.5,
+    "changed": false
+  },
+  {
+    "field": "compile",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "conf",
+    "type": "NoneType",
+    "C2": null,
+    "C26": null,
+    "changed": false
+  },
+  {
+    "field": "copy_paste",
+    "type": "int",
+    "C2": 0,
+    "C26": 0,
+    "changed": false
+  },
+  {
+    "field": "copy_paste_mode",
+    "type": "str",
+    "C2": "flip",
+    "C26": "flip",
+    "changed": false
+  },
+  {
+    "field": "cos_lr",
+    "type": "bool",
+    "C2": true,
+    "C26": true,
+    "changed": false
+  },
+  {
+    "field": "cutmix",
+    "type": "int",
+    "C2": 0,
+    "C26": 0,
+    "changed": false
+  },
+  {
+    "field": "data",
+    "type": "str",
+    "C2": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "C26": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "changed": false
+  },
+  {
+    "field": "degrees",
+    "type": "int",
+    "C2": 5,
+    "C26": 5,
+    "changed": false
+  },
+  {
+    "field": "deterministic",
+    "type": "bool",
+    "C2": true,
+    "C26": true,
+    "changed": false
+  },
+  {
+    "field": "device",
+    "type": "str",
+    "C2": "0",
+    "C26": "0",
+    "changed": false
+  },
+  {
+    "field": "dfl",
+    "type": "float",
+    "C2": 1.5,
+    "C26": 1.5,
+    "changed": false
+  },
+  {
+    "field": "dnn",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "dropout",
+    "type": "float",
+    "C2": 0.0,
+    "C26": 0.0,
+    "changed": false
+  },
+  {
+    "field": "dynamic",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "embed",
+    "type": "NoneType",
+    "C2": null,
+    "C26": null,
+    "changed": false
+  },
+  {
+    "field": "end2end",
+    "type": "NoneType",
+    "C2": null,
+    "C26": null,
+    "changed": false
+  },
+  {
+    "field": "epochs",
+    "type": "int",
+    "C2": 200,
+    "C26": 200,
+    "changed": false
+  },
+  {
+    "field": "erasing",
+    "type": "int",
+    "C2": 0,
+    "C26": 0,
+    "changed": false
+  },
+  {
+    "field": "exist_ok",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "fliplr",
+    "type": "float",
+    "C2": 0.5,
+    "C26": 0.5,
+    "changed": false
+  },
+  {
+    "field": "flipud",
+    "type": "float",
+    "C2": 0.2,
+    "C26": 0.2,
+    "changed": false
+  },
+  {
+    "field": "format",
+    "type": "str",
+    "C2": "torchscript",
+    "C26": "torchscript",
+    "changed": false
+  },
+  {
+    "field": "fraction",
+    "type": "float",
+    "C2": 1.0,
+    "C26": 1.0,
+    "changed": false
+  },
+  {
+    "field": "freeze",
+    "type": "NoneType",
+    "C2": null,
+    "C26": null,
+    "changed": false
+  },
+  {
+    "field": "half",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "hsv_h",
+    "type": "float",
+    "C2": 0.015,
+    "C26": 0.015,
+    "changed": false
+  },
+  {
+    "field": "hsv_s",
+    "type": "float",
+    "C2": 0.5,
+    "C26": 0.5,
+    "changed": false
+  },
+  {
+    "field": "hsv_v",
+    "type": "float",
+    "C2": 0.35,
+    "C26": 0.35,
+    "changed": false
+  },
+  {
+    "field": "imgsz",
+    "type": "int",
+    "C2": 640,
+    "C26": 640,
+    "changed": false
+  },
+  {
+    "field": "int8",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "iou",
+    "type": "float",
+    "C2": 0.7,
+    "C26": 0.7,
+    "changed": false
+  },
+  {
+    "field": "keras",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "kobj",
+    "type": "float",
+    "C2": 1.0,
+    "C26": 1.0,
+    "changed": false
+  },
+  {
+    "field": "line_width",
+    "type": "NoneType",
+    "C2": null,
+    "C26": null,
+    "changed": false
+  },
+  {
+    "field": "lr0",
+    "type": "float",
+    "C2": 0.0005,
+    "C26": 0.0005,
+    "changed": false
+  },
+  {
+    "field": "lrf",
+    "type": "float",
+    "C2": 0.01,
+    "C26": 0.01,
+    "changed": false
+  },
+  {
+    "field": "mask_ratio",
+    "type": "int",
+    "C2": 4,
+    "C26": 4,
+    "changed": false
+  },
+  {
+    "field": "max_det",
+    "type": "int",
+    "C2": 300,
+    "C26": 300,
+    "changed": false
+  },
+  {
+    "field": "mixup",
+    "type": "float",
+    "C2": 0.05,
+    "C26": 0.05,
+    "changed": false
+  },
+  {
+    "field": "mode",
+    "type": "str",
+    "C2": "train",
+    "C26": "train",
+    "changed": false
+  },
+  {
+    "field": "model",
+    "type": "str",
+    "C2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "C26": "/root/autodl-tmp/projects/Crack_RTDETR-c26/weights/c26_cbr_scca_controlled_init.pt",
+    "changed": true
+  },
+  {
+    "field": "momentum",
+    "type": "float",
+    "C2": 0.937,
+    "C26": 0.937,
+    "changed": false
+  },
+  {
+    "field": "mosaic",
+    "type": "float",
+    "C2": 0.8,
+    "C26": 0.8,
+    "changed": false
+  },
+  {
+    "field": "multi_scale",
+    "type": "float",
+    "C2": 0.0,
+    "C26": 0.0,
+    "changed": false
+  },
+  {
+    "field": "name",
+    "type": "str",
+    "C2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "C26": "c26_rtdetr_r18_lite_cbr_scca_e200_b16_onlineaug",
+    "changed": true
+  },
+  {
+    "field": "nbs",
+    "type": "int",
+    "C2": 64,
+    "C26": 64,
+    "changed": false
+  },
+  {
+    "field": "nms",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "opset",
+    "type": "NoneType",
+    "C2": null,
+    "C26": null,
+    "changed": false
+  },
+  {
+    "field": "optimize",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "optimizer",
+    "type": "str",
+    "C2": "AdamW",
+    "C26": "AdamW",
+    "changed": false
+  },
+  {
+    "field": "overlap_mask",
+    "type": "bool",
+    "C2": true,
+    "C26": true,
+    "changed": false
+  },
+  {
+    "field": "patience",
+    "type": "int",
+    "C2": 50,
+    "C26": 50,
+    "changed": false
+  },
+  {
+    "field": "perspective",
+    "type": "float",
+    "C2": 0.0002,
+    "C26": 0.0002,
+    "changed": false
+  },
+  {
+    "field": "plots",
+    "type": "bool",
+    "C2": true,
+    "C26": true,
+    "changed": false
+  },
+  {
+    "field": "pose",
+    "type": "float",
+    "C2": 12.0,
+    "C26": 12.0,
+    "changed": false
+  },
+  {
+    "field": "pretrained",
+    "type": "bool",
+    "C2": true,
+    "C26": true,
+    "changed": false
+  },
+  {
+    "field": "profile",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "project",
+    "type": "str",
+    "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "C26": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "changed": false
+  },
+  {
+    "field": "rect",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "resume",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "retina_masks",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "rle",
+    "type": "float",
+    "C2": 1.0,
+    "C26": 1.0,
+    "changed": false
+  },
+  {
+    "field": "save",
+    "type": "bool",
+    "C2": true,
+    "C26": true,
+    "changed": false
+  },
+  {
+    "field": "save_conf",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "save_crop",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "save_dir",
+    "type": "str",
+    "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "C26": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c26_rtdetr_r18_lite_cbr_scca_e200_b16_onlineaug",
+    "changed": true
+  },
+  {
+    "field": "save_frames",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "save_json",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "save_period",
+    "type": "int",
+    "C2": -1,
+    "C26": -1,
+    "changed": false
+  },
+  {
+    "field": "save_txt",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "scale",
+    "type": "float",
+    "C2": 0.4,
+    "C26": 0.4,
+    "changed": false
+  },
+  {
+    "field": "seed",
+    "type": "int",
+    "C2": 42,
+    "C26": 42,
+    "changed": false
+  },
+  {
+    "field": "shear",
+    "type": "float",
+    "C2": 1.5,
+    "C26": 1.5,
+    "changed": false
+  },
+  {
+    "field": "show",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "show_boxes",
+    "type": "bool",
+    "C2": true,
+    "C26": true,
+    "changed": false
+  },
+  {
+    "field": "show_conf",
+    "type": "bool",
+    "C2": true,
+    "C26": true,
+    "changed": false
+  },
+  {
+    "field": "show_labels",
+    "type": "bool",
+    "C2": true,
+    "C26": true,
+    "changed": false
+  },
+  {
+    "field": "simplify",
+    "type": "bool",
+    "C2": true,
+    "C26": true,
+    "changed": false
+  },
+  {
+    "field": "single_cls",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "source",
+    "type": "NoneType",
+    "C2": null,
+    "C26": null,
+    "changed": false
+  },
+  {
+    "field": "split",
+    "type": "str",
+    "C2": "val",
+    "C26": "val",
+    "changed": false
+  },
+  {
+    "field": "stream_buffer",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "task",
+    "type": "str",
+    "C2": "detect",
+    "C26": "detect",
+    "changed": false
+  },
+  {
+    "field": "time",
+    "type": "NoneType",
+    "C2": null,
+    "C26": null,
+    "changed": false
+  },
+  {
+    "field": "tracker",
+    "type": "str",
+    "C2": "botsort.yaml",
+    "C26": "botsort.yaml",
+    "changed": false
+  },
+  {
+    "field": "translate",
+    "type": "float",
+    "C2": 0.1,
+    "C26": 0.1,
+    "changed": false
+  },
+  {
+    "field": "val",
+    "type": "bool",
+    "C2": true,
+    "C26": true,
+    "changed": false
+  },
+  {
+    "field": "verbose",
+    "type": "bool",
+    "C2": true,
+    "C26": true,
+    "changed": false
+  },
+  {
+    "field": "vid_stride",
+    "type": "int",
+    "C2": 1,
+    "C26": 1,
+    "changed": false
+  },
+  {
+    "field": "visualize",
+    "type": "bool",
+    "C2": false,
+    "C26": false,
+    "changed": false
+  },
+  {
+    "field": "warmup_bias_lr",
+    "type": "float",
+    "C2": 0.1,
+    "C26": 0.1,
+    "changed": false
+  },
+  {
+    "field": "warmup_epochs",
+    "type": "int",
+    "C2": 5,
+    "C26": 5,
+    "changed": false
+  },
+  {
+    "field": "warmup_momentum",
+    "type": "float",
+    "C2": 0.8,
+    "C26": 0.8,
+    "changed": false
+  },
+  {
+    "field": "weight_decay",
+    "type": "float",
+    "C2": 0.0001,
+    "C26": 0.0001,
+    "changed": false
+  },
+  {
+    "field": "workers",
+    "type": "int",
+    "C2": 8,
+    "C26": 8,
+    "changed": false
+  },
+  {
+    "field": "workspace",
+    "type": "NoneType",
+    "C2": null,
+    "C26": null,
+    "changed": false
+  }
+]

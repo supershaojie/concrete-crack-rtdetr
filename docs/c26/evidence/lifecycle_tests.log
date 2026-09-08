@@ -1,0 +1,23 @@
+test_109_field_recipe_and_type_drift (test_c26_tools.TestC26Tools) ... ok
+test_complete_pack_over_20mib_with_weights_images_streams_and_hashes (test_c26_tools.TestC26Tools) ... ok
+test_direct_c25_independence_duplicate_guard_and_failure_status (test_c26_tools.TestC26Tools) ... Traceback (most recent call last):
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\c26\tools\train_c26.py", line 187, in worker
+    require(sha256(p["init"]) == plan["init_sha256"], "Initialization changed")
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\c26\tools\init_scca.py", line 42, in sha256
+    with Path(path).open("rb") as f:
+  File "D:\miniconda3\envs\rtdetr\lib\pathlib.py", line 1180, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "D:\miniconda3\envs\rtdetr\lib\pathlib.py", line 1038, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c26\\outputs\\tmpk0usr2mz\\init.pt'
+ok
+test_stream_full_precision_anisotropic_unclipped_and_empty_gt (test_c26_tools.TestC26Tools) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.292s
+
+OK
+Verified complete archive: D:\MyProjects\Crack_RTDETR\outputs\worktrees\c26\outputs\tmp7k8_bynb\result.tar.gz
+Bytes: 22032292
+SHA256: d18b9bfe03e0396ed5dd5653591fdb4578300d09639ff890a80a4b296680c972
+Started c26: tmux c26-training; log D:\MyProjects\Crack_RTDETR\outputs\worktrees\c26\outputs\tmpk0usr2mz\launch\console.log; 完整服务器预检未执行

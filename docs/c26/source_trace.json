@@ -1,0 +1,41 @@
+{
+  "c24_base": "f6e9dfda765046ae7691302cf5ec89d3f76cec5d",
+  "c19_source": "025997e3c51eaf6933534308a95da6ebf97bff53",
+  "modules": {
+    "cbr.py": {
+      "source_commit": "025997e3c51eaf6933534308a95da6ebf97bff53",
+      "path": "ultralytics-main/ultralytics/nn/modules/cbr.py",
+      "canonical_lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "equal_to_fixed_git_blob": true
+    },
+    "scca_aifi.py": {
+      "source_commit": "f6e9dfda765046ae7691302cf5ec89d3f76cec5d",
+      "path": "ultralytics-main/ultralytics/nn/modules/scca_aifi.py",
+      "canonical_lf_sha256": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca",
+      "equal_to_fixed_git_blob": true
+    }
+  },
+  "source_hashes": {
+    "tools/autodl_c26.sh": "411c79faa0c2daef378248f5dd24cd77b714a8927ce946485ce01ac908770290",
+    "tools/c26_results.py": "9a688853c22cd2a0546e1b229f7a9c07401abcd221c6c347e6e0d0f2082c2e2d",
+    "tools/check_c26.py": "2de339b6bc3ec18d3bd2c38fd4169a5246bbe8fd8bdcf8aa8c05ace2dd6b39ca",
+    "tools/init_c26.py": "87c7b5cc57438c1f47bac1bc436278920aa6cf3484ad6620c1f1aedc755d50d3",
+    "tools/sync_c26.sh": "dbe546df6e581f7770769744536e0ca0147bd88aac82e17c3101240a8491dc79",
+    "tools/train_c26.py": "daa630c20a25d5886aecfedcce8836bb890f160ca15cd9eed2dd6fceb2555922",
+    "ultralytics-main/tests/test_c26.py": "9ec614a1e32c21373b72f49385732586871e200566b8dee517f5cf1d6e3926f4",
+    "ultralytics-main/tests/test_c26_export.py": "89555a53a88c0a45c0fa68de123eb4d50c7534ae4685c116c208bc99c149d2dd",
+    "ultralytics-main/tests/test_c26_tools.py": "b3fbb26003d66aab10bcbe7c4d1ff6cf34836e7c2b839d6e8e2f0729f4cf0c1f",
+    "ultralytics-main/tests/test_cbr.py": "22b7854186bd35f901c2fbf813898e3bdfb9d04818a63f91c2808f7bde8df4cf",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-scca.yaml": "8b239e978285d5eac1ff79b626c8d80badd6256dc74df019c759c68925760b87",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr.yaml": "a63c78a28daf6fbc92a8563fa45507e7a05f61633ec19af6c42bec72d83f90bc",
+    "ultralytics-main/ultralytics/nn/modules/__init__.py": "c177bf810e0e125debe4c7f8ed4290904ba17593211ffcc362ed4cd6b30a5d9e",
+    "ultralytics-main/ultralytics/nn/modules/cbr.py": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+    "ultralytics-main/ultralytics/nn/modules/scca_aifi.py": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca",
+    "ultralytics-main/ultralytics/nn/modules/transformer.py": "019d631e55a6f380e9776d513e9556f2c49a857ac94b3c08c1f8b4729dd3b988",
+    "ultralytics-main/ultralytics/nn/tasks.py": "457b3fd523ae91aa62ba246c8b30033354be227967efcdffddf01d0207edf1c7"
+  },
+  "compatibility": "Only additive decoder return_final_query after existing C24 arguments; CBR registration/parser case; separate C26 tooling. Original module algorithms unchanged.",
+  "source_evidence_note": "Runtime in local evidence identifies C24 parent while C26 changes were uncommitted; hashes above identify delivered code.",
+  "c26_number": "No prior C26 tracked record in local refs or remote branch inventory; C25 reserved separately",
+  "full_server_preflight": "NOT_RUN"
+}

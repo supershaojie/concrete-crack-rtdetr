@@ -104,6 +104,7 @@ from .head import (
     YOLOESegment26,
     v10Detect,
 )
+from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
 from .scca_aifi import SCCAAIFI
 from .transformer import (
     AIFI,
@@ -191,6 +192,8 @@ __all__ = (
     "Pose26",
     "Proto",
     "RTDETRDecoder",
+    "RTDETRDecoderCBR",
+    "CrackBoundaryRefinement",
     "RTDETRDecoderACR",
     "CoverageRelationSelfAttention",
     "RepC3",
