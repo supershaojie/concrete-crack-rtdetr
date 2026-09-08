@@ -1,0 +1,17 @@
+{
+  "schema": "scca_predictions_gt_v1",
+  "path": "predictions_gt.jsonl.gz",
+  "sha256": "e5692c3cd8af0889f12c276dda5c2af48f8742e1d08f99494545fe9c26ac2ace",
+  "status": "completed",
+  "images": 4,
+  "expected_images": 4,
+  "predictions": 1200,
+  "ground_truths": 8,
+  "dataset_root": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\acr\\outputs\\local_data",
+  "split": "val",
+  "all_queries": true,
+  "metric_conf": 0.001,
+  "coordinates": "Unclipped continuous xyxy in original image pixels; x scales by original_width/input_width, y by original_height/input_height; no +1 convention.",
+  "precision": "FP32 inference values serialized without decimal rounding; coordinate conversion uses float64.",
+  "coverage": "Exact multiset match with validator dataset.im_files; includes empty images."
+}

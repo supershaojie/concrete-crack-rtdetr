@@ -1,7 +1,8 @@
-"""Same-policy val/test, bounded optional diagnostics and <=20 MiB result export."""
+"""Same-policy val/test with streaming evidence, lightweight and complete result export."""
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 from datetime import datetime
 import gzip
 import hashlib
@@ -11,6 +12,7 @@ import random
 from pathlib import Path
 import subprocess
 import tarfile
+import traceback
 
 import numpy as np
 import torch
@@ -20,9 +22,10 @@ from ultralytics import RTDETR
 from ultralytics.models.rtdetr.val import RTDETRValidator
 from ultralytics.nn.modules import SCCAAIFI
 from ultralytics.utils import YAML, ops
+from scca_export import PredictionStream, evaluation_log, package_complete
 
 
-def postprocess(preds, imgsz, conf):
+def postprocess(preds, imgsz, conf, all_queries=False):
     preds = preds[0] if isinstance(preds, (list, tuple)) else preds
     result, affected = [], 0
     for pred in preds:
@@ -32,7 +35,7 @@ def postprocess(preds, imgsz, conf):
         rows = torch.cat((boxes, score[:, None], cls[:, None]), -1)[order]
         mask = rows[:, 4] > conf
         affected += int(not torch.equal(mask, score > conf))
-        rows = rows[mask]
+        rows = rows if all_queries else rows[mask]
         result.append(dict(bboxes=rows[:, :4], conf=rows[:, 4], cls=rows[:, 5]))
     return result, affected
 
@@ -43,7 +46,8 @@ def evaluate(weights, data, split, output, device="0", batch=16, val_report=None
     require(not output.exists(), f"Preserve previous evaluation: {output}")
     settings = dict(data=str(data.resolve()), split=split, imgsz=640, batch=batch, workers=0, device=device,
                     half=False, conf=.001, iou=.7, max_det=300, augment=False, rect=False,
-                    plots=True, save_json=False, save_txt=False, project=str(output), name="plots", exist_ok=False)
+                    cache=False, fraction=1.0, plots=True, save_json=False, save_txt=False,
+                    project=str(output), name="plots", exist_ok=False)
     digest = sha256(weights)
     if split == "test":
         require(val_report and val_report.is_file(), "Test requires completed val of selected best")
@@ -52,40 +56,79 @@ def evaluate(weights, data, split, output, device="0", batch=16, val_report=None
                 "Test checkpoint not the validated selection")
         require(prior["data_sha256"] == sha256(data), "Val/test data config differs")
         require(prior["policy"] == "corrected_sorted_conf_mask_v1", "Val/test postprocess policy differs")
-        for k in ("imgsz", "batch", "half", "conf", "iou", "max_det", "augment", "rect"):
+        for k in ("imgsz", "batch", "workers", "half", "conf", "iou", "max_det", "augment", "rect"):
             require(prior["settings"][k] == settings[k], f"Val/test setting differs: {k}")
+        require(prior["runtime"]["commit"] == runtime()["commit"], "Val/test evaluation source commit differs")
     output.mkdir(parents=True)
     counts = dict(images=0, historical_mask_affected_images=0)
+    streams = []
 
     class ComparableValidator(RTDETRValidator):
+        def build_dataset(self, img_path, mode="val", batch=None):
+            dataset = super().build_dataset(img_path, mode, batch)
+            requested = Counter(str(Path(p).resolve()) for p in dataset.get_img_files(img_path))
+            usable = Counter(str(Path(p).resolve()) for p in dataset.im_files)
+            require(requested == usable, "Split contains rejected/corrupt images or labels; cannot claim complete coverage")
+            report["requested_split_images"] = sum(requested.values())
+            return dataset
+
+        def init_metrics(self, model):
+            super().init_metrics(model)
+            report["actual_settings"] = vars(self.args).copy()
+            for key in ("imgsz", "batch", "workers", "half", "conf", "iou", "max_det", "augment", "rect"):
+                require(getattr(self.args, key) == settings[key], f"Evaluation setting changed: {key}")
+            streams.append(PredictionStream(output, self.data["path"], self.dataloader.dataset.im_files, split, self.args.conf))
+
         def postprocess(self, preds):
-            result, changed = postprocess(preds, self.args.imgsz, self.args.conf)
+            all_rows, changed = postprocess(preds, self.args.imgsz, self.args.conf, all_queries=True)
+            require(all(len(row["conf"]) == 300 for row in all_rows), "Expected all 300 regular queries per image")
             counts["historical_mask_affected_images"] += changed
-            return result
+            # Only small detection rows reach CPU; no model activations retained.
+            self.export_rows = [{k: v.detach().cpu() for k, v in row.items()} for row in all_rows]
+            return [{k: v[row["conf"] > self.args.conf] for k, v in row.items()} for row in all_rows]
 
         def update_metrics(self, preds, batch):
             counts["images"] += len(preds)
+            streams[0].write_batch(self.export_rows, batch)
+            del self.export_rows
             return super().update_metrics(preds, batch)
 
     report = dict(status="failed", runtime=runtime(), split=split, settings=settings, checkpoint=str(weights),
                   checkpoint_sha256=digest, data_sha256=sha256(data), data_config=YAML.load(data),
-                  policy="corrected_sorted_conf_mask_v1", comparison="Re-evaluate C2/C17 with this identical entry. Training best selection retains original C2 validator.")
+                  policy="corrected_sorted_conf_mask_v1", result_origin="same_entry_reevaluation",
+                  comparison="Historical results must be labeled separately; C2/C17/C24 re-evaluation is optional, never a C25 launch prerequisite. Training best selection retains original C2 validator.")
     try:
-        model = RTDETR(str(weights))
-        require(model.model.model[-1].nc == 1, "Evaluation requires nc=1")
-        report["parameters_unfused"] = sum(p.numel() for p in model.model.parameters())
-        metrics = model.val(validator=ComparableValidator, **settings)
+        with evaluation_log(output):
+            try:
+                model = RTDETR(str(weights))
+                require(model.model.model[-1].nc == 1, "Evaluation requires nc=1")
+                report["parameters_unfused"] = sum(p.numel() for p in model.model.parameters())
+                metrics = model.val(validator=ComparableValidator, **settings)
+            except BaseException:
+                traceback.print_exc()
+                raise
         ap = metrics.box.all_ap
         require(ap.shape == (1, 10) and np.isfinite(ap).all(), "Nonfinite/unexpected AP")
         require(sha256(weights) == digest, "Checkpoint changed during evaluation")
+        require(sha256(data) == report["data_sha256"], "Data config changed during evaluation")
+        require(len(streams) == 1, "Expected one independent inference pass")
+        report["prediction_export"] = streams[0].finish()
         report.update(status="completed", precision=float(metrics.box.mp), recall=float(metrics.box.mr),
                       AP75=float(ap[:, 5].mean()), mAP50=float(metrics.box.map50), mAP50_95=float(metrics.box.map),
+                      ap_iou_thresholds=[.5 + i * .05 for i in range(10)], ap_by_class=ap.tolist(),
+                      ap_class_ids=metrics.box.ap_class_index.tolist(),
                       speed_ms_per_image=metrics.speed, **counts)
     except BaseException as error:
         report["error"] = repr(error)
+        with (output / "evaluation.log").open("a", encoding="utf-8") as log:
+            traceback.print_exc(file=log)
         raise
     finally:
+        for stream in streams: stream.close()
+        report.update(counts)
         write_json(output / "metrics.json", report)
+        write_json(output / "exit_code.json", dict(exit_code=0 if report["status"] == "completed" else 1,
+                                                   status=report["status"], finished=datetime.now().isoformat()))
     return report
 
 
@@ -205,7 +248,7 @@ def package(variant, destination=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("val", "test", "pack", "diagnose"))
+    parser.add_argument("mode", choices=("val", "test", "pack", "pack-complete", "diagnose"))
     parser.add_argument("variant", type=str.lower, choices=VARIANTS)
     parser.add_argument("--weights", type=Path, help="Also supports historical C2/C17 best for same-policy val")
     parser.add_argument("--data", type=Path, default=MAIN / "configs/crack_autodl.yaml")
@@ -218,6 +261,8 @@ if __name__ == "__main__":
     weights = args.weights or p["run"] / "weights/best.pt"
     if args.mode == "pack":
         package(args.variant, args.output)
+    elif args.mode == "pack-complete":
+        package_complete(args.variant, args.output)
     elif args.mode == "diagnose":
         diagnose(weights, args.data, args.output or p["launch"] / "diagnostics.json", args.device)
     else:

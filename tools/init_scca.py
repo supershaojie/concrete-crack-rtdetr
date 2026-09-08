@@ -67,6 +67,8 @@ def build(variant, nc=80, baseline=False):
 def verify_model(model, variant, zero=False):
     require(type(model.model[9]) is SCCAAIFI, "SCCAAIFI must replace layer 9")
     require(type(model.model[-1]) is RTDETRDecoder, "Other candidate decoder enabled")
+    require(model.model[-1].num_queries == 300 and model.model[-1].decoder.num_layers == 3,
+            "Original three-layer/300-query Decoder changed")
     require(model.model[-1].f == ([19, 22, 25] if variant == "c24" else [20, 23, 26]), "Decoder inputs changed")
     module = model.model[9]
     require(module.ma.embed_dim == 256 and module.ma.num_heads == 8 and module.fc1.out_features == 1024, "AIFI recipe changed")
@@ -74,6 +76,9 @@ def verify_model(model, variant, zero=False):
     if variant == "c25":
         require(type(model.model[18]) is CSCEFv51 and model.model[18].f == [17, 16], "C17 CSCEF changed")
         require(model.model[19].f == [16, 18], "C17 Concat changed")
+    if model.model[-1].nc == 1:
+        require(sum(p.numel() for p in model.parameters()) == (20148312 if variant == "c24" else 20175224),
+                "Unexpected nc=1 unfused parameter count")
     if zero:
         require(torch.count_nonzero(module.scca_o.weight).item() == 0, "Initial O must be zero")
         require(torch.count_nonzero(module.scca_temperature_raw).item() == 0, "Initial temperature raw must be zero")

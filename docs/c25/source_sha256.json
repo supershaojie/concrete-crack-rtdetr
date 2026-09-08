@@ -1,0 +1,21 @@
+{
+  "base_commit": "f6e9dfda765046ae7691302cf5ec89d3f76cec5d",
+  "normalization": "CRLF to LF only",
+  "files": {
+    "tools/autodl_scca.sh": "2b2b4f6f2d613849c9bac500422bfb2499c6e284dd51f219a1c6045b93e0eba4",
+    "tools/check_c25_delivery.py": "1c2eb5de66ede6489ea2e6fb3bc6ae66f59147e31bb567a1d122f8f410435c9f",
+    "tools/check_scca.py": "4affc4c062b5856ec6888bbc2db66aff0a34bbcce0c6f83c353db9a4036cfcdb",
+    "tools/init_rtdetr_r18_lite_cscef_v3_from_baseline.py": "5a7a2c92bf67e1a245fd41fd8d3b9d622092a55a882cd163f1f532d356d93fdd",
+    "tools/init_scca.py": "95e9d7b434fd8df40a8dd7033d8a91de3211a684009a8fcee5a09113fabbb8f4",
+    "tools/scca_export.py": "1ed5e82b8faae6cea94af40fb733c64efbbaa7fea910437c4fb52af959a913bb",
+    "tools/scca_results.py": "cfba1301cc7a25b4a6d8441fefc3cfbbf56985d16c6c59d96e25fee36c77220a",
+    "tools/smoke_scca.py": "5a35b01dd43cc91b9e037c66c77122598e559d6ddb05169124d7879af57a3370",
+    "tools/train_scca.py": "a6d9485dc2ba36861560f300429953720cd455baaf96bb91fa12a5ec7bb47552",
+    "ultralytics-main/tests/test_scca_complete.py": "47ef44ab1f422e9a3391e9d2e8ca41637ba60bdd5ebef5ce38929c451eee09f9",
+    "ultralytics-main/tests/test_scca_tools.py": "4590c852fc0ed50d498d7d43435f71cab4fba5fbe95c1c45162be18d8c373b10",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-scca.yaml": "4fb3dafb1863e8681ba43516f296daf1f4168174c7417470e7a76a49f648b364",
+    "ultralytics-main/ultralytics/nn/modules/cscef_v5.py": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+    "ultralytics-main/ultralytics/nn/modules/cscef_v51.py": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+    "ultralytics-main/ultralytics/nn/modules/scca_aifi.py": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca"
+  }
+}

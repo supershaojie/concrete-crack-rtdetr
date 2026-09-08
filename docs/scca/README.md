@@ -1,5 +1,7 @@
 # SCCA-AIFI：C24 / C25
 
+> 本文保留最初 C24/C25 交付记录。C25 已按用户要求进入独立组合实验交付，当前入口、完整结果包和验证记录见 [C25 文档](../c25/README.md)；以下“待选”等表述属于历史阶段。
+
 SCCAAIFI（Spatially Conditioned Channel Attention AIFI）在第 9 层替换原 AIFI。
 C24 为 C2＋SCCA，先由用户独立训练；C25 为 C17 原 CSCEFv51＋SCCA，仅交付待选组合。
 没有正式训练成绩，不宣称稳定涨点、删除背景或恢复已经丢失的像素细节。

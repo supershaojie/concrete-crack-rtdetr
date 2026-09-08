@@ -1,0 +1,32 @@
+test_actual_c2_all_fields_and_project_preserved (test_cscef_v51.TestC17RecipeLock) ... ok
+test_missing_data_remains_server_path_and_no_artifacts (test_cscef_v51.TestC17RecipeLock) ... ok
+test_no_project_changes_or_defaults_or_unknown_fields (test_cscef_v51.TestC17RecipeLock) ... ok
+test_prepare_is_inert_immutable_and_plan_rejects_changes (test_cscef_v51.TestC17RecipeLock) ... ok
+Prepared 109-field C2 comparison: D:\MyProjects\Crack_RTDETR\outputs\worktrees\c25\outputs\tmpxbve4zi2\reports\launch_plan.json
+Changed fields: ['model', 'name', 'save_dir']
+WARNING no model scale passed. Assuming scale='l'.
+test_real_api_passes_complete_recipe_to_trainer_without_dataset (test_cscef_v51.TestC17RecipeLock) ... ok
+Prepared 109-field C2 comparison: D:\MyProjects\Crack_RTDETR\outputs\worktrees\c25\outputs\tmpmr921k2u\reports\launch_plan.json
+Changed fields: ['model', 'name', 'save_dir']
+Prepared 109-field C2 comparison: D:\MyProjects\Crack_RTDETR\outputs\worktrees\c25\outputs\tmpnjycvu5u\reports\launch_plan.json
+Changed fields: ['model', 'name', 'save_dir']
+test_success_failure_logs_and_exclusive_launch_with_mock_training (test_cscef_v51.TestC17RecipeLock) ... ok
+test_tmux_reuses_plan_and_current_conda_environment_without_training (test_cscef_v51.TestC17RecipeLock) ... ok
+Prepared 109-field C2 comparison: D:\MyProjects\Crack_RTDETR\outputs\worktrees\c25\outputs\tmpa6427zt7\reports\launch_plan.json
+Changed fields: ['model', 'name', 'save_dir']
+Started tmux session cscef_v51_c17_rtdetr_r18_lite_cscef_v51_e200_b16_onlineaug; console and exit code: D:\MyProjects\Crack_RTDETR\outputs\worktrees\c25\outputs\tmpa6427zt7\reports
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+test_baseline_smoke_and_v5_parser_regression (test_cscef_v51.TestCSCEFv51) ... ok
+test_gradient_opening_and_semantic_dependence (test_cscef_v51.TestCSCEFv51) ... ok
+test_legacy_cpu_autocast_compatibility (test_cscef_v51.TestCSCEFv51) ... ok
+test_nonlinear_order_boundaries_detach_and_sample_independence (test_cscef_v51.TestCSCEFv51) ... ok
+test_nonzero_full_forward_matches_diagnostic (test_cscef_v51.TestCSCEFv51) ... ok
+test_only_override_and_exact_state_contract (test_cscef_v51.TestCSCEFv51) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 1.964s
+
+OK

@@ -57,12 +57,31 @@ def rebuild_audit(source, target, variant):
     equal = [k for k in before if k not in incompatible and torch.equal(before[k].cpu(), after[k].cpu())]
     require(len(equal) + len(incompatible) == len(before), "Train API failed to load public/new state values")
     return dict(nc_source=source.model[-1].nc, nc_target=target.model[-1].nc, loaded_exact=len(equal),
-                missing=[], unexpected=[], classification_shape_skips=sorted(incompatible))
+                total_states=len(before), missing=[], unexpected=[], classification_shape_skips=sorted(incompatible),
+                state_checks=[dict(key=k, source_shape=list(before[k].shape), target_shape=list(after[k].shape),
+                                   action="classification_reinitialized" if k in incompatible else "loaded_exact",
+                                   equal=None if k in incompatible else True) for k in sorted(before)])
 
 
 def disable_oom_retry(trainer):
     # Native trainer checks this counter before reducing batch; set it before every batch.
     trainer._oom_retries = 3
+
+
+def optimizer_audit(model, optimizer, variant):
+    """Check both original additions, including every trainable CSCEF tensor."""
+    ids = [id(p) for group in optimizer.param_groups for p in group["params"]]
+    groups = {"scca": {}, "cscef": {}}
+    for name, parameter in model.named_parameters():
+        group = "scca" if ".scca_" in name else "cscef" if variant == "c25" and name.startswith("model.18.") else None
+        if group:
+            require(parameter.requires_grad, f"Frozen module parameter: {name}")
+            groups[group][name] = ids.count(id(parameter))
+    require(len(groups["scca"]) == 5, "Expected all five SCCA parameter tensors")
+    require(len(groups["cscef"]) == (5 if variant == "c25" else 0), "Expected all five CSCEF parameter tensors")
+    require(all(count == 1 for group in groups.values() for count in group.values()),
+            "CSCEF/SCCA parameter absent or duplicated in optimizer")
+    return groups
 
 
 def ensure_amp_resources(main, report):
@@ -96,6 +115,9 @@ def start_direct(variant):
     require(torch.cuda.is_available(), "AutoDL CUDA unavailable")
     require(os.environ.get("CONDA_DEFAULT_ENV") == "rtdetr", "Activate existing rtdetr environment")
     info = runtime()
+    require(info["python"].startswith("3.10.") and info["torch"] == "2.1.2+cu121" and
+            info["cuda"] == "12.1" and "4090" in (info["gpu"] or ""),
+            "Expected existing Python 3.10 / PyTorch 2.1.2+cu121 / RTX 4090; environment was not changed")
     require(not subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip(),
             "Protect uncommitted source: commit/review changes before launch")
     require(not p["run"].exists(), f"Existing results protected: {p['run']}")
@@ -173,14 +195,14 @@ def worker(variant):
             verify_model(trainer.model, variant, zero=True)
             require(bool(trainer.amp), "Native AMP check disabled AMP; stopping rather than changing formal recipe")
             actual = vars(trainer.args)
-            differences = {k: [v, actual.get(k)] for k, v in plan["args"].items() if actual.get(k) != v}
+            differences = {k: [v, actual.get(k)] for k, v in plan["args"].items()
+                           if type(actual.get(k)) is not type(v) or actual.get(k) != v}
             require(not differences, f"Actual training recipe changed: {differences}")
             YAML.save(p["launch"] / "actual_train_args.yaml", actual)
-            ids = [id(v) for g in trainer.optimizer.param_groups for v in g["params"]]
-            added = {n: ids.count(id(v)) for n, v in trainer.model.named_parameters() if ".scca_" in n}
-            require(all(count == 1 for count in added.values()), "New parameters absent/duplicated in optimizer")
+            added = optimizer_audit(trainer.model, trainer.optimizer, variant)
             write_json(p["launch"] / "training_setup.json", dict(amp=bool(trainer.amp), parameters=sum(v.numel() for v in trainer.model.parameters()),
-                       optimizer=type(trainer.optimizer).__name__, scca_optimizer_occurrences=added, recipe_differences=differences,
+                       optimizer=type(trainer.optimizer).__name__, scca_optimizer_occurrences=added["scca"],
+                       cscef_optimizer_occurrences=added["cscef"], recipe_differences=differences,
                        batch=trainer.args.batch, full_server_preflight="NOT_RUN"))
 
         model.add_callback("on_train_start", setup)

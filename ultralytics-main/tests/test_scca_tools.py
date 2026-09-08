@@ -44,7 +44,7 @@ class TestSCCATools(unittest.TestCase):
     def test_direct_dispatch_no_prepare_and_duplicate_lock(self):
         with tempfile.TemporaryDirectory(dir=ROOT / "outputs") as d:
             root = Path(d)
-            p = dict(name="c24", run=root / "run", launch=root / "launch", init=root / "init.pt",
+            p = dict(name="c25", run=root / "run", launch=root / "launch", init=root / "init.pt",
                      source=root / "source.pt", c2_args=root / "c2.yaml")
             p["source"].write_bytes(b"source"); p["c2_args"].write_text("test")
             data = root / "data.yaml"; data.write_text("test")
@@ -57,14 +57,14 @@ class TestSCCATools(unittest.TestCase):
                 output.write_bytes(b"fresh")
                 return {"status": "passed"}
             with patch.object(train, "paths", return_value=p), patch.object(train, "ROOT", root), \
-                 patch.object(train, "runtime", return_value={"commit": "a" * 40}), \
+                 patch.object(train, "runtime", return_value={"commit": "a" * 40, "python": "3.10.0", "torch": "2.1.2+cu121", "cuda": "12.1", "gpu": "NVIDIA GeForce RTX 4090"}), \
                  patch.object(train, "recipe", return_value=(args, [])), \
                  patch.object(train, "ensure_amp_resources"), patch.object(train, "initialize", side_effect=initialize), \
                  patch.object(train, "check_det_dataset", return_value=dict(nc=1, train=str(root), val=str(root), test=str(root))), \
                  patch.object(train.shutil, "which", return_value="tmux"), patch.object(train.torch.cuda, "is_available", return_value=True), \
                  patch.object(train.subprocess, "check_output", return_value=""), patch.object(train.subprocess, "run", side_effect=run), \
                  patch.dict(os.environ, {"CONDA_DEFAULT_ENV": "rtdetr"}):
-                train.start_direct("c24")
+                train.start_direct("c25")
                 plan = json.loads((p["launch"] / "plan.json").read_text(encoding="utf-8"))
                 self.assertEqual(plan["full_server_preflight"], "NOT_RUN")
                 self.assertTrue(any("new-session" in c for c in dispatch))
@@ -72,7 +72,7 @@ class TestSCCATools(unittest.TestCase):
                 script = (p["launch"] / "worker.sh").read_text()
                 self.assertIn("export PYTHONPATH=", script)
                 self.assertIn("export YOLO_AUTOINSTALL=false", script)
-                with self.assertRaises(FileExistsError): train.start_direct("c24")
+                with self.assertRaises(FileExistsError): train.start_direct("c25")
                 self.assertEqual(sum("new-session" in c for c in dispatch), 1)
 
     def test_corrected_sort_threshold(self):

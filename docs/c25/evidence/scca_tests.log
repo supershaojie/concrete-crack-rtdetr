@@ -1,0 +1,28 @@
+test_amp_and_real_half (test_scca_aifi.TestSCCAAIFI) ... ok
+test_literal_formula_and_conditioning (test_scca_aifi.TestSCCAAIFI) ... ok
+test_rng_and_public_states (test_scca_aifi.TestSCCAAIFI) ... ok
+test_two_updates_and_input_gradients (test_scca_aifi.TestSCCAAIFI) ... ok
+test_zero_alignment_and_single_mha (test_scca_aifi.TestSCCAAIFI) ... ok
+test_all_queries_preserves_corrected_metrics (test_scca_complete.TestCompleteEvidence) ... ok
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 127 weight(decay=0.0001), 128 bias(decay=0.0)
+test_both_modules_in_native_optimizer_once_reject_missing_duplicate (test_scca_complete.TestCompleteEvidence) ... ok
+test_complete_pack_over_20mib_weights_images_missing_and_hashes (test_scca_complete.TestCompleteEvidence) ... ok
+test_stream_non_square_full_precision_empty_and_coverage (test_scca_complete.TestCompleteEvidence) ... ok
+test_stream_rejects_duplicate (test_scca_complete.TestCompleteEvidence) ... ok
+test_test_rejects_changed_workers_or_source_before_inference (test_scca_complete.TestCompleteEvidence) ... ok
+test_corrected_sort_threshold (test_scca_tools.TestSCCATools) ... ok
+test_direct_dispatch_no_prepare_and_duplicate_lock (test_scca_tools.TestSCCATools) ... ok
+test_original_oom_guard_is_exhausted_before_batch (test_scca_tools.TestSCCATools) ... ok
+test_pack_excludes_weights_and_images_and_protects_old (test_scca_tools.TestSCCATools) ... ok
+test_recipe_all_109_fields_and_reject_drift (test_scca_tools.TestSCCATools) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 2.055s
+
+OK
+D:\MyProjects\Crack_RTDETR\outputs\worktrees\c25\outputs\tmpd4tc9eoz\complete.tar.gz 22029095 5bac0cc15d5a00b03046280d9ebe5a3ce25b5a9bc2899af58e1ca4d42f39d205
+Evidence: missing_evidence ; missing: 48
+Started c25: tmux scca-c25; log D:\MyProjects\Crack_RTDETR\outputs\worktrees\c25\outputs\tmp80uheq52\launch\console.log; 完整服务器预检未执行
+D:\MyProjects\Crack_RTDETR\outputs\worktrees\c25\outputs\tmpgt87b45e\result.tar.gz 686 915c2dd1be4493eb4559a0dc9ffb861b1233904e0e259d189c7601027f148537
