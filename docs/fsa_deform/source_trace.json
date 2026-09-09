@@ -1,0 +1,51 @@
+{
+  "c2_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+  "c2_git_archive": "outputs\\worktrees\\fsa-deform\\docs\\fsa_deform\\c2_git_state.txt",
+  "c2_args_original": "D:/rtdetr跑结果/c2 200e在线/c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053/train_run/args.yaml",
+  "args_sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+  "unchanged_c2_files": [
+    {
+      "file": "ultralytics-main/ultralytics/nn/modules/transformer.py",
+      "c2_exact_lf": true,
+      "sha256_lf": "8986f3f58a5e30a42545f544f1a35f5e5861b13ee5d4507d8b2afab1c41df782"
+    },
+    {
+      "file": "ultralytics-main/ultralytics/nn/modules/head.py",
+      "c2_exact_lf": true,
+      "sha256_lf": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc"
+    },
+    {
+      "file": "ultralytics-main/ultralytics/nn/modules/utils.py",
+      "c2_exact_lf": true,
+      "sha256_lf": "bcf0492178d3924b5d6a5f5808906b7aec6214172b70bfeb21b3aab308b17164"
+    },
+    {
+      "file": "ultralytics-main/ultralytics/models/rtdetr/val.py",
+      "c2_exact_lf": true,
+      "sha256_lf": "f7974365832f0eb2e146571a591150f268d42ecb89e12e96f2518d4251a63a6a"
+    },
+    {
+      "file": "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite.yaml",
+      "c2_exact_lf": true,
+      "sha256_lf": "3493d693cbef958a38a2a135822a6c5379b65804905bc71566e395069e8f4f16"
+    }
+  ],
+  "reference_files": [
+    {
+      "path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\modules\\transformer.py",
+      "sha256": "2a8906995d3b9e8dedfc97a63a405a7b25c820c26c0860a7adeee950541d91e0"
+    },
+    {
+      "path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\SFS_MSDeformAttn\\ops\\functions\\ms_deform_attn_func.py",
+      "sha256": "09851540dd9e4fcf8c0cd1503b8e296b6ed7097b27be91c66d79a7316f62a233"
+    },
+    {
+      "path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\SFS_MSDeformAttn\\ops\\modules\\ms_deform_attn.py",
+      "sha256": "94c82b85186d4ab267d6fdc85d224b7b24c3e8b07ea00560bec0f9854c52f8b5"
+    }
+  ],
+  "historical_zip": "D:/7.1 rtdetr改/魔鬼面具_RTDETR/RTDETR-20260623.zip",
+  "agents_md": "No applicable AGENTS.md found in ancestry or worktree; .agents empty",
+  "reference_usage": "Sampling signatures, layout, zero padding and align_corners=False only; no extension or extra_modules copied",
+  "base_selection": "New branch directly from archived real C2, not original checkout HEAD"
+}

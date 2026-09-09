@@ -1,0 +1,11 @@
+Commit:
+67c3078e54a657fd96d65fee657a75fbb1dae0d6
+
+Branch:
+exp-rtdetr-r18-lite-paperalign
+
+Git status:
+
+Remote:
+origin	git@github.com:supershaojie/concrete-crack-rtdetr.git (fetch)
+origin	git@github.com:supershaojie/concrete-crack-rtdetr.git (push)

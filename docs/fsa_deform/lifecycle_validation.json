@@ -1,0 +1,43 @@
+{
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "fsa_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\fsa-deform\\ultralytics-main\\ultralytics\\nn\\modules\\fsa_deform.py",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "source_sha256": {
+      "ultralytics-main/ultralytics/nn/modules/fsa_deform.py": "9ebb4569928ff0042031d462904d5f1ea58a0449954c09f3780506e8ec8a5bc7",
+      "ultralytics-main/ultralytics/nn/modules/transformer.py": "211ad48b970b94e556c48ad94e815e860fac2a988f72b6261783540aaf0cab9e",
+      "ultralytics-main/ultralytics/nn/modules/head.py": "f96f372951fbea16ff4f5ce974a1f934f1f51d27a3866c50f296771d8dd4ef98",
+      "ultralytics-main/ultralytics/nn/modules/utils.py": "11637c9a947b6173fb56cd149b96f9a7ca22b67f77817bea9c0dd1fc6c25cc09",
+      "ultralytics-main/ultralytics/nn/tasks.py": "9d8393b8fbb5b14508702f54c9c0f085a67e821b2ab420261d06fe2fb4b93e8f",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-fsa-deform.yaml": "9b86077b5c29d1cd07dafa234568d03f306772badb3e9e7f3b43a0a683982c9d"
+    },
+    "working_tree_dirty": true,
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\fsa-deform\\ultralytics-main\\ultralytics\\__init__.py",
+    "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6"
+  },
+  "scope": "MOCKED lifecycle controls and real archive IO; no real dispatch/training",
+  "full_server_preflight": "NOT_RUN",
+  "native_C2_postprocess": "exact on unsorted threshold stress case; historical behavior retained",
+  "direct_without_preflight_marker": "passed (mocked dispatch)",
+  "duplicate_reservation_rejected": true,
+  "worker_oom_exit": "passed: mocked OOM propagates, exit_code=1, batch stays 16",
+  "states": [
+    "NOT_STARTED",
+    "RUNNING",
+    "FAILED",
+    "FAILED",
+    "SUCCESS"
+  ],
+  "incomplete_complete_pack_rejected": true,
+  "partial_archive": {
+    "integrity": "passed",
+    "missing_count": 43,
+    "evidence_complete": false,
+    "bytes": 22879708,
+    "overwrite_rejected": true
+  },
+  "status": "passed"
+}

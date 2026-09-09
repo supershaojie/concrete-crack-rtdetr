@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "scope": "Actual bash sync script with explicit Git stub; no remote access or actual git worktrees",
+  "new_detached": true,
+  "existing_detached_same_sha": true,
+  "dirty_preserved": true,
+  "different_sha_preserved": true,
+  "remote_mismatch_rejected": true,
+  "branch_name_independent": true
+}

@@ -1,0 +1,291 @@
+{
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "fsa_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\fsa-deform\\ultralytics-main\\ultralytics\\nn\\modules\\fsa_deform.py",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "source_sha256": {
+      "ultralytics-main/ultralytics/nn/modules/fsa_deform.py": "9ebb4569928ff0042031d462904d5f1ea58a0449954c09f3780506e8ec8a5bc7",
+      "ultralytics-main/ultralytics/nn/modules/transformer.py": "211ad48b970b94e556c48ad94e815e860fac2a988f72b6261783540aaf0cab9e",
+      "ultralytics-main/ultralytics/nn/modules/head.py": "f96f372951fbea16ff4f5ce974a1f934f1f51d27a3866c50f296771d8dd4ef98",
+      "ultralytics-main/ultralytics/nn/modules/utils.py": "11637c9a947b6173fb56cd149b96f9a7ca22b67f77817bea9c0dd1fc6c25cc09",
+      "ultralytics-main/ultralytics/nn/tasks.py": "9d8393b8fbb5b14508702f54c9c0f085a67e821b2ab420261d06fe2fb4b93e8f",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-fsa-deform.yaml": "9b86077b5c29d1cd07dafa234568d03f306772badb3e9e7f3b43a0a683982c9d"
+    },
+    "working_tree_dirty": true,
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\fsa-deform\\ultralytics-main\\ultralytics\\__init__.py",
+    "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6"
+  },
+  "scope": "synthetic only; no formal training/full val/test",
+  "deterministic": "True warn_only=True (native C2 CUDA grid_sample backward is nondeterministic)",
+  "parameters": {
+    "baseline": 20082772,
+    "fsa": 20087292,
+    "delta": 4520
+  },
+  "structure": [
+    "MSDeformAttn",
+    "FSADeformAttn",
+    "MSDeformAttn"
+  ],
+  "geometry_eta_fields_fallback": {
+    "base_radius": [
+      [
+        1.0,
+        0.25
+      ],
+      [
+        0.5,
+        0.25
+      ],
+      [
+        0.25,
+        0.25
+      ]
+    ],
+    "signs": [
+      [
+        -1.0,
+        -1.0
+      ],
+      [
+        -1.0,
+        1.0
+      ],
+      [
+        1.0,
+        -1.0
+      ],
+      [
+        1.0,
+        1.0
+      ]
+    ],
+    "clamps": "passed",
+    "independent_xy": true,
+    "constant": {
+      "center": 3.0,
+      "outputs": {
+        "0.0": 3.0,
+        "1.0": 3.0,
+        "-1.0": 3.0,
+        "100.0": 3.0,
+        "-100.0": 3.0
+      }
+    },
+    "affine": {
+      "center": 28.0,
+      "outputs": {
+        "0.0": 28.0,
+        "1.0": 28.0,
+        "-1.0": 28.0,
+        "100.0": 28.0,
+        "-100.0": 28.0
+      }
+    },
+    "nonlinear": {
+      "center": 0.0,
+      "outputs": {
+        "0.0": 0.0,
+        "1.0": 0.6320783495903015,
+        "-1.0": -0.6320783495903015,
+        "100.0": 0.8299411535263062,
+        "-100.0": -0.8299411535263062
+      }
+    },
+    "masked_out_of_bounds_zero": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "nonzero_vectorized_oracle": {
+      "max_abs_error": 1.4901161193847656e-07,
+      "max_rel_error": 0.0010862438939511776
+    },
+    "2d_fallback": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    }
+  },
+  "staged_gradient": {
+    "steps": [
+      {
+        "step": 0,
+        "tx": 0.0,
+        "ty": 0.0,
+        "a": 0.008504635654389858,
+        "fc1": 0.0
+      },
+      {
+        "step": 1,
+        "tx": 1.1553430567801115e-07,
+        "ty": 7.730206164069386e-08,
+        "a": 0.008529077284038067,
+        "fc1": 1.7090428627852816e-06
+      },
+      {
+        "step": 2,
+        "tx": 2.3218899514176883e-07,
+        "ty": 1.5466922320683807e-07,
+        "a": 0.008553530089557171,
+        "fc1": 3.423722773732152e-06
+      }
+    ],
+    "learned_state_dict_reload": "exact"
+  },
+  "cpu_eval_zero": {
+    "layer1_input": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "layer1_output": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "layer2_input": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "layer2_output": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "bbox": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "score": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    }
+  },
+  "cpu_dn_zero": {
+    "layer1_input": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "layer1_output": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "layer2_input": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "layer2_output": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "bbox": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "score": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "enc_bbox": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "enc_score": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "queries": 500,
+    "reference_detached": true,
+    "dn_meta_and_mask": "exact"
+  },
+  "cuda_eval_zero": {
+    "layer1_input": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "layer1_output": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "layer2_input": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "layer2_output": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "bbox": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    },
+    "score": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0
+    }
+  },
+  "precision": {
+    "CUDA_FP32": {
+      "loss": 0.46330398321151733,
+      "backward": "finite",
+      "reference_detached": true,
+      "fc1_grad": 0.011828472837805748
+    },
+    "CUDA_AMP": {
+      "loss": 0.5030730366706848,
+      "backward": "finite",
+      "reference_detached": true,
+      "fc1_grad": 0.020069599151611328
+    },
+    "true_model_half": {
+      "dtype": "torch.float16",
+      "shape": [
+        1,
+        300,
+        5
+      ],
+      "finite": true
+    },
+    "learned_full_model_save_load": "exact; support_fc2 remains nonzero"
+  },
+  "native_synthetic_training_step": {
+    "device": "cuda",
+    "amp": true,
+    "synthetic_batch": 2,
+    "imgsz": 160,
+    "steps": 1,
+    "loss": 116.50394439697266,
+    "components": [
+      1.000002384185791,
+      15.650760650634766,
+      0.5
+    ],
+    "a_gradient_sum": 0.6530346274375916,
+    "optimizer": "AdamW; all parameters once",
+    "finite_backward": true
+  },
+  "runtime_benchmark": {
+    "device": "cuda",
+    "scope": "synthetic whole-model eval, B1 160x160, 5 warmups + 20 forwards; local coarse estimate only",
+    "runs": {
+      "C2": {
+        "forward_ms": 38.0077,
+        "peak_allocated_bytes": 175631360,
+        "incremental_peak_bytes": 27723776
+      },
+      "FSA": {
+        "forward_ms": 42.129340000000326,
+        "peak_allocated_bytes": 175650304,
+        "incremental_peak_bytes": 27723776
+      }
+    }
+  },
+  "recipe_fields": 109,
+  "non_three_layers_rejected": true,
+  "status": "passed",
+  "unverified": [
+    "formal 200 epoch training",
+    "complete dataset val/test and mAP",
+    "AutoDL RTX 4090 batch16 640 performance",
+    "export/ONNX/custom backends"
+  ]
+}

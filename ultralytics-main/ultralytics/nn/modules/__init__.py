@@ -175,6 +175,8 @@ __all__ = (
     "Pose26",
     "Proto",
     "RTDETRDecoder",
+    "RTDETRDecoderFSA",
+    "FSADeformAttn",
     "RepC3",
     "RepConv",
     "RepNCSPELAN4",
@@ -194,3 +196,5 @@ __all__ = (
     "YOLOESegment26",
     "v10Detect",
 )
+
+from .fsa_deform import FSADeformAttn, RTDETRDecoderFSA
