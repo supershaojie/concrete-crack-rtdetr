@@ -1,0 +1,20 @@
+{
+  "c2_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+  "c2_args_source": "D:\\rtdetr跑结果\\c2 200e在线\\c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053\\train_run\\args.yaml",
+  "c2_args_sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+  "reference_access": "NOT_AVAILABLE",
+  "reference_search": [
+    "/workspace/scratch/4e13cea9b2d0/upload",
+    "D:/MyProjects",
+    "D:/rtdetr跑结果"
+  ],
+  "reference_expected_sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+  "tools_reuse": {
+    "init_lcr.py": "6acde1689f275f2c3be85bf7eb68289d7dd0bd52b931f25d52267e66842596ad",
+    "train_lcr.py": "317ddf0a0718ae9919901def17d088e993f8a3384b40f774f6fcb1fc014c27ec",
+    "lcr_results.py": "41f24cfd918124b3315f69791e6e07338ab09ddef5f9fb240c14be1dc0215dbf",
+    "sync_lcr.sh": "b0e03d79b44721c86a40c87057fc82ca4b5cc27774e7ffdaaace1a40e458b3f8",
+    "autodl_lcr.sh": "7a730e4b35ebed91bbea19b4763bf1645ffb680429e5b7ac9d8ea942c2b60c68"
+  },
+  "tools_reuse_note": "Read-only copy of local lifecycle utilities; adapted into independent RSC files. No LCR model code or runtime import."
+}

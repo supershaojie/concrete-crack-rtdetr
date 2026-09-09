@@ -109,7 +109,11 @@ from .transformer import (
     TransformerLayer,
 )
 
+from .rsc_head import RSCHead, RTDETRDecoderRSC
+
 __all__ = (
+    "RSCHead",
+    "RTDETRDecoderRSC",
     "AIFI",
     "C1",
     "C2",
