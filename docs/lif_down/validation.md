@@ -35,6 +35,9 @@ val/test同checkpoint和错误SHA拒绝；不能解释为独立验证集成绩�
 
 sync_checks.json 记录本地真实 Git bare/linked-worktree 集成测试，只有 fetch 目标重定向到隔离本地仓库。
 验证远端前进后仍固定原 SHA、detached HEAD、重入、脏目标/不同SHA/错误仓库拒绝、主工作树修改保留。
+测试固定代码提交为 `8bc56f95aa3f4149f4c5fbf20ceeeba415baf342`；随后提交只精简重复映射报告表示并补存此证据。
+两个 Bash 脚本通过语法检查，真实 Bash status 入口返回 NOT_STARTED。
+数值检查在初次提交前的 LIF 工作树执行，所以其 runtime.commit 是 C2 HEAD；同报告中源码散列标识实际被测 LIF 文件。
 
 尚未验证：AutoDL Linux/PyTorch2.1.2、正式 batch16 显存/吞吐、服务器真实 tmux、200e 收敛、完整 val/test、
 真实训练完成证据及其完整下载包、任何涨点或创新性结论。最终回复提供已推送的 SHA，不以本地 smoke 代替服务器结果。

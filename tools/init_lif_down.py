@@ -120,7 +120,7 @@ def controlled_models(source, variant="lif_down"):
     report = dict(source=str(source.resolve()), source_sha256=SOURCE_SHA256, c2_commit=C2_COMMIT,
                   variant=variant, source_nc=original.model[-1].nc, target_nc=target.model[-1].nc, seed=42, source_to_target=rows, source_states=len(rows), missing_source=[],
                   unexpected_source=[], shape_mismatches=[], new_lif_down_states=sorted(expected_lif_down),
-                  new_lif_down_parameters=21104, COMMON=rows, NEW=sorted(expected_lif_down),
+                  new_lif_down_parameters=21104, COMMON=sorted(source_state), NEW=sorted(expected_lif_down),
                   MISSING=[], UNEXPECTED=[], SHAPE_MISMATCH=[], ALLOWED_CLASS_ADAPTATION=[],
                   new_initial_values={k: dict(shape=list(v.shape), min=float(v.min()), max=float(v.max()), nonzero=int(torch.count_nonzero(v))) for k,v in target.state_dict().items() if is_added(k)},
                   public_constructor_equal=True, storage="FP32, original half source values exactly promoted")

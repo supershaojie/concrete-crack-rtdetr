@@ -1,0 +1,42 @@
+{
+  "status": "PASSED",
+  "scope": "Real local Git/worktrees; only fetch destination redirected to isolated local bare repository",
+  "pinned_code_commit": "8bc56f95aa3f4149f4c5fbf20ceeeba415baf342",
+  "fixture_remote_advanced_commit": "df4a56dff35907444516c36633bf8809d772266f",
+  "detached_launcher_accepted": true,
+  "main_dirty_state_preserved": true,
+  "checks": [
+    {
+      "name": "remote_advanced_pin_original",
+      "exit_code": 0,
+      "tail": "outputs/sync_checks_user_fixture/worktree with space, fixed 8bc56f95aa3f4149f4c5fbf20ceeeba415baf342; no training started.\nFrom D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\lif-down\\outputs\\sync_checks_user_fixture\\remote\n * branch            codex/lif-down -> FETCH_HEAD\nPreparing worktree (detached HEAD 8bc56f9)\nUpdating files:  64% (575/895)\nUpdating files:  65% (582/895)\nUpdating files:  66% (591/895)\nUpdating files:  67% (600/895)\nUpdating files:  68% (609/895)\nUpdating files:  69% (618/895)\nUpdating files:  70% (627/895)\nUpdating files:  71% (636/895)\nUpdating files:  72% (645/895)\nUpdating files:  73% (654/895)\nUpdating files:  74% (663/895)\nUpdating files:  75% (672/895)\nUpdating files:  76% (681/895)\nUpdating files:  77% (690/895)\nUpdating files:  78% (699/895)\nUpdating files:  79% (708/895)\nUpdating files:  80% (716/895)\nUpdating files:  81% (725/895)\nUpdating files:  82% (734/895)\nUpdating files:  83% (743/895)\nUpdating files:  84% (752/895)\nUpdating files:  85% (761/895)\nUpdating files:  86% (770/895)\nUpdating files:  87% (779/895)\nUpdating files:  88% (788/895)\nUpdating files:  89% (797/895)\nUpdating files:  90% (806/895)\nUpdating files:  91% (815/895)\nUpdating files:  92% (824/895)\nUpdating files:  93% (833/895)\nUpdating files:  94% (842/895)\nUpdating files:  95% (851/895)\nUpdating files:  96% (860/895)\nUpdating files:  97% (869/895)\nUpdating files:  98% (878/895)\nUpdating files:  99% (887/895)\nUpdating files: 100% (895/895)\nUpdating files: 100% (895/895), done.\n"
+    },
+    {
+      "name": "repeat_same_clean_pin",
+      "exit_code": 0,
+      "tail": "7c39dd2e9d55fe060603fad6ae\",\n      \"tools/lif_down_topology.py\": \"b2533b21fa8bb4f40742fc96f220ac04dfc8ed7908db0276129ba103ce920fe2\",\n      \"ultralytics-main/ultralytics/nn/tasks.py\": \"d3c5350824c93d0156e8054be5b12b207d49390017392f6cb95e30a9e506cf79\",\n      \"ultralytics-main/ultralytics/nn/modules/__init__.py\": \"6307f26b0a84c45c65a13a97d79f0717120d6288e1f21ca51e0f3641b82257a9\",\n      \"tools/init_lif_down.py\": \"193574d71f98b897f3d16d93d1a6f7a7305a768b356adafc26e7d40c2e4878be\",\n      \"tools/train_lif_down.py\": \"94f02723ce008aeba6bd5e6cda90783a37209a3feb32461f4a63ae808406f3ff\",\n      \"tools/autodl_lif_down.sh\": \"5b955ddd5c86407c4a1831fb8d8ed33c6bfff06bf8309d677c56bd621d9fe8d9\",\n      \"tools/lif_down_results.py\": \"c846377444f33896cd92832db74fbfd046aff608529d68994ad970636ff08a21\",\n      \"ultralytics-main/ultralytics/nn/modules/lif_down.py\": \"5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac\",\n      \"ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-lif-down.yaml\": \"296f1e60cf622423965d113c30ad8eb6c1b4b02ee8714db78bbd7c27f8f120ab\"\n    }\n  },\n  \"verified_remote_head\": \"df4a56dff35907444516c36633bf8809d772266f\"\n}\nLIF-Down ready at D:/MyProjects/Crack_RTDETR/outputs/worktrees/lif-down/outputs/sync_checks_user_fixture/worktree with space, fixed 8bc56f95aa3f4149f4c5fbf20ceeeba415baf342; no training started.\nFrom D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\lif-down\\outputs\\sync_checks_user_fixture\\remote\n * branch            codex/lif-down -> FETCH_HEAD\n"
+    },
+    {
+      "name": "dirty_target_rejected",
+      "exit_code": 1,
+      "tail": "Modified target preserved\nFrom D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\lif-down\\outputs\\sync_checks_user_fixture\\remote\n * branch            codex/lif-down -> FETCH_HEAD\n"
+    },
+    {
+      "name": "different_sha_rejected",
+      "exit_code": 1,
+      "tail": "Different SHA preserved; use another new directory\nFrom D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\lif-down\\outputs\\sync_checks_user_fixture\\remote\n * branch            codex/lif-down -> FETCH_HEAD\n"
+    },
+    {
+      "name": "non_worktree_rejected",
+      "exit_code": 1,
+      "tail": "Target is not linked worktree; preserved\nFrom D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\lif-down\\outputs\\sync_checks_user_fixture\\remote\n * branch            codex/lif-down -> FETCH_HEAD\n"
+    },
+    {
+      "name": "wrong_origin_rejected",
+      "exit_code": 1,
+      "tail": "Unexpected origin: https://example.invalid/wrong.git\n"
+    }
+  ],
+  "training": "NOT_RUN",
+  "fixture_directory": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\lif-down\\outputs\\sync_checks_user_fixture"
+}
