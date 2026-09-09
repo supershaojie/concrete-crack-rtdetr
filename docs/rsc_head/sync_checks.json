@@ -1,0 +1,42 @@
+{
+  "status": "PASSED",
+  "scope": "Real local Git/worktrees; only fetch destination redirected to isolated local bare repository",
+  "pinned_code_commit": "ddbc5c6f012a8fe94599e268baeb7bb7a08fb0a8",
+  "fixture_remote_advanced_commit": "15057eb6987e3c637bf618f08f08390e588c5c8b",
+  "detached_launcher_accepted": true,
+  "main_dirty_state_preserved": true,
+  "checks": [
+    {
+      "name": "remote_advanced_pin_original",
+      "exit_code": 0,
+      "tail": "solated C2 refinement-state conditioned head\n{\n  \"record\": {\n    \"commit\": \"ddbc5c6f012a8fe94599e268baeb7bb7a08fb0a8\",\n    \"branch\": \"codex/rsc-head\",\n    \"main\": \"D:\\\\MyProjects\\\\Crack_RTDETR-rsc-head\\\\outputs\\\\rsc_sync_checks2_fixture\\\\main\",\n    \"worktree\": \"D:\\\\MyProjects\\\\Crack_RTDETR-rsc-head\\\\outputs\\\\rsc_sync_checks2_fixture\\\\worktree with space\",\n    \"files\": {\n      \"tools/init_rsc_head.py\": \"a192e24b367666bc0a6eb3d47e67663bd15048f2930e89858d42ad8e1eed8945\",\n      \"tools/train_rsc_head.py\": \"9ffc3ec1e4d58dddcd27b25550edba43774d93e7b9602b3c504471a81df69c8f\",\n      \"tools/autodl_rsc_head.sh\": \"d72ccd344feb7cff2620886f84166b5c9552f1aeaef1162688bbf41db9d881ce\",\n      \"tools/rsc_head_results.py\": \"09a5c178a9dc527ab60e1143925bff93dc9f7835d9e2af0e55d1579b54d5bbac\",\n      \"ultralytics-main/ultralytics/nn/modules/rsc_head.py\": \"abc755133a4b918de32714388459c8c618b83c53c46a7d12c45d1917bb859c9f\",\n      \"ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-rsc-head.yaml\": \"7e831f2d06e6a10a364aa747f8dce2a4c48f1350a4ab45fc0be7bf97cbbcecb8\"\n    }\n  },\n  \"verified_remote_head\": \"15057eb6987e3c637bf618f08f08390e588c5c8b\"\n}\nRSC-Head ready at D:/MyProjects/Crack_RTDETR-rsc-head/outputs/rsc_sync_checks2_fixture/worktree with space, fixed ddbc5c6f012a8fe94599e268baeb7bb7a08fb0a8; no training started.\nFrom D:\\MyProjects\\Crack_RTDETR-rsc-head\\outputs\\rsc_sync_checks2_fixture\\remote\n * branch            codex/rsc-head -> FETCH_HEAD\nPreparing worktree (detached HEAD ddbc5c6)\n"
+    },
+    {
+      "name": "repeat_same_clean_pin",
+      "exit_code": 0,
+      "tail": "{\n  \"record\": {\n    \"commit\": \"ddbc5c6f012a8fe94599e268baeb7bb7a08fb0a8\",\n    \"branch\": \"codex/rsc-head\",\n    \"main\": \"D:\\\\MyProjects\\\\Crack_RTDETR-rsc-head\\\\outputs\\\\rsc_sync_checks2_fixture\\\\main\",\n    \"worktree\": \"D:\\\\MyProjects\\\\Crack_RTDETR-rsc-head\\\\outputs\\\\rsc_sync_checks2_fixture\\\\worktree with space\",\n    \"files\": {\n      \"tools/init_rsc_head.py\": \"a192e24b367666bc0a6eb3d47e67663bd15048f2930e89858d42ad8e1eed8945\",\n      \"tools/train_rsc_head.py\": \"9ffc3ec1e4d58dddcd27b25550edba43774d93e7b9602b3c504471a81df69c8f\",\n      \"tools/autodl_rsc_head.sh\": \"d72ccd344feb7cff2620886f84166b5c9552f1aeaef1162688bbf41db9d881ce\",\n      \"tools/rsc_head_results.py\": \"09a5c178a9dc527ab60e1143925bff93dc9f7835d9e2af0e55d1579b54d5bbac\",\n      \"ultralytics-main/ultralytics/nn/modules/rsc_head.py\": \"abc755133a4b918de32714388459c8c618b83c53c46a7d12c45d1917bb859c9f\",\n      \"ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-rsc-head.yaml\": \"7e831f2d06e6a10a364aa747f8dce2a4c48f1350a4ab45fc0be7bf97cbbcecb8\"\n    }\n  },\n  \"verified_remote_head\": \"15057eb6987e3c637bf618f08f08390e588c5c8b\"\n}\nRSC-Head ready at D:/MyProjects/Crack_RTDETR-rsc-head/outputs/rsc_sync_checks2_fixture/worktree with space, fixed ddbc5c6f012a8fe94599e268baeb7bb7a08fb0a8; no training started.\nFrom D:\\MyProjects\\Crack_RTDETR-rsc-head\\outputs\\rsc_sync_checks2_fixture\\remote\n * branch            codex/rsc-head -> FETCH_HEAD\n"
+    },
+    {
+      "name": "dirty_target_rejected",
+      "exit_code": 1,
+      "tail": "Modified target preserved\nFrom D:\\MyProjects\\Crack_RTDETR-rsc-head\\outputs\\rsc_sync_checks2_fixture\\remote\n * branch            codex/rsc-head -> FETCH_HEAD\n"
+    },
+    {
+      "name": "different_sha_rejected",
+      "exit_code": 1,
+      "tail": "Different SHA preserved; use another new directory\nFrom D:\\MyProjects\\Crack_RTDETR-rsc-head\\outputs\\rsc_sync_checks2_fixture\\remote\n * branch            codex/rsc-head -> FETCH_HEAD\n"
+    },
+    {
+      "name": "non_worktree_rejected",
+      "exit_code": 1,
+      "tail": "Target is not linked worktree; preserved\nFrom D:\\MyProjects\\Crack_RTDETR-rsc-head\\outputs\\rsc_sync_checks2_fixture\\remote\n * branch            codex/rsc-head -> FETCH_HEAD\n"
+    },
+    {
+      "name": "wrong_origin_rejected",
+      "exit_code": 1,
+      "tail": "Unexpected origin: https://example.invalid/wrong.git\n"
+    }
+  ],
+  "training": "NOT_RUN",
+  "fixture_directory": "D:\\MyProjects\\Crack_RTDETR-rsc-head\\outputs\\rsc_sync_checks2_fixture"
+}

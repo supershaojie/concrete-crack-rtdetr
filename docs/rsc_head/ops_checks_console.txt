@@ -1,0 +1,10 @@
+Started rsc_head: tmux rsc-head-training; log D:\MyProjects\Crack_RTDETR-rsc-head\outputs\rsc_head_ops_8xou_8i0\worktree\outputs\rsc_head\console.log; 完整服务器预检未执行
+Traceback (most recent call last):
+  File "D:\MyProjects\Crack_RTDETR-rsc-head\tools\train_rsc_head.py", line 288, in worker
+    model.train(trainer=RecordingTrainer, **plan["args"])
+  File "D:\MyProjects\Crack_RTDETR-rsc-head\tools\check_rsc_head_ops.py", line 74, in train
+    def train(self, **kwargs): raise train.torch.cuda.OutOfMemoryError("MOCK OOM")
+torch.OutOfMemoryError: MOCK OOM
+Archive verified (evidence_complete=False): D:\MyProjects\Crack_RTDETR-rsc-head\outputs\rsc_head_ops_8xou_8i0\fixture.tar.gz
+Bytes: 22940364
+SHA256: c3f3fa86085f7643814d626722f0cd12060d5df45b8978a50c583939d3079959

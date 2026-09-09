@@ -7,7 +7,7 @@
     "gpu": "NVIDIA GeForce RTX 2060",
     "ultralytics": "D:\\MyProjects\\Crack_RTDETR-rsc-head\\ultralytics-main\\ultralytics\\__init__.py",
     "rsc_head_module": "D:\\MyProjects\\Crack_RTDETR-rsc-head\\ultralytics-main\\ultralytics\\nn\\modules\\rsc_head.py",
-    "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6"
+    "commit": "ddbc5c6f012a8fe94599e268baeb7bb7a08fb0a8"
   },
   "scope": "MOCKED lifecycle controls and real archive IO; no real dispatch/training",
   "full_server_preflight": "NOT_RUN",
@@ -25,7 +25,7 @@
     "integrity": "passed",
     "missing_count": 43,
     "evidence_complete": false,
-    "bytes": 22878783,
+    "bytes": 22940364,
     "overwrite_rejected": true
   },
   "status": "passed"

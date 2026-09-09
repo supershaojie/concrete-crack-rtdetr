@@ -55,7 +55,7 @@ RSCHead 继承 nn.Linear，直接保留原 weight/bias 参数对象，不再次�
 
 真实配方来自 `D:/rtdetr跑结果/c2 200e在线/c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053/train_run/args.yaml`，原样存于 [c2_args.yaml](c2_args.yaml)。配方和数据档案来源/哈希见 [provenance.json](provenance.json)。该记录与 C17/C19 对照的 C2 同属 200e 在线增强系列：200e、640、batch16、seed42、AdamW、lr0=.0005、lrf=.01、decay=.0001、warmup5、cos_lr=true、AMP=true、close_mosaic=10；workers8、device0、deterministic=true、patience50。
 
-增强保持 hsv=(.015,.5,.35)、degrees5、translate.1、scale.4、shear1.5、perspective.0002、flipud.2、fliplr.5、mosaic.8、mixup.05、cutmix0、copy_paste0、erasing0。完整字段以存档为准，不使用早期 150e 配方。数据原划分 train6048/val1728/test864，配置见 [c2_data.yaml](c2_data.yaml)；不重划。启动时对真实 C2 args 的每个字段和值类型严格检查，同时核对数据路径、划分和类别。允许差异只有 model/name/save_dir；覆盖 RSC_HEAD_MAIN 时 project/data 仅作同一根目录迁移。
+增强保持 hsv=(.015,.5,.35)、degrees5、translate.1、scale.4、shear1.5、perspective.0002、flipud.2、fliplr.5、mosaic.8、mixup.05、cutmix0、copy_paste0、erasing0。完整字段以存档为准，不使用早期 150e 配方。默认服务器完整配置见 [resolved_formal_config.yaml](resolved_formal_config.yaml)，逐字段差异见 [recipe_diff.json](recipe_diff.json)；运行时还将从真实C2记录重新严格解析。数据原划分 train6048/val1728/test864，配置见 [c2_data.yaml](c2_data.yaml)；不重划。启动时对真实 C2 args 的每个字段和值类型严格检查，同时核对数据路径、划分和类别。允许差异只有 model/name/save_dir；覆盖 RSC_HEAD_MAIN 时 project/data 仅作同一根目录迁移。
 
 统一源为主仓库 `weights/rtdetr_r18_lite_imagenet_backbone_init.pt`，SHA256：
 

@@ -30,6 +30,6 @@ TF32 关闭、cudnn benchmark=false/deterministic=true、torch deterministic war
 
 早期尝试保存在本地 outputs：第一次揭示极小框 xyxy 面积需按端点计算，已修复实现；标量 oracle 的细长框用 y=0 避免把 FP32端点舍入误当算法差错，未放宽容差。后续修复三个测试夹具问题：直接构造模型需补原训练器设置的 nc；接口对照不能切换输入投影BN；优化器需按CPU加载后映射设备的流程比较状态。最终检查没有删 DN、关闭 AMP 或改变算法来通过。
 
-操作工具检查：`check_rsc_head_ops.py` 使用模拟 dispatch/OOM/PID 状态和真实归档 IO，不创建真实 tmux 或训练。覆盖无完整预检标记直接调度、重复启动拒绝、OOM非零退出且batch不变、失联/缺产物状态、超过20MiB归档完整读回、拒绝覆盖、缺失材料不标完整。Bash语法通过。具体结果见 ops_checks.json；同步集成记录见 sync_checks.json（如有）。
+操作工具检查：`check_rsc_head_ops.py` 使用模拟 dispatch/OOM/PID 状态和真实归档 IO，不创建真实 tmux 或训练。覆盖无完整预检标记直接调度、重复启动拒绝、OOM非零退出且batch不变、失联/缺产物状态、超过20MiB归档完整读回、拒绝覆盖、缺失材料不标完整。Bash语法通过。具体结果见 ops_checks.json；真实本地 Git 集成测试共6个场景通过：远程前进后固定旧SHA、同一干净SHA重复同步、带修改拒绝、不同SHA拒绝、非worktree拒绝、错误origin拒绝。真实 detached worktree 的 verify_delivery 也通过，主库既有修改保持原样。仅将fetch目标定向到隔离bare仓库，没有伪造git对象或启动训练。记录见 sync_checks.json。
 
 未执行：AutoDL4090/PyTorch2.1.2、正式batch16显存、完整训练/数据集val/test/吞吐延迟或精度提升验证。full_server_preflight=NOT_RUN。
