@@ -1,0 +1,656 @@
+[
+  {
+    "field": "agnostic_nms",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "amp",
+    "c2": true,
+    "lcr": true,
+    "changed": false
+  },
+  {
+    "field": "angle",
+    "c2": 1.0,
+    "lcr": 1.0,
+    "changed": false
+  },
+  {
+    "field": "augment",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "auto_augment",
+    "c2": null,
+    "lcr": null,
+    "changed": false
+  },
+  {
+    "field": "batch",
+    "c2": 16,
+    "lcr": 16,
+    "changed": false
+  },
+  {
+    "field": "bgr",
+    "c2": 0.0,
+    "lcr": 0.0,
+    "changed": false
+  },
+  {
+    "field": "box",
+    "c2": 7.5,
+    "lcr": 7.5,
+    "changed": false
+  },
+  {
+    "field": "cache",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "cfg",
+    "c2": null,
+    "lcr": null,
+    "changed": false
+  },
+  {
+    "field": "classes",
+    "c2": null,
+    "lcr": null,
+    "changed": false
+  },
+  {
+    "field": "close_mosaic",
+    "c2": 10,
+    "lcr": 10,
+    "changed": false
+  },
+  {
+    "field": "cls",
+    "c2": 0.5,
+    "lcr": 0.5,
+    "changed": false
+  },
+  {
+    "field": "compile",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "conf",
+    "c2": null,
+    "lcr": null,
+    "changed": false
+  },
+  {
+    "field": "copy_paste",
+    "c2": 0,
+    "lcr": 0,
+    "changed": false
+  },
+  {
+    "field": "copy_paste_mode",
+    "c2": "flip",
+    "lcr": "flip",
+    "changed": false
+  },
+  {
+    "field": "cos_lr",
+    "c2": true,
+    "lcr": true,
+    "changed": false
+  },
+  {
+    "field": "cutmix",
+    "c2": 0,
+    "lcr": 0,
+    "changed": false
+  },
+  {
+    "field": "data",
+    "c2": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "lcr": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "changed": false
+  },
+  {
+    "field": "degrees",
+    "c2": 5,
+    "lcr": 5,
+    "changed": false
+  },
+  {
+    "field": "deterministic",
+    "c2": true,
+    "lcr": true,
+    "changed": false
+  },
+  {
+    "field": "device",
+    "c2": "0",
+    "lcr": "0",
+    "changed": false
+  },
+  {
+    "field": "dfl",
+    "c2": 1.5,
+    "lcr": 1.5,
+    "changed": false
+  },
+  {
+    "field": "dnn",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "dropout",
+    "c2": 0.0,
+    "lcr": 0.0,
+    "changed": false
+  },
+  {
+    "field": "dynamic",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "embed",
+    "c2": null,
+    "lcr": null,
+    "changed": false
+  },
+  {
+    "field": "end2end",
+    "c2": null,
+    "lcr": null,
+    "changed": false
+  },
+  {
+    "field": "epochs",
+    "c2": 200,
+    "lcr": 200,
+    "changed": false
+  },
+  {
+    "field": "erasing",
+    "c2": 0,
+    "lcr": 0,
+    "changed": false
+  },
+  {
+    "field": "exist_ok",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "fliplr",
+    "c2": 0.5,
+    "lcr": 0.5,
+    "changed": false
+  },
+  {
+    "field": "flipud",
+    "c2": 0.2,
+    "lcr": 0.2,
+    "changed": false
+  },
+  {
+    "field": "format",
+    "c2": "torchscript",
+    "lcr": "torchscript",
+    "changed": false
+  },
+  {
+    "field": "fraction",
+    "c2": 1.0,
+    "lcr": 1.0,
+    "changed": false
+  },
+  {
+    "field": "freeze",
+    "c2": null,
+    "lcr": null,
+    "changed": false
+  },
+  {
+    "field": "half",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "hsv_h",
+    "c2": 0.015,
+    "lcr": 0.015,
+    "changed": false
+  },
+  {
+    "field": "hsv_s",
+    "c2": 0.5,
+    "lcr": 0.5,
+    "changed": false
+  },
+  {
+    "field": "hsv_v",
+    "c2": 0.35,
+    "lcr": 0.35,
+    "changed": false
+  },
+  {
+    "field": "imgsz",
+    "c2": 640,
+    "lcr": 640,
+    "changed": false
+  },
+  {
+    "field": "int8",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "iou",
+    "c2": 0.7,
+    "lcr": 0.7,
+    "changed": false
+  },
+  {
+    "field": "keras",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "kobj",
+    "c2": 1.0,
+    "lcr": 1.0,
+    "changed": false
+  },
+  {
+    "field": "line_width",
+    "c2": null,
+    "lcr": null,
+    "changed": false
+  },
+  {
+    "field": "lr0",
+    "c2": 0.0005,
+    "lcr": 0.0005,
+    "changed": false
+  },
+  {
+    "field": "lrf",
+    "c2": 0.01,
+    "lcr": 0.01,
+    "changed": false
+  },
+  {
+    "field": "mask_ratio",
+    "c2": 4,
+    "lcr": 4,
+    "changed": false
+  },
+  {
+    "field": "max_det",
+    "c2": 300,
+    "lcr": 300,
+    "changed": false
+  },
+  {
+    "field": "mixup",
+    "c2": 0.05,
+    "lcr": 0.05,
+    "changed": false
+  },
+  {
+    "field": "mode",
+    "c2": "train",
+    "lcr": "train",
+    "changed": false
+  },
+  {
+    "field": "model",
+    "c2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "lcr": "/root/autodl-tmp/projects/Crack_RTDETR-lcr/weights/lcr_aifi_controlled_init.pt",
+    "changed": true
+  },
+  {
+    "field": "momentum",
+    "c2": 0.937,
+    "lcr": 0.937,
+    "changed": false
+  },
+  {
+    "field": "mosaic",
+    "c2": 0.8,
+    "lcr": 0.8,
+    "changed": false
+  },
+  {
+    "field": "multi_scale",
+    "c2": 0.0,
+    "lcr": 0.0,
+    "changed": false
+  },
+  {
+    "field": "name",
+    "c2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "lcr": "lcr_aifi_rtdetr_r18_lite_e200_b16_onlineaug",
+    "changed": true
+  },
+  {
+    "field": "nbs",
+    "c2": 64,
+    "lcr": 64,
+    "changed": false
+  },
+  {
+    "field": "nms",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "opset",
+    "c2": null,
+    "lcr": null,
+    "changed": false
+  },
+  {
+    "field": "optimize",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "optimizer",
+    "c2": "AdamW",
+    "lcr": "AdamW",
+    "changed": false
+  },
+  {
+    "field": "overlap_mask",
+    "c2": true,
+    "lcr": true,
+    "changed": false
+  },
+  {
+    "field": "patience",
+    "c2": 50,
+    "lcr": 50,
+    "changed": false
+  },
+  {
+    "field": "perspective",
+    "c2": 0.0002,
+    "lcr": 0.0002,
+    "changed": false
+  },
+  {
+    "field": "plots",
+    "c2": true,
+    "lcr": true,
+    "changed": false
+  },
+  {
+    "field": "pose",
+    "c2": 12.0,
+    "lcr": 12.0,
+    "changed": false
+  },
+  {
+    "field": "pretrained",
+    "c2": true,
+    "lcr": true,
+    "changed": false
+  },
+  {
+    "field": "profile",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "project",
+    "c2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "lcr": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "changed": false
+  },
+  {
+    "field": "rect",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "resume",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "retina_masks",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "rle",
+    "c2": 1.0,
+    "lcr": 1.0,
+    "changed": false
+  },
+  {
+    "field": "save",
+    "c2": true,
+    "lcr": true,
+    "changed": false
+  },
+  {
+    "field": "save_conf",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "save_crop",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "save_dir",
+    "c2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "lcr": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/lcr_aifi_rtdetr_r18_lite_e200_b16_onlineaug",
+    "changed": true
+  },
+  {
+    "field": "save_frames",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "save_json",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "save_period",
+    "c2": -1,
+    "lcr": -1,
+    "changed": false
+  },
+  {
+    "field": "save_txt",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "scale",
+    "c2": 0.4,
+    "lcr": 0.4,
+    "changed": false
+  },
+  {
+    "field": "seed",
+    "c2": 42,
+    "lcr": 42,
+    "changed": false
+  },
+  {
+    "field": "shear",
+    "c2": 1.5,
+    "lcr": 1.5,
+    "changed": false
+  },
+  {
+    "field": "show",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "show_boxes",
+    "c2": true,
+    "lcr": true,
+    "changed": false
+  },
+  {
+    "field": "show_conf",
+    "c2": true,
+    "lcr": true,
+    "changed": false
+  },
+  {
+    "field": "show_labels",
+    "c2": true,
+    "lcr": true,
+    "changed": false
+  },
+  {
+    "field": "simplify",
+    "c2": true,
+    "lcr": true,
+    "changed": false
+  },
+  {
+    "field": "single_cls",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "source",
+    "c2": null,
+    "lcr": null,
+    "changed": false
+  },
+  {
+    "field": "split",
+    "c2": "val",
+    "lcr": "val",
+    "changed": false
+  },
+  {
+    "field": "stream_buffer",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "task",
+    "c2": "detect",
+    "lcr": "detect",
+    "changed": false
+  },
+  {
+    "field": "time",
+    "c2": null,
+    "lcr": null,
+    "changed": false
+  },
+  {
+    "field": "tracker",
+    "c2": "botsort.yaml",
+    "lcr": "botsort.yaml",
+    "changed": false
+  },
+  {
+    "field": "translate",
+    "c2": 0.1,
+    "lcr": 0.1,
+    "changed": false
+  },
+  {
+    "field": "val",
+    "c2": true,
+    "lcr": true,
+    "changed": false
+  },
+  {
+    "field": "verbose",
+    "c2": true,
+    "lcr": true,
+    "changed": false
+  },
+  {
+    "field": "vid_stride",
+    "c2": 1,
+    "lcr": 1,
+    "changed": false
+  },
+  {
+    "field": "visualize",
+    "c2": false,
+    "lcr": false,
+    "changed": false
+  },
+  {
+    "field": "warmup_bias_lr",
+    "c2": 0.1,
+    "lcr": 0.1,
+    "changed": false
+  },
+  {
+    "field": "warmup_epochs",
+    "c2": 5,
+    "lcr": 5,
+    "changed": false
+  },
+  {
+    "field": "warmup_momentum",
+    "c2": 0.8,
+    "lcr": 0.8,
+    "changed": false
+  },
+  {
+    "field": "weight_decay",
+    "c2": 0.0001,
+    "lcr": 0.0001,
+    "changed": false
+  },
+  {
+    "field": "workers",
+    "c2": 8,
+    "lcr": 8,
+    "changed": false
+  },
+  {
+    "field": "workspace",
+    "c2": null,
+    "lcr": null,
+    "changed": false
+  }
+]

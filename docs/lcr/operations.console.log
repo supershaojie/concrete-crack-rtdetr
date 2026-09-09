@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "D:\MyProjects\Crack_RTDETR-lcr\tools\train_lcr.py", line 262, in worker
+    model.train(trainer=RecordingTrainer, **plan["args"])
+  File "D:\MyProjects\Crack_RTDETR-lcr\tools\check_lcr_ops.py", line 73, in train
+    def train(self, **kwargs): raise train.torch.cuda.OutOfMemoryError("MOCK OOM")
+torch.OutOfMemoryError: MOCK OOM
+Started lcr_aifi: tmux lcr-training; log D:\MyProjects\Crack_RTDETR-lcr\outputs\lcr_ops_8yl6r64i\worktree\outputs\lcr\console.log; 完整服务器预检未执行
+Archive verified (evidence_complete=False): D:\MyProjects\Crack_RTDETR-lcr\outputs\lcr_ops_8yl6r64i\fixture.tar.gz
+Bytes: 23049658
+SHA256: 8951f7c7a58a568232ad8da43ebedb341189410e5f4a611b623550eb68958630

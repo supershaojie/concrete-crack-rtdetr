@@ -13,6 +13,7 @@ import torch.nn as nn
 from ultralytics.nn.autobackend import check_class_names
 from ultralytics.nn.modules import (
     AIFI,
+    LCRAIFI,
     SCCAAIFI,
     C1,
     C2,
@@ -1677,7 +1678,7 @@ def parse_model(d, ch, verbose=True):
                     args.extend((True, 1.2))
             if m is C2fCIB:
                 legacy = False
-        elif m in {AIFI, SCCAAIFI}:
+        elif m in {AIFI, SCCAAIFI, LCRAIFI}:
             c2 = ch[f]
             args = [ch[f], *args]
         elif m is Blocks:

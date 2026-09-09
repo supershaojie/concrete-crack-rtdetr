@@ -1,0 +1,59 @@
+{
+  "reference_access": "AVAILABLE",
+  "module_zip": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-20260623.zip",
+  "module_zip_sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+  "read_reference_files": [
+    {
+      "zip_entry": "RTDETR-main/ultralytics/nn/extra_modules/transformer.py",
+      "local": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\transformer.py",
+      "sha256": "e14e25e61b83c070892582f90c6f5f407caf3457ef57c5909ffa8a0d646cf22f"
+    },
+    {
+      "zip_entry": "RTDETR-main/ultralytics/nn/extra_modules/block.py",
+      "local": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\block.py",
+      "sha256": "e3e3617c89bd7caf350d2601740f2e399847a16a3a659d7b3e40010b88498cd2"
+    }
+  ],
+  "c2_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+  "tool_base_commit": "beedcfa307e250fb2de47587097c51f9c141123b",
+  "c2_archive": "D:\\rtdetr跑结果\\c2 200e在线\\c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053",
+  "c2_model_matches_archive_and_commit": true,
+  "c2_all_109_fields_match": true,
+  "source_files": [
+    {
+      "path": "D:\\rtdetr跑结果\\c2 200e在线\\c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053\\train_run\\args.yaml",
+      "sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd"
+    },
+    {
+      "path": "D:\\rtdetr跑结果\\c2 200e在线\\c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053\\config\\rtdetr-resnet18-lite.yaml",
+      "sha256": "3493d693cbef958a38a2a135822a6c5379b65804905bc71566e395069e8f4f16"
+    },
+    {
+      "path": "D:\\rtdetr跑结果\\c2 200e在线\\c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053\\weights\\rtdetr_r18_lite_imagenet_backbone_init.pt",
+      "sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e"
+    },
+    {
+      "path": "D:\\MyProjects\\Crack_RTDETR\\weights\\rtdetr_r18_lite_imagenet_backbone_init.pt",
+      "sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e"
+    }
+  ],
+  "reused_tools": [
+    {
+      "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\evc\\tools\\train_evc.py",
+      "sha256": "d8e0416ed00cee6e7cb8cb00baa3cc05129f866e6bec5d76c3c0d0e6f3cd8ba1"
+    },
+    {
+      "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\evc\\tools\\evc_results.py",
+      "sha256": "17e52ecc11c49adf6aec283d80c2c851ff95a6737c2bdd7a3a105af532b27ce8"
+    },
+    {
+      "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\dra\\tools\\init_dra.py",
+      "sha256": "821fe3ec21cc66662138575806ce87be7e18a0bffc860576ba6e5337435fca87"
+    }
+  ],
+  "papers": {
+    "transnext": "https://arxiv.org/abs/2311.17132",
+    "moganet": "https://openreview.net/forum?id=XhYWgjqCrV",
+    "openreview_web_access": "browser verification challenge; local reference class read"
+  }
+}

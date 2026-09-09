@@ -1,0 +1,34 @@
+flowchart TD
+ F["F: B x 256 x H x W"] --> X["Flatten X: B x HW x 256"]
+ X --> QK["Q=K=X+original sin/cos PE"]
+ X --> V["V=X"]
+ QK --> MHA["Original MHA, 8 heads"]
+ V --> MHA
+ MHA --> DR1["Original dropout1"]
+ X --> ADD1["Add residual"]
+ DR1 --> ADD1
+ ADD1 --> N1["Original LayerNorm1"]
+ N1 --> FC1["fc1 Linear 256 to 1024"]
+ FC1 --> U["Reshape using actual H,W"]
+ U --> S["S: DW3x3, replicate pad, identity init"]
+ S --> M["M: mean3x3, replicate pad"]
+ S --> D["D=S-M, FP32"]
+ M --> D
+ D --> E["E=D/sqrt(mean_channel D squared + 1e-6), FP32"]
+ E --> GI["grouped1x1 1024 to 64, groups16, Xavier"]
+ GI --> GA[GELU]
+ GA --> GO["grouped1x1 64 to 1024, groups16, zero init"]
+ GO --> DELTA["Delta=0.5 tanh T, FP32"]
+ S --> PS["phi S"]
+ M --> PM["phi M"]
+ PS --> A["A=phi S + Delta * (phi S - phi M)"]
+ PM --> A
+ DELTA --> A
+ A --> TOK["Cast back; contiguous B x HW x 1024"]
+ TOK --> DROP["Original dropout"]
+ DROP --> FC2["fc2 Linear 1024 to 256"]
+ FC2 --> DR2["Original dropout2"]
+ N1 --> ADD2["Add residual"]
+ DR2 --> ADD2
+ ADD2 --> N2["Original LayerNorm2"]
+ N2 --> OUT["Reshape B x 256 x H x W"]

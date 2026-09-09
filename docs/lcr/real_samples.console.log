@@ -1,0 +1,34 @@
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 529/538 items from pretrained weights
+Fast image access  (ping: 0.10.0 ms, read: 1811.3215.3 MB/s, size: 6706.5 KB)
+
+[KScanning D:\MyProjects\Crack_RTDETR-lcr\outputs\lcr_data_v3\tmpgn0d77bq\subset\labels\train... 2 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 2/2 68.8it/s 0.0s
+New cache created: D:\MyProjects\Crack_RTDETR-lcr\outputs\lcr_data_v3\tmpgn0d77bq\subset\labels\train.cache
+Ultralytics 8.4.21  Python-3.9.25 torch-2.7.1+cu118 CPU (Intel Core i7-10750H 2.60GHz)
+rtdetr-resnet18-lite-lcr summary: 221 layers, 19,896,212 parameters, 15,925,908 gradients, 57.2 GFLOPs
+[34m[1mval: [0mFast image access  (ping: 0.10.0 ms, read: 2279.710.9 MB/s, size: 4247.3 KB)
+
+[K[34m[1mval: [0mScanning D:\MyProjects\Crack_RTDETR-lcr\outputs\lcr_data_v3\tmpgn0d77bq\subset\labels\val... 2 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 2/2 2.0Kit/s 0.0s
+[34m[1mval: [0mNew cache created: D:\MyProjects\Crack_RTDETR-lcr\outputs\lcr_data_v3\tmpgn0d77bq\subset\labels\val.cache
+
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 50% ━━━━━━────── 1/2 1.0s/it 0.3s<1.0s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 2/2 3.7it/s 0.5s
+                   all          2          2          0          0          0          0
+Speed: 0.1ms preprocess, 98.6ms inference, 0.0ms loss, 3.1ms postprocess per image
+Results saved to [1mD:\MyProjects\Crack_RTDETR-lcr\outputs\lcr_data_v3\limited_val\plots[0m
+Ultralytics 8.4.21  Python-3.9.25 torch-2.7.1+cu118 CPU (Intel Core i7-10750H 2.60GHz)
+rtdetr-resnet18-lite-lcr summary: 221 layers, 19,896,212 parameters, 15,925,908 gradients, 57.2 GFLOPs
+[34m[1mval: [0mFast image access  (ping: 0.10.0 ms, read: 1768.7131.4 MB/s, size: 5640.4 KB)
+
+[K[34m[1mval: [0mScanning D:\MyProjects\Crack_RTDETR-lcr\outputs\lcr_data_v3\tmpgn0d77bq\subset\labels\test... 2 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 2/2 1.0Kit/s 0.0s
+[34m[1mval: [0mNew cache created: D:\MyProjects\Crack_RTDETR-lcr\outputs\lcr_data_v3\tmpgn0d77bq\subset\labels\test.cache
+
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 50% ━━━━━━────── 1/2 1.2it/s 0.3s<0.8s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 2/2 3.8it/s 0.5s
+                   all          2          4          0          0          0          0
+Speed: 0.2ms preprocess, 109.5ms inference, 0.0ms loss, 1.1ms postprocess per image
+Results saved to [1mD:\MyProjects\Crack_RTDETR-lcr\outputs\lcr_data_v3\limited_test\plots[0m
