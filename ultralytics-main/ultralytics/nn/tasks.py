@@ -58,6 +58,7 @@ from ultralytics.nn.modules import (
     ImagePoolingAttn,
     Index,
     LRPCHead,
+    LIFDown,
     Pose,
     Pose26,
     RepC3,
@@ -235,7 +236,7 @@ class BaseModel(torch.nn.Module):
         """
         if not self.is_fused():
             for m in self.model.modules():
-                if isinstance(m, (Conv, Conv2, DWConv)) and hasattr(m, "bn"):
+                if isinstance(m, (Conv, Conv2, DWConv)) and not isinstance(m, LIFDown) and hasattr(m, "bn"):
                     if isinstance(m, Conv2):
                         m.fuse_convs()
                     m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
@@ -1579,6 +1580,7 @@ def parse_model(d, ch, verbose=True):
         {
             Classify,
             Conv,
+            LIFDown,
             ConvTranspose,
             GhostConv,
             ConvNormLayer,

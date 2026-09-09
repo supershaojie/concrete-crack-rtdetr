@@ -1,0 +1,80 @@
+{
+  "c2_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+  "actual_c2_git_state": "Commit:\n67c3078e54a657fd96d65fee657a75fbb1dae0d6\n\nBranch:\nexp-rtdetr-r18-lite-paperalign\n\nGit status:\n\nRemote:\norigin\tgit@github.com:supershaojie/concrete-crack-rtdetr.git (fetch)\norigin\tgit@github.com:supershaojie/concrete-crack-rtdetr.git (push)\n",
+  "c2_args_source": "D:\\rtdetr跑结果\\c2 200e在线\\c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053\\train_run\\args.yaml",
+  "c2_args_sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+  "c2_yaml": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\lif-down\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite.yaml",
+  "c2_yaml_sha256": "5fbfe7c88f23482fb6694fb18fd875d963f4bad1f026dc927314ab0fb0dbbf0b",
+  "archive_yaml_semantic_equal": true,
+  "c2_init_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "c2_init_source": "D:/MyProjects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+  "baseline_record_agreement": {
+    "C17": {
+      "path": "D:/MyProjects/Crack_RTDETR-lcr/docs/C17_CSCEF_V51.md",
+      "sha256": "1ce0b7bcbd0fa012ce1149bfd0c85d2527e36a1523913a028dda30ef52887f32",
+      "c2_commit_agrees": true
+    },
+    "C19": {
+      "path": "D:/MyProjects/Crack_RTDETR/outputs/worktrees/cbr/docs/C19_CBR.md",
+      "sha256": "25e959172ca79de94d484d49717d7ba66266f4e07e438fc966580ce80d67e1a3",
+      "c2_commit_agrees": true
+    },
+    "C24": {
+      "path": "D:/MyProjects/Crack_RTDETR/outputs/worktrees/scca/docs/scca/README.md",
+      "sha256": "cfdc99860bcd2b4bcb444d7c34f8716ff9b11862870aca75c6779dec89f68c57",
+      "c2_commit_agrees": true
+    },
+    "LCR": {
+      "path": "D:/MyProjects/Crack_RTDETR-lcr/docs/lcr/README.md",
+      "sha256": "567e2eb353319708ff40b71cb645924d882ce74bcf3d18deb1d8a0125a85a9cb",
+      "c2_commit_agrees": true
+    },
+    "RSC": {
+      "path": "D:/MyProjects/Crack_RTDETR-rsc-head/docs/rsc_head/README.md",
+      "sha256": "0051ae087facf78804bad7fffce7bd91fc2c49ebd7183b6cea06869ea27001b3",
+      "c2_commit_agrees": true
+    }
+  },
+  "recipe_comparisons": {
+    "LCR": {
+      "path": "D:\\MyProjects\\Crack_RTDETR-lcr\\docs\\lcr\\c2_args.yaml",
+      "fields": 109,
+      "all_equal": true,
+      "sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd"
+    },
+    "RSC": {
+      "path": "D:\\MyProjects\\Crack_RTDETR-rsc-head\\docs\\rsc_head\\c2_args.yaml",
+      "fields": 109,
+      "all_equal": true,
+      "sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd"
+    },
+    "C24": {
+      "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\scca\\docs\\scca\\c2_args.yaml",
+      "fields": 109,
+      "all_equal": true,
+      "sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd"
+    },
+    "C19": {
+      "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\cbr\\docs\\cbr_c2_109_field_comparison.json",
+      "fields": 109,
+      "only_identity_changes": [
+        "model",
+        "name",
+        "save_dir"
+      ]
+    }
+  },
+  "reference_modules": {
+    "block.py": {
+      "path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\block.py",
+      "sha256": "e3e3617c89bd7caf350d2601740f2e399847a16a3a659d7b3e40010b88498cd2"
+    },
+    "wtconv2d.py": {
+      "path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\wtconv2d.py",
+      "sha256": "2f030c240ba7bbcdc21c8c0d250ef3b3ffe9b78f516938648f39ac155ef7641f"
+    }
+  },
+  "reference_scope": "Read SPDConv and WTConv2d as mechanism references only; no runtime dependency or module transplantation",
+  "applicable_AGENTS": "None found in ancestors, repository, .agents, or C2 tracked tree",
+  "tools_reuse": "Adapted reviewed RSC lifecycle/evaluation/sync utilities at b847aa0 into this C2-only branch; no other experiment model imports; strict complete-only pack and five-state status"
+}

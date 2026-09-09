@@ -1,0 +1,29 @@
+{
+  "status": "PASSED",
+  "scope": "two duplicated real training images only, no full val/test",
+  "reports": {
+    "val": {
+      "status": "completed",
+      "images": 2,
+      "predictions": 600,
+      "ground_truth": 6,
+      "checkpoint_sha256": "572ceeeb87ca2f51f79830d349630c2580a6dfa6b59e2b4e1325287282acf20e",
+      "export_complete": true,
+      "policy": "corrected_sorted_conf_mask_v1",
+      "evidence_scope": "two_real_train_images_fixture"
+    },
+    "test": {
+      "status": "completed",
+      "images": 2,
+      "predictions": 600,
+      "ground_truth": 6,
+      "checkpoint_sha256": "572ceeeb87ca2f51f79830d349630c2580a6dfa6b59e2b4e1325287282acf20e",
+      "export_complete": true,
+      "policy": "corrected_sorted_conf_mask_v1",
+      "evidence_scope": "two_real_train_images_fixture"
+    }
+  },
+  "sorted_filter": "PASSED",
+  "checkpoint_mismatch_rejected": true,
+  "formal_metrics": "NOT_RUN"
+}

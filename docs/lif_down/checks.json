@@ -1,0 +1,477 @@
+{
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\lif-down\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\lif-down\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6"
+  },
+  "status": "PASSED",
+  "formal_training": "NOT_RUN",
+  "full_val_test": "NOT_RUN",
+  "server_batch16": "NOT_RUN",
+  "determinism": "TF32 disabled; deterministic algorithms warn_only because native CUDA grid_sample backward is nondeterministic",
+  "module": {
+    "shape": [
+      {
+        "input": [
+          80,
+          80
+        ],
+        "output": [
+          2,
+          256,
+          40,
+          40
+        ],
+        "equivalence": {
+          "max_abs_error": 0.0,
+          "max_rel_error": 0.0,
+          "atol": 2e-06,
+          "rtol": 2e-05
+        }
+      },
+      {
+        "input": [
+          79,
+          80
+        ],
+        "output": [
+          2,
+          256,
+          40,
+          40
+        ],
+        "equivalence": {
+          "max_abs_error": 0.0,
+          "max_rel_error": 0.0,
+          "atol": 2e-06,
+          "rtol": 2e-05
+        }
+      },
+      {
+        "input": [
+          80,
+          79
+        ],
+        "output": [
+          2,
+          256,
+          40,
+          40
+        ],
+        "equivalence": {
+          "max_abs_error": 0.0,
+          "max_rel_error": 0.0,
+          "atol": 2e-06,
+          "rtol": 2e-05
+        }
+      },
+      {
+        "input": [
+          79,
+          81
+        ],
+        "output": [
+          2,
+          256,
+          40,
+          41
+        ],
+        "equivalence": {
+          "max_abs_error": 0.0,
+          "max_rel_error": 0.0,
+          "atol": 2e-06,
+          "rtol": 2e-05
+        }
+      },
+      {
+        "input": [
+          1,
+          1
+        ],
+        "output": [
+          2,
+          256,
+          1,
+          1
+        ],
+        "equivalence": {
+          "max_abs_error": 0.0,
+          "max_rel_error": 0.0,
+          "atol": 2e-06,
+          "rtol": 2e-05
+        }
+      }
+    ],
+    "haar_layout": "PASSED",
+    "odd_replicate": "PASSED",
+    "align_hand_tensor": [
+      [
+        [
+          [
+            1.0,
+            1.75,
+            2.75
+          ],
+          [
+            3.25,
+            4.0,
+            5.0
+          ],
+          [
+            6.25,
+            7.0,
+            8.0
+          ]
+        ]
+      ]
+    ],
+    "first_gradient_norms": {
+      "B_proj.weight": 0.0,
+      "P.weight": 0.0,
+      "U_mix.weight": 0.0,
+      "U_dw.weight": 0.0,
+      "O_proj.weight": 0.015629954636096954
+    },
+    "after_O_update_gradient_norms": {
+      "B_proj.weight": 2.3278598746401258e-06,
+      "P.weight": 9.334624451184936e-08,
+      "U_mix.weight": 4.0433508985415756e-08,
+      "U_dw.weight": 6.824754450462933e-08,
+      "O_proj.weight": 0.01562991738319397
+    }
+  },
+  "parameters": {
+    "baseline": 20082772,
+    "lif": 20103876,
+    "delta": 21104
+  },
+  "topology": {
+    "decoder": 26,
+    "p3_to_p4": {
+      "input": 19,
+      "downsample": 20,
+      "concat": 21,
+      "lateral": [
+        15
+      ],
+      "output": 22
+    },
+    "p4_to_p5": {
+      "input": 22,
+      "downsample": 23,
+      "concat": 24,
+      "lateral": [
+        10
+      ],
+      "output": 25
+    }
+  },
+  "graph": [
+    {
+      "index": 0,
+      "type": "ConvNormLayer",
+      "source": -1
+    },
+    {
+      "index": 1,
+      "type": "ConvNormLayer",
+      "source": -1
+    },
+    {
+      "index": 2,
+      "type": "ConvNormLayer",
+      "source": -1
+    },
+    {
+      "index": 3,
+      "type": "MaxPool2d",
+      "source": -1
+    },
+    {
+      "index": 4,
+      "type": "Blocks",
+      "source": -1
+    },
+    {
+      "index": 5,
+      "type": "Blocks",
+      "source": -1
+    },
+    {
+      "index": 6,
+      "type": "Blocks",
+      "source": -1
+    },
+    {
+      "index": 7,
+      "type": "Blocks",
+      "source": -1
+    },
+    {
+      "index": 8,
+      "type": "Conv",
+      "source": -1
+    },
+    {
+      "index": 9,
+      "type": "AIFI",
+      "source": -1
+    },
+    {
+      "index": 10,
+      "type": "Conv",
+      "source": -1
+    },
+    {
+      "index": 11,
+      "type": "Upsample",
+      "source": -1
+    },
+    {
+      "index": 12,
+      "type": "Conv",
+      "source": 6
+    },
+    {
+      "index": 13,
+      "type": "Concat",
+      "source": [
+        -2,
+        -1
+      ]
+    },
+    {
+      "index": 14,
+      "type": "RepC3",
+      "source": -1
+    },
+    {
+      "index": 15,
+      "type": "Conv",
+      "source": -1
+    },
+    {
+      "index": 16,
+      "type": "Upsample",
+      "source": -1
+    },
+    {
+      "index": 17,
+      "type": "Conv",
+      "source": 5
+    },
+    {
+      "index": 18,
+      "type": "Concat",
+      "source": [
+        -2,
+        -1
+      ]
+    },
+    {
+      "index": 19,
+      "type": "RepC3",
+      "source": -1
+    },
+    {
+      "index": 20,
+      "type": "LIFDown",
+      "source": -1
+    },
+    {
+      "index": 21,
+      "type": "Concat",
+      "source": [
+        -1,
+        15
+      ]
+    },
+    {
+      "index": 22,
+      "type": "RepC3",
+      "source": -1
+    },
+    {
+      "index": 23,
+      "type": "Conv",
+      "source": -1
+    },
+    {
+      "index": 24,
+      "type": "Concat",
+      "source": [
+        -1,
+        10
+      ]
+    },
+    {
+      "index": 25,
+      "type": "RepC3",
+      "source": -1
+    },
+    {
+      "index": 26,
+      "type": "RTDETRDecoder",
+      "source": [
+        19,
+        22,
+        25
+      ]
+    }
+  ],
+  "real_samples": [
+    {
+      "image": "crack_000001_brightness_contrast_strong.jpg",
+      "image_sha256": "f52412b0f7d6158df8c1e064cfc126a5ee447e7463dd663649f3ee5afd40d053",
+      "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+      "instances": 3
+    },
+    {
+      "image": "crack_000001_clahe_gamma_strong.jpg",
+      "image_sha256": "b597504f8cb893227a8bca17099be73259fc0ce94fadb8bd3e00ca5dce7c9f34",
+      "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+      "instances": 3
+    }
+  ],
+  "cpu": {
+    "downsample": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "atol": 2e-06,
+      "rtol": 2e-05
+    },
+    "final": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "atol": 2e-06,
+      "rtol": 2e-05
+    },
+    "bbox": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "atol": 2e-06,
+      "rtol": 2e-05
+    },
+    "score": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "atol": 2e-06,
+      "rtol": 2e-05
+    },
+    "input": [
+      1,
+      3,
+      640,
+      640
+    ],
+    "save_load": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "atol": 2e-06,
+      "rtol": 2e-05
+    },
+    "fuse_nonzero": {
+      "max_abs_error": 1.1920928955078125e-07,
+      "max_rel_error": 1.8840808024833677e-07,
+      "atol": 2e-05,
+      "rtol": 0.0002
+    },
+    "DN_loss": {
+      "scope": "two real training samples, resized smoke only",
+      "imgsz": 320,
+      "batch": 2,
+      "loss": 64.55174255371094,
+      "dn_split": [
+        198,
+        300
+      ],
+      "criterion": "RTDETRDetectionLoss",
+      "backward": "PASSED"
+    }
+  },
+  "cuda": {
+    "downsample": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "atol": 2e-06,
+      "rtol": 2e-05
+    },
+    "final": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "atol": 2e-06,
+      "rtol": 2e-05
+    },
+    "bbox": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "atol": 2e-06,
+      "rtol": 2e-05
+    },
+    "score": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "atol": 2e-06,
+      "rtol": 2e-05
+    },
+    "input": [
+      1,
+      3,
+      640,
+      640
+    ],
+    "AMP_inference": {
+      "status": "PASSED",
+      "dtype": "torch.float32"
+    },
+    "save_load": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "atol": 2e-06,
+      "rtol": 2e-05
+    },
+    "fuse_nonzero": {
+      "max_abs_error": 1.7881393432617188e-07,
+      "max_rel_error": 2.6744569936454354e-07,
+      "atol": 2e-05,
+      "rtol": 0.0002
+    },
+    "model_half": {
+      "status": "PASSED",
+      "dtype": "torch.float16",
+      "shape": [
+        1,
+        300,
+        5
+      ]
+    },
+    "DN_loss": {
+      "scope": "two real training samples, resized smoke only",
+      "imgsz": 320,
+      "batch": 2,
+      "loss": 64.83168029785156,
+      "dn_split": [
+        198,
+        300
+      ],
+      "criterion": "RTDETRDetectionLoss",
+      "backward": "PASSED"
+    },
+    "AMP_DN": {
+      "loss": 65.03380584716797,
+      "backward": "PASSED",
+      "update": "PASSED",
+      "smoke_scaler": 128,
+      "formal_scaler": "native unchanged"
+    }
+  },
+  "source_sha256": {
+    "ultralytics-main/ultralytics/nn/modules/lif_down.py": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+    "tools/check_lif_down.py": "04eddebf5ea48cec4802f707c921622e85193b7d8a31c8b19b42a0a972a1ada7"
+  }
+}

@@ -109,7 +109,10 @@ from .transformer import (
     TransformerLayer,
 )
 
+from .lif_down import LIFDown
+
 __all__ = (
+    "LIFDown",
     "AIFI",
     "C1",
     "C2",
