@@ -49,3 +49,10 @@ shell入口bash -n通过；隔离Git固定SHA/detached保护检查见 [sync_vali
 ## NOT_RUN
 
 正式训练、完整真实val/test、full_server_preflight、AutoDL4090/PyTorch2.1.2、真实SSH/tmux投递均NOT_RUN。正式batch16显存、200e稳定性/精度、延迟未测。本模块使用兼容2.1.2的基础API，未将本地较新版本实测称为服务器验证。
+
+## 最终同步验证
+
+`python tools/check_lcr_sync.py --bash "C:/Program Files/Git/bin/bash.exe" --output outputs/lcr_sync_v3.json` 退出0。
+真实本地临时Git仓库验证：远程前进仍固定交付SHA、首次detached创建、detached重复同步、脏目标拒绝、不同SHA拒绝、普通目录拒绝、错误origin拒绝；每种情况主工作树HEAD/状态均不变。对真实detached fixture调用启动器verify_delivery通过，没有启动tmux。仅origin get-url身份mock为正确GitHub URL，实际fetch/push全部在临时本地remote。前两次仅修正Windows PATH测试夹具，服务器同步脚本未因此改写。
+
+最终源码与核心数值验证相比仅增加运行来源断言/日志、Git测试夹具路径兼容及文档证据。核心模块/模型图/初始化公式/训练配方未变。源码散列覆盖交付版本，数值与样本报告保留各自真实运行时HEAD。

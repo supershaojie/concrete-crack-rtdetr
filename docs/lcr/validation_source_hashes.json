@@ -1,0 +1,65 @@
+{
+  "normalization": "UTF-8 source bytes, CRLF to LF; compares across Windows/server checkout",
+  "files": [
+    {
+      "path": "tools/autodl_lcr.sh",
+      "sha256_lf": "7a730e4b35ebed91bbea19b4763bf1645ffb680429e5b7ac9d8ea942c2b60c68"
+    },
+    {
+      "path": "tools/check_lcr.py",
+      "sha256_lf": "cf49114aa413f1c9200cbf3235940eef4b06a1bc27de77b63553ffe4a60ace9d"
+    },
+    {
+      "path": "tools/check_lcr_data.py",
+      "sha256_lf": "d64ccb535534c352150f6b9b4a884d7965afdb70d658be73822f5f95aa47cc4d"
+    },
+    {
+      "path": "tools/check_lcr_ops.py",
+      "sha256_lf": "b2b7c6583ee02f551a451239d5893876be0702b7cd86efe4a113558c359361e1"
+    },
+    {
+      "path": "tools/check_lcr_sync.py",
+      "sha256_lf": "aa206d86c7e1f134cfad4fe419ae508be8a2ebedc194dad23a56bf595fdaed06"
+    },
+    {
+      "path": "tools/init_lcr.py",
+      "sha256_lf": "40bba169badfcb1695a09f5703aa81d2efa546368a45dc2f23b5bf658cc9e0f9"
+    },
+    {
+      "path": "tools/lcr_results.py",
+      "sha256_lf": "9279ba845eab0b855ea702927fa27f8d3193d84b17fbd318cf0561803850180c"
+    },
+    {
+      "path": "tools/sync_lcr.sh",
+      "sha256_lf": "b0e03d79b44721c86a40c87057fc82ca4b5cc27774e7ffdaaace1a40e458b3f8"
+    },
+    {
+      "path": "tools/train_lcr.py",
+      "sha256_lf": "f263eab4b8ef8151d72dd6176c916b089a138cb9056c9b1306add7b999b7d9a2"
+    },
+    {
+      "path": "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-lcr.yaml",
+      "sha256_lf": "3a6b5a3e6cffe131005e65c7b9e1fdee66306993591ecf8acfa797b8a2f7f589"
+    },
+    {
+      "path": "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite.yaml",
+      "sha256_lf": "3493d693cbef958a38a2a135822a6c5379b65804905bc71566e395069e8f4f16"
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/__init__.py",
+      "sha256_lf": "3294893d6f5057281ba32c86fffd32e959dd23a9cbfe7d8d0ca67a15db52b97d"
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/lcr_aifi.py",
+      "sha256_lf": "7e0ba1f9747748ee3c534ea25a3ffda96b3d1ef44007f3bf1cc21c747dc063d2"
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/transformer.py",
+      "sha256_lf": "019d631e55a6f380e9776d513e9556f2c49a857ac94b3c08c1f8b4729dd3b988"
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/tasks.py",
+      "sha256_lf": "ea93b4fd3b0d31638768251dee796e29e69197410d1dbf6f9d01471d156df046"
+    }
+  ]
+}

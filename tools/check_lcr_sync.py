@@ -34,17 +34,16 @@ def run(output, bash):
         (main/'preserve-user-file.txt').write_text('preserve this user fixture')
         before=(g('rev-parse','HEAD',cwd=main),g('status','--porcelain',cwd=main))
         bindir=folder/'bin'; bindir.mkdir()
-        # Git Bash uses /d/... roots while native Git prints D:/...; normalize only that read result.
+        # Mock only the remote identity; all remaining Git operations are real and local.
         wrapper='#!/usr/bin/env bash\nset -e\n'
         wrapper+='if [[ "$*" == *"remote get-url origin"* ]]; then printf "%s\\n" "${LCR_FIXTURE_ORIGIN:-https://github.com/supershaojie/concrete-crack-rtdetr.git}"; exit 0; fi\n'
-        if os.name=='nt':
-            wrapper+='if [[ "$*" == *"rev-parse --show-toplevel"* ]]; then cygpath -u "$('+shlex.quote(Path(git).as_posix())+' "$@")"; exit 0; fi\n'
         wrapper+='exec '+shlex.quote(Path(git).as_posix())+' "$@"\n'
         (bindir/'git').write_text(wrapper,encoding='utf-8'); (bindir/'git').chmod(0o755)
         def sync(expected, label, target=work, commit=sha, identity=None):
-            env=dict(os.environ,LCR_PYTHON=__import__('sys').executable)
+            env=dict(os.environ,LCR_PYTHON=Path(__import__('sys').executable).as_posix())
             if identity: env['LCR_FIXTURE_ORIGIN']=identity
-            command='export PATH='+shlex.quote(bindir.as_posix())+':"$PATH"; bash '+shlex.quote((ROOT/'tools/sync_lcr.sh').as_posix())+' '+shlex.join([commit,main.as_posix(),target.as_posix()])
+            bash_bindir=('/'+bindir.drive[0].lower()+bindir.as_posix()[2:]) if os.name=='nt' else bindir.as_posix()
+            command='export PATH='+shlex.quote(bash_bindir)+':"$PATH"; bash '+shlex.quote((ROOT/'tools/sync_lcr.sh').as_posix())+' '+shlex.join([commit,main.as_posix(),target.as_posix()])
             p=subprocess.run([bash,'-c',command],env=env,text=True,capture_output=True)
             require((p.returncode==0)==expected,label+': '+p.stdout+'\n'+p.stderr)
             require(before==(g('rev-parse','HEAD',cwd=main),g('status','--porcelain',cwd=main)),'Main changed')

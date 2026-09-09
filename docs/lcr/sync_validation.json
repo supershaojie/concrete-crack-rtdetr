@@ -1,0 +1,53 @@
+{
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR-lcr\\ultralytics-main\\ultralytics\\__init__.py",
+    "lcr_module": "D:\\MyProjects\\Crack_RTDETR-lcr\\ultralytics-main\\ultralytics\\nn\\modules\\lcr_aifi.py",
+    "commit": "dcf40fdff61ac7455638a00c2b6db0d0de50f328"
+  },
+  "scope": "Local real Git/worktree fixtures; only remote get-url identity mocked. No network, tmux or training.",
+  "checks": [
+    {
+      "case": "ancestor SHA creates detached worktree",
+      "exit_code": 0,
+      "expected_accept": true,
+      "main_unchanged": true
+    },
+    {
+      "case": "idempotent existing detached worktree",
+      "exit_code": 0,
+      "expected_accept": true,
+      "main_unchanged": true
+    },
+    {
+      "case": "dirty target rejected",
+      "exit_code": 1,
+      "expected_accept": false,
+      "main_unchanged": true
+    },
+    {
+      "case": "different delivered SHA rejected",
+      "exit_code": 1,
+      "expected_accept": false,
+      "main_unchanged": true
+    },
+    {
+      "case": "ordinary directory rejected",
+      "exit_code": 1,
+      "expected_accept": false,
+      "main_unchanged": true
+    },
+    {
+      "case": "wrong remote identity rejected",
+      "exit_code": 1,
+      "expected_accept": false,
+      "main_unchanged": true
+    }
+  ],
+  "detached_launch_identity": "passed",
+  "status": "passed"
+}
