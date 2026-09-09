@@ -1,0 +1,10 @@
+Started evc_deform: tmux evc-training; log D:\MyProjects\Crack_RTDETR\outputs\worktrees\evc\outputs\evc_ops_ropxqq8j\worktree\outputs\evc\console.log; 完整服务器预检未执行
+Traceback (most recent call last):
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\evc\tools\train_evc.py", line 226, in worker
+    model.train(trainer=RecordingTrainer, **plan["args"])
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\evc\tools\check_evc_ops.py", line 71, in train
+    def train(self, **kwargs): raise train.torch.cuda.OutOfMemoryError("MOCK OOM")
+torch.OutOfMemoryError: MOCK OOM
+Archive verified (evidence_complete=False): D:\MyProjects\Crack_RTDETR\outputs\worktrees\evc\outputs\evc_ops_ropxqq8j\fixture.tar.gz
+Bytes: 23049748
+SHA256: 8b3bd43051ea5c7346682c71fe204527c0c49c3924f3fb3fb51000f656b4fceb

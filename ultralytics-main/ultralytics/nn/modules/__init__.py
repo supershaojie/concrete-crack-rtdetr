@@ -105,6 +105,7 @@ from .head import (
     v10Detect,
 )
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
+from .evc_deform import EVCMSDeformAttn, RTDETRDecoderEVC
 from .scca_aifi import SCCAAIFI
 from .transformer import (
     AIFI,
@@ -193,6 +194,8 @@ __all__ = (
     "Proto",
     "RTDETRDecoder",
     "RTDETRDecoderCBR",
+    "RTDETRDecoderEVC",
+    "EVCMSDeformAttn",
     "CrackBoundaryRefinement",
     "RTDETRDecoderACR",
     "CoverageRelationSelfAttention",

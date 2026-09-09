@@ -1,0 +1,13 @@
+{
+  "tools/check_evc.py": "78bfbdc38a0b3dcd4d8d5c8685def89f69b533dda64715f4872261f70c1a70ac",
+  "tools/check_evc_ops.py": "7d3672e58b8049ba4a3e8e5746bd9294820ad66dad7283c45a766e2854c179b7",
+  "tools/evc_results.py": "b34de2edc286f5b9be43cabe91f64f9f847ca8de99cc768277a2fea290ce9a90",
+  "tools/init_evc.py": "eba9f8999397b36434ec0034d301ed0731e32ead4c1cbf88e3c16304edda34dd",
+  "tools/train_evc.py": "e0140eebc3dfd8a91afa823a01a3f2481840891284bf5d2c477ac42add0d9e2b",
+  "tools/autodl_evc.sh": "a04b877e09cd1c74dd495dfb0cb96e7e9709fe1227130a84a5bce0f051c7be32",
+  "tools/sync_evc.sh": "1a44f242322bc131db0f8f6a9972ddb2127336384d471d20118152ed45b13297",
+  "ultralytics-main/ultralytics/nn/modules/evc_deform.py": "e00ee0541424bff9a10075b57acec5a9c1abba8f9208a2c237daaf06775a56d9",
+  "ultralytics-main/ultralytics/nn/modules/__init__.py": "29956aea417dca1896312c2b3e9bd27f61310ea1d91809a3f45be25f7f56db4f",
+  "ultralytics-main/ultralytics/nn/tasks.py": "fcece945c5b7f5dbee33cdd842c372bd8f95e74071628ecb7b711d877a51250d",
+  "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-evc-deform.yaml": "6800405071955b62bf23ba0ed2d0d1659b29a053aa4d835651eb04b6b1bc346a"
+}

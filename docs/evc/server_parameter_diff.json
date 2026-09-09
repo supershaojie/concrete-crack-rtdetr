@@ -1,0 +1,659 @@
+[
+  {
+    "field": "agnostic_nms",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "amp",
+    "C2": true,
+    "evc_deform": true,
+    "changed": false
+  },
+  {
+    "field": "angle",
+    "C2": 1.0,
+    "evc_deform": 1.0,
+    "changed": false
+  },
+  {
+    "field": "augment",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "auto_augment",
+    "C2": null,
+    "evc_deform": null,
+    "changed": false
+  },
+  {
+    "field": "batch",
+    "C2": 16,
+    "evc_deform": 16,
+    "changed": false
+  },
+  {
+    "field": "bgr",
+    "C2": 0.0,
+    "evc_deform": 0.0,
+    "changed": false
+  },
+  {
+    "field": "box",
+    "C2": 7.5,
+    "evc_deform": 7.5,
+    "changed": false
+  },
+  {
+    "field": "cache",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "cfg",
+    "C2": null,
+    "evc_deform": null,
+    "changed": false
+  },
+  {
+    "field": "classes",
+    "C2": null,
+    "evc_deform": null,
+    "changed": false
+  },
+  {
+    "field": "close_mosaic",
+    "C2": 10,
+    "evc_deform": 10,
+    "changed": false
+  },
+  {
+    "field": "cls",
+    "C2": 0.5,
+    "evc_deform": 0.5,
+    "changed": false
+  },
+  {
+    "field": "compile",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "conf",
+    "C2": null,
+    "evc_deform": null,
+    "changed": false
+  },
+  {
+    "field": "copy_paste",
+    "C2": 0,
+    "evc_deform": 0,
+    "changed": false
+  },
+  {
+    "field": "copy_paste_mode",
+    "C2": "flip",
+    "evc_deform": "flip",
+    "changed": false
+  },
+  {
+    "field": "cos_lr",
+    "C2": true,
+    "evc_deform": true,
+    "changed": false
+  },
+  {
+    "field": "cutmix",
+    "C2": 0,
+    "evc_deform": 0,
+    "changed": false
+  },
+  {
+    "field": "data",
+    "C2": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "evc_deform": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "changed": false
+  },
+  {
+    "field": "degrees",
+    "C2": 5,
+    "evc_deform": 5,
+    "changed": false
+  },
+  {
+    "field": "deterministic",
+    "C2": true,
+    "evc_deform": true,
+    "changed": false
+  },
+  {
+    "field": "device",
+    "C2": "0",
+    "evc_deform": "0",
+    "changed": false
+  },
+  {
+    "field": "dfl",
+    "C2": 1.5,
+    "evc_deform": 1.5,
+    "changed": false
+  },
+  {
+    "field": "dnn",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "dropout",
+    "C2": 0.0,
+    "evc_deform": 0.0,
+    "changed": false
+  },
+  {
+    "field": "dynamic",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "embed",
+    "C2": null,
+    "evc_deform": null,
+    "changed": false
+  },
+  {
+    "field": "end2end",
+    "C2": null,
+    "evc_deform": null,
+    "changed": false
+  },
+  {
+    "field": "epochs",
+    "C2": 200,
+    "evc_deform": 200,
+    "changed": false
+  },
+  {
+    "field": "erasing",
+    "C2": 0,
+    "evc_deform": 0,
+    "changed": false
+  },
+  {
+    "field": "exist_ok",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "fliplr",
+    "C2": 0.5,
+    "evc_deform": 0.5,
+    "changed": false
+  },
+  {
+    "field": "flipud",
+    "C2": 0.2,
+    "evc_deform": 0.2,
+    "changed": false
+  },
+  {
+    "field": "format",
+    "C2": "torchscript",
+    "evc_deform": "torchscript",
+    "changed": false
+  },
+  {
+    "field": "fraction",
+    "C2": 1.0,
+    "evc_deform": 1.0,
+    "changed": false
+  },
+  {
+    "field": "freeze",
+    "C2": null,
+    "evc_deform": null,
+    "changed": false
+  },
+  {
+    "field": "half",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "hsv_h",
+    "C2": 0.015,
+    "evc_deform": 0.015,
+    "changed": false
+  },
+  {
+    "field": "hsv_s",
+    "C2": 0.5,
+    "evc_deform": 0.5,
+    "changed": false
+  },
+  {
+    "field": "hsv_v",
+    "C2": 0.35,
+    "evc_deform": 0.35,
+    "changed": false
+  },
+  {
+    "field": "imgsz",
+    "C2": 640,
+    "evc_deform": 640,
+    "changed": false
+  },
+  {
+    "field": "int8",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "iou",
+    "C2": 0.7,
+    "evc_deform": 0.7,
+    "changed": false
+  },
+  {
+    "field": "keras",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "kobj",
+    "C2": 1.0,
+    "evc_deform": 1.0,
+    "changed": false
+  },
+  {
+    "field": "line_width",
+    "C2": null,
+    "evc_deform": null,
+    "changed": false
+  },
+  {
+    "field": "lr0",
+    "C2": 0.0005,
+    "evc_deform": 0.0005,
+    "changed": false
+  },
+  {
+    "field": "lrf",
+    "C2": 0.01,
+    "evc_deform": 0.01,
+    "changed": false
+  },
+  {
+    "field": "mask_ratio",
+    "C2": 4,
+    "evc_deform": 4,
+    "changed": false
+  },
+  {
+    "field": "max_det",
+    "C2": 300,
+    "evc_deform": 300,
+    "changed": false
+  },
+  {
+    "field": "mixup",
+    "C2": 0.05,
+    "evc_deform": 0.05,
+    "changed": false
+  },
+  {
+    "field": "mode",
+    "C2": "train",
+    "evc_deform": "train",
+    "changed": false
+  },
+  {
+    "field": "model",
+    "C2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "evc_deform": "/root/autodl-tmp/projects/Crack_RTDETR-evc/weights/evc_deform_controlled_init.pt",
+    "changed": true,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "momentum",
+    "C2": 0.937,
+    "evc_deform": 0.937,
+    "changed": false
+  },
+  {
+    "field": "mosaic",
+    "C2": 0.8,
+    "evc_deform": 0.8,
+    "changed": false
+  },
+  {
+    "field": "multi_scale",
+    "C2": 0.0,
+    "evc_deform": 0.0,
+    "changed": false
+  },
+  {
+    "field": "name",
+    "C2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "evc_deform": "evc_deform_rtdetr_r18_lite_e200_b16_onlineaug",
+    "changed": true,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "nbs",
+    "C2": 64,
+    "evc_deform": 64,
+    "changed": false
+  },
+  {
+    "field": "nms",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "opset",
+    "C2": null,
+    "evc_deform": null,
+    "changed": false
+  },
+  {
+    "field": "optimize",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "optimizer",
+    "C2": "AdamW",
+    "evc_deform": "AdamW",
+    "changed": false
+  },
+  {
+    "field": "overlap_mask",
+    "C2": true,
+    "evc_deform": true,
+    "changed": false
+  },
+  {
+    "field": "patience",
+    "C2": 50,
+    "evc_deform": 50,
+    "changed": false
+  },
+  {
+    "field": "perspective",
+    "C2": 0.0002,
+    "evc_deform": 0.0002,
+    "changed": false
+  },
+  {
+    "field": "plots",
+    "C2": true,
+    "evc_deform": true,
+    "changed": false
+  },
+  {
+    "field": "pose",
+    "C2": 12.0,
+    "evc_deform": 12.0,
+    "changed": false
+  },
+  {
+    "field": "pretrained",
+    "C2": true,
+    "evc_deform": true,
+    "changed": false
+  },
+  {
+    "field": "profile",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "project",
+    "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "evc_deform": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "changed": false
+  },
+  {
+    "field": "rect",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "resume",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "retina_masks",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "rle",
+    "C2": 1.0,
+    "evc_deform": 1.0,
+    "changed": false
+  },
+  {
+    "field": "save",
+    "C2": true,
+    "evc_deform": true,
+    "changed": false
+  },
+  {
+    "field": "save_conf",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "save_crop",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "save_dir",
+    "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "evc_deform": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/evc_deform_rtdetr_r18_lite_e200_b16_onlineaug",
+    "changed": true,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "save_frames",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "save_json",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "save_period",
+    "C2": -1,
+    "evc_deform": -1,
+    "changed": false
+  },
+  {
+    "field": "save_txt",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "scale",
+    "C2": 0.4,
+    "evc_deform": 0.4,
+    "changed": false
+  },
+  {
+    "field": "seed",
+    "C2": 42,
+    "evc_deform": 42,
+    "changed": false
+  },
+  {
+    "field": "shear",
+    "C2": 1.5,
+    "evc_deform": 1.5,
+    "changed": false
+  },
+  {
+    "field": "show",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "show_boxes",
+    "C2": true,
+    "evc_deform": true,
+    "changed": false
+  },
+  {
+    "field": "show_conf",
+    "C2": true,
+    "evc_deform": true,
+    "changed": false
+  },
+  {
+    "field": "show_labels",
+    "C2": true,
+    "evc_deform": true,
+    "changed": false
+  },
+  {
+    "field": "simplify",
+    "C2": true,
+    "evc_deform": true,
+    "changed": false
+  },
+  {
+    "field": "single_cls",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "source",
+    "C2": null,
+    "evc_deform": null,
+    "changed": false
+  },
+  {
+    "field": "split",
+    "C2": "val",
+    "evc_deform": "val",
+    "changed": false
+  },
+  {
+    "field": "stream_buffer",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "task",
+    "C2": "detect",
+    "evc_deform": "detect",
+    "changed": false
+  },
+  {
+    "field": "time",
+    "C2": null,
+    "evc_deform": null,
+    "changed": false
+  },
+  {
+    "field": "tracker",
+    "C2": "botsort.yaml",
+    "evc_deform": "botsort.yaml",
+    "changed": false
+  },
+  {
+    "field": "translate",
+    "C2": 0.1,
+    "evc_deform": 0.1,
+    "changed": false
+  },
+  {
+    "field": "val",
+    "C2": true,
+    "evc_deform": true,
+    "changed": false
+  },
+  {
+    "field": "verbose",
+    "C2": true,
+    "evc_deform": true,
+    "changed": false
+  },
+  {
+    "field": "vid_stride",
+    "C2": 1,
+    "evc_deform": 1,
+    "changed": false
+  },
+  {
+    "field": "visualize",
+    "C2": false,
+    "evc_deform": false,
+    "changed": false
+  },
+  {
+    "field": "warmup_bias_lr",
+    "C2": 0.1,
+    "evc_deform": 0.1,
+    "changed": false
+  },
+  {
+    "field": "warmup_epochs",
+    "C2": 5,
+    "evc_deform": 5,
+    "changed": false
+  },
+  {
+    "field": "warmup_momentum",
+    "C2": 0.8,
+    "evc_deform": 0.8,
+    "changed": false
+  },
+  {
+    "field": "weight_decay",
+    "C2": 0.0001,
+    "evc_deform": 0.0001,
+    "changed": false
+  },
+  {
+    "field": "workers",
+    "C2": 8,
+    "evc_deform": 8,
+    "changed": false
+  },
+  {
+    "field": "workspace",
+    "C2": null,
+    "evc_deform": null,
+    "changed": false
+  }
+]

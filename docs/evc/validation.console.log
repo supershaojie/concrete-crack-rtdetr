@@ -1,0 +1,45 @@
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 524/533 items from pretrained weights
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 528/537 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 121 weight(decay=0.0001), 128 bias(decay=0.0)
+D:\MyProjects\Crack_RTDETR\outputs\worktrees\evc\tools\check_evc.py:97: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=amp, init_scale=128.)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 121 weight(decay=0.0001), 128 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 121 weight(decay=0.0001), 128 bias(decay=0.0)
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 524/533 items from pretrained weights
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 528/537 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 537/537 items from pretrained weights
+Ultralytics 8.4.21  Python-3.9.25 torch-2.7.1+cu118 CPU (Intel Core i7-10750H 2.60GHz)
+rtdetr-resnet18-lite-evc-deform summary: 214 layers, 19,881,828 parameters, 15,911,524 gradients, 57.2 GFLOPs
+[34m[1mval: [0mFast image access  (ping: 0.00.0 ms, read: 17.91.8 MB/s, size: 1.4 KB)
+
+[K[34m[1mval: [0mScanning D:\MyProjects\Crack_RTDETR\outputs\worktrees\evc\outputs\evc_debug_uifebdtu\dataset\labels\val... 2 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 2/2 286.6it/s 0.0s
+[34m[1mval: [0mNew cache created: D:\MyProjects\Crack_RTDETR\outputs\worktrees\evc\outputs\evc_debug_uifebdtu\dataset\labels\val.cache
+
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 1/1 1.3it/s 0.8s
+                   all          2          2          0          0          0          0
+Speed: 1.0ms preprocess, 369.0ms inference, 0.0ms loss, 6.3ms postprocess per image
+Results saved to [1mD:\MyProjects\Crack_RTDETR\outputs\worktrees\evc\outputs\evc_debug_uifebdtu\evaluation_val\plots[0m
+Ultralytics 8.4.21  Python-3.9.25 torch-2.7.1+cu118 CPU (Intel Core i7-10750H 2.60GHz)
+rtdetr-resnet18-lite-evc-deform summary: 214 layers, 19,881,828 parameters, 15,911,524 gradients, 57.2 GFLOPs
+[34m[1mval: [0mFast image access  (ping: 0.10.0 ms, read: 13.91.5 MB/s, size: 1.4 KB)
+
+[K[34m[1mval: [0mScanning D:\MyProjects\Crack_RTDETR\outputs\worktrees\evc\outputs\evc_debug_uifebdtu\dataset\labels\test... 2 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 2/2 1.0Kit/s 0.0s
+[34m[1mval: [0mNew cache created: D:\MyProjects\Crack_RTDETR\outputs\worktrees\evc\outputs\evc_debug_uifebdtu\dataset\labels\test.cache
+
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 1/1 1.4it/s 0.7s
+                   all          2          2          0          0          0          0
+Speed: 1.4ms preprocess, 337.1ms inference, 0.0ms loss, 0.9ms postprocess per image
+Results saved to [1mD:\MyProjects\Crack_RTDETR\outputs\worktrees\evc\outputs\evc_debug_uifebdtu\evaluation_test\plots[0m

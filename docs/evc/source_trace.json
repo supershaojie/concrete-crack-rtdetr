@@ -1,0 +1,28 @@
+{
+  "archive": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-20260623.zip",
+  "archive_sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+  "extracted_source": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\SFS_MSDeformAttn\\ops\\modules\\ms_deform_attn.py",
+  "reference_class": "MSDeformAttn_for_sfs",
+  "source_sha256": "94c82b85186d4ab267d6fdc85d224b7b24c3e8b07ea00560bec0f9854c52f8b5",
+  "zip_member_equals_extracted": true,
+  "borrowed": "Only interface, B/Q/heads/levels/points/value organization and geometric comparison; no CUDA extension or package code copied",
+  "implementation_sources": [
+    "ultralytics-main/ultralytics/nn/modules/transformer.py:MSDeformAttn,DeformableTransformerDecoderLayer,DeformableTransformerDecoder",
+    "ultralytics-main/ultralytics/nn/modules/utils.py:multi_scale_deformable_attn_pytorch",
+    "ultralytics-main/ultralytics/nn/modules/head.py:RTDETRDecoder"
+  ],
+  "baseline_yaml": "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite.yaml",
+  "branch": "codex/evc-deform",
+  "alias": "evc_deform",
+  "c_number": null,
+  "number_policy": "Stable alias supported by repository tools; no numeric C id allocated, avoiding parallel DRA collision.",
+  "agents": "No AGENTS.md found in repository or checked ancestors; .agents contains no instruction file.",
+  "recipe_source": "D:/rtdetr跑结果/c2 200e在线/c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053/train_run/args.yaml",
+  "transport_base": "beedcfa307e250fb2de47587097c51f9c141123b",
+  "baseline_structure": "pure C2, not C26; C26 lifecycle tools reused without enabling its modules",
+  "unchanged_source_sha256_lf": {
+    "transformer.py": "019d631e55a6f380e9776d513e9556f2c49a857ac94b3c08c1f8b4729dd3b988",
+    "utils.py": "bcf0492178d3924b5d6a5f5808906b7aec6214172b70bfeb21b3aab308b17164",
+    "head.py": "ce5758fdfa3142af207ea6e311b6c084b39d45a064028a738f3712cd485153fb"
+  }
+}
