@@ -1,0 +1,17 @@
+{
+  "hash_policy": "UTF-8 source bytes, CRLF normalized to LF",
+  "files": {
+    "tools/autodl_dra.sh": "9ce28dd028c728afe395a7f7102fd42fd1e6f31ad105f95ae5d1115d731c095b",
+    "tools/check_dra.py": "d09bcfb29a4141f6e8dbfc787fb89a436094ef0b82a4ae72f57f8b9a055261f9",
+    "tools/check_dra_tools.py": "e7df701ea804f4cefa422414489a49131bf6907e23f25a71881de3a64a8cb918",
+    "tools/dra_results.py": "3a980534249d948598c050fdd1c54cc63d06a53197a75fa809a4ee5283ddae8a",
+    "tools/init_dra.py": "a2f229f90dd6e9b679691da579b8f2a1351e04d64e14240dbba4ef52d537bed0",
+    "tools/sync_dra.sh": "681fa2e1878a56b228ecdb7df1326b992200a1667667c2d07dfdcd8ee37f3e84",
+    "tools/train_dra.py": "b83f19055467a89fec7c4415e44264521a00c359780c7e15e086decafc74c0fe",
+    "ultralytics-main/ultralytics/nn/modules/dra_aifi.py": "dd58ee8786668862bac88dc4bd7de25ea960835234b78073d8b6038fb92b6172",
+    "ultralytics-main/ultralytics/nn/modules/transformer.py": "019d631e55a6f380e9776d513e9556f2c49a857ac94b3c08c1f8b4729dd3b988",
+    "ultralytics-main/ultralytics/nn/modules/__init__.py": "9fd10a21d43a9352f124f8b9e43b3eb3c68509d3d49fd6efe788ab0a64db269e",
+    "ultralytics-main/ultralytics/nn/tasks.py": "224ad3e7d17795195e643889317b58c89193de51c32026959d3271bcf82ed618",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-dra-aifi.yaml": "4ccfdab054af8d39ab593373042bdf9253575afa1bdcec00c76d9f818250b61b"
+  }
+}

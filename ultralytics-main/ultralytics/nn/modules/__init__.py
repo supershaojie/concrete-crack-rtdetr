@@ -106,6 +106,7 @@ from .head import (
 )
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
 from .scca_aifi import SCCAAIFI
+from .dra_aifi import DRAAIFI
 from .transformer import (
     AIFI,
     MLP,
@@ -121,6 +122,7 @@ from .transformer import (
 
 __all__ = (
     "AIFI",
+    "DRAAIFI",
     "SCCAAIFI",
     "C1",
     "C2",

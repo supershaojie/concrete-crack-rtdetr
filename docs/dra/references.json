@@ -1,0 +1,22 @@
+{
+  "zip": {
+    "path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-20260623.zip",
+    "sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc"
+  },
+  "extra_transformer": {
+    "path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\transformer.py",
+    "sha256": "e14e25e61b83c070892582f90c6f5f407caf3457ef57c5909ffa8a0d646cf22f"
+  },
+  "request_document": {
+    "path": "D:\\rtdetr跑结果\\DRA-AIFI\\DRA_AIFI_Codex_prompt.md",
+    "sha256": "41a0866a95c972c8293826efb96ccff626ea391809d7950744a7c07604e20c10"
+  },
+  "c2_original_args": {
+    "path": "D:\\rtdetr跑结果\\c2 200e在线\\c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053\\train_run\\args.yaml",
+    "sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd"
+  },
+  "c2_initialization": {
+    "path": "D:\\MyProjects\\Crack_RTDETR\\weights\\rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e"
+  }
+}

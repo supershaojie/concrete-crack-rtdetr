@@ -1,0 +1,541 @@
+{
+  "status": "passed",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\dra\\ultralytics-main\\ultralytics\\__init__.py",
+    "commit": "beedcfa307e250fb2de47587097c51f9c141123b"
+  },
+  "full_server_preflight": "NOT_RUN",
+  "formal_training": "NOT_RUN",
+  "full_val_test": "NOT_RUN",
+  "server_4090_torch212": "NOT_RUN",
+  "nc1_loading": {
+    "nc_source": 80,
+    "nc_target": 1,
+    "loaded_exact": 528,
+    "missing": [],
+    "unexpected": [],
+    "classification_shape_skips": [
+      "model.26.dec_score_head.0.bias",
+      "model.26.dec_score_head.0.weight",
+      "model.26.dec_score_head.1.bias",
+      "model.26.dec_score_head.1.weight",
+      "model.26.dec_score_head.2.bias",
+      "model.26.dec_score_head.2.weight",
+      "model.26.denoising_class_embed.weight",
+      "model.26.enc_score_head.bias",
+      "model.26.enc_score_head.weight"
+    ]
+  },
+  "parameters_unfused_nc1": {
+    "c2": 20082772,
+    "dra_aifi": 20087148,
+    "added": 4376
+  },
+  "export": "Native sorted order/mask exactly preserved; same-pass flags and pixel scaling checked",
+  "module": [
+    {
+      "device": "cpu",
+      "hw": [
+        20,
+        20
+      ],
+      "pre_norm": false,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.34765690565109253
+    },
+    {
+      "device": "cpu",
+      "hw": [
+        5,
+        7
+      ],
+      "pre_norm": false,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.26798567175865173
+    },
+    {
+      "device": "cpu",
+      "hw": [
+        7,
+        5
+      ],
+      "pre_norm": false,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.26738399267196655
+    },
+    {
+      "device": "cpu",
+      "hw": [
+        1,
+        1
+      ],
+      "pre_norm": false,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.0
+    },
+    {
+      "device": "cpu",
+      "hw": [
+        20,
+        20
+      ],
+      "pre_norm": true,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.34765690565109253
+    },
+    {
+      "device": "cpu",
+      "hw": [
+        5,
+        7
+      ],
+      "pre_norm": true,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.26798567175865173
+    },
+    {
+      "device": "cpu",
+      "hw": [
+        7,
+        5
+      ],
+      "pre_norm": true,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.26738399267196655
+    },
+    {
+      "device": "cpu",
+      "hw": [
+        1,
+        1
+      ],
+      "pre_norm": true,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.0
+    },
+    {
+      "device": "cuda",
+      "hw": [
+        20,
+        20
+      ],
+      "pre_norm": false,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.2981390058994293
+    },
+    {
+      "device": "cuda",
+      "hw": [
+        5,
+        7
+      ],
+      "pre_norm": false,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.19176237285137177
+    },
+    {
+      "device": "cuda",
+      "hw": [
+        7,
+        5
+      ],
+      "pre_norm": false,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.19177702069282532
+    },
+    {
+      "device": "cuda",
+      "hw": [
+        1,
+        1
+      ],
+      "pre_norm": false,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.0
+    },
+    {
+      "device": "cuda",
+      "hw": [
+        20,
+        20
+      ],
+      "pre_norm": true,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.2981390058994293
+    },
+    {
+      "device": "cuda",
+      "hw": [
+        5,
+        7
+      ],
+      "pre_norm": true,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.19176237285137177
+    },
+    {
+      "device": "cuda",
+      "hw": [
+        7,
+        5
+      ],
+      "pre_norm": true,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.19177702069282532
+    },
+    {
+      "device": "cuda",
+      "hw": [
+        1,
+        1
+      ],
+      "pre_norm": true,
+      "eval": 0.0,
+      "train": 0.0,
+      "bias_symmetry_max_abs": 0.0,
+      "nonzero_bias_max_abs": 0.0
+    }
+  ],
+  "network": [
+    {
+      "device": "cpu",
+      "amp": false,
+      "synthetic_batch": 2,
+      "image_hw": [
+        160,
+        192
+      ],
+      "steps": [
+        {
+          "step": 0,
+          "loss": 133.93338012695312,
+          "gradients": {
+            "model.9.dra_predictor.0.weight": 0.0,
+            "model.9.dra_predictor.2.weight": 0.0,
+            "model.9.dra_predictor.4.weight": 0.002082935767248273,
+            "model.9.dra_predictor.4.bias": 0.009144823998212814
+          }
+        },
+        {
+          "step": 1,
+          "loss": 63.441139221191406,
+          "gradients": {
+            "model.9.dra_predictor.0.weight": 5.609303116216324e-06,
+            "model.9.dra_predictor.2.weight": 2.5205197289324133e-06,
+            "model.9.dra_predictor.4.weight": 0.0025501959025859833,
+            "model.9.dra_predictor.4.bias": 0.009350900538265705
+          }
+        },
+        {
+          "step": 2,
+          "loss": 49.397953033447266,
+          "gradients": {
+            "model.9.dra_predictor.0.weight": 3.141476781820529e-06,
+            "model.9.dra_predictor.2.weight": 1.9392418835195713e-06,
+            "model.9.dra_predictor.4.weight": 0.001330775674432516,
+            "model.9.dra_predictor.4.bias": 0.004494976717978716
+          }
+        }
+      ],
+      "comparison_tolerance": {
+        "atol": 2e-05,
+        "rtol": 2e-05
+      },
+      "eval_max_abs": 0.0,
+      "train_output_max_abs": 0.0,
+      "native_loss_max_abs": 0.0,
+      "dn_num_split": [
+        200,
+        300
+      ],
+      "eval_final_selection_max_abs": 0.0,
+      "added_optimizer_occurrences": {
+        "model.9.dra_predictor.0.weight": 1,
+        "model.9.dra_predictor.2.weight": 1,
+        "model.9.dra_predictor.4.weight": 1,
+        "model.9.dra_predictor.4.bias": 1
+      },
+      "learned_bias_max_abs": 0.0008454740745946765,
+      "reload_max_abs": 0.0,
+      "actual_half_forward": {
+        "status": "passed",
+        "output_dtype": "torch.float16",
+        "shape": [
+          2,
+          300,
+          5
+        ]
+      }
+    },
+    {
+      "device": "cuda",
+      "amp": false,
+      "synthetic_batch": 2,
+      "image_hw": [
+        160,
+        192
+      ],
+      "steps": [
+        {
+          "step": 0,
+          "loss": 126.47080993652344,
+          "gradients": {
+            "model.9.dra_predictor.0.weight": 0.0,
+            "model.9.dra_predictor.2.weight": 0.0,
+            "model.9.dra_predictor.4.weight": 0.0028488971292972565,
+            "model.9.dra_predictor.4.bias": 0.03279024362564087
+          }
+        },
+        {
+          "step": 1,
+          "loss": 63.77976989746094,
+          "gradients": {
+            "model.9.dra_predictor.0.weight": 3.5664852475747466e-06,
+            "model.9.dra_predictor.2.weight": 1.6964953601927846e-06,
+            "model.9.dra_predictor.4.weight": 0.0010740028228610754,
+            "model.9.dra_predictor.4.bias": 0.01001698523759842
+          }
+        },
+        {
+          "step": 2,
+          "loss": 49.85578918457031,
+          "gradients": {
+            "model.9.dra_predictor.0.weight": 2.127276275132317e-06,
+            "model.9.dra_predictor.2.weight": 2.018189434238593e-06,
+            "model.9.dra_predictor.4.weight": 0.0005514369695447385,
+            "model.9.dra_predictor.4.bias": 0.002623770385980606
+          }
+        }
+      ],
+      "comparison_tolerance": {
+        "atol": 2e-05,
+        "rtol": 2e-05
+      },
+      "eval_max_abs": 0.0,
+      "train_output_max_abs": 0.0,
+      "native_loss_max_abs": 0.0,
+      "dn_num_split": [
+        200,
+        300
+      ],
+      "eval_final_selection_max_abs": 0.0,
+      "added_optimizer_occurrences": {
+        "model.9.dra_predictor.0.weight": 1,
+        "model.9.dra_predictor.2.weight": 1,
+        "model.9.dra_predictor.4.weight": 1,
+        "model.9.dra_predictor.4.bias": 1
+      },
+      "learned_bias_max_abs": 0.000779781665187329,
+      "reload_max_abs": 0.0,
+      "actual_half_forward": {
+        "status": "passed",
+        "output_dtype": "torch.float16",
+        "shape": [
+          2,
+          300,
+          5
+        ]
+      }
+    },
+    {
+      "device": "cuda",
+      "amp": true,
+      "synthetic_batch": 2,
+      "image_hw": [
+        160,
+        192
+      ],
+      "steps": [
+        {
+          "step": 0,
+          "loss": 132.62301635742188,
+          "gradients": {
+            "model.9.dra_predictor.0.weight": 0.0,
+            "model.9.dra_predictor.2.weight": 0.0,
+            "model.9.dra_predictor.4.weight": 0.0035419464111328125,
+            "model.9.dra_predictor.4.bias": 0.025543212890625
+          }
+        },
+        {
+          "step": 1,
+          "loss": 63.63948059082031,
+          "gradients": {
+            "model.9.dra_predictor.0.weight": 4.082918167114258e-06,
+            "model.9.dra_predictor.2.weight": 1.6242265701293945e-06,
+            "model.9.dra_predictor.4.weight": 0.0008482933044433594,
+            "model.9.dra_predictor.4.bias": 0.00777435302734375
+          }
+        },
+        {
+          "step": 2,
+          "loss": 50.10532760620117,
+          "gradients": {
+            "model.9.dra_predictor.0.weight": 2.555549144744873e-06,
+            "model.9.dra_predictor.2.weight": 3.4030526876449585e-06,
+            "model.9.dra_predictor.4.weight": 0.0005640983581542969,
+            "model.9.dra_predictor.4.bias": 0.004589080810546875
+          }
+        }
+      ],
+      "comparison_tolerance": {
+        "atol": 0.005,
+        "rtol": 0.005
+      },
+      "eval_max_abs": 0.0,
+      "train_output_max_abs": 0.0,
+      "native_loss_max_abs": 0.0,
+      "dn_num_split": [
+        200,
+        300
+      ],
+      "eval_final_selection_max_abs": 0.0,
+      "added_optimizer_occurrences": {
+        "model.9.dra_predictor.0.weight": 1,
+        "model.9.dra_predictor.2.weight": 1,
+        "model.9.dra_predictor.4.weight": 1,
+        "model.9.dra_predictor.4.bias": 1
+      },
+      "learned_bias_max_abs": 0.0007348601939156651,
+      "reload_max_abs": 0.0,
+      "actual_half_forward": {
+        "status": "passed",
+        "output_dtype": "torch.float16",
+        "shape": [
+          2,
+          300,
+          5
+        ]
+      }
+    }
+  ],
+  "checkpoint_initialization": {
+    "source": "D:\\MyProjects\\Crack_RTDETR\\weights\\rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "c2_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+    "variant": "dra_aifi",
+    "seed": 42,
+    "source_states": 533,
+    "missing_source": [],
+    "unexpected_source": [],
+    "shape_mismatches": [],
+    "new_dra_states": [
+      "model.9.dra_predictor.0.weight",
+      "model.9.dra_predictor.2.weight",
+      "model.9.dra_predictor.4.bias",
+      "model.9.dra_predictor.4.weight"
+    ],
+    "new_dra_parameters": 4376,
+    "new_initial_values": {
+      "model.9.dra_predictor.0.weight": {
+        "shape": [
+          16,
+          256,
+          1,
+          1
+        ],
+        "min": -0.062499724328517914,
+        "max": 0.06249195337295532,
+        "nonzero": 4096
+      },
+      "model.9.dra_predictor.2.weight": {
+        "shape": [
+          16,
+          1,
+          3,
+          3
+        ],
+        "min": -0.3207080066204071,
+        "max": 0.3319115936756134,
+        "nonzero": 144
+      },
+      "model.9.dra_predictor.4.weight": {
+        "shape": [
+          8,
+          16,
+          1,
+          1
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "nonzero": 0
+      },
+      "model.9.dra_predictor.4.bias": {
+        "shape": [
+          8
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "nonzero": 0
+      }
+    },
+    "public_constructor_equal": true,
+    "storage": "FP32, original half source values exactly promoted",
+    "runtime": {
+      "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+      "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+      "torch": "2.7.1+cu118",
+      "cuda": "11.8",
+      "gpu": "NVIDIA GeForce RTX 2060",
+      "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\dra\\ultralytics-main\\ultralytics\\__init__.py",
+      "commit": "beedcfa307e250fb2de47587097c51f9c141123b"
+    },
+    "output": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\dra\\outputs\\dra_check_01\\tmp_na36su0\\clean_init.pt",
+    "output_sha256": "7b8223ed578cf996083b4882503ed798b345d8ba3675d220751cc8488a015464",
+    "reload_exact": true,
+    "status": "passed"
+  },
+  "native_train_api_rebuild": {
+    "nc_source": 80,
+    "nc_target": 1,
+    "loaded_exact": 528,
+    "missing": [],
+    "unexpected": [],
+    "classification_shape_skips": [
+      "model.26.dec_score_head.0.bias",
+      "model.26.dec_score_head.0.weight",
+      "model.26.dec_score_head.1.bias",
+      "model.26.dec_score_head.1.weight",
+      "model.26.dec_score_head.2.bias",
+      "model.26.dec_score_head.2.weight",
+      "model.26.denoising_class_embed.weight",
+      "model.26.enc_score_head.bias",
+      "model.26.enc_score_head.weight"
+    ]
+  },
+  "tested_tree_note": "DRA implementation was uncommitted during validation; runtime.commit is the base. See validation_source_hashes.json for delivered source."
+}
