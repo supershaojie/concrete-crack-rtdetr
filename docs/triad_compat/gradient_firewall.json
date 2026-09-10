@@ -1,0 +1,91 @@
+{
+  "cscef": {
+    "status": "passed",
+    "refs_side_gradient": "None (no edge)",
+    "base_derivative_max_abs_error": 0,
+    "main_ref_gradients_present": true,
+    "first_backward": {
+      "lateral_projection.weight": 0.0,
+      "semantic_projection.weight": 0.0,
+      "mix_projection.weight": 0.0,
+      "depthwise_conv.weight": 0.0,
+      "output_projection.weight": 0.6475432515144348
+    },
+    "active_parameter_grads": {
+      "lateral_projection.weight": 7136.5458984375,
+      "semantic_projection.weight": 14887.185546875,
+      "mix_projection.weight": 3654.7021484375,
+      "depthwise_conv.weight": 1001.00634765625,
+      "output_projection.weight": 94145.6015625
+    },
+    "old_semantic_grad_l1": 47.59711456298828,
+    "batch_max_abs": 1.4901161193847656e-08
+  },
+  "scca": {
+    "post": {
+      "max_abs": 0,
+      "max_rel": 0,
+      "old_input_gradients": {
+        "src": 194.80213928222656,
+        "s": 20.25550079345703
+      },
+      "isolated_input_gradients": "None (no edge)",
+      "side_parameter_gradients": {
+        "scca_temperature_raw": 4.484186172485352,
+        "scca_q.weight": 425.1350402832031,
+        "scca_k.weight": 449.5473327636719,
+        "scca_v.weight": 4338.84521484375,
+        "scca_o.weight": 5528.81591796875
+      },
+      "main_mha_ffn_gradient": true
+    },
+    "pre": {
+      "max_abs": 0,
+      "max_rel": 0,
+      "old_input_gradients": {
+        "src": 168.140380859375,
+        "s": 16.34322738647461
+      },
+      "isolated_input_gradients": "None (no edge)",
+      "side_parameter_gradients": {
+        "scca_temperature_raw": 3.6948351860046387,
+        "scca_q.weight": 350.8636474609375,
+        "scca_k.weight": 384.36590576171875,
+        "scca_v.weight": 4068.685302734375,
+        "scca_o.weight": 5469.98046875
+      },
+      "main_mha_ffn_gradient": true
+    }
+  },
+  "cbr": {
+    "status": "passed",
+    "ref_query_side_gradient": "None (no edge)",
+    "box_derivative_max_abs_error": 0,
+    "old_extra_gradients": {
+      "p3": 0.33639174699783325,
+      "query": 0.3956463634967804
+    },
+    "active_parameter_grads": {
+      "p3_proj.weight": 5.256516456604004,
+      "p3_proj.bias": 0.10133975744247437,
+      "query_proj.weight": 10.600520133972168,
+      "query_proj.bias": 0.2162671834230423,
+      "evidence_proj.weight": 2.159966230392456,
+      "evidence_proj.bias": 0.2162671834230423,
+      "side_embed.weight": 0.390690416097641,
+      "geometry_proj.weight": 0.18595804274082184,
+      "geometry_proj.bias": 0.2162671834230423,
+      "score.weight": 0.008997337892651558,
+      "offset_hidden.weight": 24.444549560546875,
+      "offset_hidden.bias": 0.8292691707611084,
+      "offset_out.weight": 13.614497184753418,
+      "offset_out.bias": 1.5678369998931885
+    },
+    "reference_evidence_sensitive": true,
+    "ref_change_max_abs": 2.302858352661133,
+    "width_height_ratio": [
+      0.9974377155303955,
+      1.0027588605880737
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "scope": "explicit synthetic train-lifecycle fixture + real two-image val/test outputs; NOT formal training",
+  "archive_sha256": "09d5df7981d870f457bf0fa4cf4a47fc6803f2d4c6eff7b0c932b8b68936f05e",
+  "archive_bytes": 94955921,
+  "members": 388,
+  "no_implicit_evaluation": true,
+  "overwrite_rejected": true,
+  "broken_test_rejected": true
+}

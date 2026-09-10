@@ -1,0 +1,616 @@
+{
+  "audit_stage": "completed BEFORE production edits",
+  "date": "2026-09-10",
+  "commits": {
+    "C2": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+    "C17": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+    "C19": "025997e3c51eaf6933534308a95da6ebf97bff53",
+    "C24": "f6e9dfda765046ae7691302cf5ec89d3f76cec5d",
+    "C20": "81d5f0175e0168e022f29feb1ceb54de8a52deb5",
+    "C25": "ac32e223a509981ee9e61be66a352f2b80c5bfd1",
+    "C26": "beedcfa307e250fb2de47587097c51f9c141123b"
+  },
+  "attachments": {
+    "C2": {
+      "path": "D:\\rtdetr跑结果\\c2 200e在线\\c2_rtdetr_r18_lite_complete_retest_20260904.tar.gz",
+      "sha256": "c225efc13d32fcef1eeb1ec1efdd37d1d282de081bafcba58cf47f0faf36a2fd",
+      "bytes": 146345962
+    },
+    "C17": {
+      "path": "D:\\rtdetr跑结果\\c17 r18 lite cs v5.1涨1\\c17_cscef_v51_complete_20260906_153449_116232399.tar.gz",
+      "sha256": "c94cc1f590451728ce4e6cedd3fa973606ad263a09308f7f10f43d592b05a571",
+      "bytes": 213022736
+    },
+    "C19": {
+      "path": "D:\\rtdetr跑结果\\c19 CBR涨2\\c19_cbr_test_small_20260907_132852_339107473.tar.gz",
+      "sha256": "83d557d4315ebd6bb2d1b4e2a18f444b84eaaad2734fda59f02475c38e247d24",
+      "bytes": 7031872
+    },
+    "C24": {
+      "path": "D:\\rtdetr跑结果\\c24 SCCA-AIFI涨\\c24_scca_complete_20260908_212957_GmHKX5.tar.gz",
+      "sha256": "732ac3cef7f9c1242eef39aad7f5c3c64a16c4f7c895f205ced7d8e8b8152a1c",
+      "bytes": 109737118,
+      "nested_source_sha256": "c62232c7de7e55b7e155833296fab02dcb2bf3e491e1b6912ab1716b6911b995"
+    },
+    "C20": {
+      "path": "D:\\rtdetr跑结果\\c20 cs+cbr\\c20_cscef_cbr_small.tar.gz",
+      "sha256": "bf98d6c0c872965c140ffc71dd5a93ad6b519448c2f85771a2f50ae7423d6a36",
+      "bytes": 1016205
+    },
+    "C25": {
+      "path": "D:\\rtdetr跑结果\\c25 CSCEF＋SCCA\\c25_complete_20260909_105335_507623.tar.gz",
+      "sha256": "4e28647accfdd45c15e726138ded15b1df034fb0ff045cd34752b3b3b4ba873f",
+      "bytes": 137764085
+    },
+    "C26": {
+      "path": "D:\\rtdetr跑结果\\c26 CBR＋SCCA\\c26_complete_20260909_111637_287553.tar.gz",
+      "sha256": "608168ac41d233fdfb836e7da9288fa2d1002d453370fd145db224ed6d2f0571",
+      "bytes": 139696559
+    },
+    "MODULES": {
+      "path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-20260623.zip",
+      "sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+      "bytes": 21038947
+    }
+  },
+  "historical_records": {
+    "C2": {
+      "metrics_file": "C2\\c2_rtdetr_r18_lite_complete_retest_20260904\\test_run\\metrics_summary.json",
+      "metrics": {
+        "source_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+        "seed": 42,
+        "precision": 0.8339600078513765,
+        "recall": 0.8080444244334384,
+        "mAP50": 0.858162985651444,
+        "mAP75": 0.4583604005521489,
+        "mAP50_95": 0.46963623190802783,
+        "results_dict.metrics/precision(B)": 0.8339600078513765,
+        "results_dict.metrics/recall(B)": 0.8080444244334384,
+        "results_dict.metrics/mAP50(B)": 0.858162985651444,
+        "results_dict.metrics/mAP50-95(B)": 0.46963623190802783
+      },
+      "train_args_diff": {}
+    },
+    "C17": {
+      "metrics_file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\test\\metrics_summary.json",
+      "metrics": {
+        "precision": 0.8448953234408928,
+        "recall": 0.825003752063635,
+        "mAP50": 0.8792974548298313,
+        "mAP75": 0.5328297758576255,
+        "mAP50_95": 0.5120450850441516,
+        "results_dict.metrics/precision(B)": 0.8448953234408928,
+        "results_dict.metrics/recall(B)": 0.825003752063635,
+        "results_dict.metrics/mAP50(B)": 0.8792974548298313,
+        "results_dict.metrics/mAP50-95(B)": 0.5120450850441516
+      },
+      "train_args_diff": {
+        "model": [
+          "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+          "/root/autodl-tmp/projects/Crack_RTDETR_cscef_v51/weights/rtdetr_r18_lite_cscef_v51_imagenet_backbone_init.pt"
+        ],
+        "name": [
+          "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "c17_rtdetr_r18_lite_cscef_v51_e200_b16_onlineaug"
+        ],
+        "save_dir": [
+          "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c17_rtdetr_r18_lite_cscef_v51_e200_b16_onlineaug"
+        ]
+      }
+    },
+    "C19": {
+      "metrics_file": "C19\\c19_cbr_test_small_20260907_132852_339107473\\metrics_summary.json",
+      "metrics": {
+        "precision": 0.8490338445575341,
+        "recall": 0.837311905431872,
+        "mAP50": 0.8851863565670782,
+        "mAP50_95": 0.5038924194554971,
+        "mAP75": 0.5199952552147155,
+        "results_dict.metrics/precision(B)": 0.8490338445575341,
+        "results_dict.metrics/recall(B)": 0.837311905431872,
+        "results_dict.metrics/mAP50(B)": 0.8851863565670782,
+        "results_dict.metrics/mAP50-95(B)": 0.5038924194554971
+      },
+      "train_args_diff": {
+        "save_dir": [
+          "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_rtdetr_r18_lite_cbr_e200_b16_onlineaug"
+        ],
+        "name": [
+          "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "c19_rtdetr_r18_lite_cbr_e200_b16_onlineaug"
+        ],
+        "model": [
+          "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+          "/root/autodl-tmp/projects/Crack_RTDETR_cbr/weights/rtdetr_r18_lite_cbr_imagenet_backbone_init.pt"
+        ]
+      }
+    },
+    "C24": {
+      "metrics_file": "C24\\c24_scca_complete_20260908_212957_GmHKX5\\launch_and_evaluation\\evaluation_test\\metrics.json",
+      "metrics": {
+        "runtime.commit": "f6e9dfda765046ae7691302cf5ec89d3f76cec5d",
+        "policy": "corrected_sorted_conf_mask_v1",
+        "precision": 0.8555632739746718,
+        "recall": 0.819900945520036,
+        "AP75": 0.5064610022981055,
+        "mAP50": 0.8782438758197731,
+        "mAP50_95": 0.4998720584810606,
+        "historical_mask_affected_images": 0
+      },
+      "train_args_diff": {
+        "save_dir": [
+          "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c24_rtdetr_r18_lite_scca_e200_b16_onlineaug"
+        ],
+        "name": [
+          "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "c24_rtdetr_r18_lite_scca_e200_b16_onlineaug"
+        ],
+        "model": [
+          "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+          "/root/autodl-tmp/projects/Crack_RTDETR-scca/weights/c24_scca_controlled_init.pt"
+        ]
+      }
+    },
+    "C20": {
+      "metrics_file": "C20\\evaluation\\test\\metrics_summary.json",
+      "metrics": {
+        "runtime.git_commit": "81d5f0175e0168e022f29feb1ceb54de8a52deb5",
+        "precision": 0.8373206057484079,
+        "recall": 0.814948221521837,
+        "mAP50": 0.8663025638932066,
+        "AP75": 0.49481070954386996,
+        "mAP50_95": 0.4870430125761403,
+        "effective_args.seed": 0
+      },
+      "train_args_diff": {
+        "save_dir": [
+          "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c20_rtdetr_r18_lite_cscef_cbr_e200_b16_onlineaug"
+        ],
+        "name": [
+          "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "c20_rtdetr_r18_lite_cscef_cbr_e200_b16_onlineaug"
+        ],
+        "model": [
+          "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+          "/root/autodl-tmp/projects/Crack_RTDETR_cscef_cbr/weights/rtdetr_r18_lite_cscef_cbr_imagenet_backbone_init.pt"
+        ]
+      }
+    },
+    "C25": {
+      "metrics_file": "C25\\evaluation\\test\\metrics.json",
+      "metrics": {
+        "runtime.commit": "ac32e223a509981ee9e61be66a352f2b80c5bfd1",
+        "policy": "corrected_sorted_conf_mask_v1",
+        "actual_settings.seed": 0,
+        "prediction_export.precision": "FP32 inference values serialized without decimal rounding; coordinate conversion uses float64.",
+        "precision": 0.7938377732041972,
+        "recall": 0.7771274200810446,
+        "AP75": 0.4049775660594557,
+        "mAP50": 0.8184778761187871,
+        "mAP50_95": 0.4251799780843431,
+        "historical_mask_affected_images": 0
+      },
+      "train_args_diff": {
+        "save_dir": [
+          "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c25_rtdetr_r18_lite_cscef_v51_scca_e200_b16_onlineaug"
+        ],
+        "name": [
+          "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "c25_rtdetr_r18_lite_cscef_v51_scca_e200_b16_onlineaug"
+        ],
+        "model": [
+          "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+          "/root/autodl-tmp/projects/Crack_RTDETR-c25/weights/c25_scca_controlled_init.pt"
+        ]
+      }
+    },
+    "C26": {
+      "metrics_file": "C26\\evaluation\\test\\metrics.json",
+      "metrics": {
+        "runtime.commit": "beedcfa307e250fb2de47587097c51f9c141123b",
+        "policy": "corrected_sorted_conf_mask_v1",
+        "actual_settings.seed": 0,
+        "precision": 0.8421676599383899,
+        "recall": 0.814948221521837,
+        "AP75": 0.49601933387203323,
+        "mAP50": 0.8603720998167826,
+        "mAP50_95": 0.49073033585461523,
+        "historical_mask_affected_images": 0
+      },
+      "train_args_diff": {
+        "save_dir": [
+          "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c26_rtdetr_r18_lite_cbr_scca_e200_b16_onlineaug"
+        ],
+        "name": [
+          "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "c26_rtdetr_r18_lite_cbr_scca_e200_b16_onlineaug"
+        ],
+        "model": [
+          "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+          "/root/autodl-tmp/projects/Crack_RTDETR-c26/weights/c26_cbr_scca_controlled_init.pt"
+        ]
+      }
+    },
+    "c2_args_fields": 109
+  },
+  "old_gradient_probe": {
+    "scope": "synthetic nonzero branch dependency probe, NOT a trained-loss conflict/cosine measurement",
+    "cscef": {
+      "lateral_side_grad_l1": 5.955102920532227,
+      "semantic_grad_l1": 6.175935745239258,
+      "residual_rms": 0.010653483681380749
+    },
+    "scca": {
+      "src_side_grad_l1": 16.903833389282227,
+      "mha_side_grad_l1": 1.7848355770111084,
+      "relation_shape": [
+        1,
+        4,
+        16,
+        16
+      ]
+    },
+    "cbr": {
+      "p3_side_grad_l1": 0.0055017475970089436,
+      "query_side_grad_l1": 0.0032682709861546755,
+      "box_residual_scale_grad_l1": 0.005145697388797998,
+      "rho": 0.1,
+      "normal_fraction": 0.1
+    }
+  },
+  "read_evidence": [
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\metadata\\cscef_v51\\audit.json",
+      "sha256": "b09d8c96e9e4b40303d29f3f52844ade52fcae1a4a5a892264fd2f2e0d1a6d83",
+      "bytes": 546226
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\metadata\\cscef_v51\\initialization.json",
+      "sha256": "7d4b8031f8a3ca6b73b43548e3765ea8eaef348af07c4f8cc230a69b462db575",
+      "bytes": 144019
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\working_tree.patch",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\files\\docs\\C17_CSCEF_V51.md",
+      "sha256": "d30fe500b584dab9a6f09cbb5f69eafcf401092d9d9e547dc05937382e3ee2a1",
+      "bytes": 13309
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\files\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cscef-v2.yaml",
+      "sha256": "8275efea9212131799508c57da8c411baf89625cac0be05f9a5c42c3410b906e",
+      "bytes": 2310
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\files\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cscef-v3.yaml",
+      "sha256": "cf679dc1cde990419ca549299be0f991b002cc31d64fdfb9b44e50a3ea10cdbc",
+      "bytes": 2289
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\files\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cscef-v4.yaml",
+      "sha256": "e379696b2c3d94adbdcbf6eda0d4e2c92f2804115468e1ab9ff58b11cff52db3",
+      "bytes": 2317
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\files\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cscef-v5.yaml",
+      "sha256": "158c81388429dafccff995586837996c2503ee0d7c2c0237dc5e8822ea8f0fca",
+      "bytes": 2296
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\files\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cscef-v51.yaml",
+      "sha256": "d366dd5bf9b4e8fef7b879e0a09dfe0d88bb42ef0ac251d880ec6d6a98871d5e",
+      "bytes": 2300
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\files\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cscef.yaml",
+      "sha256": "27545ed78ed8308f8c0e5f18abfecdcfc5a0ef69cdf1c605467d564e432bf895",
+      "bytes": 2289
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\files\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite.yaml",
+      "sha256": "3493d693cbef958a38a2a135822a6c5379b65804905bc71566e395069e8f4f16",
+      "bytes": 2090
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\files\\ultralytics-main\\ultralytics\\nn\\tasks.py",
+      "sha256": "f265a7f6aac839c99f6025124d64d1bcbc390587affeac940390e9193635c5dd",
+      "bytes": 73910
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\files\\ultralytics-main\\ultralytics\\nn\\modules\\cscef_v5.py",
+      "sha256": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+      "bytes": 8576
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\files\\ultralytics-main\\ultralytics\\nn\\modules\\cscef_v51.py",
+      "sha256": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+      "bytes": 916
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\files\\ultralytics-main\\ultralytics\\nn\\modules\\head.py",
+      "sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+      "bytes": 78412
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\files\\ultralytics-main\\ultralytics\\nn\\modules\\transformer.py",
+      "sha256": "8986f3f58a5e30a42545f544f1a35f5e5861b13ee5d4507d8b2afab1c41df782",
+      "bytes": 31979
+    },
+    {
+      "file": "C19\\c19_cbr_test_small_20260907_132852_339107473\\launch_reports\\launch_c19\\audit.json",
+      "sha256": "e0cd832cbd47422b98e28d571da743de54a1df53ae9973d7e2ae01f8e4d8dfd8",
+      "bytes": 635371
+    },
+    {
+      "file": "C19\\c19_cbr_test_small_20260907_132852_339107473\\launch_reports\\launch_c19\\initialization.json",
+      "sha256": "a3256e59ad8e5c9229087b71e441e47cd39764071229771c55b69544f8601e24",
+      "bytes": 128493
+    },
+    {
+      "file": "C19\\c19_cbr_test_small_20260907_132852_339107473\\source\\files\\docs\\C19_CBR.md",
+      "sha256": "25e959172ca79de94d484d49717d7ba66266f4e07e438fc966580ce80d67e1a3",
+      "bytes": 12917
+    },
+    {
+      "file": "C19\\c19_cbr_test_small_20260907_132852_339107473\\source\\files\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cbr.yaml",
+      "sha256": "a63c78a28daf6fbc92a8563fa45507e7a05f61633ec19af6c42bec72d83f90bc",
+      "bytes": 2165
+    },
+    {
+      "file": "C19\\c19_cbr_test_small_20260907_132852_339107473\\source\\files\\ultralytics-main\\ultralytics\\nn\\tasks.py",
+      "sha256": "0414fe503b0dde3c615581d291fb7cf2bb5174ef5f673e572219470de19e9164",
+      "bytes": 73758
+    },
+    {
+      "file": "C19\\c19_cbr_test_small_20260907_132852_339107473\\source\\files\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+      "sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "bytes": 7371
+    },
+    {
+      "file": "C19\\c19_cbr_test_small_20260907_132852_339107473\\source\\files\\ultralytics-main\\ultralytics\\nn\\modules\\head.py",
+      "sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+      "bytes": 78412
+    },
+    {
+      "file": "C19\\c19_cbr_test_small_20260907_132852_339107473\\source\\files\\ultralytics-main\\ultralytics\\nn\\modules\\transformer.py",
+      "sha256": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602",
+      "bytes": 32165
+    },
+    {
+      "file": "C24\\c24_scca_complete_20260908_212957_GmHKX5\\launch_and_evaluation\\initialization.json",
+      "sha256": "8d55b133e50225461ce77e84ee0a5e146dded59e8012f7cc6a1e79d117e712da",
+      "bytes": 98467
+    },
+    {
+      "file": "C24\\c24_scca_complete_20260908_212957_GmHKX5\\launch_and_evaluation\\parameter_diff.json",
+      "sha256": "14dd87fe45ff98000a3029df3ae924a813f37b8c0677cd70fc203f85183384aa",
+      "bytes": 10133
+    },
+    {
+      "file": "C24\\c24_scca_complete_20260908_212957_GmHKX5\\metadata\\working_tree.patch",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "C24\\nested_source\\docs\\C17_CSCEF_V51.md",
+      "sha256": "d30fe500b584dab9a6f09cbb5f69eafcf401092d9d9e547dc05937382e3ee2a1",
+      "bytes": 13309
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\AUTODL.md",
+      "sha256": "062d335ac9c77a39395989d6c5d01bb8029b53fc6c9466ac77d1ece7e5c9faa0",
+      "bytes": 4892
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\c24_parameter_diff.json",
+      "sha256": "05239f2cb199e03952bb7db900a11b36847c51f4608a2f0d379af2051f2960e1",
+      "bytes": 10460
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\c25_parameter_diff.json",
+      "sha256": "8c4defa80ba5704288659bcecbbfb8bef495ced5dbad85e187a4569bcae2a8ff",
+      "bytes": 10480
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\local_validation.json",
+      "sha256": "92d9235cb68dd4da748304916c2313bea4bcb3d787bd06b94d41fce9587cd8d0",
+      "bytes": 16704
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\README.md",
+      "sha256": "cfdc99860bcd2b4bcb444d7c34f8716ff9b11862870aca75c6779dec89f68c57",
+      "bytes": 8526
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\source_sha256.json",
+      "sha256": "f2d85e9ce14e274054bd2ca284220b58bf98d6d3ac1ceb21bb9c243bae4c17b3",
+      "bytes": 1632
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\source_trace.json",
+      "sha256": "f88a31e737e849b7eebf9b442617f4551795a630ccf08a23e5a75d3958a496c0",
+      "bytes": 937
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\VALIDATION.md",
+      "sha256": "537bd7fb8f7169007ff653b3deece78f002f776ed45ed0c7fdedee9e87d87849",
+      "bytes": 6027
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\evidence\\c24_diagnostics.json",
+      "sha256": "c08d1ad2a7c02cd1bd8e7e993829a171e14bf7c832c96ec2ca2d2f048b599590",
+      "bytes": 3649
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\evidence\\c24_mapping.json",
+      "sha256": "a8c3aaae6142ef58d90e1098eb750f0af1a8eba0877d0df5ecc9abc4ba133605",
+      "bytes": 97832
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\evidence\\c24_smoke.json",
+      "sha256": "6a83b0c06f114172ce4749389a34362b1d10ead115d54a3a3d1df5a73daf10ec",
+      "bytes": 4474
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\evidence\\c24_test_pipeline.json",
+      "sha256": "3627e1f3cda817fc9a30904cd086de460a9c2afb0a28950cda673a8bb5bc3049",
+      "bytes": 2049
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\evidence\\c24_val_pipeline.json",
+      "sha256": "46b014d9bd66fd5469bc586da4dcc4889ade27f9c3a0255c26281b680f040c99",
+      "bytes": 2047
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\evidence\\c25_mapping.json",
+      "sha256": "ea172ceed4fd8ac7333098f69925fe67a2a649035ddf9922ae459b2f6dee929c",
+      "bytes": 98086
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\evidence\\c25_smoke.json",
+      "sha256": "6b91668c47f63d76b5839fc6b8c347d7f2298a82189f430bc3c5ceec97c8bcfe",
+      "bytes": 4477
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\evidence\\c25_test_pipeline.json",
+      "sha256": "755457eefb2e72c87ef9a341280e159fad11dd13308e6c9f213022676d5dcf8e",
+      "bytes": 2048
+    },
+    {
+      "file": "C24\\nested_source\\docs\\scca\\evidence\\c25_val_pipeline.json",
+      "sha256": "fa4b60d3bd617d0ec9ceec7b6bc337d3ea46850dd931515b635bc63555848a44",
+      "bytes": 2045
+    },
+    {
+      "file": "C24\\nested_source\\experiment_records\\scca_aifi.md",
+      "sha256": "0616e75e542e21444154120d8ec0071b9f8ef535f4706ef20dda298b2b82028f",
+      "bytes": 878
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-acr.yaml",
+      "sha256": "22c59420248231517b4f5881ee97beca5c270a0cea8b223814464eed7fb42fa6",
+      "bytes": 2178
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cscef-scca.yaml",
+      "sha256": "4fb3dafb1863e8681ba43516f296daf1f4168174c7417470e7a76a49f648b364",
+      "bytes": 2304
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cscef-v2.yaml",
+      "sha256": "8275efea9212131799508c57da8c411baf89625cac0be05f9a5c42c3410b906e",
+      "bytes": 2310
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cscef-v3.yaml",
+      "sha256": "cf679dc1cde990419ca549299be0f991b002cc31d64fdfb9b44e50a3ea10cdbc",
+      "bytes": 2289
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cscef-v4.yaml",
+      "sha256": "e379696b2c3d94adbdcbf6eda0d4e2c92f2804115468e1ab9ff58b11cff52db3",
+      "bytes": 2317
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cscef-v5.yaml",
+      "sha256": "158c81388429dafccff995586837996c2503ee0d7c2c0237dc5e8822ea8f0fca",
+      "bytes": 2296
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cscef-v51-acr.yaml",
+      "sha256": "e75c2b62366cf6ebe2d46b0b56831fcdb9e0fe3020d10bcc993ccea8562713b1",
+      "bytes": 2398
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cscef-v51.yaml",
+      "sha256": "d366dd5bf9b4e8fef7b879e0a09dfe0d88bb42ef0ac251d880ec6d6a98871d5e",
+      "bytes": 2300
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cscef.yaml",
+      "sha256": "27545ed78ed8308f8c0e5f18abfecdcfc5a0ef69cdf1c605467d564e432bf895",
+      "bytes": 2289
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-scca.yaml",
+      "sha256": "985f4e30f4c706627079e9d56e392faa07e50053756ad122191a55396ac09123",
+      "bytes": 2094
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite.yaml",
+      "sha256": "3493d693cbef958a38a2a135822a6c5379b65804905bc71566e395069e8f4f16",
+      "bytes": 2090
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\nn\\tasks.py",
+      "sha256": "0e39086dc2d3358e3c03e4e0df87ca18ab91724975f2671139659919e7958f1f",
+      "bytes": 74011
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\nn\\modules\\cscef_v5.py",
+      "sha256": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+      "bytes": 8576
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\nn\\modules\\cscef_v51.py",
+      "sha256": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+      "bytes": 916
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\nn\\modules\\head.py",
+      "sha256": "ce5758fdfa3142af207ea6e311b6c084b39d45a064028a738f3712cd485153fb",
+      "bytes": 79405
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\nn\\modules\\scca_aifi.py",
+      "sha256": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca",
+      "bytes": 3796
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\nn\\modules\\transformer.py",
+      "sha256": "71a1f942e18d47415117f25683a70455fd248a8a10a7068eedfc16c95aeb4ae3",
+      "bytes": 32665
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\files\\ultralytics-main\\ultralytics\\nn\\modules\\cscef_v5.py",
+      "matches_source_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139"
+    },
+    {
+      "file": "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\files\\ultralytics-main\\ultralytics\\nn\\modules\\cscef_v51.py",
+      "matches_source_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139"
+    },
+    {
+      "file": "C19\\c19_cbr_test_small_20260907_132852_339107473\\source\\files\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+      "matches_source_commit": "025997e3c51eaf6933534308a95da6ebf97bff53"
+    },
+    {
+      "file": "C24\\nested_source\\ultralytics-main\\ultralytics\\nn\\modules\\scca_aifi.py",
+      "matches_source_commit": "f6e9dfda765046ae7691302cf5ec89d3f76cec5d"
+    }
+  ],
+  "hypotheses": {
+    "H1": "Code-supported forward/gradient risk, not proven sole cause of AP loss",
+    "H2": "Code-supported, including box-size residual scaling gradient",
+    "H3": "Code-supported indirect distribution/gradient coupling",
+    "H4": "Single-run historical gains support efficacy; stable-reference remedy remains prospective"
+  },
+  "limitations": [
+    "No trained checkpoint gradient cosine study or causal ablation; synthetic derivatives prove paths, not opposition of loss gradients.",
+    "C24/C25/C26 use corrected sorted confidence mask; affected test images recorded as 0. C20/C25/C26 effective evaluation seed=0 versus C2 seed=42.",
+    "References are stable against direct innovation rewriting, not frozen backbone representations across training.",
+    "Detach removes branch-input derivatives, not all downstream/shared-loss interaction."
+  ],
+  "adjustments": [
+    "CBRv2 must detach width/height used to scale side offsets as well as grid/query/geometry; original box addition remains differentiable.",
+    "Port only C19 optional final-query decoder return to C2; exclude inherited ACR changes from C24/C26."
+  ]
+}

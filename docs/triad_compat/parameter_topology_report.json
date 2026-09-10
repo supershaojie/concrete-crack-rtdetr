@@ -1,0 +1,1922 @@
+{
+  "runtime": {
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\ultralytics-main\\ultralytics\\__init__.py",
+    "modules": {
+      "DRCSCEFv6": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\ultralytics-main\\ultralytics\\nn\\modules\\cscef_v6.py",
+      "GISCCAAIFI": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\ultralytics-main\\ultralytics\\nn\\modules\\scca_aifi_v2.py",
+      "StableReferenceCBR": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\ultralytics-main\\ultralytics\\nn\\modules\\cbr_v2.py"
+    },
+    "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+    "dirty": true
+  },
+  "c2_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "variants": {
+    "cscef_v6": {
+      "yaml": "rtdetr-resnet18-lite-cscef-v6.yaml",
+      "cscef": true,
+      "scca": false,
+      "cbr": false,
+      "parameters": 20109684,
+      "name": "triad_cscef_v6_rtdetr_r18_lite_e200_b16_onlineaug",
+      "log_dir": "outputs/triad_compat/cscef_v6",
+      "evaluation_dirs": {
+        "val": "outputs/triad_compat/cscef_v6/evaluation_val",
+        "test": "outputs/triad_compat/cscef_v6/evaluation_test"
+      },
+      "package_dir": "downloads/triad_compat/cscef_v6",
+      "topology": {
+        "roles": {
+          "P3_ref": 17,
+          "P4_ref": 12,
+          "P5_projection": 8,
+          "decoder": 27,
+          "aifi": 9,
+          "P3_base": 19,
+          "P4_base": 22,
+          "P5_base": 25,
+          "P3_enh": 26
+        },
+        "common_layer_mapping": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3,
+          "4": 4,
+          "5": 5,
+          "6": 6,
+          "7": 7,
+          "8": 8,
+          "9": 9,
+          "10": 10,
+          "11": 11,
+          "12": 12,
+          "13": 13,
+          "14": 14,
+          "15": 15,
+          "16": 16,
+          "17": 17,
+          "18": 18,
+          "19": 19,
+          "20": 20,
+          "21": 21,
+          "22": 22,
+          "23": 23,
+          "24": 24,
+          "25": 25,
+          "26": 27
+        },
+        "decoder_inputs": [
+          26,
+          22,
+          25
+        ],
+        "nodes": [
+          {
+            "index": 0,
+            "module": "ConvNormLayer",
+            "sources": [
+              -1
+            ]
+          },
+          {
+            "index": 1,
+            "module": "ConvNormLayer",
+            "sources": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "module": "ConvNormLayer",
+            "sources": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "module": "nn.MaxPool2d",
+            "sources": [
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "module": "Blocks",
+            "sources": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "module": "Blocks",
+            "sources": [
+              4
+            ]
+          },
+          {
+            "index": 6,
+            "module": "Blocks",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "index": 7,
+            "module": "Blocks",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "index": 8,
+            "module": "Conv",
+            "sources": [
+              7
+            ]
+          },
+          {
+            "index": 9,
+            "module": "AIFI",
+            "sources": [
+              8
+            ]
+          },
+          {
+            "index": 10,
+            "module": "Conv",
+            "sources": [
+              9
+            ]
+          },
+          {
+            "index": 11,
+            "module": "nn.Upsample",
+            "sources": [
+              10
+            ]
+          },
+          {
+            "index": 12,
+            "module": "Conv",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "index": 13,
+            "module": "Concat",
+            "sources": [
+              11,
+              12
+            ]
+          },
+          {
+            "index": 14,
+            "module": "RepC3",
+            "sources": [
+              13
+            ]
+          },
+          {
+            "index": 15,
+            "module": "Conv",
+            "sources": [
+              14
+            ]
+          },
+          {
+            "index": 16,
+            "module": "nn.Upsample",
+            "sources": [
+              15
+            ]
+          },
+          {
+            "index": 17,
+            "module": "Conv",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "index": 18,
+            "module": "Concat",
+            "sources": [
+              16,
+              17
+            ]
+          },
+          {
+            "index": 19,
+            "module": "RepC3",
+            "sources": [
+              18
+            ]
+          },
+          {
+            "index": 20,
+            "module": "Conv",
+            "sources": [
+              19
+            ]
+          },
+          {
+            "index": 21,
+            "module": "Concat",
+            "sources": [
+              20,
+              15
+            ]
+          },
+          {
+            "index": 22,
+            "module": "RepC3",
+            "sources": [
+              21
+            ]
+          },
+          {
+            "index": 23,
+            "module": "Conv",
+            "sources": [
+              22
+            ]
+          },
+          {
+            "index": 24,
+            "module": "Concat",
+            "sources": [
+              23,
+              10
+            ]
+          },
+          {
+            "index": 25,
+            "module": "RepC3",
+            "sources": [
+              24
+            ]
+          },
+          {
+            "index": 26,
+            "module": "DRCSCEFv6",
+            "sources": [
+              19,
+              17,
+              12
+            ]
+          },
+          {
+            "index": 27,
+            "module": "RTDETRDecoder",
+            "sources": [
+              26,
+              22,
+              25
+            ]
+          }
+        ]
+      },
+      "new_parameters": {
+        "cscef": 26912
+      },
+      "measured_parameters": 20109684,
+      "new_state_count": 7
+    },
+    "scca_v2": {
+      "yaml": "rtdetr-resnet18-lite-scca-v2.yaml",
+      "cscef": false,
+      "scca": true,
+      "cbr": false,
+      "parameters": 20148312,
+      "name": "triad_scca_v2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "log_dir": "outputs/triad_compat/scca_v2",
+      "evaluation_dirs": {
+        "val": "outputs/triad_compat/scca_v2/evaluation_val",
+        "test": "outputs/triad_compat/scca_v2/evaluation_test"
+      },
+      "package_dir": "downloads/triad_compat/scca_v2",
+      "topology": {
+        "roles": {
+          "P3_ref": 17,
+          "P4_ref": 12,
+          "P5_projection": 8,
+          "decoder": 26,
+          "aifi": 9,
+          "P3_base": 19,
+          "P4_base": 22,
+          "P5_base": 25,
+          "P3_enh": 19
+        },
+        "common_layer_mapping": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3,
+          "4": 4,
+          "5": 5,
+          "6": 6,
+          "7": 7,
+          "8": 8,
+          "9": 9,
+          "10": 10,
+          "11": 11,
+          "12": 12,
+          "13": 13,
+          "14": 14,
+          "15": 15,
+          "16": 16,
+          "17": 17,
+          "18": 18,
+          "19": 19,
+          "20": 20,
+          "21": 21,
+          "22": 22,
+          "23": 23,
+          "24": 24,
+          "25": 25,
+          "26": 26
+        },
+        "decoder_inputs": [
+          19,
+          22,
+          25
+        ],
+        "nodes": [
+          {
+            "index": 0,
+            "module": "ConvNormLayer",
+            "sources": [
+              -1
+            ]
+          },
+          {
+            "index": 1,
+            "module": "ConvNormLayer",
+            "sources": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "module": "ConvNormLayer",
+            "sources": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "module": "nn.MaxPool2d",
+            "sources": [
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "module": "Blocks",
+            "sources": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "module": "Blocks",
+            "sources": [
+              4
+            ]
+          },
+          {
+            "index": 6,
+            "module": "Blocks",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "index": 7,
+            "module": "Blocks",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "index": 8,
+            "module": "Conv",
+            "sources": [
+              7
+            ]
+          },
+          {
+            "index": 9,
+            "module": "GISCCAAIFI",
+            "sources": [
+              8
+            ]
+          },
+          {
+            "index": 10,
+            "module": "Conv",
+            "sources": [
+              9
+            ]
+          },
+          {
+            "index": 11,
+            "module": "nn.Upsample",
+            "sources": [
+              10
+            ]
+          },
+          {
+            "index": 12,
+            "module": "Conv",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "index": 13,
+            "module": "Concat",
+            "sources": [
+              11,
+              12
+            ]
+          },
+          {
+            "index": 14,
+            "module": "RepC3",
+            "sources": [
+              13
+            ]
+          },
+          {
+            "index": 15,
+            "module": "Conv",
+            "sources": [
+              14
+            ]
+          },
+          {
+            "index": 16,
+            "module": "nn.Upsample",
+            "sources": [
+              15
+            ]
+          },
+          {
+            "index": 17,
+            "module": "Conv",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "index": 18,
+            "module": "Concat",
+            "sources": [
+              16,
+              17
+            ]
+          },
+          {
+            "index": 19,
+            "module": "RepC3",
+            "sources": [
+              18
+            ]
+          },
+          {
+            "index": 20,
+            "module": "Conv",
+            "sources": [
+              19
+            ]
+          },
+          {
+            "index": 21,
+            "module": "Concat",
+            "sources": [
+              20,
+              15
+            ]
+          },
+          {
+            "index": 22,
+            "module": "RepC3",
+            "sources": [
+              21
+            ]
+          },
+          {
+            "index": 23,
+            "module": "Conv",
+            "sources": [
+              22
+            ]
+          },
+          {
+            "index": 24,
+            "module": "Concat",
+            "sources": [
+              23,
+              10
+            ]
+          },
+          {
+            "index": 25,
+            "module": "RepC3",
+            "sources": [
+              24
+            ]
+          },
+          {
+            "index": 26,
+            "module": "RTDETRDecoder",
+            "sources": [
+              19,
+              22,
+              25
+            ]
+          }
+        ]
+      },
+      "new_parameters": {
+        "scca": 65540
+      },
+      "measured_parameters": 20148312,
+      "new_state_count": 5
+    },
+    "cbr_v2": {
+      "yaml": "rtdetr-resnet18-lite-cbr-v2.yaml",
+      "cscef": false,
+      "scca": false,
+      "cbr": true,
+      "parameters": 20128661,
+      "name": "triad_cbr_v2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "log_dir": "outputs/triad_compat/cbr_v2",
+      "evaluation_dirs": {
+        "val": "outputs/triad_compat/cbr_v2/evaluation_val",
+        "test": "outputs/triad_compat/cbr_v2/evaluation_test"
+      },
+      "package_dir": "downloads/triad_compat/cbr_v2",
+      "topology": {
+        "roles": {
+          "P3_ref": 17,
+          "P4_ref": 12,
+          "P5_projection": 8,
+          "decoder": 26,
+          "aifi": 9,
+          "P3_base": 19,
+          "P4_base": 22,
+          "P5_base": 25,
+          "P3_enh": 19
+        },
+        "common_layer_mapping": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3,
+          "4": 4,
+          "5": 5,
+          "6": 6,
+          "7": 7,
+          "8": 8,
+          "9": 9,
+          "10": 10,
+          "11": 11,
+          "12": 12,
+          "13": 13,
+          "14": 14,
+          "15": 15,
+          "16": 16,
+          "17": 17,
+          "18": 18,
+          "19": 19,
+          "20": 20,
+          "21": 21,
+          "22": 22,
+          "23": 23,
+          "24": 24,
+          "25": 25,
+          "26": 26
+        },
+        "decoder_inputs": [
+          19,
+          22,
+          25,
+          17
+        ],
+        "nodes": [
+          {
+            "index": 0,
+            "module": "ConvNormLayer",
+            "sources": [
+              -1
+            ]
+          },
+          {
+            "index": 1,
+            "module": "ConvNormLayer",
+            "sources": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "module": "ConvNormLayer",
+            "sources": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "module": "nn.MaxPool2d",
+            "sources": [
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "module": "Blocks",
+            "sources": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "module": "Blocks",
+            "sources": [
+              4
+            ]
+          },
+          {
+            "index": 6,
+            "module": "Blocks",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "index": 7,
+            "module": "Blocks",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "index": 8,
+            "module": "Conv",
+            "sources": [
+              7
+            ]
+          },
+          {
+            "index": 9,
+            "module": "AIFI",
+            "sources": [
+              8
+            ]
+          },
+          {
+            "index": 10,
+            "module": "Conv",
+            "sources": [
+              9
+            ]
+          },
+          {
+            "index": 11,
+            "module": "nn.Upsample",
+            "sources": [
+              10
+            ]
+          },
+          {
+            "index": 12,
+            "module": "Conv",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "index": 13,
+            "module": "Concat",
+            "sources": [
+              11,
+              12
+            ]
+          },
+          {
+            "index": 14,
+            "module": "RepC3",
+            "sources": [
+              13
+            ]
+          },
+          {
+            "index": 15,
+            "module": "Conv",
+            "sources": [
+              14
+            ]
+          },
+          {
+            "index": 16,
+            "module": "nn.Upsample",
+            "sources": [
+              15
+            ]
+          },
+          {
+            "index": 17,
+            "module": "Conv",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "index": 18,
+            "module": "Concat",
+            "sources": [
+              16,
+              17
+            ]
+          },
+          {
+            "index": 19,
+            "module": "RepC3",
+            "sources": [
+              18
+            ]
+          },
+          {
+            "index": 20,
+            "module": "Conv",
+            "sources": [
+              19
+            ]
+          },
+          {
+            "index": 21,
+            "module": "Concat",
+            "sources": [
+              20,
+              15
+            ]
+          },
+          {
+            "index": 22,
+            "module": "RepC3",
+            "sources": [
+              21
+            ]
+          },
+          {
+            "index": 23,
+            "module": "Conv",
+            "sources": [
+              22
+            ]
+          },
+          {
+            "index": 24,
+            "module": "Concat",
+            "sources": [
+              23,
+              10
+            ]
+          },
+          {
+            "index": 25,
+            "module": "RepC3",
+            "sources": [
+              24
+            ]
+          },
+          {
+            "index": 26,
+            "module": "RTDETRDecoderCBRv2",
+            "sources": [
+              19,
+              22,
+              25,
+              17
+            ]
+          }
+        ]
+      },
+      "new_parameters": {
+        "cbr": 45889
+      },
+      "measured_parameters": 20128661,
+      "new_state_count": 14
+    },
+    "cscef_v6_scca_v2": {
+      "yaml": "rtdetr-resnet18-lite-cscef-v6-scca-v2.yaml",
+      "cscef": true,
+      "scca": true,
+      "cbr": false,
+      "parameters": 20175224,
+      "name": "triad_cscef_v6_scca_v2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "log_dir": "outputs/triad_compat/cscef_v6_scca_v2",
+      "evaluation_dirs": {
+        "val": "outputs/triad_compat/cscef_v6_scca_v2/evaluation_val",
+        "test": "outputs/triad_compat/cscef_v6_scca_v2/evaluation_test"
+      },
+      "package_dir": "downloads/triad_compat/cscef_v6_scca_v2",
+      "topology": {
+        "roles": {
+          "P3_ref": 17,
+          "P4_ref": 12,
+          "P5_projection": 8,
+          "decoder": 27,
+          "aifi": 9,
+          "P3_base": 19,
+          "P4_base": 22,
+          "P5_base": 25,
+          "P3_enh": 26
+        },
+        "common_layer_mapping": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3,
+          "4": 4,
+          "5": 5,
+          "6": 6,
+          "7": 7,
+          "8": 8,
+          "9": 9,
+          "10": 10,
+          "11": 11,
+          "12": 12,
+          "13": 13,
+          "14": 14,
+          "15": 15,
+          "16": 16,
+          "17": 17,
+          "18": 18,
+          "19": 19,
+          "20": 20,
+          "21": 21,
+          "22": 22,
+          "23": 23,
+          "24": 24,
+          "25": 25,
+          "26": 27
+        },
+        "decoder_inputs": [
+          26,
+          22,
+          25
+        ],
+        "nodes": [
+          {
+            "index": 0,
+            "module": "ConvNormLayer",
+            "sources": [
+              -1
+            ]
+          },
+          {
+            "index": 1,
+            "module": "ConvNormLayer",
+            "sources": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "module": "ConvNormLayer",
+            "sources": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "module": "nn.MaxPool2d",
+            "sources": [
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "module": "Blocks",
+            "sources": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "module": "Blocks",
+            "sources": [
+              4
+            ]
+          },
+          {
+            "index": 6,
+            "module": "Blocks",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "index": 7,
+            "module": "Blocks",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "index": 8,
+            "module": "Conv",
+            "sources": [
+              7
+            ]
+          },
+          {
+            "index": 9,
+            "module": "GISCCAAIFI",
+            "sources": [
+              8
+            ]
+          },
+          {
+            "index": 10,
+            "module": "Conv",
+            "sources": [
+              9
+            ]
+          },
+          {
+            "index": 11,
+            "module": "nn.Upsample",
+            "sources": [
+              10
+            ]
+          },
+          {
+            "index": 12,
+            "module": "Conv",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "index": 13,
+            "module": "Concat",
+            "sources": [
+              11,
+              12
+            ]
+          },
+          {
+            "index": 14,
+            "module": "RepC3",
+            "sources": [
+              13
+            ]
+          },
+          {
+            "index": 15,
+            "module": "Conv",
+            "sources": [
+              14
+            ]
+          },
+          {
+            "index": 16,
+            "module": "nn.Upsample",
+            "sources": [
+              15
+            ]
+          },
+          {
+            "index": 17,
+            "module": "Conv",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "index": 18,
+            "module": "Concat",
+            "sources": [
+              16,
+              17
+            ]
+          },
+          {
+            "index": 19,
+            "module": "RepC3",
+            "sources": [
+              18
+            ]
+          },
+          {
+            "index": 20,
+            "module": "Conv",
+            "sources": [
+              19
+            ]
+          },
+          {
+            "index": 21,
+            "module": "Concat",
+            "sources": [
+              20,
+              15
+            ]
+          },
+          {
+            "index": 22,
+            "module": "RepC3",
+            "sources": [
+              21
+            ]
+          },
+          {
+            "index": 23,
+            "module": "Conv",
+            "sources": [
+              22
+            ]
+          },
+          {
+            "index": 24,
+            "module": "Concat",
+            "sources": [
+              23,
+              10
+            ]
+          },
+          {
+            "index": 25,
+            "module": "RepC3",
+            "sources": [
+              24
+            ]
+          },
+          {
+            "index": 26,
+            "module": "DRCSCEFv6",
+            "sources": [
+              19,
+              17,
+              12
+            ]
+          },
+          {
+            "index": 27,
+            "module": "RTDETRDecoder",
+            "sources": [
+              26,
+              22,
+              25
+            ]
+          }
+        ]
+      },
+      "new_parameters": {
+        "scca": 65540,
+        "cscef": 26912
+      },
+      "measured_parameters": 20175224,
+      "new_state_count": 12
+    },
+    "cscef_v6_cbr_v2": {
+      "yaml": "rtdetr-resnet18-lite-cscef-v6-cbr-v2.yaml",
+      "cscef": true,
+      "scca": false,
+      "cbr": true,
+      "parameters": 20155573,
+      "name": "triad_cscef_v6_cbr_v2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "log_dir": "outputs/triad_compat/cscef_v6_cbr_v2",
+      "evaluation_dirs": {
+        "val": "outputs/triad_compat/cscef_v6_cbr_v2/evaluation_val",
+        "test": "outputs/triad_compat/cscef_v6_cbr_v2/evaluation_test"
+      },
+      "package_dir": "downloads/triad_compat/cscef_v6_cbr_v2",
+      "topology": {
+        "roles": {
+          "P3_ref": 17,
+          "P4_ref": 12,
+          "P5_projection": 8,
+          "decoder": 27,
+          "aifi": 9,
+          "P3_base": 19,
+          "P4_base": 22,
+          "P5_base": 25,
+          "P3_enh": 26
+        },
+        "common_layer_mapping": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3,
+          "4": 4,
+          "5": 5,
+          "6": 6,
+          "7": 7,
+          "8": 8,
+          "9": 9,
+          "10": 10,
+          "11": 11,
+          "12": 12,
+          "13": 13,
+          "14": 14,
+          "15": 15,
+          "16": 16,
+          "17": 17,
+          "18": 18,
+          "19": 19,
+          "20": 20,
+          "21": 21,
+          "22": 22,
+          "23": 23,
+          "24": 24,
+          "25": 25,
+          "26": 27
+        },
+        "decoder_inputs": [
+          26,
+          22,
+          25,
+          17
+        ],
+        "nodes": [
+          {
+            "index": 0,
+            "module": "ConvNormLayer",
+            "sources": [
+              -1
+            ]
+          },
+          {
+            "index": 1,
+            "module": "ConvNormLayer",
+            "sources": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "module": "ConvNormLayer",
+            "sources": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "module": "nn.MaxPool2d",
+            "sources": [
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "module": "Blocks",
+            "sources": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "module": "Blocks",
+            "sources": [
+              4
+            ]
+          },
+          {
+            "index": 6,
+            "module": "Blocks",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "index": 7,
+            "module": "Blocks",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "index": 8,
+            "module": "Conv",
+            "sources": [
+              7
+            ]
+          },
+          {
+            "index": 9,
+            "module": "AIFI",
+            "sources": [
+              8
+            ]
+          },
+          {
+            "index": 10,
+            "module": "Conv",
+            "sources": [
+              9
+            ]
+          },
+          {
+            "index": 11,
+            "module": "nn.Upsample",
+            "sources": [
+              10
+            ]
+          },
+          {
+            "index": 12,
+            "module": "Conv",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "index": 13,
+            "module": "Concat",
+            "sources": [
+              11,
+              12
+            ]
+          },
+          {
+            "index": 14,
+            "module": "RepC3",
+            "sources": [
+              13
+            ]
+          },
+          {
+            "index": 15,
+            "module": "Conv",
+            "sources": [
+              14
+            ]
+          },
+          {
+            "index": 16,
+            "module": "nn.Upsample",
+            "sources": [
+              15
+            ]
+          },
+          {
+            "index": 17,
+            "module": "Conv",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "index": 18,
+            "module": "Concat",
+            "sources": [
+              16,
+              17
+            ]
+          },
+          {
+            "index": 19,
+            "module": "RepC3",
+            "sources": [
+              18
+            ]
+          },
+          {
+            "index": 20,
+            "module": "Conv",
+            "sources": [
+              19
+            ]
+          },
+          {
+            "index": 21,
+            "module": "Concat",
+            "sources": [
+              20,
+              15
+            ]
+          },
+          {
+            "index": 22,
+            "module": "RepC3",
+            "sources": [
+              21
+            ]
+          },
+          {
+            "index": 23,
+            "module": "Conv",
+            "sources": [
+              22
+            ]
+          },
+          {
+            "index": 24,
+            "module": "Concat",
+            "sources": [
+              23,
+              10
+            ]
+          },
+          {
+            "index": 25,
+            "module": "RepC3",
+            "sources": [
+              24
+            ]
+          },
+          {
+            "index": 26,
+            "module": "DRCSCEFv6",
+            "sources": [
+              19,
+              17,
+              12
+            ]
+          },
+          {
+            "index": 27,
+            "module": "RTDETRDecoderCBRv2",
+            "sources": [
+              26,
+              22,
+              25,
+              17
+            ]
+          }
+        ]
+      },
+      "new_parameters": {
+        "cscef": 26912,
+        "cbr": 45889
+      },
+      "measured_parameters": 20155573,
+      "new_state_count": 21
+    },
+    "scca_v2_cbr_v2": {
+      "yaml": "rtdetr-resnet18-lite-scca-v2-cbr-v2.yaml",
+      "cscef": false,
+      "scca": true,
+      "cbr": true,
+      "parameters": 20194201,
+      "name": "triad_scca_v2_cbr_v2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "log_dir": "outputs/triad_compat/scca_v2_cbr_v2",
+      "evaluation_dirs": {
+        "val": "outputs/triad_compat/scca_v2_cbr_v2/evaluation_val",
+        "test": "outputs/triad_compat/scca_v2_cbr_v2/evaluation_test"
+      },
+      "package_dir": "downloads/triad_compat/scca_v2_cbr_v2",
+      "topology": {
+        "roles": {
+          "P3_ref": 17,
+          "P4_ref": 12,
+          "P5_projection": 8,
+          "decoder": 26,
+          "aifi": 9,
+          "P3_base": 19,
+          "P4_base": 22,
+          "P5_base": 25,
+          "P3_enh": 19
+        },
+        "common_layer_mapping": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3,
+          "4": 4,
+          "5": 5,
+          "6": 6,
+          "7": 7,
+          "8": 8,
+          "9": 9,
+          "10": 10,
+          "11": 11,
+          "12": 12,
+          "13": 13,
+          "14": 14,
+          "15": 15,
+          "16": 16,
+          "17": 17,
+          "18": 18,
+          "19": 19,
+          "20": 20,
+          "21": 21,
+          "22": 22,
+          "23": 23,
+          "24": 24,
+          "25": 25,
+          "26": 26
+        },
+        "decoder_inputs": [
+          19,
+          22,
+          25,
+          17
+        ],
+        "nodes": [
+          {
+            "index": 0,
+            "module": "ConvNormLayer",
+            "sources": [
+              -1
+            ]
+          },
+          {
+            "index": 1,
+            "module": "ConvNormLayer",
+            "sources": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "module": "ConvNormLayer",
+            "sources": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "module": "nn.MaxPool2d",
+            "sources": [
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "module": "Blocks",
+            "sources": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "module": "Blocks",
+            "sources": [
+              4
+            ]
+          },
+          {
+            "index": 6,
+            "module": "Blocks",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "index": 7,
+            "module": "Blocks",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "index": 8,
+            "module": "Conv",
+            "sources": [
+              7
+            ]
+          },
+          {
+            "index": 9,
+            "module": "GISCCAAIFI",
+            "sources": [
+              8
+            ]
+          },
+          {
+            "index": 10,
+            "module": "Conv",
+            "sources": [
+              9
+            ]
+          },
+          {
+            "index": 11,
+            "module": "nn.Upsample",
+            "sources": [
+              10
+            ]
+          },
+          {
+            "index": 12,
+            "module": "Conv",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "index": 13,
+            "module": "Concat",
+            "sources": [
+              11,
+              12
+            ]
+          },
+          {
+            "index": 14,
+            "module": "RepC3",
+            "sources": [
+              13
+            ]
+          },
+          {
+            "index": 15,
+            "module": "Conv",
+            "sources": [
+              14
+            ]
+          },
+          {
+            "index": 16,
+            "module": "nn.Upsample",
+            "sources": [
+              15
+            ]
+          },
+          {
+            "index": 17,
+            "module": "Conv",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "index": 18,
+            "module": "Concat",
+            "sources": [
+              16,
+              17
+            ]
+          },
+          {
+            "index": 19,
+            "module": "RepC3",
+            "sources": [
+              18
+            ]
+          },
+          {
+            "index": 20,
+            "module": "Conv",
+            "sources": [
+              19
+            ]
+          },
+          {
+            "index": 21,
+            "module": "Concat",
+            "sources": [
+              20,
+              15
+            ]
+          },
+          {
+            "index": 22,
+            "module": "RepC3",
+            "sources": [
+              21
+            ]
+          },
+          {
+            "index": 23,
+            "module": "Conv",
+            "sources": [
+              22
+            ]
+          },
+          {
+            "index": 24,
+            "module": "Concat",
+            "sources": [
+              23,
+              10
+            ]
+          },
+          {
+            "index": 25,
+            "module": "RepC3",
+            "sources": [
+              24
+            ]
+          },
+          {
+            "index": 26,
+            "module": "RTDETRDecoderCBRv2",
+            "sources": [
+              19,
+              22,
+              25,
+              17
+            ]
+          }
+        ]
+      },
+      "new_parameters": {
+        "scca": 65540,
+        "cbr": 45889
+      },
+      "measured_parameters": 20194201,
+      "new_state_count": 19
+    },
+    "triad_v1": {
+      "yaml": "rtdetr-resnet18-lite-triad-compat-v1.yaml",
+      "cscef": true,
+      "scca": true,
+      "cbr": true,
+      "parameters": 20221113,
+      "name": "triad_triad_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "log_dir": "outputs/triad_compat/triad_v1",
+      "evaluation_dirs": {
+        "val": "outputs/triad_compat/triad_v1/evaluation_val",
+        "test": "outputs/triad_compat/triad_v1/evaluation_test"
+      },
+      "package_dir": "downloads/triad_compat/triad_v1",
+      "topology": {
+        "roles": {
+          "P3_ref": 17,
+          "P4_ref": 12,
+          "P5_projection": 8,
+          "decoder": 27,
+          "aifi": 9,
+          "P3_base": 19,
+          "P4_base": 22,
+          "P5_base": 25,
+          "P3_enh": 26
+        },
+        "common_layer_mapping": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3,
+          "4": 4,
+          "5": 5,
+          "6": 6,
+          "7": 7,
+          "8": 8,
+          "9": 9,
+          "10": 10,
+          "11": 11,
+          "12": 12,
+          "13": 13,
+          "14": 14,
+          "15": 15,
+          "16": 16,
+          "17": 17,
+          "18": 18,
+          "19": 19,
+          "20": 20,
+          "21": 21,
+          "22": 22,
+          "23": 23,
+          "24": 24,
+          "25": 25,
+          "26": 27
+        },
+        "decoder_inputs": [
+          26,
+          22,
+          25,
+          17
+        ],
+        "nodes": [
+          {
+            "index": 0,
+            "module": "ConvNormLayer",
+            "sources": [
+              -1
+            ]
+          },
+          {
+            "index": 1,
+            "module": "ConvNormLayer",
+            "sources": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "module": "ConvNormLayer",
+            "sources": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "module": "nn.MaxPool2d",
+            "sources": [
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "module": "Blocks",
+            "sources": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "module": "Blocks",
+            "sources": [
+              4
+            ]
+          },
+          {
+            "index": 6,
+            "module": "Blocks",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "index": 7,
+            "module": "Blocks",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "index": 8,
+            "module": "Conv",
+            "sources": [
+              7
+            ]
+          },
+          {
+            "index": 9,
+            "module": "GISCCAAIFI",
+            "sources": [
+              8
+            ]
+          },
+          {
+            "index": 10,
+            "module": "Conv",
+            "sources": [
+              9
+            ]
+          },
+          {
+            "index": 11,
+            "module": "nn.Upsample",
+            "sources": [
+              10
+            ]
+          },
+          {
+            "index": 12,
+            "module": "Conv",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "index": 13,
+            "module": "Concat",
+            "sources": [
+              11,
+              12
+            ]
+          },
+          {
+            "index": 14,
+            "module": "RepC3",
+            "sources": [
+              13
+            ]
+          },
+          {
+            "index": 15,
+            "module": "Conv",
+            "sources": [
+              14
+            ]
+          },
+          {
+            "index": 16,
+            "module": "nn.Upsample",
+            "sources": [
+              15
+            ]
+          },
+          {
+            "index": 17,
+            "module": "Conv",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "index": 18,
+            "module": "Concat",
+            "sources": [
+              16,
+              17
+            ]
+          },
+          {
+            "index": 19,
+            "module": "RepC3",
+            "sources": [
+              18
+            ]
+          },
+          {
+            "index": 20,
+            "module": "Conv",
+            "sources": [
+              19
+            ]
+          },
+          {
+            "index": 21,
+            "module": "Concat",
+            "sources": [
+              20,
+              15
+            ]
+          },
+          {
+            "index": 22,
+            "module": "RepC3",
+            "sources": [
+              21
+            ]
+          },
+          {
+            "index": 23,
+            "module": "Conv",
+            "sources": [
+              22
+            ]
+          },
+          {
+            "index": 24,
+            "module": "Concat",
+            "sources": [
+              23,
+              10
+            ]
+          },
+          {
+            "index": 25,
+            "module": "RepC3",
+            "sources": [
+              24
+            ]
+          },
+          {
+            "index": 26,
+            "module": "DRCSCEFv6",
+            "sources": [
+              19,
+              17,
+              12
+            ]
+          },
+          {
+            "index": 27,
+            "module": "RTDETRDecoderCBRv2",
+            "sources": [
+              26,
+              22,
+              25,
+              17
+            ]
+          }
+        ]
+      },
+      "new_parameters": {
+        "scca": 65540,
+        "cscef": 26912,
+        "cbr": 45889
+      },
+      "measured_parameters": 20221113,
+      "new_state_count": 26
+    }
+  },
+  "baseline_parameters": 20082772,
+  "protected_C2_files": {
+    "ultralytics-main/ultralytics/nn/modules/head.py": "f96f372951fbea16ff4f5ce974a1f934f1f51d27a3866c50f296771d8dd4ef98",
+    "ultralytics-main/ultralytics/models/utils/loss.py": "db5c644d54350eacc6b8a5dbe3f5fd9b38b99383413f055a782194f859df14a8",
+    "ultralytics-main/ultralytics/models/utils/ops.py": "99b11ae1cb287cf39a872f952cce9b5784635255cb1c5af50ac872fa8cb182ba",
+    "ultralytics-main/ultralytics/models/rtdetr/train.py": "91f9148261328acdddb551ad04ab7acd462b56ed9dade690a7008d42ea9798ad",
+    "ultralytics-main/ultralytics/models/rtdetr/val.py": "5f7eb3025f37a46903e103ba0c82bac1cf9fdebdd9f1590c748a90666a355106",
+    "ultralytics-main/ultralytics/engine/trainer.py": "d954c4c79d2cf328392c3867eae03ad53366b57fb505feb944ce78196f691ac6",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite.yaml": "5fbfe7c88f23482fb6694fb18fd875d963f4bad1f026dc927314ab0fb0dbbf0b"
+  },
+  "historical_audit_sha256": "c8640f11c100747f6033fb9766cde9c0b4ad51d9ce73f09415c1a065779cbc43"
+}

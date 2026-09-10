@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "scope": "two copied images per original split; untrained controlled model",
+  "splits": {
+    "val": {
+      "images": 2,
+      "export_complete": true,
+      "checkpoint_sha256": "28007e8b9b071a94f573c572ed112689488a79492027ec15a68a820a3c4a3786",
+      "settings": {
+        "imgsz": 640,
+        "batch": 16,
+        "workers": 0,
+        "seed": 42,
+        "half": false,
+        "conf": 0.001,
+        "iou": 0.7,
+        "max_det": 300,
+        "augment": false,
+        "rect": false,
+        "data": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\outputs\\eval_pipeline_run1\\subset\\data.yaml",
+        "split": "val",
+        "device": "0",
+        "plots": true,
+        "save_json": false,
+        "save_txt": false,
+        "project": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\outputs\\eval_pipeline_run1\\val",
+        "name": "plots",
+        "exist_ok": false
+      },
+      "scope": "pipeline only; no research performance claim"
+    },
+    "test": {
+      "images": 2,
+      "export_complete": true,
+      "checkpoint_sha256": "28007e8b9b071a94f573c572ed112689488a79492027ec15a68a820a3c4a3786",
+      "settings": {
+        "imgsz": 640,
+        "batch": 16,
+        "workers": 0,
+        "seed": 42,
+        "half": false,
+        "conf": 0.001,
+        "iou": 0.7,
+        "max_det": 300,
+        "augment": false,
+        "rect": false,
+        "data": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\outputs\\eval_pipeline_run1\\subset\\data.yaml",
+        "split": "test",
+        "device": "0",
+        "plots": true,
+        "save_json": false,
+        "save_txt": false,
+        "project": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\outputs\\eval_pipeline_run1\\test",
+        "name": "plots",
+        "exist_ok": false
+      },
+      "scope": "pipeline only; no research performance claim"
+    }
+  }
+}

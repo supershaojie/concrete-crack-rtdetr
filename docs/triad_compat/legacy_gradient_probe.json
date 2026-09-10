@@ -1,0 +1,25 @@
+{
+  "scope": "synthetic nonzero branch dependency probe, NOT a trained-loss conflict/cosine measurement",
+  "cscef": {
+    "lateral_side_grad_l1": 5.955102920532227,
+    "semantic_grad_l1": 6.175935745239258,
+    "residual_rms": 0.010653483681380749
+  },
+  "scca": {
+    "src_side_grad_l1": 16.903833389282227,
+    "mha_side_grad_l1": 1.7848355770111084,
+    "relation_shape": [
+      1,
+      4,
+      16,
+      16
+    ]
+  },
+  "cbr": {
+    "p3_side_grad_l1": 0.0055017475970089436,
+    "query_side_grad_l1": 0.0032682709861546755,
+    "box_residual_scale_grad_l1": 0.005145697388797998,
+    "rho": 0.1,
+    "normal_fraction": 0.1
+  }
+}

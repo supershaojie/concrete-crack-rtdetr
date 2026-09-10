@@ -1,0 +1,704 @@
+{
+  "parameters": 20148312,
+  "topology": {
+    "roles": {
+      "P3_ref": 17,
+      "P4_ref": 12,
+      "P5_projection": 8,
+      "decoder": 26,
+      "aifi": 9,
+      "P3_base": 19,
+      "P4_base": 22,
+      "P5_base": 25,
+      "P3_enh": 19
+    },
+    "common_layer_mapping": {
+      "0": 0,
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 9,
+      "10": 10,
+      "11": 11,
+      "12": 12,
+      "13": 13,
+      "14": 14,
+      "15": 15,
+      "16": 16,
+      "17": 17,
+      "18": 18,
+      "19": 19,
+      "20": 20,
+      "21": 21,
+      "22": 22,
+      "23": 23,
+      "24": 24,
+      "25": 25,
+      "26": 26
+    },
+    "decoder_inputs": [
+      19,
+      22,
+      25
+    ],
+    "nodes": [
+      {
+        "index": 0,
+        "module": "ConvNormLayer",
+        "sources": [
+          -1
+        ]
+      },
+      {
+        "index": 1,
+        "module": "ConvNormLayer",
+        "sources": [
+          0
+        ]
+      },
+      {
+        "index": 2,
+        "module": "ConvNormLayer",
+        "sources": [
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "module": "nn.MaxPool2d",
+        "sources": [
+          2
+        ]
+      },
+      {
+        "index": 4,
+        "module": "Blocks",
+        "sources": [
+          3
+        ]
+      },
+      {
+        "index": 5,
+        "module": "Blocks",
+        "sources": [
+          4
+        ]
+      },
+      {
+        "index": 6,
+        "module": "Blocks",
+        "sources": [
+          5
+        ]
+      },
+      {
+        "index": 7,
+        "module": "Blocks",
+        "sources": [
+          6
+        ]
+      },
+      {
+        "index": 8,
+        "module": "Conv",
+        "sources": [
+          7
+        ]
+      },
+      {
+        "index": 9,
+        "module": "GISCCAAIFI",
+        "sources": [
+          8
+        ]
+      },
+      {
+        "index": 10,
+        "module": "Conv",
+        "sources": [
+          9
+        ]
+      },
+      {
+        "index": 11,
+        "module": "nn.Upsample",
+        "sources": [
+          10
+        ]
+      },
+      {
+        "index": 12,
+        "module": "Conv",
+        "sources": [
+          6
+        ]
+      },
+      {
+        "index": 13,
+        "module": "Concat",
+        "sources": [
+          11,
+          12
+        ]
+      },
+      {
+        "index": 14,
+        "module": "RepC3",
+        "sources": [
+          13
+        ]
+      },
+      {
+        "index": 15,
+        "module": "Conv",
+        "sources": [
+          14
+        ]
+      },
+      {
+        "index": 16,
+        "module": "nn.Upsample",
+        "sources": [
+          15
+        ]
+      },
+      {
+        "index": 17,
+        "module": "Conv",
+        "sources": [
+          5
+        ]
+      },
+      {
+        "index": 18,
+        "module": "Concat",
+        "sources": [
+          16,
+          17
+        ]
+      },
+      {
+        "index": 19,
+        "module": "RepC3",
+        "sources": [
+          18
+        ]
+      },
+      {
+        "index": 20,
+        "module": "Conv",
+        "sources": [
+          19
+        ]
+      },
+      {
+        "index": 21,
+        "module": "Concat",
+        "sources": [
+          20,
+          15
+        ]
+      },
+      {
+        "index": 22,
+        "module": "RepC3",
+        "sources": [
+          21
+        ]
+      },
+      {
+        "index": 23,
+        "module": "Conv",
+        "sources": [
+          22
+        ]
+      },
+      {
+        "index": 24,
+        "module": "Concat",
+        "sources": [
+          23,
+          10
+        ]
+      },
+      {
+        "index": 25,
+        "module": "RepC3",
+        "sources": [
+          24
+        ]
+      },
+      {
+        "index": 26,
+        "module": "RTDETRDecoder",
+        "sources": [
+          19,
+          22,
+          25
+        ]
+      }
+    ]
+  },
+  "zero_init": {
+    "640x640": {
+      "output.0": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.0": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.1": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.2": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.3": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "P3_ref": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "shape": [
+          1,
+          256,
+          80,
+          80
+        ]
+      },
+      "P4_ref": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "shape": [
+          1,
+          256,
+          40,
+          40
+        ]
+      },
+      "P3_base": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "shape": [
+          1,
+          256,
+          80,
+          80
+        ]
+      },
+      "P3_enh": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "shape": [
+          1,
+          256,
+          80,
+          80
+        ]
+      },
+      "P4_base": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "shape": [
+          1,
+          256,
+          40,
+          40
+        ]
+      },
+      "P5_base": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "shape": [
+          1,
+          256,
+          20,
+          20
+        ]
+      }
+    },
+    "160x192": {
+      "output.0": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.0": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.1": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.2": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.3": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "P3_ref": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "shape": [
+          1,
+          256,
+          20,
+          24
+        ]
+      },
+      "P4_ref": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "shape": [
+          1,
+          256,
+          10,
+          12
+        ]
+      },
+      "P3_base": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "shape": [
+          1,
+          256,
+          20,
+          24
+        ]
+      },
+      "P3_enh": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "shape": [
+          1,
+          256,
+          20,
+          24
+        ]
+      },
+      "P4_base": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "shape": [
+          1,
+          256,
+          10,
+          12
+        ]
+      },
+      "P5_base": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "shape": [
+          1,
+          256,
+          5,
+          6
+        ]
+      }
+    }
+  },
+  "routing": {
+    "status": "not_applicable"
+  },
+  "FP32_loss_DN": {
+    "status": "passed",
+    "device": "cpu",
+    "amp": false,
+    "debug_scaler_initial": null,
+    "steps": [
+      {
+        "step": 0,
+        "batch": 2,
+        "gt_groups": [
+          2,
+          1
+        ],
+        "loss": 104.26528930664062,
+        "components": [
+          1.7722457647323608,
+          11.126009941101074,
+          4.083451747894287
+        ],
+        "query_count": 500,
+        "dn_split": [
+          200,
+          300
+        ],
+        "new_gradients": {
+          "model.9.scca_temperature_raw": 0.0,
+          "model.9.scca_q.weight": 0.0,
+          "model.9.scca_k.weight": 0.0,
+          "model.9.scca_v.weight": 0.0,
+          "model.9.scca_o.weight": 389.07830810546875
+        },
+        "main_feature_gradients": {
+          "P3_ref": 503.477294921875,
+          "P4_ref": 336.1483154296875,
+          "P3_base": 627.6502685546875,
+          "P4_base": 215.12838745117188,
+          "P5_base": 62.355918884277344
+        }
+      },
+      {
+        "step": 1,
+        "batch": 1,
+        "gt_groups": [
+          3
+        ],
+        "loss": 47.02333450317383,
+        "components": [
+          1.6017826795578003,
+          0.3418765068054199,
+          3.5639641284942627
+        ],
+        "query_count": 498,
+        "dn_split": [
+          198,
+          300
+        ],
+        "new_gradients": {
+          "model.9.scca_temperature_raw": 0.0006953664706088603,
+          "model.9.scca_q.weight": 0.4841051697731018,
+          "model.9.scca_k.weight": 0.5897537469863892,
+          "model.9.scca_v.weight": 5.538398742675781,
+          "model.9.scca_o.weight": 151.35813903808594
+        },
+        "main_feature_gradients": {
+          "P3_ref": 214.15469360351562,
+          "P4_ref": 136.78968811035156,
+          "P3_base": 268.01458740234375,
+          "P4_base": 81.66806030273438,
+          "P5_base": 23.488632202148438
+        }
+      }
+    ],
+    "optimizer_coverage": {
+      "all_parameters_once": true,
+      "groups": [
+        {
+          "group": "weight",
+          "decay": 0.0001,
+          "count": 122,
+          "new_parameters": [
+            "model.9.scca_temperature_raw",
+            "model.9.scca_q.weight",
+            "model.9.scca_k.weight",
+            "model.9.scca_v.weight",
+            "model.9.scca_o.weight"
+          ]
+        },
+        {
+          "group": "bn",
+          "decay": 0.0,
+          "count": 81,
+          "new_parameters": []
+        },
+        {
+          "group": "bias",
+          "decay": 0.0,
+          "count": 128,
+          "new_parameters": []
+        }
+      ]
+    },
+    "save_load": {
+      "output.0": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.0": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.1": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.2": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.3": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      }
+    },
+    "native_rebuild_preserves_learned": true
+  },
+  "AMP_loss_DN": {
+    "status": "passed",
+    "device": "cuda",
+    "amp": true,
+    "debug_scaler_initial": 128,
+    "steps": [
+      {
+        "step": 0,
+        "batch": 2,
+        "gt_groups": [
+          2,
+          1
+        ],
+        "loss": 101.99491882324219,
+        "components": [
+          1.8668217658996582,
+          9.794442176818848,
+          3.8000903129577637
+        ],
+        "query_count": 500,
+        "dn_split": [
+          200,
+          300
+        ],
+        "new_gradients": {
+          "model.9.scca_temperature_raw": 0.0,
+          "model.9.scca_q.weight": 0.0,
+          "model.9.scca_k.weight": 0.0,
+          "model.9.scca_v.weight": 0.0,
+          "model.9.scca_o.weight": 348.8306884765625
+        },
+        "main_feature_gradients": {
+          "P3_ref": 61161.5234375,
+          "P4_ref": 41464.8203125,
+          "P3_base": 75744.515625,
+          "P4_base": 25959.0234375,
+          "P5_base": 7695.970703125
+        }
+      },
+      {
+        "step": 1,
+        "batch": 1,
+        "gt_groups": [
+          3
+        ],
+        "loss": 47.10028076171875,
+        "components": [
+          1.697068214416504,
+          0.31567344069480896,
+          3.5251083374023438
+        ],
+        "query_count": 498,
+        "dn_split": [
+          198,
+          300
+        ],
+        "new_gradients": {
+          "model.9.scca_temperature_raw": 0.0008671414107084274,
+          "model.9.scca_q.weight": 0.2662796974182129,
+          "model.9.scca_k.weight": 0.2806723415851593,
+          "model.9.scca_v.weight": 3.215532064437866,
+          "model.9.scca_o.weight": 110.96083068847656
+        },
+        "main_feature_gradients": {
+          "P3_ref": 13908.2548828125,
+          "P4_ref": 8894.673828125,
+          "P3_base": 18897.962890625,
+          "P4_base": 5775.87939453125,
+          "P5_base": 1350.08984375
+        }
+      }
+    ],
+    "optimizer_coverage": {
+      "all_parameters_once": true,
+      "groups": [
+        {
+          "group": "weight",
+          "decay": 0.0001,
+          "count": 122,
+          "new_parameters": [
+            "model.9.scca_temperature_raw",
+            "model.9.scca_q.weight",
+            "model.9.scca_k.weight",
+            "model.9.scca_v.weight",
+            "model.9.scca_o.weight"
+          ]
+        },
+        {
+          "group": "bn",
+          "decay": 0.0,
+          "count": 81,
+          "new_parameters": []
+        },
+        {
+          "group": "bias",
+          "decay": 0.0,
+          "count": 128,
+          "new_parameters": []
+        }
+      ]
+    },
+    "save_load": {
+      "output.0": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.0": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.1": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.2": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      },
+      "output.1.3": {
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0
+      }
+    },
+    "native_rebuild_preserves_learned": true
+  },
+  "precision": {
+    "status": "passed",
+    "AMP_vs_FP32": {
+      "output.0": {
+        "max_abs_error": 0.75,
+        "max_rel_error": 7.200000286102295
+      },
+      "output.1.0": {
+        "max_abs_error": 0.75,
+        "max_rel_error": 7.200000286102295
+      },
+      "output.1.1": {
+        "max_abs_error": 0.034265875816345215,
+        "max_rel_error": 0.047809913754463196
+      },
+      "output.1.2": {
+        "max_abs_error": 0.75,
+        "max_rel_error": 7.200000286102295
+      },
+      "output.1.3": {
+        "max_abs_error": 0.0008836984634399414,
+        "max_rel_error": 0.0009961496107280254
+      }
+    },
+    "true_half": {
+      "output.0": "torch.float16",
+      "output.1.0": "torch.float16",
+      "output.1.1": "torch.float16",
+      "output.1.2": "torch.float16",
+      "output.1.3": "torch.float16"
+    },
+    "shape": [
+      1,
+      300,
+      5
+    ]
+  },
+  "initialization_report": "scca_v2_initialization.json"
+}

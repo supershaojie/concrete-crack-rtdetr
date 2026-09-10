@@ -1,0 +1,187 @@
+{
+  "runtime": {
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\ultralytics-main\\ultralytics\\__init__.py",
+    "modules": {
+      "DRCSCEFv6": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\ultralytics-main\\ultralytics\\nn\\modules\\cscef_v6.py",
+      "GISCCAAIFI": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\ultralytics-main\\ultralytics\\nn\\modules\\scca_aifi_v2.py",
+      "StableReferenceCBR": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\ultralytics-main\\ultralytics\\nn\\modules\\cbr_v2.py"
+    },
+    "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+    "dirty": true
+  },
+  "scope": "bounded synthetic; no formal training/full dataset val/test",
+  "legacy_regression": {
+    "c2": {
+      "parameters": 20082772,
+      "output_shape": [
+        1,
+        300,
+        5
+      ]
+    },
+    "c17": {
+      "parameters": 20109684,
+      "output_shape": [
+        1,
+        300,
+        5
+      ]
+    },
+    "c19": {
+      "parameters": 20128661,
+      "output_shape": [
+        1,
+        300,
+        5
+      ]
+    },
+    "c24": {
+      "parameters": 20148312,
+      "output_shape": [
+        1,
+        300,
+        5
+      ]
+    }
+  },
+  "variants": {
+    "cscef_v6": {
+      "yaml": "rtdetr-resnet18-lite-cscef-v6.yaml",
+      "parameters": 20109684,
+      "max_zero_init_abs": 0.0,
+      "max_common_abs": 0.0,
+      "common_states": 533,
+      "new_states": 7,
+      "classification_adaptations": 9,
+      "DN_queries": [
+        500,
+        498
+      ],
+      "CPU_FP32_loss_DN": "passed",
+      "CUDA_AMP_loss_DN": "passed",
+      "true_half": "passed",
+      "save_load_max_abs": 0.0,
+      "optimizer_all_once": true,
+      "yaml_load_exact_states": 531
+    },
+    "scca_v2": {
+      "yaml": "rtdetr-resnet18-lite-scca-v2.yaml",
+      "parameters": 20148312,
+      "max_zero_init_abs": 0.0,
+      "max_common_abs": 0.0,
+      "common_states": 533,
+      "new_states": 5,
+      "classification_adaptations": 9,
+      "DN_queries": [
+        500,
+        498
+      ],
+      "CPU_FP32_loss_DN": "passed",
+      "CUDA_AMP_loss_DN": "passed",
+      "true_half": "passed",
+      "save_load_max_abs": 0.0,
+      "optimizer_all_once": true,
+      "yaml_load_exact_states": 529
+    },
+    "cbr_v2": {
+      "yaml": "rtdetr-resnet18-lite-cbr-v2.yaml",
+      "parameters": 20128661,
+      "max_zero_init_abs": 0.0,
+      "max_common_abs": 0.0,
+      "common_states": 533,
+      "new_states": 14,
+      "classification_adaptations": 9,
+      "DN_queries": [
+        500,
+        498
+      ],
+      "CPU_FP32_loss_DN": "passed",
+      "CUDA_AMP_loss_DN": "passed",
+      "true_half": "passed",
+      "save_load_max_abs": 0.0,
+      "optimizer_all_once": true,
+      "yaml_load_exact_states": 538
+    },
+    "cscef_v6_scca_v2": {
+      "yaml": "rtdetr-resnet18-lite-cscef-v6-scca-v2.yaml",
+      "parameters": 20175224,
+      "max_zero_init_abs": 0.0,
+      "max_common_abs": 0.0,
+      "common_states": 533,
+      "new_states": 12,
+      "classification_adaptations": 9,
+      "DN_queries": [
+        500,
+        498
+      ],
+      "CPU_FP32_loss_DN": "passed",
+      "CUDA_AMP_loss_DN": "passed",
+      "true_half": "passed",
+      "save_load_max_abs": 0.0,
+      "optimizer_all_once": true,
+      "yaml_load_exact_states": 536
+    },
+    "cscef_v6_cbr_v2": {
+      "yaml": "rtdetr-resnet18-lite-cscef-v6-cbr-v2.yaml",
+      "parameters": 20155573,
+      "max_zero_init_abs": 0.0,
+      "max_common_abs": 0.0,
+      "common_states": 533,
+      "new_states": 21,
+      "classification_adaptations": 9,
+      "DN_queries": [
+        500,
+        498
+      ],
+      "CPU_FP32_loss_DN": "passed",
+      "CUDA_AMP_loss_DN": "passed",
+      "true_half": "passed",
+      "save_load_max_abs": 0.0,
+      "optimizer_all_once": true,
+      "yaml_load_exact_states": 545
+    },
+    "scca_v2_cbr_v2": {
+      "yaml": "rtdetr-resnet18-lite-scca-v2-cbr-v2.yaml",
+      "parameters": 20194201,
+      "max_zero_init_abs": 0.0,
+      "max_common_abs": 0.0,
+      "common_states": 533,
+      "new_states": 19,
+      "classification_adaptations": 9,
+      "DN_queries": [
+        500,
+        498
+      ],
+      "CPU_FP32_loss_DN": "passed",
+      "CUDA_AMP_loss_DN": "passed",
+      "true_half": "passed",
+      "save_load_max_abs": 0.0,
+      "optimizer_all_once": true,
+      "yaml_load_exact_states": 543
+    },
+    "triad_v1": {
+      "yaml": "rtdetr-resnet18-lite-triad-compat-v1.yaml",
+      "parameters": 20221113,
+      "max_zero_init_abs": 0.0,
+      "max_common_abs": 0.0,
+      "common_states": 533,
+      "new_states": 26,
+      "classification_adaptations": 9,
+      "DN_queries": [
+        500,
+        498
+      ],
+      "CPU_FP32_loss_DN": "passed",
+      "CUDA_AMP_loss_DN": "passed",
+      "true_half": "passed",
+      "save_load_max_abs": 0.0,
+      "optimizer_all_once": true,
+      "yaml_load_exact_states": 550
+    }
+  }
+}

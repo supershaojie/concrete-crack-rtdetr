@@ -109,7 +109,17 @@ from .transformer import (
     TransformerLayer,
 )
 
+from .cscef_v5 import CSCEFv5
+from .cscef_v51 import CSCEFv51
+from .cscef_v6 import DRCSCEFv6
+from .scca_aifi import SCCAAIFI
+from .scca_aifi_v2 import GISCCAAIFI
+from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
+from .cbr_v2 import StableReferenceCBR, RTDETRDecoderCBRv2
+
 __all__ = (
+    "CSCEFv5", "CSCEFv51", "DRCSCEFv6", "SCCAAIFI", "GISCCAAIFI",
+    "CrackBoundaryRefinement", "RTDETRDecoderCBR", "StableReferenceCBR", "RTDETRDecoderCBRv2",
     "AIFI",
     "C1",
     "C2",

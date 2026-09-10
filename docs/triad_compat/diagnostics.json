@@ -1,0 +1,155 @@
+{
+  "runtime": {
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\ultralytics-main\\ultralytics\\__init__.py",
+    "modules": {
+      "DRCSCEFv6": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\ultralytics-main\\ultralytics\\nn\\modules\\cscef_v6.py",
+      "GISCCAAIFI": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\ultralytics-main\\ultralytics\\nn\\modules\\scca_aifi_v2.py",
+      "StableReferenceCBR": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\triad-compat\\ultralytics-main\\ultralytics\\nn\\modules\\cbr_v2.py"
+    },
+    "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+    "dirty": true
+  },
+  "variant": "triad_v1",
+  "diagnostic_only": true,
+  "synthetic_nonzero_intervention": true,
+  "input": [
+    1,
+    3,
+    160,
+    192
+  ],
+  "features": {
+    "P4_ref": {
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype": "torch.float32",
+      "rms": 0.2929351329803467,
+      "finite": true
+    },
+    "P3_ref": {
+      "shape": [
+        1,
+        256,
+        20,
+        24
+      ],
+      "dtype": "torch.float32",
+      "rms": 0.32311511039733887,
+      "finite": true
+    },
+    "P3_base": {
+      "shape": [
+        1,
+        256,
+        20,
+        24
+      ],
+      "dtype": "torch.float32",
+      "rms": 0.02072238363325596,
+      "finite": true
+    },
+    "P4_base": {
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype": "torch.float32",
+      "rms": 0.0005175374681130052,
+      "finite": true
+    },
+    "P5_base": {
+      "shape": [
+        1,
+        256,
+        5,
+        6
+      ],
+      "dtype": "torch.float32",
+      "rms": 0.0192458163946867,
+      "finite": true
+    },
+    "P3_enh": {
+      "shape": [
+        1,
+        256,
+        20,
+        24
+      ],
+      "dtype": "torch.float32",
+      "rms": 0.03897605836391449,
+      "finite": true
+    }
+  },
+  "cscef_delta_to_base_rms": 1.5506140921124865,
+  "scca": {
+    "delta_rms": 0.05530153959989548,
+    "delta_to_src_rms": 0.06683271712300806,
+    "delta_to_s_rms": 0.17735176850699552,
+    "attention_shape": [
+      1,
+      4,
+      16,
+      16
+    ],
+    "finite": true
+  },
+  "cbr": {
+    "mean_abs_box_correction": 8.722511847736314e-05,
+    "saturated_fraction": 0.0,
+    "evidence_rms": 0.12935437262058258,
+    "finite": true,
+    "rho": 0.075
+  },
+  "same_image_batch_error": {
+    "max_abs_error": 1.7881393432617188e-07,
+    "max_rel_error": 3.145714231322927e-07
+  },
+  "AMP_vs_FP32": {
+    "max_abs_error": 0.8332831263542175,
+    "max_rel_error": 13.34965705871582
+  },
+  "precision_selection": {
+    "raw_output_error": {
+      "max_abs_error": 0.8332831263542175,
+      "max_rel_error": 13.34965705871582
+    },
+    "same_position_query_indices": 150,
+    "shared_encoder_indices": 299,
+    "matched_query_value_error": {
+      "max_abs_error": 0.0005202293395996094,
+      "max_rel_error": 0.0008871671161614358
+    },
+    "interpretation": "Native encoder top-k may permute/change queries under AMP; matched values are a diagnostic, not a forced selection."
+  },
+  "baseline_precision_selection": {
+    "raw_output_error": {
+      "max_abs_error": 0.75,
+      "max_rel_error": 6.799999237060547
+    },
+    "same_position_query_indices": 86,
+    "shared_encoder_indices": 300,
+    "matched_query_value_error": {
+      "max_abs_error": 0.00032526254653930664,
+      "max_rel_error": 0.00048073462676256895
+    },
+    "interpretation": "Native encoder top-k may permute/change queries under AMP; matched values are a diagnostic, not a forced selection."
+  },
+  "benchmark": {
+    "mean_forward_ms": 29.760199999999948,
+    "iterations": 10,
+    "warmups": 3,
+    "peak_allocated_bytes": 122092032,
+    "scope": "local synthetic B1 160x192 eval; not AutoDL4090/formal training throughput"
+  }
+}

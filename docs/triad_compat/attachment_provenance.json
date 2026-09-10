@@ -1,0 +1,41 @@
+{
+  "spec": {
+    "path": "D:\\rtdetr跑结果\\RTDETR_C17_C19_C24_Compatibility_Redesign\\RTDETR_C17_C19_C24_Compatibility_Redesign_Codex_Spec.md",
+    "sha256": "7951cbe78c8281a0090f5ee7faf5c9049b976975fa5bed35c1f89db7bf76d69c"
+  },
+  "module_reference_files": {
+    "RTDETR-main\\ultralytics\\nn\\extra_modules\\attention.py": "928204bf285bcf184e55b046a5beca5f5c0e32a0e734bd3f0889f881d8a7bc8d",
+    "RTDETR-main\\ultralytics\\nn\\extra_modules\\block.py": "e3e3617c89bd7caf350d2601740f2e399847a16a3a659d7b3e40010b88498cd2",
+    "RTDETR-main\\ultralytics\\nn\\extra_modules\\CAFM.py": "74377b3d2eb98b9902fb19dbfe6e7990dfd40df459f96910b6d5518ce8504158",
+    "RTDETR-main\\ultralytics\\nn\\extra_modules\\FAAFusion.py": "1e9a554905abb89ba8c65014ee4c88d8d7b1e0d5005556ad806b504527a64676",
+    "RTDETR-main\\ultralytics\\nn\\extra_modules\\FreqFusion.py": "82475bfd37734b999fe823be06b21faae3a03bfa2dc8fc3d71a609d9cef2407f",
+    "RTDETR-main\\ultralytics\\nn\\extra_modules\\MAFusion.py": "5569fb44215f78d689aed5300417d0f0a671c639b871bc80dc89c53245d6a1d5",
+    "RTDETR-main\\ultralytics\\nn\\extra_modules\\SFSFusion.py": "208b8f8398f5fe0577e7022fc00b50f9b9e60557a2e07d61d800f23ae2bae96d",
+    "RTDETR-main\\ultralytics\\nn\\extra_modules\\wtconv2d.py": "2f030c240ba7bbcdc21c8c0d250ef3b3ffe9b78f516938648f39ac155ef7641f"
+  },
+  "archive_hashes": {
+    "C2": "c225efc13d32fcef1eeb1ec1efdd37d1d282de081bafcba58cf47f0faf36a2fd",
+    "C17": "c94cc1f590451728ce4e6cedd3fa973606ad263a09308f7f10f43d592b05a571",
+    "C19": "83d557d4315ebd6bb2d1b4e2a18f444b84eaaad2734fda59f02475c38e247d24",
+    "C24": "732ac3cef7f9c1242eef39aad7f5c3c64a16c4f7c895f205ced7d8e8b8152a1c",
+    "C20": "bf98d6c0c872965c140ffc71dd5a93ad6b519448c2f85771a2f50ae7423d6a36",
+    "C25": "4e28647accfdd45c15e726138ded15b1df034fb0ff045cd34752b3b3b4ba873f",
+    "C26": "608168ac41d233fdfb836e7da9288fa2d1002d453370fd145db224ed6d2f0571",
+    "MODULES": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc"
+  },
+  "c19_git": {
+    "commit": "025997e3c51eaf6933534308a95da6ebf97bff53",
+    "branch": "exp-rtdetr-r18-lite-cbr",
+    "status": ""
+  },
+  "patches": {
+    "C17\\c17_cscef_v51_complete_20260906_153449_116232399\\source\\working_tree.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C24\\c24_scca_complete_20260908_212957_GmHKX5\\metadata\\working_tree.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

@@ -13,6 +13,13 @@ import torch.nn as nn
 from ultralytics.nn.autobackend import check_class_names
 from ultralytics.nn.modules import (
     AIFI,
+    CSCEFv5,
+    CSCEFv51,
+    DRCSCEFv6,
+    SCCAAIFI,
+    GISCCAAIFI,
+    RTDETRDecoderCBR,
+    RTDETRDecoderCBRv2,
     C1,
     C2,
     C2PSA,
@@ -1668,7 +1675,17 @@ def parse_model(d, ch, verbose=True):
                     args.extend((True, 1.2))
             if m is C2fCIB:
                 legacy = False
-        elif m is AIFI:
+        elif m in {CSCEFv5, CSCEFv51}:
+            if not isinstance(f, list) or len(f) != 2:
+                raise ValueError("CSCEF v5/v5.1 requires two explicit source features.")
+            c2 = ch[f[0]]
+            args = [ch[f[0]], ch[f[1]], *args]
+        elif m is DRCSCEFv6:
+            if not isinstance(f, list) or len(f) != 3:
+                raise ValueError("DRCSCEFv6 requires base, lateral reference, semantic reference.")
+            c2 = ch[f[0]]
+            args = [*(ch[j] for j in f), *args]
+        elif m in {AIFI, SCCAAIFI, GISCCAAIFI}:
             args = [ch[f], *args]
         elif m is Blocks:
             block_type = globals()[args[1]] if isinstance(args[1], str) else args[1]
@@ -1710,7 +1727,7 @@ def parse_model(d, ch, verbose=True):
             args.append([ch[x] for x in f])
         elif m is ImagePoolingAttn:
             args.insert(1, [ch[x] for x in f])  # channels as second arg
-        elif m is RTDETRDecoder:  # special case, channels arg must be passed in index 1
+        elif m in {RTDETRDecoder, RTDETRDecoderCBR, RTDETRDecoderCBRv2}:  # channels at index 1
             args.insert(1, [ch[x] for x in f])
         elif m is CBLinear:
             c2 = args[0]
