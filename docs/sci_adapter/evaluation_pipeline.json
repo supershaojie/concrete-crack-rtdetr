@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "scope": "two copied images per original split; untrained controlled model",
+  "splits": {
+    "val": {
+      "images": 2,
+      "export_complete": true,
+      "checkpoint_sha256": "cbca5fac0235c2a1aea93b241742fd57b9c04a5578cbcaa81c657f00a9bcedbb",
+      "settings": {
+        "imgsz": 640,
+        "batch": 16,
+        "workers": 0,
+        "seed": 42,
+        "half": false,
+        "conf": 0.001,
+        "iou": 0.7,
+        "max_det": 300,
+        "augment": false,
+        "rect": false,
+        "data": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\sci-adapter\\outputs\\sci_eval_pipeline\\subset\\data.yaml",
+        "split": "val",
+        "device": "0",
+        "plots": true,
+        "save_json": false,
+        "save_txt": false,
+        "project": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\sci-adapter\\outputs\\sci_eval_pipeline\\val",
+        "name": "plots",
+        "exist_ok": false
+      },
+      "scope": "pipeline only; no research performance claim"
+    },
+    "test": {
+      "images": 2,
+      "export_complete": true,
+      "checkpoint_sha256": "cbca5fac0235c2a1aea93b241742fd57b9c04a5578cbcaa81c657f00a9bcedbb",
+      "settings": {
+        "imgsz": 640,
+        "batch": 16,
+        "workers": 0,
+        "seed": 42,
+        "half": false,
+        "conf": 0.001,
+        "iou": 0.7,
+        "max_det": 300,
+        "augment": false,
+        "rect": false,
+        "data": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\sci-adapter\\outputs\\sci_eval_pipeline\\subset\\data.yaml",
+        "split": "test",
+        "device": "0",
+        "plots": true,
+        "save_json": false,
+        "save_txt": false,
+        "project": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\sci-adapter\\outputs\\sci_eval_pipeline\\test",
+        "name": "plots",
+        "exist_ok": false
+      },
+      "scope": "pipeline only; no research performance claim"
+    }
+  }
+}

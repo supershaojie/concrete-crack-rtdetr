@@ -17,6 +17,8 @@ Examples:
     >>> subprocess.run(f"onnxslim {f} {f} && open {f}", shell=True, check=True)  # pip install onnxslim
 """
 
+from .semantic_compat_adapter import SemanticCompatibilityAdapter, SCIAdapter
+
 from .block import (
     C1,
     C2,
@@ -119,6 +121,8 @@ from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
 from .cbr_v2 import StableReferenceCBR, RTDETRDecoderCBRv2
 
 __all__ = (
+    "SemanticCompatibilityAdapter",
+    "SCIAdapter",
     "CSCEFv5", "CSCEFv51", "CSCEFv52Compat", "DRCSCEFv6", "SCCAAIFI", "GISCCAAIFI",
     "CrackBoundaryRefinement", "RTDETRDecoderCBR", "StableReferenceCBR", "RTDETRDecoderCBRv2",
     "AIFI",

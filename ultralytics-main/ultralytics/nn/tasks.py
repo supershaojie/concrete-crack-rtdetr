@@ -15,6 +15,7 @@ from ultralytics.nn.modules import (
     AIFI,
     CSCEFv5,
     CSCEFv51,
+    SCIAdapter,
     CSCEFv52Compat,
     DRCSCEFv6,
     SCCAAIFI,
@@ -1676,6 +1677,9 @@ def parse_model(d, ch, verbose=True):
                     args.extend((True, 1.2))
             if m is C2fCIB:
                 legacy = False
+        elif m is SCIAdapter:
+            c2 = ch[f]
+            args = [c2, *args]
         elif m in {CSCEFv5, CSCEFv51, CSCEFv52Compat}:
             if not isinstance(f, list) or len(f) != 2:
                 raise ValueError("CSCEF v5/v5.1 requires two explicit source features.")

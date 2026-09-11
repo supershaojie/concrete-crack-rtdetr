@@ -1,0 +1,125 @@
+{
+  "status": "passed",
+  "device": "cuda",
+  "variants": {
+    "cscef_v51_sci_control": {
+      "zero_init_semantic_gradient": {
+        "semantic": {
+          "max_abs": 0.0,
+          "max_rel": 0.0,
+          "L2_ratio": 1.0
+        },
+        "Y4": {
+          "max_abs": 0.0,
+          "max_rel": 0.0,
+          "L2_ratio": 1.0
+        }
+      },
+      "nonzero_identity_jacobian": {
+        "max_abs": 0.0,
+        "max_rel": 0.0
+      },
+      "nonzero_parameter_gradient_L2": {
+        "model.18.norm.weight": 2.957574361062143e-05,
+        "model.18.norm.bias": 3.436498445807956e-05,
+        "model.18.reduce.weight": 0.0008328238036483526,
+        "model.18.restore.weight": 0.017548035830259323,
+        "model.18.restore.bias": 0.01015915721654892,
+        "model.19.lateral_projection.weight": 0.0025126507971435785,
+        "model.19.semantic_projection.weight": 0.002146579558029771,
+        "model.19.mix_projection.weight": 0.0017084102146327496,
+        "model.19.depthwise_conv.weight": 0.00038172455970197916,
+        "model.19.output_projection.weight": 0.001319698290899396
+      },
+      "isolated_input_gradient": null,
+      "isolated_adapter_gradients": [
+        1.9949393390561454e-06,
+        3.120016799584846e-06,
+        1.66441186593147e-05,
+        0.00017562655557412654,
+        0.00017609847418498248
+      ]
+    },
+    "scca_sci_cscef_v51": {
+      "zero_init_semantic_gradient": {
+        "semantic": {
+          "max_abs": 0.0,
+          "max_rel": 0.0,
+          "L2_ratio": 1.0
+        },
+        "Y4": {
+          "max_abs": 0.0,
+          "max_rel": 0.0,
+          "L2_ratio": 1.0
+        }
+      },
+      "nonzero_identity_jacobian": {
+        "max_abs": 0.0,
+        "max_rel": 0.0
+      },
+      "nonzero_parameter_gradient_L2": {
+        "model.9.scca_temperature_raw": 1.971903839148581e-05,
+        "model.9.scca_q.weight": 0.00026875888579525054,
+        "model.9.scca_k.weight": 0.0002099890698445961,
+        "model.9.scca_v.weight": 0.0011279473546892405,
+        "model.9.scca_o.weight": 0.003118948545306921,
+        "model.18.norm.weight": 3.352673229528591e-05,
+        "model.18.norm.bias": 4.549941513687372e-05,
+        "model.18.reduce.weight": 0.0009738486260175705,
+        "model.18.restore.weight": 0.018223285675048828,
+        "model.18.restore.bias": 0.013405143283307552,
+        "model.19.lateral_projection.weight": 0.002090922323986888,
+        "model.19.semantic_projection.weight": 0.0018336219945922494,
+        "model.19.mix_projection.weight": 0.0011792790610343218,
+        "model.19.depthwise_conv.weight": 0.00036431598709896207,
+        "model.19.output_projection.weight": 0.0012672396842390299
+      },
+      "isolated_input_gradient": null,
+      "isolated_adapter_gradients": [
+        1.8227399323222926e-06,
+        2.7237142603553366e-06,
+        1.514286850579083e-05,
+        0.00016761699225753546,
+        0.00016032368876039982
+      ]
+    }
+  },
+  "synthetic_learning": {
+    "initial_loss": 0.0034377840347588062,
+    "final_loss": 9.264078107662499e-05,
+    "steps": 30,
+    "losses": [
+      0.0034377840347588062,
+      0.0025154356844723225,
+      0.0016562454402446747,
+      0.0009916754206642509,
+      0.0006455969414673746,
+      0.0005275451694615185,
+      0.0004671339993365109,
+      0.00040511804400011897,
+      0.0003520979662425816,
+      0.0003169669071212411,
+      0.00029734219424426556,
+      0.0002859876840375364,
+      0.0002759382186923176,
+      0.00026284478371962905,
+      0.00024539136211387813,
+      0.00022452308621723205,
+      0.00020250251691322774,
+      0.00018197824829258025,
+      0.00016502290964126587,
+      0.0001524545659776777,
+      0.0001437558967154473,
+      0.0001375599968014285,
+      0.0001323390897596255,
+      0.00012696416524704546,
+      0.00012100115418434143,
+      0.00011468912998680025,
+      0.0001086206320906058,
+      0.00010333037789678201,
+      9.90331027423963e-05,
+      9.559049794916064e-05
+    ],
+    "scope": "Synthetic engineering learnability only; no detection-performance evidence"
+  }
+}
