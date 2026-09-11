@@ -1,0 +1,53 @@
+{
+  "experiment": "C15 RT-DETR-R18-Lite CSCEF-v5",
+  "source_commit": "fad58b01eb813c5cea7f9fc2c36c93a5a4d388e7",
+  "ultralytics_source": "/root/autodl-tmp/projects/Crack_RTDETR_cscef_v5/ultralytics-main/ultralytics/__init__.py",
+  "checkpoint": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c15_rtdetr_r18_lite_cscef_v5_e200_b16_onlineaug/weights/best.pt",
+  "checkpoint_sha256": "099212cf5a03cfb6c3066044f3dee373e465f7d8e8308c29c97e7451eadc99d5",
+  "data": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+  "split": "test",
+  "imgsz": 640,
+  "batch": 16,
+  "workers": 8,
+  "device": 0,
+  "seed": 42,
+  "conf": 0.001,
+  "iou": 0.7,
+  "max_det": 300,
+  "half": false,
+  "augment": false,
+  "save_json": true,
+  "plots": true,
+  "project": "/root/autodl-tmp/projects/Crack_RTDETR/runs/test",
+  "name": "c15_cscef_v5_test_20260906_022343_832775",
+  "exist_ok": true,
+  "verbose": true,
+  "precision": 0.7966897069701403,
+  "recall": 0.7834308869878434,
+  "mAP50": 0.8276554181816267,
+  "mAP75": 0.4769045979534264,
+  "mAP50_95": 0.46770864203611556,
+  "results_dict": {
+    "metrics/precision(B)": 0.7966897069701403,
+    "metrics/recall(B)": 0.7834308869878434,
+    "metrics/mAP50(B)": 0.8276554181816267,
+    "metrics/mAP50-95(B)": 0.46770864203611556,
+    "fitness": 0.46770864203611556
+  },
+  "speed_ms_per_image": {
+    "preprocess": 0.9891033621021994,
+    "inference": 5.175465519574505,
+    "loss": 0.0006256374978908787,
+    "postprocess": 0.671207706478459
+  },
+  "images": 864,
+  "predictions": 259200,
+  "runtime": {
+    "python": "3.10.13",
+    "torch": "2.1.2+cu121",
+    "cuda": "12.1",
+    "ultralytics": "8.4.21",
+    "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "instances": 6663
+}

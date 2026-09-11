@@ -1,0 +1,55 @@
+{
+  "experiment": "C19 CBR",
+  "split": "test",
+  "checkpoint": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_rtdetr_r18_lite_cbr_e200_b16_onlineaug/weights/best.pt",
+  "best_sha256": "1a5a850c5cb1dadaed34ebff86b20c3f31312f44ed7839149864b3befab19f3d",
+  "images": 864,
+  "instances": 6663,
+  "precision": 0.8490338445575341,
+  "recall": 0.837311905431872,
+  "mAP50": 0.8851863565670782,
+  "mAP50_95": 0.5038924194554971,
+  "mAP75": 0.5199952552147155,
+  "AP_by_class_and_IoU": [
+    [
+      0.8851863565670782,
+      0.8441727125636013,
+      0.7918044838007569,
+      0.7241388740064454,
+      0.6308137139224552,
+      0.5199952552147155,
+      0.3716133884464415,
+      0.21114368165679245,
+      0.057354562865546695,
+      0.002701165511139435
+    ]
+  ],
+  "IoU_thresholds": [
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.8999999999999999,
+    0.95
+  ],
+  "results_dict": {
+    "metrics/precision(B)": 0.8490338445575341,
+    "metrics/recall(B)": 0.837311905431872,
+    "metrics/mAP50(B)": 0.8851863565670782,
+    "metrics/mAP50-95(B)": 0.5038924194554971,
+    "fitness": 0.5038924194554971
+  },
+  "speed_ms_per_image": {
+    "preprocess": 0.7085964445852571,
+    "inference": 3.325331274902931,
+    "loss": 0.0005943562697481226,
+    "postprocess": 0.38305289301745316
+  },
+  "prediction_count": 259200,
+  "test_save_dir": "/root/autodl-tmp/c19_cbr_test_small_20260907_132852_339107473/test",
+  "prediction_note": "Native saved predictions may be rounded; official AP is recorded above."
+}

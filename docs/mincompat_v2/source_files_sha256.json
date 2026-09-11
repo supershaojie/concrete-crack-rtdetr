@@ -1,0 +1,30 @@
+{
+  "policy": "UTF-8 bytes with CRLF normalized to LF",
+  "files": {
+    "tools/audit_mincompat_v2.py": "62655ac3101fa08a36d1524bfe7970fc557d2145d279847692b9ee6e67ba69de",
+    "tools/autodl_mincompat_v2.sh": "1acabc653ee4c76cafc5df8c4900459b1230912a71b570b94c15e89f35ad4134",
+    "tools/check_mincompat_v2.py": "8681a8c02e4029d0c1a8b9fe2fb9e0029d200aabc60b4010aa882605e841deda",
+    "tools/check_mincompat_v2_eval_pipeline.py": "e34a999c72b736792f24f79f21fde38075a2675470192dc8426f021fd90c3b0b",
+    "tools/check_mincompat_v2_gradients.py": "715cebe2fc3da0b4dd7abe7cfc929dd51d93609884c1405a120ca60b10c60796",
+    "tools/check_mincompat_v2_ops.py": "5cdcdad605e91c571b023f8c6f03274dd62f3ebd198c95f5efc2791ceab3943f",
+    "tools/check_mincompat_v2_pack_fixture.py": "8ce4a8b7256b4d436c7a0eae384ec1e466d48b0836a882c05f31a272a7a05ac2",
+    "tools/check_mincompat_v2_regression.py": "aa9184a97347643aaf446ae300d95a44453b3859b52c6e54fa991ecca44002f0",
+    "tools/init_mincompat_v2.py": "f61bd8b823a8d575becd510f3e919290d1ad10b18e4e2222513b66af999cdedf",
+    "tools/mincompat_v2.py": "5e05baa7acb725bf578f846a9c0cd343b5a4338fed024d17a67c8fcc03254b18",
+    "tools/mincompat_v2_results.py": "5192eab2562955789c213b4e31c5e00ba947c0d627a0536c9308d39b66e86d40",
+    "tools/sync_mincompat_v2.sh": "a4b7a4e6e20c9e81dd9fe57f5bb1073689f5442af59bd4d40ef48e1ec06b5ded",
+    "tools/train_mincompat_v2.py": "99f9a707c17fa4812bdff3573c78392ee3ba9cd0c73c572ed9edf4f59b0fd707",
+    "ultralytics-main/tests/test_mincompat_v2_lifecycle.py": "62d36ddaa28f04540ab0e435d5c980b1983f9d0019190a580a8e0a15b3f6bfe5",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-c25-replay.yaml": "cf5044066fc4927f4476ce80d9637a7d55b74d0c8a9ea513d6985dee495198cc",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v52-compat.yaml": "0651dd7b9550902dc4934f29438f9684572b8fec110b1642d0e7b1c63358cf4f",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v52-scca-compat.yaml": "45a66a3d3afc9b166834f4337bae54b75ce6ee8961a246b51979bcd3989294b3",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-triad-mincompat-v2.yaml": "ba8a54fef4aee869f8ca5c4e0a19b270da89760ac2327f1a3b807f4572138434",
+    "ultralytics-main/ultralytics/nn/modules/__init__.py": "5d69b383ef459fe6c203c17af9788d3ff0792df3136cc629bf7acf83099d347f",
+    "ultralytics-main/ultralytics/nn/modules/cbr.py": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+    "ultralytics-main/ultralytics/nn/modules/cscef_v5.py": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+    "ultralytics-main/ultralytics/nn/modules/cscef_v51.py": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+    "ultralytics-main/ultralytics/nn/modules/cscef_v52_compat.py": "fcfae8d931f21a558647f7235e4d4a9eb0f7c9dd610b7f07f91394b966586994",
+    "ultralytics-main/ultralytics/nn/modules/scca_aifi.py": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca",
+    "ultralytics-main/ultralytics/nn/tasks.py": "a4484b45ddc3023f15e8a96caa30adb0a231acacc19f4c4f7fd44d58a17ce71c"
+  }
+}

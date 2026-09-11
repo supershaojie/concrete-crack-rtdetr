@@ -1,0 +1,61 @@
+{
+  "status": "completed",
+  "runtime": {
+    "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+    "executable": "/root/miniconda3/envs/rtdetr/bin/python",
+    "torch": "2.1.2+cu121",
+    "cuda": "12.1",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "ultralytics": "/root/autodl-tmp/projects/Crack_RTDETR-scca/ultralytics-main/ultralytics/__init__.py",
+    "commit": "f6e9dfda765046ae7691302cf5ec89d3f76cec5d"
+  },
+  "split": "test",
+  "settings": {
+    "data": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "split": "test",
+    "imgsz": 640,
+    "batch": 16,
+    "workers": 0,
+    "device": "0",
+    "half": false,
+    "conf": 0.001,
+    "iou": 0.7,
+    "max_det": 300,
+    "augment": false,
+    "rect": false,
+    "plots": true,
+    "save_json": false,
+    "save_txt": false,
+    "project": "/root/autodl-tmp/projects/Crack_RTDETR-scca/outputs/scca/c24/evaluation_test",
+    "name": "plots",
+    "exist_ok": false
+  },
+  "checkpoint": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c24_rtdetr_r18_lite_scca_e200_b16_onlineaug/weights/best.pt",
+  "checkpoint_sha256": "6078c2ba4f6a555fab24ee9d2cb14c0630590a7408623e6106fa5b90c141916a",
+  "data_sha256": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+  "data_config": {
+    "path": "/root/autodl-tmp/projects/Crack_RTDETR/datasets/crack_det",
+    "train": "images/train",
+    "val": "images/val",
+    "test": "images/test",
+    "names": {
+      "0": "crack"
+    }
+  },
+  "policy": "corrected_sorted_conf_mask_v1",
+  "comparison": "Re-evaluate C2/C17 with this identical entry. Training best selection retains original C2 validator.",
+  "parameters_unfused": 20148312,
+  "precision": 0.8555632739746718,
+  "recall": 0.819900945520036,
+  "AP75": 0.5064610022981055,
+  "mAP50": 0.8782438758197731,
+  "mAP50_95": 0.4998720584810606,
+  "speed_ms_per_image": {
+    "preprocess": 0.17789944454475684,
+    "inference": 2.797800396500086,
+    "loss": 0.0004901041932128094,
+    "postprocess": 0.25539457608290295
+  },
+  "images": 864,
+  "historical_mask_affected_images": 0
+}

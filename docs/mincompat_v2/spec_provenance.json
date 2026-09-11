@@ -1,0 +1,6 @@
+{
+  "source": "D:\\rtdetr跑结果\\RTDETR_C17_C19_C24_Minimal_Compatibility_Redesign_v2\\RTDETR_C17_C19_C24_Minimal_Compatibility_Redesign_v2_Codex_Spec.md",
+  "source_sha256": "8d37562e7767449b8570aa4e16e6723adcd9165330b2ad26d1fd560d65675421",
+  "copy_sha256": "ecf8fdfd22cad28007461349327552c9d4162a9eaa0beb9cb6b2830f048c9d00",
+  "copy_policy": "Only normalize LF and remove trailing whitespace; original source untouched"
+}

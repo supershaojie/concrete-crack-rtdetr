@@ -1,0 +1,36 @@
+{
+  "experiment": "C2 RT-DETR-R18-Lite baseline",
+  "source_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+  "ultralytics_source": "/root/autodl-tmp/projects/Crack_RTDETR_c2_retest/ultralytics-main/ultralytics/__init__.py",
+  "checkpoint": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug/weights/best.pt",
+  "dataset": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+  "split": "test",
+  "imgsz": 640,
+  "batch": 16,
+  "workers": 8,
+  "seed": 42,
+  "conf": 0.001,
+  "iou": 0.7,
+  "max_det": 300,
+  "half": false,
+  "augment": false,
+  "precision": 0.8339600078513765,
+  "recall": 0.8080444244334384,
+  "mAP50": 0.858162985651444,
+  "mAP75": 0.4583604005521489,
+  "mAP50_95": 0.46963623190802783,
+  "fitness": 0.46963623190802783,
+  "results_dict": {
+    "metrics/precision(B)": 0.8339600078513765,
+    "metrics/recall(B)": 0.8080444244334384,
+    "metrics/mAP50(B)": 0.858162985651444,
+    "metrics/mAP50-95(B)": 0.46963623190802783,
+    "fitness": 0.46963623190802783
+  },
+  "speed_ms_per_image": {
+    "preprocess": 0.6970992846483434,
+    "inference": 3.190712606603349,
+    "loss": 0.0005356182723685548,
+    "postprocess": 0.4010899984105317
+  }
+}

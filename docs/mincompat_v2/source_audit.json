@@ -1,0 +1,4130 @@
+{
+  "status": "passed",
+  "runtime": {
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\mincompat-v2\\ultralytics-main\\ultralytics\\__init__.py",
+    "modules": {
+      "CSCEFv52Compat": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\mincompat-v2\\ultralytics-main\\ultralytics\\nn\\modules\\cscef_v52_compat.py",
+      "SCCAAIFI": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\mincompat-v2\\ultralytics-main\\ultralytics\\nn\\modules\\scca_aifi.py",
+      "RTDETRDecoderCBR": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\mincompat-v2\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py"
+    },
+    "commit": "05e6de8b582f4a5f6c11cd50f8bc0406dacd7d0b",
+    "dirty": true
+  },
+  "protected_files": {
+    "ultralytics-main/ultralytics/nn/modules/cscef_v5.py": {
+      "commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+      "canonical_sha256": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/cscef_v51.py": {
+      "commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+      "canonical_sha256": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v51.yaml": {
+      "commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+      "canonical_sha256": "d366dd5bf9b4e8fef7b879e0a09dfe0d88bb42ef0ac251d880ec6d6a98871d5e",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/cbr.py": {
+      "commit": "025997e3c51eaf6933534308a95da6ebf97bff53",
+      "canonical_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr.yaml": {
+      "commit": "025997e3c51eaf6933534308a95da6ebf97bff53",
+      "canonical_sha256": "a63c78a28daf6fbc92a8563fa45507e7a05f61633ec19af6c42bec72d83f90bc",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/scca_aifi.py": {
+      "commit": "f6e9dfda765046ae7691302cf5ec89d3f76cec5d",
+      "canonical_sha256": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-scca.yaml": {
+      "commit": "f6e9dfda765046ae7691302cf5ec89d3f76cec5d",
+      "canonical_sha256": "985f4e30f4c706627079e9d56e392faa07e50053756ad122191a55396ac09123",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/head.py": {
+      "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "canonical_sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/conv.py": {
+      "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "canonical_sha256": "c802f36ea1596d8910f2b651d57877b50a4960857b97cbb5a20d44a1dbbaa774",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/block.py": {
+      "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "canonical_sha256": "7ee11e94e88c89abc1a6cce14b99e41fe6f1d2d6a8bb031bd4d45184609ca882",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/utils.py": {
+      "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "canonical_sha256": "bcf0492178d3924b5d6a5f5808906b7aec6214172b70bfeb21b3aab308b17164",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/models/rtdetr/train.py": {
+      "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "canonical_sha256": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/models/rtdetr/val.py": {
+      "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "canonical_sha256": "f7974365832f0eb2e146571a591150f268d42ecb89e12e96f2518d4251a63a6a",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/models/utils/loss.py": {
+      "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "canonical_sha256": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/models/utils/ops.py": {
+      "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "canonical_sha256": "7d520895c245adafb06b07c6b330dabbd6a36a69cd0fe742cd71f2797f474dde",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/utils/loss.py": {
+      "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "canonical_sha256": "47ef8869db5caa09f303ce9446921f77e9bc2a552956ba7e3c76410c8e4c5fc8",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/utils/tal.py": {
+      "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "canonical_sha256": "37494f68725dc9a134dbb8be5db218c1b02bfd8cbf448d6bf50058c631ce4a81",
+      "exact": true
+    },
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite.yaml": {
+      "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "canonical_sha256": "3493d693cbef958a38a2a135822a6c5379b65804905bc71566e395069e8f4f16",
+      "exact": true
+    }
+  },
+  "C2_execution_AST_exact": true,
+  "transformer_unchanged_from_parent": true,
+  "old_combinations": {
+    "c20": {
+      "commit": "81d5f0175e0168e022f29feb1ceb54de8a52deb5",
+      "graph": [
+        [
+          -1,
+          1,
+          "ConvNormLayer",
+          [
+            32,
+            3,
+            2,
+            "None",
+            false,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "ConvNormLayer",
+          [
+            32,
+            3,
+            1,
+            "None",
+            false,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "ConvNormLayer",
+          [
+            64,
+            3,
+            1,
+            "None",
+            false,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "nn.MaxPool2d",
+          [
+            3,
+            2,
+            1
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Blocks",
+          [
+            64,
+            "BasicBlock",
+            2,
+            2,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Blocks",
+          [
+            128,
+            "BasicBlock",
+            2,
+            3,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Blocks",
+          [
+            256,
+            "BasicBlock",
+            2,
+            4,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Blocks",
+          [
+            512,
+            "BasicBlock",
+            2,
+            5,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            1,
+            1,
+            "None",
+            1,
+            1,
+            false
+          ]
+        ],
+        [
+          -1,
+          1,
+          "AIFI",
+          [
+            1024,
+            8
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            1,
+            1
+          ]
+        ],
+        [
+          -1,
+          1,
+          "nn.Upsample",
+          [
+            "None",
+            2,
+            "nearest"
+          ]
+        ],
+        [
+          6,
+          1,
+          "Conv",
+          [
+            256,
+            1,
+            1,
+            "None",
+            1,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            -2,
+            -1
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "RepC3",
+          [
+            256,
+            0.5
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            1,
+            1
+          ]
+        ],
+        [
+          -1,
+          1,
+          "nn.Upsample",
+          [
+            "None",
+            2,
+            "nearest"
+          ]
+        ],
+        [
+          5,
+          1,
+          "Conv",
+          [
+            256,
+            1,
+            1,
+            "None",
+            1,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            17,
+            16
+          ],
+          1,
+          "CSCEFv51",
+          []
+        ],
+        [
+          [
+            16,
+            18
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "RepC3",
+          [
+            256,
+            0.5
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            3,
+            2
+          ]
+        ],
+        [
+          [
+            -1,
+            15
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "RepC3",
+          [
+            256,
+            0.5
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            3,
+            2
+          ]
+        ],
+        [
+          [
+            -1,
+            10
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "RepC3",
+          [
+            256,
+            0.5
+          ]
+        ],
+        [
+          [
+            20,
+            23,
+            26
+          ],
+          1,
+          "RTDETRDecoderCBR",
+          [
+            "nc",
+            256,
+            300,
+            4,
+            8,
+            3
+          ]
+        ]
+      ]
+    },
+    "c25": {
+      "commit": "ac32e223a509981ee9e61be66a352f2b80c5bfd1",
+      "graph": [
+        [
+          -1,
+          1,
+          "ConvNormLayer",
+          [
+            32,
+            3,
+            2,
+            "None",
+            false,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "ConvNormLayer",
+          [
+            32,
+            3,
+            1,
+            "None",
+            false,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "ConvNormLayer",
+          [
+            64,
+            3,
+            1,
+            "None",
+            false,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "nn.MaxPool2d",
+          [
+            3,
+            2,
+            1
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Blocks",
+          [
+            64,
+            "BasicBlock",
+            2,
+            2,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Blocks",
+          [
+            128,
+            "BasicBlock",
+            2,
+            3,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Blocks",
+          [
+            256,
+            "BasicBlock",
+            2,
+            4,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Blocks",
+          [
+            512,
+            "BasicBlock",
+            2,
+            5,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            1,
+            1,
+            "None",
+            1,
+            1,
+            false
+          ]
+        ],
+        [
+          -1,
+          1,
+          "SCCAAIFI",
+          [
+            1024,
+            8
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            1,
+            1
+          ]
+        ],
+        [
+          -1,
+          1,
+          "nn.Upsample",
+          [
+            "None",
+            2,
+            "nearest"
+          ]
+        ],
+        [
+          6,
+          1,
+          "Conv",
+          [
+            256,
+            1,
+            1,
+            "None",
+            1,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            -2,
+            -1
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "RepC3",
+          [
+            256,
+            0.5
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            1,
+            1
+          ]
+        ],
+        [
+          -1,
+          1,
+          "nn.Upsample",
+          [
+            "None",
+            2,
+            "nearest"
+          ]
+        ],
+        [
+          5,
+          1,
+          "Conv",
+          [
+            256,
+            1,
+            1,
+            "None",
+            1,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            17,
+            16
+          ],
+          1,
+          "CSCEFv51",
+          []
+        ],
+        [
+          [
+            16,
+            18
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "RepC3",
+          [
+            256,
+            0.5
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            3,
+            2
+          ]
+        ],
+        [
+          [
+            -1,
+            15
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "RepC3",
+          [
+            256,
+            0.5
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            3,
+            2
+          ]
+        ],
+        [
+          [
+            -1,
+            10
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "RepC3",
+          [
+            256,
+            0.5
+          ]
+        ],
+        [
+          [
+            20,
+            23,
+            26
+          ],
+          1,
+          "RTDETRDecoder",
+          [
+            "nc",
+            256,
+            300,
+            4,
+            8,
+            3
+          ]
+        ]
+      ]
+    },
+    "c26": {
+      "commit": "beedcfa307e250fb2de47587097c51f9c141123b",
+      "graph": [
+        [
+          -1,
+          1,
+          "ConvNormLayer",
+          [
+            32,
+            3,
+            2,
+            "None",
+            false,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "ConvNormLayer",
+          [
+            32,
+            3,
+            1,
+            "None",
+            false,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "ConvNormLayer",
+          [
+            64,
+            3,
+            1,
+            "None",
+            false,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "nn.MaxPool2d",
+          [
+            3,
+            2,
+            1
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Blocks",
+          [
+            64,
+            "BasicBlock",
+            2,
+            2,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Blocks",
+          [
+            128,
+            "BasicBlock",
+            2,
+            3,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Blocks",
+          [
+            256,
+            "BasicBlock",
+            2,
+            4,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Blocks",
+          [
+            512,
+            "BasicBlock",
+            2,
+            5,
+            "relu"
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            1,
+            1,
+            "None",
+            1,
+            1,
+            false
+          ]
+        ],
+        [
+          -1,
+          1,
+          "SCCAAIFI",
+          [
+            1024,
+            8
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            1,
+            1
+          ]
+        ],
+        [
+          -1,
+          1,
+          "nn.Upsample",
+          [
+            "None",
+            2,
+            "nearest"
+          ]
+        ],
+        [
+          6,
+          1,
+          "Conv",
+          [
+            256,
+            1,
+            1,
+            "None",
+            1,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            -2,
+            -1
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "RepC3",
+          [
+            256,
+            0.5
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            1,
+            1
+          ]
+        ],
+        [
+          -1,
+          1,
+          "nn.Upsample",
+          [
+            "None",
+            2,
+            "nearest"
+          ]
+        ],
+        [
+          5,
+          1,
+          "Conv",
+          [
+            256,
+            1,
+            1,
+            "None",
+            1,
+            1,
+            false
+          ]
+        ],
+        [
+          [
+            -2,
+            -1
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "RepC3",
+          [
+            256,
+            0.5
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            3,
+            2
+          ]
+        ],
+        [
+          [
+            -1,
+            15
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "RepC3",
+          [
+            256,
+            0.5
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            3,
+            2
+          ]
+        ],
+        [
+          [
+            -1,
+            10
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "RepC3",
+          [
+            256,
+            0.5
+          ]
+        ],
+        [
+          [
+            19,
+            22,
+            25
+          ],
+          1,
+          "RTDETRDecoderCBR",
+          [
+            "nc",
+            256,
+            300,
+            4,
+            8,
+            3
+          ]
+        ]
+      ]
+    }
+  },
+  "old_C25_replay_exact": true,
+  "new_topology": {
+    "cscef_v52_compat": {
+      "roles": {
+        "aifi": 9,
+        "Y5": 10,
+        "Y4": 15,
+        "semantic": 16,
+        "P3_ref": 17,
+        "P4_ref": 12,
+        "CSCEF": 18,
+        "P3_enh": 18,
+        "P3_base": 20,
+        "P4_base": 23,
+        "P5_base": 26,
+        "decoder": 27
+      },
+      "common_layer_mapping": {
+        "0": 0,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 6,
+        "7": 7,
+        "8": 8,
+        "9": 9,
+        "10": 10,
+        "11": 11,
+        "12": 12,
+        "13": 13,
+        "14": 14,
+        "15": 15,
+        "16": 16,
+        "17": 17,
+        "18": 19,
+        "19": 20,
+        "20": 21,
+        "21": 22,
+        "22": 23,
+        "23": 24,
+        "24": 25,
+        "25": 26,
+        "26": 27
+      },
+      "decoder_inputs": [
+        20,
+        23,
+        26
+      ],
+      "semantic_grad_scale": 0.25,
+      "nodes": [
+        {
+          "index": 0,
+          "module": "ConvNormLayer",
+          "sources": [
+            -1
+          ]
+        },
+        {
+          "index": 1,
+          "module": "ConvNormLayer",
+          "sources": [
+            0
+          ]
+        },
+        {
+          "index": 2,
+          "module": "ConvNormLayer",
+          "sources": [
+            1
+          ]
+        },
+        {
+          "index": 3,
+          "module": "nn.MaxPool2d",
+          "sources": [
+            2
+          ]
+        },
+        {
+          "index": 4,
+          "module": "Blocks",
+          "sources": [
+            3
+          ]
+        },
+        {
+          "index": 5,
+          "module": "Blocks",
+          "sources": [
+            4
+          ]
+        },
+        {
+          "index": 6,
+          "module": "Blocks",
+          "sources": [
+            5
+          ]
+        },
+        {
+          "index": 7,
+          "module": "Blocks",
+          "sources": [
+            6
+          ]
+        },
+        {
+          "index": 8,
+          "module": "Conv",
+          "sources": [
+            7
+          ]
+        },
+        {
+          "index": 9,
+          "module": "AIFI",
+          "sources": [
+            8
+          ]
+        },
+        {
+          "index": 10,
+          "module": "Conv",
+          "sources": [
+            9
+          ]
+        },
+        {
+          "index": 11,
+          "module": "nn.Upsample",
+          "sources": [
+            10
+          ]
+        },
+        {
+          "index": 12,
+          "module": "Conv",
+          "sources": [
+            6
+          ]
+        },
+        {
+          "index": 13,
+          "module": "Concat",
+          "sources": [
+            11,
+            12
+          ]
+        },
+        {
+          "index": 14,
+          "module": "RepC3",
+          "sources": [
+            13
+          ]
+        },
+        {
+          "index": 15,
+          "module": "Conv",
+          "sources": [
+            14
+          ]
+        },
+        {
+          "index": 16,
+          "module": "nn.Upsample",
+          "sources": [
+            15
+          ]
+        },
+        {
+          "index": 17,
+          "module": "Conv",
+          "sources": [
+            5
+          ]
+        },
+        {
+          "index": 18,
+          "module": "CSCEFv52Compat",
+          "sources": [
+            17,
+            16
+          ]
+        },
+        {
+          "index": 19,
+          "module": "Concat",
+          "sources": [
+            16,
+            18
+          ]
+        },
+        {
+          "index": 20,
+          "module": "RepC3",
+          "sources": [
+            19
+          ]
+        },
+        {
+          "index": 21,
+          "module": "Conv",
+          "sources": [
+            20
+          ]
+        },
+        {
+          "index": 22,
+          "module": "Concat",
+          "sources": [
+            21,
+            15
+          ]
+        },
+        {
+          "index": 23,
+          "module": "RepC3",
+          "sources": [
+            22
+          ]
+        },
+        {
+          "index": 24,
+          "module": "Conv",
+          "sources": [
+            23
+          ]
+        },
+        {
+          "index": 25,
+          "module": "Concat",
+          "sources": [
+            24,
+            10
+          ]
+        },
+        {
+          "index": 26,
+          "module": "RepC3",
+          "sources": [
+            25
+          ]
+        },
+        {
+          "index": 27,
+          "module": "RTDETRDecoder",
+          "sources": [
+            20,
+            23,
+            26
+          ]
+        }
+      ]
+    },
+    "cscef_v52_scca_compat": {
+      "roles": {
+        "aifi": 9,
+        "Y5": 10,
+        "Y4": 15,
+        "semantic": 16,
+        "P3_ref": 17,
+        "P4_ref": 12,
+        "CSCEF": 18,
+        "P3_enh": 18,
+        "P3_base": 20,
+        "P4_base": 23,
+        "P5_base": 26,
+        "decoder": 27
+      },
+      "common_layer_mapping": {
+        "0": 0,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 6,
+        "7": 7,
+        "8": 8,
+        "9": 9,
+        "10": 10,
+        "11": 11,
+        "12": 12,
+        "13": 13,
+        "14": 14,
+        "15": 15,
+        "16": 16,
+        "17": 17,
+        "18": 19,
+        "19": 20,
+        "20": 21,
+        "21": 22,
+        "22": 23,
+        "23": 24,
+        "24": 25,
+        "25": 26,
+        "26": 27
+      },
+      "decoder_inputs": [
+        20,
+        23,
+        26
+      ],
+      "semantic_grad_scale": 0.25,
+      "nodes": [
+        {
+          "index": 0,
+          "module": "ConvNormLayer",
+          "sources": [
+            -1
+          ]
+        },
+        {
+          "index": 1,
+          "module": "ConvNormLayer",
+          "sources": [
+            0
+          ]
+        },
+        {
+          "index": 2,
+          "module": "ConvNormLayer",
+          "sources": [
+            1
+          ]
+        },
+        {
+          "index": 3,
+          "module": "nn.MaxPool2d",
+          "sources": [
+            2
+          ]
+        },
+        {
+          "index": 4,
+          "module": "Blocks",
+          "sources": [
+            3
+          ]
+        },
+        {
+          "index": 5,
+          "module": "Blocks",
+          "sources": [
+            4
+          ]
+        },
+        {
+          "index": 6,
+          "module": "Blocks",
+          "sources": [
+            5
+          ]
+        },
+        {
+          "index": 7,
+          "module": "Blocks",
+          "sources": [
+            6
+          ]
+        },
+        {
+          "index": 8,
+          "module": "Conv",
+          "sources": [
+            7
+          ]
+        },
+        {
+          "index": 9,
+          "module": "SCCAAIFI",
+          "sources": [
+            8
+          ]
+        },
+        {
+          "index": 10,
+          "module": "Conv",
+          "sources": [
+            9
+          ]
+        },
+        {
+          "index": 11,
+          "module": "nn.Upsample",
+          "sources": [
+            10
+          ]
+        },
+        {
+          "index": 12,
+          "module": "Conv",
+          "sources": [
+            6
+          ]
+        },
+        {
+          "index": 13,
+          "module": "Concat",
+          "sources": [
+            11,
+            12
+          ]
+        },
+        {
+          "index": 14,
+          "module": "RepC3",
+          "sources": [
+            13
+          ]
+        },
+        {
+          "index": 15,
+          "module": "Conv",
+          "sources": [
+            14
+          ]
+        },
+        {
+          "index": 16,
+          "module": "nn.Upsample",
+          "sources": [
+            15
+          ]
+        },
+        {
+          "index": 17,
+          "module": "Conv",
+          "sources": [
+            5
+          ]
+        },
+        {
+          "index": 18,
+          "module": "CSCEFv52Compat",
+          "sources": [
+            17,
+            16
+          ]
+        },
+        {
+          "index": 19,
+          "module": "Concat",
+          "sources": [
+            16,
+            18
+          ]
+        },
+        {
+          "index": 20,
+          "module": "RepC3",
+          "sources": [
+            19
+          ]
+        },
+        {
+          "index": 21,
+          "module": "Conv",
+          "sources": [
+            20
+          ]
+        },
+        {
+          "index": 22,
+          "module": "Concat",
+          "sources": [
+            21,
+            15
+          ]
+        },
+        {
+          "index": 23,
+          "module": "RepC3",
+          "sources": [
+            22
+          ]
+        },
+        {
+          "index": 24,
+          "module": "Conv",
+          "sources": [
+            23
+          ]
+        },
+        {
+          "index": 25,
+          "module": "Concat",
+          "sources": [
+            24,
+            10
+          ]
+        },
+        {
+          "index": 26,
+          "module": "RepC3",
+          "sources": [
+            25
+          ]
+        },
+        {
+          "index": 27,
+          "module": "RTDETRDecoder",
+          "sources": [
+            20,
+            23,
+            26
+          ]
+        }
+      ]
+    },
+    "triad_mincompat_v2": {
+      "roles": {
+        "aifi": 9,
+        "Y5": 10,
+        "Y4": 15,
+        "semantic": 16,
+        "P3_ref": 17,
+        "P4_ref": 12,
+        "CSCEF": 18,
+        "P3_enh": 18,
+        "P3_base": 20,
+        "P4_base": 23,
+        "P5_base": 26,
+        "decoder": 27
+      },
+      "common_layer_mapping": {
+        "0": 0,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 6,
+        "7": 7,
+        "8": 8,
+        "9": 9,
+        "10": 10,
+        "11": 11,
+        "12": 12,
+        "13": 13,
+        "14": 14,
+        "15": 15,
+        "16": 16,
+        "17": 17,
+        "18": 19,
+        "19": 20,
+        "20": 21,
+        "21": 22,
+        "22": 23,
+        "23": 24,
+        "24": 25,
+        "25": 26,
+        "26": 27
+      },
+      "decoder_inputs": [
+        20,
+        23,
+        26
+      ],
+      "semantic_grad_scale": 0.25,
+      "nodes": [
+        {
+          "index": 0,
+          "module": "ConvNormLayer",
+          "sources": [
+            -1
+          ]
+        },
+        {
+          "index": 1,
+          "module": "ConvNormLayer",
+          "sources": [
+            0
+          ]
+        },
+        {
+          "index": 2,
+          "module": "ConvNormLayer",
+          "sources": [
+            1
+          ]
+        },
+        {
+          "index": 3,
+          "module": "nn.MaxPool2d",
+          "sources": [
+            2
+          ]
+        },
+        {
+          "index": 4,
+          "module": "Blocks",
+          "sources": [
+            3
+          ]
+        },
+        {
+          "index": 5,
+          "module": "Blocks",
+          "sources": [
+            4
+          ]
+        },
+        {
+          "index": 6,
+          "module": "Blocks",
+          "sources": [
+            5
+          ]
+        },
+        {
+          "index": 7,
+          "module": "Blocks",
+          "sources": [
+            6
+          ]
+        },
+        {
+          "index": 8,
+          "module": "Conv",
+          "sources": [
+            7
+          ]
+        },
+        {
+          "index": 9,
+          "module": "SCCAAIFI",
+          "sources": [
+            8
+          ]
+        },
+        {
+          "index": 10,
+          "module": "Conv",
+          "sources": [
+            9
+          ]
+        },
+        {
+          "index": 11,
+          "module": "nn.Upsample",
+          "sources": [
+            10
+          ]
+        },
+        {
+          "index": 12,
+          "module": "Conv",
+          "sources": [
+            6
+          ]
+        },
+        {
+          "index": 13,
+          "module": "Concat",
+          "sources": [
+            11,
+            12
+          ]
+        },
+        {
+          "index": 14,
+          "module": "RepC3",
+          "sources": [
+            13
+          ]
+        },
+        {
+          "index": 15,
+          "module": "Conv",
+          "sources": [
+            14
+          ]
+        },
+        {
+          "index": 16,
+          "module": "nn.Upsample",
+          "sources": [
+            15
+          ]
+        },
+        {
+          "index": 17,
+          "module": "Conv",
+          "sources": [
+            5
+          ]
+        },
+        {
+          "index": 18,
+          "module": "CSCEFv52Compat",
+          "sources": [
+            17,
+            16
+          ]
+        },
+        {
+          "index": 19,
+          "module": "Concat",
+          "sources": [
+            16,
+            18
+          ]
+        },
+        {
+          "index": 20,
+          "module": "RepC3",
+          "sources": [
+            19
+          ]
+        },
+        {
+          "index": 21,
+          "module": "Conv",
+          "sources": [
+            20
+          ]
+        },
+        {
+          "index": 22,
+          "module": "Concat",
+          "sources": [
+            21,
+            15
+          ]
+        },
+        {
+          "index": 23,
+          "module": "RepC3",
+          "sources": [
+            22
+          ]
+        },
+        {
+          "index": 24,
+          "module": "Conv",
+          "sources": [
+            23
+          ]
+        },
+        {
+          "index": 25,
+          "module": "Concat",
+          "sources": [
+            24,
+            10
+          ]
+        },
+        {
+          "index": 26,
+          "module": "RepC3",
+          "sources": [
+            25
+          ]
+        },
+        {
+          "index": 27,
+          "module": "RTDETRDecoderCBR",
+          "sources": [
+            20,
+            23,
+            26
+          ]
+        }
+      ]
+    }
+  },
+  "recipe_all_109_fields": {
+    "cscef_v52_compat": [
+      {
+        "field": "agnostic_nms",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "amp",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "angle",
+        "C2": 1.0,
+        "variant": 1.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "augment",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "auto_augment",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "batch",
+        "C2": 16,
+        "variant": 16,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "bgr",
+        "C2": 0.0,
+        "variant": 0.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "box",
+        "C2": 7.5,
+        "variant": 7.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "cache",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "cfg",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "classes",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "close_mosaic",
+        "C2": 10,
+        "variant": 10,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "cls",
+        "C2": 0.5,
+        "variant": 0.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "compile",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "conf",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "copy_paste",
+        "C2": 0,
+        "variant": 0,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "copy_paste_mode",
+        "C2": "flip",
+        "variant": "flip",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "cos_lr",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "cutmix",
+        "C2": 0,
+        "variant": 0,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "data",
+        "C2": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+        "variant": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "degrees",
+        "C2": 5,
+        "variant": 5,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "deterministic",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "device",
+        "C2": "0",
+        "variant": "0",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "dfl",
+        "C2": 1.5,
+        "variant": 1.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "dnn",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "dropout",
+        "C2": 0.0,
+        "variant": 0.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "dynamic",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "embed",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "end2end",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "epochs",
+        "C2": 200,
+        "variant": 200,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "erasing",
+        "C2": 0,
+        "variant": 0,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "exist_ok",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "fliplr",
+        "C2": 0.5,
+        "variant": 0.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "flipud",
+        "C2": 0.2,
+        "variant": 0.2,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "format",
+        "C2": "torchscript",
+        "variant": "torchscript",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "fraction",
+        "C2": 1.0,
+        "variant": 1.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "freeze",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "half",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "hsv_h",
+        "C2": 0.015,
+        "variant": 0.015,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "hsv_s",
+        "C2": 0.5,
+        "variant": 0.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "hsv_v",
+        "C2": 0.35,
+        "variant": 0.35,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "imgsz",
+        "C2": 640,
+        "variant": 640,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "int8",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "iou",
+        "C2": 0.7,
+        "variant": 0.7,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "keras",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "kobj",
+        "C2": 1.0,
+        "variant": 1.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "line_width",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "lr0",
+        "C2": 0.0005,
+        "variant": 0.0005,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "lrf",
+        "C2": 0.01,
+        "variant": 0.01,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "mask_ratio",
+        "C2": 4,
+        "variant": 4,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "max_det",
+        "C2": 300,
+        "variant": 300,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "mixup",
+        "C2": 0.05,
+        "variant": 0.05,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "mode",
+        "C2": "train",
+        "variant": "train",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "model",
+        "C2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+        "variant": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\mincompat-v2\\weights\\cscef_v52_compat_controlled_init.pt",
+        "type": "str",
+        "changed": true
+      },
+      {
+        "field": "momentum",
+        "C2": 0.937,
+        "variant": 0.937,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "mosaic",
+        "C2": 0.8,
+        "variant": 0.8,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "multi_scale",
+        "C2": 0.0,
+        "variant": 0.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "name",
+        "C2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+        "variant": "mincompat_cscef_v52_compat_rtdetr_r18_lite_e200_b16_onlineaug",
+        "type": "str",
+        "changed": true
+      },
+      {
+        "field": "nbs",
+        "C2": 64,
+        "variant": 64,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "nms",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "opset",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "optimize",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "optimizer",
+        "C2": "AdamW",
+        "variant": "AdamW",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "overlap_mask",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "patience",
+        "C2": 50,
+        "variant": 50,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "perspective",
+        "C2": 0.0002,
+        "variant": 0.0002,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "plots",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "pose",
+        "C2": 12.0,
+        "variant": 12.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "pretrained",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "profile",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "project",
+        "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+        "variant": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "rect",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "resume",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "retina_masks",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "rle",
+        "C2": 1.0,
+        "variant": 1.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "save",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "save_conf",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "save_crop",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "save_dir",
+        "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+        "variant": "\\root\\autodl-tmp\\projects\\Crack_RTDETR\\runs\\c_series\\mincompat_cscef_v52_compat_rtdetr_r18_lite_e200_b16_onlineaug",
+        "type": "str",
+        "changed": true
+      },
+      {
+        "field": "save_frames",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "save_json",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "save_period",
+        "C2": -1,
+        "variant": -1,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "save_txt",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "scale",
+        "C2": 0.4,
+        "variant": 0.4,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "seed",
+        "C2": 42,
+        "variant": 42,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "shear",
+        "C2": 1.5,
+        "variant": 1.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "show",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "show_boxes",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "show_conf",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "show_labels",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "simplify",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "single_cls",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "source",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "split",
+        "C2": "val",
+        "variant": "val",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "stream_buffer",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "task",
+        "C2": "detect",
+        "variant": "detect",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "time",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "tracker",
+        "C2": "botsort.yaml",
+        "variant": "botsort.yaml",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "translate",
+        "C2": 0.1,
+        "variant": 0.1,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "val",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "verbose",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "vid_stride",
+        "C2": 1,
+        "variant": 1,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "visualize",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "warmup_bias_lr",
+        "C2": 0.1,
+        "variant": 0.1,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "warmup_epochs",
+        "C2": 5,
+        "variant": 5,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "warmup_momentum",
+        "C2": 0.8,
+        "variant": 0.8,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "weight_decay",
+        "C2": 0.0001,
+        "variant": 0.0001,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "workers",
+        "C2": 8,
+        "variant": 8,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "workspace",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      }
+    ],
+    "cscef_v52_scca_compat": [
+      {
+        "field": "agnostic_nms",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "amp",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "angle",
+        "C2": 1.0,
+        "variant": 1.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "augment",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "auto_augment",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "batch",
+        "C2": 16,
+        "variant": 16,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "bgr",
+        "C2": 0.0,
+        "variant": 0.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "box",
+        "C2": 7.5,
+        "variant": 7.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "cache",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "cfg",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "classes",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "close_mosaic",
+        "C2": 10,
+        "variant": 10,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "cls",
+        "C2": 0.5,
+        "variant": 0.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "compile",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "conf",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "copy_paste",
+        "C2": 0,
+        "variant": 0,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "copy_paste_mode",
+        "C2": "flip",
+        "variant": "flip",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "cos_lr",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "cutmix",
+        "C2": 0,
+        "variant": 0,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "data",
+        "C2": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+        "variant": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "degrees",
+        "C2": 5,
+        "variant": 5,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "deterministic",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "device",
+        "C2": "0",
+        "variant": "0",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "dfl",
+        "C2": 1.5,
+        "variant": 1.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "dnn",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "dropout",
+        "C2": 0.0,
+        "variant": 0.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "dynamic",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "embed",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "end2end",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "epochs",
+        "C2": 200,
+        "variant": 200,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "erasing",
+        "C2": 0,
+        "variant": 0,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "exist_ok",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "fliplr",
+        "C2": 0.5,
+        "variant": 0.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "flipud",
+        "C2": 0.2,
+        "variant": 0.2,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "format",
+        "C2": "torchscript",
+        "variant": "torchscript",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "fraction",
+        "C2": 1.0,
+        "variant": 1.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "freeze",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "half",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "hsv_h",
+        "C2": 0.015,
+        "variant": 0.015,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "hsv_s",
+        "C2": 0.5,
+        "variant": 0.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "hsv_v",
+        "C2": 0.35,
+        "variant": 0.35,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "imgsz",
+        "C2": 640,
+        "variant": 640,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "int8",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "iou",
+        "C2": 0.7,
+        "variant": 0.7,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "keras",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "kobj",
+        "C2": 1.0,
+        "variant": 1.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "line_width",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "lr0",
+        "C2": 0.0005,
+        "variant": 0.0005,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "lrf",
+        "C2": 0.01,
+        "variant": 0.01,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "mask_ratio",
+        "C2": 4,
+        "variant": 4,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "max_det",
+        "C2": 300,
+        "variant": 300,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "mixup",
+        "C2": 0.05,
+        "variant": 0.05,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "mode",
+        "C2": "train",
+        "variant": "train",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "model",
+        "C2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+        "variant": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\mincompat-v2\\weights\\cscef_v52_scca_compat_controlled_init.pt",
+        "type": "str",
+        "changed": true
+      },
+      {
+        "field": "momentum",
+        "C2": 0.937,
+        "variant": 0.937,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "mosaic",
+        "C2": 0.8,
+        "variant": 0.8,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "multi_scale",
+        "C2": 0.0,
+        "variant": 0.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "name",
+        "C2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+        "variant": "mincompat_cscef_v52_scca_compat_rtdetr_r18_lite_e200_b16_onlineaug",
+        "type": "str",
+        "changed": true
+      },
+      {
+        "field": "nbs",
+        "C2": 64,
+        "variant": 64,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "nms",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "opset",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "optimize",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "optimizer",
+        "C2": "AdamW",
+        "variant": "AdamW",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "overlap_mask",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "patience",
+        "C2": 50,
+        "variant": 50,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "perspective",
+        "C2": 0.0002,
+        "variant": 0.0002,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "plots",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "pose",
+        "C2": 12.0,
+        "variant": 12.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "pretrained",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "profile",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "project",
+        "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+        "variant": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "rect",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "resume",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "retina_masks",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "rle",
+        "C2": 1.0,
+        "variant": 1.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "save",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "save_conf",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "save_crop",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "save_dir",
+        "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+        "variant": "\\root\\autodl-tmp\\projects\\Crack_RTDETR\\runs\\c_series\\mincompat_cscef_v52_scca_compat_rtdetr_r18_lite_e200_b16_onlineaug",
+        "type": "str",
+        "changed": true
+      },
+      {
+        "field": "save_frames",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "save_json",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "save_period",
+        "C2": -1,
+        "variant": -1,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "save_txt",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "scale",
+        "C2": 0.4,
+        "variant": 0.4,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "seed",
+        "C2": 42,
+        "variant": 42,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "shear",
+        "C2": 1.5,
+        "variant": 1.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "show",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "show_boxes",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "show_conf",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "show_labels",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "simplify",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "single_cls",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "source",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "split",
+        "C2": "val",
+        "variant": "val",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "stream_buffer",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "task",
+        "C2": "detect",
+        "variant": "detect",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "time",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "tracker",
+        "C2": "botsort.yaml",
+        "variant": "botsort.yaml",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "translate",
+        "C2": 0.1,
+        "variant": 0.1,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "val",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "verbose",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "vid_stride",
+        "C2": 1,
+        "variant": 1,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "visualize",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "warmup_bias_lr",
+        "C2": 0.1,
+        "variant": 0.1,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "warmup_epochs",
+        "C2": 5,
+        "variant": 5,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "warmup_momentum",
+        "C2": 0.8,
+        "variant": 0.8,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "weight_decay",
+        "C2": 0.0001,
+        "variant": 0.0001,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "workers",
+        "C2": 8,
+        "variant": 8,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "workspace",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      }
+    ],
+    "triad_mincompat_v2": [
+      {
+        "field": "agnostic_nms",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "amp",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "angle",
+        "C2": 1.0,
+        "variant": 1.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "augment",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "auto_augment",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "batch",
+        "C2": 16,
+        "variant": 16,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "bgr",
+        "C2": 0.0,
+        "variant": 0.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "box",
+        "C2": 7.5,
+        "variant": 7.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "cache",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "cfg",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "classes",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "close_mosaic",
+        "C2": 10,
+        "variant": 10,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "cls",
+        "C2": 0.5,
+        "variant": 0.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "compile",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "conf",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "copy_paste",
+        "C2": 0,
+        "variant": 0,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "copy_paste_mode",
+        "C2": "flip",
+        "variant": "flip",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "cos_lr",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "cutmix",
+        "C2": 0,
+        "variant": 0,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "data",
+        "C2": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+        "variant": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "degrees",
+        "C2": 5,
+        "variant": 5,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "deterministic",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "device",
+        "C2": "0",
+        "variant": "0",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "dfl",
+        "C2": 1.5,
+        "variant": 1.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "dnn",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "dropout",
+        "C2": 0.0,
+        "variant": 0.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "dynamic",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "embed",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "end2end",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "epochs",
+        "C2": 200,
+        "variant": 200,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "erasing",
+        "C2": 0,
+        "variant": 0,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "exist_ok",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "fliplr",
+        "C2": 0.5,
+        "variant": 0.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "flipud",
+        "C2": 0.2,
+        "variant": 0.2,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "format",
+        "C2": "torchscript",
+        "variant": "torchscript",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "fraction",
+        "C2": 1.0,
+        "variant": 1.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "freeze",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "half",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "hsv_h",
+        "C2": 0.015,
+        "variant": 0.015,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "hsv_s",
+        "C2": 0.5,
+        "variant": 0.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "hsv_v",
+        "C2": 0.35,
+        "variant": 0.35,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "imgsz",
+        "C2": 640,
+        "variant": 640,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "int8",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "iou",
+        "C2": 0.7,
+        "variant": 0.7,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "keras",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "kobj",
+        "C2": 1.0,
+        "variant": 1.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "line_width",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "lr0",
+        "C2": 0.0005,
+        "variant": 0.0005,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "lrf",
+        "C2": 0.01,
+        "variant": 0.01,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "mask_ratio",
+        "C2": 4,
+        "variant": 4,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "max_det",
+        "C2": 300,
+        "variant": 300,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "mixup",
+        "C2": 0.05,
+        "variant": 0.05,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "mode",
+        "C2": "train",
+        "variant": "train",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "model",
+        "C2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+        "variant": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\mincompat-v2\\weights\\triad_mincompat_v2_controlled_init.pt",
+        "type": "str",
+        "changed": true
+      },
+      {
+        "field": "momentum",
+        "C2": 0.937,
+        "variant": 0.937,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "mosaic",
+        "C2": 0.8,
+        "variant": 0.8,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "multi_scale",
+        "C2": 0.0,
+        "variant": 0.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "name",
+        "C2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+        "variant": "mincompat_triad_mincompat_v2_rtdetr_r18_lite_e200_b16_onlineaug",
+        "type": "str",
+        "changed": true
+      },
+      {
+        "field": "nbs",
+        "C2": 64,
+        "variant": 64,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "nms",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "opset",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "optimize",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "optimizer",
+        "C2": "AdamW",
+        "variant": "AdamW",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "overlap_mask",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "patience",
+        "C2": 50,
+        "variant": 50,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "perspective",
+        "C2": 0.0002,
+        "variant": 0.0002,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "plots",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "pose",
+        "C2": 12.0,
+        "variant": 12.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "pretrained",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "profile",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "project",
+        "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+        "variant": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "rect",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "resume",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "retina_masks",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "rle",
+        "C2": 1.0,
+        "variant": 1.0,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "save",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "save_conf",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "save_crop",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "save_dir",
+        "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+        "variant": "\\root\\autodl-tmp\\projects\\Crack_RTDETR\\runs\\c_series\\mincompat_triad_mincompat_v2_rtdetr_r18_lite_e200_b16_onlineaug",
+        "type": "str",
+        "changed": true
+      },
+      {
+        "field": "save_frames",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "save_json",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "save_period",
+        "C2": -1,
+        "variant": -1,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "save_txt",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "scale",
+        "C2": 0.4,
+        "variant": 0.4,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "seed",
+        "C2": 42,
+        "variant": 42,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "shear",
+        "C2": 1.5,
+        "variant": 1.5,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "show",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "show_boxes",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "show_conf",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "show_labels",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "simplify",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "single_cls",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "source",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "split",
+        "C2": "val",
+        "variant": "val",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "stream_buffer",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "task",
+        "C2": "detect",
+        "variant": "detect",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "time",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      },
+      {
+        "field": "tracker",
+        "C2": "botsort.yaml",
+        "variant": "botsort.yaml",
+        "type": "str",
+        "changed": false
+      },
+      {
+        "field": "translate",
+        "C2": 0.1,
+        "variant": 0.1,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "val",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "verbose",
+        "C2": true,
+        "variant": true,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "vid_stride",
+        "C2": 1,
+        "variant": 1,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "visualize",
+        "C2": false,
+        "variant": false,
+        "type": "bool",
+        "changed": false
+      },
+      {
+        "field": "warmup_bias_lr",
+        "C2": 0.1,
+        "variant": 0.1,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "warmup_epochs",
+        "C2": 5,
+        "variant": 5,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "warmup_momentum",
+        "C2": 0.8,
+        "variant": 0.8,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "weight_decay",
+        "C2": 0.0001,
+        "variant": 0.0001,
+        "type": "float",
+        "changed": false
+      },
+      {
+        "field": "workers",
+        "C2": 8,
+        "variant": 8,
+        "type": "int",
+        "changed": false
+      },
+      {
+        "field": "workspace",
+        "C2": null,
+        "variant": null,
+        "type": "NoneType",
+        "changed": false
+      }
+    ]
+  }
+}

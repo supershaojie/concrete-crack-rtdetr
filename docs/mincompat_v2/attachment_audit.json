@@ -1,0 +1,633 @@
+[
+  {
+    "package": "D:\\rtdetr跑结果\\c17 cscef_v6\\cscef_v6_complete_20260911_102837_555400.tar.gz",
+    "bytes": 139573923,
+    "sha256": "ffd9c3fa7615925900fb29c7efa4b5f46725a4444463db93f667eba55b0cb210",
+    "metrics": [
+      {
+        "member": "test/metrics.json",
+        "values": {
+          "runtime": {
+            "commit": "05e6de8b582f4a5f6c11cd50f8bc0406dacd7d0b",
+            "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+            "torch": "2.1.2+cu121",
+            "cuda": "12.1",
+            "gpu": "NVIDIA GeForce RTX 4090"
+          },
+          "split": "test",
+          "checkpoint_sha256": "2a8872171f5c3254ee3c318c8ec60b9c69920aac047cd8cad01968db0e3fd696",
+          "variant": "cscef_v6",
+          "precision": 0.7538670628356574,
+          "recall": 0.7510130571814498,
+          "AP75": 0.39576235001477433,
+          "mAP50": 0.788689347805847,
+          "mAP50_95": 0.4165237430966872
+        }
+      },
+      {
+        "member": "val/metrics.json",
+        "values": {
+          "runtime": {
+            "commit": "05e6de8b582f4a5f6c11cd50f8bc0406dacd7d0b",
+            "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+            "torch": "2.1.2+cu121",
+            "cuda": "12.1",
+            "gpu": "NVIDIA GeForce RTX 4090"
+          },
+          "split": "val",
+          "checkpoint_sha256": "2a8872171f5c3254ee3c318c8ec60b9c69920aac047cd8cad01968db0e3fd696",
+          "variant": "cscef_v6",
+          "precision": 0.7605065757314728,
+          "recall": 0.7627725856697819,
+          "AP75": 0.41442785931456366,
+          "mAP50": 0.8031743462415606,
+          "mAP50_95": 0.4295550286323181
+        }
+      }
+    ],
+    "recipe": [
+      {
+        "member": "console/actual_train_args.yaml",
+        "fields": 109,
+        "diff": {
+          "name": [
+            "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+            "triad_cscef_v6_rtdetr_r18_lite_e200_b16_onlineaug"
+          ],
+          "save_dir": [
+            "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+            "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/triad_cscef_v6_rtdetr_r18_lite_e200_b16_onlineaug"
+          ],
+          "model": [
+            "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+            "/root/autodl-tmp/projects/Crack_RTDETR-triad-compat/weights/cscef_v6_controlled_init.pt"
+          ]
+        }
+      },
+      {
+        "member": "console/authoritative_c2_args.yaml",
+        "fields": 109,
+        "diff": {}
+      },
+      {
+        "member": "training/args.yaml",
+        "fields": 109,
+        "diff": {
+          "name": [
+            "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+            "triad_cscef_v6_rtdetr_r18_lite_e200_b16_onlineaug"
+          ],
+          "save_dir": [
+            "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+            "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/triad_cscef_v6_rtdetr_r18_lite_e200_b16_onlineaug"
+          ],
+          "model": [
+            "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+            "/root/autodl-tmp/projects/Crack_RTDETR-triad-compat/weights/cscef_v6_controlled_init.pt"
+          ]
+        }
+      }
+    ],
+    "sidecar_sha256_verified": true,
+    "identified_by_inner_variant": "cscef_v6",
+    "init_source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "source_record": {
+      "runtime": {
+        "executable": "/root/miniconda3/envs/rtdetr/bin/python",
+        "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+        "torch": "2.1.2+cu121",
+        "cuda": "12.1",
+        "gpu": "NVIDIA GeForce RTX 4090",
+        "ultralytics": "/root/autodl-tmp/projects/Crack_RTDETR-triad-compat/ultralytics-main/ultralytics/__init__.py",
+        "modules": {
+          "DRCSCEFv6": "/root/autodl-tmp/projects/Crack_RTDETR-triad-compat/ultralytics-main/ultralytics/nn/modules/cscef_v6.py",
+          "GISCCAAIFI": "/root/autodl-tmp/projects/Crack_RTDETR-triad-compat/ultralytics-main/ultralytics/nn/modules/scca_aifi_v2.py",
+          "StableReferenceCBR": "/root/autodl-tmp/projects/Crack_RTDETR-triad-compat/ultralytics-main/ultralytics/nn/modules/cbr_v2.py"
+        },
+        "commit": "05e6de8b582f4a5f6c11cd50f8bc0406dacd7d0b",
+        "dirty": false
+      },
+      "snapshot_sha256": "94d3f072c729adad999bcf106bc21d94d0063f930393dd4b872f6fa6f4962d9d",
+      "c2_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "c2_args_sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+      "data_sha256": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa"
+    },
+    "failure_source_verified": {
+      "cscef_v6.py": {
+        "canonical_sha256": "e70c06617732875717ded091934f9dd76ee947e6e4e7afffa66972e812131617",
+        "same_as_preserved_v1": true
+      },
+      "scca_aifi_v2.py": {
+        "canonical_sha256": "fc3cf5fd0e17c47d87c4df28cce15904322a66e7da2db11b6124f8206a77daa0",
+        "same_as_preserved_v1": true
+      },
+      "cbr_v2.py": {
+        "canonical_sha256": "27ec65a1c3f24273a85f8a1ede26409935ce2d89bf4e736aeb0a0c5410a1e7ce",
+        "same_as_preserved_v1": true
+      }
+    }
+  },
+  {
+    "package": "D:\\rtdetr跑结果\\c24 scca_v2\\scca_v2_complete_20260911_102849_497792.tar.gz",
+    "bytes": 139647123,
+    "sha256": "650c9583cc6a80d1421f6899aad9a696cbb6c1daf23a6bed61d3ac86c4ce6ab5",
+    "metrics": [
+      {
+        "member": "test/metrics.json",
+        "values": {
+          "runtime": {
+            "commit": "05e6de8b582f4a5f6c11cd50f8bc0406dacd7d0b",
+            "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+            "torch": "2.1.2+cu121",
+            "cuda": "12.1",
+            "gpu": "NVIDIA GeForce RTX 4090"
+          },
+          "split": "test",
+          "checkpoint_sha256": "5be934fe6ea92aba5ced5e9e2093a51b0c2c7d568cf7e840507639d069709268",
+          "variant": "scca_v2",
+          "precision": 0.8031705127956372,
+          "recall": 0.7771274200810446,
+          "AP75": 0.4281460030593854,
+          "mAP50": 0.8296869092291662,
+          "mAP50_95": 0.4426717781864705
+        }
+      },
+      {
+        "member": "val/metrics.json",
+        "values": {
+          "runtime": {
+            "commit": "05e6de8b582f4a5f6c11cd50f8bc0406dacd7d0b",
+            "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+            "torch": "2.1.2+cu121",
+            "cuda": "12.1",
+            "gpu": "NVIDIA GeForce RTX 4090"
+          },
+          "split": "val",
+          "checkpoint_sha256": "5be934fe6ea92aba5ced5e9e2093a51b0c2c7d568cf7e840507639d069709268",
+          "variant": "scca_v2",
+          "precision": 0.8109902114978664,
+          "recall": 0.789797507788162,
+          "AP75": 0.4544219466304279,
+          "mAP50": 0.8389421649838711,
+          "mAP50_95": 0.4574304372907797
+        }
+      }
+    ],
+    "recipe": [
+      {
+        "member": "console/actual_train_args.yaml",
+        "fields": 109,
+        "diff": {
+          "name": [
+            "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+            "triad_scca_v2_rtdetr_r18_lite_e200_b16_onlineaug"
+          ],
+          "save_dir": [
+            "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+            "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/triad_scca_v2_rtdetr_r18_lite_e200_b16_onlineaug"
+          ],
+          "model": [
+            "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+            "/root/autodl-tmp/projects/Crack_RTDETR-triad-compat/weights/scca_v2_controlled_init.pt"
+          ]
+        }
+      },
+      {
+        "member": "console/authoritative_c2_args.yaml",
+        "fields": 109,
+        "diff": {}
+      },
+      {
+        "member": "training/args.yaml",
+        "fields": 109,
+        "diff": {
+          "name": [
+            "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+            "triad_scca_v2_rtdetr_r18_lite_e200_b16_onlineaug"
+          ],
+          "save_dir": [
+            "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+            "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/triad_scca_v2_rtdetr_r18_lite_e200_b16_onlineaug"
+          ],
+          "model": [
+            "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+            "/root/autodl-tmp/projects/Crack_RTDETR-triad-compat/weights/scca_v2_controlled_init.pt"
+          ]
+        }
+      }
+    ],
+    "sidecar_sha256_verified": true,
+    "identified_by_inner_variant": "scca_v2",
+    "init_source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "source_record": {
+      "runtime": {
+        "executable": "/root/miniconda3/envs/rtdetr/bin/python",
+        "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+        "torch": "2.1.2+cu121",
+        "cuda": "12.1",
+        "gpu": "NVIDIA GeForce RTX 4090",
+        "ultralytics": "/root/autodl-tmp/projects/Crack_RTDETR-triad-compat/ultralytics-main/ultralytics/__init__.py",
+        "modules": {
+          "DRCSCEFv6": "/root/autodl-tmp/projects/Crack_RTDETR-triad-compat/ultralytics-main/ultralytics/nn/modules/cscef_v6.py",
+          "GISCCAAIFI": "/root/autodl-tmp/projects/Crack_RTDETR-triad-compat/ultralytics-main/ultralytics/nn/modules/scca_aifi_v2.py",
+          "StableReferenceCBR": "/root/autodl-tmp/projects/Crack_RTDETR-triad-compat/ultralytics-main/ultralytics/nn/modules/cbr_v2.py"
+        },
+        "commit": "05e6de8b582f4a5f6c11cd50f8bc0406dacd7d0b",
+        "dirty": false
+      },
+      "snapshot_sha256": "94d3f072c729adad999bcf106bc21d94d0063f930393dd4b872f6fa6f4962d9d",
+      "c2_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "c2_args_sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+      "data_sha256": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa"
+    },
+    "failure_source_verified": {
+      "cscef_v6.py": {
+        "canonical_sha256": "e70c06617732875717ded091934f9dd76ee947e6e4e7afffa66972e812131617",
+        "same_as_preserved_v1": true
+      },
+      "scca_aifi_v2.py": {
+        "canonical_sha256": "fc3cf5fd0e17c47d87c4df28cce15904322a66e7da2db11b6124f8206a77daa0",
+        "same_as_preserved_v1": true
+      },
+      "cbr_v2.py": {
+        "canonical_sha256": "27ec65a1c3f24273a85f8a1ede26409935ce2d89bf4e736aeb0a0c5410a1e7ce",
+        "same_as_preserved_v1": true
+      }
+    }
+  },
+  {
+    "package": "D:\\rtdetr跑结果\\c17 r18 lite cs v5.1涨1\\c17_cscef_v51_complete_20260906_153449_116232399.tar.gz",
+    "bytes": 213022736,
+    "sha256": "c94cc1f590451728ce4e6cedd3fa973606ad263a09308f7f10f43d592b05a571",
+    "metrics": [
+      {
+        "member": "c17_cscef_v51_complete_20260906_153449_116232399/test/metrics_summary.json",
+        "values": {
+          "split": "test",
+          "checkpoint_sha256": "3498541fae238cc53c6842c096502f35ae7093435331b1696a668cdad0fe1221",
+          "precision": 0.8448953234408928,
+          "recall": 0.825003752063635,
+          "mAP50": 0.8792974548298313,
+          "mAP50_95": 0.5120450850441516,
+          "results_dict": {
+            "metrics/precision(B)": 0.8448953234408928,
+            "metrics/recall(B)": 0.825003752063635,
+            "metrics/mAP50(B)": 0.8792974548298313,
+            "metrics/mAP50-95(B)": 0.5120450850441516,
+            "fitness": 0.5120450850441516
+          },
+          "runtime": {}
+        }
+      },
+      {
+        "member": "c17_cscef_v51_complete_20260906_153449_116232399/baseline_c2/test/c2_rtdetr_r18_lite_best_test_complete_20260904/metrics_summary.json",
+        "values": {
+          "split": "test",
+          "precision": 0.8339600078513765,
+          "recall": 0.8080444244334384,
+          "mAP50": 0.858162985651444,
+          "mAP50_95": 0.46963623190802783,
+          "results_dict": {
+            "metrics/precision(B)": 0.8339600078513765,
+            "metrics/recall(B)": 0.8080444244334384,
+            "metrics/mAP50(B)": 0.858162985651444,
+            "metrics/mAP50-95(B)": 0.46963623190802783,
+            "fitness": 0.46963623190802783
+          },
+          "runtime": {}
+        }
+      },
+      {
+        "member": "c17_cscef_v51_complete_20260906_153449_116232399/reference_c15/test/c15_cscef_v5_test_20260906_022343_832775/metrics_summary.json",
+        "values": {
+          "checkpoint_sha256": "099212cf5a03cfb6c3066044f3dee373e465f7d8e8308c29c97e7451eadc99d5",
+          "split": "test",
+          "precision": 0.7966897069701403,
+          "recall": 0.7834308869878434,
+          "mAP50": 0.8276554181816267,
+          "mAP50_95": 0.46770864203611556,
+          "results_dict": {
+            "metrics/precision(B)": 0.7966897069701403,
+            "metrics/recall(B)": 0.7834308869878434,
+            "metrics/mAP50(B)": 0.8276554181816267,
+            "metrics/mAP50-95(B)": 0.46770864203611556,
+            "fitness": 0.46770864203611556
+          },
+          "runtime": {
+            "python": "3.10.13",
+            "torch": "2.1.2+cu121",
+            "cuda": "12.1",
+            "gpu": "NVIDIA GeForce RTX 4090"
+          }
+        }
+      }
+    ],
+    "recipe": [],
+    "sidecar_sha256_verified": true
+  },
+  {
+    "package": "D:\\rtdetr跑结果\\c19 CBR涨2\\c19_cbr_test_small_20260907_132852_339107473.tar.gz",
+    "bytes": 7031872,
+    "sha256": "83d557d4315ebd6bb2d1b4e2a18f444b84eaaad2734fda59f02475c38e247d24",
+    "metrics": [
+      {
+        "member": "c19_cbr_test_small_20260907_132852_339107473/metrics_summary.json",
+        "values": {
+          "split": "test",
+          "precision": 0.8490338445575341,
+          "recall": 0.837311905431872,
+          "mAP50": 0.8851863565670782,
+          "mAP50_95": 0.5038924194554971,
+          "results_dict": {
+            "metrics/precision(B)": 0.8490338445575341,
+            "metrics/recall(B)": 0.837311905431872,
+            "metrics/mAP50(B)": 0.8851863565670782,
+            "metrics/mAP50-95(B)": 0.5038924194554971,
+            "fitness": 0.5038924194554971
+          },
+          "runtime": {}
+        }
+      }
+    ],
+    "recipe": [],
+    "sidecar_sha256_verified": true
+  },
+  {
+    "package": "D:\\rtdetr跑结果\\c24 SCCA-AIFI涨\\c24_scca_complete_20260908_212957_GmHKX5.tar.gz",
+    "bytes": 109737118,
+    "sha256": "732ac3cef7f9c1242eef39aad7f5c3c64a16c4f7c895f205ced7d8e8b8152a1c",
+    "metrics": [
+      {
+        "member": "c24_scca_complete_20260908_212957_GmHKX5/launch_and_evaluation/evaluation_val/metrics.json",
+        "values": {
+          "runtime": {
+            "commit": "f6e9dfda765046ae7691302cf5ec89d3f76cec5d",
+            "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+            "torch": "2.1.2+cu121",
+            "cuda": "12.1",
+            "gpu": "NVIDIA GeForce RTX 4090"
+          },
+          "split": "val",
+          "checkpoint_sha256": "6078c2ba4f6a555fab24ee9d2cb14c0630590a7408623e6106fa5b90c141916a",
+          "precision": 0.8591583029446084,
+          "recall": 0.8238080135106566,
+          "AP75": 0.5241951833458742,
+          "mAP50": 0.8822275927410956,
+          "mAP50_95": 0.5093868081177676
+        }
+      },
+      {
+        "member": "c24_scca_complete_20260908_212957_GmHKX5/launch_and_evaluation/evaluation_test/metrics.json",
+        "values": {
+          "runtime": {
+            "commit": "f6e9dfda765046ae7691302cf5ec89d3f76cec5d",
+            "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+            "torch": "2.1.2+cu121",
+            "cuda": "12.1",
+            "gpu": "NVIDIA GeForce RTX 4090"
+          },
+          "split": "test",
+          "checkpoint_sha256": "6078c2ba4f6a555fab24ee9d2cb14c0630590a7408623e6106fa5b90c141916a",
+          "precision": 0.8555632739746718,
+          "recall": 0.819900945520036,
+          "AP75": 0.5064610022981055,
+          "mAP50": 0.8782438758197731,
+          "mAP50_95": 0.4998720584810606
+        }
+      }
+    ],
+    "recipe": [],
+    "sidecar_sha256_verified": true
+  },
+  {
+    "package": "D:\\rtdetr跑结果\\c20 cs+cbr\\c20_cscef_cbr_small.tar.gz",
+    "bytes": 1016205,
+    "sha256": "bf98d6c0c872965c140ffc71dd5a93ad6b519448c2f85771a2f50ae7423d6a36",
+    "metrics": [
+      {
+        "member": "evaluation/val/metrics_summary.json",
+        "values": {
+          "split": "val",
+          "runtime": {
+            "git_commit": "81d5f0175e0168e022f29feb1ceb54de8a52deb5",
+            "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+            "torch_version": "2.1.2+cu121",
+            "torch_cuda": "12.1",
+            "gpu": "NVIDIA GeForce RTX 4090"
+          },
+          "checkpoint_sha256": "6eda2d56209a4e714490ab11297a9a92b9cbc509dc8baa646eb742eac3f208ba",
+          "precision": 0.8380752437935135,
+          "recall": 0.8154561643429333,
+          "mAP50": 0.8746050032240683,
+          "AP75": 0.49919495475725634,
+          "mAP50_95": 0.49168945613140325
+        }
+      },
+      {
+        "member": "evaluation/test/metrics_summary.json",
+        "values": {
+          "split": "test",
+          "runtime": {
+            "git_commit": "81d5f0175e0168e022f29feb1ceb54de8a52deb5",
+            "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+            "torch_version": "2.1.2+cu121",
+            "torch_cuda": "12.1",
+            "gpu": "NVIDIA GeForce RTX 4090"
+          },
+          "checkpoint_sha256": "6eda2d56209a4e714490ab11297a9a92b9cbc509dc8baa646eb742eac3f208ba",
+          "precision": 0.8373206057484079,
+          "recall": 0.814948221521837,
+          "mAP50": 0.8663025638932066,
+          "AP75": 0.49481070954386996,
+          "mAP50_95": 0.4870430125761403
+        }
+      }
+    ],
+    "recipe": [
+      {
+        "member": "training/args.yaml",
+        "fields": 109,
+        "diff": {
+          "name": [
+            "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+            "c20_rtdetr_r18_lite_cscef_cbr_e200_b16_onlineaug"
+          ],
+          "save_dir": [
+            "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+            "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c20_rtdetr_r18_lite_cscef_cbr_e200_b16_onlineaug"
+          ],
+          "model": [
+            "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+            "/root/autodl-tmp/projects/Crack_RTDETR_cscef_cbr/weights/rtdetr_r18_lite_cscef_cbr_imagenet_backbone_init.pt"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "package": "D:\\rtdetr跑结果\\c25 CSCEF＋SCCA\\c25_complete_20260909_105335_507623.tar.gz",
+    "bytes": 137764085,
+    "sha256": "4e28647accfdd45c15e726138ded15b1df034fb0ff045cd34752b3b3b4ba873f",
+    "metrics": [
+      {
+        "member": "evaluation/test/metrics.json",
+        "values": {
+          "runtime": {
+            "commit": "ac32e223a509981ee9e61be66a352f2b80c5bfd1",
+            "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+            "torch": "2.1.2+cu121",
+            "cuda": "12.1",
+            "gpu": "NVIDIA GeForce RTX 4090"
+          },
+          "split": "test",
+          "checkpoint_sha256": "f1cb06963385597d911feb9868d5839e173788d28f2e7f2bd01e6b819fde72d9",
+          "precision": 0.7938377732041972,
+          "recall": 0.7771274200810446,
+          "AP75": 0.4049775660594557,
+          "mAP50": 0.8184778761187871,
+          "mAP50_95": 0.4251799780843431
+        }
+      },
+      {
+        "member": "evaluation/val/metrics.json",
+        "values": {
+          "runtime": {
+            "commit": "ac32e223a509981ee9e61be66a352f2b80c5bfd1",
+            "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+            "torch": "2.1.2+cu121",
+            "cuda": "12.1",
+            "gpu": "NVIDIA GeForce RTX 4090"
+          },
+          "split": "val",
+          "checkpoint_sha256": "f1cb06963385597d911feb9868d5839e173788d28f2e7f2bd01e6b819fde72d9",
+          "precision": 0.7942611914697665,
+          "recall": 0.7827102803738317,
+          "AP75": 0.4196705811034077,
+          "mAP50": 0.8258263994707672,
+          "mAP50_95": 0.43599553921649836
+        }
+      }
+    ],
+    "recipe": [
+      {
+        "member": "training/args.yaml",
+        "fields": 109,
+        "diff": {
+          "name": [
+            "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+            "c25_rtdetr_r18_lite_cscef_v51_scca_e200_b16_onlineaug"
+          ],
+          "save_dir": [
+            "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+            "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c25_rtdetr_r18_lite_cscef_v51_scca_e200_b16_onlineaug"
+          ],
+          "model": [
+            "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+            "/root/autodl-tmp/projects/Crack_RTDETR-c25/weights/c25_scca_controlled_init.pt"
+          ]
+        }
+      }
+    ],
+    "sidecar_sha256_verified": true
+  },
+  {
+    "package": "D:\\rtdetr跑结果\\c26 CBR＋SCCA\\c26_complete_20260909_111637_287553.tar.gz",
+    "bytes": 139696559,
+    "sha256": "608168ac41d233fdfb836e7da9288fa2d1002d453370fd145db224ed6d2f0571",
+    "metrics": [
+      {
+        "member": "evaluation/test/metrics.json",
+        "values": {
+          "runtime": {
+            "commit": "beedcfa307e250fb2de47587097c51f9c141123b",
+            "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+            "torch": "2.1.2+cu121",
+            "cuda": "12.1",
+            "gpu": "NVIDIA GeForce RTX 4090"
+          },
+          "split": "test",
+          "checkpoint_sha256": "8e20df98083d85115f18d09807c0bd2dba31d1f6b80ccb1f3b61f43afc4d62bf",
+          "precision": 0.8421676599383899,
+          "recall": 0.814948221521837,
+          "AP75": 0.49601933387203323,
+          "mAP50": 0.8603720998167826,
+          "mAP50_95": 0.49073033585461523
+        }
+      },
+      {
+        "member": "evaluation/val/metrics.json",
+        "values": {
+          "runtime": {
+            "commit": "beedcfa307e250fb2de47587097c51f9c141123b",
+            "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+            "torch": "2.1.2+cu121",
+            "cuda": "12.1",
+            "gpu": "NVIDIA GeForce RTX 4090"
+          },
+          "split": "val",
+          "checkpoint_sha256": "8e20df98083d85115f18d09807c0bd2dba31d1f6b80ccb1f3b61f43afc4d62bf",
+          "precision": 0.8374861056547469,
+          "recall": 0.8195544775431322,
+          "AP75": 0.5164133400519515,
+          "mAP50": 0.8677436977133515,
+          "mAP50_95": 0.5012546191022473
+        }
+      }
+    ],
+    "recipe": [
+      {
+        "member": "training/args.yaml",
+        "fields": 109,
+        "diff": {
+          "name": [
+            "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+            "c26_rtdetr_r18_lite_cbr_scca_e200_b16_onlineaug"
+          ],
+          "save_dir": [
+            "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+            "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c26_rtdetr_r18_lite_cbr_scca_e200_b16_onlineaug"
+          ],
+          "model": [
+            "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+            "/root/autodl-tmp/projects/Crack_RTDETR-c26/weights/c26_cbr_scca_controlled_init.pt"
+          ]
+        }
+      }
+    ],
+    "sidecar_sha256_verified": true
+  },
+  {
+    "package": "D:\\rtdetr跑结果\\c2 200e在线\\c2_rtdetr_r18_lite_complete_retest_20260904.tar.gz",
+    "bytes": 146345962,
+    "sha256": "c225efc13d32fcef1eeb1ec1efdd37d1d282de081bafcba58cf47f0faf36a2fd",
+    "metrics": [
+      {
+        "member": "c2_rtdetr_r18_lite_complete_retest_20260904/test_run/metrics_summary.json",
+        "values": {
+          "split": "test",
+          "precision": 0.8339600078513765,
+          "recall": 0.8080444244334384,
+          "mAP50": 0.858162985651444,
+          "mAP50_95": 0.46963623190802783,
+          "results_dict": {
+            "metrics/precision(B)": 0.8339600078513765,
+            "metrics/recall(B)": 0.8080444244334384,
+            "metrics/mAP50(B)": 0.858162985651444,
+            "metrics/mAP50-95(B)": 0.46963623190802783,
+            "fitness": 0.46963623190802783
+          },
+          "runtime": {}
+        }
+      }
+    ],
+    "recipe": [],
+    "sidecar_sha256_verified": true,
+    "C2_archive_recipe": [
+      {
+        "member": "c2_rtdetr_r18_lite_complete_retest_20260904/train_run/args.yaml",
+        "fields": 109,
+        "typed_diff": {}
+      }
+    ]
+  }
+]

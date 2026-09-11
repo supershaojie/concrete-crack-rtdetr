@@ -1,0 +1,18 @@
+{
+  "unit_tests": 9,
+  "status": "passed",
+  "sync": {
+    "status": "passed",
+    "scope": "actual Bash script with explicit Git stub; no network/server/git-worktree mutation",
+    "new_detached": true,
+    "clean_reuse": true,
+    "dirty_preserved": true,
+    "different_SHA_preserved": true,
+    "pinned_ancestor_accepted": true,
+    "outside_history_rejected": true,
+    "attached_preserved": true,
+    "wrong_origin_rejected": true,
+    "pin_preserved": true
+  },
+  "bash_syntax": "passed"
+}

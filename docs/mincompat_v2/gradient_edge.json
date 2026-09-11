@@ -1,0 +1,296 @@
+{
+  "status": "passed",
+  "FP32": {
+    "forward": {
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "identity": {
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "strict_load": true,
+    "parameters": 26912,
+    "state_tensors": 7,
+    "nonzero_output": true,
+    "semantic": {
+      "L1_ratio": 0.25,
+      "L2_ratio": 0.25,
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "lateral": {
+      "L1_ratio": 1.0,
+      "L2_ratio": 1.0,
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "parameter_gradients": {
+      "lateral_projection.weight": {
+        "max_abs": 0.0,
+        "max_rel": 0.0
+      },
+      "semantic_projection.weight": {
+        "max_abs": 0.0,
+        "max_rel": 0.0
+      },
+      "mix_projection.weight": {
+        "max_abs": 0.0,
+        "max_rel": 0.0
+      },
+      "depthwise_conv.weight": {
+        "max_abs": 0.0,
+        "max_rel": 0.0
+      },
+      "output_projection.weight": {
+        "max_abs": 0.0,
+        "max_rel": 0.0
+      }
+    }
+  },
+  "pair": {
+    "nonzero_CSCEF_SCCA": true,
+    "strict_pair_state_load": true,
+    "forward": {
+      "640x640": {
+        "Y5": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "Y4": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "semantic": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "lateral": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "CSCEF": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "P3": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "P4": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "P5": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "bbox": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "score": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        }
+      },
+      "160x192": {
+        "Y5": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "Y4": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "semantic": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "lateral": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "CSCEF": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "P3": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "P4": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "P5": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "bbox": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        },
+        "score": {
+          "max_abs": 0.0,
+          "max_rel": 0.0
+        }
+      }
+    },
+    "semantic_only": {
+      "upY4": {
+        "L1_ratio": 0.25,
+        "L2_ratio": 0.25,
+        "max_abs": 0.0,
+        "max_rel": 0.0
+      },
+      "Y4": {
+        "L1_ratio": 0.25,
+        "L2_ratio": 0.25,
+        "max_abs": 0.0,
+        "max_rel": 0.0
+      }
+    },
+    "main_concat_only": {
+      "upY4": {
+        "L1_ratio": 1.0,
+        "L2_ratio": 1.0,
+        "max_abs": 8.881784197001252e-16,
+        "max_rel": 6.938893784536049e-05
+      },
+      "Y4": {
+        "L1_ratio": 1.0,
+        "L2_ratio": 1.0,
+        "max_abs": 3.552713678800501e-15,
+        "max_rel": 0.0001110223020077683
+      }
+    },
+    "SCCA_total": {
+      "scca_temperature_raw": {
+        "old_L2": 0.0003547871601767838,
+        "new_L2": 0.0003546414664015174
+      },
+      "scca_q.weight": {
+        "old_L2": 0.007051451597362757,
+        "new_L2": 0.006907666567713022
+      },
+      "scca_k.weight": {
+        "old_L2": 0.004162868484854698,
+        "new_L2": 0.004114147741347551
+      },
+      "scca_v.weight": {
+        "old_L2": 0.011981799267232418,
+        "new_L2": 0.011569757014513016
+      },
+      "scca_o.weight": {
+        "old_L2": 0.08350925892591476,
+        "new_L2": 0.08307714760303497
+      }
+    },
+    "SCCA_semantic_side": {
+      "scca_temperature_raw": {
+        "L1_ratio": 0.25000008940696716,
+        "L2_ratio": 0.2500000596046448,
+        "max_abs": 3.410605131648481e-13,
+        "max_rel": 7.660354413019377e-07
+      },
+      "scca_q.weight": {
+        "L1_ratio": 0.24999971687793732,
+        "L2_ratio": 0.24999980628490448,
+        "max_abs": 3.055902197957039e-10,
+        "max_rel": 1.5
+      },
+      "scca_k.weight": {
+        "L1_ratio": 0.2499999701976776,
+        "L2_ratio": 0.25,
+        "max_abs": 2.7284841053187847e-12,
+        "max_rel": 0.00238663493655622
+      },
+      "scca_v.weight": {
+        "L1_ratio": 0.2500000298023224,
+        "L2_ratio": 0.2500000298023224,
+        "max_abs": 1.0231815394945443e-12,
+        "max_rel": 0.001901743235066533
+      },
+      "scca_o.weight": {
+        "L1_ratio": 0.25,
+        "L2_ratio": 0.25,
+        "max_abs": 3.637978807091713e-12,
+        "max_rel": 0.000379449047613889
+      }
+    },
+    "total_gradient_note": "Total SCCA gradients include normal main paths; no fixed total ratio is asserted.",
+    "SCCA_internal_edges": {
+      "False": {
+        "x_L2": 0.00031849998049438,
+        "s_L2": 1.6678430256433785e-05
+      },
+      "True": {
+        "x_L2": 0.0003300174430478364,
+        "s_L2": 1.8166214431403205e-05
+      }
+    }
+  },
+  "AMP": {
+    "forward": {
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "identity": {
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "strict_load": true,
+    "parameters": 26912,
+    "state_tensors": 7,
+    "nonzero_output": true,
+    "semantic": {
+      "L1_ratio": 0.25,
+      "L2_ratio": 0.25,
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "lateral": {
+      "L1_ratio": 1.0,
+      "L2_ratio": 1.0,
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "parameter_gradients": {
+      "lateral_projection.weight": {
+        "max_abs": 0.0,
+        "max_rel": 0.0
+      },
+      "semantic_projection.weight": {
+        "max_abs": 0.0,
+        "max_rel": 0.0
+      },
+      "mix_projection.weight": {
+        "max_abs": 0.0,
+        "max_rel": 0.0
+      },
+      "depthwise_conv.weight": {
+        "max_abs": 0.0,
+        "max_rel": 0.0
+      },
+      "output_projection.weight": {
+        "max_abs": 0.0,
+        "max_rel": 0.0
+      }
+    }
+  },
+  "half": {
+    "forward": {
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "identity": {
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "strict_load": true,
+    "parameters": 26912,
+    "state_tensors": 7,
+    "nonzero_output": true
+  }
+}
