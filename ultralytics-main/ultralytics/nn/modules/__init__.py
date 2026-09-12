@@ -110,9 +110,13 @@ from .transformer import (
 )
 
 from .lif_down import LIFDown
+from .cscef_v5 import CSCEFv5
+from .cscef_v51 import CSCEFv51
 
 __all__ = (
     "LIFDown",
+    "CSCEFv5",
+    "CSCEFv51",
     "AIFI",
     "C1",
     "C2",

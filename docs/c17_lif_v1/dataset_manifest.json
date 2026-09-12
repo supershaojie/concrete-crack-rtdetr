@@ -1,0 +1,23 @@
+{
+  "root": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det",
+  "splits": {
+    "train": {
+      "images": 6048,
+      "instances": 45573,
+      "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+      "label_contents_sha256": "66ea2c534858cacb8ad0c6518f610061a7a95ce29aec63be830187e6ff68549f"
+    },
+    "val": {
+      "images": 1728,
+      "instances": 12840,
+      "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+      "label_contents_sha256": "1397eb393bb3b52b32b5d265c83e4199779044f77adb2c25f4563c0665e80784"
+    },
+    "test": {
+      "images": 864,
+      "instances": 6663,
+      "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+      "label_contents_sha256": "74c3185a4f272ed0477d899fac2ddc2e8050dde8c953f427611213deddb31c73"
+    }
+  }
+}

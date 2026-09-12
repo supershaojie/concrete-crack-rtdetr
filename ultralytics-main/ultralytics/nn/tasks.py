@@ -59,6 +59,8 @@ from ultralytics.nn.modules import (
     Index,
     LRPCHead,
     LIFDown,
+    CSCEFv5,
+    CSCEFv51,
     Pose,
     Pose26,
     RepC3,
@@ -1686,6 +1688,12 @@ def parse_model(d, ch, verbose=True):
             c2 = args[1] if args[3] else args[1] * (args[5] if len(args) > 5 else 4)
         elif m is torch.nn.BatchNorm2d:
             args = [ch[f]]
+        elif m in {CSCEFv5, CSCEFv51}:
+            if not isinstance(f, (list, tuple)) or len(f) != 2:
+                raise ValueError(f"{m.__name__} requires exactly two input layers: [lateral, semantic].")
+            c_lateral, c_semantic = (ch[x] for x in f)
+            args = [c_lateral, c_semantic, *args]
+            c2 = c_lateral
         elif m is Concat:
             c2 = sum(ch[x] for x in f)
         elif m in frozenset(

@@ -1,0 +1,82 @@
+{
+  "source": "D:\\MyProjects\\Crack_RTDETR\\weights\\rtdetr_r18_lite_imagenet_backbone_init.pt",
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "source_nc": 80,
+  "target_nc": 80,
+  "seed": 42,
+  "c2_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+  "lif_commit": "0e95bbade3558b0d2b77c5531483c60810391d88",
+  "c17_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+  "NEW_TRAINABLE": [
+    "model.18.depthwise_conv.weight",
+    "model.18.lateral_projection.weight",
+    "model.18.mix_projection.weight",
+    "model.18.output_projection.weight",
+    "model.18.semantic_projection.weight",
+    "model.21.B_proj.weight",
+    "model.21.O_proj.weight",
+    "model.21.P.weight",
+    "model.21.U_dw.weight",
+    "model.21.U_mix.weight"
+  ],
+  "NEW_BUFFER": [
+    "model.18.scharr_x",
+    "model.18.scharr_y"
+  ],
+  "ALLOWED_CLASS_ADAPTATION": [],
+  "MISSING": [],
+  "UNEXPECTED": [],
+  "SHAPE_MISMATCH": [],
+  "storage": "FP32; public half source promoted exactly",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c17-lif-v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c17-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "0e95bbade3558b0d2b77c5531483c60810391d88",
+    "cscef_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c17-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cscef_v51.py",
+    "original_modules": {
+      "lif_down.py": {
+        "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c17-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+        "sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cscef_v5.py": {
+        "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c17-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cscef_v5.py",
+        "sha256": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+        "lf_sha256": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474"
+      },
+      "cscef_v51.py": {
+        "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c17-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cscef_v51.py",
+        "sha256": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+        "lf_sha256": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c"
+      }
+    },
+    "code_lf_sha256": {
+      "ultralytics-main/ultralytics/nn/tasks.py": "9c4af3624f8de3db0810902ceee25b96565e67111c8d3a971f322ddeb5b4b65f",
+      "ultralytics-main/ultralytics/nn/modules/__init__.py": "abde5b31de86edd38d957ba235ac8d32b10e9a024781cd943557f809f759e040",
+      "ultralytics-main/ultralytics/models/rtdetr/train.py": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+      "ultralytics-main/ultralytics/engine/trainer.py": "18125ba895b64961cf0f7db29214aca27392176e65d72a9166fa818f00a1033a",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v51-lif-down.yaml": "cedb7f73b031dba7c6931782a058dad672b236fb44a8d114734f5bebe207836c",
+      "tools/init_c17_lif_v1.py": "73393e4c653c1efda4cdd7b5b1e804289a0d467ea4a143641a628610db5fd04f",
+      "tools/c17_lif_v1_topology.py": "fd441c2ff72ca59aff81d81b527802b57aebdf6f27db643fc7cfd669b7746407",
+      "tools/check_c17_lif_v1.py": "14deec64d16e733a0360df6671c1cba50c79bd1d698ff4e0f9b204572c3d08c6",
+      "tools/train_c17_lif_v1.py": "63884a36b5988fb2b4781b89a27ba93c9c5a7c9e41d5f4ee3b48bec75dc80259",
+      "tools/c17_lif_v1_results.py": "65b094a17aa331aefd812713255d54699de68dcb05709806ed65f2dcfc445e23"
+    }
+  },
+  "output": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c17-lif-v1\\weights\\c17_lif_v1_controlled_init.pt",
+  "output_sha256": "9b60ed0764b7906c800faf94177e7e5557dc3f86a0ad43690c3d0194127b798e",
+  "reload_exact": true,
+  "status": "passed",
+  "common_states": 533,
+  "new_trainable_tensors": 10,
+  "new_buffers": 2,
+  "trainer_same_shape_exact": 536,
+  "allowed_class_adaptations": 9,
+  "all_nc1_common_exact": 533,
+  "full_mapping": "initialization_mapping.json"
+}

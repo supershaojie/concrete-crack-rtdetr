@@ -1,0 +1,874 @@
+[
+  {
+    "field": "task",
+    "source": "detect",
+    "target": "detect",
+    "source_type": "str",
+    "target_type": "str",
+    "changed": false
+  },
+  {
+    "field": "mode",
+    "source": "train",
+    "target": "train",
+    "source_type": "str",
+    "target_type": "str",
+    "changed": false
+  },
+  {
+    "field": "model",
+    "source": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "target": "/root/autodl-tmp/projects/Crack_RTDETR-c17-lif-v1/weights/c17_lif_v1_controlled_init.pt",
+    "source_type": "str",
+    "target_type": "str",
+    "changed": true
+  },
+  {
+    "field": "data",
+    "source": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "target": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "source_type": "str",
+    "target_type": "str",
+    "changed": false
+  },
+  {
+    "field": "epochs",
+    "source": 200,
+    "target": 200,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "time",
+    "source": null,
+    "target": null,
+    "source_type": "NoneType",
+    "target_type": "NoneType",
+    "changed": false
+  },
+  {
+    "field": "patience",
+    "source": 50,
+    "target": 50,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "batch",
+    "source": 16,
+    "target": 16,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "imgsz",
+    "source": 640,
+    "target": 640,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "save",
+    "source": true,
+    "target": true,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "save_period",
+    "source": -1,
+    "target": -1,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "cache",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "device",
+    "source": "0",
+    "target": "0",
+    "source_type": "str",
+    "target_type": "str",
+    "changed": false
+  },
+  {
+    "field": "workers",
+    "source": 8,
+    "target": 8,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "project",
+    "source": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "target": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "source_type": "str",
+    "target_type": "str",
+    "changed": false
+  },
+  {
+    "field": "name",
+    "source": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "target": "c17_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+    "source_type": "str",
+    "target_type": "str",
+    "changed": true
+  },
+  {
+    "field": "exist_ok",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "pretrained",
+    "source": true,
+    "target": true,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "optimizer",
+    "source": "AdamW",
+    "target": "AdamW",
+    "source_type": "str",
+    "target_type": "str",
+    "changed": false
+  },
+  {
+    "field": "verbose",
+    "source": true,
+    "target": true,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "seed",
+    "source": 42,
+    "target": 42,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "deterministic",
+    "source": true,
+    "target": true,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "single_cls",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "rect",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "cos_lr",
+    "source": true,
+    "target": true,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "close_mosaic",
+    "source": 10,
+    "target": 10,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "resume",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "amp",
+    "source": true,
+    "target": true,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "fraction",
+    "source": 1.0,
+    "target": 1.0,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "profile",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "freeze",
+    "source": null,
+    "target": null,
+    "source_type": "NoneType",
+    "target_type": "NoneType",
+    "changed": false
+  },
+  {
+    "field": "multi_scale",
+    "source": 0.0,
+    "target": 0.0,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "compile",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "overlap_mask",
+    "source": true,
+    "target": true,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "mask_ratio",
+    "source": 4,
+    "target": 4,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "dropout",
+    "source": 0.0,
+    "target": 0.0,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "val",
+    "source": true,
+    "target": true,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "split",
+    "source": "val",
+    "target": "val",
+    "source_type": "str",
+    "target_type": "str",
+    "changed": false
+  },
+  {
+    "field": "save_json",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "conf",
+    "source": null,
+    "target": null,
+    "source_type": "NoneType",
+    "target_type": "NoneType",
+    "changed": false
+  },
+  {
+    "field": "iou",
+    "source": 0.7,
+    "target": 0.7,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "max_det",
+    "source": 300,
+    "target": 300,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "half",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "dnn",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "plots",
+    "source": true,
+    "target": true,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "end2end",
+    "source": null,
+    "target": null,
+    "source_type": "NoneType",
+    "target_type": "NoneType",
+    "changed": false
+  },
+  {
+    "field": "source",
+    "source": null,
+    "target": null,
+    "source_type": "NoneType",
+    "target_type": "NoneType",
+    "changed": false
+  },
+  {
+    "field": "vid_stride",
+    "source": 1,
+    "target": 1,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "stream_buffer",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "visualize",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "augment",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "agnostic_nms",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "classes",
+    "source": null,
+    "target": null,
+    "source_type": "NoneType",
+    "target_type": "NoneType",
+    "changed": false
+  },
+  {
+    "field": "retina_masks",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "embed",
+    "source": null,
+    "target": null,
+    "source_type": "NoneType",
+    "target_type": "NoneType",
+    "changed": false
+  },
+  {
+    "field": "show",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "save_frames",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "save_txt",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "save_conf",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "save_crop",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "show_labels",
+    "source": true,
+    "target": true,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "show_conf",
+    "source": true,
+    "target": true,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "show_boxes",
+    "source": true,
+    "target": true,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "line_width",
+    "source": null,
+    "target": null,
+    "source_type": "NoneType",
+    "target_type": "NoneType",
+    "changed": false
+  },
+  {
+    "field": "format",
+    "source": "torchscript",
+    "target": "torchscript",
+    "source_type": "str",
+    "target_type": "str",
+    "changed": false
+  },
+  {
+    "field": "keras",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "optimize",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "int8",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "dynamic",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "simplify",
+    "source": true,
+    "target": true,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "opset",
+    "source": null,
+    "target": null,
+    "source_type": "NoneType",
+    "target_type": "NoneType",
+    "changed": false
+  },
+  {
+    "field": "workspace",
+    "source": null,
+    "target": null,
+    "source_type": "NoneType",
+    "target_type": "NoneType",
+    "changed": false
+  },
+  {
+    "field": "nms",
+    "source": false,
+    "target": false,
+    "source_type": "bool",
+    "target_type": "bool",
+    "changed": false
+  },
+  {
+    "field": "lr0",
+    "source": 0.0005,
+    "target": 0.0005,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "lrf",
+    "source": 0.01,
+    "target": 0.01,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "momentum",
+    "source": 0.937,
+    "target": 0.937,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "weight_decay",
+    "source": 0.0001,
+    "target": 0.0001,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "warmup_epochs",
+    "source": 5,
+    "target": 5,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "warmup_momentum",
+    "source": 0.8,
+    "target": 0.8,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "warmup_bias_lr",
+    "source": 0.1,
+    "target": 0.1,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "box",
+    "source": 7.5,
+    "target": 7.5,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "cls",
+    "source": 0.5,
+    "target": 0.5,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "dfl",
+    "source": 1.5,
+    "target": 1.5,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "pose",
+    "source": 12.0,
+    "target": 12.0,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "kobj",
+    "source": 1.0,
+    "target": 1.0,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "rle",
+    "source": 1.0,
+    "target": 1.0,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "angle",
+    "source": 1.0,
+    "target": 1.0,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "nbs",
+    "source": 64,
+    "target": 64,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "hsv_h",
+    "source": 0.015,
+    "target": 0.015,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "hsv_s",
+    "source": 0.5,
+    "target": 0.5,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "hsv_v",
+    "source": 0.35,
+    "target": 0.35,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "degrees",
+    "source": 5,
+    "target": 5,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "translate",
+    "source": 0.1,
+    "target": 0.1,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "scale",
+    "source": 0.4,
+    "target": 0.4,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "shear",
+    "source": 1.5,
+    "target": 1.5,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "perspective",
+    "source": 0.0002,
+    "target": 0.0002,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "flipud",
+    "source": 0.2,
+    "target": 0.2,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "fliplr",
+    "source": 0.5,
+    "target": 0.5,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "bgr",
+    "source": 0.0,
+    "target": 0.0,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "mosaic",
+    "source": 0.8,
+    "target": 0.8,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "mixup",
+    "source": 0.05,
+    "target": 0.05,
+    "source_type": "float",
+    "target_type": "float",
+    "changed": false
+  },
+  {
+    "field": "cutmix",
+    "source": 0,
+    "target": 0,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "copy_paste",
+    "source": 0,
+    "target": 0,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "copy_paste_mode",
+    "source": "flip",
+    "target": "flip",
+    "source_type": "str",
+    "target_type": "str",
+    "changed": false
+  },
+  {
+    "field": "auto_augment",
+    "source": null,
+    "target": null,
+    "source_type": "NoneType",
+    "target_type": "NoneType",
+    "changed": false
+  },
+  {
+    "field": "erasing",
+    "source": 0,
+    "target": 0,
+    "source_type": "int",
+    "target_type": "int",
+    "changed": false
+  },
+  {
+    "field": "cfg",
+    "source": null,
+    "target": null,
+    "source_type": "NoneType",
+    "target_type": "NoneType",
+    "changed": false
+  },
+  {
+    "field": "tracker",
+    "source": "botsort.yaml",
+    "target": "botsort.yaml",
+    "source_type": "str",
+    "target_type": "str",
+    "changed": false
+  },
+  {
+    "field": "save_dir",
+    "source": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "target": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c17_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+    "source_type": "str",
+    "target_type": "str",
+    "changed": true
+  }
+]

@@ -1,0 +1,48 @@
+{
+  "status": "PASSED",
+  "scope": "Real local Git/worktrees; only fetch destination redirected to isolated local bare repository",
+  "base_commit": "0e95bbade3558b0d2b77c5531483c60810391d88",
+  "pinned_fixture_commit": "24a96514eca036dc2fe8b3bd5678e85e6ed542b3",
+  "fixture_remote_advanced_commit": "ae791b791550591073fb49253ca14feb4063d799",
+  "detached_launcher_accepted": true,
+  "main_dirty_state_preserved": true,
+  "checks": [
+    {
+      "name": "remote_advanced_pin_original",
+      "exit_code": 0,
+      "tail": "935)\nUpdating files:  55% (515/935)\nUpdating files:  56% (524/935)\nUpdating files:  57% (533/935)\nUpdating files:  58% (543/935)\nUpdating files:  59% (552/935)\nUpdating files:  60% (561/935)\nUpdating files:  61% (571/935)\nUpdating files:  62% (580/935)\nUpdating files:  63% (590/935)\nUpdating files:  64% (599/935)\nUpdating files:  65% (608/935)\nUpdating files:  66% (618/935)\nUpdating files:  67% (627/935)\nUpdating files:  68% (636/935)\nUpdating files:  69% (646/935)\nUpdating files:  70% (655/935)\nUpdating files:  71% (664/935)\nUpdating files:  72% (674/935)\nUpdating files:  73% (683/935)\nUpdating files:  74% (692/935)\nUpdating files:  75% (702/935)\nUpdating files:  76% (711/935)\nUpdating files:  77% (720/935)\nUpdating files:  78% (730/935)\nUpdating files:  79% (739/935)\nUpdating files:  80% (748/935)\nUpdating files:  81% (758/935)\nUpdating files:  82% (767/935)\nUpdating files:  83% (777/935)\nUpdating files:  84% (786/935)\nUpdating files:  85% (795/935)\nUpdating files:  86% (805/935)\nUpdating files:  87% (814/935)\nUpdating files:  88% (823/935)\nUpdating files:  89% (833/935)\nUpdating files:  89% (838/935)\nUpdating files:  90% (842/935)\nUpdating files:  91% (851/935)\nUpdating files:  92% (861/935)\nUpdating files:  93% (870/935)\nUpdating files:  94% (879/935)\nUpdating files:  95% (889/935)\nUpdating files:  96% (898/935)\nUpdating files:  97% (907/935)\nUpdating files:  98% (917/935)\nUpdating files:  99% (926/935)\nUpdating files: 100% (935/935)\nUpdating files: 100% (935/935), done.\n"
+    },
+    {
+      "name": "repeat_same_clean_pin",
+      "exit_code": 0,
+      "tail": "780b6792a268614e8136\",\n      \"ultralytics-main/ultralytics/nn/modules/lif_down.py\": \"26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7\",\n      \"ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v51-lif-down.yaml\": \"cedb7f73b031dba7c6931782a058dad672b236fb44a8d114734f5bebe207836c\",\n      \"ultralytics-main/ultralytics/nn/modules/cscef_v5.py\": \"a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474\",\n      \"ultralytics-main/ultralytics/nn/modules/cscef_v51.py\": \"b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c\",\n      \"tools/check_c17_lif_v1.py\": \"3f4d4be57c91c89002afeee672f4d411dead5559d52b0ce0f86ddfa60e37348a\",\n      \"tools/c17_lif_v1_data.py\": \"3e723e638846e4a25ebda299a32bd8709b6fb874f5a9440528f2b414caec2afc\",\n      \"tools/c17_lif_v1_history_worker.py\": \"33918ea3148a3178ca23379ad719ceb3cbf0b8437582468977ab0f2be6b5704f\",\n      \"docs/c17_lif_v1/dataset_manifest.json\": \"e0f98d30ede6736ed5e8025e7b7a1a00e5b956987eecbd77dbadc46895a78b64\",\n      \"docs/c17_lif_v1/checks.json\": \"c3d460954a30bdeabd2859a2b788b953ab47880dcbd2dc3530676485d1bf4f8c\",\n      \"docs/c17_lif_v1/PROVENANCE.json\": \"923f745170e2713d5aa052c00f8858ef31a1e28cb1b17a2dda3209e1d13b7688\"\n    }\n  },\n  \"verified_remote_head\": \"ae791b791550591073fb49253ca14feb4063d799\"\n}\nC17 + LIF v1 ready at D:/MyProjects/Crack_RTDETR/outputs/worktrees/c17-lif-v1/outputs/sync_v4_fixture/worktree with space, fixed 24a96514eca036dc2fe8b3bd5678e85e6ed542b3; no training started.\n"
+    },
+    {
+      "name": "dirty_target_rejected",
+      "exit_code": 1,
+      "tail": "Modified tracked target preserved\n"
+    },
+    {
+      "name": "untracked_output_preserved",
+      "exit_code": 0,
+      "tail": "780b6792a268614e8136\",\n      \"ultralytics-main/ultralytics/nn/modules/lif_down.py\": \"26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7\",\n      \"ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v51-lif-down.yaml\": \"cedb7f73b031dba7c6931782a058dad672b236fb44a8d114734f5bebe207836c\",\n      \"ultralytics-main/ultralytics/nn/modules/cscef_v5.py\": \"a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474\",\n      \"ultralytics-main/ultralytics/nn/modules/cscef_v51.py\": \"b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c\",\n      \"tools/check_c17_lif_v1.py\": \"3f4d4be57c91c89002afeee672f4d411dead5559d52b0ce0f86ddfa60e37348a\",\n      \"tools/c17_lif_v1_data.py\": \"3e723e638846e4a25ebda299a32bd8709b6fb874f5a9440528f2b414caec2afc\",\n      \"tools/c17_lif_v1_history_worker.py\": \"33918ea3148a3178ca23379ad719ceb3cbf0b8437582468977ab0f2be6b5704f\",\n      \"docs/c17_lif_v1/dataset_manifest.json\": \"e0f98d30ede6736ed5e8025e7b7a1a00e5b956987eecbd77dbadc46895a78b64\",\n      \"docs/c17_lif_v1/checks.json\": \"c3d460954a30bdeabd2859a2b788b953ab47880dcbd2dc3530676485d1bf4f8c\",\n      \"docs/c17_lif_v1/PROVENANCE.json\": \"923f745170e2713d5aa052c00f8858ef31a1e28cb1b17a2dda3209e1d13b7688\"\n    }\n  },\n  \"verified_remote_head\": \"ae791b791550591073fb49253ca14feb4063d799\"\n}\nC17 + LIF v1 ready at D:/MyProjects/Crack_RTDETR/outputs/worktrees/c17-lif-v1/outputs/sync_v4_fixture/worktree with space, fixed 24a96514eca036dc2fe8b3bd5678e85e6ed542b3; no training started.\n"
+    },
+    {
+      "name": "different_sha_rejected",
+      "exit_code": 1,
+      "tail": "Different SHA preserved; use another new directory\n"
+    },
+    {
+      "name": "non_worktree_rejected",
+      "exit_code": 1,
+      "tail": "Target is not linked worktree; preserved\n"
+    },
+    {
+      "name": "wrong_origin_rejected",
+      "exit_code": 1,
+      "tail": "Unexpected origin: https://example.invalid/wrong.git\n"
+    }
+  ],
+  "training": "NOT_RUN",
+  "fixture_directory": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c17-lif-v1\\outputs\\sync_v4_fixture"
+}

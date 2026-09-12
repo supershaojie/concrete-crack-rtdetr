@@ -1,0 +1,204 @@
+{
+  "parameters": {
+    "c2": 20082772,
+    "lif": 20103876,
+    "c17": 20109684,
+    "c17_lif_v1": 20130788
+  },
+  "topology": {
+    "decoder": 27,
+    "p3_to_p4": {
+      "input": 20,
+      "downsample": 21,
+      "concat": 22,
+      "lateral": [
+        15
+      ],
+      "output": 23
+    },
+    "p4_to_p5": {
+      "input": 23,
+      "downsample": 24,
+      "concat": 25,
+      "lateral": [
+        10
+      ],
+      "output": 26
+    },
+    "cscef": 18,
+    "lateral": 17,
+    "semantic": 16,
+    "y4": 15,
+    "p3_concat": 19,
+    "decoder_inputs": [
+      20,
+      23,
+      26
+    ]
+  },
+  "original_cscef_zero_step": {
+    "lateral_projection.weight": 0.0,
+    "semantic_projection.weight": 0.0,
+    "mix_projection.weight": 0.0,
+    "depthwise_conv.weight": 0.0,
+    "output_projection.weight": 0.008357838727533817
+  },
+  "decoder_dependency_effect": {
+    "p3": {
+      "shape": [
+        1,
+        256,
+        20,
+        24
+      ],
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "atol": 0,
+      "rtol": 0
+    },
+    "down_effect_max_abs": 0.0008064225548878312,
+    "p4_effect_max_abs": 4.8448448069393635e-05,
+    "p5_effect_max_abs": 7.273629307746887e-07
+  },
+  "devices": {
+    "cpu": {
+      "degeneration_max_abs": 0.0,
+      "fp32_fuse_max_abs": 7.152557373046875e-07,
+      "fp32_fuse_max_rel": 0.4777902364730835,
+      "reload_max_abs": 0.0,
+      "repeat_fuse_max_abs": 7.152557373046875e-07,
+      "predict_auto_fuse_max_abs": 8.344650268554688e-07,
+      "AMP_fuse_max_abs": 0,
+      "half_fuse_max_abs": 0,
+      "bn_before": 69,
+      "bn_after": 27,
+      "natural_topk": {
+        "160x192": {
+          "natural_topk_indices_equal": true,
+          "natural_output_row_max_abs": 1.1920928955078125e-07,
+          "topk_set_intersection": 300
+        },
+        "640x640": {
+          "natural_topk_indices_equal": false,
+          "natural_output_row_max_abs": 0.09999999403953552,
+          "topk_set_intersection": 300
+        }
+      },
+      "losses": [
+        57.088165283203125,
+        24.108715057373047,
+        24.467044830322266
+      ],
+      "optimizer_coverage": 336,
+      "first_warmup": [
+        {
+          "batch_index": 0,
+          "nw": 1890,
+          "accumulate": 1,
+          "lrs": {
+            "weight": 0.0,
+            "bn": 0.0,
+            "bias": 0.1
+          }
+        },
+        {
+          "batch_index": 1,
+          "nw": 1890,
+          "accumulate": 1,
+          "lrs": {
+            "weight": 2.6455026455026455e-07,
+            "bn": 2.6455026455026455e-07,
+            "bias": 0.09994735449735451
+          }
+        },
+        {
+          "batch_index": 2,
+          "nw": 1890,
+          "accumulate": 1,
+          "lrs": {
+            "weight": 5.291005291005291e-07,
+            "bn": 5.291005291005291e-07,
+            "bias": 0.099894708994709
+          }
+        }
+      ],
+      "peak_allocated_bytes": null,
+      "warnings": []
+    },
+    "cuda": {
+      "degeneration_max_abs": 0.0,
+      "fp32_fuse_max_abs": 8.344650268554688e-07,
+      "fp32_fuse_max_rel": 0.9517436027526855,
+      "reload_max_abs": 0.0,
+      "repeat_fuse_max_abs": 8.344650268554688e-07,
+      "predict_auto_fuse_max_abs": 8.344650268554688e-07,
+      "AMP_fuse_max_abs": 0.00146484375,
+      "half_fuse_max_abs": 0.00146484375,
+      "bn_before": 69,
+      "bn_after": 27,
+      "natural_topk": {
+        "160x192": {
+          "natural_topk_indices_equal": false,
+          "natural_output_row_max_abs": 0.3749999701976776,
+          "topk_set_intersection": 300
+        },
+        "640x640": {
+          "natural_topk_indices_equal": true,
+          "natural_output_row_max_abs": 1.7881393432617188e-07,
+          "topk_set_intersection": 300
+        }
+      },
+      "losses": [
+        57.094482421875,
+        24.309080123901367,
+        24.542070388793945,
+        24.15387535095215,
+        23.343557357788086,
+        23.730545043945312
+      ],
+      "optimizer_coverage": 336,
+      "first_warmup": [
+        {
+          "batch_index": 0,
+          "nw": 1890,
+          "accumulate": 1,
+          "lrs": {
+            "weight": 0.0,
+            "bn": 0.0,
+            "bias": 0.1
+          }
+        },
+        {
+          "batch_index": 1,
+          "nw": 1890,
+          "accumulate": 1,
+          "lrs": {
+            "weight": 2.6455026455026455e-07,
+            "bn": 2.6455026455026455e-07,
+            "bias": 0.09994735449735451
+          }
+        },
+        {
+          "batch_index": 2,
+          "nw": 1890,
+          "accumulate": 1,
+          "lrs": {
+            "weight": 5.291005291005291e-07,
+            "bn": 5.291005291005291e-07,
+            "bias": 0.099894708994709
+          }
+        }
+      ],
+      "peak_allocated_bytes": 737745408,
+      "warnings": [
+        "grid_sampler_2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\Context.cpp:97.)",
+        "grid_sampler_2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\Context.cpp:97.)",
+        "grid_sampler_2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\Context.cpp:97.)",
+        "grid_sampler_2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\Context.cpp:97.)",
+        "grid_sampler_2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\Context.cpp:97.)",
+        "grid_sampler_2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\Context.cpp:97.)"
+      ]
+    }
+  },
+  "historical_regression_max_abs": 0.0
+}

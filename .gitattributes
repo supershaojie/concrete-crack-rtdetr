@@ -1,1 +1,6 @@
 *.sh text eol=lf
+ultralytics-main/ultralytics/nn/modules/lif_down.py text eol=lf
+ultralytics-main/ultralytics/nn/modules/cscef_v5.py text eol=lf
+ultralytics-main/ultralytics/nn/modules/cscef_v51.py text eol=lf
+ultralytics-main/tests/fixtures/c17_lif_v1/*.py text eol=lf
+ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v51*.yaml text eol=lf

@@ -1,0 +1,407 @@
+{
+  "lif": {
+    "path": "D:\\rtdetr跑结果\\LIF-Down涨\\lif_down_complete_20260910_221150_853145.tar.gz",
+    "sha256": "57afaa4ab29b6a9541b29553477161ff5432921bac3bb9d4073fb9e0cfafa78a",
+    "files": {
+      "metadata/source/ultralytics-main/ultralytics/nn/modules/lif_down.py": {
+        "member": "metadata/source/ultralytics-main/ultralytics/nn/modules/lif_down.py",
+        "sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+        "bytes": 3031,
+        "git_commit": "0e95bbade3558b0d2b77c5531483c60810391d88",
+        "git_path": "ultralytics-main/ultralytics/nn/modules/lif_down.py",
+        "git_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+        "git_byte_equal": true,
+        "git_lf_equal": true
+      },
+      "metadata/source/ultralytics-main/ultralytics/nn/tasks.py": {
+        "member": "metadata/source/ultralytics-main/ultralytics/nn/tasks.py",
+        "sha256": "9a108682836c5e03cef5a629a47e6a72d6a3ec6f09a85073251305299f754642",
+        "lf_sha256": "9a108682836c5e03cef5a629a47e6a72d6a3ec6f09a85073251305299f754642",
+        "bytes": 73523,
+        "git_commit": "0e95bbade3558b0d2b77c5531483c60810391d88",
+        "git_path": "ultralytics-main/ultralytics/nn/tasks.py",
+        "git_sha256": "9a108682836c5e03cef5a629a47e6a72d6a3ec6f09a85073251305299f754642",
+        "git_byte_equal": true,
+        "git_lf_equal": true
+      },
+      "metadata/source/ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-lif-down.yaml": {
+        "member": "metadata/source/ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-lif-down.yaml",
+        "sha256": "2347bc18c2883b4f69e3e7706631f74fd7b8dfed72f553c2aafdc56bddb13f82",
+        "lf_sha256": "2347bc18c2883b4f69e3e7706631f74fd7b8dfed72f553c2aafdc56bddb13f82",
+        "bytes": 2093,
+        "git_commit": "0e95bbade3558b0d2b77c5531483c60810391d88",
+        "git_path": "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-lif-down.yaml",
+        "git_sha256": "2347bc18c2883b4f69e3e7706631f74fd7b8dfed72f553c2aafdc56bddb13f82",
+        "git_byte_equal": true,
+        "git_lf_equal": true
+      },
+      "metadata/source/tools/init_lif_down.py": {
+        "member": "metadata/source/tools/init_lif_down.py",
+        "sha256": "ad8528792f4ed735069122a23df250576a4e03021f3160443c4a765395b4c955",
+        "lf_sha256": "ad8528792f4ed735069122a23df250576a4e03021f3160443c4a765395b4c955",
+        "bytes": 8949,
+        "git_commit": "0e95bbade3558b0d2b77c5531483c60810391d88",
+        "git_path": "tools/init_lif_down.py",
+        "git_sha256": "ad8528792f4ed735069122a23df250576a4e03021f3160443c4a765395b4c955",
+        "git_byte_equal": true,
+        "git_lf_equal": true
+      },
+      "metadata/source/tools/lif_down_topology.py": {
+        "member": "metadata/source/tools/lif_down_topology.py",
+        "sha256": "1e526bcb86357bd5cdf1a6b16ba7162aae15dec1dfb158078f69a3750aeb321e",
+        "lf_sha256": "1e526bcb86357bd5cdf1a6b16ba7162aae15dec1dfb158078f69a3750aeb321e",
+        "bytes": 1776,
+        "git_commit": "0e95bbade3558b0d2b77c5531483c60810391d88",
+        "git_path": "tools/lif_down_topology.py",
+        "git_sha256": "1e526bcb86357bd5cdf1a6b16ba7162aae15dec1dfb158078f69a3750aeb321e",
+        "git_byte_equal": true,
+        "git_lf_equal": true
+      },
+      "metadata/source/tools/check_lif_down.py": {
+        "member": "metadata/source/tools/check_lif_down.py",
+        "sha256": "04eddebf5ea48cec4802f707c921622e85193b7d8a31c8b19b42a0a972a1ada7",
+        "lf_sha256": "04eddebf5ea48cec4802f707c921622e85193b7d8a31c8b19b42a0a972a1ada7",
+        "bytes": 11716,
+        "git_commit": "0e95bbade3558b0d2b77c5531483c60810391d88",
+        "git_path": "tools/check_lif_down.py",
+        "git_sha256": "04eddebf5ea48cec4802f707c921622e85193b7d8a31c8b19b42a0a972a1ada7",
+        "git_byte_equal": true,
+        "git_lf_equal": true
+      },
+      "metadata/source/tools/train_lif_down.py": {
+        "member": "metadata/source/tools/train_lif_down.py",
+        "sha256": "7703a01f094b001e3d0649d2ffb6b9aa01346cebf779c650310a6f440bd3493e",
+        "lf_sha256": "7703a01f094b001e3d0649d2ffb6b9aa01346cebf779c650310a6f440bd3493e",
+        "bytes": 21593,
+        "git_commit": "0e95bbade3558b0d2b77c5531483c60810391d88",
+        "git_path": "tools/train_lif_down.py",
+        "git_sha256": "7703a01f094b001e3d0649d2ffb6b9aa01346cebf779c650310a6f440bd3493e",
+        "git_byte_equal": true,
+        "git_lf_equal": true
+      },
+      "metadata/source/tools/autodl_lif_down.sh": {
+        "member": "metadata/source/tools/autodl_lif_down.sh",
+        "sha256": "5b955ddd5c86407c4a1831fb8d8ed33c6bfff06bf8309d677c56bd621d9fe8d9",
+        "lf_sha256": "5b955ddd5c86407c4a1831fb8d8ed33c6bfff06bf8309d677c56bd621d9fe8d9",
+        "bytes": 1952
+      },
+      "metadata/launch/authoritative_c2_args.yaml": {
+        "member": "metadata/launch/authoritative_c2_args.yaml",
+        "sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+        "lf_sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+        "bytes": 1823
+      },
+      "metadata/launch/actual_train_args.yaml": {
+        "member": "metadata/launch/actual_train_args.yaml",
+        "sha256": "8bb9e1c075a186c1880980952f563975ce12132615f7792f6eedc9869984a109",
+        "lf_sha256": "8bb9e1c075a186c1880980952f563975ce12132615f7792f6eedc9869984a109",
+        "bytes": 1830
+      },
+      "metadata/launch/initialization.json": {
+        "member": "metadata/launch/initialization.json",
+        "sha256": "bfbce0b5a891948420f328310ee92f761028989ae6777a149dafd6d482e52a1d",
+        "lf_sha256": "bfbce0b5a891948420f328310ee92f761028989ae6777a149dafd6d482e52a1d",
+        "bytes": 122170
+      },
+      "training/args.yaml": {
+        "member": "training/args.yaml",
+        "sha256": "8bb9e1c075a186c1880980952f563975ce12132615f7792f6eedc9869984a109",
+        "lf_sha256": "8bb9e1c075a186c1880980952f563975ce12132615f7792f6eedc9869984a109",
+        "bytes": 1830
+      },
+      "val/metrics.json": {
+        "member": "val/metrics.json",
+        "sha256": "d866a93967f709ba4afc10bcccbc8798d00857973d734b4bd12099f6e42ee910",
+        "lf_sha256": "d866a93967f709ba4afc10bcccbc8798d00857973d734b4bd12099f6e42ee910",
+        "bytes": 5671
+      },
+      "test/metrics.json": {
+        "member": "test/metrics.json",
+        "sha256": "77ac9bcc8db47539399c0a0e28a9bcd20128f1cdf195cc3a68d8ee61bb37fbb0",
+        "lf_sha256": "77ac9bcc8db47539399c0a0e28a9bcd20128f1cdf195cc3a68d8ee61bb37fbb0",
+        "bytes": 5672
+      }
+    },
+    "missing": [],
+    "initialization_summary": {
+      "source": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+      "source_nc": 80,
+      "target_nc": 80,
+      "seed": 42,
+      "runtime": {
+        "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+        "executable": "/root/miniconda3/envs/rtdetr/bin/python",
+        "torch": "2.1.2+cu121",
+        "cuda": "12.1",
+        "gpu": "NVIDIA GeForce RTX 4090",
+        "ultralytics": "/root/autodl-tmp/projects/Crack_RTDETR-lif-down/ultralytics-main/ultralytics/__init__.py",
+        "lif_down_module": "/root/autodl-tmp/projects/Crack_RTDETR-lif-down/ultralytics-main/ultralytics/nn/modules/lif_down.py",
+        "commit": "0e95bbade3558b0d2b77c5531483c60810391d88"
+      },
+      "output_sha256": "d52d90566c6cba359f34d0e61207b551e6a426d97a2e2d5048c5e2090ca01121",
+      "status": "passed"
+    }
+  },
+  "c17": {
+    "path": "D:\\rtdetr跑结果\\c17 r18 lite cs v5.1涨1\\c17_cscef_v51_complete_20260906_153449_116232399.tar.gz",
+    "sha256": "c94cc1f590451728ce4e6cedd3fa973606ad263a09308f7f10f43d592b05a571",
+    "files": {
+      "source/source_commit.txt": {
+        "member": "c17_cscef_v51_complete_20260906_153449_116232399/source/source_commit.txt",
+        "sha256": "75406792cf1dc8943e1cd7214a56dcd5e040bea7eabc20639d8f4f09e0758da0",
+        "lf_sha256": "75406792cf1dc8943e1cd7214a56dcd5e040bea7eabc20639d8f4f09e0758da0",
+        "bytes": 41
+      },
+      "source/working_tree.patch": {
+        "member": "c17_cscef_v51_complete_20260906_153449_116232399/source/working_tree.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "lf_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "source/files/ultralytics-main/ultralytics/nn/modules/cscef_v5.py": {
+        "member": "c17_cscef_v51_complete_20260906_153449_116232399/source/files/ultralytics-main/ultralytics/nn/modules/cscef_v5.py",
+        "sha256": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+        "lf_sha256": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+        "bytes": 8576,
+        "git_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+        "git_path": "ultralytics-main/ultralytics/nn/modules/cscef_v5.py",
+        "git_sha256": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+        "git_byte_equal": true,
+        "git_lf_equal": true
+      },
+      "source/files/ultralytics-main/ultralytics/nn/modules/cscef_v51.py": {
+        "member": "c17_cscef_v51_complete_20260906_153449_116232399/source/files/ultralytics-main/ultralytics/nn/modules/cscef_v51.py",
+        "sha256": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+        "lf_sha256": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+        "bytes": 916,
+        "git_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+        "git_path": "ultralytics-main/ultralytics/nn/modules/cscef_v51.py",
+        "git_sha256": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+        "git_byte_equal": true,
+        "git_lf_equal": true
+      },
+      "source/files/ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v51.yaml": {
+        "member": "c17_cscef_v51_complete_20260906_153449_116232399/source/files/ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v51.yaml",
+        "sha256": "d366dd5bf9b4e8fef7b879e0a09dfe0d88bb42ef0ac251d880ec6d6a98871d5e",
+        "lf_sha256": "d366dd5bf9b4e8fef7b879e0a09dfe0d88bb42ef0ac251d880ec6d6a98871d5e",
+        "bytes": 2300,
+        "git_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+        "git_path": "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v51.yaml",
+        "git_sha256": "d366dd5bf9b4e8fef7b879e0a09dfe0d88bb42ef0ac251d880ec6d6a98871d5e",
+        "git_byte_equal": true,
+        "git_lf_equal": true
+      },
+      "source/files/tools/audit_rtdetr_r18_lite_cscef_v51.py": {
+        "member": "c17_cscef_v51_complete_20260906_153449_116232399/source/files/tools/audit_rtdetr_r18_lite_cscef_v51.py",
+        "sha256": "08f3159877d611e4c519b4f6f87679cbb1b95444c61b8679048a6435baef45b9",
+        "lf_sha256": "08f3159877d611e4c519b4f6f87679cbb1b95444c61b8679048a6435baef45b9",
+        "bytes": 21040,
+        "git_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+        "git_path": "tools/audit_rtdetr_r18_lite_cscef_v51.py",
+        "git_sha256": "08f3159877d611e4c519b4f6f87679cbb1b95444c61b8679048a6435baef45b9",
+        "git_byte_equal": true,
+        "git_lf_equal": true
+      },
+      "source/files/tools/train_rtdetr_r18_lite_cscef_v51.py": {
+        "member": "c17_cscef_v51_complete_20260906_153449_116232399/source/files/tools/train_rtdetr_r18_lite_cscef_v51.py",
+        "sha256": "819eaa6eb5a73e4eefb8935d9786123cd077f12aa0fd2ae4ce0a69accaba8901",
+        "lf_sha256": "819eaa6eb5a73e4eefb8935d9786123cd077f12aa0fd2ae4ce0a69accaba8901",
+        "bytes": 15867,
+        "git_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+        "git_path": "tools/train_rtdetr_r18_lite_cscef_v51.py",
+        "git_sha256": "819eaa6eb5a73e4eefb8935d9786123cd077f12aa0fd2ae4ce0a69accaba8901",
+        "git_byte_equal": true,
+        "git_lf_equal": true
+      },
+      "metadata/cscef_v51/initialization.json": {
+        "member": "c17_cscef_v51_complete_20260906_153449_116232399/metadata/cscef_v51/initialization.json",
+        "sha256": "7d4b8031f8a3ca6b73b43548e3765ea8eaef348af07c4f8cc230a69b462db575",
+        "lf_sha256": "7d4b8031f8a3ca6b73b43548e3765ea8eaef348af07c4f8cc230a69b462db575",
+        "bytes": 144019
+      },
+      "metadata/cscef_v51/launch_c17/train_args.yaml": {
+        "member": "c17_cscef_v51_complete_20260906_153449_116232399/metadata/cscef_v51/launch_c17/train_args.yaml",
+        "sha256": "94ea44d2a9df9a609ed405c5a9d04b2c3191c6bcb3a03b8f170b855631e54f8a",
+        "lf_sha256": "94ea44d2a9df9a609ed405c5a9d04b2c3191c6bcb3a03b8f170b855631e54f8a",
+        "bytes": 1865
+      },
+      "baseline_c2/training/args.yaml": {
+        "member": "c17_cscef_v51_complete_20260906_153449_116232399/baseline_c2/training/args.yaml",
+        "sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+        "lf_sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+        "bytes": 1823
+      },
+      "training/args.yaml": {
+        "member": "c17_cscef_v51_complete_20260906_153449_116232399/training/args.yaml",
+        "sha256": "94ea44d2a9df9a609ed405c5a9d04b2c3191c6bcb3a03b8f170b855631e54f8a",
+        "lf_sha256": "94ea44d2a9df9a609ed405c5a9d04b2c3191c6bcb3a03b8f170b855631e54f8a",
+        "bytes": 1865
+      },
+      "test/metrics_summary.json": {
+        "member": "c17_cscef_v51_complete_20260906_153449_116232399/test/metrics_summary.json",
+        "sha256": "ce9d7e043e4548753515d96fe8cfae818077e1708411ead8c444915b12a1c0da",
+        "lf_sha256": "ce9d7e043e4548753515d96fe8cfae818077e1708411ead8c444915b12a1c0da",
+        "bytes": 1019
+      }
+    },
+    "missing": [],
+    "initialization_summary": {
+      "runtime": {
+        "ultralytics_file": "/root/autodl-tmp/projects/Crack_RTDETR_cscef_v51/ultralytics-main/ultralytics/__init__.py",
+        "ultralytics_version": "8.4.21",
+        "torch_version": "2.1.2+cu121",
+        "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+        "cuda_available": true,
+        "git_commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+        "git_status": [],
+        "code_sha256": {
+          "ultralytics-main/ultralytics/nn/modules/cscef_v51.py": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+          "ultralytics-main/ultralytics/nn/modules/cscef_v5.py": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+          "ultralytics-main/ultralytics/nn/modules/__init__.py": "23d203d50557b1f2e6ec1d0b8308c9fb23128ea8ffb4bb1240b8f4b080b641cd",
+          "ultralytics-main/ultralytics/nn/tasks.py": "f265a7f6aac839c99f6025124d64d1bcbc390587affeac940390e9193635c5dd",
+          "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v51.yaml": "d366dd5bf9b4e8fef7b879e0a09dfe0d88bb42ef0ac251d880ec6d6a98871d5e",
+          "tools/init_rtdetr_r18_lite_cscef_v51_controlled.py": "09f61e498b4e1fc14b94f106aaf1c55d16ab88cdb935d8818820948ae3e11cb7",
+          "tools/audit_rtdetr_r18_lite_cscef_v51.py": "08f3159877d611e4c519b4f6f87679cbb1b95444c61b8679048a6435baef45b9",
+          "tools/train_rtdetr_r18_lite_cscef_v51.py": "819eaa6eb5a73e4eefb8935d9786123cd077f12aa0fd2ae4ce0a69accaba8901",
+          "tools/init_rtdetr_r18_lite_cscef_v3_from_baseline.py": "5a7a2c92bf67e1a245fd41fd8d3b9d622092a55a882cd163f1f532d356d93fdd",
+          "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite.yaml": "3493d693cbef958a38a2a135822a6c5379b65804905bc71566e395069e8f4f16",
+          "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v5.yaml": "158c81388429dafccff995586837996c2503ee0d7c2c0237dc5e8822ea8f0fca",
+          "ultralytics-main/ultralytics/models/rtdetr/train.py": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+          "ultralytics-main/ultralytics/engine/trainer.py": "18125ba895b64961cf0f7db29214aca27392176e65d72a9166fa818f00a1033a",
+          "ultralytics-main/ultralytics/engine/model.py": "45af5b44eb627e9f15e621509c8f4aad5213c28591deba8d279681af0bd83ae1",
+          "ultralytics-main/ultralytics/cfg/__init__.py": "6e94aa21564b526c2223ede7e3dd79a014c1829193b069ae6939125f28005ede",
+          "ultralytics-main/ultralytics/cfg/default.yaml": "3ef9fcf96280ba18b761a6165f7d77e14630b6759d5b32b28cd9d31025734dca"
+        }
+      },
+      "source": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+      "seed": 42,
+      "output_sha256": "3b5b1e811e9a1930bdf3e3ab2d0d3bea605b842ec4bf26191c3ddd15f9abb516",
+      "clean_training_state": true,
+      "status": "passed"
+    }
+  },
+  "commits": {
+    "c2": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+    "lif": "0e95bbade3558b0d2b77c5531483c60810391d88",
+    "c17": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139"
+  },
+  "worktree": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c17-lif-v1",
+  "branch": "codex/rtdetr-c17-lif-v1",
+  "modules": {
+    "lif_down.py": {
+      "path": "ultralytics-main/ultralytics/nn/modules/lif_down.py",
+      "commit": "0e95bbade3558b0d2b77c5531483c60810391d88",
+      "sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "historical_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "byte_equal": true,
+      "ast_equal": true
+    },
+    "cscef_v5.py": {
+      "path": "ultralytics-main/ultralytics/nn/modules/cscef_v5.py",
+      "commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+      "sha256": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+      "historical_sha256": "a8ed29a6c6205ee51ec9fc0ea2e0bfed37a9c39a69dbf3dc761ee6debe037474",
+      "byte_equal": true,
+      "ast_equal": true
+    },
+    "cscef_v51.py": {
+      "path": "ultralytics-main/ultralytics/nn/modules/cscef_v51.py",
+      "commit": "0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139",
+      "sha256": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+      "historical_sha256": "b1879215de5eceba6d88a856fc0ef9f4d7287a755e97c543ab9a4bb50677102c",
+      "byte_equal": true,
+      "ast_equal": true
+    }
+  },
+  "reference_only": {
+    "extra_modules/block.py": {
+      "path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\block.py",
+      "sha256": "e3e3617c89bd7caf350d2601740f2e399847a16a3a659d7b3e40010b88498cd2",
+      "bytes": 579266
+    },
+    "extra_modules/wtconv2d.py": {
+      "path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\wtconv2d.py",
+      "sha256": "2f030c240ba7bbcdc21c8c0d250ef3b3ffe9b78f516938648f39ac155ef7641f",
+      "bytes": 6662
+    },
+    "modules/transformer.py": {
+      "path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\modules\\transformer.py",
+      "sha256": "2a8906995d3b9e8dedfc97a63a405a7b25c820c26c0860a7adeee950541d91e0",
+      "bytes": 17894
+    }
+  },
+  "recipes": {
+    "lif": {
+      "fields": 109,
+      "differences": [
+        {
+          "field": "model",
+          "c2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+          "parent": "/root/autodl-tmp/projects/Crack_RTDETR-lif-down/weights/lif_down_controlled_init.pt",
+          "c2_type": "str",
+          "parent_type": "str"
+        },
+        {
+          "field": "name",
+          "c2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "parent": "lif_down_rtdetr_r18_lite_e200_b16_onlineaug",
+          "c2_type": "str",
+          "parent_type": "str"
+        },
+        {
+          "field": "save_dir",
+          "c2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "parent": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/lif_down_rtdetr_r18_lite_e200_b16_onlineaug",
+          "c2_type": "str",
+          "parent_type": "str"
+        }
+      ]
+    },
+    "c17": {
+      "fields": 109,
+      "differences": [
+        {
+          "field": "model",
+          "c2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+          "parent": "/root/autodl-tmp/projects/Crack_RTDETR_cscef_v51/weights/rtdetr_r18_lite_cscef_v51_imagenet_backbone_init.pt",
+          "c2_type": "str",
+          "parent_type": "str"
+        },
+        {
+          "field": "name",
+          "c2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "parent": "c17_rtdetr_r18_lite_cscef_v51_e200_b16_onlineaug",
+          "c2_type": "str",
+          "parent_type": "str"
+        },
+        {
+          "field": "save_dir",
+          "c2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "parent": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c17_rtdetr_r18_lite_cscef_v51_e200_b16_onlineaug",
+          "c2_type": "str",
+          "parent_type": "str"
+        }
+      ]
+    }
+  },
+  "post_migration_git_snapshot": {
+    "status": " M ultralytics-main/ultralytics/nn/modules/__init__.py\n M ultralytics-main/ultralytics/nn/modules/lif_down.py\n M ultralytics-main/ultralytics/nn/tasks.py\n?? ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v51-lif-down.yaml\n?? ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cscef-v51.yaml\n?? ultralytics-main/ultralytics/nn/modules/cscef_v5.py\n?? ultralytics-main/ultralytics/nn/modules/cscef_v51.py\n",
+    "worktrees": "D:/MyProjects/Crack_RTDETR                                           f34502c [exp-rtdetr-r18-lite-cscef-v4]\nD:/MyProjects/Crack_RTDETR-gsdr-aifi                                 d895437 [exp-rtdetr-r18-lite-gsdr-aifi]\nD:/MyProjects/Crack_RTDETR-lcr                                       d328d73 [codex/lcr-aifi]\nD:/MyProjects/Crack_RTDETR-rsc-head                                  b847aa0 [codex/rsc-head]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/acr                     5f909e6 [codex/acr-query-attention]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/c17-lif-v1              0e95bba [codex/rtdetr-c17-lif-v1]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/c19-lif-v1              0e95bba [codex/rtdetr-c19-lif-v1]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/c25                     ac32e22 [codex/c25-cscef-scca]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/c26                     beedcfa [codex/c26-cbr-scca]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/cbr                     025997e [exp-rtdetr-r18-lite-cbr]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/cscef-cbr               81d5f01 [exp-rtdetr-r18-lite-cscef-cbr]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/cscef-v5                fad58b0 [exp-rtdetr-r18-lite-cscef-v5]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/cscef-v51               0c53a9c [exp-rtdetr-r18-lite-cscef-v51]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/diag-c20-cbr-gradcheck  91b58ff [codex/diag-c20-cbr-gradcheck]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/diag-c20-cbr-rescue     d73391f [codex/diag-c20-cbr-rescue]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/dra                     737fa75 [codex/dra-aifi]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/evc                     a259582 [codex/evc-deform]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/fsa-deform              c7f1259 [codex/fsa-deform]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/gsdr-aifi-v2            30f2da6 [exp-rtdetr-r18-lite-gsdr-aifi-v2]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/gsdr-aifi-v3            51f1f35 [exp-rtdetr-r18-lite-gsdr-aifi-v3]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/lif-down                0e95bba [codex/lif-down]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/mincompat-v2            33535ab [codex/rtdetr-mincompat-v2]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/sala                    9621aeb [codex/c21-rtdetr-r18-lite-sala]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/scca                    f6e9dfd [codex/scca-aifi]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/sci-adapter             81e0426 [codex/rtdetr-sci-adapter]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/triad-compat            05e6de8 [codex/rtdetr-triad-compat]\n",
+    "remote": "origin\thttps://github.com/supershaojie/concrete-crack-rtdetr.git (fetch)\norigin\thttps://github.com/supershaojie/concrete-crack-rtdetr.git (push)\n",
+    "branches": "+ codex/acr-query-attention\n+ codex/c21-rtdetr-r18-lite-sala\n+ codex/c25-cscef-scca\n+ codex/c26-cbr-scca\n+ codex/diag-c20-cbr-gradcheck\n+ codex/diag-c20-cbr-rescue\n+ codex/dra-aifi\n+ codex/evc-deform\n+ codex/fsa-deform\n+ codex/lcr-aifi\n+ codex/lif-down\n+ codex/rsc-head\n* codex/rtdetr-c17-lif-v1\n+ codex/rtdetr-c19-lif-v1\n+ codex/rtdetr-mincompat-v2\n+ codex/rtdetr-sci-adapter\n+ codex/rtdetr-triad-compat\n+ codex/scca-aifi\n  exp-dataset-augfirst-crackdet\n  exp-dataset-augfirst-shuffle\n  exp-dataset-augfirst-strong5-crackdet\n  exp-rtdetr-r18\n  exp-rtdetr-r18-augfirst-crackdet\n  exp-rtdetr-r18-imagenet-pretrain\n+ exp-rtdetr-r18-lite-cbr\n  exp-rtdetr-r18-lite-cscef\n+ exp-rtdetr-r18-lite-cscef-cbr\n  exp-rtdetr-r18-lite-cscef-v2\n  exp-rtdetr-r18-lite-cscef-v3\n+ exp-rtdetr-r18-lite-cscef-v4\n+ exp-rtdetr-r18-lite-cscef-v5\n+ exp-rtdetr-r18-lite-cscef-v51\n+ exp-rtdetr-r18-lite-gsdr-aifi\n+ exp-rtdetr-r18-lite-gsdr-aifi-v2\n+ exp-rtdetr-r18-lite-gsdr-aifi-v3\n  exp-rtdetr-r18-lite-obp-aifi\n  exp-rtdetr-r18-lite-paperalign\n  main\n  remotes/c2-bundle/c2-source\n  remotes/origin/codex/acr-query-attention\n  remotes/origin/codex/c21-rtdetr-r18-lite-sala\n  remotes/origin/codex/c25-cscef-scca\n  remotes/origin/codex/c26-cbr-scca\n  remotes/origin/codex/diag-c20-cbr-gradcheck\n  remotes/origin/codex/diag-c20-cbr-rescue\n  remotes/origin/codex/dra-aifi\n  remotes/origin/codex/evc-deform\n  remotes/origin/codex/fsa-deform\n  remotes/origin/codex/lcr-aifi\n  remotes/origin/codex/lif-down\n  remotes/origin/codex/rsc-head\n  remotes/origin/codex/rtdetr-mincompat-v2\n  remotes/origin/codex/rtdetr-sci-adapter\n  remotes/origin/codex/rtdetr-triad-compat\n  remotes/origin/codex/scca-aifi\n  remotes/origin/exp-dataset-augfirst-crackdet\n  remotes/origin/exp-dataset-augfirst-shuffle\n  remotes/origin/exp-rtdetr-r18\n  remotes/origin/exp-rtdetr-r18-augfirst-crackdet\n  remotes/origin/exp-rtdetr-r18-imagenet-pretrain\n  remotes/origin/exp-rtdetr-r18-lite-cbr\n  remotes/origin/exp-rtdetr-r18-lite-cscef\n  remotes/origin/exp-rtdetr-r18-lite-cscef-cbr\n  remotes/origin/exp-rtdetr-r18-lite-cscef-v2\n  remotes/origin/exp-rtdetr-r18-lite-cscef-v3\n  remotes/origin/exp-rtdetr-r18-lite-cscef-v4\n  remotes/origin/exp-rtdetr-r18-lite-cscef-v5\n  remotes/origin/exp-rtdetr-r18-lite-cscef-v51\n  remotes/origin/exp-rtdetr-r18-lite-gsdr-aifi\n  remotes/origin/exp-rtdetr-r18-lite-gsdr-aifi-v2\n  remotes/origin/exp-rtdetr-r18-lite-gsdr-aifi-v3\n  remotes/origin/exp-rtdetr-r18-lite-obp-aifi\n  remotes/origin/exp-rtdetr-r18-lite-paperalign\n  remotes/origin/main\n",
+    "history": "81e0426 feat(rtdetr): add isolated semantic compatibility adapter\n33535ab feat(rtdetr): minimally attenuate CSCEF-SCCA conflict edge\n05e6de8 feat(rtdetr): decouple CSCEF SCCA CBR for compatible triad\n0e95bba test(lif-down): record pinned worktree delivery checks\nc7f1259 feat(rtdetr): add isolated C2 FSA-Deform v1 with audited lifecycle\n8bc56f9 feat(rtdetr): implement isolated C2 LIF-Down v1 experiment\nb847aa0 test(rtdetr): record RSC lifecycle and pinned sync evidence\nddbc5c6 feat(rtdetr): add isolated C2 refinement-state conditioned head\nd328d73 test(lcr): record fixed-SHA worktree guards and final source fingerprints\ndcf40fd feat(rtdetr): add isolated C2 LCR-AIFI experiment and reproducible lifecycle\na259582 feat(rtdetr): add C2 EVC-Deform single-module experiment\n737fa75 feat(rtdetr): add isolated DRA-AIFI experiment and reproducible lifecycle\nbeedcfa feat(rtdetr): combine original C19 CBR and C24 SCCA for independent C26\nac32e22 feat(c25): complete joint experiment audit and evidence export\nf6e9dfd feat(rtdetr): add C24/C25 SCCA-AIFI with controlled init and direct AutoDL tools\n5f909e6 Add C22 direct launch with clean initialization and optional statistics\ned366eb feat(rtdetr): add controlled C22/C23 ACR self-attention experiments\n91b58ff Fix gradient diagnostic criterion initialization for stripped checkpoints\n9621aeb Implement C21 SALA decoder attention with controlled initialization and AutoDL workflow\nf84848c Add bounded single-graph CBR conditional gradient diagnostics\nd73391f Document explicit source commit fetches for isolated server diagnosis\ne56f699 Add read-only C20 CBR rescue diagnostics and bounded evidence export\n81d5f01 Implement C20 CSCEF and CBR combination with controlled initialization and AutoDL workflow\n025997e Keep the AutoDL workflow in LF format across checkouts\nd4c3f66 Implement C19 CBR on the C2 baseline with controlled initialization and server workflow\n51f1f35 feat(rtdetr): add C18 query-local GSDR-AIFI v3 with C2-locked launch\n0c53a9c feat(cscef): implement C17 per-image mean structure v5.1\n30f2da6 feat(rtdetr): add controlled GSDR-AIFI v2 and C2-locked C16 launcher\nfad58b0 fix(audit): avoid disabled FP16 autocast on PyTorch 2.1 CPU\n3b90898 feat(rtdetr): add identity-initialized CSCEF v5 with C2 alignment audits\nd895437 feat(rtdetr): add baseline-preserving GSDR-AIFI\nf34502c feat(rtdetr): add structure-consistency CSCEF v4\n975cbda fix(rtdetr): align CSCEF-v3 edge dtype for half validation\n8be3061 fix(rtdetr): canonicalize CSCEF-v3 audit hashes\n311068e test(rtdetr): make CSCEF hash guards cross-platform\nb80faa9 feat(rtdetr): add bias-free discrepancy-gated CSCEF-v3\ndc01e23 fix(rtdetr): use RT-DETR validator in CSCEF-v2 diagnostics\na213fd1 tools(rtdetr): add CSCEF-v2 validation diagnostics\n00f19ce docs(figures): add editable CSCEF-v2 module diagram\n1594cb2 feat(rtdetr): redesign CSCEF with constrained semantic gating\n0e11ede feat(rtdetr): add OBP-AIFI orthogonal branch encoder\nfa829d3 docs(figures): add editable CSCEF module diagram\nef34b5d feat(rtdetr): add CSCEF cross-scale edge fusion\n67c3078 record reproducible RT-DETR environment\ncab1297 add ImageNet initialization script for RT-DETR ResNet18-Lite\neca287a add lightweight RT-DETR ResNet18 baseline\n581d50c rebuild crack_det with strong five augmentations\nec277b2 merge aug-first crack_det pipeline into r18 pretrain branch\nd2d17c4 rebuild crack_det without affine augmentation\n010c8c5 add aug-first shuffle dataset diagnostic pipeline\n443382e add ImageNet backbone initialization for RT-DETR-R18\n7e9b3d4 ignore local server results\n8e54cbc Merge branch 'main' into exp-rtdetr-r18\n21446e8 prepare crack dataset pipeline with 7-2-1 split and deterministic augmentation\nd183ec5 add RT-DETR ResNet18 baseline config\n937b784 initialize project docs configs and tools\nf367e72 init project with ultralytics and dataset config\n"
+  },
+  "specification": {
+    "path": "D:/rtdetr跑结果/C17＋LIF：原 CSCEF-v5.1＋LIF-Down v1/RTDETR_C17_LIF_v1_Codex_Spec.md",
+    "sha256": "838857f08b54ad969d2c6f74f0eb2ee435e9b041d4a1257aee14ffda3a60e712"
+  },
+  "module_reference_archive": {
+    "path": "D:/7.1 rtdetr改/魔鬼面具_RTDETR/RTDETR-20260623.zip",
+    "sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc"
+  },
+  "applicable_AGENTS_files": [],
+  "history_fixtures": "Exact successful module bytes in ultralytics-main/tests/fixtures/c17_lif_v1; subprocess dynamic output/input/parameter gradient regressions. Full historical packages also tested locally from Git."
+}

@@ -1,0 +1,27 @@
+{
+  "experiment": "C17 CSCEF-v5.1",
+  "split": "test",
+  "checkpoint": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c17_rtdetr_r18_lite_cscef_v51_e200_b16_onlineaug/weights/best.pt",
+  "checkpoint_sha256": "3498541fae238cc53c6842c096502f35ae7093435331b1696a668cdad0fe1221",
+  "images": 864,
+  "instances": 6663,
+  "precision": 0.8448953234408928,
+  "recall": 0.825003752063635,
+  "mAP50": 0.8792974548298313,
+  "mAP75": 0.5328297758576255,
+  "mAP50_95": 0.5120450850441516,
+  "results_dict": {
+    "metrics/precision(B)": 0.8448953234408928,
+    "metrics/recall(B)": 0.825003752063635,
+    "metrics/mAP50(B)": 0.8792974548298313,
+    "metrics/mAP50-95(B)": 0.5120450850441516,
+    "fitness": 0.5120450850441516
+  },
+  "speed_ms_per_image": {
+    "preprocess": 0.8769032234946886,
+    "inference": 4.432460741588363,
+    "loss": 0.0006119996585227825,
+    "postprocess": 0.5848113904465679
+  },
+  "save_dir": "/root/autodl-tmp/projects/Crack_RTDETR/runs/test/c17_cscef_v51_best_test_20260906_153449_116232399"
+}
