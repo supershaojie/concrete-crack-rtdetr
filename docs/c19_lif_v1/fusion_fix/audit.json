@@ -1,0 +1,75 @@
+{
+  "old_commit": "c27064ce6b06d0c32d38e644fcff64394a1a5992",
+  "failure_archive": {
+    "name": "c19_lif_preflight_20260913_003955_348529.tar.gz",
+    "sha256": "765b4458637e9f5555423f20adbeba120df6ceb7e9b15f6f5e129c98e2fa9791",
+    "bytes": 6637805,
+    "no_pt_members": true,
+    "no_owner_or_lock_members": true
+  },
+  "original_failure": {
+    "device": "cpu",
+    "precision": "fp32",
+    "batch": 1,
+    "image": [
+      160,
+      192
+    ],
+    "max_abs_error": 0.20000004768371582,
+    "max_rel_error": 0.38095247745513916,
+    "atol": 2e-05,
+    "rtol": 0.0002,
+    "key": "NOT_RECORDED; awaiting server capture",
+    "root_cause": "NOT_PROVEN",
+    "formal_training": "NOT_RUN",
+    "capacity": "NOT_RUN"
+  },
+  "protected_git_paths_unchanged": [
+    "ultralytics-main",
+    "tools/init_c19_lif_v1.py",
+    "tools/check_lif_down.py",
+    "tools/init_lif_down.py",
+    "tools/c19_lif_v1_results.py",
+    "tools/sync_c19_lif_v1.sh",
+    "configs"
+  ],
+  "LF_SHA256": {
+    "lif_down.py": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+    "cbr.py": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+    "head.py": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+    "transformer.py": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602"
+  },
+  "parameters_nc1": 20149765,
+  "recipe": "unchanged 109-field C2 recipe: e200/b16/640/AdamW/seed42/AMP",
+  "initialization": "unchanged public nc80 source, 533 common + 19 new parameters + 0 new buffers, native nc1 543 exact + 9 original adaptation",
+  "AutoDL": "NOT_RUN: no access to original environment/initialization/input",
+  "formal_training": "NOT_RUN",
+  "full_val_test": "NOT_RUN",
+  "capacity": "NOT_RUN",
+  "test_identity_note": "Tests ran before committing the patch; runtime.commit is prior HEAD. The following LF-normalized tool hashes pin the final tested implementation. local_full_checks predates the final evidence-writer refinements; release_fusion and release_faults cover final diagnostics.",
+  "tested_tool_LF_SHA256": {
+    "tools/c19_lif_v1_data.py": "aba8477f4fd445a4932828a09255af573b400aa7af2e7d4ce6c0434e6bf0afa2",
+    "tools/c19_lif_v1_diagnostic.py": "5d7801901362ad47893b8f1f2195e0666730aa20f8cee763f39cc335b6cd0f06",
+    "tools/c19_lif_v1_probe.py": "1f146aca02d953917cc1d4fed0c650fff0422ede0521d903387444c199b5eb07",
+    "tools/c19_lif_v1_results.py": "135e78cfe7bc9a155b0f804763df21a079ec919a50f906d11ce1419053b7c8c3",
+    "tools/check_c19_lif_v1.py": "8579d71183c931030d31cf52ca18d2489d18a94d03f00bafce6b9dcc655e7fa4",
+    "tools/check_c19_lif_v1_fusion_fix.py": "544d7723f83fe5a7175f442abf9be742be116e90a9bfd736c42fbb2edf01f4a2",
+    "tools/check_c19_lif_v1_ops.py": "bf082e1de360963b4e2b5b5344d1df9a3d758325ccd7a498f6f08eb5a81667bb",
+    "tools/check_c19_lif_v1_recovery.py": "93f66f8b8b2770b199de58eba56f32b473fa2acb26584c59560d8d4f4ed48a40",
+    "tools/check_c19_lif_v1_sync.py": "ba13cd4467472267cc4a8e90afc7414db86c134567450620a168808295918c28",
+    "tools/diagnose_c19_lif_v1_fusion.py": "38aa20911e50df5782f45597724676b13014691d84ed45acee195079fd4ef734",
+    "tools/init_c19_lif_v1.py": "846f6656c603506304428bb9401ba1309ef8febab5833e88bb18083d9b048af1",
+    "tools/preflight_c19_lif_v1.py": "680de3871646908c01ac4f32e8eb036bce64b6c1b3557fa45a6b90b70ec0e949",
+    "tools/recover_c19_lif_v1_preflight.py": "6679c9f848209dea79a6b9b72d34909de233d12d385d967d7454897969e0f305",
+    "tools/train_c19_lif_v1.py": "f942f25a1fb9ee07e7d02ebebe30ecb7eb7c78b4df7708c3ffd40b807603e6d7"
+  },
+  "commands_run": [
+    "check_c19_lif_v1.py (local finite checks, no --capacity-batch)",
+    "diagnose_c19_lif_v1_fusion.py (CPU/CUDA, unchanged legacy RNG prefix)",
+    "diagnose_c19_lif_v1_fusion.py --fixture (saved CPU fixture replay)",
+    "check_c19_lif_v1_fusion_fix.py (29 tests)",
+    "check_c19_lif_v1_recovery.py (26 tests, mocked server + real fixture archival IO)",
+    "check_c19_lif_v1_ops.py (mocked dispatch/OOM/preflight-failure, real package IO)",
+    "Python AST parse; bash -n; git diff --check"
+  ]
+}

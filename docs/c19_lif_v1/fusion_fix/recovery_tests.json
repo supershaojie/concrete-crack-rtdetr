@@ -1,0 +1,32 @@
+{
+  "status": "PASSED",
+  "scope": "fixture filesystem + mocked git/proc/tmux; no server recovery",
+  "tests": {
+    "default_read_only": "PASSED: exact file bytes and paths unchanged",
+    "wrong_owner_worktree": true,
+    "wrong_owner_variant": true,
+    "wrong_owner_runtime": true,
+    "state_dispatched": true,
+    "state_initializing": true,
+    "state_training": true,
+    "unknown_training": true,
+    "dispatch_worker.sh": true,
+    "dispatch_plan.json": true,
+    "dispatch_process.json": true,
+    "dispatch_console.log": true,
+    "dispatch_training_state.json": true,
+    "existing_formal_run": true,
+    "concurrent_recovery": true,
+    "preserving_archive": "PASSED: exact owner bytes verified, old launch/check unchanged, unique archive + manifest",
+    "second_apply_rejected": true,
+    "repeated_failure_preserved": "PASSED: two non-overlapping retained archives",
+    "other_experiment_untouched": "PASSED: C17 worker/session ignored",
+    "live_or_reused_owner_pid": true,
+    "uncertain_owner_pid": true,
+    "missing_owner_pid": true,
+    "active_worker": true,
+    "active_preflight": true,
+    "exact_tmux_session": true,
+    "uncertain_tmux": true
+  }
+}

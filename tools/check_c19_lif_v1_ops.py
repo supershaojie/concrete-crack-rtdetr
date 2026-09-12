@@ -41,7 +41,7 @@ def run(output):
         def dispatch(command, **kwargs):
             calls.append(command)
             if any(str(c).endswith('check_c19_lif_v1.py') for c in command):
-                write_json(root/'outputs/c19_lif_v1_preflight/checks.json', dict(status='PASSED',capacity=dict(status='PASSED',batch=16,imgsz=640)))
+                write_json(root/'outputs/c19_lif_v1_preflight/checks.json', dict(status='PASSED',capacity=dict(status='PASSED',batch=16,imgsz=640,AMP=True), cpu=dict(fuse={'FP32':dict(status='PASSED',acceptance='PASSED')}), cuda=dict(fuse={k:dict(status='PASSED',acceptance='PASSED') for k in ('FP32','half_fuse','amp_fuse')})))
             return subprocess.CompletedProcess(command, 1 if "has-session" in command and not any("new-session" in c for c in calls) else 0)
         def initialization(src, dest, variant):
             dest.write_bytes(b"MOCK INITIALIZATION; NEVER TRAIN")
@@ -84,6 +84,32 @@ def run(output):
             require(train.run_state(p) == "FAILED", "OOM not failed")
             require(plan["args"]["batch"] == 16, "OOM changed batch")
             report["worker_oom_exit"] = "passed: mocked OOM propagates, exit_code=1, batch stays 16"
+            # A failed subprocess must preserve its partial report, lock and init;
+            # no worker may be dispatched. This is separate from the success fixture.
+            failed_root,failed_main=temporary/'failed_worktree',temporary/'failed_main'
+            (failed_root/'docs/c19_lif_v1').mkdir(parents=True)
+            (failed_root/'docs/c19_lif_v1/c2_args.yaml').write_bytes((ROOT/'docs/c19_lif_v1/c2_args.yaml').read_bytes())
+            (failed_main/'configs').mkdir(parents=True)
+            (failed_main/'configs/crack_autodl.yaml').write_bytes(data.read_bytes())
+            failed_paths=dict(p,run=failed_main/'runs/c_series'/train.VARIANTS['c19_lif_v1'][2],
+                              launch=failed_root/'outputs/c19_lif_v1',init=failed_root/'init.pt')
+            failure_calls=[]
+            def failed_dispatch(command,**kwargs):
+                failure_calls.append(command)
+                if any(str(c).endswith('check_c19_lif_v1.py') for c in command):
+                    write_json(failed_root/'outputs/c19_lif_v1_preflight/checks.json',dict(status='FAILED',capacity=dict(status='NOT_RUN'),
+                        cpu=dict(fuse=dict(FP32=dict(status='FAILED_REAL_NUMERICAL_MISMATCH',failure=dict(key='lif_residual'))))))
+                    raise subprocess.CalledProcessError(1,command)
+                return subprocess.CompletedProcess(command,1 if 'has-session' in command else 0)
+            with patch.object(train,'ROOT',failed_root),patch.object(train,'MAIN',failed_main),patch.object(train,'paths',return_value=failed_paths),patch.object(train.subprocess,'run',side_effect=failed_dispatch):
+                try:train.start_direct('c19_lif_v1')
+                except subprocess.CalledProcessError:pass
+                else:raise AssertionError('Failed preflight swallowed')
+                state=json.loads((failed_paths['launch']/'launch_state.json').read_text(encoding='utf-8'))
+                require(state['status']=='failed' and state['partial_preflight_sha256']==sha256(failed_paths['launch']/'preflight.json'),'Partial preflight lost')
+                require(failed_paths['init'].is_file() and failed_paths['run'].with_name(failed_paths['run'].name+'.c19_lif_v1.lock').is_dir(),'Failed evidence/lock lost')
+                require(not any('new-session' in c for c in failure_calls),'Failed preflight dispatched a worker')
+                report['failed_preflight_preserved']='passed: partial report SHA, FAILED state, init and reservation retained; no dispatch'
         # Explicit state fixtures, not actual training evidence.
         q = dict(launch=temporary / "state", run=temporary / "state_run")
         q["launch"].mkdir()

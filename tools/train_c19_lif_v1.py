@@ -22,6 +22,8 @@ from ultralytics.utils import YAML, ASSETS
 from ultralytics.data.utils import check_det_dataset
 from ultralytics.nn.tasks import RTDETRDetectionModel
 
+from c19_lif_v1_diagnostic import atomic_json as write_json, PASS
+
 MAIN = Path(os.environ.get("C19_LIF_V1_MAIN", "/root/autodl-tmp/projects/Crack_RTDETR"))
 
 
@@ -144,6 +146,18 @@ def duplicate_processes():
     return found
 
 
+def require_preflight(check):
+    require(check.get('status')=='PASSED', 'Bounded preflight failed or requires review')
+    capacity=check.get('capacity',{})
+    require(capacity.get('status')=='PASSED' and capacity.get('batch')==16 and capacity.get('imgsz')==640 and capacity.get('AMP') is True,
+            'B16/640 native AMP capacity gate missing/failed')
+    for device,labels in [('cpu',['FP32']),('cuda',['FP32','half_fuse','amp_fuse'])]:
+        for label in labels:
+            diagnostic=check.get(device,{}).get('fuse',{}).get(label,{})
+            require(diagnostic.get('status') in PASS and diagnostic.get('acceptance')=='PASSED',
+                    device+'.'+label+' candidate-aware fusion gate missing/failed/requires review')
+
+
 def start_direct(variant):
     p = paths(variant)
     delivery = verify_delivery()
@@ -166,7 +180,7 @@ def start_direct(variant):
     lock = p["run"].with_name(p["run"].name + ".c19_lif_v1.lock")
     lock.parent.mkdir(parents=True, exist_ok=True)
     lock.mkdir(exist_ok=False)
-    write_json(lock / "owner.json", dict(pid=os.getpid(), worktree=str(ROOT), variant=variant, runtime=info))
+    write_json(lock / "owner.json", dict(pid=os.getpid(), process_token=process_token(os.getpid()), worktree=str(ROOT), variant=variant, runtime=info))
     p["launch"].mkdir(parents=True, exist_ok=False)
     write_json(p["launch"] / "launch_state.json", dict(status="initializing", full_server_preflight="bounded_required"))
     try:
@@ -191,14 +205,17 @@ def start_direct(variant):
         write_json(p['launch'] / 'dataset_inventory.json', inventory)
         checkdir = ROOT / 'outputs/c19_lif_v1_preflight'
         print(f"Bounded preflight log: {p['launch'] / 'preflight.log'}", flush=True)
-        with (p['launch'] / 'preflight.log').open('x', encoding='utf-8') as stream:
-            subprocess.run([sys.executable, '-u', str(ROOT/'tools/check_c19_lif_v1.py'),
-                '--source', str(p['source']), '--initialized', str(p['init']),
-                '--real-dataset', str(data['path']), '--output', str(checkdir), '--capacity-batch', '16'],
-                cwd=ROOT, stdout=stream, stderr=subprocess.STDOUT, check=True)
+        try:
+            with (p['launch'] / 'preflight.log').open('x', encoding='utf-8') as stream:
+                subprocess.run([sys.executable, '-u', str(ROOT/'tools/check_c19_lif_v1.py'),
+                    '--source', str(p['source']), '--initialized', str(p['init']),
+                    '--real-dataset', str(data['path']), '--output', str(checkdir), '--capacity-batch', '16'],
+                    cwd=ROOT, stdout=stream, stderr=subprocess.STDOUT, check=True)
+        finally:
+            if (checkdir/'checks.json').is_file():
+                shutil.copyfile(checkdir/'checks.json', p['launch']/'preflight.json')
         check = json.loads((checkdir/'checks.json').read_text(encoding='utf-8'))
-        require(check['status'] == 'PASSED' and check['capacity']['status'] == 'PASSED', 'Bounded preflight/capacity failed')
-        require(check['capacity']['batch'] == 16 and check['capacity']['imgsz'] == 640, 'Wrong capacity scope')
+        require_preflight(check)
         shutil.copyfile(checkdir/'checks.json', p['launch']/'preflight.json')
         YAML.save(p["launch"] / "train_args.yaml", args)
         write_json(p["launch"] / "parameter_diff.json", rows)
@@ -230,7 +247,9 @@ def start_direct(variant):
         write_json(p["launch"] / "launch_state.json", dict(status="dispatched", session=session, log=str(console), full_server_preflight="bounded_required"))
         print(f"Started {variant}: tmux {session}; log {console}; 有限预检通过；正式训练已派发")
     except BaseException as error:
-        write_json(p["launch"] / "launch_state.json", dict(status="failed", error=repr(error), full_server_preflight="bounded_required"))
+        write_json(p["launch"] / "launch_state.json", dict(status="failed", error=repr(error), full_server_preflight="bounded_required",
+            partial_preflight=str(p['launch']/'preflight.json') if (p['launch']/'preflight.json').is_file() else None,
+            partial_preflight_sha256=sha256(p['launch']/'preflight.json') if (p['launch']/'preflight.json').is_file() else None))
         raise
 
 
@@ -246,6 +265,7 @@ def worker(variant):
         require(sha256(p["init"]) == plan["init_sha256"], "Initialization changed")
         require(plan['bounded_preflight']['status'] == 'PASSED' and
                 sha256(p['launch']/'preflight.json') == plan['bounded_preflight']['report_sha256'], 'Preflight evidence changed')
+        require_preflight(json.loads((p['launch']/'preflight.json').read_text(encoding='utf-8')))
         source_record = json.loads((p["launch"] / "source_record.json").read_text(encoding="utf-8"))
         require(sha256(plan["args"]["data"]) == source_record["data_sha256"] and
                 sha256(p["c2_args"]) == plan["c2_args_sha256"], "Data config/C2 recipe changed since dispatch")

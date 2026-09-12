@@ -50,8 +50,7 @@ def geometry_gradient():
 from c19_lif_v1_data import dataset_inventory,real_batch
 
 
-def compare_records(a,b,atol=2e-6,rtol=2e-5):
-    return {k:compare(a[k],b[k],atol=atol,rtol=rtol) for k in a.keys() & b.keys() if isinstance(a[k],torch.Tensor)}
+from c19_lif_v1_diagnostic import compare_records, fusion_protocol, atomic_json, PASS, DiagnosticError
 
 
 def activate(model,lif=True,cbr=True,bn=False):
@@ -219,38 +218,40 @@ def benchmark(target,device):
                 peak_allocated_bytes=torch.cuda.max_memory_allocated() if device=='cuda' else None)
 
 
-def precision_fuse_compare(unfused,fused,x,amp=False):
-    """Locate half/AMP top-k changes, then compare matching encoder candidate IDs."""
-    with torch.no_grad(),torch.autocast('cuda',enabled=amp,dtype=torch.float16):
-        _,a=capture(unfused,x);_,b=capture(fused,x)
-    indices=a['candidate_indices'];natural_indices=b['candidate_indices']
-    report=dict(natural_box_max_abs=float((a['boxes']-b['boxes']).abs().max()),
-                changed_candidate_positions=int((indices!=natural_indices).sum()),
-                pre_sort={k:compare(a[k],b[k],3e-3,3e-2) for k in ('scale_0','scale_1','scale_2','downsample','candidate_scores')})
-    topk=torch.topk
-    def fixed_topk(input,k,dim=None,*args,**kwargs):
-        if input.ndim==2 and input.shape==a['candidate_scores'].shape[:2] and k==indices.shape[1] and dim==1:
-            ids=indices.to(input.device)
-            return SimpleNamespace(values=input.gather(1,ids),indices=ids)
-        return topk(input,k,dim,*args,**kwargs)
-    with torch.no_grad(),torch.autocast('cuda',enabled=amp,dtype=torch.float16),patch.object(torch,'topk',side_effect=fixed_topk):
-        _,aligned=capture(fused,x)
-    report['same_candidate_query_outputs']={k:compare(a[k],aligned[k],3e-3,3e-2) for k in
-            ('raw_boxes','raw_scores','boxes','scores','returned_query','cbr_query','cbr_before')}
-    report['diagnostic_scope']='Replay unfused top-k indices only in temporary test; production sorting unchanged'
-    return report
 
-
-def fuse_checks(target,device,folder):
+def fuse_checks(target,device,folder,report=None,persist=lambda:None):
+    from c19_lif_v1_diagnostic import rng_state
+    if report is None:report={}
     model=deepcopy(target).eval();activate(model,bn=True);model.to(device)
     x=torch.rand(1,3,160,192,device=device)
-    with torch.no_grad():_,before=capture(model,x)
-    fused=deepcopy(model).fuse(verbose=False)
-    lif_index=topology()['p3_to_p4']['downsample'];lif=fused.model[lif_index]
-    require(hasattr(lif,'bn') and torch.equal(lif.O_proj.weight,model.model[lif_index].O_proj.weight),'LIF fuse lost residual/BN')
-    require(sum(isinstance(m,torch.nn.BatchNorm2d) for m in fused.modules()) < sum(isinstance(m,torch.nn.BatchNorm2d) for m in model.modules()),'Global fuse disabled')
-    with torch.no_grad():_,after=capture(fused,x)
-    report=dict(nontrivial_bn=True,both_branches_active=True,FP32=compare_records(before,after,2e-5,2e-4),lif_bn_retained=True)
+    try:
+        fused=deepcopy(model).fuse(verbose=False)
+        lif_index=topology()['p3_to_p4']['downsample'];lif=fused.model[lif_index]
+        require(hasattr(lif,'bn') and torch.equal(lif.O_proj.weight,model.model[lif_index].O_proj.weight),'LIF fuse lost residual/BN')
+        require(sum(isinstance(m,torch.nn.BatchNorm2d) for m in fused.modules()) < sum(isinstance(m,torch.nn.BatchNorm2d) for m in model.modules()),'Global fuse disabled')
+    except BaseException as error:
+        evidence=folder/(device+'_fuse_setup_failure.pt')
+        torch.save(dict(image=x.cpu(),state=model.cpu().state_dict(),rng=rng_state()),evidence)
+        report['setup_failure']=dict(status='FAILED_INCOMPLETE_DIAGNOSTIC',stage=device+'.fp32.fuse.setup',
+            error=repr(error),evidence=str(evidence),sha256=sha256(evidence));persist()
+        raise
+    report.update(nontrivial_bn=True,both_branches_active=True,lif_bn_retained=True)
+    def parent_factory():
+        parent=build('C2',nc=1).eval()
+        parent.load_state_dict({k:model.state_dict()[k].float().cpu() for k in parent.state_dict()},strict=True)
+        return parent
+    def protocol(label,left,right,image,precision):
+        destination=folder/(device+'_'+label+'_fusion')
+        report[label]=dict(status='RUNNING',diagnostic=str(destination/'fuse_diagnostic.json'));persist()
+        try:
+            result=fusion_protocol(left,right,image,destination,device,precision,parent_factory)
+        finally:
+            path=destination/'fuse_diagnostic.json'
+            if path.is_file():report[label]=json.loads(path.read_text(encoding='utf-8'))
+            persist()
+        return result
+    protocol('FP32',model,fused,x,'fp32')
+    with torch.no_grad():_,before=capture(model,x);_,after=capture(fused,x)
     fused.fuse(verbose=False)
     with torch.no_grad():_,again=capture(fused,x)
     report['repeat_fuse']=compare_records(after,again)
@@ -270,8 +271,8 @@ def fuse_checks(target,device,folder):
         # Native AutoBackend fuses FP32 first, then converts to half. Calling
         # half().fuse() hits the inherited generic Conv helper's FP32 bias dtype.
         half_fused_model=deepcopy(fused).half()
-        report['half_fuse']=precision_fuse_compare(half,half_fused_model,x.half())
-        report['amp_fuse']=precision_fuse_compare(loaded,fused,x,amp=True)
+        protocol('half_fuse',half,half_fused_model,x.half(),'half')
+        protocol('amp_fuse',loaded,fused,x,'amp')
         report['true_half']=dict(status='PASSED',parameter_dtype=str(next(half.parameters()).dtype),output_dtype=str(half_out.dtype))
         report['half_fuse_order']='Native order: FP32 fuse then half; inherited half().fuse() is unsupported and unchanged'
     else:report['AMP']=report['true_half']='NOT_RUN on CPU; CUDA checked separately'
@@ -280,6 +281,8 @@ def fuse_checks(target,device,folder):
     predictions=api.predict(image,imgsz=192,device=device,verbose=False,save=False)
     require(hasattr(api.predictor.model.model.model[lif_index],'bn'),'AutoBackend predict lost LIF BN')
     report['predict_auto_fuse']=dict(status='PASSED',images=len(predictions),checkpoint_sha256=sha256(checkpoint))
+    persist()
+    require(all(report[k]['status'] in PASS for k in ('FP32','half_fuse','amp_fuse') if k in report),'Fusion requires review; natural candidate membership drift blocks formal startup')
     return report,checkpoint
 
 
@@ -345,7 +348,8 @@ def main():
             torch.manual_seed(321)
             report[device]=dict(degenerations=degenerations(target,device))
             print(device+' parent degenerations passed',flush=True)
-            report[device]['fuse'],checkpoint=fuse_checks(target,device,args.output)
+            report[device]['fuse']={}
+            _,checkpoint=fuse_checks(target,device,args.output,report[device]['fuse'],lambda:atomic_json(args.output/'checks.json',report))
             if device=='cpu':report['bounded_val_test']=bounded_eval(checkpoint,args.real_dataset,args.output)
             report[device]['loss']=loss_checks(target,batch,device,args.output,nb)
             if device=='cuda':report[device]['AMP_loss']=loss_checks(target,batch,device,args.output,nb,amp=True)
@@ -354,11 +358,14 @@ def main():
             if torch.cuda.is_available():torch.cuda.empty_cache()
         if args.capacity_batch:report['capacity']=capacity(args.initialized,args.real_dataset,args.capacity_batch)
         report['status']='PASSED'
+    except BaseException as error:
+        report['failure']=getattr(error,'detail',dict(error=repr(error)))
+        raise
     finally:
         report['source_sha256']={p.relative_to(ROOT).as_posix():sha256(p) for p in list((ROOT/'tools').glob('*c19_lif_v1*.py'))+
                                  [ROOT/'ultralytics-main/ultralytics/nn/modules/cbr.py',ROOT/'ultralytics-main/ultralytics/nn/modules/lif_down.py',
                                   ROOT/'ultralytics-main/ultralytics/nn/modules/transformer.py',ROOT/'ultralytics-main/ultralytics/nn/tasks.py']}
-        write_json(args.output/'checks.json',report)
+        atomic_json(args.output/'checks.json',report)
 
 
 if __name__=='__main__':main()
