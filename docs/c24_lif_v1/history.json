@@ -1,0 +1,49 @@
+{
+  "name": "history",
+  "status": "PASSED",
+  "result": {
+    "c2": {
+      "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "isolated_source": "git archive 67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "parameters": 20082772,
+      "states": 533,
+      "forward": "EXACT",
+      "nonzero_input_parameter_gradients": "NOT_APPLICABLE",
+      "pre_post_norm": "NOT_APPLICABLE",
+      "original_constructor_initial_values": {}
+    },
+    "c24": {
+      "commit": "f6e9dfda765046ae7691302cf5ec89d3f76cec5d",
+      "isolated_source": "git archive f6e9dfda765046ae7691302cf5ec89d3f76cec5d",
+      "parameters": 20148312,
+      "states": 538,
+      "forward": "EXACT",
+      "nonzero_input_parameter_gradients": "EXACT",
+      "pre_post_norm": "EXACT",
+      "original_constructor_initial_values": {
+        "model.9.scca_temperature_raw": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb",
+        "model.9.scca_q.weight": "99a9d963c3b1e888cb374d809039bafbc11aeadee62b6fc88e517c31e51f3937",
+        "model.9.scca_k.weight": "93579026dbaf32f59a85cd509c46e2ba1fc8ab016b875be30b1fff0d543b08ac",
+        "model.9.scca_v.weight": "1b317db397484ac7abf0f81c217def4fd6465653fe668da472d1c4fff8fc5a81",
+        "model.9.scca_o.weight": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+      }
+    },
+    "lif": {
+      "commit": "0e95bbade3558b0d2b77c5531483c60810391d88",
+      "isolated_source": "git archive 0e95bbade3558b0d2b77c5531483c60810391d88",
+      "parameters": 20103876,
+      "states": 538,
+      "forward": "EXACT",
+      "nonzero_input_parameter_gradients": "EXACT",
+      "pre_post_norm": "NOT_APPLICABLE",
+      "original_constructor_initial_values": {
+        "model.20.B_proj.weight": "8f1cbb19dbebb4ea1df2b8b00066355c25db085df8348c679351fc1481e19593",
+        "model.20.P.weight": "34c97fb2aad50371f916fea56643cc756e7d695eb8b040b021ffc839e2ee054c",
+        "model.20.U_mix.weight": "718ece26003c72dc51c290f4bf40bbb628fa5c8608d5b9ac7450b7b09fbc28fe",
+        "model.20.U_dw.weight": "8574358d302ad3e1d0c177df82506d3978300c9424130094a29a7ea123c55cf8",
+        "model.20.O_proj.weight": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+      }
+    }
+  },
+  "seconds": 37.422
+}

@@ -1,0 +1,27 @@
+{
+  "pack_stress": {
+    "status": "PASSED",
+    "source_bytes": 131432311,
+    "archive_bytes": 4768962,
+    "limit": 8000000,
+    "sha256": "fe4bd265eb0d2ebdb0b22c0eaba3215c4faf483960a28770ca9dc39485e595cb",
+    "reductions": 142,
+    "first_failure_preserved": true,
+    "checkpoint_loaded": false,
+    "archive_members": 55,
+    "all_json_parseable": true
+  },
+  "locks": {
+    "status": "PASSED",
+    "duplicate_refused": true,
+    "pid_start_time_checked": true,
+    "wrong_token_preserved": true,
+    "dead_owner_archived": true,
+    "unrelated_owner_preserved": true
+  },
+  "evaluation_mask": {
+    "status": "PASSED",
+    "policy": "corrected_sorted_conf_mask_v1",
+    "inference": "NOT_RUN"
+  }
+}

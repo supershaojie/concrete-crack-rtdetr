@@ -1,0 +1,32 @@
+{
+  "status": "completed",
+  "settings": {
+    "data": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "split": "test",
+    "imgsz": 640,
+    "batch": 16,
+    "workers": 0,
+    "device": "0",
+    "half": false,
+    "conf": 0.001,
+    "iou": 0.7,
+    "max_det": 300,
+    "augment": false,
+    "rect": false,
+    "plots": true,
+    "save_json": false,
+    "save_txt": false,
+    "project": "/root/autodl-tmp/projects/Crack_RTDETR-scca/outputs/scca/c24/evaluation_test",
+    "name": "plots",
+    "exist_ok": false
+  },
+  "checkpoint_sha256": "6078c2ba4f6a555fab24ee9d2cb14c0630590a7408623e6106fa5b90c141916a",
+  "data_sha256": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+  "policy": "corrected_sorted_conf_mask_v1",
+  "precision": 0.8555632739746718,
+  "recall": 0.819900945520036,
+  "AP75": 0.5064610022981055,
+  "mAP50": 0.8782438758197731,
+  "mAP50_95": 0.4998720584810606,
+  "images": 864
+}

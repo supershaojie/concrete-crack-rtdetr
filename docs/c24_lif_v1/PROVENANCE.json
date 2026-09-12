@@ -1,0 +1,383 @@
+{
+  "commits": {
+    "c2": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+    "c24": "f6e9dfda765046ae7691302cf5ec89d3f76cec5d",
+    "lif": "0e95bbade3558b0d2b77c5531483c60810391d88"
+  },
+  "packages": {
+    "c24": {
+      "path": "D:\\rtdetr跑结果\\c24 SCCA-AIFI涨\\c24_scca_complete_20260908_212957_GmHKX5.tar.gz",
+      "sha256": "732ac3cef7f9c1242eef39aad7f5c3c64a16c4f7c895f205ced7d8e8b8152a1c",
+      "read_files": {
+        "metadata/source_at_commit.tar.gz": {
+          "sha256": "c62232c7de7e55b7e155833296fab02dcb2bf3e491e1b6912ab1716b6911b995",
+          "bytes": 3872128
+        },
+        "source/ultralytics-main/ultralytics/nn/modules/scca_aifi.py": {
+          "sha256": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca",
+          "bytes": 3796
+        },
+        "source/ultralytics-main/ultralytics/nn/tasks.py": {
+          "sha256": "0e39086dc2d3358e3c03e4e0df87ca18ab91724975f2671139659919e7958f1f",
+          "bytes": 74011
+        },
+        "source/ultralytics-main/ultralytics/nn/modules/__init__.py": {
+          "sha256": "705a98e916eb488c68931de75fbb393a5d2d0fe6ce0718cb0d59318a18ca14c1",
+          "bytes": 3879
+        },
+        "source/ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-scca.yaml": {
+          "sha256": "985f4e30f4c706627079e9d56e392faa07e50053756ad122191a55396ac09123",
+          "bytes": 2094
+        },
+        "source/docs/scca/README.md": {
+          "sha256": "cfdc99860bcd2b4bcb444d7c34f8716ff9b11862870aca75c6779dec89f68c57",
+          "bytes": 8526
+        },
+        "source/docs/scca/VALIDATION.md": {
+          "sha256": "537bd7fb8f7169007ff653b3deece78f002f776ed45ed0c7fdedee9e87d87849",
+          "bytes": 6027
+        },
+        "source/docs/scca/c2_args.yaml": {
+          "sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+          "bytes": 1823
+        },
+        "source/experiment_records/scca_aifi.md": {
+          "sha256": "0616e75e542e21444154120d8ec0071b9f8ef535f4706ef20dda298b2b82028f",
+          "bytes": 878
+        },
+        "metadata/working_tree.patch": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "metadata/crack_autodl.yaml": {
+          "sha256": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+          "bytes": 137
+        },
+        "launch_and_evaluation/actual_train_args.yaml": {
+          "sha256": "83ff653999d035202ad7e1a8bd65176238ba5eea1e47110a1a1f061125967012",
+          "bytes": 1826
+        },
+        "launch_and_evaluation/initialization.json": {
+          "sha256": "8d55b133e50225461ce77e84ee0a5e146dded59e8012f7cc6a1e79d117e712da",
+          "bytes": 98467
+        },
+        "launch_and_evaluation/evaluation_val/metrics.json": {
+          "sha256": "5005423ab5ed012d35bd61be21898bc80f7c6f62df3df07f99e242b2ef63ea7b",
+          "bytes": 2082
+        },
+        "launch_and_evaluation/evaluation_test/metrics.json": {
+          "sha256": "c0e53650a8655df97698fd043e8bd5aaa5fa9cdb19f7193a5f6fcf2f98208dc5",
+          "bytes": 2082
+        }
+      },
+      "module_git_sha256": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca",
+      "module_package_sha256": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca",
+      "module_lf_sha256": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca"
+    },
+    "lif": {
+      "path": "D:\\rtdetr跑结果\\LIF-Down涨\\lif_down_complete_20260910_221150_853145.tar.gz",
+      "sha256": "57afaa4ab29b6a9541b29553477161ff5432921bac3bb9d4073fb9e0cfafa78a",
+      "read_files": {
+        "metadata/source/ultralytics-main/ultralytics/nn/modules/lif_down.py": {
+          "sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+          "bytes": 3031
+        },
+        "metadata/source/ultralytics-main/ultralytics/nn/tasks.py": {
+          "sha256": "9a108682836c5e03cef5a629a47e6a72d6a3ec6f09a85073251305299f754642",
+          "bytes": 73523
+        },
+        "metadata/source/tools/init_lif_down.py": {
+          "sha256": "ad8528792f4ed735069122a23df250576a4e03021f3160443c4a765395b4c955",
+          "bytes": 8949
+        },
+        "metadata/source/tools/lif_down_topology.py": {
+          "sha256": "1e526bcb86357bd5cdf1a6b16ba7162aae15dec1dfb158078f69a3750aeb321e",
+          "bytes": 1776
+        },
+        "metadata/source/tools/check_lif_down.py": {
+          "sha256": "04eddebf5ea48cec4802f707c921622e85193b7d8a31c8b19b42a0a972a1ada7",
+          "bytes": 11716
+        },
+        "metadata/source/tools/train_lif_down.py": {
+          "sha256": "7703a01f094b001e3d0649d2ffb6b9aa01346cebf779c650310a6f440bd3493e",
+          "bytes": 21593
+        },
+        "metadata/source/tools/lif_down_results.py": {
+          "sha256": "7e1cf2cf6ff7dd1361ee68fd0b5295c7a2ad34bbe2623418453c65efaad820ec",
+          "bytes": 26234
+        },
+        "metadata/launch/authoritative_c2_args.yaml": {
+          "sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+          "bytes": 1823
+        },
+        "metadata/launch/actual_train_args.yaml": {
+          "sha256": "8bb9e1c075a186c1880980952f563975ce12132615f7792f6eedc9869984a109",
+          "bytes": 1830
+        },
+        "metadata/launch/initialization.json": {
+          "sha256": "bfbce0b5a891948420f328310ee92f761028989ae6777a149dafd6d482e52a1d",
+          "bytes": 122170
+        },
+        "metadata/launch/data_config.yaml": {
+          "sha256": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+          "bytes": 137
+        },
+        "training/args.yaml": {
+          "sha256": "8bb9e1c075a186c1880980952f563975ce12132615f7792f6eedc9869984a109",
+          "bytes": 1830
+        },
+        "val/metrics.json": {
+          "sha256": "d866a93967f709ba4afc10bcccbc8798d00857973d734b4bd12099f6e42ee910",
+          "bytes": 5671
+        },
+        "test/metrics.json": {
+          "sha256": "77ac9bcc8db47539399c0a0e28a9bcd20128f1cdf195cc3a68d8ee61bb37fbb0",
+          "bytes": 5672
+        }
+      },
+      "module_git_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "module_package_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "module_lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+    }
+  },
+  "reference_files": [
+    {
+      "path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\modules\\transformer.py",
+      "sha256": "2a8906995d3b9e8dedfc97a63a405a7b25c820c26c0860a7adeee950541d91e0",
+      "bytes": 17894,
+      "status": "READ"
+    },
+    {
+      "path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\block.py",
+      "sha256": "e3e3617c89bd7caf350d2601740f2e399847a16a3a659d7b3e40010b88498cd2",
+      "bytes": 579266,
+      "status": "READ"
+    },
+    {
+      "path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\wtconv2d.py",
+      "sha256": "2f030c240ba7bbcdc21c8c0d250ef3b3ffe9b78f516938648f39ac155ef7641f",
+      "bytes": 6662,
+      "status": "READ"
+    }
+  ],
+  "repository": {
+    "status": "M ultralytics-main/ultralytics/nn/modules/__init__.py\n M ultralytics-main/ultralytics/nn/modules/lif_down.py\n M ultralytics-main/ultralytics/nn/tasks.py\n?? tools/audit_c24_lif_v1.py\n?? ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-scca-lif-down.yaml\n?? ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-scca.yaml\n?? ultralytics-main/ultralytics/nn/modules/scca_aifi.py",
+    "worktrees": "D:/MyProjects/Crack_RTDETR                                           f34502c [exp-rtdetr-r18-lite-cscef-v4]\nD:/MyProjects/Crack_RTDETR-gsdr-aifi                                 d895437 [exp-rtdetr-r18-lite-gsdr-aifi]\nD:/MyProjects/Crack_RTDETR-lcr                                       d328d73 [codex/lcr-aifi]\nD:/MyProjects/Crack_RTDETR-rsc-head                                  b847aa0 [codex/rsc-head]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/acr                     5f909e6 [codex/acr-query-attention]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/c17-lif-v1              1e927b8 [codex/rtdetr-c17-lif-v1]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/c19-lif-v1              8bdc14f [codex/rtdetr-c19-lif-v1]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/c24-lif-v1              0e95bba [codex/rtdetr-c24-lif-v1]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/c25                     ac32e22 [codex/c25-cscef-scca]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/c26                     beedcfa [codex/c26-cbr-scca]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/cbr                     025997e [exp-rtdetr-r18-lite-cbr]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/cscef-cbr               81d5f01 [exp-rtdetr-r18-lite-cscef-cbr]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/cscef-v5                fad58b0 [exp-rtdetr-r18-lite-cscef-v5]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/cscef-v51               0c53a9c [exp-rtdetr-r18-lite-cscef-v51]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/diag-c20-cbr-gradcheck  91b58ff [codex/diag-c20-cbr-gradcheck]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/diag-c20-cbr-rescue     d73391f [codex/diag-c20-cbr-rescue]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/dra                     737fa75 [codex/dra-aifi]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/evc                     a259582 [codex/evc-deform]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/fsa-deform              c7f1259 [codex/fsa-deform]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/gsdr-aifi-v2            30f2da6 [exp-rtdetr-r18-lite-gsdr-aifi-v2]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/gsdr-aifi-v3            51f1f35 [exp-rtdetr-r18-lite-gsdr-aifi-v3]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/lif-down                0e95bba [codex/lif-down]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/mincompat-v2            33535ab [codex/rtdetr-mincompat-v2]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/sala                    9621aeb [codex/c21-rtdetr-r18-lite-sala]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/scca                    f6e9dfd [codex/scca-aifi]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/sci-adapter             81e0426 [codex/rtdetr-sci-adapter]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/triad-compat            05e6de8 [codex/rtdetr-triad-compat]",
+    "remote": "origin\thttps://github.com/supershaojie/concrete-crack-rtdetr.git (fetch)\norigin\thttps://github.com/supershaojie/concrete-crack-rtdetr.git (push)",
+    "branch": "codex/rtdetr-c24-lif-v1"
+  },
+  "recipes": {
+    "c24": {
+      "fields": 109,
+      "differences": [
+        {
+          "field": "model",
+          "c2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+          "parent": "/root/autodl-tmp/projects/Crack_RTDETR-scca/weights/c24_scca_controlled_init.pt",
+          "c2_type": "str",
+          "parent_type": "str"
+        },
+        {
+          "field": "name",
+          "c2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "parent": "c24_rtdetr_r18_lite_scca_e200_b16_onlineaug",
+          "c2_type": "str",
+          "parent_type": "str"
+        },
+        {
+          "field": "save_dir",
+          "c2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "parent": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c24_rtdetr_r18_lite_scca_e200_b16_onlineaug",
+          "c2_type": "str",
+          "parent_type": "str"
+        }
+      ]
+    },
+    "lif": {
+      "fields": 109,
+      "differences": [
+        {
+          "field": "model",
+          "c2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+          "parent": "/root/autodl-tmp/projects/Crack_RTDETR-lif-down/weights/lif_down_controlled_init.pt",
+          "c2_type": "str",
+          "parent_type": "str"
+        },
+        {
+          "field": "name",
+          "c2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "parent": "lif_down_rtdetr_r18_lite_e200_b16_onlineaug",
+          "c2_type": "str",
+          "parent_type": "str"
+        },
+        {
+          "field": "save_dir",
+          "c2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+          "parent": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/lif_down_rtdetr_r18_lite_e200_b16_onlineaug",
+          "c2_type": "str",
+          "parent_type": "str"
+        }
+      ]
+    }
+  },
+  "parent_metrics": {
+    "c24": {
+      "val": {
+        "status": "completed",
+        "settings": {
+          "data": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+          "split": "val",
+          "imgsz": 640,
+          "batch": 16,
+          "workers": 0,
+          "device": "0",
+          "half": false,
+          "conf": 0.001,
+          "iou": 0.7,
+          "max_det": 300,
+          "augment": false,
+          "rect": false,
+          "plots": true,
+          "save_json": false,
+          "save_txt": false,
+          "project": "/root/autodl-tmp/projects/Crack_RTDETR-scca/outputs/scca/c24/evaluation_val",
+          "name": "plots",
+          "exist_ok": false
+        },
+        "checkpoint_sha256": "6078c2ba4f6a555fab24ee9d2cb14c0630590a7408623e6106fa5b90c141916a",
+        "data_sha256": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+        "policy": "corrected_sorted_conf_mask_v1",
+        "precision": 0.8591583029446084,
+        "recall": 0.8238080135106566,
+        "AP75": 0.5241951833458742,
+        "mAP50": 0.8822275927410956,
+        "mAP50_95": 0.5093868081177676,
+        "images": 1728
+      },
+      "test": {
+        "status": "completed",
+        "settings": {
+          "data": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+          "split": "test",
+          "imgsz": 640,
+          "batch": 16,
+          "workers": 0,
+          "device": "0",
+          "half": false,
+          "conf": 0.001,
+          "iou": 0.7,
+          "max_det": 300,
+          "augment": false,
+          "rect": false,
+          "plots": true,
+          "save_json": false,
+          "save_txt": false,
+          "project": "/root/autodl-tmp/projects/Crack_RTDETR-scca/outputs/scca/c24/evaluation_test",
+          "name": "plots",
+          "exist_ok": false
+        },
+        "checkpoint_sha256": "6078c2ba4f6a555fab24ee9d2cb14c0630590a7408623e6106fa5b90c141916a",
+        "data_sha256": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+        "policy": "corrected_sorted_conf_mask_v1",
+        "precision": 0.8555632739746718,
+        "recall": 0.819900945520036,
+        "AP75": 0.5064610022981055,
+        "mAP50": 0.8782438758197731,
+        "mAP50_95": 0.4998720584810606,
+        "images": 864
+      }
+    },
+    "lif": {
+      "val": {
+        "status": "completed",
+        "settings": {
+          "imgsz": 640,
+          "batch": 16,
+          "workers": 0,
+          "half": false,
+          "conf": 0.001,
+          "iou": 0.7,
+          "max_det": 300,
+          "augment": false,
+          "rect": false,
+          "data": "/root/autodl-tmp/projects/Crack_RTDETR-lif-down/outputs/lif_down/data_config.yaml",
+          "split": "val",
+          "device": "0",
+          "plots": true,
+          "save_json": false,
+          "save_txt": false,
+          "project": "/root/autodl-tmp/projects/Crack_RTDETR-lif-down/outputs/lif_down/evaluation_val",
+          "name": "plots",
+          "exist_ok": false
+        },
+        "checkpoint_sha256": "5017457bfe114d29a9dcdbc530f72c0390429b5775cb0668725d40ff6e87cf5b",
+        "data_sha256": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+        "policy": "corrected_sorted_conf_mask_v1",
+        "precision": 0.8551132722761707,
+        "recall": 0.840809968847352,
+        "AP75": 0.538932009991103,
+        "mAP50": 0.8930844076618588,
+        "mAP50_95": 0.5185631920696523,
+        "images": 1728,
+        "ground_truth": 12840
+      },
+      "test": {
+        "status": "completed",
+        "settings": {
+          "imgsz": 640,
+          "batch": 16,
+          "workers": 0,
+          "half": false,
+          "conf": 0.001,
+          "iou": 0.7,
+          "max_det": 300,
+          "augment": false,
+          "rect": false,
+          "data": "/root/autodl-tmp/projects/Crack_RTDETR-lif-down/outputs/lif_down/data_config.yaml",
+          "split": "test",
+          "device": "0",
+          "plots": true,
+          "save_json": false,
+          "save_txt": false,
+          "project": "/root/autodl-tmp/projects/Crack_RTDETR-lif-down/outputs/lif_down/evaluation_test",
+          "name": "plots",
+          "exist_ok": false
+        },
+        "checkpoint_sha256": "5017457bfe114d29a9dcdbc530f72c0390429b5775cb0668725d40ff6e87cf5b",
+        "data_sha256": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+        "policy": "corrected_sorted_conf_mask_v1",
+        "precision": 0.848074560371181,
+        "recall": 0.824853669518235,
+        "AP75": 0.5284095555036584,
+        "mAP50": 0.880347583834848,
+        "mAP50_95": 0.5081882458799715,
+        "images": 864,
+        "ground_truth": 6663
+      }
+    }
+  },
+  "reference_note": "Background only; no reference implementation copied.",
+  "spec": {
+    "path": "D:\\rtdetr跑结果\\C24／SCCA ＋ LIF-Down v1\\RTDETR_C24_LIF_v1_Codex_Spec.md",
+    "sha256": "d9925ef3a5e084156f84255997fddfda1c7f2cf475501ae6448740748fa12cd4"
+  },
+  "numerical_policy_reference": {
+    "path": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\C19_LIF_FP16_Cutoff_Tie_Gate_Fix_Codex.md",
+    "sha256": "8189020f0ec814513fb4f6953da6d9a219ac2c8676e9d264ee265f8d9b12f687",
+    "status": "READ_CRITERIA_ONLY",
+    "c19_source_imported": false
+  },
+  "selective_tool_reuse": {
+    "0e95bbade3558b0d2b77c5531483c60810391d88": [
+      "lif_down_topology.locate/refs",
+      "check_lif_down.module_checks",
+      "train_lif_down.disable_oom_retry/ensure_amp_resources",
+      "lif_down_results postprocess/image_record/evaluate (new entry only)"
+    ],
+    "1e927b8": [
+      "AMP/half tolerance policy .008/.04 only; numerical collector implemented for native C24 Decoder"
+    ]
+  },
+  "line_endings": "Original LIF working checkout initially CRLF; restored exact successful Git/package LF bytes. .gitattributes pins LF for both original modules. No AST/computation change.",
+  "AGENTS": "No applicable AGENTS.md found in repository or checked ancestors; no subagents used."
+}

@@ -1,0 +1,33 @@
+{
+  "status": "completed",
+  "settings": {
+    "imgsz": 640,
+    "batch": 16,
+    "workers": 0,
+    "half": false,
+    "conf": 0.001,
+    "iou": 0.7,
+    "max_det": 300,
+    "augment": false,
+    "rect": false,
+    "data": "/root/autodl-tmp/projects/Crack_RTDETR-lif-down/outputs/lif_down/data_config.yaml",
+    "split": "test",
+    "device": "0",
+    "plots": true,
+    "save_json": false,
+    "save_txt": false,
+    "project": "/root/autodl-tmp/projects/Crack_RTDETR-lif-down/outputs/lif_down/evaluation_test",
+    "name": "plots",
+    "exist_ok": false
+  },
+  "checkpoint_sha256": "5017457bfe114d29a9dcdbc530f72c0390429b5775cb0668725d40ff6e87cf5b",
+  "data_sha256": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+  "policy": "corrected_sorted_conf_mask_v1",
+  "precision": 0.848074560371181,
+  "recall": 0.824853669518235,
+  "AP75": 0.5284095555036584,
+  "mAP50": 0.880347583834848,
+  "mAP50_95": 0.5081882458799715,
+  "images": 864,
+  "ground_truth": 6663
+}

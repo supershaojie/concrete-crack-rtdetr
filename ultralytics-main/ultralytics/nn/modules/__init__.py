@@ -110,10 +110,12 @@ from .transformer import (
 )
 
 from .lif_down import LIFDown
+from .scca_aifi import SCCAAIFI
 
 __all__ = (
     "LIFDown",
     "AIFI",
+    "SCCAAIFI",
     "C1",
     "C2",
     "C2PSA",
