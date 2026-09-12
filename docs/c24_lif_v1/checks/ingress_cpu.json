@@ -1,0 +1,19 @@
+{
+  "name": "ingress_cpu",
+  "status": "PASSED",
+  "result": {
+    "ema_validator": {
+      "actual_half": false,
+      "output_dtype": "torch.float32",
+      "training": true,
+      "finite": true
+    },
+    "predict_AutoBackend": {
+      "fp16": false,
+      "output_dtype": "torch.float32",
+      "finite": true,
+      "fused": true
+    }
+  },
+  "seconds": 0.375
+}

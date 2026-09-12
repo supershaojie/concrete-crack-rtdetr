@@ -1,0 +1,52 @@
+{
+  "name": "structure",
+  "status": "PASSED",
+  "result": {
+    "counts": {
+      "c2": {
+        "parameters": 20082772,
+        "states": 533
+      },
+      "c24": {
+        "parameters": 20148312,
+        "states": 538
+      },
+      "lif": {
+        "parameters": 20103876,
+        "states": 538
+      },
+      "combo": {
+        "parameters": 20169416,
+        "states": 543
+      }
+    },
+    "topology": {
+      "decoder": 26,
+      "p3_to_p4": {
+        "input": 19,
+        "downsample": 20,
+        "concat": 21,
+        "lateral": [
+          15
+        ],
+        "output": 22
+      },
+      "p4_to_p5": {
+        "input": 22,
+        "downsample": 23,
+        "concat": 24,
+        "lateral": [
+          10
+        ],
+        "output": 25
+      },
+      "aifi": 9,
+      "decoder_inputs": [
+        19,
+        22,
+        25
+      ]
+    }
+  },
+  "seconds": 0.032
+}

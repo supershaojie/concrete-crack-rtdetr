@@ -4,6 +4,7 @@ import os
 import subprocess
 import sys
 import tempfile
+import shlex
 from c24_lif_v1_common import *
 
 def checks(bash):
@@ -16,11 +17,14 @@ def checks(bash):
     run(['git','clone','--bare','--shared',ROOT,remote]);run(['git','clone','--shared',remote,main])
     url='https://github.com/supershaojie/concrete-crack-rtdetr.git'
     run(['git','remote','set-url','origin',url],main)
-    run(['git','config','url.'+remote.as_uri()+'.insteadOf',url],main)
     for k,v in [('user.name','Local sync fixture'),('user.email','sync-fixture@example.invalid')]:run(['git','config',k,v],main)
     main_head=run(['git','rev-parse','HEAD'],main).stdout
     (main/'downloads').mkdir(exist_ok=True);marker=main/'downloads/user_keep.txt';marker.write_text('preserve user result')
-    env={**os.environ,'C24_LIF_V1_PYTHON':sys.executable.replace('\\','/')}
+    routing=folder/'local_fetch.sh'
+    routing.write_bytes(('git() {\n if [[ "${1:-}" == -C && "${3:-}" == fetch && "${4:-}" == origin ]]; then\n'
+        ' command git "$1" "$2" fetch '+shlex.quote(remote.as_posix())+' "${@:5}"\n'
+        ' else command git "$@"; fi\n}\n').encode())
+    env={**os.environ,'C24_LIF_V1_PYTHON':sys.executable.replace('\\','/'),'BASH_ENV':routing.as_posix()}
     args=[bash,ROOT/'tools/sync_c24_lif_v1.sh',sha,main,target]
     first=run(args,env=env);again=run(args,env=env)
     require(marker.read_text()=='preserve user result' and run(['git','rev-parse','HEAD'],main).stdout==main_head,'Main modified')
@@ -39,7 +43,7 @@ def checks(bash):
     for name in ['sync_c24_lif_v1.sh','autodl_c24_lif_v1.sh']:run([bash,'-n',ROOT/'tools'/name])
     report=dict(status='PASSED',tested_commit=sha,first_sync=True,idempotent_same_sha=True,dirty_refused=True,different_sha_preserved=True,
         unrelated_preserved=True,main_head_and_downloads_preserved=True,unknown_action_exit=typo.returncode,bash_syntax='PASSED',
-        fixture=str(folder),network='local Git URL rewrite only; no external push',fixture_preserved=True)
+        fixture=str(folder),network='fixture BASH_ENV routes fetch to local bare repository; no external fetch/push',fixture_preserved=True)
     write_json(ROOT/'docs/c24_lif_v1/sync_checks.json',report);print(json.dumps(report,indent=2))
 
 if __name__=='__main__':

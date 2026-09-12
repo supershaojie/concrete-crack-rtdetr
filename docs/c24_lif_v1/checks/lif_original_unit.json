@@ -1,0 +1,136 @@
+{
+  "name": "lif_original_unit",
+  "status": "PASSED",
+  "result": {
+    "shape": [
+      {
+        "input": [
+          80,
+          80
+        ],
+        "output": [
+          2,
+          256,
+          40,
+          40
+        ],
+        "equivalence": {
+          "max_abs_error": 0.0,
+          "max_rel_error": 0.0,
+          "atol": 2e-06,
+          "rtol": 2e-05
+        }
+      },
+      {
+        "input": [
+          79,
+          80
+        ],
+        "output": [
+          2,
+          256,
+          40,
+          40
+        ],
+        "equivalence": {
+          "max_abs_error": 0.0,
+          "max_rel_error": 0.0,
+          "atol": 2e-06,
+          "rtol": 2e-05
+        }
+      },
+      {
+        "input": [
+          80,
+          79
+        ],
+        "output": [
+          2,
+          256,
+          40,
+          40
+        ],
+        "equivalence": {
+          "max_abs_error": 0.0,
+          "max_rel_error": 0.0,
+          "atol": 2e-06,
+          "rtol": 2e-05
+        }
+      },
+      {
+        "input": [
+          79,
+          81
+        ],
+        "output": [
+          2,
+          256,
+          40,
+          41
+        ],
+        "equivalence": {
+          "max_abs_error": 0.0,
+          "max_rel_error": 0.0,
+          "atol": 2e-06,
+          "rtol": 2e-05
+        }
+      },
+      {
+        "input": [
+          1,
+          1
+        ],
+        "output": [
+          2,
+          256,
+          1,
+          1
+        ],
+        "equivalence": {
+          "max_abs_error": 0.0,
+          "max_rel_error": 0.0,
+          "atol": 2e-06,
+          "rtol": 2e-05
+        }
+      }
+    ],
+    "haar_layout": "PASSED",
+    "odd_replicate": "PASSED",
+    "align_hand_tensor": [
+      [
+        [
+          [
+            1.0,
+            1.75,
+            2.75
+          ],
+          [
+            3.25,
+            4.0,
+            5.0
+          ],
+          [
+            6.25,
+            7.0,
+            8.0
+          ]
+        ]
+      ]
+    ],
+    "first_gradient_norms": {
+      "B_proj.weight": 0.0,
+      "P.weight": 0.0,
+      "U_mix.weight": 0.0,
+      "U_dw.weight": 0.0,
+      "O_proj.weight": 0.015629954636096954
+    },
+    "after_O_update_gradient_norms": {
+      "B_proj.weight": 2.3278598746401258e-06,
+      "P.weight": 9.334624451184936e-08,
+      "U_mix.weight": 4.0433508985415756e-08,
+      "U_dw.weight": 6.824754450462933e-08,
+      "O_proj.weight": 0.01562991738319397
+    }
+  },
+  "seconds": 0.36
+}

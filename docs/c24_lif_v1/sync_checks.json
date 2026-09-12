@@ -1,0 +1,15 @@
+{
+  "status": "PASSED",
+  "tested_commit": "e15b4369c25d184ecd9ffc7f0f428ba72fc56f77",
+  "first_sync": true,
+  "idempotent_same_sha": true,
+  "dirty_refused": true,
+  "different_sha_preserved": true,
+  "unrelated_preserved": true,
+  "main_head_and_downloads_preserved": true,
+  "unknown_action_exit": 2,
+  "bash_syntax": "PASSED",
+  "fixture": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\outputs\\sync_fixture_mvefwgu8",
+  "network": "fixture BASH_ENV routes fetch to local bare repository; no external fetch/push",
+  "fixture_preserved": true
+}

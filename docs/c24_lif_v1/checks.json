@@ -1,0 +1,142 @@
+{
+  "schema": 4,
+  "status": "REQUIRES_REVIEW",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "scca": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\scca_aifi.py",
+    "lif": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "0e95bbade3558b0d2b77c5531483c60810391d88"
+  },
+  "fingerprint": {
+    "ultralytics-main/ultralytics/nn/tasks.py": "258b33e7bce3dee6cf29453236c760911d333f3fb0a1c0ae0e11cc716a2112d7",
+    "ultralytics-main/ultralytics/nn/modules/__init__.py": "20c72ff051ea9991135136cf7354fca4336ba942f673b0af181587198d32718d",
+    "ultralytics-main/ultralytics/nn/modules/scca_aifi.py": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca",
+    "ultralytics-main/ultralytics/nn/modules/lif_down.py": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+    "ultralytics-main/ultralytics/nn/modules/head.py": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+    "ultralytics-main/ultralytics/nn/modules/transformer.py": "8986f3f58a5e30a42545f544f1a35f5e5861b13ee5d4507d8b2afab1c41df782",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-scca-lif-down.yaml": "9f6408356cb4404731baf85c19e369bac201f0c27c990e10b65c2768331b8f70",
+    "docs/c24_lif_v1/c2_args.yaml": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+    "docs/c24_lif_v1/c2_data.yaml": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+    "tools/audit_c24_lif_v1.py": "45a52a5836f5b64956bcb5b772e8f34aa553f2846c8b7bdda30fba48c591daf9",
+    "tools/autodl_c24_lif_v1.sh": "360f066ba4a1bfcc850b4aec51066405250dbd12823ea8e8dda1da9000e2bd38",
+    "tools/c24_lif_v1_common.py": "4b3941a1827dd1d74fd5d35ef96fcb9cfccf3d486cac96a1cb2129a35e0a9a3d",
+    "tools/c24_lif_v1_history_worker.py": "6f5a66acba9f47bdba3b8ca2dc6fcb7ddefa418c9ffee21479e35dffb5da1541",
+    "tools/c24_lif_v1_numerics.py": "2f94dd0dbdd066a61af30e56128161370e18b3caf583107c2763493302b654ab",
+    "tools/c24_lif_v1_pack.py": "76afd788e6cbd39ff9fe70de26ea0b346155d02df158002e0b81acd9a5289ed3",
+    "tools/c24_lif_v1_results.py": "fb341b484269eaa4c1c93b11edddef3d3d2ac67e237e1c5642178709c11f5b17",
+    "tools/c24_lif_v1_topology.py": "d42da1d60c4bcd8da6da1a637efecee597052959690c6140d6ec4f726ae66273",
+    "tools/check_c24_lif_v1.py": "3d4dc3b91da1d36e6385ca31a9a3d24287b4cbf7836ddfb8cde3abc8986d7a2c",
+    "tools/check_c24_lif_v1_ops.py": "b83c0a71b513876b35b617aa2a038ee780f66c0a11d0252eab09e1e2b4697c61",
+    "tools/check_c24_lif_v1_sync.py": "269b98566bf945b8dd4e624e3778fb13a7e00eb0ebc8566ed88c406f5295be18",
+    "tools/init_c24_lif_v1.py": "f600860e16b785eb2ac3f97a296ad956438dd63fd75b9afb1499263ff81a9463",
+    "tools/sync_c24_lif_v1.sh": "80a418470f93e8118c0fd0c5c2f302320f7144fcc1627ab1f747205dc5199124",
+    "tools/train_c24_lif_v1.py": "040f2d2ead462f45b98ad5eda3b6575b8ff4512d3f25e3551933216ca8b8c092"
+  },
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "stages": [
+    {
+      "name": "negative_gate",
+      "status": "PASSED",
+      "seconds": 0.047,
+      "report": "checks/negative_gate.json"
+    },
+    {
+      "name": "lif_original_unit",
+      "status": "PASSED",
+      "seconds": 0.36,
+      "report": "checks/lif_original_unit.json"
+    },
+    {
+      "name": "initialization",
+      "status": "PASSED",
+      "seconds": 5.75,
+      "report": "checks/initialization.json"
+    },
+    {
+      "name": "structure",
+      "status": "PASSED",
+      "seconds": 0.032,
+      "report": "checks/structure.json"
+    },
+    {
+      "name": "history",
+      "status": "PASSED",
+      "seconds": 34.859,
+      "report": "checks/history.json"
+    },
+    {
+      "name": "degeneration_cpu",
+      "status": "PASSED",
+      "seconds": 4.656,
+      "report": "checks/degeneration_cpu.json"
+    },
+    {
+      "name": "fusion_cpu_fp32",
+      "status": "PASSED",
+      "seconds": 1.843,
+      "report": "checks/fusion_cpu_fp32.json"
+    },
+    {
+      "name": "native_loss_cpu",
+      "status": "PASSED",
+      "seconds": 2.359,
+      "report": "checks/native_loss_cpu.json"
+    },
+    {
+      "name": "ingress_cpu",
+      "status": "PASSED",
+      "seconds": 0.375,
+      "report": "checks/ingress_cpu.json"
+    },
+    {
+      "name": "degeneration_cuda",
+      "status": "PASSED",
+      "seconds": 3.515,
+      "report": "checks/degeneration_cuda.json"
+    },
+    {
+      "name": "fusion_cuda_fp32",
+      "status": "PASSED",
+      "seconds": 1.375,
+      "report": "checks/fusion_cuda_fp32.json"
+    },
+    {
+      "name": "fusion_cuda_amp",
+      "status": "REQUIRES_REVIEW",
+      "seconds": 1.875,
+      "report": "checks/fusion_cuda_amp.json"
+    },
+    {
+      "name": "fusion_cuda_half",
+      "status": "REQUIRES_REVIEW",
+      "seconds": 1.718,
+      "report": "checks/fusion_cuda_half.json"
+    },
+    {
+      "name": "native_loss_cuda",
+      "status": "PASSED",
+      "seconds": 3.437,
+      "report": "checks/native_loss_cuda.json"
+    },
+    {
+      "name": "ingress_cuda",
+      "status": "PASSED",
+      "seconds": 0.484,
+      "report": "checks/ingress_cuda.json"
+    }
+  ],
+  "formal_training": "NOT_RUN",
+  "full_val_test": "NOT_RUN",
+  "server_B16_640": "NOT_RUN",
+  "scope": "local",
+  "first_failure": {
+    "name": "fusion_cuda_amp",
+    "error": null,
+    "status": "REQUIRES_REVIEW"
+  }
+}

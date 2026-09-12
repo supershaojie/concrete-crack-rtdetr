@@ -374,10 +374,35 @@
       "train_lif_down.disable_oom_retry/ensure_amp_resources",
       "lif_down_results postprocess/image_record/evaluate (new entry only)"
     ],
-    "1e927b8": [
+    "1e927b8c4e7510f383abf34efea14212d7d56367": [
       "AMP/half tolerance policy .008/.04 only; numerical collector implemented for native C24 Decoder"
     ]
   },
   "line_endings": "Original LIF working checkout initially CRLF; restored exact successful Git/package LF bytes. .gitattributes pins LF for both original modules. No AST/computation change.",
-  "AGENTS": "No applicable AGENTS.md found in repository or checked ancestors; no subagents used."
+  "AGENTS": "No applicable AGENTS.md found in repository or checked ancestors; no subagents used.",
+  "parent_initialization_records": {
+    "c24": {
+      "source": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+      "variant": "c24",
+      "seed": 42,
+      "source_states": 533,
+      "public_constructor_equal": true,
+      "output_sha256": "680803cbc6372cf6e30a638d88b0b2c063af22b6ff19288c3fbee0e8a847b5eb",
+      "reload_exact": true,
+      "status": "passed"
+    },
+    "lif": {
+      "source": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+      "variant": "lif_down",
+      "source_nc": 80,
+      "seed": 42,
+      "source_states": 533,
+      "public_constructor_equal": true,
+      "output_sha256": "d52d90566c6cba359f34d0e61207b551e6a426d97a2e2d5048c5e2090ca01121",
+      "reload_exact": true,
+      "status": "passed"
+    }
+  }
 }

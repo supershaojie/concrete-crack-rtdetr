@@ -1,0 +1,16 @@
+{
+  "name": "negative_gate",
+  "status": "PASSED",
+  "result": {
+    "permutation": true,
+    "missing_key": true,
+    "illegal_id": true,
+    "NaN": true,
+    "lost_residual": true,
+    "wrong_bn": true,
+    "empty_report": true,
+    "only_A_replay": true,
+    "different_parent_set": true
+  },
+  "seconds": 0.047
+}

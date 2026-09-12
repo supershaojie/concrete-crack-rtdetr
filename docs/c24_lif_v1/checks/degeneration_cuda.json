@@ -1,0 +1,253 @@
+{
+  "name": "degeneration_cuda",
+  "status": "PASSED",
+  "result": [
+    {
+      "parent": "c2",
+      "device": "cuda",
+      "input": [
+        1,
+        3,
+        640,
+        640
+      ],
+      "comparison": {
+        "key": "final_prediction",
+        "shape_a": [
+          1,
+          300,
+          5
+        ],
+        "shape_b": [
+          1,
+          300,
+          5
+        ],
+        "dtype_a": "torch.float32",
+        "dtype_b": "torch.float32",
+        "device_a": "cuda:0",
+        "device_b": "cuda:0",
+        "atol": 2e-06,
+        "rtol": 2e-05,
+        "status": "PASSED",
+        "finite": true,
+        "max_abs": 0.0,
+        "max_rel": 0.0,
+        "max_coordinate": [
+          0,
+          0,
+          0
+        ],
+        "a": 0.01875000074505806,
+        "b": 0.01875000074505806,
+        "over_tolerance": 0
+      }
+    },
+    {
+      "parent": "c24",
+      "device": "cuda",
+      "input": [
+        1,
+        3,
+        640,
+        640
+      ],
+      "comparison": {
+        "key": "final_prediction",
+        "shape_a": [
+          1,
+          300,
+          5
+        ],
+        "shape_b": [
+          1,
+          300,
+          5
+        ],
+        "dtype_a": "torch.float32",
+        "dtype_b": "torch.float32",
+        "device_a": "cuda:0",
+        "device_b": "cuda:0",
+        "atol": 2e-06,
+        "rtol": 2e-05,
+        "status": "PASSED",
+        "finite": true,
+        "max_abs": 0.0,
+        "max_rel": 0.0,
+        "max_coordinate": [
+          0,
+          0,
+          0
+        ],
+        "a": 0.01875000074505806,
+        "b": 0.01875000074505806,
+        "over_tolerance": 0
+      }
+    },
+    {
+      "parent": "lif",
+      "device": "cuda",
+      "input": [
+        1,
+        3,
+        640,
+        640
+      ],
+      "comparison": {
+        "key": "final_prediction",
+        "shape_a": [
+          1,
+          300,
+          5
+        ],
+        "shape_b": [
+          1,
+          300,
+          5
+        ],
+        "dtype_a": "torch.float32",
+        "dtype_b": "torch.float32",
+        "device_a": "cuda:0",
+        "device_b": "cuda:0",
+        "atol": 2e-06,
+        "rtol": 2e-05,
+        "status": "PASSED",
+        "finite": true,
+        "max_abs": 0.0,
+        "max_rel": 0.0,
+        "max_coordinate": [
+          0,
+          0,
+          0
+        ],
+        "a": 0.01875000074505806,
+        "b": 0.01875000074505806,
+        "over_tolerance": 0
+      }
+    },
+    {
+      "parent": "c2",
+      "device": "cuda",
+      "input": [
+        1,
+        3,
+        160,
+        192
+      ],
+      "comparison": {
+        "key": "final_prediction",
+        "shape_a": [
+          1,
+          300,
+          5
+        ],
+        "shape_b": [
+          1,
+          300,
+          5
+        ],
+        "dtype_a": "torch.float32",
+        "dtype_b": "torch.float32",
+        "device_a": "cuda:0",
+        "device_b": "cuda:0",
+        "atol": 2e-06,
+        "rtol": 2e-05,
+        "status": "PASSED",
+        "finite": true,
+        "max_abs": 0.0,
+        "max_rel": 0.0,
+        "max_coordinate": [
+          0,
+          0,
+          0
+        ],
+        "a": 0.0625,
+        "b": 0.0625,
+        "over_tolerance": 0
+      }
+    },
+    {
+      "parent": "c24",
+      "device": "cuda",
+      "input": [
+        1,
+        3,
+        160,
+        192
+      ],
+      "comparison": {
+        "key": "final_prediction",
+        "shape_a": [
+          1,
+          300,
+          5
+        ],
+        "shape_b": [
+          1,
+          300,
+          5
+        ],
+        "dtype_a": "torch.float32",
+        "dtype_b": "torch.float32",
+        "device_a": "cuda:0",
+        "device_b": "cuda:0",
+        "atol": 2e-06,
+        "rtol": 2e-05,
+        "status": "PASSED",
+        "finite": true,
+        "max_abs": 0.0,
+        "max_rel": 0.0,
+        "max_coordinate": [
+          0,
+          0,
+          0
+        ],
+        "a": 0.0625,
+        "b": 0.0625,
+        "over_tolerance": 0
+      }
+    },
+    {
+      "parent": "lif",
+      "device": "cuda",
+      "input": [
+        1,
+        3,
+        160,
+        192
+      ],
+      "comparison": {
+        "key": "final_prediction",
+        "shape_a": [
+          1,
+          300,
+          5
+        ],
+        "shape_b": [
+          1,
+          300,
+          5
+        ],
+        "dtype_a": "torch.float32",
+        "dtype_b": "torch.float32",
+        "device_a": "cuda:0",
+        "device_b": "cuda:0",
+        "atol": 2e-06,
+        "rtol": 2e-05,
+        "status": "PASSED",
+        "finite": true,
+        "max_abs": 0.0,
+        "max_rel": 0.0,
+        "max_coordinate": [
+          0,
+          0,
+          0
+        ],
+        "a": 0.0625,
+        "b": 0.0625,
+        "over_tolerance": 0
+      }
+    }
+  ],
+  "seconds": 3.515
+}

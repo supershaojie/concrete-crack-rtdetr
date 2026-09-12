@@ -1,0 +1,19 @@
+{
+  "name": "ingress_cuda",
+  "status": "PASSED",
+  "result": {
+    "ema_validator": {
+      "actual_half": true,
+      "output_dtype": "torch.float16",
+      "training": true,
+      "finite": true
+    },
+    "predict_AutoBackend": {
+      "fp16": true,
+      "output_dtype": "torch.float16",
+      "finite": true,
+      "fused": true
+    }
+  },
+  "seconds": 0.484
+}
