@@ -1,0 +1,40 @@
+{
+  "status": "PASSED",
+  "scope": "Real local Git/worktrees; only fetch destination redirected to isolated local bare repository",
+  "pinned_code_commit": "da600f3cc128f025340a859e2dbbe62140b43897",
+  "fixture_remote_advanced_commit": "7405821ff48ac670e14254288d7c5068fc55859a",
+  "detached_launcher_accepted": true,
+  "main_dirty_state_preserved": true,
+  "checks": [
+    {
+      "name": "remote_advanced_pin_original",
+      "exit_code": 0
+    },
+    {
+      "name": "repeat_same_clean_pin",
+      "exit_code": 0
+    },
+    {
+      "name": "dirty_target_rejected",
+      "exit_code": 1
+    },
+    {
+      "name": "untracked_outputs_preserved",
+      "exit_code": 0
+    },
+    {
+      "name": "different_sha_rejected",
+      "exit_code": 1
+    },
+    {
+      "name": "non_worktree_rejected",
+      "exit_code": 1
+    },
+    {
+      "name": "wrong_origin_rejected",
+      "exit_code": 1
+    }
+  ],
+  "training": "NOT_RUN",
+  "fixture_directory": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\outputs\\sync_checks3_fixture"
+}

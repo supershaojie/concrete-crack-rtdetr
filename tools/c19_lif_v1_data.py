@@ -36,5 +36,3 @@ def real_batch(dataset,size=160,count=2):
         records.append(dict(image=p.name,image_sha256=sha256(p),label_sha256=sha256(label),instances=len(rows)))
     return dict(img=torch.stack(tensors),bboxes=torch.tensor(boxes).reshape(-1,4),cls=torch.tensor(classes).reshape(-1,1),
                 batch_idx=torch.tensor(indices)),records
-
-

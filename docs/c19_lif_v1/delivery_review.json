@@ -1,0 +1,25 @@
+{
+  "status": "PASSED",
+  "protected_lif_files": [
+    "ultralytics-main/ultralytics/nn/modules/lif_down.py",
+    "ultralytics-main/ultralytics/nn/modules/head.py",
+    "tools/init_lif_down.py",
+    "tools/train_lif_down.py",
+    "tools/check_lif_down.py",
+    "tools/lif_down_topology.py",
+    "tools/autodl_lif_down.sh",
+    "tools/sync_lif_down.sh",
+    "tools/lif_down_results.py"
+  ],
+  "original_c19_files_exact_LF": true,
+  "core_existing_file_diff": "9 insertions, 2 deletions across registration/parser/final_query; LIF fuse condition untouched",
+  "numerical_code_commit": "da600f3cc128f025340a859e2dbbe62140b43897",
+  "post_test_changes": "Audit documentation plus removal of trailing blank lines in data helper; AST identical",
+  "final_data_helper_sha256": "aba8477f4fd445a4932828a09255af573b400aa7af2e7d4ce6c0434e6bf0afa2",
+  "no_weights_dataset_or_archives_in_git": true,
+  "python_compile": "PASSED",
+  "bash_syntax": "PASSED",
+  "wrong_shell_action_exit": 2,
+  "formal_training": "NOT_RUN",
+  "full_val_test": "NOT_RUN"
+}
