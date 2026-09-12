@@ -1,2 +1,3 @@
 # Preserve original uploaded JSON bytes across Windows and Linux checkouts.
+*.json text eol=lf
 light_fixture/** -text

@@ -103,11 +103,12 @@
   "report_sha256": {
     "cutoff_tests.json": "d400920dfeab12f39bc0a8905e46c1b59855c14dfec9d7c7917e2fbc8c1205f6",
     "gate_flow_tests.json": "f7e772228e75aa2c40b4301966a713abb44b9845e34e72f31a73fe43c3f63ab0",
-    "lifecycle_tests.json": "c1f8b64930c70c3554403bf8d28258f445a3af8864289af6590a96fa7dd3855d",
+    "lifecycle_tests.json": "b295136615e19158bfd8b70ff5f035bc94dca504c6e3ba59c9bf7edab4031b1c",
     "light_tests.json": "5511875a66424fcd0df3d091051a09a1f332dfe0b681a72c480243e0b9bb7ed5",
     "local_checks.json.gz": "2ad4e1241b8b2b31866f689046586617c8ad46add49988511282d10123ba291d",
     "original_fault_tests.json": "7f24f525fc31621958c472838aa81d46bc94ff6afb23a600709618b79d957747",
     "shared_fixture_replay.json.gz": "74bd51e28843d52aa1acbdd5a80318bcfb322adcd3321a82589dd407e172308e",
     "synthetic_cutoff_evidence.json.gz": "9a6fbf4a0893a256dbecf7ef21644082cd93b50ef8cbc6123914031a8a2b7f20"
-  }
+  },
+  "report_hash_policy": "Tracked test JSON uses LF across checkouts; gzip reports and original LIGHT fixtures retain exact bytes. This avoids Windows checkout newline conversion changing reported hashes."
 }
