@@ -1,5 +1,7 @@
 # 原 C19/CBR + 原 LIF-Down v1
 
+2026-09-13 FP16 截止位门禁追加修复见 [gate_fix/README.md](gate_fix/README.md)，当前单次预检后派发命令见 [gate_fix/AUTODL.md](gate_fix/AUTODL.md)。旧锁已归档，不重复 apply；历史文档保留。
+
 2026-09-13 预检融合工程修复与安全重试见 [fusion_fix/README.md](fusion_fix/README.md)；新 worktree 操作见 [fusion_fix/AUTODL.md](fusion_fix/AUTODL.md)。本目录原检查报告是历史开发机证据，不能当作旧 AutoDL 失败已通过。
 
 本实验只组合两个成功原版，工程准备完成后等待用户启动固定配方训练。没有正式训练、完整 val/test 或涨点结论。独立分支为 `codex/rtdetr-c19-lif-v1`，直接基于 LIF 成功提交 `0e95bbade3558b0d2b77c5531483c60810391d88`。

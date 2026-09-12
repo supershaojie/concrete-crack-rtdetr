@@ -1,0 +1,113 @@
+{
+  "base_commit": "216bba006a61382ebecef4bc5eb44374e67a2c80",
+  "formal_training": "NOT_RUN",
+  "full_val_test": "NOT_RUN",
+  "protected_git_diff": "EMPTY",
+  "protected_paths": [
+    "ultralytics-main",
+    "configs",
+    "tools/init_c19_lif_v1.py",
+    "tools/c19_lif_v1_results.py",
+    "tools/sync_c19_lif_v1.sh"
+  ],
+  "recipe_function_AST_exact": true,
+  "recipe_fields": 109,
+  "parameters": {
+    "C2": 20082772,
+    "LIF": 20103876,
+    "C19": 20128661,
+    "pair": 20149765
+  },
+  "module_sha256_LF": {
+    "lif_down.py": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+    "cbr.py": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+  },
+  "old_LIGHT": {
+    "path": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\c19_lif_LIGHT_20260913_021400_574635.tar.gz",
+    "bytes": 120965,
+    "sha256": "b1485f1349fac86bac33ba07409840364076a33974814835ac0de2ef121d0aa8",
+    "tracked_per_mode_bytes_exact": true,
+    "old_status_unchanged": true
+  },
+  "local": {
+    "runtime": {
+      "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+      "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+      "torch": "2.7.1+cu118",
+      "cuda": "11.8",
+      "gpu": "NVIDIA GeForce RTX 2060",
+      "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\ultralytics-main\\ultralytics\\__init__.py",
+      "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+      "commit": "216bba006a61382ebecef4bc5eb44374e67a2c80",
+      "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+      "module_hashes": {
+        "lif_down": {
+          "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+          "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+        },
+        "cbr": {
+          "raw_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+          "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+        }
+      }
+    },
+    "checks_status": "PASSED",
+    "capacity": {
+      "status": "NOT_RUN"
+    },
+    "cutoff_status": "PASS_WITH_BASELINE_CUTOFF_TIE",
+    "synthetic_cutoff_scope": "test-only logits injection; actual native topk/gather and original model operators",
+    "CUDA_loss": "PASSED",
+    "CUDA_AMP_loss": "PASSED",
+    "native_precision": "PASSED",
+    "native_half_nonzero_bbox_parameters": 6
+  },
+  "final_predicate_rechecked_on_full_numerical_evidence": "gate_flow_tests.json",
+  "python_AST_files": [
+    "tools/c19_lif_v1_cutoff.py",
+    "tools/c19_lif_v1_diagnostic.py",
+    "tools/c19_lif_v1_precision.py",
+    "tools/check_c19_lif_v1.py",
+    "tools/check_c19_lif_v1_cutoff.py",
+    "tools/check_c19_lif_v1_fusion_fix.py",
+    "tools/check_c19_lif_v1_gate_flow.py",
+    "tools/check_c19_lif_v1_light.py",
+    "tools/check_c19_lif_v1_ops.py",
+    "tools/diagnose_c19_lif_v1_fusion.py",
+    "tools/pack_c19_lif_v1_light.py",
+    "tools/preflight_c19_lif_v1.py",
+    "tools/train_c19_lif_v1.py"
+  ],
+  "tested_snapshot_note": "local_checks runtime is pre-commit base. Subsequent changes: shared fixture device/precision metadata and replay CLI, stricter dtype/finite evidence rejection, focused test additions. Shared replay and final evidence predicate independently passed. No numerical model change.",
+  "engine_source_sha256": {
+    "engine/trainer.py": "d954c4c79d2cf328392c3867eae03ad53366b57fb505feb944ce78196f691ac6",
+    "engine/validator.py": "4897c61f7ab694eb8ac5cfa2d4c960a69c15807c56be2fcc68118f35b26238dc",
+    "models/rtdetr/val.py": "5f7eb3025f37a46903e103ba0c82bac1cf9fdebdd9f1590c748a90666a355106",
+    "nn/autobackend.py": "ba9c51fcfb60a3d5b8a9a9d4bd66805e21b405eba661abb8f5cbf1bcaee09ed8"
+  },
+  "engineering_source_sha256_LF": {
+    "tools/c19_lif_v1_cutoff.py": "0fcb76fdb966d3ebcdc2f55e5c823501a727bd9a27fcdf7ff5b74a0602a314a0",
+    "tools/c19_lif_v1_diagnostic.py": "a17919c31c9e4eabb9dca2c1d52a51f35b2d8f16a7a665ae3019a21ce872a065",
+    "tools/c19_lif_v1_precision.py": "4462d72cf1f9efc9d06e28e2d54cad3720798810940f5c1cce89ff744d76b874",
+    "tools/check_c19_lif_v1.py": "086adaf437441d630ccd123868b4b111acc7ac6d7a8d932a85ed897a79fb498e",
+    "tools/check_c19_lif_v1_cutoff.py": "83dbecbfcddc29ccd6e534ac9a731838b9819797b87c4112934dc8a41217317d",
+    "tools/check_c19_lif_v1_fusion_fix.py": "25c8c0b6769012172c6346879ae55c8911275e7747cabdf719c8c9bf5e488628",
+    "tools/check_c19_lif_v1_gate_flow.py": "e2c39920c509ca04560a8dea5e25af578cd2ed19c7108a5800fcd21f7fab59c2",
+    "tools/check_c19_lif_v1_light.py": "1496b14c7db244bb901ebe94f38c0a89411557ae9cdeb580306191844d3cf5dd",
+    "tools/check_c19_lif_v1_ops.py": "1d8ca38c284b057416da012a7348440303324aa5baabe86c63b81a907fc4c7c3",
+    "tools/diagnose_c19_lif_v1_fusion.py": "c7fb572e1a5d23578a2b4f8f6fbab1c70b51573bba62c4555e8dcea002c5d7ba",
+    "tools/pack_c19_lif_v1_light.py": "ef6adcad77d955d179442f83c836564bbc211496759e20c8b1c15b8321503e4b",
+    "tools/preflight_c19_lif_v1.py": "6a59a540277969a34bd31e0da2b0f93c56d845f9b0bc6244ee5903c55fde6ce3",
+    "tools/train_c19_lif_v1.py": "84759327c483aca917772b6e14f976fed841c5763220f14029fd4389950084f6"
+  },
+  "report_sha256": {
+    "cutoff_tests.json": "d400920dfeab12f39bc0a8905e46c1b59855c14dfec9d7c7917e2fbc8c1205f6",
+    "gate_flow_tests.json": "f7e772228e75aa2c40b4301966a713abb44b9845e34e72f31a73fe43c3f63ab0",
+    "lifecycle_tests.json": "c1f8b64930c70c3554403bf8d28258f445a3af8864289af6590a96fa7dd3855d",
+    "light_tests.json": "5511875a66424fcd0df3d091051a09a1f332dfe0b681a72c480243e0b9bb7ed5",
+    "local_checks.json.gz": "2ad4e1241b8b2b31866f689046586617c8ad46add49988511282d10123ba291d",
+    "original_fault_tests.json": "7f24f525fc31621958c472838aa81d46bc94ff6afb23a600709618b79d957747",
+    "shared_fixture_replay.json.gz": "74bd51e28843d52aa1acbdd5a80318bcfb322adcd3321a82589dd407e172308e",
+    "synthetic_cutoff_evidence.json.gz": "9a6fbf4a0893a256dbecf7ef21644082cd93b50ef8cbc6123914031a8a2b7f20"
+  }
+}

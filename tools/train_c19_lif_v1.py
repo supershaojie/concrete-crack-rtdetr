@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import json
+import math
 import os
 from pathlib import Path
 import shlex
@@ -22,7 +23,8 @@ from ultralytics.utils import YAML, ASSETS
 from ultralytics.data.utils import check_det_dataset
 from ultralytics.nn.tasks import RTDETRDetectionModel
 
-from c19_lif_v1_diagnostic import atomic_json as write_json, PASS
+from c19_lif_v1_diagnostic import atomic_json as write_json
+from c19_lif_v1_cutoff import fusion_accepted
 
 MAIN = Path(os.environ.get("C19_LIF_V1_MAIN", "/root/autodl-tmp/projects/Crack_RTDETR"))
 
@@ -151,11 +153,25 @@ def require_preflight(check):
     capacity=check.get('capacity',{})
     require(capacity.get('status')=='PASSED' and capacity.get('batch')==16 and capacity.get('imgsz')==640 and capacity.get('AMP') is True,
             'B16/640 native AMP capacity gate missing/failed')
+    require(type(capacity.get('loss')) in (int,float) and math.isfinite(capacity['loss']) and capacity.get('optimizer_steps')==0, 'Capacity finite/loss evidence missing')
     for device,labels in [('cpu',['FP32']),('cuda',['FP32','half_fuse','amp_fuse'])]:
         for label in labels:
             diagnostic=check.get(device,{}).get('fuse',{}).get(label,{})
-            require(diagnostic.get('status') in PASS and diagnostic.get('acceptance')=='PASSED',
+            require(fusion_accepted(diagnostic,device,{'FP32':'fp32','half_fuse':'half','amp_fuse':'amp'}[label]),
                     device+'.'+label+' candidate-aware fusion gate missing/failed/requires review')
+
+    for device,label in [('cpu','loss'),('cuda','loss'),('cuda','AMP_loss')]:
+        loss=check.get(device,{}).get(label,{})
+        require(loss.get('status')=='PASSED' and len(loss.get('steps',[]))==3 and len(loss.get('dynamic_DN',[]))==3 and
+                loss.get('model_optimizer_reload_exact') is True and loss.get('device')==device and loss.get('AMP')==(label=='AMP_loss'),device+'.'+label+' loss/DN/reload was not completed')
+        require(len({v.get('total_queries') for v in loss['dynamic_DN']})==3,'Dynamic DN not exercised')
+        for step in loss['steps']:
+            require(type(step.get('loss')) in (int,float) and math.isfinite(step['loss']) and step.get('new_grad_norms') and all(type(v) in (int,float) and math.isfinite(v) and v>0 for v in step['new_grad_norms'].values()),'Missing native finite loss/gradient evidence')
+    precision=check.get('cuda',{}).get('training_precision',{})
+    require(precision.get('status')=='PASSED' and precision.get('nonzero_bbox_parameters',0)>0 and
+            precision.get('native_epoch_validation',{}).get('status')=='PASSED' and
+            precision.get('autobackend_fuse_half',{}).get('status')=='PASSED' and
+            fusion_accepted(precision.get('updated_FP32_fusion',{}),'cuda','fp32'),'Native validation precision/nonzero bbox checks missing')
 
 
 def start_direct(variant):
@@ -174,15 +190,18 @@ def start_direct(variant):
             "Protect uncommitted source: commit/review changes before launch")
     require(not p["run"].exists(), f"Existing results protected: {p['run']}")
     session = "c19_lif_v1-training"
-    require(subprocess.run(["tmux", "has-session", "-t", session], capture_output=True).returncode != 0,
+    require(subprocess.run(["tmux", "has-session", "-t", "="+session], capture_output=True).returncode != 0,
             f"Session already exists: {session}")
     # Atomic, persistent reservation shared by all worktrees; preserve failure evidence too.
     lock = p["run"].with_name(p["run"].name + ".c19_lif_v1.lock")
     lock.parent.mkdir(parents=True, exist_ok=True)
+    if lock.exists():
+        owner=lock/'owner.json'
+        raise RuntimeError('Current shared reservation preserved; inspect owner before any recovery: '+(owner.read_text(encoding='utf-8') if owner.is_file() else str(lock)))
     lock.mkdir(exist_ok=False)
     write_json(lock / "owner.json", dict(pid=os.getpid(), process_token=process_token(os.getpid()), worktree=str(ROOT), variant=variant, runtime=info))
     p["launch"].mkdir(parents=True, exist_ok=False)
-    write_json(p["launch"] / "launch_state.json", dict(status="initializing", full_server_preflight="bounded_required"))
+    write_json(p["launch"] / "launch_state.json", dict(status="initializing", pid=os.getpid(), process_token=process_token(os.getpid()), full_server_preflight="bounded_required"))
     try:
         require(p["c2_args"].is_file() and p["source"].is_file(), "C2 args/source missing")
         args, rows = recipe(p["c2_args"], variant, p["init"])
@@ -204,7 +223,8 @@ def start_direct(variant):
         require(inventory['test']['images'] == 864 and inventory['test']['boxes'] == 6663, 'Test inventory differs')
         write_json(p['launch'] / 'dataset_inventory.json', inventory)
         checkdir = ROOT / 'outputs/c19_lif_v1_preflight'
-        print(f"Bounded preflight log: {p['launch'] / 'preflight.log'}", flush=True)
+        write_json(p['launch']/'launch_state.json',dict(status='checking',pid=os.getpid(),process_token=process_token(os.getpid()),preflight_log=str(p['launch']/'preflight.log'),console_log=str(p['launch']/'console.log')))
+        print(f"Bounded preflight log: {p['launch'] / 'preflight.log'}; future worker log: {p['launch'] / 'console.log'}", flush=True)
         try:
             with (p['launch'] / 'preflight.log').open('x', encoding='utf-8') as stream:
                 subprocess.run([sys.executable, '-u', str(ROOT/'tools/check_c19_lif_v1.py'),
@@ -250,6 +270,12 @@ def start_direct(variant):
         write_json(p["launch"] / "launch_state.json", dict(status="failed", error=repr(error), full_server_preflight="bounded_required",
             partial_preflight=str(p['launch']/'preflight.json') if (p['launch']/'preflight.json').is_file() else None,
             partial_preflight_sha256=sha256(p['launch']/'preflight.json') if (p['launch']/'preflight.json').is_file() else None))
+        try:
+            from pack_c19_lif_v1_light import package
+            checkdir=ROOT/'outputs/c19_lif_v1_preflight'
+            package(checkdir if checkdir.is_dir() else p['launch'],p['launch'].with_name('c19_lif_v1_LIGHT.tar.gz'),p['launch'])
+        except Exception as packaging_error:
+            print('LIGHT packaging failed; original error/evidence retained:',repr(packaging_error),flush=True)
         raise
 
 
@@ -348,21 +374,37 @@ def run_state(p):
         return "FAILED"
     if code == shell_code == 0:
         return "SUCCESS" if all((p["run"] / f).is_file() for f in ("weights/best.pt", "weights/last.pt", "results.csv")) else "FAILED"
+    if launch.get('status') in ('initializing','checking') and launch.get('pid'):
+        token=process_token(launch['pid'])
+        return 'CHECKING' if token and token==launch.get('process_token') else 'FAILED'
     if process:
         token = process_token(process["pid"])
         return ("RUNNING" if (p["launch"] / "training_state.json").is_file() else "DISPATCHED") if token and token == process.get("process_token") else ("DISPATCHED" if code == 0 else "FAILED")
     if launch.get("status") == "dispatched" and shutil.which("tmux"):
-        if subprocess.run(["tmux", "has-session", "-t", "c19_lif_v1-training"], capture_output=True).returncode:
+        if subprocess.run(["tmux", "has-session", "-t", "=c19_lif_v1-training"], capture_output=True).returncode:
             return "FAILED"
-    return {"dispatched": "DISPATCHED", "initializing": "DISPATCHED"}.get(launch.get("status"), "NOT_STARTED")
+    return {"dispatched": "DISPATCHED", "initializing": "CHECKING", "checking": "CHECKING"}.get(launch.get("status"), "NOT_STARTED")
 
 
 def status(variant):
     p = paths(variant)
     print(f"Experiment: {variant}\nRun: {p['run']}\nLog: {p['launch'] / 'console.log'}")
     print("STATE:", run_state(p))
+    lock=p['run'].with_name(p['run'].name+'.c19_lif_v1.lock')
+    print('Preflight log:',p['launch']/'preflight.log')
+    print('Shared lock:',lock,'PRESENT' if lock.exists() else 'ABSENT')
+    if (lock/'owner.json').is_file():
+        owner=json.loads((lock/'owner.json').read_text(encoding='utf-8'));print(json.dumps(owner,indent=2))
+        pid=owner.get('pid')
+        try:
+            require(type(pid) is int and pid>0,'Invalid owner PID')
+            os.kill(pid,0);owner_state='LIVE_OR_REUSED'
+        except ProcessLookupError:owner_state='DEAD'
+        except (OSError,RuntimeError):owner_state='UNKNOWN'
+        print('Owner PID state:',owner_state)
+    print('C19 worker PIDs:',duplicate_processes())
     if shutil.which("tmux"):
-        active = subprocess.run(["tmux", "has-session", "-t", "c19_lif_v1-training"], capture_output=True).returncode == 0
+        active = subprocess.run(["tmux", "has-session", "-t", "=c19_lif_v1-training"], capture_output=True).returncode == 0
         print("tmux active:", active)
     for name in ("launch_state.json", "process.json", "exit_code.json", "process_exit_code.txt"):
         path = p["launch"] / name

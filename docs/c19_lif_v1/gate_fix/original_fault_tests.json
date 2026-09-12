@@ -1,0 +1,565 @@
+{
+  "status": "PASSED",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "216bba006a61382ebecef4bc5eb44374e67a2c80",
+    "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    }
+  },
+  "formal_training": "NOT_RUN",
+  "full_val_test": "NOT_RUN",
+  "tests": {
+    "tensor_lif_conv": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "lif_conv",
+      "stage": "fault.lif_conv",
+      "device": "cpu",
+      "precision": "fp32",
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 2e-06,
+      "rtol": 2e-05,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.09999999962747097,
+      "max_rel_error": 0.9335055395749202,
+      "allclose_failed_count": 1,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        0,
+        0,
+        5
+      ],
+      "a": 0.0071230921894311905,
+      "b": 0.10712309181690216,
+      "reference_denominator": 0.10712309181690216,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "tensor_candidate_scores": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "candidate_scores",
+      "stage": "fault.candidate_scores",
+      "device": "cpu",
+      "precision": "fp32",
+      "shape": [
+        1,
+        630,
+        1
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 2e-06,
+      "rtol": 2e-05,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.10000002384185791,
+      "max_rel_error": 0.10744726526375438,
+      "allclose_failed_count": 1,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        5,
+        0
+      ],
+      "a": 0.8306893110275269,
+      "b": 0.9306893348693848,
+      "reference_denominator": 0.9306893348693848,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "tensor_query_layer_0": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "query_layer_0",
+      "stage": "fault.query_layer_0",
+      "device": "cpu",
+      "precision": "fp32",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 2e-06,
+      "rtol": 2e-05,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.10000002384185791,
+      "max_rel_error": 0.09393274219431219,
+      "allclose_failed_count": 1,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        0,
+        5
+      ],
+      "a": 0.9645917415618896,
+      "b": 1.0645917654037476,
+      "reference_denominator": 1.0645917654037476,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "tensor_cbr_after": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "cbr_after",
+      "stage": "fault.cbr_after",
+      "device": "cpu",
+      "precision": "fp32",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 2e-06,
+      "rtol": 2e-05,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.10000002384185791,
+      "max_rel_error": 0.10798618732078435,
+      "allclose_failed_count": 1,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        1,
+        1
+      ],
+      "a": 0.8260445594787598,
+      "b": 0.9260445833206177,
+      "reference_denominator": 0.9260445833206177,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "missing_required": {
+      "status": "FAILED_INCOMPLETE_DIAGNOSTIC",
+      "stage": "parent",
+      "key": "raw_boxes",
+      "reason": "Required tensor missing"
+    },
+    "integer_identity": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "candidate_indices",
+      "stage": "identity",
+      "device": "cpu",
+      "precision": "fp32",
+      "shape": [
+        1
+      ],
+      "dtype_a": "torch.int64",
+      "dtype_b": "torch.int64",
+      "atol": 2e-05,
+      "rtol": 0.0002,
+      "candidate_ids_available": false,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 1,
+      "max_rel_error": null,
+      "allclose_failed_count": 1,
+      "index": [
+        0
+      ],
+      "a": 1073741824,
+      "b": 1073741825,
+      "reference_denominator": 1073741825,
+      "reason": "Exact identity mismatch"
+    },
+    "legacy_float_ID_false_pass": {
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "atol": 2e-06,
+      "rtol": 2e-05
+    },
+    "wrong_id_dtype": {
+      "status": "FAILED_INCOMPLETE_DIAGNOSTIC",
+      "stage": "parent",
+      "key": "candidate_indices",
+      "reason": "IDs must be int64"
+    },
+    "wrong_shape": {
+      "status": "FAILED_INCOMPLETE_DIAGNOSTIC",
+      "key": "raw_scores",
+      "stage": "parent",
+      "device": "cpu",
+      "precision": "fp32",
+      "shape": [
+        1,
+        1,
+        300,
+        1
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 2e-06,
+      "rtol": 2e-05,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "shape_b": [
+        1,
+        1,
+        300,
+        0
+      ],
+      "reason": "Shape/dtype mismatch"
+    },
+    "nonfinite": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "scale_0",
+      "stage": "parent",
+      "device": "cpu",
+      "precision": "fp32",
+      "shape": [
+        1,
+        256,
+        20,
+        24
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 2e-06,
+      "rtol": 2e-05,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "reason": "Unexpected NaN/Inf"
+    },
+    "legal_masked_anchor": {
+      "key": "anchors",
+      "stage": "mask",
+      "device": "cpu",
+      "precision": "fp32",
+      "shape": [
+        2
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 2e-05,
+      "rtol": 0.0002,
+      "candidate_ids_available": false,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 1
+    },
+    "anchor_mask_changed": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "anchors",
+      "stage": "mask",
+      "device": "cpu",
+      "precision": "fp32",
+      "shape": [
+        2
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 2e-05,
+      "rtol": 0.0002,
+      "candidate_ids_available": false,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "reason": "Masked anchor nonfinite mask/value mismatch"
+    },
+    "same_set_bijection": "PASSED; all post-selection records restored by actual ID",
+    "legacy_row_permutation_false_failure": {
+      "error": "RuntimeError(\"Numerical mismatch: {'max_abs_error': 0.8750000596046448, 'max_rel_error': 14.000000953674316, 'atol': 2e-05, 'rtol': 0.0002}\")"
+    },
+    "different_set_rejected": {
+      "error": "RuntimeError('Alignment requires a candidate ID bijection')"
+    },
+    "native_gather_and_cleanup": "PASSED: actual selected features and reference anchors verified; normal/setup/forward exception cleanup exact",
+    "lif_residual_disabled": {
+      "status": "PASSED (injected failure detected)",
+      "failure": {
+        "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+        "key": "lif_residual",
+        "stage": "cpu.fp32.fuse.pre_selection",
+        "device": "cpu",
+        "precision": "fp32",
+        "shape": [
+          1,
+          256,
+          10,
+          12
+        ],
+        "dtype_a": "torch.float32",
+        "dtype_b": "torch.float32",
+        "atol": 2e-05,
+        "rtol": 0.0002,
+        "candidate_ids_available": true,
+        "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+        "max_abs_error": 0.0021206517703831196,
+        "max_rel_error": 2120651770.3831196,
+        "allclose_failed_count": 29600,
+        "masked_nonfinite_count": 0,
+        "index": [
+          0,
+          224,
+          0,
+          0
+        ],
+        "a": -0.0021206517703831196,
+        "b": -0.0,
+        "reference_denominator": 1e-12,
+        "reason": "Original allclose tolerance exceeded",
+        "phase": "pre_selection"
+      },
+      "partial_keys": [
+        "lif_input",
+        "lif_conv",
+        "lif_residual"
+      ]
+    },
+    "lif_bn_broken": {
+      "status": "PASSED (injected failure detected)",
+      "failure": {
+        "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+        "stage": "fusion_invariants",
+        "key": "lif_bn/state",
+        "reason": "LIF residual/BN state or ordinary fusion changed",
+        "phase": "fixture"
+      },
+      "partial_keys": []
+    },
+    "encoder_score": {
+      "status": "PASSED (injected failure detected)",
+      "failure": {
+        "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+        "key": "candidate_scores",
+        "stage": "cpu.fp32.fuse.pre_selection",
+        "device": "cpu",
+        "precision": "fp32",
+        "shape": [
+          1,
+          630,
+          1
+        ],
+        "dtype_a": "torch.float32",
+        "dtype_b": "torch.float32",
+        "atol": 2e-05,
+        "rtol": 0.0002,
+        "candidate_ids_available": true,
+        "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+        "max_abs_error": 0.10000061988830566,
+        "max_rel_error": 1.7777434138610146,
+        "allclose_failed_count": 630,
+        "masked_nonfinite_count": 0,
+        "index": [
+          0,
+          236,
+          0
+        ],
+        "a": 0.8954765796661377,
+        "b": 0.9954771995544434,
+        "reference_denominator": 0.9954771995544434,
+        "reason": "Original allclose tolerance exceeded",
+        "phase": "pre_selection"
+      },
+      "partial_keys": [
+        "lif_input",
+        "lif_conv",
+        "lif_residual",
+        "lif_pre_bn",
+        "lif_post_bn",
+        "scale_0",
+        "downsample",
+        "scale_1",
+        "scale_2",
+        "projection_0",
+        "projection_1",
+        "projection_2",
+        "flattened_features",
+        "encoder_features",
+        "candidate_scores"
+      ]
+    },
+    "query": {
+      "status": "PASSED (injected failure detected)",
+      "failure": {
+        "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+        "key": "query_layer_0",
+        "stage": "cpu.fp32.fuse.aligned",
+        "device": "cpu",
+        "precision": "fp32",
+        "shape": [
+          1,
+          300,
+          256
+        ],
+        "dtype_a": "torch.float32",
+        "dtype_b": "torch.float32",
+        "atol": 2e-05,
+        "rtol": 0.0002,
+        "candidate_ids_available": true,
+        "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+        "max_abs_error": 0.10000169277191162,
+        "max_rel_error": 12614.496240601504,
+        "allclose_failed_count": 76800,
+        "masked_nonfinite_count": 0,
+        "index": [
+          0,
+          270,
+          193
+        ],
+        "a": -1.266823410987854,
+        "b": -1.1668217182159424,
+        "reference_denominator": 1.1668217182159424,
+        "reason": "Original allclose tolerance exceeded",
+        "phase": "common_id_alignment"
+      },
+      "partial_keys": [
+        "lif_input",
+        "lif_conv",
+        "lif_residual",
+        "lif_pre_bn",
+        "lif_post_bn",
+        "scale_0",
+        "downsample",
+        "scale_1",
+        "scale_2",
+        "projection_0",
+        "projection_1",
+        "projection_2",
+        "flattened_features",
+        "encoder_features",
+        "candidate_scores",
+        "anchors",
+        "valid_mask"
+      ]
+    },
+    "cbr_output": {
+      "status": "PASSED (injected failure detected)",
+      "failure": {
+        "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+        "key": "cbr_residual",
+        "stage": "cpu.fp32.fuse.aligned",
+        "device": "cpu",
+        "precision": "fp32",
+        "shape": [
+          1,
+          300,
+          4
+        ],
+        "dtype_a": "torch.float32",
+        "dtype_b": "torch.float32",
+        "atol": 2e-05,
+        "rtol": 0.0002,
+        "candidate_ids_available": true,
+        "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+        "max_abs_error": 0.1000000536441803,
+        "max_rel_error": 0.9994861741375209,
+        "allclose_failed_count": 1200,
+        "masked_nonfinite_count": 0,
+        "index": [
+          0,
+          87,
+          1
+        ],
+        "a": 0.001041322946548462,
+        "b": 0.10104137659072876,
+        "reference_denominator": 0.10104137659072876,
+        "reason": "Original allclose tolerance exceeded",
+        "phase": "common_id_alignment"
+      },
+      "partial_keys": [
+        "lif_input",
+        "lif_conv",
+        "lif_residual",
+        "lif_pre_bn",
+        "lif_post_bn",
+        "scale_0",
+        "downsample",
+        "scale_1",
+        "scale_2",
+        "projection_0",
+        "projection_1",
+        "projection_2",
+        "flattened_features",
+        "encoder_features",
+        "candidate_scores",
+        "anchors",
+        "valid_mask"
+      ]
+    },
+    "trace_exception": {
+      "status": "PASSED (injected failure detected)",
+      "failure": {
+        "status": "FAILED_INCOMPLETE_DIAGNOSTIC",
+        "stage": "natural_trace",
+        "error": "RuntimeError('Injected trace failure')",
+        "traceback": "Traceback (most recent call last):\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\tools\\c19_lif_v1_diagnostic.py\", line 246, in fusion_protocol\n    records['natural_a']=a=run(unfused);records['natural_b']=b=run(fused)\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\tools\\c19_lif_v1_diagnostic.py\", line 229, in run\n    return capture(model,image,fixed_ids=ids)[1]\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\tools\\c19_lif_v1_probe.py\", line 152, in capture\n    return _capture(model,image,batch,fixed_ids,records,handles,patches)\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\tools\\c19_lif_v1_probe.py\", line 129, in _capture\n    value=model.predict(image,batch=batch)\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\ultralytics-main\\ultralytics\\nn\\tasks.py\", line 851, in predict\n    x = head([y[j] for j in head.f], batch)  # head inference\n  File \"D:\\miniconda3\\envs\\rtdetr\\lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1751, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"D:\\miniconda3\\envs\\rtdetr\\lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1857, in _call_impl\n    return inner()\n  File \"D:\\miniconda3\\envs\\rtdetr\\lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1805, in inner\n    result = forward_call(*args, **kwargs)\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py\", line 101, in forward\n    return self._forward_cbr(x, batch, False)\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py\", line 118, in _forward_cbr\n    embed, refer_bbox, enc_bboxes, enc_scores = self._get_decoder_input(feats, shapes, dn_embed, dn_bbox)\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\tools\\c19_lif_v1_probe.py\", line 87, in decoder_input\n    try:value=original_decoder_input(*args,**kwargs)\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\head.py\", line 1672, in _get_decoder_input\n    features = self.enc_output(self.valid_mask * feats)  # bs, h*w, 256\n  File \"D:\\miniconda3\\envs\\rtdetr\\lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1751, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"D:\\miniconda3\\envs\\rtdetr\\lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1857, in _call_impl\n    return inner()\n  File \"D:\\miniconda3\\envs\\rtdetr\\lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1818, in inner\n    hook_result = hook(self, args, result)\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\tools\\check_c19_lif_v1_fusion_fix.py\", line 88, in <lambda>\n    else:handles.append(fused.model[-1].enc_output.register_forward_hook(lambda *args:(_ for _ in ()).throw(RuntimeError('Injected trace failure'))))\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\tools\\check_c19_lif_v1_fusion_fix.py\", line 88, in <genexpr>\n    else:handles.append(fused.model[-1].enc_output.register_forward_hook(lambda *args:(_ for _ in ()).throw(RuntimeError('Injected trace failure'))))\nRuntimeError: Injected trace failure\n",
+        "phase": "natural_trace"
+      },
+      "partial_keys": []
+    },
+    "end_to_end_set_drift": {
+      "status": "REQUIRES_REVIEW",
+      "selection": "SET_DRIFT",
+      "margin_explained": false
+    },
+    "fixed_query_fault": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "query_layer_0",
+      "stage": "cpu.fp32.fuse.replay",
+      "device": "cpu",
+      "precision": "fp32",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 2e-05,
+      "rtol": 0.0002,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.10000169277191162,
+      "max_rel_error": 12614.496240601504,
+      "allclose_failed_count": 76800,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        270,
+        193
+      ],
+      "a": -1.266823410987854,
+      "b": -1.1668217182159424,
+      "reference_denominator": 1.1668217182159424,
+      "reason": "Original allclose tolerance exceeded",
+      "phase": "fixed_query_replay"
+    },
+    "partial_checks_json": "PASSED: atomic real checker failure report; failure remains FAILED",
+    "status_only_proof_rejected": {
+      "error": "RuntimeError('cpu.FP32 candidate-aware fusion gate missing/failed/requires review')"
+    },
+    "launch_blocks_REQUIRES_REVIEW": {
+      "error": "RuntimeError('cpu.FP32 candidate-aware fusion gate missing/failed/requires review')"
+    },
+    "launch_blocks_FAILED_REAL_NUMERICAL_MISMATCH": {
+      "error": "RuntimeError('cpu.FP32 candidate-aware fusion gate missing/failed/requires review')"
+    },
+    "launch_blocks_FAILED_INCOMPLETE_DIAGNOSTIC": {
+      "error": "RuntimeError('cpu.FP32 candidate-aware fusion gate missing/failed/requires review')"
+    },
+    "capacity_not_substituted": {
+      "error": "RuntimeError('B16/640 native AMP capacity gate missing/failed')"
+    }
+  }
+}

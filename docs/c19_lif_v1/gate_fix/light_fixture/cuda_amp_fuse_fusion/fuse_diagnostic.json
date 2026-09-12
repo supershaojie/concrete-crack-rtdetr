@@ -1,0 +1,6539 @@
+{
+  "status": "PASS_WITH_CANDIDATE_PERMUTATION",
+  "acceptance": "PASSED",
+  "device": "cuda",
+  "precision": "amp",
+  "formal_training": "NOT_RUN",
+  "runtime": {
+    "python": "3.10.13",
+    "torch": "2.1.2+cu121",
+    "cuda": "12.1",
+    "threads": 8,
+    "tf32": false,
+    "cudnn_tf32": false,
+    "deterministic": true
+  },
+  "pre_selection": {
+    "lif_input": {
+      "key": "lif_input",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        20,
+        24
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0001220703125,
+      "max_rel_error": 103.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "lif_conv": {
+      "key": "lif_conv",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 3.0517578125e-05,
+      "max_rel_error": 3635883.331298828,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "lif_residual": {
+      "key": "lif_residual",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 1.9073486328125e-06,
+      "max_rel_error": 536441.8029785156,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "lif_pre_bn": {
+      "key": "lif_pre_bn",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 6.103515625e-05,
+      "max_rel_error": 23841857.91015625,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "lif_post_bn": {
+      "key": "lif_post_bn",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0001220703125,
+      "max_rel_error": 10.222222222222221,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "scale_0": {
+      "key": "scale_0",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        20,
+        24
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0001220703125,
+      "max_rel_error": 103.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "downsample": {
+      "key": "downsample",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 6.103515625e-05,
+      "max_rel_error": 11.5,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "scale_1": {
+      "key": "scale_1",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 7.62939453125e-06,
+      "max_rel_error": 6.5,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "scale_2": {
+      "key": "scale_2",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        5,
+        6
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 9.1552734375e-05,
+      "max_rel_error": 5.46875,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "projection_0": {
+      "key": "projection_0",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        20,
+        24
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 9.1552734375e-05,
+      "max_rel_error": 73.5,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "projection_1": {
+      "key": "projection_1",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 4.291534423828125e-06,
+      "max_rel_error": 13.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "projection_2": {
+      "key": "projection_2",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        5,
+        6
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 7.62939453125e-05,
+      "max_rel_error": 12.675,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "flattened_features": {
+      "key": "flattened_features",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        630,
+        256
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 9.1552734375e-05,
+      "max_rel_error": 73.5,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "encoder_features": {
+      "key": "encoder_features",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        630,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.002462029457092285,
+      "max_rel_error": 18.86411485765362,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "candidate_scores": {
+      "key": "candidate_scores",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        630,
+        1
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0009765625,
+      "max_rel_error": 0.022632519356759976,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "anchors": {
+      "key": "anchors",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        630,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "valid_mask": {
+      "key": "valid_mask",
+      "stage": "cuda.amp.fuse.pre_selection",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        630,
+        1
+      ],
+      "dtype_a": "torch.bool",
+      "dtype_b": "torch.bool",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0,
+      "max_rel_error": null,
+      "allclose_failed_count": 0
+    }
+  },
+  "selection": {
+    "kind": "PERMUTATION",
+    "images": [
+      {
+        "image": 0,
+        "natural_a": [
+          385,
+          73,
+          361,
+          265,
+          313,
+          217,
+          169,
+          289,
+          193,
+          241,
+          97,
+          188,
+          145,
+          164,
+          337,
+          409,
+          92,
+          79,
+          91,
+          394,
+          83,
+          90,
+          121,
+          212,
+          395,
+          392,
+          402,
+          404,
+          298,
+          87,
+          396,
+          80,
+          81,
+          159,
+          388,
+          86,
+          386,
+          78,
+          116,
+          207,
+          231,
+          140,
+          352,
+          304,
+          328,
+          377,
+          160,
+          82,
+          260,
+          401,
+          135,
+          131,
+          279,
+          354,
+          111,
+          179,
+          299,
+          389,
+          103,
+          183,
+          230,
+          248,
+          398,
+          380,
+          390,
+          403,
+          88,
+          356,
+          391,
+          397,
+          353,
+          274,
+          74,
+          280,
+          301,
+          89,
+          107,
+          387,
+          393,
+          132,
+          155,
+          247,
+          256,
+          350,
+          281,
+          77,
+          134,
+          203,
+          208,
+          400,
+          236,
+          293,
+          399,
+          84,
+          104,
+          185,
+          187,
+          227,
+          255,
+          257,
+          172,
+          175,
+          232,
+          235,
+          244,
+          300,
+          347,
+          355,
+          184,
+          233,
+          250,
+          322,
+          341,
+          85,
+          151,
+          206,
+          224,
+          292,
+          295,
+          371,
+          378,
+          139,
+          158,
+          296,
+          346,
+          115,
+          171,
+          234,
+          284,
+          148,
+          209,
+          211,
+          290,
+          329,
+          106,
+          127,
+          266,
+          348,
+          136,
+          199,
+          277,
+          317,
+          332,
+          368,
+          229,
+          303,
+          308,
+          110,
+          128,
+          163,
+          278,
+          210,
+          275,
+          369,
+          416,
+          114,
+          219,
+          267,
+          302,
+          320,
+          75,
+          130,
+          200,
+          343,
+          349,
+          351,
+          418,
+          186,
+          223,
+          276,
+          291,
+          129,
+          133,
+          243,
+          294,
+          318,
+          362,
+          126,
+          124,
+          196,
+          259,
+          372,
+          101,
+          122,
+          182,
+          374,
+          376,
+          76,
+          105,
+          149,
+          270,
+          370,
+          100,
+          226,
+          245,
+          297,
+          323,
+          330,
+          373,
+          253,
+          283,
+          414,
+          125,
+          152,
+          154,
+          176,
+          272,
+          365,
+          417,
+          98,
+          112,
+          249,
+          344,
+          109,
+          137,
+          218,
+          305,
+          314,
+          428,
+          102,
+          108,
+          319,
+          342,
+          113,
+          156,
+          178,
+          228,
+          271,
+          307,
+          324,
+          420,
+          423,
+          222,
+          282,
+          325,
+          174,
+          246,
+          331,
+          161,
+          254,
+          177,
+          379,
+          419,
+          195,
+          327,
+          366,
+          220,
+          225,
+          306,
+          338,
+          375,
+          425,
+          138,
+          157,
+          162,
+          367,
+          422,
+          123,
+          205,
+          198,
+          242,
+          315,
+          340,
+          202,
+          99,
+          150,
+          316,
+          326,
+          363,
+          197,
+          321,
+          345,
+          427,
+          201,
+          153,
+          251,
+          180,
+          221,
+          258,
+          273,
+          364,
+          421,
+          204,
+          268,
+          424,
+          339,
+          410,
+          426,
+          252,
+          146,
+          170,
+          173,
+          269,
+          413,
+          147,
+          181,
+          412,
+          189,
+          411,
+          194
+        ],
+        "natural_b": [
+          385,
+          73,
+          361,
+          265,
+          313,
+          217,
+          169,
+          289,
+          193,
+          241,
+          97,
+          188,
+          164,
+          145,
+          337,
+          92,
+          79,
+          409,
+          91,
+          394,
+          83,
+          90,
+          121,
+          212,
+          395,
+          298,
+          392,
+          402,
+          404,
+          87,
+          388,
+          396,
+          80,
+          81,
+          86,
+          159,
+          78,
+          207,
+          352,
+          386,
+          116,
+          140,
+          231,
+          304,
+          328,
+          377,
+          260,
+          82,
+          135,
+          160,
+          401,
+          279,
+          131,
+          354,
+          111,
+          179,
+          389,
+          103,
+          248,
+          299,
+          398,
+          183,
+          230,
+          380,
+          390,
+          88,
+          356,
+          391,
+          397,
+          403,
+          353,
+          274,
+          74,
+          89,
+          280,
+          301,
+          387,
+          393,
+          107,
+          350,
+          132,
+          247,
+          256,
+          77,
+          155,
+          134,
+          208,
+          281,
+          400,
+          203,
+          236,
+          257,
+          293,
+          399,
+          84,
+          185,
+          244,
+          255,
+          355,
+          104,
+          172,
+          175,
+          187,
+          227,
+          235,
+          250,
+          347,
+          184,
+          232,
+          233,
+          300,
+          322,
+          341,
+          85,
+          151,
+          224,
+          292,
+          295,
+          296,
+          371,
+          139,
+          206,
+          346,
+          378,
+          158,
+          171,
+          211,
+          234,
+          284,
+          290,
+          106,
+          115,
+          148,
+          209,
+          329,
+          127,
+          136,
+          199,
+          266,
+          348,
+          277,
+          317,
+          332,
+          303,
+          308,
+          368,
+          128,
+          163,
+          229,
+          110,
+          114,
+          210,
+          267,
+          275,
+          278,
+          369,
+          416,
+          75,
+          302,
+          343,
+          349,
+          130,
+          200,
+          219,
+          276,
+          320,
+          351,
+          418,
+          129,
+          186,
+          243,
+          291,
+          294,
+          318,
+          133,
+          223,
+          362,
+          372,
+          124,
+          126,
+          259,
+          122,
+          196,
+          376,
+          101,
+          374,
+          76,
+          105,
+          149,
+          182,
+          270,
+          100,
+          226,
+          245,
+          297,
+          323,
+          330,
+          370,
+          373,
+          414,
+          98,
+          125,
+          152,
+          154,
+          176,
+          253,
+          283,
+          417,
+          109,
+          112,
+          272,
+          344,
+          365,
+          137,
+          249,
+          305,
+          314,
+          108,
+          218,
+          428,
+          102,
+          113,
+          156,
+          228,
+          271,
+          307,
+          319,
+          324,
+          342,
+          423,
+          178,
+          420,
+          222,
+          325,
+          161,
+          174,
+          246,
+          282,
+          177,
+          254,
+          331,
+          379,
+          195,
+          327,
+          366,
+          419,
+          157,
+          162,
+          338,
+          367,
+          375,
+          422,
+          425,
+          138,
+          220,
+          225,
+          306,
+          123,
+          198,
+          205,
+          242,
+          340,
+          315,
+          202,
+          316,
+          326,
+          99,
+          150,
+          321,
+          197,
+          201,
+          345,
+          363,
+          427,
+          221,
+          251,
+          153,
+          180,
+          273,
+          258,
+          364,
+          421,
+          204,
+          268,
+          339,
+          410,
+          424,
+          426,
+          146,
+          252,
+          170,
+          147,
+          173,
+          269,
+          413,
+          181,
+          412,
+          189,
+          411,
+          194
+        ],
+        "changed_positions": 214,
+        "a_only": [],
+        "b_only": [],
+        "common_count": 300,
+        "score_disturbance_e": 0.0009765625,
+        "margin_bound": 0.005859375,
+        "floating_slack": 0.00390625,
+        "exchanges": [],
+        "margin_explained": true,
+        "cutoff_gap_a": 0.00048828125,
+        "cutoff_gap_b": 0.0
+      }
+    ],
+    "coordinates_a": [
+      [
+        [
+          385,
+          0,
+          16,
+          1
+        ],
+        [
+          73,
+          0,
+          3,
+          1
+        ],
+        [
+          361,
+          0,
+          15,
+          1
+        ],
+        [
+          265,
+          0,
+          11,
+          1
+        ],
+        [
+          313,
+          0,
+          13,
+          1
+        ],
+        [
+          217,
+          0,
+          9,
+          1
+        ],
+        [
+          169,
+          0,
+          7,
+          1
+        ],
+        [
+          289,
+          0,
+          12,
+          1
+        ],
+        [
+          193,
+          0,
+          8,
+          1
+        ],
+        [
+          241,
+          0,
+          10,
+          1
+        ],
+        [
+          97,
+          0,
+          4,
+          1
+        ],
+        [
+          188,
+          0,
+          7,
+          20
+        ],
+        [
+          145,
+          0,
+          6,
+          1
+        ],
+        [
+          164,
+          0,
+          6,
+          20
+        ],
+        [
+          337,
+          0,
+          14,
+          1
+        ],
+        [
+          409,
+          0,
+          17,
+          1
+        ],
+        [
+          92,
+          0,
+          3,
+          20
+        ],
+        [
+          79,
+          0,
+          3,
+          7
+        ],
+        [
+          91,
+          0,
+          3,
+          19
+        ],
+        [
+          394,
+          0,
+          16,
+          10
+        ],
+        [
+          83,
+          0,
+          3,
+          11
+        ],
+        [
+          90,
+          0,
+          3,
+          18
+        ],
+        [
+          121,
+          0,
+          5,
+          1
+        ],
+        [
+          212,
+          0,
+          8,
+          20
+        ],
+        [
+          395,
+          0,
+          16,
+          11
+        ],
+        [
+          392,
+          0,
+          16,
+          8
+        ],
+        [
+          402,
+          0,
+          16,
+          18
+        ],
+        [
+          404,
+          0,
+          16,
+          20
+        ],
+        [
+          298,
+          0,
+          12,
+          10
+        ],
+        [
+          87,
+          0,
+          3,
+          15
+        ],
+        [
+          396,
+          0,
+          16,
+          12
+        ],
+        [
+          80,
+          0,
+          3,
+          8
+        ],
+        [
+          81,
+          0,
+          3,
+          9
+        ],
+        [
+          159,
+          0,
+          6,
+          15
+        ],
+        [
+          388,
+          0,
+          16,
+          4
+        ],
+        [
+          86,
+          0,
+          3,
+          14
+        ],
+        [
+          386,
+          0,
+          16,
+          2
+        ],
+        [
+          78,
+          0,
+          3,
+          6
+        ],
+        [
+          116,
+          0,
+          4,
+          20
+        ],
+        [
+          207,
+          0,
+          8,
+          15
+        ],
+        [
+          231,
+          0,
+          9,
+          15
+        ],
+        [
+          140,
+          0,
+          5,
+          20
+        ],
+        [
+          352,
+          0,
+          14,
+          16
+        ],
+        [
+          304,
+          0,
+          12,
+          16
+        ],
+        [
+          328,
+          0,
+          13,
+          16
+        ],
+        [
+          377,
+          0,
+          15,
+          17
+        ],
+        [
+          160,
+          0,
+          6,
+          16
+        ],
+        [
+          82,
+          0,
+          3,
+          10
+        ],
+        [
+          260,
+          0,
+          10,
+          20
+        ],
+        [
+          401,
+          0,
+          16,
+          17
+        ],
+        [
+          135,
+          0,
+          5,
+          15
+        ],
+        [
+          131,
+          0,
+          5,
+          11
+        ],
+        [
+          279,
+          0,
+          11,
+          15
+        ],
+        [
+          354,
+          0,
+          14,
+          18
+        ],
+        [
+          111,
+          0,
+          4,
+          15
+        ],
+        [
+          179,
+          0,
+          7,
+          11
+        ],
+        [
+          299,
+          0,
+          12,
+          11
+        ],
+        [
+          389,
+          0,
+          16,
+          5
+        ],
+        [
+          103,
+          0,
+          4,
+          7
+        ],
+        [
+          183,
+          0,
+          7,
+          15
+        ],
+        [
+          230,
+          0,
+          9,
+          14
+        ],
+        [
+          248,
+          0,
+          10,
+          8
+        ],
+        [
+          398,
+          0,
+          16,
+          14
+        ],
+        [
+          380,
+          0,
+          15,
+          20
+        ],
+        [
+          390,
+          0,
+          16,
+          6
+        ],
+        [
+          403,
+          0,
+          16,
+          19
+        ],
+        [
+          88,
+          0,
+          3,
+          16
+        ],
+        [
+          356,
+          0,
+          14,
+          20
+        ],
+        [
+          391,
+          0,
+          16,
+          7
+        ],
+        [
+          397,
+          0,
+          16,
+          13
+        ],
+        [
+          353,
+          0,
+          14,
+          17
+        ],
+        [
+          274,
+          0,
+          11,
+          10
+        ],
+        [
+          74,
+          0,
+          3,
+          2
+        ],
+        [
+          280,
+          0,
+          11,
+          16
+        ],
+        [
+          301,
+          0,
+          12,
+          13
+        ],
+        [
+          89,
+          0,
+          3,
+          17
+        ],
+        [
+          107,
+          0,
+          4,
+          11
+        ],
+        [
+          387,
+          0,
+          16,
+          3
+        ],
+        [
+          393,
+          0,
+          16,
+          9
+        ],
+        [
+          132,
+          0,
+          5,
+          12
+        ],
+        [
+          155,
+          0,
+          6,
+          11
+        ],
+        [
+          247,
+          0,
+          10,
+          7
+        ],
+        [
+          256,
+          0,
+          10,
+          16
+        ],
+        [
+          350,
+          0,
+          14,
+          14
+        ],
+        [
+          281,
+          0,
+          11,
+          17
+        ],
+        [
+          77,
+          0,
+          3,
+          5
+        ],
+        [
+          134,
+          0,
+          5,
+          14
+        ],
+        [
+          203,
+          0,
+          8,
+          11
+        ],
+        [
+          208,
+          0,
+          8,
+          16
+        ],
+        [
+          400,
+          0,
+          16,
+          16
+        ],
+        [
+          236,
+          0,
+          9,
+          20
+        ],
+        [
+          293,
+          0,
+          12,
+          5
+        ],
+        [
+          399,
+          0,
+          16,
+          15
+        ],
+        [
+          84,
+          0,
+          3,
+          12
+        ],
+        [
+          104,
+          0,
+          4,
+          8
+        ],
+        [
+          185,
+          0,
+          7,
+          17
+        ],
+        [
+          187,
+          0,
+          7,
+          19
+        ],
+        [
+          227,
+          0,
+          9,
+          11
+        ],
+        [
+          255,
+          0,
+          10,
+          15
+        ],
+        [
+          257,
+          0,
+          10,
+          17
+        ],
+        [
+          172,
+          0,
+          7,
+          4
+        ],
+        [
+          175,
+          0,
+          7,
+          7
+        ],
+        [
+          232,
+          0,
+          9,
+          16
+        ],
+        [
+          235,
+          0,
+          9,
+          19
+        ],
+        [
+          244,
+          0,
+          10,
+          4
+        ],
+        [
+          300,
+          0,
+          12,
+          12
+        ],
+        [
+          347,
+          0,
+          14,
+          11
+        ],
+        [
+          355,
+          0,
+          14,
+          19
+        ],
+        [
+          184,
+          0,
+          7,
+          16
+        ],
+        [
+          233,
+          0,
+          9,
+          17
+        ],
+        [
+          250,
+          0,
+          10,
+          10
+        ],
+        [
+          322,
+          0,
+          13,
+          10
+        ],
+        [
+          341,
+          0,
+          14,
+          5
+        ],
+        [
+          85,
+          0,
+          3,
+          13
+        ],
+        [
+          151,
+          0,
+          6,
+          7
+        ],
+        [
+          206,
+          0,
+          8,
+          14
+        ],
+        [
+          224,
+          0,
+          9,
+          8
+        ],
+        [
+          292,
+          0,
+          12,
+          4
+        ],
+        [
+          295,
+          0,
+          12,
+          7
+        ],
+        [
+          371,
+          0,
+          15,
+          11
+        ],
+        [
+          378,
+          0,
+          15,
+          18
+        ],
+        [
+          139,
+          0,
+          5,
+          19
+        ],
+        [
+          158,
+          0,
+          6,
+          14
+        ],
+        [
+          296,
+          0,
+          12,
+          8
+        ],
+        [
+          346,
+          0,
+          14,
+          10
+        ],
+        [
+          115,
+          0,
+          4,
+          19
+        ],
+        [
+          171,
+          0,
+          7,
+          3
+        ],
+        [
+          234,
+          0,
+          9,
+          18
+        ],
+        [
+          284,
+          0,
+          11,
+          20
+        ],
+        [
+          148,
+          0,
+          6,
+          4
+        ],
+        [
+          209,
+          0,
+          8,
+          17
+        ],
+        [
+          211,
+          0,
+          8,
+          19
+        ],
+        [
+          290,
+          0,
+          12,
+          2
+        ],
+        [
+          329,
+          0,
+          13,
+          17
+        ],
+        [
+          106,
+          0,
+          4,
+          10
+        ],
+        [
+          127,
+          0,
+          5,
+          7
+        ],
+        [
+          266,
+          0,
+          11,
+          2
+        ],
+        [
+          348,
+          0,
+          14,
+          12
+        ],
+        [
+          136,
+          0,
+          5,
+          16
+        ],
+        [
+          199,
+          0,
+          8,
+          7
+        ],
+        [
+          277,
+          0,
+          11,
+          13
+        ],
+        [
+          317,
+          0,
+          13,
+          5
+        ],
+        [
+          332,
+          0,
+          13,
+          20
+        ],
+        [
+          368,
+          0,
+          15,
+          8
+        ],
+        [
+          229,
+          0,
+          9,
+          13
+        ],
+        [
+          303,
+          0,
+          12,
+          15
+        ],
+        [
+          308,
+          0,
+          12,
+          20
+        ],
+        [
+          110,
+          0,
+          4,
+          14
+        ],
+        [
+          128,
+          0,
+          5,
+          8
+        ],
+        [
+          163,
+          0,
+          6,
+          19
+        ],
+        [
+          278,
+          0,
+          11,
+          14
+        ],
+        [
+          210,
+          0,
+          8,
+          18
+        ],
+        [
+          275,
+          0,
+          11,
+          11
+        ],
+        [
+          369,
+          0,
+          15,
+          9
+        ],
+        [
+          416,
+          0,
+          17,
+          8
+        ],
+        [
+          114,
+          0,
+          4,
+          18
+        ],
+        [
+          219,
+          0,
+          9,
+          3
+        ],
+        [
+          267,
+          0,
+          11,
+          3
+        ],
+        [
+          302,
+          0,
+          12,
+          14
+        ],
+        [
+          320,
+          0,
+          13,
+          8
+        ],
+        [
+          75,
+          0,
+          3,
+          3
+        ],
+        [
+          130,
+          0,
+          5,
+          10
+        ],
+        [
+          200,
+          0,
+          8,
+          8
+        ],
+        [
+          343,
+          0,
+          14,
+          7
+        ],
+        [
+          349,
+          0,
+          14,
+          13
+        ],
+        [
+          351,
+          0,
+          14,
+          15
+        ],
+        [
+          418,
+          0,
+          17,
+          10
+        ],
+        [
+          186,
+          0,
+          7,
+          18
+        ],
+        [
+          223,
+          0,
+          9,
+          7
+        ],
+        [
+          276,
+          0,
+          11,
+          12
+        ],
+        [
+          291,
+          0,
+          12,
+          3
+        ],
+        [
+          129,
+          0,
+          5,
+          9
+        ],
+        [
+          133,
+          0,
+          5,
+          13
+        ],
+        [
+          243,
+          0,
+          10,
+          3
+        ],
+        [
+          294,
+          0,
+          12,
+          6
+        ],
+        [
+          318,
+          0,
+          13,
+          6
+        ],
+        [
+          362,
+          0,
+          15,
+          2
+        ],
+        [
+          126,
+          0,
+          5,
+          6
+        ],
+        [
+          124,
+          0,
+          5,
+          4
+        ],
+        [
+          196,
+          0,
+          8,
+          4
+        ],
+        [
+          259,
+          0,
+          10,
+          19
+        ],
+        [
+          372,
+          0,
+          15,
+          12
+        ],
+        [
+          101,
+          0,
+          4,
+          5
+        ],
+        [
+          122,
+          0,
+          5,
+          2
+        ],
+        [
+          182,
+          0,
+          7,
+          14
+        ],
+        [
+          374,
+          0,
+          15,
+          14
+        ],
+        [
+          376,
+          0,
+          15,
+          16
+        ],
+        [
+          76,
+          0,
+          3,
+          4
+        ],
+        [
+          105,
+          0,
+          4,
+          9
+        ],
+        [
+          149,
+          0,
+          6,
+          5
+        ],
+        [
+          270,
+          0,
+          11,
+          6
+        ],
+        [
+          370,
+          0,
+          15,
+          10
+        ],
+        [
+          100,
+          0,
+          4,
+          4
+        ],
+        [
+          226,
+          0,
+          9,
+          10
+        ],
+        [
+          245,
+          0,
+          10,
+          5
+        ],
+        [
+          297,
+          0,
+          12,
+          9
+        ],
+        [
+          323,
+          0,
+          13,
+          11
+        ],
+        [
+          330,
+          0,
+          13,
+          18
+        ],
+        [
+          373,
+          0,
+          15,
+          13
+        ],
+        [
+          253,
+          0,
+          10,
+          13
+        ],
+        [
+          283,
+          0,
+          11,
+          19
+        ],
+        [
+          414,
+          0,
+          17,
+          6
+        ],
+        [
+          125,
+          0,
+          5,
+          5
+        ],
+        [
+          152,
+          0,
+          6,
+          8
+        ],
+        [
+          154,
+          0,
+          6,
+          10
+        ],
+        [
+          176,
+          0,
+          7,
+          8
+        ],
+        [
+          272,
+          0,
+          11,
+          8
+        ],
+        [
+          365,
+          0,
+          15,
+          5
+        ],
+        [
+          417,
+          0,
+          17,
+          9
+        ],
+        [
+          98,
+          0,
+          4,
+          2
+        ],
+        [
+          112,
+          0,
+          4,
+          16
+        ],
+        [
+          249,
+          0,
+          10,
+          9
+        ],
+        [
+          344,
+          0,
+          14,
+          8
+        ],
+        [
+          109,
+          0,
+          4,
+          13
+        ],
+        [
+          137,
+          0,
+          5,
+          17
+        ],
+        [
+          218,
+          0,
+          9,
+          2
+        ],
+        [
+          305,
+          0,
+          12,
+          17
+        ],
+        [
+          314,
+          0,
+          13,
+          2
+        ],
+        [
+          428,
+          0,
+          17,
+          20
+        ],
+        [
+          102,
+          0,
+          4,
+          6
+        ],
+        [
+          108,
+          0,
+          4,
+          12
+        ],
+        [
+          319,
+          0,
+          13,
+          7
+        ],
+        [
+          342,
+          0,
+          14,
+          6
+        ],
+        [
+          113,
+          0,
+          4,
+          17
+        ],
+        [
+          156,
+          0,
+          6,
+          12
+        ],
+        [
+          178,
+          0,
+          7,
+          10
+        ],
+        [
+          228,
+          0,
+          9,
+          12
+        ],
+        [
+          271,
+          0,
+          11,
+          7
+        ],
+        [
+          307,
+          0,
+          12,
+          19
+        ],
+        [
+          324,
+          0,
+          13,
+          12
+        ],
+        [
+          420,
+          0,
+          17,
+          12
+        ],
+        [
+          423,
+          0,
+          17,
+          15
+        ],
+        [
+          222,
+          0,
+          9,
+          6
+        ],
+        [
+          282,
+          0,
+          11,
+          18
+        ],
+        [
+          325,
+          0,
+          13,
+          13
+        ],
+        [
+          174,
+          0,
+          7,
+          6
+        ],
+        [
+          246,
+          0,
+          10,
+          6
+        ],
+        [
+          331,
+          0,
+          13,
+          19
+        ],
+        [
+          161,
+          0,
+          6,
+          17
+        ],
+        [
+          254,
+          0,
+          10,
+          14
+        ],
+        [
+          177,
+          0,
+          7,
+          9
+        ],
+        [
+          379,
+          0,
+          15,
+          19
+        ],
+        [
+          419,
+          0,
+          17,
+          11
+        ],
+        [
+          195,
+          0,
+          8,
+          3
+        ],
+        [
+          327,
+          0,
+          13,
+          15
+        ],
+        [
+          366,
+          0,
+          15,
+          6
+        ],
+        [
+          220,
+          0,
+          9,
+          4
+        ],
+        [
+          225,
+          0,
+          9,
+          9
+        ],
+        [
+          306,
+          0,
+          12,
+          18
+        ],
+        [
+          338,
+          0,
+          14,
+          2
+        ],
+        [
+          375,
+          0,
+          15,
+          15
+        ],
+        [
+          425,
+          0,
+          17,
+          17
+        ],
+        [
+          138,
+          0,
+          5,
+          18
+        ],
+        [
+          157,
+          0,
+          6,
+          13
+        ],
+        [
+          162,
+          0,
+          6,
+          18
+        ],
+        [
+          367,
+          0,
+          15,
+          7
+        ],
+        [
+          422,
+          0,
+          17,
+          14
+        ],
+        [
+          123,
+          0,
+          5,
+          3
+        ],
+        [
+          205,
+          0,
+          8,
+          13
+        ],
+        [
+          198,
+          0,
+          8,
+          6
+        ],
+        [
+          242,
+          0,
+          10,
+          2
+        ],
+        [
+          315,
+          0,
+          13,
+          3
+        ],
+        [
+          340,
+          0,
+          14,
+          4
+        ],
+        [
+          202,
+          0,
+          8,
+          10
+        ],
+        [
+          99,
+          0,
+          4,
+          3
+        ],
+        [
+          150,
+          0,
+          6,
+          6
+        ],
+        [
+          316,
+          0,
+          13,
+          4
+        ],
+        [
+          326,
+          0,
+          13,
+          14
+        ],
+        [
+          363,
+          0,
+          15,
+          3
+        ],
+        [
+          197,
+          0,
+          8,
+          5
+        ],
+        [
+          321,
+          0,
+          13,
+          9
+        ],
+        [
+          345,
+          0,
+          14,
+          9
+        ],
+        [
+          427,
+          0,
+          17,
+          19
+        ],
+        [
+          201,
+          0,
+          8,
+          9
+        ],
+        [
+          153,
+          0,
+          6,
+          9
+        ],
+        [
+          251,
+          0,
+          10,
+          11
+        ],
+        [
+          180,
+          0,
+          7,
+          12
+        ],
+        [
+          221,
+          0,
+          9,
+          5
+        ],
+        [
+          258,
+          0,
+          10,
+          18
+        ],
+        [
+          273,
+          0,
+          11,
+          9
+        ],
+        [
+          364,
+          0,
+          15,
+          4
+        ],
+        [
+          421,
+          0,
+          17,
+          13
+        ],
+        [
+          204,
+          0,
+          8,
+          12
+        ],
+        [
+          268,
+          0,
+          11,
+          4
+        ],
+        [
+          424,
+          0,
+          17,
+          16
+        ],
+        [
+          339,
+          0,
+          14,
+          3
+        ],
+        [
+          410,
+          0,
+          17,
+          2
+        ],
+        [
+          426,
+          0,
+          17,
+          18
+        ],
+        [
+          252,
+          0,
+          10,
+          12
+        ],
+        [
+          146,
+          0,
+          6,
+          2
+        ],
+        [
+          170,
+          0,
+          7,
+          2
+        ],
+        [
+          173,
+          0,
+          7,
+          5
+        ],
+        [
+          269,
+          0,
+          11,
+          5
+        ],
+        [
+          413,
+          0,
+          17,
+          5
+        ],
+        [
+          147,
+          0,
+          6,
+          3
+        ],
+        [
+          181,
+          0,
+          7,
+          13
+        ],
+        [
+          412,
+          0,
+          17,
+          4
+        ],
+        [
+          189,
+          0,
+          7,
+          21
+        ],
+        [
+          411,
+          0,
+          17,
+          3
+        ],
+        [
+          194,
+          0,
+          8,
+          2
+        ]
+      ]
+    ],
+    "coordinates_b": [
+      [
+        [
+          385,
+          0,
+          16,
+          1
+        ],
+        [
+          73,
+          0,
+          3,
+          1
+        ],
+        [
+          361,
+          0,
+          15,
+          1
+        ],
+        [
+          265,
+          0,
+          11,
+          1
+        ],
+        [
+          313,
+          0,
+          13,
+          1
+        ],
+        [
+          217,
+          0,
+          9,
+          1
+        ],
+        [
+          169,
+          0,
+          7,
+          1
+        ],
+        [
+          289,
+          0,
+          12,
+          1
+        ],
+        [
+          193,
+          0,
+          8,
+          1
+        ],
+        [
+          241,
+          0,
+          10,
+          1
+        ],
+        [
+          97,
+          0,
+          4,
+          1
+        ],
+        [
+          188,
+          0,
+          7,
+          20
+        ],
+        [
+          164,
+          0,
+          6,
+          20
+        ],
+        [
+          145,
+          0,
+          6,
+          1
+        ],
+        [
+          337,
+          0,
+          14,
+          1
+        ],
+        [
+          92,
+          0,
+          3,
+          20
+        ],
+        [
+          79,
+          0,
+          3,
+          7
+        ],
+        [
+          409,
+          0,
+          17,
+          1
+        ],
+        [
+          91,
+          0,
+          3,
+          19
+        ],
+        [
+          394,
+          0,
+          16,
+          10
+        ],
+        [
+          83,
+          0,
+          3,
+          11
+        ],
+        [
+          90,
+          0,
+          3,
+          18
+        ],
+        [
+          121,
+          0,
+          5,
+          1
+        ],
+        [
+          212,
+          0,
+          8,
+          20
+        ],
+        [
+          395,
+          0,
+          16,
+          11
+        ],
+        [
+          298,
+          0,
+          12,
+          10
+        ],
+        [
+          392,
+          0,
+          16,
+          8
+        ],
+        [
+          402,
+          0,
+          16,
+          18
+        ],
+        [
+          404,
+          0,
+          16,
+          20
+        ],
+        [
+          87,
+          0,
+          3,
+          15
+        ],
+        [
+          388,
+          0,
+          16,
+          4
+        ],
+        [
+          396,
+          0,
+          16,
+          12
+        ],
+        [
+          80,
+          0,
+          3,
+          8
+        ],
+        [
+          81,
+          0,
+          3,
+          9
+        ],
+        [
+          86,
+          0,
+          3,
+          14
+        ],
+        [
+          159,
+          0,
+          6,
+          15
+        ],
+        [
+          78,
+          0,
+          3,
+          6
+        ],
+        [
+          207,
+          0,
+          8,
+          15
+        ],
+        [
+          352,
+          0,
+          14,
+          16
+        ],
+        [
+          386,
+          0,
+          16,
+          2
+        ],
+        [
+          116,
+          0,
+          4,
+          20
+        ],
+        [
+          140,
+          0,
+          5,
+          20
+        ],
+        [
+          231,
+          0,
+          9,
+          15
+        ],
+        [
+          304,
+          0,
+          12,
+          16
+        ],
+        [
+          328,
+          0,
+          13,
+          16
+        ],
+        [
+          377,
+          0,
+          15,
+          17
+        ],
+        [
+          260,
+          0,
+          10,
+          20
+        ],
+        [
+          82,
+          0,
+          3,
+          10
+        ],
+        [
+          135,
+          0,
+          5,
+          15
+        ],
+        [
+          160,
+          0,
+          6,
+          16
+        ],
+        [
+          401,
+          0,
+          16,
+          17
+        ],
+        [
+          279,
+          0,
+          11,
+          15
+        ],
+        [
+          131,
+          0,
+          5,
+          11
+        ],
+        [
+          354,
+          0,
+          14,
+          18
+        ],
+        [
+          111,
+          0,
+          4,
+          15
+        ],
+        [
+          179,
+          0,
+          7,
+          11
+        ],
+        [
+          389,
+          0,
+          16,
+          5
+        ],
+        [
+          103,
+          0,
+          4,
+          7
+        ],
+        [
+          248,
+          0,
+          10,
+          8
+        ],
+        [
+          299,
+          0,
+          12,
+          11
+        ],
+        [
+          398,
+          0,
+          16,
+          14
+        ],
+        [
+          183,
+          0,
+          7,
+          15
+        ],
+        [
+          230,
+          0,
+          9,
+          14
+        ],
+        [
+          380,
+          0,
+          15,
+          20
+        ],
+        [
+          390,
+          0,
+          16,
+          6
+        ],
+        [
+          88,
+          0,
+          3,
+          16
+        ],
+        [
+          356,
+          0,
+          14,
+          20
+        ],
+        [
+          391,
+          0,
+          16,
+          7
+        ],
+        [
+          397,
+          0,
+          16,
+          13
+        ],
+        [
+          403,
+          0,
+          16,
+          19
+        ],
+        [
+          353,
+          0,
+          14,
+          17
+        ],
+        [
+          274,
+          0,
+          11,
+          10
+        ],
+        [
+          74,
+          0,
+          3,
+          2
+        ],
+        [
+          89,
+          0,
+          3,
+          17
+        ],
+        [
+          280,
+          0,
+          11,
+          16
+        ],
+        [
+          301,
+          0,
+          12,
+          13
+        ],
+        [
+          387,
+          0,
+          16,
+          3
+        ],
+        [
+          393,
+          0,
+          16,
+          9
+        ],
+        [
+          107,
+          0,
+          4,
+          11
+        ],
+        [
+          350,
+          0,
+          14,
+          14
+        ],
+        [
+          132,
+          0,
+          5,
+          12
+        ],
+        [
+          247,
+          0,
+          10,
+          7
+        ],
+        [
+          256,
+          0,
+          10,
+          16
+        ],
+        [
+          77,
+          0,
+          3,
+          5
+        ],
+        [
+          155,
+          0,
+          6,
+          11
+        ],
+        [
+          134,
+          0,
+          5,
+          14
+        ],
+        [
+          208,
+          0,
+          8,
+          16
+        ],
+        [
+          281,
+          0,
+          11,
+          17
+        ],
+        [
+          400,
+          0,
+          16,
+          16
+        ],
+        [
+          203,
+          0,
+          8,
+          11
+        ],
+        [
+          236,
+          0,
+          9,
+          20
+        ],
+        [
+          257,
+          0,
+          10,
+          17
+        ],
+        [
+          293,
+          0,
+          12,
+          5
+        ],
+        [
+          399,
+          0,
+          16,
+          15
+        ],
+        [
+          84,
+          0,
+          3,
+          12
+        ],
+        [
+          185,
+          0,
+          7,
+          17
+        ],
+        [
+          244,
+          0,
+          10,
+          4
+        ],
+        [
+          255,
+          0,
+          10,
+          15
+        ],
+        [
+          355,
+          0,
+          14,
+          19
+        ],
+        [
+          104,
+          0,
+          4,
+          8
+        ],
+        [
+          172,
+          0,
+          7,
+          4
+        ],
+        [
+          175,
+          0,
+          7,
+          7
+        ],
+        [
+          187,
+          0,
+          7,
+          19
+        ],
+        [
+          227,
+          0,
+          9,
+          11
+        ],
+        [
+          235,
+          0,
+          9,
+          19
+        ],
+        [
+          250,
+          0,
+          10,
+          10
+        ],
+        [
+          347,
+          0,
+          14,
+          11
+        ],
+        [
+          184,
+          0,
+          7,
+          16
+        ],
+        [
+          232,
+          0,
+          9,
+          16
+        ],
+        [
+          233,
+          0,
+          9,
+          17
+        ],
+        [
+          300,
+          0,
+          12,
+          12
+        ],
+        [
+          322,
+          0,
+          13,
+          10
+        ],
+        [
+          341,
+          0,
+          14,
+          5
+        ],
+        [
+          85,
+          0,
+          3,
+          13
+        ],
+        [
+          151,
+          0,
+          6,
+          7
+        ],
+        [
+          224,
+          0,
+          9,
+          8
+        ],
+        [
+          292,
+          0,
+          12,
+          4
+        ],
+        [
+          295,
+          0,
+          12,
+          7
+        ],
+        [
+          296,
+          0,
+          12,
+          8
+        ],
+        [
+          371,
+          0,
+          15,
+          11
+        ],
+        [
+          139,
+          0,
+          5,
+          19
+        ],
+        [
+          206,
+          0,
+          8,
+          14
+        ],
+        [
+          346,
+          0,
+          14,
+          10
+        ],
+        [
+          378,
+          0,
+          15,
+          18
+        ],
+        [
+          158,
+          0,
+          6,
+          14
+        ],
+        [
+          171,
+          0,
+          7,
+          3
+        ],
+        [
+          211,
+          0,
+          8,
+          19
+        ],
+        [
+          234,
+          0,
+          9,
+          18
+        ],
+        [
+          284,
+          0,
+          11,
+          20
+        ],
+        [
+          290,
+          0,
+          12,
+          2
+        ],
+        [
+          106,
+          0,
+          4,
+          10
+        ],
+        [
+          115,
+          0,
+          4,
+          19
+        ],
+        [
+          148,
+          0,
+          6,
+          4
+        ],
+        [
+          209,
+          0,
+          8,
+          17
+        ],
+        [
+          329,
+          0,
+          13,
+          17
+        ],
+        [
+          127,
+          0,
+          5,
+          7
+        ],
+        [
+          136,
+          0,
+          5,
+          16
+        ],
+        [
+          199,
+          0,
+          8,
+          7
+        ],
+        [
+          266,
+          0,
+          11,
+          2
+        ],
+        [
+          348,
+          0,
+          14,
+          12
+        ],
+        [
+          277,
+          0,
+          11,
+          13
+        ],
+        [
+          317,
+          0,
+          13,
+          5
+        ],
+        [
+          332,
+          0,
+          13,
+          20
+        ],
+        [
+          303,
+          0,
+          12,
+          15
+        ],
+        [
+          308,
+          0,
+          12,
+          20
+        ],
+        [
+          368,
+          0,
+          15,
+          8
+        ],
+        [
+          128,
+          0,
+          5,
+          8
+        ],
+        [
+          163,
+          0,
+          6,
+          19
+        ],
+        [
+          229,
+          0,
+          9,
+          13
+        ],
+        [
+          110,
+          0,
+          4,
+          14
+        ],
+        [
+          114,
+          0,
+          4,
+          18
+        ],
+        [
+          210,
+          0,
+          8,
+          18
+        ],
+        [
+          267,
+          0,
+          11,
+          3
+        ],
+        [
+          275,
+          0,
+          11,
+          11
+        ],
+        [
+          278,
+          0,
+          11,
+          14
+        ],
+        [
+          369,
+          0,
+          15,
+          9
+        ],
+        [
+          416,
+          0,
+          17,
+          8
+        ],
+        [
+          75,
+          0,
+          3,
+          3
+        ],
+        [
+          302,
+          0,
+          12,
+          14
+        ],
+        [
+          343,
+          0,
+          14,
+          7
+        ],
+        [
+          349,
+          0,
+          14,
+          13
+        ],
+        [
+          130,
+          0,
+          5,
+          10
+        ],
+        [
+          200,
+          0,
+          8,
+          8
+        ],
+        [
+          219,
+          0,
+          9,
+          3
+        ],
+        [
+          276,
+          0,
+          11,
+          12
+        ],
+        [
+          320,
+          0,
+          13,
+          8
+        ],
+        [
+          351,
+          0,
+          14,
+          15
+        ],
+        [
+          418,
+          0,
+          17,
+          10
+        ],
+        [
+          129,
+          0,
+          5,
+          9
+        ],
+        [
+          186,
+          0,
+          7,
+          18
+        ],
+        [
+          243,
+          0,
+          10,
+          3
+        ],
+        [
+          291,
+          0,
+          12,
+          3
+        ],
+        [
+          294,
+          0,
+          12,
+          6
+        ],
+        [
+          318,
+          0,
+          13,
+          6
+        ],
+        [
+          133,
+          0,
+          5,
+          13
+        ],
+        [
+          223,
+          0,
+          9,
+          7
+        ],
+        [
+          362,
+          0,
+          15,
+          2
+        ],
+        [
+          372,
+          0,
+          15,
+          12
+        ],
+        [
+          124,
+          0,
+          5,
+          4
+        ],
+        [
+          126,
+          0,
+          5,
+          6
+        ],
+        [
+          259,
+          0,
+          10,
+          19
+        ],
+        [
+          122,
+          0,
+          5,
+          2
+        ],
+        [
+          196,
+          0,
+          8,
+          4
+        ],
+        [
+          376,
+          0,
+          15,
+          16
+        ],
+        [
+          101,
+          0,
+          4,
+          5
+        ],
+        [
+          374,
+          0,
+          15,
+          14
+        ],
+        [
+          76,
+          0,
+          3,
+          4
+        ],
+        [
+          105,
+          0,
+          4,
+          9
+        ],
+        [
+          149,
+          0,
+          6,
+          5
+        ],
+        [
+          182,
+          0,
+          7,
+          14
+        ],
+        [
+          270,
+          0,
+          11,
+          6
+        ],
+        [
+          100,
+          0,
+          4,
+          4
+        ],
+        [
+          226,
+          0,
+          9,
+          10
+        ],
+        [
+          245,
+          0,
+          10,
+          5
+        ],
+        [
+          297,
+          0,
+          12,
+          9
+        ],
+        [
+          323,
+          0,
+          13,
+          11
+        ],
+        [
+          330,
+          0,
+          13,
+          18
+        ],
+        [
+          370,
+          0,
+          15,
+          10
+        ],
+        [
+          373,
+          0,
+          15,
+          13
+        ],
+        [
+          414,
+          0,
+          17,
+          6
+        ],
+        [
+          98,
+          0,
+          4,
+          2
+        ],
+        [
+          125,
+          0,
+          5,
+          5
+        ],
+        [
+          152,
+          0,
+          6,
+          8
+        ],
+        [
+          154,
+          0,
+          6,
+          10
+        ],
+        [
+          176,
+          0,
+          7,
+          8
+        ],
+        [
+          253,
+          0,
+          10,
+          13
+        ],
+        [
+          283,
+          0,
+          11,
+          19
+        ],
+        [
+          417,
+          0,
+          17,
+          9
+        ],
+        [
+          109,
+          0,
+          4,
+          13
+        ],
+        [
+          112,
+          0,
+          4,
+          16
+        ],
+        [
+          272,
+          0,
+          11,
+          8
+        ],
+        [
+          344,
+          0,
+          14,
+          8
+        ],
+        [
+          365,
+          0,
+          15,
+          5
+        ],
+        [
+          137,
+          0,
+          5,
+          17
+        ],
+        [
+          249,
+          0,
+          10,
+          9
+        ],
+        [
+          305,
+          0,
+          12,
+          17
+        ],
+        [
+          314,
+          0,
+          13,
+          2
+        ],
+        [
+          108,
+          0,
+          4,
+          12
+        ],
+        [
+          218,
+          0,
+          9,
+          2
+        ],
+        [
+          428,
+          0,
+          17,
+          20
+        ],
+        [
+          102,
+          0,
+          4,
+          6
+        ],
+        [
+          113,
+          0,
+          4,
+          17
+        ],
+        [
+          156,
+          0,
+          6,
+          12
+        ],
+        [
+          228,
+          0,
+          9,
+          12
+        ],
+        [
+          271,
+          0,
+          11,
+          7
+        ],
+        [
+          307,
+          0,
+          12,
+          19
+        ],
+        [
+          319,
+          0,
+          13,
+          7
+        ],
+        [
+          324,
+          0,
+          13,
+          12
+        ],
+        [
+          342,
+          0,
+          14,
+          6
+        ],
+        [
+          423,
+          0,
+          17,
+          15
+        ],
+        [
+          178,
+          0,
+          7,
+          10
+        ],
+        [
+          420,
+          0,
+          17,
+          12
+        ],
+        [
+          222,
+          0,
+          9,
+          6
+        ],
+        [
+          325,
+          0,
+          13,
+          13
+        ],
+        [
+          161,
+          0,
+          6,
+          17
+        ],
+        [
+          174,
+          0,
+          7,
+          6
+        ],
+        [
+          246,
+          0,
+          10,
+          6
+        ],
+        [
+          282,
+          0,
+          11,
+          18
+        ],
+        [
+          177,
+          0,
+          7,
+          9
+        ],
+        [
+          254,
+          0,
+          10,
+          14
+        ],
+        [
+          331,
+          0,
+          13,
+          19
+        ],
+        [
+          379,
+          0,
+          15,
+          19
+        ],
+        [
+          195,
+          0,
+          8,
+          3
+        ],
+        [
+          327,
+          0,
+          13,
+          15
+        ],
+        [
+          366,
+          0,
+          15,
+          6
+        ],
+        [
+          419,
+          0,
+          17,
+          11
+        ],
+        [
+          157,
+          0,
+          6,
+          13
+        ],
+        [
+          162,
+          0,
+          6,
+          18
+        ],
+        [
+          338,
+          0,
+          14,
+          2
+        ],
+        [
+          367,
+          0,
+          15,
+          7
+        ],
+        [
+          375,
+          0,
+          15,
+          15
+        ],
+        [
+          422,
+          0,
+          17,
+          14
+        ],
+        [
+          425,
+          0,
+          17,
+          17
+        ],
+        [
+          138,
+          0,
+          5,
+          18
+        ],
+        [
+          220,
+          0,
+          9,
+          4
+        ],
+        [
+          225,
+          0,
+          9,
+          9
+        ],
+        [
+          306,
+          0,
+          12,
+          18
+        ],
+        [
+          123,
+          0,
+          5,
+          3
+        ],
+        [
+          198,
+          0,
+          8,
+          6
+        ],
+        [
+          205,
+          0,
+          8,
+          13
+        ],
+        [
+          242,
+          0,
+          10,
+          2
+        ],
+        [
+          340,
+          0,
+          14,
+          4
+        ],
+        [
+          315,
+          0,
+          13,
+          3
+        ],
+        [
+          202,
+          0,
+          8,
+          10
+        ],
+        [
+          316,
+          0,
+          13,
+          4
+        ],
+        [
+          326,
+          0,
+          13,
+          14
+        ],
+        [
+          99,
+          0,
+          4,
+          3
+        ],
+        [
+          150,
+          0,
+          6,
+          6
+        ],
+        [
+          321,
+          0,
+          13,
+          9
+        ],
+        [
+          197,
+          0,
+          8,
+          5
+        ],
+        [
+          201,
+          0,
+          8,
+          9
+        ],
+        [
+          345,
+          0,
+          14,
+          9
+        ],
+        [
+          363,
+          0,
+          15,
+          3
+        ],
+        [
+          427,
+          0,
+          17,
+          19
+        ],
+        [
+          221,
+          0,
+          9,
+          5
+        ],
+        [
+          251,
+          0,
+          10,
+          11
+        ],
+        [
+          153,
+          0,
+          6,
+          9
+        ],
+        [
+          180,
+          0,
+          7,
+          12
+        ],
+        [
+          273,
+          0,
+          11,
+          9
+        ],
+        [
+          258,
+          0,
+          10,
+          18
+        ],
+        [
+          364,
+          0,
+          15,
+          4
+        ],
+        [
+          421,
+          0,
+          17,
+          13
+        ],
+        [
+          204,
+          0,
+          8,
+          12
+        ],
+        [
+          268,
+          0,
+          11,
+          4
+        ],
+        [
+          339,
+          0,
+          14,
+          3
+        ],
+        [
+          410,
+          0,
+          17,
+          2
+        ],
+        [
+          424,
+          0,
+          17,
+          16
+        ],
+        [
+          426,
+          0,
+          17,
+          18
+        ],
+        [
+          146,
+          0,
+          6,
+          2
+        ],
+        [
+          252,
+          0,
+          10,
+          12
+        ],
+        [
+          170,
+          0,
+          7,
+          2
+        ],
+        [
+          147,
+          0,
+          6,
+          3
+        ],
+        [
+          173,
+          0,
+          7,
+          5
+        ],
+        [
+          269,
+          0,
+          11,
+          5
+        ],
+        [
+          413,
+          0,
+          17,
+          5
+        ],
+        [
+          181,
+          0,
+          7,
+          13
+        ],
+        [
+          412,
+          0,
+          17,
+          4
+        ],
+        [
+          189,
+          0,
+          7,
+          21
+        ],
+        [
+          411,
+          0,
+          17,
+          3
+        ],
+        [
+          194,
+          0,
+          8,
+          2
+        ]
+      ]
+    ]
+  },
+  "natural_outputs": {
+    "selected_features": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "selected_features",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.5483825206756592,
+      "max_rel_error": 1047.6544961817494,
+      "allclose_failed_count": 22362,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        15,
+        128
+      ],
+      "a": -1.7131179571151733,
+      "b": -1.1647354364395142,
+      "reference_denominator": 1.1647354364395142,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "selected_anchors": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "selected_anchors",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 4.475712299346924,
+      "max_rel_error": 26.806236698899223,
+      "allclose_failed_count": 393,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        12,
+        0
+      ],
+      "a": -2.70805025100708,
+      "b": 1.7676620483398438,
+      "reference_denominator": 1.7676620483398438,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "selected_bbox_delta": {
+      "key": "selected_bbox_delta",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "reference_boxes": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "reference_boxes",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 4.475712299346924,
+      "max_rel_error": 26.806236698899223,
+      "allclose_failed_count": 393,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        12,
+        0
+      ],
+      "a": -2.70805025100708,
+      "b": 1.7676620483398438,
+      "reference_denominator": 1.7676620483398438,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "decoder_embeddings": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "decoder_embeddings",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.5483825206756592,
+      "max_rel_error": 1047.6544961817494,
+      "allclose_failed_count": 22362,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        15,
+        128
+      ],
+      "a": -1.7131179571151733,
+      "b": -1.1647354364395142,
+      "reference_denominator": 1.1647354364395142,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "enc_boxes": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "enc_boxes",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.7916666865348816,
+      "max_rel_error": 12.666666984558105,
+      "allclose_failed_count": 393,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        12,
+        0
+      ],
+      "a": 0.0625,
+      "b": 0.8541666865348816,
+      "reference_denominator": 0.8541666865348816,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "enc_scores": {
+      "key": "enc_scores",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        1
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.00048828125,
+      "max_rel_error": 0.0005567928730512249,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "query_layer_0": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "query_layer_0",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.49487340450286865,
+      "max_rel_error": 1559.3563050130554,
+      "allclose_failed_count": 21131,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        15,
+        128
+      ],
+      "a": -2.11877179145813,
+      "b": -1.6238983869552612,
+      "reference_denominator": 1.6238983869552612,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "query_layer_1": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "query_layer_1",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.38722777366638184,
+      "max_rel_error": 419.5139260859781,
+      "allclose_failed_count": 19118,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        15,
+        128
+      ],
+      "a": -2.0104644298553467,
+      "b": -1.6232366561889648,
+      "reference_denominator": 1.6232366561889648,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "query_layer_2": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "query_layer_2",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.32073527574539185,
+      "max_rel_error": 243.9480499093755,
+      "allclose_failed_count": 17660,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        12,
+        4
+      ],
+      "a": -0.8641862273216248,
+      "b": -1.1849215030670166,
+      "reference_denominator": 1.1849215030670166,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "raw_boxes": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "raw_boxes",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.7916666865348816,
+      "max_rel_error": 12.666666984558105,
+      "allclose_failed_count": 393,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        0,
+        12,
+        0
+      ],
+      "a": 0.0625,
+      "b": 0.8541666865348816,
+      "reference_denominator": 0.8541666865348816,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "raw_scores": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "raw_scores",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        1,
+        300,
+        1
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.2138671875,
+      "max_rel_error": 0.4093457943925234,
+      "allclose_failed_count": 32,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        0,
+        17,
+        0
+      ],
+      "a": 0.736328125,
+      "b": 0.5224609375,
+      "reference_denominator": 0.5224609375,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "returned_query": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "returned_query",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.32073527574539185,
+      "max_rel_error": 243.9480499093755,
+      "allclose_failed_count": 17660,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        12,
+        4
+      ],
+      "a": -0.8641862273216248,
+      "b": -1.1849215030670166,
+      "reference_denominator": 1.1849215030670166,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "cbr_p3": {
+      "key": "cbr_p3",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        20,
+        24
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0001220703125,
+      "max_rel_error": 103.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "cbr_query": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "cbr_query",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.32073527574539185,
+      "max_rel_error": 243.9480499093755,
+      "allclose_failed_count": 17660,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        12,
+        4
+      ],
+      "a": -0.8641862273216248,
+      "b": -1.1849215030670166,
+      "reference_denominator": 1.1849215030670166,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "cbr_before": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "cbr_before",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.7916666865348816,
+      "max_rel_error": 12.666666984558105,
+      "allclose_failed_count": 393,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        12,
+        0
+      ],
+      "a": 0.0625,
+      "b": 0.8541666865348816,
+      "reference_denominator": 0.8541666865348816,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "cbr_offsets": {
+      "key": "cbr_offsets",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4,
+        1
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.002197265625,
+      "max_rel_error": 0.012753188297074268,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "cbr_residual": {
+      "key": "cbr_residual",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 1.163780689239502e-05,
+      "max_rel_error": 0.1337615071719118,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "cbr_after": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "cbr_after",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.7916738092899323,
+      "max_rel_error": 12.499586332807697,
+      "allclose_failed_count": 393,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        15,
+        0
+      ],
+      "a": 0.06333556771278381,
+      "b": 0.8550093770027161,
+      "reference_denominator": 0.8550093770027161,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "boxes": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "boxes",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.7916738092899323,
+      "max_rel_error": 12.499586332807697,
+      "allclose_failed_count": 393,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        0,
+        15,
+        0
+      ],
+      "a": 0.06333556771278381,
+      "b": 0.8550093770027161,
+      "reference_denominator": 0.8550093770027161,
+      "reason": "Original allclose tolerance exceeded"
+    },
+    "scores": {
+      "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+      "key": "scores",
+      "stage": "cuda.amp.fuse.natural",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        1,
+        300,
+        1
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.2138671875,
+      "max_rel_error": 0.4093457943925234,
+      "allclose_failed_count": 32,
+      "masked_nonfinite_count": 0,
+      "index": [
+        0,
+        0,
+        17,
+        0
+      ],
+      "a": 0.736328125,
+      "b": 0.5224609375,
+      "reference_denominator": 0.5224609375,
+      "reason": "Original allclose tolerance exceeded"
+    }
+  },
+  "common_id_alignment": {
+    "selected_features": {
+      "key": "selected_features",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0021289587020874023,
+      "max_rel_error": 7.134529878139333,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "selected_anchors": {
+      "key": "selected_anchors",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "selected_bbox_delta": {
+      "key": "selected_bbox_delta",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "reference_boxes": {
+      "key": "reference_boxes",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "decoder_embeddings": {
+      "key": "decoder_embeddings",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0021289587020874023,
+      "max_rel_error": 7.134529878139333,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "enc_boxes": {
+      "key": "enc_boxes",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "enc_scores": {
+      "key": "enc_scores",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        1
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0009765625,
+      "max_rel_error": 0.0010660980810234541,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "query_layer_0": {
+      "key": "query_layer_0",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0027834177017211914,
+      "max_rel_error": 12.637343894386525,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "query_layer_1": {
+      "key": "query_layer_1",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.002264261245727539,
+      "max_rel_error": 16.964074673190943,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "query_layer_2": {
+      "key": "query_layer_2",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0019407868385314941,
+      "max_rel_error": 9.886850250614055,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "raw_boxes": {
+      "key": "raw_boxes",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "raw_scores": {
+      "key": "raw_scores",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        1,
+        300,
+        1
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0009765625,
+      "max_rel_error": 0.0013568521031207597,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "returned_query": {
+      "key": "returned_query",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0019407868385314941,
+      "max_rel_error": 9.886850250614055,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "cbr_p3": {
+      "key": "cbr_p3",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        20,
+        24
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0001220703125,
+      "max_rel_error": 103.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "cbr_query": {
+      "key": "cbr_query",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0019407868385314941,
+      "max_rel_error": 9.886850250614055,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "cbr_before": {
+      "key": "cbr_before",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "cbr_offsets": {
+      "key": "cbr_offsets",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4,
+        1
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0001220703125,
+      "max_rel_error": 0.000749063670411985,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "cbr_residual": {
+      "key": "cbr_residual",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 1.1883676052093506e-06,
+      "max_rel_error": 0.021545319465081723,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "cbr_after": {
+      "key": "cbr_after",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 1.1883676052093506e-06,
+      "max_rel_error": 2.374116209192831e-05,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "boxes": {
+      "key": "boxes",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 1.1883676052093506e-06,
+      "max_rel_error": 2.374116209192831e-05,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "scores": {
+      "key": "scores",
+      "stage": "cuda.amp.fuse.aligned",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        1,
+        300,
+        1
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0009765625,
+      "max_rel_error": 0.0013568521031207597,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    }
+  },
+  "fixed_query_replay": {
+    "lif_input": {
+      "key": "lif_input",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        20,
+        24
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0001220703125,
+      "max_rel_error": 103.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "lif_conv": {
+      "key": "lif_conv",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 3.0517578125e-05,
+      "max_rel_error": 3635883.331298828,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "lif_residual": {
+      "key": "lif_residual",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 1.9073486328125e-06,
+      "max_rel_error": 536441.8029785156,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "lif_pre_bn": {
+      "key": "lif_pre_bn",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 6.103515625e-05,
+      "max_rel_error": 23841857.91015625,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "lif_post_bn": {
+      "key": "lif_post_bn",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0001220703125,
+      "max_rel_error": 10.222222222222221,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "scale_0": {
+      "key": "scale_0",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        20,
+        24
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0001220703125,
+      "max_rel_error": 103.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "downsample": {
+      "key": "downsample",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 6.103515625e-05,
+      "max_rel_error": 11.5,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "scale_1": {
+      "key": "scale_1",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 7.62939453125e-06,
+      "max_rel_error": 6.5,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "scale_2": {
+      "key": "scale_2",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        5,
+        6
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 9.1552734375e-05,
+      "max_rel_error": 5.46875,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "projection_0": {
+      "key": "projection_0",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        20,
+        24
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 9.1552734375e-05,
+      "max_rel_error": 73.5,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "projection_1": {
+      "key": "projection_1",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        10,
+        12
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 4.291534423828125e-06,
+      "max_rel_error": 13.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "projection_2": {
+      "key": "projection_2",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        5,
+        6
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 7.62939453125e-05,
+      "max_rel_error": 12.675,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "flattened_features": {
+      "key": "flattened_features",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        630,
+        256
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 9.1552734375e-05,
+      "max_rel_error": 73.5,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "encoder_features": {
+      "key": "encoder_features",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        630,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.002462029457092285,
+      "max_rel_error": 18.86411485765362,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "candidate_scores": {
+      "key": "candidate_scores",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        630,
+        1
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0009765625,
+      "max_rel_error": 0.022632519356759976,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "anchors": {
+      "key": "anchors",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        630,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "valid_mask": {
+      "key": "valid_mask",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        630,
+        1
+      ],
+      "dtype_a": "torch.bool",
+      "dtype_b": "torch.bool",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0,
+      "max_rel_error": null,
+      "allclose_failed_count": 0
+    },
+    "candidate_indices": {
+      "key": "candidate_indices",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300
+      ],
+      "dtype_a": "torch.int64",
+      "dtype_b": "torch.int64",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0,
+      "max_rel_error": null,
+      "allclose_failed_count": 0
+    },
+    "selected_features": {
+      "key": "selected_features",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0021289587020874023,
+      "max_rel_error": 7.134529878139333,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "selected_anchors": {
+      "key": "selected_anchors",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "selected_bbox_delta": {
+      "key": "selected_bbox_delta",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "reference_boxes": {
+      "key": "reference_boxes",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "decoder_embeddings": {
+      "key": "decoder_embeddings",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0021289587020874023,
+      "max_rel_error": 7.134529878139333,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "enc_boxes": {
+      "key": "enc_boxes",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "enc_scores": {
+      "key": "enc_scores",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        1
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0009765625,
+      "max_rel_error": 0.0010660980810234541,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "query_layer_0": {
+      "key": "query_layer_0",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0027834177017211914,
+      "max_rel_error": 12.637343894386525,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "query_layer_1": {
+      "key": "query_layer_1",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0022737979888916016,
+      "max_rel_error": 136.7757384818705,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "query_layer_2": {
+      "key": "query_layer_2",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0019281506538391113,
+      "max_rel_error": 9.181970056215718,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "raw_boxes": {
+      "key": "raw_boxes",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "raw_scores": {
+      "key": "raw_scores",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        1,
+        300,
+        1
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0009765625,
+      "max_rel_error": 0.001364256480218281,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "returned_query": {
+      "key": "returned_query",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0019281506538391113,
+      "max_rel_error": 9.181970056215718,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "cbr_p3": {
+      "key": "cbr_p3",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        256,
+        20,
+        24
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0001220703125,
+      "max_rel_error": 103.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "cbr_query": {
+      "key": "cbr_query",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        256
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0019281506538391113,
+      "max_rel_error": 9.181970056215718,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "cbr_before": {
+      "key": "cbr_before",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0,
+      "max_rel_error": 0.0,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "cbr_offsets": {
+      "key": "cbr_offsets",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4,
+        1
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0001220703125,
+      "max_rel_error": 0.000749063670411985,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "cbr_residual": {
+      "key": "cbr_residual",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 1.1883676052093506e-06,
+      "max_rel_error": 0.021950714433630152,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "cbr_after": {
+      "key": "cbr_after",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 1.1883676052093506e-06,
+      "max_rel_error": 2.374116209192831e-05,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "boxes": {
+      "key": "boxes",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        1,
+        300,
+        4
+      ],
+      "dtype_a": "torch.float32",
+      "dtype_b": "torch.float32",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 1.1883676052093506e-06,
+      "max_rel_error": 2.374116209192831e-05,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    },
+    "scores": {
+      "key": "scores",
+      "stage": "cuda.amp.fuse.replay",
+      "device": "cuda",
+      "precision": "amp",
+      "shape": [
+        1,
+        1,
+        300,
+        1
+      ],
+      "dtype_a": "torch.float16",
+      "dtype_b": "torch.float16",
+      "atol": 0.003,
+      "rtol": 0.03,
+      "candidate_ids_available": true,
+      "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+      "max_abs_error": 0.0009765625,
+      "max_rel_error": 0.001364256480218281,
+      "allclose_failed_count": 0,
+      "masked_nonfinite_count": 0
+    }
+  },
+  "failure": null,
+  "natural_outputs_scope": "Unaligned row comparisons; leaf mismatches do not diagnose an operator until candidate identity/alignment/replay is checked",
+  "tolerances": {
+    "atol": 0.003,
+    "rtol": 0.03
+  },
+  "fixture": {
+    "path": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-preflightfix/outputs/c19_lif_v1_manual_preflight_20260912_175414_64c88f5f/checks/cuda_amp_fuse_fusion/fixture.pt",
+    "sha256": "ef2041bc5a2447549268b4688bf82a16744a15f1009da8220058d4480aef31bb"
+  },
+  "source_hashes": {
+    "tools/c19_lif_v1_diagnostic.py": "5d7801901362ad47893b8f1f2195e0666730aa20f8cee763f39cc335b6cd0f06",
+    "tools/c19_lif_v1_probe.py": "1f146aca02d953917cc1d4fed0c650fff0422ede0521d903387444c199b5eb07",
+    "ultralytics-main/ultralytics/nn/modules/lif_down.py": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+    "ultralytics-main/ultralytics/nn/modules/cbr.py": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+    "ultralytics-main/ultralytics/nn/modules/head.py": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+    "ultralytics-main/ultralytics/nn/modules/transformer.py": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602",
+    "ultralytics-main/ultralytics/nn/tasks.py": "c5a19e3eaf10acf2a5aa6a53e4a3f9afd01d7b79e4f9a41744af9755d6ebcbd8"
+  },
+  "operator_status": "OPERATOR_CHECK_PASSED",
+  "records": {
+    "path": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-preflightfix/outputs/c19_lif_v1_manual_preflight_20260912_175414_64c88f5f/checks/cuda_amp_fuse_fusion/records.pt",
+    "sha256": "f559a9b59df06413f60452d59b7ae0063370bd35dfbd2e637d2c97580162cb58"
+  }
+}

@@ -10,6 +10,7 @@ import torch
 from init_c19_lif_v1 import controlled_models,build_training_model,require,runtime,sha256,build
 from check_c19_lif_v1 import degenerations,fuse_checks
 from c19_lif_v1_diagnostic import atomic_json,fusion_protocol,PASS,restore_rng
+from c19_lif_v1_cutoff import fusion_accepted
 from ultralytics import RTDETR
 from ultralytics.utils.patches import torch_load
 
@@ -32,18 +33,30 @@ def run(args):
         report.update(mapping=mapping,trainer_rebuild=adapt);persist()
         if args.fixture:
             fixture=torch_load(args.fixture,map_location='cpu')
-            device=fixture['device'];precision=fixture['precision']
-            model=deepcopy(target).eval().to(device)
-            if precision=='half':model.half()
-            model.load_state_dict(fixture['unfused'],strict=True)
-            fused=deepcopy(target).eval().fuse(verbose=False).to(device)
-            if precision=='half':fused.half()
-            fused.load_state_dict(fixture['fused'],strict=True)
+            device=fixture['device'];precision=args.precision or fixture['precision']
+            source_model=None
+            if 'state' in fixture:
+                source_model=deepcopy(target).eval().to(device);source_model.load_state_dict(fixture['state'],strict=True)
+                model=deepcopy(source_model);fused=deepcopy(source_model).fuse(verbose=False)
+                if precision=='half':model.half();fused.half()
+            else:
+                require(args.precision is None or args.precision==fixture['precision'],'Old per-mode fixture cannot change precision')
+                model=deepcopy(target).eval().to(device)
+                if precision=='half':model.half()
+                model.load_state_dict(fixture['unfused'],strict=True)
+                fused=deepcopy(target).eval().fuse(verbose=False).to(device)
+                if precision=='half':fused.half()
+                fused.load_state_dict(fixture['fused'],strict=True)
+                if precision!='half':source_model=model
             def parent():
-                p=build('C2',nc=1).eval();p.load_state_dict({k:model.state_dict()[k].float().cpu() for k in p.state_dict()},strict=True);return p
+                reference=source_model if source_model is not None else model
+                p=build('C2',nc=1).eval();p.load_state_dict({k:reference.state_dict()[k].float().cpu() for k in p.state_dict()},strict=True);return p
             restore_rng(fixture['rng'])
-            result=fusion_protocol(model,fused,fixture['image'].to(device),args.output/'fixture_replay',device,precision,parent)
-            report['fixture_replay']=result;report['status']='PASSED' if result['status'] in PASS else 'REQUIRES_REVIEW'
+            image=fixture['image'].to(device)
+            if precision=='half':image=image.half()
+            result=fusion_protocol(model,fused,image,args.output/'fixture_replay',device,precision,parent,source_model,
+                                   fixture_reference=dict(path=str(args.fixture),sha256=sha256(args.fixture)))
+            report['fixture_replay']=result;report['status']='PASSED' if fusion_accepted(result) else 'REQUIRES_REVIEW'
         else:
             for device in args.devices:
                 if device=='cuda' and not torch.cuda.is_available():
@@ -73,5 +86,6 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     for name in ('source','initialized','output'):parser.add_argument('--'+name,type=Path,required=True)
     parser.add_argument('--devices',nargs='+',choices=['cpu','cuda'],default=['cpu','cuda'])
+    parser.add_argument('--precision',choices=['fp32','half','amp'],help='Optional mode for a shared FP32 fixture')
     parser.add_argument('--fixture',type=Path,help='Replay a saved diagnostic fixture; never a trained checkpoint')
     raise SystemExit(run(parser.parse_args()))

@@ -1,0 +1,238 @@
+{
+  "status": "PASSED",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "216bba006a61382ebecef4bc5eb44374e67a2c80",
+    "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    }
+  },
+  "formal_training": "NOT_RUN",
+  "tests": {
+    "LIGHT_original_review": {
+      "original_status": "REQUIRES_REVIEW",
+      "review": {
+        "accepted": false,
+        "status": "REQUIRES_REVIEW",
+        "acceptance": "BLOCKED",
+        "reason": "New dynamic diagnostic evidence required"
+      },
+      "missing_dynamic": [
+        "B-set pair replay",
+        "A/B C2 replay",
+        "FP64 local cutoff statistics",
+        "strict source mapping/trace proof"
+      ],
+      "cpu_raw_0_2_explained": true
+    },
+    "native_cutoff_acceptance": {
+      "status": "PASS_WITH_BASELINE_CUTOFF_TIE",
+      "scope": "test-only injected logits; actual original model operators and native topk/gather",
+      "pair_B": {
+        "key": "boxes",
+        "stage": "cuda.half.fuse.replay_B",
+        "device": "cuda",
+        "precision": "half",
+        "shape": [
+          1,
+          1,
+          300,
+          4
+        ],
+        "dtype_a": "torch.float32",
+        "dtype_b": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.03,
+        "candidate_ids_available": true,
+        "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+        "max_abs_error": 1.1846423149108887e-06,
+        "max_rel_error": 2.730300410317788e-05,
+        "allclose_failed_count": 0,
+        "masked_nonfinite_count": 0
+      },
+      "parent_A": {
+        "key": "boxes",
+        "stage": "cuda.half.parent.replay_A",
+        "device": "cuda",
+        "precision": "half",
+        "shape": [
+          1,
+          1,
+          300,
+          4
+        ],
+        "dtype_a": "torch.float16",
+        "dtype_b": "torch.float16",
+        "atol": 0.003,
+        "rtol": 0.03,
+        "candidate_ids_available": true,
+        "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "allclose_failed_count": 0,
+        "masked_nonfinite_count": 0
+      },
+      "parent_B": {
+        "key": "boxes",
+        "stage": "cuda.half.parent.replay_B",
+        "device": "cuda",
+        "precision": "half",
+        "shape": [
+          1,
+          1,
+          300,
+          4
+        ],
+        "dtype_a": "torch.float16",
+        "dtype_b": "torch.float16",
+        "atol": 0.003,
+        "rtol": 0.03,
+        "candidate_ids_available": true,
+        "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "allclose_failed_count": 0,
+        "masked_nonfinite_count": 0
+      }
+    },
+    "cleanup": "PASSED: topk/hooks/forward/CPU-CUDA-Python-NumPy RNG restored",
+    "different_C2_full_IDs": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "C2 complete natural ID sequences differ"
+    },
+    "C2_continuous_failure": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Continuous comparison failed: encoder_features"
+    },
+    "only_A_passes_B_fails": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Continuous comparison failed: raw_boxes"
+    },
+    "parent_B_failure": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Continuous comparison failed: raw_boxes"
+    },
+    "missing_parent": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "'parent_selection'"
+    },
+    "missing_field": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Required comparison tensors missing/extra"
+    },
+    "wrong_semantic_dtype": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Wrong semantic dtype: valid_mask"
+    },
+    "wrong_floating_dtype": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Wrong floating dtype: raw_boxes"
+    },
+    "missing_finite_evidence": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Invalid finite/mask evidence: raw_boxes"
+    },
+    "empty_tensor_shape": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Invalid tensor shape: raw_boxes"
+    },
+    "bad_BN": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "LIF/fusion invariant failed"
+    },
+    "LIF_residual_error": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Continuous comparison failed: lif_residual"
+    },
+    "CBR_output_error": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Continuous comparison failed: cbr_after"
+    },
+    "parent_mapping_missing": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "'source_state_sha256'"
+    },
+    "illegal_ID": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Illegal candidate ID"
+    },
+    "NaN_scores": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Nonfinite logits"
+    },
+    "CPU_exception_forbidden": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Cutoff exception is only for CUDA true-half"
+    },
+    "AMP_exception_forbidden": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Actual model/input precision path differs"
+    },
+    "FP32_exception_forbidden": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Changed tolerance policy"
+    },
+    "wrong_tolerance": {
+      "accepted": false,
+      "status": "REQUIRES_REVIEW",
+      "acceptance": "BLOCKED",
+      "reason": "Comparison identity/tolerances changed: boxes"
+    },
+    "stable_member_blocked": true,
+    "empty_gate_PASSED": true,
+    "empty_gate_PASS_WITH_BASELINE_CUTOFF_TIE": true,
+    "empty_gate_REQUIRES_REVIEW": true
+  }
+}

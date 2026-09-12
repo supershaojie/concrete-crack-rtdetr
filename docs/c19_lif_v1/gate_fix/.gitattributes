@@ -1,0 +1,2 @@
+# Preserve original uploaded JSON bytes across Windows and Linux checkouts.
+light_fixture/** -text

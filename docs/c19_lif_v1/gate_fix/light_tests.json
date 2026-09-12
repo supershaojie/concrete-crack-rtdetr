@@ -1,0 +1,17 @@
+{
+  "status": "PASSED",
+  "tests": {
+    "real_LIGHT": {
+      "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\outputs\\gate_fix\\light_tests_release_with_logs\\actual_LIGHT.tar.gz",
+      "bytes": 66929,
+      "limit_bytes": 8000000,
+      "sha256": "fe1f6932d384f63c61efd9873dc24a621d75e120561ac93c2e809628f980fc43",
+      "files": 17
+    },
+    "source_preserved": true,
+    "large_weights_excluded_structured_JSON_and_tail": true,
+    "hard_cap_no_partial_output": true,
+    "cannot_raise_8MB_cap": true,
+    "old_archive_preserved": true
+  }
+}

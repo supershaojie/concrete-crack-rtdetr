@@ -1,0 +1,24 @@
+{
+  "archive_sha256": "b1485f1349fac86bac33ba07409840364076a33974814835ac0de2ef121d0aa8",
+  "archive_bytes": 120965,
+  "mode_reports": {
+    "cpu_FP32_fusion": {
+      "bytes": 120764,
+      "sha256": "95a7d1fc1967de773b47e72e84f148f91870a203898d2165a1615812fce8a0b4"
+    },
+    "cuda_amp_fuse_fusion": {
+      "bytes": 119506,
+      "sha256": "9fd45a687298c2143642995f9b1dcd8fe506278520b923f4a3e3d00a4386995b"
+    },
+    "cuda_FP32_fusion": {
+      "bytes": 115993,
+      "sha256": "bb86ff9bd9ba8c0b68570ad4d2b49f61e93b7689b21a214e33a315cd4ffa03f2"
+    },
+    "cuda_half_fuse_fusion": {
+      "bytes": 188083,
+      "sha256": "6f5394d80b700852c514df91f49285e762c3198fd093b96800e81a65e4f9d610"
+    }
+  },
+  "original_status_preserved": true,
+  "total_checks_excerpt": "TEXT ONLY; not parsed as complete JSON"
+}

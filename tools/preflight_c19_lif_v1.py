@@ -26,6 +26,8 @@ def main():
     out.mkdir(parents=True,exist_ok=False)
     report=dict(status='FAILED',formal_training='NOT_RUN',full_val_test='NOT_RUN',runtime=runtime(),directory=str(out))
     print('Finite preflight directory:',out,flush=True)
+    print('Live preflight log:',out/'preflight.log',flush=True)
+    print('Small structured report:',out/'preflight_only.json',flush=True)
     try:
         init=out/'controlled_init.pt'
         args,_=recipe(p['c2_args'],'c19_lif_v1',init);verify_data_config(args['data'])
@@ -41,6 +43,9 @@ def main():
     finally:
         report['checks']=str(out/'checks/checks.json');report['log']=str(out/'preflight.log')
         atomic_json(out/'preflight_only.json',report)
+        if report['status']!='PASSED':
+            from pack_c19_lif_v1_light import package
+            package(out,out.with_name(out.name+'_LIGHT.tar.gz'))
 
 
 if __name__=='__main__':main()

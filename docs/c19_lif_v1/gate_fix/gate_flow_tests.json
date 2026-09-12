@@ -1,0 +1,17 @@
+{
+  "status": "PASSED",
+  "scope": "Real evidence predicate; only B16 capacity metadata mocked. Does not run capacity or dispatch training.",
+  "tests": {
+    "complete_normal_evidence": true,
+    "complete_cutoff_warning_accepted": true,
+    "missing_CUDA_loss": true,
+    "missing_CUDA_AMP_loss": true,
+    "missing_DN": true,
+    "nonfinite_gradient": true,
+    "no_B16_capacity": true,
+    "wrong_capacity_batch": true,
+    "missing_validation_half": true,
+    "missing_nonzero_bbox": true,
+    "empty_warning_string": true
+  }
+}

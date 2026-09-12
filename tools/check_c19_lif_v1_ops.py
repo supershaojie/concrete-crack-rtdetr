@@ -26,7 +26,7 @@ def rejected(action):
 
 def run(output):
     info = runtime()
-    report = dict(runtime=info, scope="MOCKED lifecycle/preflight controls and real archive IO; no real tmux dispatch/training", full_server_preflight="bounded_required")
+    report = dict(runtime=info, scope="MOCKED lifecycle/preflight validator and real archive IO; evidence predicate tested separately; no real tmux dispatch/training", full_server_preflight="bounded_required")
     with tempfile.TemporaryDirectory(prefix="c19_lif_v1_ops_", dir=ROOT / "outputs") as d:
         temporary = Path(d)
         main, root = temporary / "main", temporary / "worktree"
@@ -53,6 +53,7 @@ def run(output):
                                      (train, "runtime", lambda: info), (train, "initialize", initialization),
                                      (train, "record_source", snapshot), (train, "ensure_amp_resources", lambda *a: None),
                                      (train, "verify_server_environment", lambda *a: None),
+                                     (train, "require_preflight", lambda *a: None),
                                      (train, "verify_data_config", lambda *a: None),
                                      (train, "verify_delivery", lambda: {"commit": info["commit"]}),
                                      (train, "duplicate_processes", lambda: []),
@@ -68,6 +69,7 @@ def run(output):
             plan = json.loads((p["launch"] / "plan.json").read_text(encoding="utf-8"))
             require(plan["args"]["batch"] == 16 and plan["args"]["epochs"] == 200 and plan["full_server_preflight"] == "bounded_required", "Direct recipe changed")
             require(len([c for c in calls if "new-session" in c]) == 1, "Dispatch count")
+            require(len([c for c in calls if any(str(v).endswith("check_c19_lif_v1.py") for v in c)])==1,"start-direct must run exactly one preflight")
             require(not (p["launch"] / "audit.json").exists(), "Unexpected audit gate")
             report["bounded_preflight_then_dispatch"] = "passed (mocked finite preflight and dispatch)"
             report["duplicate_reservation_rejected"] = rejected(lambda: train.start_direct("c19_lif_v1"))
@@ -114,6 +116,12 @@ def run(output):
         q = dict(launch=temporary / "state", run=temporary / "state_run")
         q["launch"].mkdir()
         states = [train.run_state(q)]
+        write_json(q['launch']/'launch_state.json',dict(status='checking',pid=123,process_token='checking-token'))
+        with patch.object(train,'process_token',return_value='checking-token'):checking_live=train.run_state(q)
+        with patch.object(train,'process_token',return_value='reused-token'):checking_reused=train.run_state(q)
+        require(checking_live=='CHECKING' and checking_reused=='FAILED','Checking owner token classification')
+        report['checking_states']=dict(live=checking_live,reused=checking_reused)
+        write_json(q['launch']/'launch_state.json',dict(status='dispatched'))
         write_json(q["launch"] / "process.json", dict(pid=123, process_token="abc"))
         write_json(q["launch"] / "training_state.json", dict(status="training"))
         with patch.object(train, "process_token", return_value="abc"): states.append(train.run_state(q))

@@ -51,6 +51,7 @@ from c19_lif_v1_data import dataset_inventory,real_batch
 
 
 from c19_lif_v1_diagnostic import compare_records, fusion_protocol, atomic_json, PASS, DiagnosticError
+from c19_lif_v1_cutoff import fusion_accepted
 
 
 def activate(model,lif=True,cbr=True,bn=False):
@@ -202,7 +203,7 @@ def loss_checks(target,batch,device,folder,nb,amp=False):
         dynamic.append(dict(gt_groups=group,total_queries=out[0].shape[2],dn_split=out[-1]['dn_num_split'] if out[-1] else None))
     require(len({r['total_queries'] for r in dynamic})==3,'Dynamic DN not exercised')
     return dict(device=device,AMP=amp,smoke_scaler=128,formal_scaler='native unchanged',batch=len(batch['img']),imgsz=batch['img'].shape[-1],
-                steps=rows,optimizer=groups,dynamic_DN=dynamic,model_optimizer_reload_exact=True,updated_checkpoint='DISCARDED; never formal init')
+                steps=rows,optimizer=groups,dynamic_DN=dynamic,model_optimizer_reload_exact=True,disposable_checkpoint=str(dest),status='PASSED',updated_checkpoint='DISCARDED; never formal init')
 
 
 def benchmark(target,device):
@@ -236,6 +237,9 @@ def fuse_checks(target,device,folder,report=None,persist=lambda:None):
             error=repr(error),evidence=str(evidence),sha256=sha256(evidence));persist()
         raise
     report.update(nontrivial_bn=True,both_branches_active=True,lif_bn_retained=True)
+    snapshot=folder/(device+'_fusion_source.pt')
+    torch.save(dict(state={k:v.detach().cpu() for k,v in model.state_dict().items()},image=x.cpu(),rng=rng_state(),yaml=model.yaml,nc=1,device=device,precision='fp32'),snapshot)
+    fixture_reference=dict(path=str(snapshot),sha256=sha256(snapshot),scope='shared FP32 source for this device; fuse FP32 then cast per mode')
     def parent_factory():
         parent=build('C2',nc=1).eval()
         parent.load_state_dict({k:model.state_dict()[k].float().cpu() for k in parent.state_dict()},strict=True)
@@ -244,7 +248,7 @@ def fuse_checks(target,device,folder,report=None,persist=lambda:None):
         destination=folder/(device+'_'+label+'_fusion')
         report[label]=dict(status='RUNNING',diagnostic=str(destination/'fuse_diagnostic.json'));persist()
         try:
-            result=fusion_protocol(left,right,image,destination,device,precision,parent_factory)
+            result=fusion_protocol(left,right,image,destination,device,precision,parent_factory,parent_source=model,fixture_reference=fixture_reference)
         finally:
             path=destination/'fuse_diagnostic.json'
             if path.is_file():report[label]=json.loads(path.read_text(encoding='utf-8'))
@@ -282,7 +286,7 @@ def fuse_checks(target,device,folder,report=None,persist=lambda:None):
     require(hasattr(api.predictor.model.model.model[lif_index],'bn'),'AutoBackend predict lost LIF BN')
     report['predict_auto_fuse']=dict(status='PASSED',images=len(predictions),checkpoint_sha256=sha256(checkpoint))
     persist()
-    require(all(report[k]['status'] in PASS for k in ('FP32','half_fuse','amp_fuse') if k in report),'Fusion requires review; natural candidate membership drift blocks formal startup')
+    require(all(fusion_accepted(report[k],device,precision) for k,precision in [('FP32','fp32'),('half_fuse','half'),('amp_fuse','amp')] if k in report),'Fusion evidence incomplete or requires review; startup blocked')
     return report,checkpoint
 
 
@@ -352,7 +356,11 @@ def main():
             _,checkpoint=fuse_checks(target,device,args.output,report[device]['fuse'],lambda:atomic_json(args.output/'checks.json',report))
             if device=='cpu':report['bounded_val_test']=bounded_eval(checkpoint,args.real_dataset,args.output)
             report[device]['loss']=loss_checks(target,batch,device,args.output,nb)
-            if device=='cuda':report[device]['AMP_loss']=loss_checks(target,batch,device,args.output,nb,amp=True)
+            if device=='cuda':
+                report[device]['AMP_loss']=loss_checks(target,batch,device,args.output,nb,amp=True)
+                from c19_lif_v1_precision import native_precision_smoke
+                report[device]['training_precision']=native_precision_smoke(Path(report[device]['AMP_loss']['disposable_checkpoint']),target,batch,args.output/'training_precision')
+            atomic_json(args.output/'checks.json',report)
             report[device]['benchmark']=benchmark(target,device)
             print(device+' fuse/loss/DN/optimizer passed',flush=True);gc.collect()
             if torch.cuda.is_available():torch.cuda.empty_cache()

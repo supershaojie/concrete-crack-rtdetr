@@ -137,10 +137,10 @@ def run(output,fixture):
         partial=json.loads((checker_out/'checks.json').read_text(encoding='utf-8'))
         require(partial['status']=='FAILED' and partial['capacity']['status']=='NOT_RUN' and 'failure' in partial,'finally hid failure')
         rows['partial_checks_json']='PASSED: atomic real checker failure report; failure remains FAILED'
-        valid=dict(status='PASSED',capacity=dict(status='PASSED',batch=16,imgsz=640,AMP=True),
+        valid=dict(status='PASSED',capacity=dict(status='PASSED',batch=16,imgsz=640,AMP=True,loss=1.,optimizer_steps=0),
                    cpu=dict(fuse={'FP32':dict(status='PASSED',acceptance='PASSED')}),
                    cuda=dict(fuse={k:dict(status='PASSED',acceptance='PASSED') for k in ('FP32','amp_fuse','half_fuse')}))
-        require_preflight(valid)
+        rows['status_only_proof_rejected']=rejected(lambda:require_preflight(valid))
         for status in ('REQUIRES_REVIEW','FAILED_REAL_NUMERICAL_MISMATCH','FAILED_INCOMPLETE_DIAGNOSTIC'):
             invalid=deepcopy(valid);invalid['cpu']['fuse']['FP32']['status']=status
             rows['launch_blocks_'+status]=rejected(lambda:require_preflight(invalid))
