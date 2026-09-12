@@ -747,6 +747,7 @@ class DeformableTransformerDecoder(nn.Module):
         pos_mlp: nn.Module,
         attn_mask: torch.Tensor | None = None,
         padding_mask: torch.Tensor | None = None,
+        return_final_query: bool = False,
     ):
         """Perform the forward pass through the entire decoder.
 
@@ -790,4 +791,6 @@ class DeformableTransformerDecoder(nn.Module):
             last_refined_bbox = refined_bbox
             refer_bbox = refined_bbox.detach() if self.training else refined_bbox
 
-        return torch.stack(dec_bboxes), torch.stack(dec_cls)
+        result = torch.stack(dec_bboxes), torch.stack(dec_cls)
+        # The query matches the last appended box, in both train and eval.
+        return (*result, output) if return_final_query else result

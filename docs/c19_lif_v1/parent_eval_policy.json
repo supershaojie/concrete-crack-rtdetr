@@ -1,0 +1,10 @@
+{
+  "predictions_sha256": "4e4ecc100e453e316cdb3c1461861a8bce2e38b66edc9d619439582fa3c06929",
+  "predictions": 259200,
+  "images": 864,
+  "min_queries": 300,
+  "max_queries": 300,
+  "min_saved_score": 0.00295,
+  "note": "Native saved scores can be rounded; 300 exported queries per image supports all confidence masks accepting all queries in this archived test",
+  "validator_sha256": "f7974365832f0eb2e146571a591150f268d42ecb89e12e96f2518d4251a63a6a"
+}
