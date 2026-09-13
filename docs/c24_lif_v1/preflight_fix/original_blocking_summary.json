@@ -1,0 +1,110 @@
+{
+  "archive_bytes": 260391,
+  "archive_sha256": "2acde183614281cce7549fa7374c6124fc1b5d64547bf0e06841df495123d156",
+  "manifest_members": 52,
+  "manifest_verification": "PASSED",
+  "evidence_namespace": "metadata/preflight",
+  "runtime": {
+    "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+    "executable": "/root/miniconda3/envs/rtdetr/bin/python",
+    "torch": "2.1.2+cu121",
+    "cuda": "12.1",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "ultralytics": "/root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1/ultralytics-main/ultralytics/__init__.py",
+    "scca": "/root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1/ultralytics-main/ultralytics/nn/modules/scca_aifi.py",
+    "lif": "/root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1/ultralytics-main/ultralytics/nn/modules/lif_down.py",
+    "commit": "e314860a45abebee226935fc1dfdc87bff98e005",
+    "nvidia_smi": "Sun Sep 13 13:27:37 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 580.105.08             Driver Version: 580.105.08     CUDA Version: 13.0     |\n+-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 4090        On  |   00000000:D8:00.0 Off |                  Off |\n| 30%   33C    P8             27W /  450W |       3MiB /  24564MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|  No running processes found                                                             |\n+-----------------------------------------------------------------------------------------+\n"
+  },
+  "first_unaccepted_stage": "fusion_cuda_amp",
+  "terminal_exception_stage": "server_B16_640",
+  "unresolved_stages": [
+    {
+      "name": "fusion_cuda_amp",
+      "status": "REQUIRES_REVIEW",
+      "error": null,
+      "natural_relation": "SET_DRIFT",
+      "position_mismatch": 250,
+      "replacements": [
+        {
+          "only_a": [
+            260,
+            2328,
+            2499,
+            5029,
+            5251
+          ],
+          "only_b": [
+            576,
+            985,
+            2279,
+            2513,
+            3170
+          ]
+        }
+      ],
+      "continuous_max_abs": 0.002888798713684082,
+      "operator_status": "PASSED",
+      "parent_control": {
+        "status": "NOT_AVAILABLE",
+        "reason": "Both nonzero modules alter encoder features; arbitrary C2 is not a comparable cutoff control."
+      },
+      "replay": {
+        "A": "PASSED",
+        "B": "PASSED"
+      }
+    },
+    {
+      "name": "fusion_cuda_half",
+      "status": "REQUIRES_REVIEW",
+      "error": null,
+      "natural_relation": "SET_DRIFT",
+      "position_mismatch": 248,
+      "replacements": [
+        {
+          "only_a": [
+            281,
+            1801,
+            2328,
+            2499,
+            2510,
+            2513,
+            3963
+          ],
+          "only_b": [
+            290,
+            1186,
+            1193,
+            1408,
+            1632,
+            3170,
+            4515
+          ]
+        }
+      ],
+      "continuous_max_abs": 0.0029296875,
+      "operator_status": "PASSED",
+      "parent_control": {
+        "status": "NOT_AVAILABLE",
+        "reason": "Both nonzero modules alter encoder features; arbitrary C2 is not a comparable cutoff control."
+      },
+      "replay": {
+        "A": "PASSED",
+        "B": "PASSED"
+      }
+    },
+    {
+      "name": "server_B16_640",
+      "status": "BLOCKED",
+      "error": "RuntimeError('Loss/backward nonfinite')"
+    }
+  ],
+  "original_loss_finite": "UNKNOWN_NOT_RECORDED",
+  "original_nonfinite_gradient_names": "UNKNOWN_NOT_RECORDED",
+  "earliest_faulty_operator": "UNKNOWN",
+  "only_scaler_overflow": "UNPROVEN",
+  "capacity_native_init": "NOT_RUN",
+  "capacity_nonzero_stress": "BLOCKED",
+  "amp_calibration": "NOT_RUN",
+  "training_dispatched": false
+}

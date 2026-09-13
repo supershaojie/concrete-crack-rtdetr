@@ -1,3 +1,5 @@
+> 2026-09-13 预检修复：当前下一步仅限新工作树的一次 preflight-only；不要执行下文历史训练命令。请先阅读 [修复诊断与当前边界](preflight_fix/DIAGNOSIS.md)。
+
 # C24 SCCA + original LIF-Down v1
 
 独立分支 `codex/rtdetr-c24-lif-v1` 从 `0e95bbade3558b0d2b77c5531483c60810391d88` 建立。

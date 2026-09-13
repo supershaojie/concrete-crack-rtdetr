@@ -21,6 +21,8 @@ from check_lif_down import module_checks
 from ultralytics.nn.autobackend import AutoBackend
 from ultralytics.models.rtdetr.val import RTDETRValidator
 from ultralytics.models.rtdetr.predict import RTDETRPredictor
+from c24_lif_v1_acceptance import ACCEPTED, aggregate, fusion_status, stage_status, blocking_summary
+from c24_lif_v1_loss import diagnostic_loss
 
 def tree_exact(a,b):
     if torch.is_tensor(a):require(a.dtype==b.dtype and torch.equal(a.cpu(),b.cpu()),'Historical/save-load tensor mismatch')
@@ -99,43 +101,10 @@ def synthetic_batch():
     torch.manual_seed(902)
     return dict(img=torch.rand(2,3,160,192),cls=torch.zeros(5,1),bboxes=torch.tensor([[.5,.5,.2,.3],[.3,.4,.1,.2],[.7,.6,.1,.4],[.4,.4,.2,.2],[.6,.5,.3,.1]]),batch_idx=torch.tensor([0,0,1,1,1]))
 
-def loss_checks(model,device,folder,batch=None,capacity=False):
-    b=deepcopy(model).to(device).train();b.nc=1;activate(b)
-    opt,report=optimizer_check(b)
-    batch={k:v.to(device) for k,v in (batch or synthetic_batch()).items() if torch.is_tensor(v)}
-    report.update(input=list(batch['img'].shape),scope='native real augmented B16/640 capacity' if capacity else 'synthetic finite smoke',steps=[])
-    for amp in ([True] if capacity else [False,True] if device=='cuda' else [False]):
-        scaler=torch.cuda.amp.GradScaler(enabled=amp,init_scale=65536. if capacity else 128.)
-        for step in range(1 if capacity else 2):
-            opt.zero_grad(set_to_none=True)
-            target=dict(cls=batch['cls'].long().flatten(),bboxes=batch['bboxes'],batch_idx=batch['batch_idx'].long(),
-                gt_groups=[int((batch['batch_idx']==i).sum()) for i in range(len(batch['img']))])
-            with torch.autocast(device_type=device,dtype=torch.float16,enabled=amp) if device=='cuda' else nullcontext():
-                pred=b.predict(batch['img'],batch=target);loss=b.loss(batch,preds=pred)[0]
-            require(pred[-1] is not None and pred[-1]['dn_num_split'][-1]==300,'Native DN missing/regular query changed')
-            scaler.scale(loss).backward();scaler.unscale_(opt)
-            require(bool(torch.isfinite(loss)) and all(p.grad is None or bool(torch.isfinite(p.grad).all()) for p in b.parameters()),'Loss/backward nonfinite')
-            grads={n:float(p.grad.float().norm()) for n,p in b.named_parameters() if added(n) and p.grad is not None}
-            require(len(grads)==10 and all(v>0 for v in grads.values()),'Activated branch gradient missing')
-            main={n:float(p.grad.float().norm()) for n,p in b.named_parameters() if n in ['model.9.ma.in_proj_weight','model.19.cv1.conv.weight','model.20.conv.weight']}
-            require(len(main)==3 and all(v>0 for v in main.values()),'Related main gradient missing')
-            torch.nn.utils.clip_grad_norm_(b.parameters(),10.);scaler.step(opt);scaler.update()
-            require(all(bool(torch.isfinite(p).all()) for p in b.parameters()),'Updated parameter nonfinite')
-            report['steps'].append(dict(amp=amp,step=step,loss=float(loss),dn=pred[-1]['dn_num_split'],new_gradients=grads,main_gradients=main,
-                scaler_initial=65536 if capacity else 128,formal_optimizer_warmup='unchanged; disposable diagnostic uses one normal AdamW update'))
-            del pred,loss
-    with tempfile.TemporaryDirectory(dir=folder,prefix='update_') as tmp:
-        dest=Path(tmp)/'state.pt';torch.save(dict(model=b.state_dict(),optimizer=opt.state_dict()),dest)
-        cp=torch_load(dest,map_location=device);c=deepcopy(model).to(device);c.load_state_dict(cp['model'],strict=True)
-        other,_=optimizer_check(c);other.load_state_dict(cp['optimizer']);tree_exact(b.state_dict(),c.state_dict());tree_exact(opt.state_dict(),other.state_dict())
-    report.update(save_load_model_optimizer='EXACT',criterion=type(b.criterion).__name__,status='PASSED')
-    if device=='cuda' and not capacity:
-        require(all(bool(torch.count_nonzero(layer.layers[-1].weight)) for layer in b.model[-1].dec_bbox_head),'Disposable bbox head did not update')
-        a=b.eval();fused=deepcopy(a).fuse(verbose=False)
-        report['updated_nonzero_bbox_fusion']=compare_pair(a,fused,torch.rand(1,3,160,192,device=device),'fp32')
-        if report['updated_nonzero_bbox_fusion']['status']!='PASSED':report['status']='REQUIRES_REVIEW'
-    if device=='cuda':report['peak_allocated_bytes']=torch.cuda.max_memory_allocated()
-    return report
+def loss_checks(model,device,folder):
+    from c24_lif_v1_loss import loss_suite
+    return loss_suite(model,device,folder)
+
 
 def ingress(model,device,half,folder):
     """Run one forward inside the real validator setup and real predictor backend."""
@@ -189,12 +158,39 @@ def fusion(model,device,mode,folder):
         correct=m(sample);missing=m.act(m.bn(m.conv(sample)));wrong=m.act(m.bn(m.conv(sample))+m.residual(sample))
     require(compare(correct,missing,'missing_residual',2e-5,2e-4)['status']=='BLOCKED','Residual negative not detected')
     require(compare(correct,wrong,'wrong_bn',2e-5,2e-4)['status']=='BLOCKED','BN negative not detected')
-    status='PASSED' if all(r['status']=='PASSED' for r in reports+[reload]) else 'REQUIRES_REVIEW'
-    return dict(status=status,mode=mode,device=device,remaining_bn=count,lif_bn_state_exact=True,repeat_fuse='EXACT',save_load=reload,
+    result=dict(mode=mode,device=device,remaining_bn=count,lif_bn_state_exact=True,repeat_fuse='EXACT',save_load=reload,
         cases=reports,physical_negatives='BLOCKED_AS_EXPECTED')
+    result['status']=fusion_status(result)
+    return result
+
+def original_parent_cutoff(models,device,mode,folder):
+    from audit_c24_lif_v1 import COMMITS,HASHES
+    from c24_lif_v1_amp import model_evidence
+    rows={}
+    for kind in ('c24','lif'):
+        a=deepcopy(models[kind]).to(device).eval()
+        initial=model_evidence(a)
+        activate(a,bn=True)
+        active=model_evidence(a)
+        b=deepcopy(a).fuse(verbose=False)
+        if mode=='half':a.half();b.half()
+        torch.manual_seed(120);x=torch.rand(1,3,640,640,device=device)
+        if mode=='half':x=x.half()
+        with torch.autocast('cuda',dtype=torch.float16) if mode=='amp' else nullcontext():
+            result=compare_pair(a,b,x,mode)
+        rows[kind]=dict(original_commit=COMMITS[kind],module_sha256=HASHES[kind],public_source_sha256=SOURCE_SHA256,
+            initial_native_model=initial,nonzero_pressure_model=active,numerics=result,comparability='DIAGNOSTIC_ONLY',
+            reason='Original parent architecture and mapped public/seed-42 weights; no combo prefix copied. Similar cutoff drift does not satisfy the strict exception.')
+        write_json(Path(folder)/('parent_'+kind+'_'+mode+'.json'),rows[kind])
+        del a,b;gc.collect()
+    return dict(status='BLOCKED' if any(r['numerics']['status']=='BLOCKED' for r in rows.values()) else 'PASSED',
+        scope='Original parent diagnostic audit, not combo cutoff acceptance',parents=rows)
 
 @contextmanager
 def diagnostic_settings():
+    import random
+    import numpy as np
+    other=(random.getstate(),np.random.get_state(),torch.get_default_dtype(),torch.is_grad_enabled())
     devices=list(range(torch.cuda.device_count())) if torch.cuda.is_available() else []
     flags=(torch.backends.cuda.matmul.allow_tf32,torch.backends.cudnn.allow_tf32,torch.backends.cudnn.benchmark,
            torch.backends.cudnn.deterministic,torch.are_deterministic_algorithms_enabled(),torch.is_deterministic_algorithms_warn_only_enabled())
@@ -205,6 +201,7 @@ def diagnostic_settings():
             torch.backends.cudnn.benchmark=False;torch.backends.cudnn.deterministic=True;torch.use_deterministic_algorithms(True,warn_only=True)
             yield
         finally:
+            random.setstate(other[0]);np.random.set_state(other[1]);torch.set_default_dtype(other[2]);torch.set_grad_enabled(other[3])
             torch.backends.cuda.matmul.allow_tf32,torch.backends.cudnn.allow_tf32,torch.backends.cudnn.benchmark,torch.backends.cudnn.deterministic=flags[:4]
             torch.use_deterministic_algorithms(flags[4],warn_only=flags[5])
             for key,value in environment.items():
@@ -215,23 +212,27 @@ def preflight(source,output,server=False):
     output=Path(output).resolve();output.mkdir(parents=True,exist_ok=True)
     report=dict(schema=SCHEMA,status='CHECKING',runtime=runtime(),fingerprint=fingerprint(),source_sha256=sha256(source),stages=[],
         formal_training='NOT_RUN',full_val_test='NOT_RUN',server_B16_640='NOT_RUN',scope='server' if server else 'local')
-    def stage(name,fn):
+    def stage(name,fn,fatal=False):
         print('STAGE '+name+' | report '+str((output/'preflight.json').resolve()),flush=True);start=time.monotonic()
         row=dict(name=name,status='RUNNING');report['stages'].append(row);write_json(output/'preflight.json',report)
         try:
-            result=fn();row.update(status='PASSED',result=result)
-            if isinstance(result,dict) and result.get('status') in ('BLOCKED','REQUIRES_REVIEW'):row['status']=result['status']
+            result=fn();row.update(status=stage_status(name,result),result=result)
+            if isinstance(result,dict) and result.get('error'):report['terminal_exception_stage']=name
             return result
         except BaseException as error:
-            row.update(status='BLOCKED',error=repr(error),traceback=traceback.format_exc());raise
+            row.update(status='BLOCKED',error=repr(error),traceback=traceback.format_exc())
+            report['terminal_exception_stage']=name
+            if fatal or isinstance(error,(KeyboardInterrupt,SystemExit)):raise
+            return dict(status='BLOCKED',error=repr(error))
         finally:
             row['seconds']=round(time.monotonic()-start,3);write_json(output/(name+'.json'),row);write_json(output/'preflight.json',report)
+            write_json(output/'blocking_summary.json',blocking_summary(report))
             print('END '+name+' '+row['status']+' '+str(row['seconds'])+'s',flush=True)
     try:
         with diagnostic_settings():
             stage('negative_gate',negative_checks);stage('lif_original_unit',module_checks)
             with tempfile.TemporaryDirectory(dir=output,prefix='init_') as tmp:
-                init=stage('initialization',lambda:initialize(source,Path(tmp)/'init.pt'))
+                init=stage('initialization',lambda:initialize(source,Path(tmp)/'init.pt'),fatal=True)
                 models80,_=controlled_models(source);models={}
                 for kind in CONFIGS:
                     with torch.random.fork_rng(devices=[]):torch.manual_seed(42);models[kind]=native_rebuild(models80['combo'],kind)
@@ -253,6 +254,10 @@ def preflight(source,output,server=False):
                     stage('degeneration_'+device,lambda:degeneration(models,device))
                     for mode in (['fp32'] if device=='cpu' else ['fp32','amp','half']):
                         stage('fusion_'+device+'_'+mode,lambda:fusion(models['combo'],device,mode,output))
+                    if device=='cuda':
+                        for mode in ('amp','half'):
+                            stage('original_parent_cutoff_cuda_'+mode,lambda:original_parent_cutoff(models,device,mode,output))
+                    stage('native_initialization_small_'+device,lambda:diagnostic_loss(models['combo'],device,output,label='native_initialization_small_'+device))
                     stage('native_loss_'+device,lambda:loss_checks(models['combo'],device,output))
                     stage('ingress_'+device,lambda:ingress(models['combo'],device,device=='cuda',output))
                     gc.collect()
@@ -260,20 +265,31 @@ def preflight(source,output,server=False):
                 if server:
                     require(torch.cuda.is_available(),'Server CUDA required')
                     from train_c24_lif_v1 import real_capacity_batch
-                    batch,evidence=real_capacity_batch()
-                    result=stage('server_B16_640',lambda:loss_checks(models['combo'],'cuda',output,batch,capacity=True))
-                    report['server_B16_640']=dict(status=result['status'],data=evidence)
-            report['status']='PASSED' if all(r['status']=='PASSED' for r in report['stages']) else 'REQUIRES_REVIEW'
+                    holder={}
+                    def get_batch():
+                        batch,evidence=real_capacity_batch();holder['batch']=batch
+                        return dict(status='PASSED',data=evidence)
+                    stage('real_capacity_batch',get_batch)
+                    for label,stress in [('native_initialization_B16_640',False),('nonzero_branch_stress_B16_640',True)]:
+                        def capacity():
+                            require('batch' in holder,'Real capacity batch unavailable')
+                            return diagnostic_loss(models['combo'],'cuda',output,label=label,batch=holder['batch'],stress=stress)
+                        stage(label,capacity)
+                        gc.collect();torch.cuda.empty_cache()
+                    report['server_B16_640']=dict(status=aggregate([r['status'] for r in report['stages'] if r['name'] in
+                        ('real_capacity_batch','native_initialization_B16_640','nonzero_branch_stress_B16_640')]))
+            report['status']=aggregate([r['status'] for r in report['stages']])
     except BaseException as error:
         report.update(status='BLOCKED',error=repr(error))
         raise
     finally:
-        report['first_failure']=next((dict(name=r['name'],error=r.get('error'),status=r['status']) for r in report['stages'] if r['status'] not in ['PASSED']),None)
+        report['first_failure']=next((dict(name=r['name'],error=r.get('error'),status=r['status']) for r in report['stages'] if r['status'] not in ACCEPTED),None)
         write_json(output/'preflight.json',report)
+        write_json(output/'blocking_summary.json',blocking_summary(report))
     return report
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--source',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--server',action='store_true')
     args=p.parse_args();torch.set_num_threads(4)
     result=preflight(args.source,args.output,args.server)
-    require(result['status']=='PASSED','Preflight '+result['status']+'; inspect '+str(args.output/'preflight.json'))
+    require(result['status'] in ACCEPTED,'Preflight '+result['status']+'; inspect '+str(args.output/'blocking_summary.json'))

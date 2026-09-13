@@ -8,11 +8,12 @@ from __future__ import annotations
 from contextlib import nullcontext
 from copy import deepcopy
 from unittest.mock import patch
+import hashlib
 import torch
 from c24_lif_v1_common import require
 from c24_lif_v1_topology import locate
 
-SCHEMA=4
+SCHEMA=5
 CONTINUOUS=('down','p3','p4','p5','encoder_input','encoder_features','encoder_logits','valid_mask','anchors_valid')
 SELECTED=('query','reference','encoder_boxes','encoder_scores','decoder_query_0','decoder_query_1','decoder_query_2','decoder_boxes','decoder_logits','output_boxes','output_scores')
 KEYS=CONTINUOUS+('candidate_ids',)+SELECTED
@@ -162,6 +163,9 @@ def cutoff_acceptance(report,parent=None):
 def compare_pair(a,b,x,mode):
     left,right=capture(a,x),capture(b,x)
     report=compare_records(left,right,mode)
+    digest=lambda t:hashlib.sha256(t.detach().cpu().contiguous().numpy().tobytes()).hexdigest()
+    report['comparison_fingerprints']=dict(input_sha256=digest(x),input_dtype=str(x.dtype),device=str(x.device),
+        torch=str(torch.__version__),encoder_input_a=digest(left['encoder_input']),encoder_input_b=digest(right['encoder_input']))
     if report.get('natural_relation')=='SET_DRIFT':
         report['boundary']=boundary(left,right);report['replay']={}
         for side,ids in [('A',left['candidate_ids']),('B',right['candidate_ids'])]:

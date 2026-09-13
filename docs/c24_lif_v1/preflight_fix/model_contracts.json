@@ -1,0 +1,9 @@
+{
+  "status": "PASSED",
+  "zero_activate_forbidden": true,
+  "source_unchanged": true,
+  "zero_upstream_gradients_allowed": true,
+  "auxiliary_DN_loss_terms_recorded": true,
+  "capture_hooks_and_topk_restored": true,
+  "loss_hook_restored": true
+}

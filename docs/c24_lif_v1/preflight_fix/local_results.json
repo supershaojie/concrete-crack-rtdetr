@@ -1,0 +1,383 @@
+{
+  "scope": "LOCAL_SYNTHETIC_B2_160x192_CUDA_TORCH_2_7_1",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "scca": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\scca_aifi.py",
+    "lif": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "e314860a45abebee226935fc1dfdc87bff98e005"
+  },
+  "status": "REQUIRES_REVIEW",
+  "stages": [
+    {
+      "name": "negative_gate",
+      "status": "PASSED"
+    },
+    {
+      "name": "lif_original_unit",
+      "status": "PASSED"
+    },
+    {
+      "name": "initialization",
+      "status": "PASSED"
+    },
+    {
+      "name": "structure",
+      "status": "PASSED"
+    },
+    {
+      "name": "history",
+      "status": "PASSED"
+    },
+    {
+      "name": "degeneration_cpu",
+      "status": "PASSED"
+    },
+    {
+      "name": "fusion_cpu_fp32",
+      "status": "PASSED"
+    },
+    {
+      "name": "native_initialization_small_cpu",
+      "status": "PASSED"
+    },
+    {
+      "name": "native_loss_cpu",
+      "status": "PASSED"
+    },
+    {
+      "name": "ingress_cpu",
+      "status": "PASSED"
+    },
+    {
+      "name": "degeneration_cuda",
+      "status": "PASSED"
+    },
+    {
+      "name": "fusion_cuda_fp32",
+      "status": "PASSED"
+    },
+    {
+      "name": "fusion_cuda_amp",
+      "status": "REQUIRES_REVIEW"
+    },
+    {
+      "name": "fusion_cuda_half",
+      "status": "REQUIRES_REVIEW"
+    },
+    {
+      "name": "original_parent_cutoff_cuda_amp",
+      "status": "PASSED"
+    },
+    {
+      "name": "original_parent_cutoff_cuda_half",
+      "status": "PASSED"
+    },
+    {
+      "name": "native_initialization_small_cuda",
+      "status": "PASSED"
+    },
+    {
+      "name": "native_loss_cuda",
+      "status": "PASSED"
+    },
+    {
+      "name": "ingress_cuda",
+      "status": "PASSED"
+    }
+  ],
+  "loss_checks": {
+    "native_initialization_small_cpu": {
+      "status": "PASSED",
+      "input": [
+        2,
+        3,
+        160,
+        192
+      ],
+      "initial_scale": 1.0,
+      "actual_updates": 2,
+      "attempts": [
+        {
+          "attempt": 0,
+          "status": "UPDATED",
+          "loss": 62.57664489746094,
+          "loss_finite": true,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "actual_step_delta": 1,
+          "evidence": "attempt_00.json"
+        },
+        {
+          "attempt": 1,
+          "status": "UPDATED",
+          "loss": 37.08856201171875,
+          "loss_finite": true,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "actual_step_delta": 1,
+          "evidence": "attempt_01.json"
+        }
+      ],
+      "peak_allocated_bytes": null,
+      "peak_reserved_bytes": null
+    },
+    "native_initialization_small_cuda": {
+      "status": "PASSED",
+      "input": [
+        2,
+        3,
+        160,
+        192
+      ],
+      "initial_scale": 65536.0,
+      "actual_updates": 2,
+      "attempts": [
+        {
+          "attempt": 0,
+          "status": "OVERFLOW_SKIPPED",
+          "loss": 62.83888626098633,
+          "loss_finite": true,
+          "scale_before": 65536.0,
+          "scale_after": 32768.0,
+          "actual_step_delta": 0,
+          "evidence": "attempt_00.json"
+        },
+        {
+          "attempt": 1,
+          "status": "OVERFLOW_SKIPPED",
+          "loss": 62.608299255371094,
+          "loss_finite": true,
+          "scale_before": 32768.0,
+          "scale_after": 16384.0,
+          "actual_step_delta": 0,
+          "evidence": "attempt_01.json"
+        },
+        {
+          "attempt": 2,
+          "status": "OVERFLOW_SKIPPED",
+          "loss": 62.68002700805664,
+          "loss_finite": true,
+          "scale_before": 16384.0,
+          "scale_after": 8192.0,
+          "actual_step_delta": 0,
+          "evidence": "attempt_02.json"
+        },
+        {
+          "attempt": 3,
+          "status": "OVERFLOW_SKIPPED",
+          "loss": 62.68645477294922,
+          "loss_finite": true,
+          "scale_before": 8192.0,
+          "scale_after": 4096.0,
+          "actual_step_delta": 0,
+          "evidence": "attempt_03.json"
+        },
+        {
+          "attempt": 4,
+          "status": "OVERFLOW_SKIPPED",
+          "loss": 62.650245666503906,
+          "loss_finite": true,
+          "scale_before": 4096.0,
+          "scale_after": 2048.0,
+          "actual_step_delta": 0,
+          "evidence": "attempt_04.json"
+        },
+        {
+          "attempt": 5,
+          "status": "UPDATED",
+          "loss": 62.67264938354492,
+          "loss_finite": true,
+          "scale_before": 2048.0,
+          "scale_after": 2048.0,
+          "actual_step_delta": 1,
+          "evidence": "attempt_05.json"
+        },
+        {
+          "attempt": 6,
+          "status": "UPDATED",
+          "loss": 36.788291931152344,
+          "loss_finite": true,
+          "scale_before": 2048.0,
+          "scale_after": 2048.0,
+          "actual_step_delta": 1,
+          "evidence": "attempt_06.json"
+        }
+      ],
+      "peak_allocated_bytes": 637091840,
+      "peak_reserved_bytes": 778043392
+    },
+    "nonzero_branch_stress_fp32": {
+      "status": "PASSED",
+      "initial_scale": 1.0,
+      "actual_updates": 2,
+      "attempts": [
+        {
+          "attempt": 0,
+          "status": "UPDATED",
+          "loss": 63.95448684692383,
+          "loss_finite": true,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "actual_step_delta": 1,
+          "evidence": "attempt_00.json"
+        },
+        {
+          "attempt": 1,
+          "status": "UPDATED",
+          "loss": 37.23746871948242,
+          "loss_finite": true,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "actual_step_delta": 1,
+          "evidence": "attempt_01.json"
+        }
+      ]
+    },
+    "nonzero_branch_stress_cold_amp": {
+      "status": "PASSED",
+      "initial_scale": 65536.0,
+      "actual_updates": 2,
+      "attempts": [
+        {
+          "attempt": 0,
+          "status": "OVERFLOW_SKIPPED",
+          "loss": 62.92259216308594,
+          "loss_finite": true,
+          "scale_before": 65536.0,
+          "scale_after": 32768.0,
+          "actual_step_delta": 0,
+          "evidence": "attempt_00.json"
+        },
+        {
+          "attempt": 1,
+          "status": "OVERFLOW_SKIPPED",
+          "loss": 62.69230651855469,
+          "loss_finite": true,
+          "scale_before": 32768.0,
+          "scale_after": 16384.0,
+          "actual_step_delta": 0,
+          "evidence": "attempt_01.json"
+        },
+        {
+          "attempt": 2,
+          "status": "OVERFLOW_SKIPPED",
+          "loss": 62.764007568359375,
+          "loss_finite": true,
+          "scale_before": 16384.0,
+          "scale_after": 8192.0,
+          "actual_step_delta": 0,
+          "evidence": "attempt_02.json"
+        },
+        {
+          "attempt": 3,
+          "status": "OVERFLOW_SKIPPED",
+          "loss": 62.77045822143555,
+          "loss_finite": true,
+          "scale_before": 8192.0,
+          "scale_after": 4096.0,
+          "actual_step_delta": 0,
+          "evidence": "attempt_03.json"
+        },
+        {
+          "attempt": 4,
+          "status": "OVERFLOW_SKIPPED",
+          "loss": 62.734619140625,
+          "loss_finite": true,
+          "scale_before": 4096.0,
+          "scale_after": 2048.0,
+          "actual_step_delta": 0,
+          "evidence": "attempt_04.json"
+        },
+        {
+          "attempt": 5,
+          "status": "UPDATED",
+          "loss": 62.75664138793945,
+          "loss_finite": true,
+          "scale_before": 2048.0,
+          "scale_after": 2048.0,
+          "actual_step_delta": 1,
+          "evidence": "attempt_05.json"
+        },
+        {
+          "attempt": 6,
+          "status": "UPDATED",
+          "loss": 36.61591720581055,
+          "loss_finite": true,
+          "scale_before": 2048.0,
+          "scale_after": 2048.0,
+          "actual_step_delta": 1,
+          "evidence": "attempt_06.json"
+        }
+      ]
+    },
+    "nonzero_branch_stress_fp32_warmed_amp": {
+      "status": "PASSED",
+      "initial_scale": 128.0,
+      "actual_updates": 2,
+      "attempts": [
+        {
+          "attempt": 0,
+          "status": "UPDATED",
+          "loss": 31.094738006591797,
+          "loss_finite": true,
+          "scale_before": 128.0,
+          "scale_after": 128.0,
+          "actual_step_delta": 1,
+          "evidence": "attempt_00.json"
+        },
+        {
+          "attempt": 1,
+          "status": "UPDATED",
+          "loss": 28.83912467956543,
+          "loss_finite": true,
+          "scale_before": 128.0,
+          "scale_after": 128.0,
+          "actual_step_delta": 1,
+          "evidence": "attempt_01.json"
+        }
+      ]
+    }
+  },
+  "parent_diagnostics": {
+    "amp": {
+      "c24": {
+        "status": "REQUIRES_REVIEW",
+        "replacement_counts": [
+          8
+        ],
+        "comparison_fingerprints_equal_combo": false
+      },
+      "lif": {
+        "status": "REQUIRES_REVIEW",
+        "replacement_counts": [
+          8
+        ],
+        "comparison_fingerprints_equal_combo": false
+      }
+    },
+    "half": {
+      "c24": {
+        "status": "REQUIRES_REVIEW",
+        "replacement_counts": [
+          8
+        ],
+        "comparison_fingerprints_equal_combo": false
+      },
+      "lif": {
+        "status": "REQUIRES_REVIEW",
+        "replacement_counts": [
+          8
+        ],
+        "comparison_fingerprints_equal_combo": false
+      }
+    }
+  },
+  "server_B16_640": "NOT_RUN",
+  "formal_training": "NOT_RUN",
+  "full_val_test": "NOT_RUN"
+}

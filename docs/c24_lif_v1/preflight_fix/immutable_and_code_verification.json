@@ -1,0 +1,161 @@
+{
+  "status": "PASSED",
+  "base_commit": "e314860a45abebee226935fc1dfdc87bff98e005",
+  "protected": {
+    "ultralytics-main/ultralytics/nn/tasks.py": {
+      "LF_git_blob_sha256": "258b33e7bce3dee6cf29453236c760911d333f3fb0a1c0ae0e11cc716a2112d7",
+      "unchanged": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/__init__.py": {
+      "LF_git_blob_sha256": "20c72ff051ea9991135136cf7354fca4336ba942f673b0af181587198d32718d",
+      "unchanged": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/scca_aifi.py": {
+      "LF_git_blob_sha256": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca",
+      "unchanged": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/lif_down.py": {
+      "LF_git_blob_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "unchanged": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/head.py": {
+      "LF_git_blob_sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+      "unchanged": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/transformer.py": {
+      "LF_git_blob_sha256": "8986f3f58a5e30a42545f544f1a35f5e5861b13ee5d4507d8b2afab1c41df782",
+      "unchanged": true
+    },
+    "ultralytics-main/ultralytics/engine/trainer.py": {
+      "LF_git_blob_sha256": "18125ba895b64961cf0f7db29214aca27392176e65d72a9166fa818f00a1033a",
+      "unchanged": true
+    },
+    "ultralytics-main/ultralytics/models/yolo/detect/train.py": {
+      "LF_git_blob_sha256": "f8c993933a1cbe3b351f426188c45385ef499f1465063f0b4962956cce20807a",
+      "unchanged": true
+    },
+    "ultralytics-main/ultralytics/models/rtdetr/train.py": {
+      "LF_git_blob_sha256": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+      "unchanged": true
+    },
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-scca-lif-down.yaml": {
+      "LF_git_blob_sha256": "9f6408356cb4404731baf85c19e369bac201f0c27c990e10b65c2768331b8f70",
+      "unchanged": true
+    },
+    "docs/c24_lif_v1/c2_args.yaml": {
+      "LF_git_blob_sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+      "unchanged": true
+    },
+    "docs/c24_lif_v1/c2_data.yaml": {
+      "LF_git_blob_sha256": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+      "unchanged": true
+    }
+  },
+  "immutable_raw_module_sha256": {
+    "scca_aifi.py": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca",
+    "lif_down.py": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+  },
+  "recipe_fields": 109,
+  "counts": {
+    "c2": {
+      "parameters": 20082772,
+      "states": 533
+    },
+    "c24": {
+      "parameters": 20148312,
+      "states": 538
+    },
+    "lif": {
+      "parameters": 20103876,
+      "states": 538
+    },
+    "combo": {
+      "parameters": 20169416,
+      "states": 543
+    }
+  },
+  "initialization_mapping": {
+    "COMMON": 533,
+    "NEW_TRAINABLE": 10,
+    "NEW_BUFFER": 0,
+    "ALLOWED_CLASS_ADAPTATION": 0,
+    "MISSING": 0,
+    "UNEXPECTED": 0,
+    "SHAPE_MISMATCH": 0,
+    "native_trainer": {
+      "loaded_exact": 534,
+      "COMMON": 524,
+      "NEW_TRAINABLE": 10,
+      "NEW_BUFFER": 0,
+      "ALLOWED_CLASS_ADAPTATION": 9,
+      "MISSING": 0,
+      "UNEXPECTED": 0,
+      "SHAPE_MISMATCH": 0,
+      "native_c2_nc1_exact": true
+    },
+    "full_mapping_evidence": "local_preflight.json: initialization.result"
+  },
+  "final_source_fingerprint": {
+    "ultralytics-main/ultralytics/nn/tasks.py": "258b33e7bce3dee6cf29453236c760911d333f3fb0a1c0ae0e11cc716a2112d7",
+    "ultralytics-main/ultralytics/nn/modules/__init__.py": "20c72ff051ea9991135136cf7354fca4336ba942f673b0af181587198d32718d",
+    "ultralytics-main/ultralytics/nn/modules/scca_aifi.py": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca",
+    "ultralytics-main/ultralytics/nn/modules/lif_down.py": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+    "ultralytics-main/ultralytics/nn/modules/head.py": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+    "ultralytics-main/ultralytics/nn/modules/transformer.py": "8986f3f58a5e30a42545f544f1a35f5e5861b13ee5d4507d8b2afab1c41df782",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-scca-lif-down.yaml": "9f6408356cb4404731baf85c19e369bac201f0c27c990e10b65c2768331b8f70",
+    "docs/c24_lif_v1/c2_args.yaml": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+    "docs/c24_lif_v1/c2_data.yaml": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+    "tools/audit_c24_lif_v1.py": "45a52a5836f5b64956bcb5b772e8f34aa553f2846c8b7bdda30fba48c591daf9",
+    "tools/audit_c24_lif_v1_failure.py": "285fb712fba42c321c35b710be979c0a613bf960f51689c1eb494fed27967fd1",
+    "tools/autodl_c24_lif_v1.sh": "360f066ba4a1bfcc850b4aec51066405250dbd12823ea8e8dda1da9000e2bd38",
+    "tools/c24_lif_v1_acceptance.py": "6ddcb3f3beb831dc19c298d94e280799f97c95287b992f2d76335a3d5fd2f00f",
+    "tools/c24_lif_v1_amp.py": "644988dc3a27a873b33703c580654a795ace4a098ec71ac39d713a309a5bed37",
+    "tools/c24_lif_v1_common.py": "4b3941a1827dd1d74fd5d35ef96fcb9cfccf3d486cac96a1cb2129a35e0a9a3d",
+    "tools/c24_lif_v1_history_worker.py": "6f5a66acba9f47bdba3b8ca2dc6fcb7ddefa418c9ffee21479e35dffb5da1541",
+    "tools/c24_lif_v1_loss.py": "b02b91641c1d3cdaf40b679d8acb66f57b8f7a6314f0b021b58b2b6c52427105",
+    "tools/c24_lif_v1_numerics.py": "f07d69137e1281b8c955cf60b8706e01ee8bfb2be0b23a6a58f7c3870129b997",
+    "tools/c24_lif_v1_pack.py": "305aa5cc97c4c7b1fbcff03850ec2558135c7113f3ee471e68b69add9e05d8df",
+    "tools/c24_lif_v1_results.py": "fb341b484269eaa4c1c93b11edddef3d3d2ac67e237e1c5642178709c11f5b17",
+    "tools/c24_lif_v1_topology.py": "d42da1d60c4bcd8da6da1a637efecee597052959690c6140d6ec4f726ae66273",
+    "tools/check_c24_lif_v1.py": "f008f33597f54f95bcae275fcbea7501c16ac43fe8834aabf89eadbb55875e4f",
+    "tools/check_c24_lif_v1_ops.py": "b83c0a71b513876b35b617aa2a038ee780f66c0a11d0252eab09e1e2b4697c61",
+    "tools/check_c24_lif_v1_preflight_fix.py": "bdf0bcb7510906f62aaefb957b237ae111ce0f8cf76be6ae34d7ddc3c21bf67b",
+    "tools/check_c24_lif_v1_sync.py": "723717e8388b3fb9271ce483ca424b4df0cf4eace68b1dded4e0316389fc3383",
+    "tools/init_c24_lif_v1.py": "f600860e16b785eb2ac3f97a296ad956438dd63fd75b9afb1499263ff81a9463",
+    "tools/sync_c24_lif_v1.sh": "ac54aa738638c822b131a7231062294e68559ec85cca54e0fb2084cef5b52650",
+    "tools/train_c24_lif_v1.py": "60cec2a756fc5a89eccb2fa08e4abb7510560ad847daa36c9c8a71a97f388fe5"
+  },
+  "local_execution_fingerprint": {
+    "ultralytics-main/ultralytics/nn/tasks.py": "258b33e7bce3dee6cf29453236c760911d333f3fb0a1c0ae0e11cc716a2112d7",
+    "ultralytics-main/ultralytics/nn/modules/__init__.py": "20c72ff051ea9991135136cf7354fca4336ba942f673b0af181587198d32718d",
+    "ultralytics-main/ultralytics/nn/modules/scca_aifi.py": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca",
+    "ultralytics-main/ultralytics/nn/modules/lif_down.py": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+    "ultralytics-main/ultralytics/nn/modules/head.py": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+    "ultralytics-main/ultralytics/nn/modules/transformer.py": "8986f3f58a5e30a42545f544f1a35f5e5861b13ee5d4507d8b2afab1c41df782",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-scca-lif-down.yaml": "9f6408356cb4404731baf85c19e369bac201f0c27c990e10b65c2768331b8f70",
+    "docs/c24_lif_v1/c2_args.yaml": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+    "docs/c24_lif_v1/c2_data.yaml": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+    "tools/audit_c24_lif_v1.py": "45a52a5836f5b64956bcb5b772e8f34aa553f2846c8b7bdda30fba48c591daf9",
+    "tools/audit_c24_lif_v1_failure.py": "285fb712fba42c321c35b710be979c0a613bf960f51689c1eb494fed27967fd1",
+    "tools/autodl_c24_lif_v1.sh": "360f066ba4a1bfcc850b4aec51066405250dbd12823ea8e8dda1da9000e2bd38",
+    "tools/c24_lif_v1_acceptance.py": "69d7a71c3774f6d8fbef02990fe3c6fdb53e346ae5d220b0ca8404e0ee87f731",
+    "tools/c24_lif_v1_amp.py": "1f5427fd460545751b65865402a4433c25a3e9f1338644f51c0f57bf4ab26b42",
+    "tools/c24_lif_v1_common.py": "4b3941a1827dd1d74fd5d35ef96fcb9cfccf3d486cac96a1cb2129a35e0a9a3d",
+    "tools/c24_lif_v1_history_worker.py": "6f5a66acba9f47bdba3b8ca2dc6fcb7ddefa418c9ffee21479e35dffb5da1541",
+    "tools/c24_lif_v1_loss.py": "b02b91641c1d3cdaf40b679d8acb66f57b8f7a6314f0b021b58b2b6c52427105",
+    "tools/c24_lif_v1_numerics.py": "f07d69137e1281b8c955cf60b8706e01ee8bfb2be0b23a6a58f7c3870129b997",
+    "tools/c24_lif_v1_pack.py": "08bc65b02cf51d66dc95823d3208b4261fd839d06b1050498caf61cc5d14a5f9",
+    "tools/c24_lif_v1_results.py": "fb341b484269eaa4c1c93b11edddef3d3d2ac67e237e1c5642178709c11f5b17",
+    "tools/c24_lif_v1_topology.py": "d42da1d60c4bcd8da6da1a637efecee597052959690c6140d6ec4f726ae66273",
+    "tools/check_c24_lif_v1.py": "f008f33597f54f95bcae275fcbea7501c16ac43fe8834aabf89eadbb55875e4f",
+    "tools/check_c24_lif_v1_ops.py": "b83c0a71b513876b35b617aa2a038ee780f66c0a11d0252eab09e1e2b4697c61",
+    "tools/check_c24_lif_v1_preflight_fix.py": "99f72275ecde17be6dbedc84de89df81f7945e5c48b4a9bd9218956c49261da6",
+    "tools/check_c24_lif_v1_sync.py": "723717e8388b3fb9271ce483ca424b4df0cf4eace68b1dded4e0316389fc3383",
+    "tools/init_c24_lif_v1.py": "f600860e16b785eb2ac3f97a296ad956438dd63fd75b9afb1499263ff81a9463",
+    "tools/sync_c24_lif_v1.sh": "ac54aa738638c822b131a7231062294e68559ec85cca54e0fb2084cef5b52650",
+    "tools/train_c24_lif_v1.py": "01f82ce716386ab31f783cb413e8d3c41b8aa55d643bac187242da279d9994f3"
+  },
+  "local_stage_status_revalidated_with_final_reader": true,
+  "server_B16_640": "NOT_RUN",
+  "post_model_run_changes": "Acceptance reader, lifecycle status, JSON single-item sharding and contract tests were subsequently checked by finite regressions; no production model/trainer changed."
+}

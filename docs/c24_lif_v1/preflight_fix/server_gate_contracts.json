@@ -1,0 +1,15 @@
+{
+  "status": "PASSED",
+  "scope": "SYNTHETIC_READER_CONTRACT_ONLY_NOT_SERVER_CAPACITY",
+  "cases": {
+    "missing_stage": "BLOCKED_AS_EXPECTED",
+    "zero_actual_updates": "BLOCKED_AS_EXPECTED",
+    "FP32_mislabelled_as_AMP": "BLOCKED_AS_EXPECTED",
+    "manual_cold_scale_128": "BLOCKED_AS_EXPECTED",
+    "different_batch_identity": "BLOCKED_AS_EXPECTED",
+    "lost_scaler_reload": "BLOCKED_AS_EXPECTED",
+    "activate_native": "BLOCKED_AS_EXPECTED",
+    "cold_state_leak": "BLOCKED_AS_EXPECTED",
+    "actual_local_not_server": "BLOCKED_AS_EXPECTED"
+  }
+}

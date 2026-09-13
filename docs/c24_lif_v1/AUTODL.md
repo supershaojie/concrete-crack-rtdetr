@@ -1,3 +1,5 @@
+> 2026-09-13 预检修复：当前下一步仅限新工作树的一次 preflight-only；不要执行下文历史训练命令。请先阅读 [修复诊断与当前边界](preflight_fix/DIAGNOSIS.md)。
+
 # AutoDL：独立固定提交与一次启动
 
 此文不给任何立即增加训练进程的授权。用户确认单卡GPU0有容量时才运行start-direct。

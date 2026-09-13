@@ -124,37 +124,14 @@ def real_capacity_batch():
     return batch,evidence
 
 def require_preflight(report):
-    from c24_lif_v1_numerics import SCHEMA,CONTINUOUS,SELECTED
-    required=['negative_gate','lif_original_unit','initialization','structure','history','degeneration_cpu','fusion_cpu_fp32','native_loss_cpu','ingress_cpu',
-        'degeneration_cuda','fusion_cuda_fp32','fusion_cuda_amp','fusion_cuda_half','native_loss_cuda','ingress_cuda','server_B16_640']
-    require(report.get('schema')==SCHEMA and report.get('status')=='PASSED','Preflight not accepted')
-    rows=report.get('stages',[])
-    require([s.get('name') for s in rows]==required,'Incomplete/duplicate preflight stage schema')
-    for stage in rows:
-        require(stage.get('status')=='PASSED' and stage.get('result'),'Empty/unaccepted stage '+stage['name'])
-        result=stage['result']
-        if stage['name'].startswith('fusion_'):
-            require(result.get('lif_bn_state_exact') and result.get('repeat_fuse')=='EXACT' and result.get('physical_negatives')=='BLOCKED_AS_EXPECTED','Missing fusion protections')
-            require([case.get('input') for case in result.get('cases',[])]==[[1,3,640,640],[1,3,160,192]],'Missing required fusion shapes')
-            for case in result['cases']+[result.get('save_load',{})]:
-                require(case.get('schema')==SCHEMA and case.get('status')==case.get('operator_status')=='PASSED' and
-                    case.get('natural_relation') in ('IDENTICAL','PERMUTATION'),'Candidate evidence not accepted')
-                for field,keys in [('continuous',CONTINUOUS),('id_aligned',SELECTED)]:
-                    values=case.get(field,[]);require([v.get('key') for v in values]==list(keys),'Incomplete numerical key schema')
-                    require(all(v.get('status')=='PASSED' and (v.get('finite') is True or v.get('exact') is True) for v in values),'Invalid numerical evidence')
-                require(case.get('candidate_ids_a') and case.get('candidate_ids_b'),'Candidate IDs absent')
-                require(all(len(ids)==len(set(ids))==300 and all(type(i) is int and i>=0 for i in ids)
-                    for key in ('candidate_ids_a','candidate_ids_b') for ids in case[key]),'Malformed candidate evidence')
-        if stage['name'].startswith('native_loss_') or stage['name']=='server_B16_640':
-            require(result.get('steps') and result.get('coverage')==336 and len(result.get('new_tensors',[]))==10 and
-                    result.get('save_load_model_optimizer')=='EXACT','Incomplete optimizer/loss evidence')
-            if stage['name']=='server_B16_640':require(result.get('input')==[16,3,640,640] and all(s['amp'] for s in result['steps']),'Formal capacity missing')
-    require(report.get('server_B16_640',{}).get('status')=='PASSED','No B16/640 result')
-    return True
+    from c24_lif_v1_acceptance import require_preflight as verify
+    return verify(report)
+
 
 def preflight_once():
     from init_c24_lif_v1 import initialize,runtime,YAML,torch
     from check_c24_lif_v1 import SCHEMA
+    from c24_lif_v1_acceptance import ACCEPTED
     p=paths();verify_delivery();require(torch.cuda.is_available(),'Server CUDA required')
     require(os.environ.get('CONDA_DEFAULT_ENV')=='rtdetr','Use existing rtdetr environment')
     require(not p['run'].exists(),'Existing formal results protected')
@@ -174,10 +151,10 @@ def preflight_once():
         for line in process.stdout:sys.stdout.write(line);sys.stdout.flush();f.write(line);f.flush()
         code=process.wait()
     report=read_json(folder/'preflight.json',{})
-    require(code==0 and report.get('schema')==SCHEMA and report.get('status')=='PASSED','Preflight blocked/requires review; training not dispatched')
+    require(code==0 and report.get('schema')==SCHEMA and report.get('status') in ACCEPTED,'Preflight blocked/requires review; training not dispatched')
     require_preflight(report)
     require(report['fingerprint']==fingerprint() and report['source_sha256']==SOURCE_SHA256 and report['server_B16_640']['status']=='PASSED','Stale/capacity preflight')
-    return dict(args=args,runtime=environment,fingerprint=fingerprint(),init_sha256=sha256(p['init']),data_sha256=sha256(p['data']),
+    return dict(args=args,runtime=environment,preflight_status=report['status'],fingerprint=fingerprint(),init_sha256=sha256(p['init']),data_sha256=sha256(p['data']),
         recipe_sha256=sha256(p['c2_args']),preflight_sha256=sha256(folder/'preflight.json'),command=command)
 
 def start_direct(check_only=False):
@@ -195,7 +172,7 @@ def start_direct(check_only=False):
                 archive=p['launch']/('previous_launch_'+datetime.now().strftime('%Y%m%d_%H%M%S_%f'));archive.mkdir()
                 for item in prior:item.rename(archive/item.name)
         state('CHECKING',owner=info);plan=preflight_once()
-        if check_only:state('NOT_STARTED',preflight='PASSED',note='Optional preflight-only; start-direct runs one fresh gate');return
+        if check_only:state('NOT_STARTED',preflight=plan['preflight_status'],training_dispatched=False,note='Finite diagnosis only; no worker created');return
         require(shutil.which('tmux'),'tmux unavailable')
         reservation=acquire('worker');plan.update(reservation=reservation,session=SESSION)
         write_json(p['launch']/'plan.json',plan)
@@ -211,6 +188,19 @@ def start_direct(check_only=False):
     except BaseException as error:
         state('REQUIRES_REVIEW' if 'Preflight' in str(error) else 'FAILED',error=repr(error))
         if reservation and not tmux_active():release('worker',reservation)
+        # Package the already-written evidence without rerunning preflight or
+        # loading a model. Packaging errors never replace the original exception.
+        try:
+            from c24_lif_v1_pack import pack_light
+            from c24_lif_v1_acceptance import blocking_summary
+            report=read_json(p['launch']/'preflight/preflight.json',dict(scope='server',stages=[],terminal_exception_stage='launch_setup'))
+            summary=blocking_summary(report);summary['launch_error']=repr(error)
+            write_json(p['launch']/'preflight/blocking_summary.json',summary)
+            dest=pack_light()
+            write_json(p['launch']/'failure_package.json',dict(path=str(dest),bytes=dest.stat().st_size,sha256=sha256(dest)))
+        except Exception as package_error:
+            write_json(p['launch']/'failure_package_error.json',dict(error=repr(package_error),original_error=repr(error)))
+            print('LIGHT packaging failed; all source evidence retained: '+repr(package_error),flush=True)
         raise
     finally:release('preflight',info)
 
@@ -267,6 +257,10 @@ def status():
     print('STAGE '+str(report.get('stages',[{}])[-1].get('name') if report.get('stages') else 'NOT_STARTED'))
     if not (p['launch']/'console.log').is_file():print('未派发训练：console.log 尚未生成。')
     print(json.dumps(record,ensure_ascii=False,indent=2))
+    print(json.dumps(dict(tmux_active=tmux_active(),run_exists=p['run'].exists(),
+        locks={kind:dict(path=str(lock_path(kind)),owner=read_json(lock_path(kind)/'owner.json',{}),
+                        live=live(read_json(lock_path(kind)/'owner.json',{}))) for kind in ('preflight','worker')},
+        blocking_summary=read_json(p['launch']/'preflight/blocking_summary.json',{})),ensure_ascii=False,indent=2))
 
 if __name__=='__main__':
     import argparse

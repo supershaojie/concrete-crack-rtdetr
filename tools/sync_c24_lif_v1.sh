@@ -15,7 +15,7 @@ esac
 C24_MAIN_HEAD="$(git -C "$C24_MAIN" rev-parse HEAD)"
 C24_MAIN_STATUS="$(git -C "$C24_MAIN" status --porcelain --untracked-files=no)"
 # Read a branch-specific ref, never shared FETCH_HEAD (other tasks may fetch concurrently).
-git -C "$C24_MAIN" fetch origin "refs/heads/$C24_BRANCH:refs/remotes/origin/$C24_BRANCH"
+git -C "$C24_MAIN" fetch --no-write-fetch-head origin "refs/heads/$C24_BRANCH:refs/remotes/origin/$C24_BRANCH"
 C24_REMOTE_HEAD="$(git -C "$C24_MAIN" rev-parse "refs/remotes/origin/$C24_BRANCH")"
 git -C "$C24_MAIN" cat-file -e "$C24_SHA^{commit}"
 git -C "$C24_MAIN" merge-base --is-ancestor "$C24_SHA" "$C24_REMOTE_HEAD"

@@ -10,9 +10,39 @@ import uuid
 from c24_lif_v1_common import *
 
 LIMIT=8_000_000
-PRIORITY=('first_failure','first_error','name','status','error','key','mode','device','shape','shape_a','shape_b',
+PRIORITY=('blocking_summary','first_unaccepted_stage','terminal_exception_stage','unresolved_stages',
+    'capacity_native_init','capacity_nonzero_stress','amp_calibration','training_dispatched',
+    'failed_attempt','calibration','attempts','gradients_scaled','gradients_unscaled','nonfinite_parameters',
+    'scale_before','scale_after','actual_optimizer_steps','actual_step_delta','initial_model','input',
+    'first_failure','first_error','name','status','error','key','mode','device','shape','shape_a','shape_b',
     'finite','atol','rtol','max_abs','max_rel','max_coordinate','over_tolerance','candidate_ids_a','candidate_ids_b',
     'natural_relation','operator_status','boundary','replay','parent_control','stages','cases','continuous','result')
+
+
+def shard_json_entries(entries):
+    """Lossless structured references for JSON records over 64 KB (stdlib only)."""
+    def put(name,value):
+        payload=(json.dumps(value,ensure_ascii=False,allow_nan=False,separators=(',',':'))+'\n').encode()
+        if len(payload)<=64000:
+            entries[name]=payload;return dict(path=name,bytes=len(payload),sha256=hashlib.sha256(payload).hexdigest())
+        stem=name[:-5]
+        if isinstance(value,list):
+            if len(value)==1:
+                value=[dict(structured_shard=put(stem+'_item_0.json',value[0]))]
+            else:
+                middle=len(value)//2;require(middle>0,'Unshardable JSON list')
+                value=dict(structured_shards=[put(stem+'_part_a.json',value[:middle]),put(stem+'_part_b.json',value[middle:])],original_items=len(value))
+        elif isinstance(value,dict):
+            value=dict(value)
+            for i,key in enumerate(sorted(value,key=lambda k:len(encode(value[k])),reverse=True)):
+                if len(encode(value))<54000:break
+                value[key]=dict(structured_shard=put(stem+'_part_'+str(i)+'.json',value[key]))
+        else:
+            value=dict(structured_summary=True,original_characters=len(str(value)),sha256=hashlib.sha256(payload).hexdigest(),
+                       head=str(value)[:2000],tail=str(value)[-4000:])
+        return put(name,value)
+    for name,data in list(entries.items()):
+        if name.endswith('.json') and len(data)>64000:put(name,json.loads(data))
 
 def compact(value,depth=0):
     if isinstance(value,dict):
@@ -93,10 +123,13 @@ def pack_light(launch=None,destination=None):
         if f.is_file() and f.suffix in ('.json','.yaml','.md'):
             entries['source_docs/'+f.name]=json_evidence(f) if f.suffix=='.json' else f.read_bytes()[:40000]
     for name in ['ultralytics-main/ultralytics/nn/modules/scca_aifi.py','ultralytics-main/ultralytics/nn/modules/lif_down.py',
-                 'tools/c24_lif_v1_numerics.py','tools/check_c24_lif_v1.py','tools/train_c24_lif_v1.py']:
+                 'tools/c24_lif_v1_numerics.py','tools/check_c24_lif_v1.py','tools/train_c24_lif_v1.py',
+                 'tools/c24_lif_v1_amp.py','tools/c24_lif_v1_loss.py','tools/c24_lif_v1_acceptance.py',
+                 'docs/c24_lif_v1/preflight_fix/DIAGNOSIS.md','docs/c24_lif_v1/preflight_fix/original_blocking_summary.json']:
         f=ROOT/name
         if f.is_file():entries['source/'+name]=f.read_bytes()
     # Deterministic reduction before compression; incompressible input also fits.
+    shard_json_entries(entries)
     for prefix in ('excerpts/','source/','source_docs/'):
         for name in list(entries):
             if sum(map(len,entries.values()))<=6_500_000:break
@@ -109,6 +142,7 @@ def pack_light(launch=None,destination=None):
     entries['PACKAGE.json']=encode(dict(experiment=EXPERIMENT,commit=git('rev-parse','HEAD'),created=datetime.now(timezone.utc).isoformat(),
         kind='diagnostic_light',hard_limit=LIMIT,model_deserialization=False,preflight_rerun=False,reductions=reductions,
         omitted_by_policy=['weights','activations','fixtures','predictions','images','datasets','nested_source_archives']))
+    shard_json_entries(entries)
     require(sum(map(len,entries.values()))<=7_500_000,'Critical evidence alone exceeds budget; package refused, server files retained')
     return archive(entries,destination,LIMIT)
 

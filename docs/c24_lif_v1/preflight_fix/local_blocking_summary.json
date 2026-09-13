@@ -1,0 +1,21 @@
+{
+  "first_unaccepted_stage": "fusion_cuda_amp",
+  "terminal_exception_stage": null,
+  "unresolved_stages": [
+    {
+      "name": "fusion_cuda_amp",
+      "status": "REQUIRES_REVIEW",
+      "error": null
+    },
+    {
+      "name": "fusion_cuda_half",
+      "status": "REQUIRES_REVIEW",
+      "error": null
+    }
+  ],
+  "capacity_native_init": "NOT_RUN",
+  "capacity_nonzero_stress": "NOT_RUN",
+  "amp_calibration": "NOT_RUN",
+  "training_dispatched": false,
+  "scope": "local"
+}

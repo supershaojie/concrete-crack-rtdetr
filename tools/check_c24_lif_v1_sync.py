@@ -9,7 +9,7 @@ from c24_lif_v1_common import *
 
 def checks(bash):
     sha=git('rev-parse','HEAD');folder=Path(tempfile.mkdtemp(prefix='sync_fixture_',dir=ROOT/'outputs')).resolve()
-    remote=folder/'remote.git';main=folder/'main';target=folder/'worktree with spaces'
+    remote=folder/'remote.git';main=folder/'main';target=folder/'Crack_RTDETR-c24-lif-v1-preflightfix'
     def run(args,cwd=None,good=True,env=None):
         result=subprocess.run(list(map(str,args)),cwd=cwd,capture_output=True,text=True,env=env)
         if good:require(result.returncode==0,result.stdout+result.stderr)
@@ -19,14 +19,17 @@ def checks(bash):
     run(['git','remote','set-url','origin',url],main)
     for k,v in [('user.name','Local sync fixture'),('user.email','sync-fixture@example.invalid')]:run(['git','config',k,v],main)
     main_head=run(['git','rev-parse','HEAD'],main).stdout
+    fetch_marker=main/'.git/FETCH_HEAD';fetch_marker.write_bytes(b'preserve unrelated FETCH_HEAD\n')
     (main/'downloads').mkdir(exist_ok=True);marker=main/'downloads/user_keep.txt';marker.write_text('preserve user result')
     routing=folder/'local_fetch.sh'
-    routing.write_bytes(('git() {\n if [[ "${1:-}" == -C && "${3:-}" == fetch && "${4:-}" == origin ]]; then\n'
-        ' command git "$1" "$2" fetch '+shlex.quote(remote.as_posix())+' "${@:5}"\n'
+    routing.write_bytes(('git() {\n if [[ "${1:-}" == -C && "${3:-}" == fetch && "${4:-}" == --no-write-fetch-head && "${5:-}" == origin ]]; then\n'
+        ' command git "$1" "$2" fetch --no-write-fetch-head '+shlex.quote(remote.as_posix())+' "${@:6}"\n'
         ' else command git "$@"; fi\n}\n').encode())
     env={**os.environ,'C24_LIF_V1_PYTHON':sys.executable.replace('\\','/'),'BASH_ENV':routing.as_posix()}
     args=[bash,ROOT/'tools/sync_c24_lif_v1.sh',sha,main,target]
     first=run(args,env=env);again=run(args,env=env)
+    spaced=folder/'worktree with spaces';run([bash,ROOT/'tools/sync_c24_lif_v1.sh',sha,main,spaced],env=env)
+    require(fetch_marker.read_bytes()==b'preserve unrelated FETCH_HEAD\n','Shared FETCH_HEAD modified')
     require(marker.read_text()=='preserve user result' and run(['git','rev-parse','HEAD'],main).stdout==main_head,'Main modified')
     file=target/'tools/train_c24_lif_v1.py';original=file.read_bytes();file.write_bytes(original+b'\n# fixture dirty\n')
     dirty=run(args,good=False,env=env);require(dirty.returncode!=0 and file.read_bytes()!=original,'Dirty target overwritten');file.write_bytes(original)
@@ -42,6 +45,7 @@ def checks(bash):
     require(typo.returncode==2,'Unknown action must exit 2 before environment/training')
     for name in ['sync_c24_lif_v1.sh','autodl_c24_lif_v1.sh']:run([bash,'-n',ROOT/'tools'/name])
     report=dict(status='PASSED',tested_commit=sha,first_sync=True,idempotent_same_sha=True,dirty_refused=True,different_sha_preserved=True,
+        preflightfix_root_supported=True,space_in_path_supported=True,shared_FETCH_HEAD_preserved=True,
         unrelated_preserved=True,main_head_and_downloads_preserved=True,unknown_action_exit=typo.returncode,bash_syntax='PASSED',
         fixture=str(folder),network='fixture BASH_ENV routes fetch to local bare repository; no external fetch/push',fixture_preserved=True)
     write_json(ROOT/'docs/c24_lif_v1/sync_checks.json',report);print(json.dumps(report,indent=2))
