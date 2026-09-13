@@ -1,0 +1,32 @@
+{
+  "failed": {
+    "status": "PASSED",
+    "preflight": 1,
+    "dispatch": 0,
+    "release": [
+      "preflight"
+    ],
+    "actual_training": "NOT_RUN_MOCKED_DISPATCH",
+    "archive_bytes": 75098,
+    "all_blockers": true,
+    "no_worker": true
+  },
+  "accepted": {
+    "status": "PASSED",
+    "preflight": 1,
+    "dispatch": 1,
+    "release": [
+      "preflight"
+    ],
+    "actual_training": "NOT_RUN_MOCKED_DISPATCH"
+  },
+  "diagnosis_only": {
+    "status": "PASSED",
+    "preflight": 1,
+    "dispatch": 0,
+    "release": [
+      "preflight"
+    ],
+    "actual_training": "NOT_RUN_MOCKED_DISPATCH"
+  }
+}

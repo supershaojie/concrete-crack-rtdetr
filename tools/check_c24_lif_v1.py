@@ -135,19 +135,28 @@ def ingress(model,device,half,folder):
     rows['predict_AutoBackend']=dict(fp16=predictor.model.fp16,output_dtype=str(out.dtype),finite=True,fused=True)
     return rows
 
-def fusion(model,device,mode,folder):
+def fusion(model,device,mode,folder,parent=None):
     a=deepcopy(model).to(device).eval();activate(a,bn=True)
     b=deepcopy(a).fuse(verbose=False);top=locate(a.yaml);index=top['p3_to_p4']['downsample']
     require(hasattr(b.model[index],'bn') and not hasattr(b.model[top['p4_to_p5']['downsample']],'bn'),'Normal fusion/LIF exclusion changed')
     tree_exact(a.model[index].state_dict(),b.model[index].state_dict())
     count=sum(isinstance(m,torch.nn.BatchNorm2d) for m in b.modules())
     state=deepcopy(b.state_dict());b.fuse(verbose=False);tree_exact(state,b.state_dict())
+    if parent is not None and mode in ('amp','half'):
+        pa=deepcopy(parent).to(device).eval();activate(pa,bn=True)
+        pb=deepcopy(pa).fuse(verbose=False)
+        if mode=='half':pa.half();pb.half()
+    else:pa=pb=None
     if mode=='half':a.half();b.half()
     reports=[]
     for shape in [(640,640),(160,192)]:
         torch.manual_seed(120);x=torch.rand(1,3,*shape,device=device)
         if mode=='half':x=x.half()
-        with torch.autocast('cuda',dtype=torch.float16) if mode=='amp' else nullcontext():row=compare_pair(a,b,x,mode)
+        with torch.autocast('cuda',dtype=torch.float16) if mode=='amp' else nullcontext():
+            if pa is None:row=compare_pair(a,b,x,mode)
+            else:
+                from c24_lif_v1_parent_p3 import certified_pair
+                row=certified_pair(a,b,pa,pb,x,mode)
         row.update(device=device,input=list(x.shape));reports.append(row)
     with tempfile.TemporaryDirectory(dir=folder,prefix='fuse_reload_') as tmp:
         path=Path(tmp)/'state.pt';torch.save(dict(model=b),path);loaded=torch_load(path,map_location=device)['model'];tree_exact(b.state_dict(),loaded.state_dict())
@@ -163,11 +172,18 @@ def fusion(model,device,mode,folder):
     result['status']=fusion_status(result)
     return result
 
-def original_parent_cutoff(models,device,mode,folder):
+def original_parent_cutoff(models,device,mode,folder,fusion_result=None):
     from audit_c24_lif_v1 import COMMITS,HASHES
     from c24_lif_v1_amp import model_evidence
     rows={}
     for kind in ('c24','lif'):
+        if kind=='c24' and fusion_result and fusion_result.get('cases'):
+            case=fusion_result['cases'][0]
+            rows[kind]=dict(original_commit=COMMITS[kind],module_sha256=HASHES[kind],public_source_sha256=SOURCE_SHA256,
+                numerics=case['parent_control'],certificate_verification=case['parent_p3_verification'],
+                scope='The same original-C24 natural runs and independent replays consumed by the fusion gate')
+            write_json(Path(folder)/('parent_'+kind+'_'+mode+'.json'),rows[kind])
+            continue
         a=deepcopy(models[kind]).to(device).eval()
         initial=model_evidence(a)
         activate(a,bn=True)
@@ -184,7 +200,7 @@ def original_parent_cutoff(models,device,mode,folder):
         write_json(Path(folder)/('parent_'+kind+'_'+mode+'.json'),rows[kind])
         del a,b;gc.collect()
     return dict(status='BLOCKED' if any(r['numerics']['status']=='BLOCKED' for r in rows.values()) else 'PASSED',
-        scope='Original parent diagnostic audit, not combo cutoff acceptance',parents=rows)
+        scope='Original C24 is bound to fusion certificate; original LIF is independent diagnostic context',parents=rows)
 
 @contextmanager
 def diagnostic_settings():
@@ -252,11 +268,12 @@ def preflight(source,output,server=False):
                     if device=='cuda' and not torch.cuda.is_available():
                         stage('cuda_unavailable',lambda:dict(status='NOT_RUN',reason='CUDA unavailable'));continue
                     stage('degeneration_'+device,lambda:degeneration(models,device))
+                    fusion_results={}
                     for mode in (['fp32'] if device=='cpu' else ['fp32','amp','half']):
-                        stage('fusion_'+device+'_'+mode,lambda:fusion(models['combo'],device,mode,output))
+                        fusion_results[mode]=stage('fusion_'+device+'_'+mode,lambda:fusion(models['combo'],device,mode,output,models['c24']))
                     if device=='cuda':
                         for mode in ('amp','half'):
-                            stage('original_parent_cutoff_cuda_'+mode,lambda:original_parent_cutoff(models,device,mode,output))
+                            stage('original_parent_cutoff_cuda_'+mode,lambda:original_parent_cutoff(models,device,mode,output,fusion_results[mode]))
                     stage('native_initialization_small_'+device,lambda:diagnostic_loss(models['combo'],device,output,label='native_initialization_small_'+device))
                     stage('native_loss_'+device,lambda:loss_checks(models['combo'],device,output))
                     stage('ingress_'+device,lambda:ingress(models['combo'],device,device=='cuda',output))

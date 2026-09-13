@@ -1,0 +1,52 @@
+{
+  "status": "PASSED",
+  "base_commit": "82adb2265ecc8da32764fc5d5062e556f55f7c88",
+  "production_and_amp_paths_unchanged": [
+    "ultralytics-main",
+    "docs/c24_lif_v1/c2_args.yaml",
+    "docs/c24_lif_v1/c2_data.yaml",
+    "tools/c24_lif_v1_amp.py",
+    "tools/c24_lif_v1_loss.py",
+    "tools/init_c24_lif_v1.py",
+    "tools/c24_lif_v1_topology.py",
+    "tools/train_lif_down.py",
+    "tools/lif_down_topology.py",
+    "tools/c24_lif_v1_results.py"
+  ],
+  "modules": {
+    "scca_aifi.py": {
+      "raw_sha256": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca",
+      "original_commit": "f6e9dfda765046ae7691302cf5ec89d3f76cec5d",
+      "original_bytes_exact": true
+    },
+    "lif_down.py": {
+      "raw_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "original_commit": "0e95bbade3558b0d2b77c5531483c60810391d88",
+      "original_bytes_exact": true
+    }
+  },
+  "public_source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "recipe": {
+    "fields": 109,
+    "sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+    "values": {
+      "epochs": 200,
+      "imgsz": 640,
+      "batch": 16,
+      "seed": 42,
+      "optimizer": "AdamW",
+      "lr0": 0.0005,
+      "amp": true
+    },
+    "allowed_identity_changes": [
+      "model",
+      "name",
+      "save_dir"
+    ]
+  },
+  "head_lf_sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+  "spec_sha256": "f34ec79bef04df5ac826d1c0857367ac326e509e08b68b1f448cf09146150b0d",
+  "worktrees_before": "worktree D:/MyProjects/Crack_RTDETR\nHEAD f34502c43a88edc9cb1076bd996b9c3fc2d23e31\nbranch refs/heads/exp-rtdetr-r18-lite-cscef-v4\n\nworktree D:/MyProjects/Crack_RTDETR-gsdr-aifi\nHEAD d8954374f7564dc6180424e9058b44403968308e\nbranch refs/heads/exp-rtdetr-r18-lite-gsdr-aifi\n\nworktree D:/MyProjects/Crack_RTDETR-lcr\nHEAD d328d7330b695c93e768180920330383444ed91c\nbranch refs/heads/codex/lcr-aifi\n\nworktree D:/MyProjects/Crack_RTDETR-rsc-head\nHEAD b847aa0825c406e6810a7a26dba654e07abe7d0e\nbranch refs/heads/codex/rsc-head\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/acr\nHEAD 5f909e6bc40d7039517e2ebc2b388c71b329af02\nbranch refs/heads/codex/acr-query-attention\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/c17-lif-v1\nHEAD 1e927b8c4e7510f383abf34efea14212d7d56367\nbranch refs/heads/codex/rtdetr-c17-lif-v1\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/c19-lif-v1\nHEAD a0459d6a652cb702699087c88fa39a3e4c4087ec\nbranch refs/heads/codex/rtdetr-c19-lif-v1\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/c24-lif-v1\nHEAD 82adb2265ecc8da32764fc5d5062e556f55f7c88\nbranch refs/heads/codex/rtdetr-c24-lif-v1\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/c25\nHEAD ac32e223a509981ee9e61be66a352f2b80c5bfd1\nbranch refs/heads/codex/c25-cscef-scca\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/c26\nHEAD beedcfa307e250fb2de47587097c51f9c141123b\nbranch refs/heads/codex/c26-cbr-scca\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/cbr\nHEAD 025997e3c51eaf6933534308a95da6ebf97bff53\nbranch refs/heads/exp-rtdetr-r18-lite-cbr\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/cscef-cbr\nHEAD 81d5f0175e0168e022f29feb1ceb54de8a52deb5\nbranch refs/heads/exp-rtdetr-r18-lite-cscef-cbr\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/cscef-v5\nHEAD fad58b01eb813c5cea7f9fc2c36c93a5a4d388e7\nbranch refs/heads/exp-rtdetr-r18-lite-cscef-v5\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/cscef-v51\nHEAD 0c53a9cf7c8d65530b82f6ce880b3c9d8e6da139\nbranch refs/heads/exp-rtdetr-r18-lite-cscef-v51\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/diag-c20-cbr-gradcheck\nHEAD 91b58ffc5389e79b4b5e9c65f8626b3f4e537099\nbranch refs/heads/codex/diag-c20-cbr-gradcheck\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/diag-c20-cbr-rescue\nHEAD d73391f1b8496b16d9b6ba06429c6393b1a21eda\nbranch refs/heads/codex/diag-c20-cbr-rescue\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/dra\nHEAD 737fa758016bfe17256a59a6cbbe31f6f7f96db0\nbranch refs/heads/codex/dra-aifi\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/evc\nHEAD a2595829137fb1a1c53fc7d1309616ad301fba45\nbranch refs/heads/codex/evc-deform\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/fsa-deform\nHEAD c7f1259f1098d682bdba46fac9e342b0ef8534bf\nbranch refs/heads/codex/fsa-deform\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/gsdr-aifi-v2\nHEAD 30f2da6e4bb91dcae5f761bcafd5993e263197da\nbranch refs/heads/exp-rtdetr-r18-lite-gsdr-aifi-v2\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/gsdr-aifi-v3\nHEAD 51f1f3518753367a511a7baad10f4989764988ec\nbranch refs/heads/exp-rtdetr-r18-lite-gsdr-aifi-v3\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/lif-down\nHEAD 0e95bbade3558b0d2b77c5531483c60810391d88\nbranch refs/heads/codex/lif-down\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/lif-down-figures\nHEAD 8d8852f97848786065d5a1434ca87ba4c37cd12c\nbranch refs/heads/codex/lif-down-figures\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/mincompat-v2\nHEAD 33535ab2a5d9acee4e62d34ae382df8b98b9bbde\nbranch refs/heads/codex/rtdetr-mincompat-v2\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/sala\nHEAD 9621aeb691a59f01ae06320569e50240d690c096\nbranch refs/heads/codex/c21-rtdetr-r18-lite-sala\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/scca\nHEAD f6e9dfda765046ae7691302cf5ec89d3f76cec5d\nbranch refs/heads/codex/scca-aifi\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/sci-adapter\nHEAD 81e0426ac12d96b30614d1b273a33ae96cdca472\nbranch refs/heads/codex/rtdetr-sci-adapter\n\nworktree D:/MyProjects/Crack_RTDETR/outputs/worktrees/triad-compat\nHEAD 05e6de8b582f4a5f6c11cd50f8bc0406dacd7d0b\nbranch refs/heads/codex/rtdetr-triad-compat",
+  "formal_training": "NOT_RUN",
+  "full_val_test": "NOT_RUN"
+}

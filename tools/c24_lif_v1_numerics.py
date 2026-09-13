@@ -13,7 +13,7 @@ import torch
 from c24_lif_v1_common import require
 from c24_lif_v1_topology import locate
 
-SCHEMA=5
+SCHEMA=6
 CONTINUOUS=('down','p3','p4','p5','encoder_input','encoder_features','encoder_logits','valid_mask','anchors_valid')
 SELECTED=('query','reference','encoder_boxes','encoder_scores','decoder_query_0','decoder_query_1','decoder_query_2','decoder_boxes','decoder_logits','output_boxes','output_scores')
 KEYS=CONTINUOUS+('candidate_ids',)+SELECTED
@@ -40,7 +40,7 @@ def compare(a,b,key,atol,rtol):
 def require_compare(a,b,key='tensor',atol=2e-6,rtol=2e-5):
     row=compare(a,b,key,atol,rtol);require(row['status']=='PASSED',str(row));return row
 
-def capture(model,x,fixed=None):
+def capture(model,x,fixed=None,trace=False):
     """Record the return indices consumed by native _get_decoder_input's gather.
 
     The scoped topk wrapper delegates to the original operation exactly once. Replay
@@ -78,6 +78,8 @@ def capture(model,x,fixed=None):
         records['anchors_valid']=head.anchors[head.valid_mask.expand_as(head.anchors)].detach().clone()
         invalid=head.anchors[~head.valid_mask.expand_as(head.anchors)]
         require(bool(torch.isposinf(invalid).all()),'Invalid anchor sentinel changed')
+        if trace:
+            records['_trace']=dict(shapes=[list(map(int,s)) for s in shapes],anchors=head.anchors.detach().clone())
         return out
     head._get_decoder_input=decoder_input
     try:
@@ -86,7 +88,7 @@ def capture(model,x,fixed=None):
         final,raw=out
         records.update(decoder_boxes=raw[0].squeeze(0).detach(),decoder_logits=raw[1].squeeze(0).detach(),
             output_boxes=final[...,:4].detach(),output_scores=final[...,4:].detach())
-        require(set(records)==set(KEYS),'Capture schema missing/unexpected keys')
+        require(set(records)==set(KEYS)|({'_trace'} if trace else set()),'Capture schema missing/unexpected keys')
         return records
     finally:
         if prior is None:head.__dict__.pop('_get_decoder_input',None)
@@ -149,6 +151,9 @@ def cutoff_acceptance(report,parent=None):
     if report.get('operator_status')!='PASSED':return 'BLOCKED'
     if report.get('natural_relation') not in ('IDENTICAL','PERMUTATION','SET_DRIFT'):return 'BLOCKED'
     if report.get('natural_relation')!='SET_DRIFT':return report.get('status','BLOCKED')
+    if report.get('parent_p3_certificate') is not None:
+        from c24_lif_v1_parent_p3 import certificate_status
+        return certificate_status(report,parent or report.get('parent_control'))['status']
     replay=report.get('replay',{})
     if any(replay.get(k,{}).get('status')!='PASSED' for k in ['A','B']):return 'BLOCKED'
     if report.get('mode')!='half':return 'REQUIRES_REVIEW'
@@ -160,12 +165,14 @@ def cutoff_acceptance(report,parent=None):
     if not parent.get('comparison_fingerprints') or parent['comparison_fingerprints']!=report.get('comparison_fingerprints'):return 'REQUIRES_REVIEW'
     return 'ACCEPTED_WITH_BASELINE_CUTOFF_WARNING'
 
-def compare_pair(a,b,x,mode):
-    left,right=capture(a,x),capture(b,x)
+def compare_pair(a,b,x,mode,natural_records=None):
+    left,right=natural_records if natural_records is not None else (capture(a,x),capture(b,x))
     report=compare_records(left,right,mode)
     digest=lambda t:hashlib.sha256(t.detach().cpu().contiguous().numpy().tobytes()).hexdigest()
     report['comparison_fingerprints']=dict(input_sha256=digest(x),input_dtype=str(x.dtype),device=str(x.device),
         torch=str(torch.__version__),encoder_input_a=digest(left['encoder_input']),encoder_input_b=digest(right['encoder_input']))
+    if report.get('operator_status')!='PASSED':
+        return report  # Persist finite/shape diagnostics before constructing cutoff summaries of invalid logits.
     if report.get('natural_relation')=='SET_DRIFT':
         report['boundary']=boundary(left,right);report['replay']={}
         for side,ids in [('A',left['candidate_ids']),('B',right['candidate_ids'])]:

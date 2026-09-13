@@ -7,9 +7,9 @@ import tempfile
 import shlex
 from c24_lif_v1_common import *
 
-def checks(bash):
+def checks(bash,output=None):
     sha=git('rev-parse','HEAD');folder=Path(tempfile.mkdtemp(prefix='sync_fixture_',dir=ROOT/'outputs')).resolve()
-    remote=folder/'remote.git';main=folder/'main';target=folder/'Crack_RTDETR-c24-lif-v1-preflightfix'
+    remote=folder/'remote.git';main=folder/'main';target=folder/'Crack_RTDETR-c24-lif-v1-parentgatefix'
     def run(args,cwd=None,good=True,env=None):
         result=subprocess.run(list(map(str,args)),cwd=cwd,capture_output=True,text=True,env=env)
         if good:require(result.returncode==0,result.stdout+result.stderr)
@@ -45,11 +45,11 @@ def checks(bash):
     require(typo.returncode==2,'Unknown action must exit 2 before environment/training')
     for name in ['sync_c24_lif_v1.sh','autodl_c24_lif_v1.sh']:run([bash,'-n',ROOT/'tools'/name])
     report=dict(status='PASSED',tested_commit=sha,first_sync=True,idempotent_same_sha=True,dirty_refused=True,different_sha_preserved=True,
-        preflightfix_root_supported=True,space_in_path_supported=True,shared_FETCH_HEAD_preserved=True,
+        parentgatefix_root_supported=True,space_in_path_supported=True,shared_FETCH_HEAD_preserved=True,
         unrelated_preserved=True,main_head_and_downloads_preserved=True,unknown_action_exit=typo.returncode,bash_syntax='PASSED',
         fixture=str(folder),network='fixture BASH_ENV routes fetch to local bare repository; no external fetch/push',fixture_preserved=True)
-    write_json(ROOT/'docs/c24_lif_v1/sync_checks.json',report);print(json.dumps(report,indent=2))
+    write_json(output or ROOT/'docs/c24_lif_v1/parent_gate_fix/sync_checks.json',report);print(json.dumps(report,indent=2))
 
 if __name__=='__main__':
     import argparse
-    p=argparse.ArgumentParser();p.add_argument('--bash',required=True);a=p.parse_args();checks(a.bash)
+    p=argparse.ArgumentParser();p.add_argument('--bash',required=True);p.add_argument('--output',type=Path);a=p.parse_args();checks(a.bash,a.output)

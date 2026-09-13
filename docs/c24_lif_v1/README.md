@@ -1,4 +1,4 @@
-> 2026-09-13 预检修复：当前下一步仅限新工作树的一次 preflight-only；不要执行下文历史训练命令。请先阅读 [修复诊断与当前边界](preflight_fix/DIAGNOSIS.md)。
+> 2026-09-13 共享 P3 门禁修复：当前流程是新工作树内一次 start-direct，内部有限预检全部接受才派发。旧 preflight-only 建议已被本次任务替代。详见 [诊断](parent_gate_fix/DIAGNOSIS.md) 和 [AutoDL 命令](AUTODL.md)。
 
 # C24 SCCA + original LIF-Down v1
 
@@ -6,8 +6,7 @@
 只迁入成功 C24 的 `scca_aifi.py`、单模块 YAML、两处注册及 AIFI parser 局部识别；没有 merge C24 历史。
 本地工作树：`D:/MyProjects/Crack_RTDETR/outputs/worktrees/c24-lif-v1`。
 
-**工程交付不等于数值门禁全部通过。** 本机 2060 的 640×640 AMP/true-half 融合出现自然候选集合变化，
-连续计算和双方 A/B 双集合重放通过原容差，仍为 `REQUIRES_REVIEW`。没有足够可比父对照证据时绝不派发训练。
+本机2060的640×640 AMP/true-half仍有自然候选集合变化。新增同次原C24共享P3证书核验共享参数/BN、实际张量、全部分数、区域外竞争者及双方A/B重放，满足条件的case为 `ACCEPTED_WITH_PARENT_P3_CUTOFF_WARNING`。缺证据仍不接受，原完整基线哈希合同保留。新SHA服务器B16/640尚待一次启动入口执行。
 没有执行正式训练、完整 val/test 或 AutoDL 操作；不存在本组合性能成绩。
 
 ## 固定结构与来源

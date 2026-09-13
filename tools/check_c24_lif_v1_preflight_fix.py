@@ -118,11 +118,19 @@ def model_contracts(source, output):
     return report
 
 
-def server_gate_contracts(output):
+def server_gate_contracts(output, measured_fusions=None):
     from c24_lif_v1_acceptance import require_preflight, required_stages
-    from c24_lif_v1_numerics import TOLERANCES
+    from c24_lif_v1_numerics import TOLERANCES,SCHEMA
     original=read_json(ROOT/'docs/c24_lif_v1/preflight_fix/local_preflight.json')
     fixture=deepcopy(original)
+    def schema(value):
+        if isinstance(value,dict):
+            for k,v in value.items():
+                if k=='schema':value[k]=SCHEMA
+                else:schema(v)
+        elif isinstance(value,list):
+            for v in value:schema(v)
+    schema(fixture)  # Reader fixture only; original measured report remains immutable.
     fixture.update(scope='server',status='PASSED',server_B16_640=dict(status='PASSED'))
     rows={r['name']:r for r in fixture['stages']}
     fp32=rows['fusion_cuda_fp32']['result']
@@ -148,6 +156,10 @@ def server_gate_contracts(output):
         result['calibration']['input'].update(shape=[16,3,640,640],images=image_identity)
         rows[label]=dict(name=label,status='PASSED',result=result)
     rows['real_capacity_batch']=dict(name='real_capacity_batch',status='PASSED',result=dict(status='PASSED',fixture=True))
+    if measured_fusions:
+        for mode in ('amp','half'):
+            result=deepcopy(measured_fusions[mode]);rows['fusion_cuda_'+mode].update(status=fusion_status(result),result=result)
+        fixture['status']=aggregate([r['status'] for r in rows.values()])
     fixture['stages']=[rows[n] for n in required_stages(True)]
     require(require_preflight(fixture),'Complete synthetic server contract rejected')
     cases={}
@@ -172,7 +184,7 @@ def server_gate_contracts(output):
         raise AssertionError('Actual local review evidence accepted as server capacity')
     except RuntimeError:
         cases['actual_local_not_server']='BLOCKED_AS_EXPECTED'
-    report=dict(status='PASSED',scope='SYNTHETIC_READER_CONTRACT_ONLY_NOT_SERVER_CAPACITY',cases=cases)
+    report=dict(status='PASSED',scope='SYNTHETIC_READER_CONTRACT_ONLY_NOT_SERVER_CAPACITY',accepted_aggregate=fixture['status'],cases=cases)
     write_json(Path(output)/'server_gate_contracts.json',report)
     return report
 

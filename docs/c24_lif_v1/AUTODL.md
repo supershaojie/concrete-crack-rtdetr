@@ -1,78 +1,51 @@
-> 2026-09-13 预检修复：当前下一步仅限新工作树的一次 preflight-only；不要执行下文历史训练命令。请先阅读 [修复诊断与当前边界](preflight_fix/DIAGNOSIS.md)。
+# 当前 AutoDL 流程：共享 P3 门禁
 
-# AutoDL：独立固定提交与一次启动
+本次Codex只做本地有限验证。把FULL_DELIVERED_SHA替换为最终回复中真实的完整40位SHA。新根目录是待创建约定，不代表已经部署。[诊断与边界](parent_gate_fix/DIAGNOSIS.md)。
 
-此文不给任何立即增加训练进程的授权。用户确认单卡GPU0有容量时才运行start-direct。
-Codex交付回复给出本次真实完整40位SHA；下方FULL_SHA必须替换为该值。
-严格模式放在子shell，不影响SSH终端。
-
-首次同步：目标工作树不需预先存在。只fetch本分支，从指定提交导出同步脚本。
+在服务器执行一次以下同步、只读状态和启动流程。旧工作树和报告保持；运行目录已存在、tmux/worker活跃或锁归属不明时入口停止，不删除锁来绕过它。旧preflight-only建议已被本次流程替代。
 
 ```bash
 (
   set -euo pipefail
-  C24_SHA=FULL_SHA
-  C24_MAIN=/root/autodl-tmp/projects/Crack_RTDETR
-  git -C "$C24_MAIN" fetch origin refs/heads/codex/rtdetr-c24-lif-v1:refs/remotes/origin/codex/rtdetr-c24-lif-v1
-  C24_SYNC=$(mktemp /tmp/sync_c24_lif_v1.XXXXXX.sh)
-  git -C "$C24_MAIN" show "$C24_SHA:tools/sync_c24_lif_v1.sh" > "$C24_SYNC"
-  bash "$C24_SYNC" "$C24_SHA" "$C24_MAIN" /root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1
+  C24_SHA=FULL_DELIVERED_SHA
+  export C24_LIF_V1_MAIN=/root/autodl-tmp/projects/Crack_RTDETR
+  C24_OLD=/root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1-preflightfix
+  C24_ROOT=/root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1-parentgatefix
+  git -C "$C24_LIF_V1_MAIN" fetch --no-write-fetch-head origin refs/heads/codex/rtdetr-c24-lif-v1:refs/remotes/origin/codex/rtdetr-c24-lif-v1
+  bash <(git -C "$C24_LIF_V1_MAIN" show "$C24_SHA:tools/sync_c24_lif_v1.sh") "$C24_SHA" "$C24_LIF_V1_MAIN" "$C24_ROOT"
+  if [[ -f "$C24_OLD/tools/autodl_c24_lif_v1.sh" ]]; then
+    bash "$C24_OLD/tools/autodl_c24_lif_v1.sh" status
+  fi
+  bash "$C24_ROOT/tools/autodl_c24_lif_v1.sh" status
+  bash "$C24_ROOT/tools/autodl_c24_lif_v1.sh" start-direct
 )
 ```
 
-同步不改主仓库HEAD，不删除runs/downloads，不reset/clean/stash。已有同SHA且干净detached工作树只核验；
-不同SHA、tracked dirty、无关目录均拒绝并保留。同步读取分支专属remote ref，避免并行fetch的FETCH_HEAD竞争。
+实际同步签名：`bash tools/sync_c24_lif_v1.sh SHA MAIN WORKTREE`。包装脚本在入口及tmux worker中激活已有rtdetr环境。只调用一次start-direct，不另跑preflight-only。内部运行当前SHA的22个必需阶段，包括原C24四路证书、native初始化和非零分支各自真实B16/640校准；任一不接受则不派发并自动保存小包。旧报告不能替代本次验收；正式GradScaler仍从默认65536开始。
 
-只启动一次（内部预检通过后才派发tmux）：
-
-```bash
-(
-  set -euo pipefail
-  cd /root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1
-  CUDA_VISIBLE_DEVICES=0 bash tools/autodl_c24_lif_v1.sh start-direct
-)
-```
-
-不要先运行一次完整preflight-only后再运行start-direct。preflight-only仅供主动选择只检查时使用。
-现有本地AMP/true-half为REQUIRES_REVIEW；如果服务器仍出现不被证据支持的集合漂移，脚本会停止派发。
-不会把本地PASS直接当成4090/B16容量PASS。
-
-真实状态、预检日志及正式日志：
+另一个终端查看真实日志；console.log只有派发后生成，tail -F会等待：
 
 ```bash
-bash /root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1/tools/autodl_c24_lif_v1.sh status
-tail -n 80 -f /root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1/outputs/c24_lif_v1/preflight.log
-tail -n 80 -f /root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1/outputs/c24_lif_v1/console.log
+tail -n 80 -F /root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1-parentgatefix/outputs/c24_lif_v1/preflight.log /root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1-parentgatefix/outputs/c24_lif_v1/console.log
 ```
 
-console.log在派发worker后才生成；缺失表示未派发训练，不要对不存在的console反复tail。
-status区分NOT_STARTED/CHECKING/DISPATCHED/RUNNING/SUCCESS/FAILED/REQUIRES_REVIEW。
-RUNNING在完成首个真实训练batch后写入。tmux存在或DISPATCHED都不是训练成功证据。
-worker内部重新source conda.sh/activate rtdetr，设置本工作树PYTHONPATH、PYTHONUNBUFFERED和YOLO_AUTOINSTALL。
-Python和外层shell都记录真实退出码；不由tee掩盖。不同任务的锁和worktree完全独立。
-
-故障小包可直接执行，不读权重、不用GPU、不再预检：
+只读状态、手动故障小包：
 
 ```bash
-bash /root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1/tools/autodl_c24_lif_v1.sh pack-light
+export C24_LIF_V1_MAIN=/root/autodl-tmp/projects/Crack_RTDETR
+C24_ROOT=/root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1-parentgatefix
+bash "$C24_ROOT/tools/autodl_c24_lif_v1.sh" status
+bash "$C24_ROOT/tools/autodl_c24_lif_v1.sh" pack-light
 ```
 
-下载输出打印的绝对`.tar.gz`文件，目录固定为 `/root/autodl-tmp/projects/Crack_RTDETR/downloads/c24_lif_v1`。
-每包有独立时间戳、SHA256、inventory和verification；故障包硬上限8,000,000字节。
+包位于`/root/autodl-tmp/projects/Crack_RTDETR/downloads/c24_lif_v1/`，脚本打印实际路径、字节数和SHA256，硬上限8,000,000 bytes。标准库打包，不加载模型、不重跑预检。
 
-正式训练成功后，同一个best依次独立val、test、打包：
+仅在未来正式训练完成且状态SUCCESS后，按需评估与打完整分析包。本次没有执行这些操作：
 
 ```bash
-(
-  set -euo pipefail
-  cd /root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1
-  CUDA_VISIBLE_DEVICES=0 bash tools/autodl_c24_lif_v1.sh val
-  CUDA_VISIBLE_DEVICES=0 bash tools/autodl_c24_lif_v1.sh test
-  bash tools/autodl_c24_lif_v1.sh pack-complete
-)
+export C24_LIF_V1_MAIN=/root/autodl-tmp/projects/Crack_RTDETR
+C24_ROOT=/root/autodl-tmp/projects/Crack_RTDETR-c24-lif-v1-parentgatefix
+bash "$C24_ROOT/tools/autodl_c24_lif_v1.sh" val
+bash "$C24_ROOT/tools/autodl_c24_lif_v1.sh" test
+bash "$C24_ROOT/tools/autodl_c24_lif_v1.sh" pack-complete
 ```
-
-评估固定640/B16/workers0/device0/half=False/conf=.001/iou=.7/max_det300/augment=False/rect=False/plots=True。
-test核验val锁定的best、代码、data及全部effective settings；不按test选择epoch或调参。
-pack-complete缺少val/test时明确失败，不自动补跑。不默认附加init/best/last、全预测或数据集；
-best/last及全量预测保留服务器并记录哈希，分析包含完整指标/曲线/CSV/args与一份源码快照。

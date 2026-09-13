@@ -31,7 +31,10 @@ def acquire(kind,reservation=None):
     path=lock_path(kind);path.parent.mkdir(parents=True,exist_ok=True)
     if path.exists():
         old=read_json(path/'owner.json')
-        require(old and old.get('worktree')==str(ROOT.resolve()) and old.get('session')==SESSION,'Ambiguous lock owner preserved: '+str(path))
+        require(old and old.get('worktree')==str(ROOT.resolve()) and old.get('session')==SESSION and
+                type(old.get('pid')) is int and old['pid']>0 and isinstance(old.get('start_time'),str) and
+                old['start_time'].isdigit() and isinstance(old.get('token'),str) and bool(old['token']),
+                'Ambiguous lock owner preserved: '+str(path))
         require(not live(old) and not tmux_active(),'Existing task owner/session protected: '+str(old))
         archive=path.with_name(path.name+'.stale.'+datetime.now().strftime('%Y%m%d_%H%M%S_%f'))
         path.rename(archive);write_json(archive/'recovery.json',dict(reason='PID/start-time no longer live; session absent',observed=owner()))
@@ -154,12 +157,19 @@ def preflight_once():
     require(code==0 and report.get('schema')==SCHEMA and report.get('status') in ACCEPTED,'Preflight blocked/requires review; training not dispatched')
     require_preflight(report)
     require(report['fingerprint']==fingerprint() and report['source_sha256']==SOURCE_SHA256 and report['server_B16_640']['status']=='PASSED','Stale/capacity preflight')
-    return dict(args=args,runtime=environment,preflight_status=report['status'],fingerprint=fingerprint(),init_sha256=sha256(p['init']),data_sha256=sha256(p['data']),
+    return dict(schema=SCHEMA,args=args,runtime=environment,preflight_status=report['status'],fingerprint=fingerprint(),init_sha256=sha256(p['init']),data_sha256=sha256(p['data']),
         recipe_sha256=sha256(p['c2_args']),preflight_sha256=sha256(folder/'preflight.json'),command=command)
 
 def start_direct(check_only=False):
     require(os.name=='posix','AutoDL lifecycle requires Linux; no local formal training')
     verify_delivery();p=paths();require(not tmux_active(),'Existing tmux protected');require(not p['run'].exists(),'Existing results protected')
+    worker_lock=lock_path('worker')
+    if worker_lock.exists():
+        previous=read_json(worker_lock/'owner.json',{})
+        require(previous.get('worktree')==str(ROOT.resolve()) and previous.get('session')==SESSION and
+                type(previous.get('pid')) is int and isinstance(previous.get('start_time'),str) and
+                previous['start_time'].isdigit() and previous.get('token'), 'Ambiguous worker lock preserved before preflight')
+        require(not live(previous),'Existing worker protected before preflight')
     info=acquire('preflight');reservation=None
     try:
         # Existing active worker in any state is protected before capacity allocation.
@@ -207,10 +217,10 @@ def start_direct(check_only=False):
 def worker(reservation_token):
     from init_c24_lif_v1 import RTDETR,RTDETRTrainer,torch,audited_rebuild,verify_model,YAML,runtime
     from train_lif_down import disable_oom_retry,ensure_amp_resources
-    from check_c24_lif_v1 import optimizer_check
+    from check_c24_lif_v1 import optimizer_check,SCHEMA
     p=paths();code=1;info=None
     try:
-        plan=read_json(p['launch']/'plan.json');require(plan and plan['reservation']['token']==reservation_token,'Worker reservation mismatch')
+        plan=read_json(p['launch']/'plan.json');require(plan and plan.get('schema')==SCHEMA and plan['reservation']['token']==reservation_token,'Worker reservation mismatch')
         old=read_json(lock_path('worker')/'owner.json');require(old and old['token']==reservation_token,'Worker lock mismatch')
         info=owner();info['token']=reservation_token;write_json(lock_path('worker')/'owner.json',info)
         verify_delivery();require(plan['fingerprint']==fingerprint(),'Worker source changed')

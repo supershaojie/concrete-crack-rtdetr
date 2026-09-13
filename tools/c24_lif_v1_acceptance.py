@@ -1,11 +1,13 @@
 """One fail-closed verifier shared by numerical checks and all launch gates."""
 from c24_lif_v1_common import require
 
-ACCEPTED = ('PASSED', 'ACCEPTED_WITH_BASELINE_CUTOFF_WARNING')
+ACCEPTED = ('PASSED', 'ACCEPTED_WITH_BASELINE_CUTOFF_WARNING', 'ACCEPTED_WITH_PARENT_P3_CUTOFF_WARNING')
 
 
-def numerical_status(case):
-    from c24_lif_v1_numerics import SCHEMA, CONTINUOUS, SELECTED, TOLERANCES, cutoff_acceptance
+def numerical_evidence_status(case):
+    """Validate operators and both own-feature replays, without a parent/grandparent exemption."""
+    import math
+    from c24_lif_v1_numerics import SCHEMA, CONTINUOUS, SELECTED, TOLERANCES
     try:
         require(case.get('schema') == SCHEMA and case.get('mode') in TOLERANCES, 'Numerical schema/mode missing')
         require(case.get('status') in (*ACCEPTED, 'BLOCKED', 'REQUIRES_REVIEW'), 'Unknown numerical status')
@@ -13,15 +15,22 @@ def numerical_status(case):
         require(case.get('operator_status') == 'PASSED', 'Numerical operator failure')
         relation = case.get('natural_relation')
         require(relation in ('IDENTICAL', 'PERMUTATION', 'SET_DRIFT'), 'Illegal candidate relation')
-        def rows(field, keys):
+        def rows(field, keys, strict=True):
             values = case.get(field, [])
             require([v.get('key') for v in values] == list(keys), 'Missing/duplicate numerical key')
             for value in values:
-                require(value.get('status') == 'PASSED' and (value.get('finite') is True or value.get('exact') is True), 'Invalid numerical evidence')
+                shape=value.get('shape_a')
+                require(isinstance(shape,list) and shape and all(type(v) is int and v>0 for v in shape) and
+                        value.get('shape_b')==shape and value.get('dtype_a')==value.get('dtype_b'), 'Numerical shape/dtype mismatch')
+                require(value.get('status') in ('PASSED','BLOCKED') and (not strict or value['status']=='PASSED') and
+                        (value.get('finite') is True or value.get('exact') is True), 'Invalid numerical evidence')
                 if value.get('finite') is True:
-                    require((value.get('atol'), value.get('rtol')) == TOLERANCES[case['mode']] and value.get('over_tolerance') == 0,
+                    require(all(type(value.get(k)) in (float,int) and math.isfinite(value[k]) and value[k]>=0
+                                for k in ('max_abs','max_rel','over_tolerance')), 'Missing/nonfinite comparison metrics')
+                    require((value.get('atol'), value.get('rtol')) == TOLERANCES[case['mode']] and (not strict or value.get('over_tolerance') == 0),
                             'Changed tolerance/over-tolerance result')
         rows('continuous', CONTINUOUS)
+        rows('natural_row_comparison', SELECTED, strict=False)
         enc = next(r for r in case['continuous'] if r['key'] == 'encoder_logits')
         size = enc['shape_a'][1]
         a, b = case.get('candidate_ids_a'), case.get('candidate_ids_b')
@@ -36,16 +45,26 @@ def numerical_status(case):
         for side, ids in [('A', a), ('B', b)]:
             replay = case.get('replay', {}).get(side, {})
             require(replay.get('candidate_ids_a') == replay.get('candidate_ids_b') == ids and
-                    replay.get('natural_relation') == 'IDENTICAL' and numerical_status(replay) == 'PASSED', 'Missing/invalid two-sided replay')
-        parent = case.get('parent_control')
-        if parent and parent.get('comparability') == 'VERIFIED':
-            # A claimed parent warning must carry the same full numerical evidence.
-            require(parent.get('natural_relation') == 'SET_DRIFT' and parent.get('parent_control') is None, 'Invalid parent proof')
-            parent_copy = dict(parent, comparability='DIAGNOSTIC_ONLY')
-            require(numerical_status(parent_copy) == 'REQUIRES_REVIEW', 'Invalid parent numerical evidence')
-        return cutoff_acceptance(case, parent)
+                    replay.get('natural_relation') == 'IDENTICAL' and replay.get('mode')==case['mode'] and numerical_evidence_status(replay) == 'PASSED', 'Missing/invalid two-sided replay')
+        return 'PASSED'
     except (RuntimeError, KeyError, TypeError, ValueError, IndexError):
         return 'BLOCKED'
+
+
+def numerical_status(case):
+    from c24_lif_v1_numerics import cutoff_acceptance
+    if numerical_evidence_status(case) != 'PASSED':
+        return 'BLOCKED'
+    if case['natural_relation'] != 'SET_DRIFT':
+        return 'PASSED'
+    parent = case.get('parent_control')
+    if case.get('parent_p3_certificate') is not None:
+        return cutoff_acceptance(case, parent)
+    if parent and parent.get('comparability') == 'VERIFIED':
+        # Preserve the old, full-fingerprint half exception; no grandparent needed.
+        if parent.get('natural_relation') != 'SET_DRIFT' or numerical_evidence_status(parent) != 'PASSED':
+            return 'BLOCKED'
+    return cutoff_acceptance(case, parent)
 
 
 def fusion_status(result):
@@ -63,7 +82,7 @@ def aggregate(statuses):
         return 'BLOCKED'
     if 'REQUIRES_REVIEW' in statuses:
         return 'REQUIRES_REVIEW'
-    return 'ACCEPTED_WITH_BASELINE_CUTOFF_WARNING' if 'ACCEPTED_WITH_BASELINE_CUTOFF_WARNING' in statuses else 'PASSED'
+    return next((warning for warning in reversed(ACCEPTED[1:]) if warning in statuses), 'PASSED')
 
 
 def stage_status(name, result):
@@ -89,7 +108,9 @@ def required_stages(server):
 
 
 def blocking_summary(report):
-    rows = report.get('stages', [])
+    rows = [dict(r, status=stage_status(r['name'], r['result']))
+            if r['name'].startswith('fusion_') and isinstance(r.get('result'), dict) else r
+            for r in report.get('stages', [])]
     unresolved = [dict(name=r['name'], status=r['status'], error=r.get('error') or r.get('result', {}).get('error')
                        if isinstance(r.get('result', {}), dict) else r.get('error'))
                   for r in rows if r['status'] not in ACCEPTED]

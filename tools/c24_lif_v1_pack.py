@@ -21,6 +21,13 @@ PRIORITY=('blocking_summary','first_unaccepted_stage','terminal_exception_stage'
 
 def shard_json_entries(entries):
     """Lossless structured references for JSON records over 64 KB (stdlib only)."""
+    def child(value):
+        raw=json.dumps(value,ensure_ascii=False,allow_nan=False,sort_keys=True,separators=(',',':')).encode()
+        name='structured/'+hashlib.sha256(raw).hexdigest()+'.json'
+        if name in entries:
+            payload=entries[name]
+            return dict(path=name,bytes=len(payload),sha256=hashlib.sha256(payload).hexdigest())
+        return put(name,value)
     def put(name,value):
         payload=(json.dumps(value,ensure_ascii=False,allow_nan=False,separators=(',',':'))+'\n').encode()
         if len(payload)<=64000:
@@ -28,15 +35,15 @@ def shard_json_entries(entries):
         stem=name[:-5]
         if isinstance(value,list):
             if len(value)==1:
-                value=[dict(structured_shard=put(stem+'_item_0.json',value[0]))]
+                value=[dict(structured_shard=child(value[0]))]
             else:
                 middle=len(value)//2;require(middle>0,'Unshardable JSON list')
-                value=dict(structured_shards=[put(stem+'_part_a.json',value[:middle]),put(stem+'_part_b.json',value[middle:])],original_items=len(value))
+                value=dict(structured_shards=[child(value[:middle]),child(value[middle:])],original_items=len(value))
         elif isinstance(value,dict):
             value=dict(value)
             for i,key in enumerate(sorted(value,key=lambda k:len(encode(value[k])),reverse=True)):
                 if len(encode(value))<54000:break
-                value[key]=dict(structured_shard=put(stem+'_part_'+str(i)+'.json',value[key]))
+                value[key]=dict(structured_shard=child(value[key]))
         else:
             value=dict(structured_summary=True,original_characters=len(str(value)),sha256=hashlib.sha256(payload).hexdigest(),
                        head=str(value)[:2000],tail=str(value)[-4000:])
@@ -46,6 +53,8 @@ def shard_json_entries(entries):
 
 def compact(value,depth=0):
     if isinstance(value,dict):
+        if value.get('kind')=='original_c24_shared_p3_v1':
+            return value  # All score vectors and exact identities are required; shard losslessly.
         keys=[k for k in PRIORITY if k in value]+[k for k in value if k not in PRIORITY]
         keep=keys[:80]
         out={k:compact(value[k],depth+1) for k in keep}
@@ -125,6 +134,8 @@ def pack_light(launch=None,destination=None):
     for name in ['ultralytics-main/ultralytics/nn/modules/scca_aifi.py','ultralytics-main/ultralytics/nn/modules/lif_down.py',
                  'tools/c24_lif_v1_numerics.py','tools/check_c24_lif_v1.py','tools/train_c24_lif_v1.py',
                  'tools/c24_lif_v1_amp.py','tools/c24_lif_v1_loss.py','tools/c24_lif_v1_acceptance.py',
+                 'tools/c24_lif_v1_parent_p3.py','tools/c24_lif_v1_light.py','tools/check_c24_lif_v1_parent_gate.py',
+                 'docs/c24_lif_v1/parent_gate_fix/DIAGNOSIS.md','docs/c24_lif_v1/parent_gate_fix/latest_light_audit.json',
                  'docs/c24_lif_v1/preflight_fix/DIAGNOSIS.md','docs/c24_lif_v1/preflight_fix/original_blocking_summary.json']:
         f=ROOT/name
         if f.is_file():entries['source/'+name]=f.read_bytes()
@@ -134,11 +145,6 @@ def pack_light(launch=None,destination=None):
         for name in list(entries):
             if sum(map(len,entries.values()))<=6_500_000:break
             if name.startswith(prefix):reductions.append(dict(path=name,action='omitted for byte budget'));entries.pop(name)
-    if sum(map(len,entries.values()))>6_500_000:
-        for name,data in sorted(list(entries.items()),key=lambda kv:len(kv[1]),reverse=True):
-            if sum(map(len,entries.values()))<=6_500_000:break
-            if name.startswith('metadata/'):
-                value=json.loads(data);entries[name]=encode(compact(value));reductions.append(dict(path=name,action='additional structured summary'))
     entries['PACKAGE.json']=encode(dict(experiment=EXPERIMENT,commit=git('rev-parse','HEAD'),created=datetime.now(timezone.utc).isoformat(),
         kind='diagnostic_light',hard_limit=LIMIT,model_deserialization=False,preflight_rerun=False,reductions=reductions,
         omitted_by_policy=['weights','activations','fixtures','predictions','images','datasets','nested_source_archives']))

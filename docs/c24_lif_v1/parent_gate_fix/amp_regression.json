@@ -1,0 +1,792 @@
+{
+  "native_overflow_then_update": {
+    "status": "PASSED",
+    "label": "native_overflow_then_update",
+    "amp": true,
+    "initial_scale": 65536.0,
+    "budget": 12,
+    "required_consecutive_updates": 2,
+    "actual_optimizer_steps": 2,
+    "consecutive_updates": 2,
+    "attempts": [
+      {
+        "attempt": 0,
+        "status": "OVERFLOW_SKIPPED",
+        "loss": 0.25,
+        "loss_finite": true,
+        "scale_before": 65536.0,
+        "scale_after": 32768.0,
+        "actual_step_delta": 0,
+        "evidence": "attempt_00.json"
+      },
+      {
+        "attempt": 1,
+        "status": "OVERFLOW_SKIPPED",
+        "loss": 0.25,
+        "loss_finite": true,
+        "scale_before": 32768.0,
+        "scale_after": 16384.0,
+        "actual_step_delta": 0,
+        "evidence": "attempt_01.json"
+      },
+      {
+        "attempt": 2,
+        "status": "UPDATED",
+        "loss": 0.25,
+        "loss_finite": true,
+        "scale_before": 16384.0,
+        "scale_after": 16384.0,
+        "actual_step_delta": 1,
+        "evidence": "attempt_02.json"
+      },
+      {
+        "attempt": 3,
+        "status": "UPDATED",
+        "loss": 0.24805068969726562,
+        "loss_finite": true,
+        "scale_before": 16384.0,
+        "scale_after": 16384.0,
+        "actual_step_delta": 1,
+        "evidence": "attempt_03.json"
+      }
+    ],
+    "training_dispatched": false,
+    "trajectory": "ordinary finite diagnostic evolution; fresh graph and zero gradients per attempt; BN/RNG advance normally",
+    "diagnostic_optimizer": "native AdamW grouping, lr=0.0005; no production warmup or accumulation simulated",
+    "input": {
+      "shape": [
+        2,
+        1
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "finite": true,
+      "min": 1.0,
+      "max": 1.0,
+      "augmented_tensor_sha256": "80b8fd6d60fa85fd14a38b5295cb92abd80dfec5ca406c9f969609a79d36809d",
+      "label_tensors": {},
+      "images": []
+    },
+    "initial_model": {
+      "parameters": {
+        "sha256": "ccf664b1fbae9ca262f8771da2cbd535a82021b22e8908d381a3ae33c393d1db",
+        "tensors": 1,
+        "dtype_distribution": {
+          "torch.float32": 1
+        },
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "buffers": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tensors": 0,
+        "dtype_distribution": {},
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "output_projections": {}
+    },
+    "initial_optimizer": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tensors": 0,
+      "dtype_distribution": {},
+      "finite": true,
+      "nonfinite_names": []
+    },
+    "coverage": {
+      "parameters": 1,
+      "optimizer_entries": 1,
+      "duplicates": 0,
+      "missing": [],
+      "extra": 0,
+      "valid": true
+    },
+    "save_load_model_optimizer_scaler": "EXACT",
+    "peak_allocated_bytes": 17047552,
+    "peak_reserved_bytes": 23068672
+  },
+  "forward_nan": {
+    "status": "BLOCKED",
+    "label": "forward_nan",
+    "amp": true,
+    "initial_scale": 65536.0,
+    "budget": 12,
+    "required_consecutive_updates": 2,
+    "actual_optimizer_steps": 0,
+    "consecutive_updates": 0,
+    "attempts": [],
+    "training_dispatched": false,
+    "trajectory": "ordinary finite diagnostic evolution; fresh graph and zero gradients per attempt; BN/RNG advance normally",
+    "diagnostic_optimizer": "native AdamW grouping, lr=0.0005; no production warmup or accumulation simulated",
+    "input": {
+      "shape": [
+        2,
+        1
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "finite": true,
+      "min": 1.0,
+      "max": 1.0,
+      "augmented_tensor_sha256": "80b8fd6d60fa85fd14a38b5295cb92abd80dfec5ca406c9f969609a79d36809d",
+      "label_tensors": {},
+      "images": []
+    },
+    "initial_model": {
+      "parameters": {
+        "sha256": "ccf664b1fbae9ca262f8771da2cbd535a82021b22e8908d381a3ae33c393d1db",
+        "tensors": 1,
+        "dtype_distribution": {
+          "torch.float32": 1
+        },
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "buffers": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tensors": 0,
+        "dtype_distribution": {},
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "output_projections": {}
+    },
+    "initial_optimizer": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tensors": 0,
+      "dtype_distribution": {},
+      "finite": true,
+      "nonfinite_names": []
+    },
+    "coverage": {
+      "parameters": 1,
+      "optimizer_entries": 1,
+      "duplicates": 0,
+      "missing": [],
+      "extra": 0,
+      "valid": true
+    },
+    "error": "RuntimeError('Forward prediction/loss nonfinite')",
+    "traceback": "Traceback (most recent call last):\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_amp.py\", line 200, in calibration\n    require(current.get('predictions_finite') is True and current['loss_finite'], 'Forward prediction/loss nonfinite')\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_common.py\", line 20, in require\n    if not value: raise RuntimeError(message)\nRuntimeError: Forward prediction/loss nonfinite\n",
+    "failed_attempt": {
+      "path": "attempt_00.json",
+      "bytes": 801,
+      "sha256": "b81bc10b2b33caafdc7bf3fe35f896f8c3a5549daef48a15571afa59637b8d1e"
+    },
+    "peak_allocated_bytes": 17043456,
+    "peak_reserved_bytes": 23068672
+  },
+  "forward_inf": {
+    "status": "BLOCKED",
+    "label": "forward_inf",
+    "amp": true,
+    "initial_scale": 65536.0,
+    "budget": 12,
+    "required_consecutive_updates": 2,
+    "actual_optimizer_steps": 0,
+    "consecutive_updates": 0,
+    "attempts": [],
+    "training_dispatched": false,
+    "trajectory": "ordinary finite diagnostic evolution; fresh graph and zero gradients per attempt; BN/RNG advance normally",
+    "diagnostic_optimizer": "native AdamW grouping, lr=0.0005; no production warmup or accumulation simulated",
+    "input": {
+      "shape": [
+        2,
+        1
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "finite": true,
+      "min": 1.0,
+      "max": 1.0,
+      "augmented_tensor_sha256": "80b8fd6d60fa85fd14a38b5295cb92abd80dfec5ca406c9f969609a79d36809d",
+      "label_tensors": {},
+      "images": []
+    },
+    "initial_model": {
+      "parameters": {
+        "sha256": "ccf664b1fbae9ca262f8771da2cbd535a82021b22e8908d381a3ae33c393d1db",
+        "tensors": 1,
+        "dtype_distribution": {
+          "torch.float32": 1
+        },
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "buffers": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tensors": 0,
+        "dtype_distribution": {},
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "output_projections": {}
+    },
+    "initial_optimizer": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tensors": 0,
+      "dtype_distribution": {},
+      "finite": true,
+      "nonfinite_names": []
+    },
+    "coverage": {
+      "parameters": 1,
+      "optimizer_entries": 1,
+      "duplicates": 0,
+      "missing": [],
+      "extra": 0,
+      "valid": true
+    },
+    "error": "RuntimeError('Forward prediction/loss nonfinite')",
+    "traceback": "Traceback (most recent call last):\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_amp.py\", line 200, in calibration\n    require(current.get('predictions_finite') is True and current['loss_finite'], 'Forward prediction/loss nonfinite')\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_common.py\", line 20, in require\n    if not value: raise RuntimeError(message)\nRuntimeError: Forward prediction/loss nonfinite\n",
+    "failed_attempt": {
+      "path": "attempt_00.json",
+      "bytes": 801,
+      "sha256": "8da42886dc3624edad566822cf822ed62172b39e11e3468840ef575aa4443dfb"
+    },
+    "peak_allocated_bytes": 17043456,
+    "peak_reserved_bytes": 23068672
+  },
+  "persistent_overflow": {
+    "status": "BLOCKED",
+    "label": "persistent_overflow",
+    "amp": true,
+    "initial_scale": 65536.0,
+    "budget": 3,
+    "required_consecutive_updates": 2,
+    "actual_optimizer_steps": 0,
+    "consecutive_updates": 0,
+    "attempts": [
+      {
+        "attempt": 0,
+        "status": "OVERFLOW_SKIPPED",
+        "loss": 0.25,
+        "loss_finite": true,
+        "scale_before": 65536.0,
+        "scale_after": 32768.0,
+        "actual_step_delta": 0,
+        "evidence": "attempt_00.json"
+      },
+      {
+        "attempt": 1,
+        "status": "OVERFLOW_SKIPPED",
+        "loss": 0.25,
+        "loss_finite": true,
+        "scale_before": 32768.0,
+        "scale_after": 16384.0,
+        "actual_step_delta": 0,
+        "evidence": "attempt_01.json"
+      },
+      {
+        "attempt": 2,
+        "status": "OVERFLOW_SKIPPED",
+        "loss": 0.25,
+        "loss_finite": true,
+        "scale_before": 16384.0,
+        "scale_after": 8192.0,
+        "actual_step_delta": 0,
+        "evidence": "attempt_02.json"
+      }
+    ],
+    "training_dispatched": false,
+    "trajectory": "ordinary finite diagnostic evolution; fresh graph and zero gradients per attempt; BN/RNG advance normally",
+    "diagnostic_optimizer": "native AdamW grouping, lr=0.0005; no production warmup or accumulation simulated",
+    "input": {
+      "shape": [
+        2,
+        1
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "finite": true,
+      "min": 1.0,
+      "max": 1.0,
+      "augmented_tensor_sha256": "80b8fd6d60fa85fd14a38b5295cb92abd80dfec5ca406c9f969609a79d36809d",
+      "label_tensors": {},
+      "images": []
+    },
+    "initial_model": {
+      "parameters": {
+        "sha256": "ccf664b1fbae9ca262f8771da2cbd535a82021b22e8908d381a3ae33c393d1db",
+        "tensors": 1,
+        "dtype_distribution": {
+          "torch.float32": 1
+        },
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "buffers": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tensors": 0,
+        "dtype_distribution": {},
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "output_projections": {}
+    },
+    "initial_optimizer": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tensors": 0,
+      "dtype_distribution": {},
+      "finite": true,
+      "nonfinite_names": []
+    },
+    "coverage": {
+      "parameters": 1,
+      "optimizer_entries": 1,
+      "duplicates": 0,
+      "missing": [],
+      "extra": 0,
+      "valid": true
+    },
+    "error": "RuntimeError('AMP calibration budget exhausted without consecutive real updates')",
+    "traceback": "Traceback (most recent call last):\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_amp.py\", line 248, in calibration\n    require(report['consecutive_updates'] >= required_updates, 'AMP calibration budget exhausted without consecutive real updates')\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_common.py\", line 20, in require\n    if not value: raise RuntimeError(message)\nRuntimeError: AMP calibration budget exhausted without consecutive real updates\n",
+    "failed_attempt": {
+      "path": "attempt_02.json",
+      "bytes": 2347,
+      "sha256": "acf533f989ae0280550a4d4e5b038664add64da65c482a33da365f3e42ba0b8e"
+    },
+    "peak_allocated_bytes": 17046016,
+    "peak_reserved_bytes": 23068672
+  },
+  "missing_parameter": {
+    "status": "BLOCKED",
+    "label": "missing_parameter",
+    "amp": true,
+    "initial_scale": 65536.0,
+    "budget": 12,
+    "required_consecutive_updates": 2,
+    "actual_optimizer_steps": 0,
+    "consecutive_updates": 0,
+    "attempts": [],
+    "training_dispatched": false,
+    "trajectory": "ordinary finite diagnostic evolution; fresh graph and zero gradients per attempt; BN/RNG advance normally",
+    "diagnostic_optimizer": "native AdamW grouping, lr=0.0005; no production warmup or accumulation simulated",
+    "input": {
+      "shape": [
+        2,
+        1
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "finite": true,
+      "min": 1.0,
+      "max": 1.0,
+      "augmented_tensor_sha256": "80b8fd6d60fa85fd14a38b5295cb92abd80dfec5ca406c9f969609a79d36809d",
+      "label_tensors": {},
+      "images": []
+    },
+    "initial_model": {
+      "parameters": {
+        "sha256": "ccf664b1fbae9ca262f8771da2cbd535a82021b22e8908d381a3ae33c393d1db",
+        "tensors": 1,
+        "dtype_distribution": {
+          "torch.float32": 1
+        },
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "buffers": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tensors": 0,
+        "dtype_distribution": {},
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "output_projections": {}
+    },
+    "initial_optimizer": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tensors": 0,
+      "dtype_distribution": {},
+      "finite": true,
+      "nonfinite_names": []
+    },
+    "coverage": {
+      "parameters": 1,
+      "optimizer_entries": 0,
+      "duplicates": 0,
+      "missing": [
+        "weight"
+      ],
+      "extra": 0,
+      "valid": false
+    },
+    "error": "RuntimeError('Missing/duplicate/foreign optimizer parameter')",
+    "traceback": "Traceback (most recent call last):\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_amp.py\", line 179, in calibration\n    require(report['coverage']['valid'], 'Missing/duplicate/foreign optimizer parameter')\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_common.py\", line 20, in require\n    if not value: raise RuntimeError(message)\nRuntimeError: Missing/duplicate/foreign optimizer parameter\n",
+    "peak_allocated_bytes": 17042432,
+    "peak_reserved_bytes": 23068672
+  },
+  "duplicate_parameter": {
+    "status": "BLOCKED",
+    "label": "duplicate_parameter",
+    "amp": true,
+    "initial_scale": 65536.0,
+    "budget": 12,
+    "required_consecutive_updates": 2,
+    "actual_optimizer_steps": 0,
+    "consecutive_updates": 0,
+    "attempts": [],
+    "training_dispatched": false,
+    "trajectory": "ordinary finite diagnostic evolution; fresh graph and zero gradients per attempt; BN/RNG advance normally",
+    "diagnostic_optimizer": "native AdamW grouping, lr=0.0005; no production warmup or accumulation simulated",
+    "input": {
+      "shape": [
+        2,
+        1
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "finite": true,
+      "min": 1.0,
+      "max": 1.0,
+      "augmented_tensor_sha256": "80b8fd6d60fa85fd14a38b5295cb92abd80dfec5ca406c9f969609a79d36809d",
+      "label_tensors": {},
+      "images": []
+    },
+    "initial_model": {
+      "parameters": {
+        "sha256": "ccf664b1fbae9ca262f8771da2cbd535a82021b22e8908d381a3ae33c393d1db",
+        "tensors": 1,
+        "dtype_distribution": {
+          "torch.float32": 1
+        },
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "buffers": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tensors": 0,
+        "dtype_distribution": {},
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "output_projections": {}
+    },
+    "initial_optimizer": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tensors": 0,
+      "dtype_distribution": {},
+      "finite": true,
+      "nonfinite_names": []
+    },
+    "coverage": {
+      "parameters": 1,
+      "optimizer_entries": 2,
+      "duplicates": 1,
+      "missing": [],
+      "extra": 0,
+      "valid": false
+    },
+    "error": "RuntimeError('Missing/duplicate/foreign optimizer parameter')",
+    "traceback": "Traceback (most recent call last):\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_amp.py\", line 179, in calibration\n    require(report['coverage']['valid'], 'Missing/duplicate/foreign optimizer parameter')\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_common.py\", line 20, in require\n    if not value: raise RuntimeError(message)\nRuntimeError: Missing/duplicate/foreign optimizer parameter\n",
+    "peak_allocated_bytes": 17042432,
+    "peak_reserved_bytes": 23068672
+  },
+  "post_update_parameter_pollution": {
+    "status": "BLOCKED",
+    "label": "post_update_parameter_pollution",
+    "amp": false,
+    "initial_scale": 1.0,
+    "budget": 2,
+    "required_consecutive_updates": 2,
+    "actual_optimizer_steps": 1,
+    "consecutive_updates": 0,
+    "attempts": [],
+    "training_dispatched": false,
+    "trajectory": "ordinary finite diagnostic evolution; fresh graph and zero gradients per attempt; BN/RNG advance normally",
+    "diagnostic_optimizer": "native AdamW grouping, lr=0.0005; no production warmup or accumulation simulated",
+    "input": {
+      "shape": [
+        2,
+        1
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "finite": true,
+      "min": 1.0,
+      "max": 1.0,
+      "augmented_tensor_sha256": "80b8fd6d60fa85fd14a38b5295cb92abd80dfec5ca406c9f969609a79d36809d",
+      "label_tensors": {},
+      "images": []
+    },
+    "initial_model": {
+      "parameters": {
+        "sha256": "ccf664b1fbae9ca262f8771da2cbd535a82021b22e8908d381a3ae33c393d1db",
+        "tensors": 1,
+        "dtype_distribution": {
+          "torch.float32": 1
+        },
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "buffers": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tensors": 0,
+        "dtype_distribution": {},
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "output_projections": {}
+    },
+    "initial_optimizer": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tensors": 0,
+      "dtype_distribution": {},
+      "finite": true,
+      "nonfinite_names": []
+    },
+    "coverage": {
+      "parameters": 1,
+      "optimizer_entries": 1,
+      "duplicates": 0,
+      "missing": [],
+      "extra": 0,
+      "valid": true
+    },
+    "error": "RuntimeError('Post-update parameter/buffer/optimizer pollution')",
+    "traceback": "Traceback (most recent call last):\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_amp.py\", line 223, in calibration\n    require(current['model_after']['parameters']['finite'] and current['model_after']['buffers']['finite'] and\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_common.py\", line 20, in require\n    if not value: raise RuntimeError(message)\nRuntimeError: Post-update parameter/buffer/optimizer pollution\n",
+    "failed_attempt": {
+      "path": "attempt_00.json",
+      "bytes": 2331,
+      "sha256": "634b092af5e65facd4ca117a74c7dfbdfcbd1c44ff7b88b1bf26c6e9176ca020"
+    },
+    "peak_allocated_bytes": 17044992,
+    "peak_reserved_bytes": 23068672
+  },
+  "post_update_optimizer_pollution": {
+    "status": "BLOCKED",
+    "label": "post_update_optimizer_pollution",
+    "amp": false,
+    "initial_scale": 1.0,
+    "budget": 2,
+    "required_consecutive_updates": 2,
+    "actual_optimizer_steps": 1,
+    "consecutive_updates": 0,
+    "attempts": [],
+    "training_dispatched": false,
+    "trajectory": "ordinary finite diagnostic evolution; fresh graph and zero gradients per attempt; BN/RNG advance normally",
+    "diagnostic_optimizer": "native AdamW grouping, lr=0.0005; no production warmup or accumulation simulated",
+    "input": {
+      "shape": [
+        2,
+        1
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "finite": true,
+      "min": 1.0,
+      "max": 1.0,
+      "augmented_tensor_sha256": "80b8fd6d60fa85fd14a38b5295cb92abd80dfec5ca406c9f969609a79d36809d",
+      "label_tensors": {},
+      "images": []
+    },
+    "initial_model": {
+      "parameters": {
+        "sha256": "ccf664b1fbae9ca262f8771da2cbd535a82021b22e8908d381a3ae33c393d1db",
+        "tensors": 1,
+        "dtype_distribution": {
+          "torch.float32": 1
+        },
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "buffers": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tensors": 0,
+        "dtype_distribution": {},
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "output_projections": {}
+    },
+    "initial_optimizer": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tensors": 0,
+      "dtype_distribution": {},
+      "finite": true,
+      "nonfinite_names": []
+    },
+    "coverage": {
+      "parameters": 1,
+      "optimizer_entries": 1,
+      "duplicates": 0,
+      "missing": [],
+      "extra": 0,
+      "valid": true
+    },
+    "error": "RuntimeError('Post-update parameter/buffer/optimizer pollution')",
+    "traceback": "Traceback (most recent call last):\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_amp.py\", line 223, in calibration\n    require(current['model_after']['parameters']['finite'] and current['model_after']['buffers']['finite'] and\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_common.py\", line 20, in require\n    if not value: raise RuntimeError(message)\nRuntimeError: Post-update parameter/buffer/optimizer pollution\n",
+    "failed_attempt": {
+      "path": "attempt_00.json",
+      "bytes": 2340,
+      "sha256": "273e3475fe82db29b9f5f9ba75bf00a17bed682a56ccd79998c4d992a48dd3af"
+    },
+    "peak_allocated_bytes": 17044992,
+    "peak_reserved_bytes": 23068672
+  },
+  "prediction_nonfinite": {
+    "status": "BLOCKED",
+    "label": "prediction_nonfinite",
+    "amp": true,
+    "initial_scale": 65536.0,
+    "budget": 12,
+    "required_consecutive_updates": 2,
+    "actual_optimizer_steps": 0,
+    "consecutive_updates": 0,
+    "attempts": [],
+    "training_dispatched": false,
+    "trajectory": "ordinary finite diagnostic evolution; fresh graph and zero gradients per attempt; BN/RNG advance normally",
+    "diagnostic_optimizer": "native AdamW grouping, lr=0.0005; no production warmup or accumulation simulated",
+    "input": {
+      "shape": [
+        2,
+        1
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "finite": true,
+      "min": 1.0,
+      "max": 1.0,
+      "augmented_tensor_sha256": "80b8fd6d60fa85fd14a38b5295cb92abd80dfec5ca406c9f969609a79d36809d",
+      "label_tensors": {},
+      "images": []
+    },
+    "initial_model": {
+      "parameters": {
+        "sha256": "ccf664b1fbae9ca262f8771da2cbd535a82021b22e8908d381a3ae33c393d1db",
+        "tensors": 1,
+        "dtype_distribution": {
+          "torch.float32": 1
+        },
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "buffers": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tensors": 0,
+        "dtype_distribution": {},
+        "finite": true,
+        "nonfinite_names": []
+      },
+      "output_projections": {}
+    },
+    "initial_optimizer": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tensors": 0,
+      "dtype_distribution": {},
+      "finite": true,
+      "nonfinite_names": []
+    },
+    "coverage": {
+      "parameters": 1,
+      "optimizer_entries": 1,
+      "duplicates": 0,
+      "missing": [],
+      "extra": 0,
+      "valid": true
+    },
+    "error": "RuntimeError('Forward prediction/loss nonfinite')",
+    "traceback": "Traceback (most recent call last):\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_amp.py\", line 200, in calibration\n    require(current.get('predictions_finite') is True and current['loss_finite'], 'Forward prediction/loss nonfinite')\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c24-lif-v1\\tools\\c24_lif_v1_common.py\", line 20, in require\n    if not value: raise RuntimeError(message)\nRuntimeError: Forward prediction/loss nonfinite\n",
+    "failed_attempt": {
+      "path": "attempt_00.json",
+      "bytes": 799,
+      "sha256": "67de8c98ab2457f038ef94d5bdb298d8195c4c84cd3c8612ffe7b793d3e58cb8"
+    },
+    "peak_allocated_bytes": 17044992,
+    "peak_reserved_bytes": 23068672
+  },
+  "exception_context_restore": {
+    "status": "PASSED"
+  },
+  "numerical_negatives": {
+    "permutation": true,
+    "missing_key": true,
+    "illegal_id": true,
+    "NaN": true,
+    "lost_residual": true,
+    "wrong_bn": true,
+    "empty_report": true,
+    "only_A_replay": true,
+    "different_parent_set": true
+  },
+  "continuous_error": {
+    "status": "BLOCKED_AS_EXPECTED"
+  },
+  "missing_candidate": {
+    "status": "BLOCKED_AS_EXPECTED"
+  },
+  "illegal_candidate": {
+    "status": "BLOCKED_AS_EXPECTED"
+  },
+  "changed_tolerance": {
+    "status": "BLOCKED_AS_EXPECTED"
+  },
+  "unknown_status": {
+    "status": "BLOCKED_AS_EXPECTED"
+  },
+  "unexplained_amp_drift": {
+    "status": "REQUIRES_REVIEW_AS_EXPECTED"
+  },
+  "unexplained_half_drift": {
+    "status": "REQUIRES_REVIEW_AS_EXPECTED"
+  },
+  "shared_warning_semantics": {
+    "status": "PASSED",
+    "evidence": "SYNTHETIC_TEST_ONLY"
+  },
+  "all_blockers_preserved": {
+    "status": "PASSED"
+  },
+  "all_gradient_names_bounded": {
+    "status": "PASSED"
+  },
+  "single_preflight_and_failure_light": {
+    "failed": {
+      "status": "PASSED",
+      "preflight": 1,
+      "dispatch": 0,
+      "release": [
+        "preflight"
+      ],
+      "actual_training": "NOT_RUN_MOCKED_DISPATCH",
+      "archive_bytes": 70816,
+      "all_blockers": true,
+      "no_worker": true
+    },
+    "accepted": {
+      "status": "PASSED",
+      "preflight": 1,
+      "dispatch": 1,
+      "release": [
+        "preflight"
+      ],
+      "actual_training": "NOT_RUN_MOCKED_DISPATCH"
+    },
+    "diagnosis_only": {
+      "status": "PASSED",
+      "preflight": 1,
+      "dispatch": 0,
+      "release": [
+        "preflight"
+      ],
+      "actual_training": "NOT_RUN_MOCKED_DISPATCH"
+    }
+  },
+  "server_gate_contracts": {
+    "status": "PASSED",
+    "scope": "SYNTHETIC_READER_CONTRACT_ONLY_NOT_SERVER_CAPACITY",
+    "accepted_aggregate": "PASSED",
+    "cases": {
+      "missing_stage": "BLOCKED_AS_EXPECTED",
+      "zero_actual_updates": "BLOCKED_AS_EXPECTED",
+      "FP32_mislabelled_as_AMP": "BLOCKED_AS_EXPECTED",
+      "manual_cold_scale_128": "BLOCKED_AS_EXPECTED",
+      "different_batch_identity": "BLOCKED_AS_EXPECTED",
+      "lost_scaler_reload": "BLOCKED_AS_EXPECTED",
+      "activate_native": "BLOCKED_AS_EXPECTED",
+      "cold_state_leak": "BLOCKED_AS_EXPECTED",
+      "actual_local_not_server": "BLOCKED_AS_EXPECTED"
+    }
+  }
+}
