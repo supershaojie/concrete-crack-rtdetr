@@ -1,0 +1,83 @@
+{
+  "status": "PASSED",
+  "tested_source_commit": "8f13858128df5f35486ca67845a41f51fa3e3979",
+  "scope": "Real local Git/worktrees, preserved dirty main; all fetches redirected to local bare fixture. Missing-object predicate and two transient errors simulated only in retry case; no network.",
+  "tests": [
+    {
+      "name": "local_object_no_fetch",
+      "exit_code": 0,
+      "fetch_attempts": 0,
+      "fetch_commands": [],
+      "output_tail": "ultralytics/utils/tuner.py\": \"b89658789523b6d6a9f013735186088463b0e2fbb85d3758c4c46519c047f612\",\n      \"ultralytics-main/ultralytics/utils/uploads.py\": \"cf28704ffb96cd8e3651f68e0f09fb71b46229cdcc3de5f1a87fe7cbe41fa1b5\"\n    }\n  },\n  \"verified_remote_head\": \"LOCAL_OBJECT_NO_FETCH\"\n}\nnbrg_v1 ready at D:/MyProjects/Crack_RTDETR/outputs/worktrees/nbrg-v1/outputs/nbrg_sync_fixture/worktree with space, fixed 8f13858128df5f35486ca67845a41f51fa3e3979; no training started.\nPreparing worktree (detached HEAD 8f13858)\nUpdating files:  87% (882/1007)\nUpdating files:  88% (887/1007)\nUpdating files:  89% (897/1007)\nUpdating files:  90% (907/1007)\nUpdating files:  91% (917/1007)\nUpdating files:  92% (927/1007)\nUpdating files:  93% (937/1007)\nUpdating files:  94% (947/1007)\nUpdating files:  95% (957/1007)\nUpdating files:  96% (967/1007)\nUpdating files:  97% (977/1007)\nUpdating files:  98% (987/1007)\nUpdating files:  99% (997/1007)\nUpdating files: 100% (1007/1007)\nUpdating files: 100% (1007/1007), done.\n"
+    },
+    {
+      "name": "repeat_same_pin",
+      "exit_code": 0,
+      "fetch_attempts": 0,
+      "fetch_commands": [],
+      "output_tail": "4f4fd2bd568065716\",\n      \"ultralytics-main/ultralytics/utils/tal.py\": \"9a3c0db192297dbfc3fa5dd55d22430814cc623708e62c8f7f286537251d6285\",\n      \"ultralytics-main/ultralytics/utils/torch_utils.py\": \"1db59dddb5f63759eb0f56c7f28e475fc7f3f04d1ce21704adcfc5bfcb3379f7\",\n      \"ultralytics-main/ultralytics/utils/tqdm.py\": \"8615eb11b3272e0788037ddcdd0883f41d6229d3e56dc005244531a1092dcb93\",\n      \"ultralytics-main/ultralytics/utils/triton.py\": \"27f246d41bfec8d0b40b896c2288ecd16aa33495cde46b964e0957d319ac136b\",\n      \"ultralytics-main/ultralytics/utils/tuner.py\": \"b89658789523b6d6a9f013735186088463b0e2fbb85d3758c4c46519c047f612\",\n      \"ultralytics-main/ultralytics/utils/uploads.py\": \"cf28704ffb96cd8e3651f68e0f09fb71b46229cdcc3de5f1a87fe7cbe41fa1b5\"\n    }\n  },\n  \"verified_remote_head\": \"LOCAL_OBJECT_NO_FETCH\"\n}\nnbrg_v1 ready at D:/MyProjects/Crack_RTDETR/outputs/worktrees/nbrg-v1/outputs/nbrg_sync_fixture/worktree with space, fixed 8f13858128df5f35486ca67845a41f51fa3e3979; no training started.\n"
+    },
+    {
+      "name": "dirty_target_rejected",
+      "exit_code": 1,
+      "fetch_attempts": 0,
+      "fetch_commands": [],
+      "output_tail": "Modified target preserved\n"
+    },
+    {
+      "name": "untracked_results_preserved",
+      "exit_code": 0,
+      "fetch_attempts": 0,
+      "fetch_commands": [],
+      "output_tail": "4f4fd2bd568065716\",\n      \"ultralytics-main/ultralytics/utils/tal.py\": \"9a3c0db192297dbfc3fa5dd55d22430814cc623708e62c8f7f286537251d6285\",\n      \"ultralytics-main/ultralytics/utils/torch_utils.py\": \"1db59dddb5f63759eb0f56c7f28e475fc7f3f04d1ce21704adcfc5bfcb3379f7\",\n      \"ultralytics-main/ultralytics/utils/tqdm.py\": \"8615eb11b3272e0788037ddcdd0883f41d6229d3e56dc005244531a1092dcb93\",\n      \"ultralytics-main/ultralytics/utils/triton.py\": \"27f246d41bfec8d0b40b896c2288ecd16aa33495cde46b964e0957d319ac136b\",\n      \"ultralytics-main/ultralytics/utils/tuner.py\": \"b89658789523b6d6a9f013735186088463b0e2fbb85d3758c4c46519c047f612\",\n      \"ultralytics-main/ultralytics/utils/uploads.py\": \"cf28704ffb96cd8e3651f68e0f09fb71b46229cdcc3de5f1a87fe7cbe41fa1b5\"\n    }\n  },\n  \"verified_remote_head\": \"LOCAL_OBJECT_NO_FETCH\"\n}\nnbrg_v1 ready at D:/MyProjects/Crack_RTDETR/outputs/worktrees/nbrg-v1/outputs/nbrg_sync_fixture/worktree with space, fixed 8f13858128df5f35486ca67845a41f51fa3e3979; no training started.\n"
+    },
+    {
+      "name": "different_target_sha_rejected",
+      "exit_code": 1,
+      "fetch_attempts": 0,
+      "fetch_commands": [],
+      "output_tail": "Different SHA preserved; use another new directory\n"
+    },
+    {
+      "name": "non_worktree_rejected",
+      "exit_code": 1,
+      "fetch_attempts": 0,
+      "fetch_commands": [],
+      "output_tail": "Target is not linked worktree; preserved\n"
+    },
+    {
+      "name": "simulated_missing_two_failures_then_real_local_fetch",
+      "exit_code": 0,
+      "fetch_attempts": 3,
+      "fetch_commands": [
+        "GIT_TERMINAL_PROMPT=0 -C D:/MyProjects/Crack_RTDETR/outputs/worktrees/nbrg-v1/outputs/nbrg_sync_fixture/main -c http.version=HTTP/1.1 -c http.lowSpeedLimit=1 -c http.lowSpeedTime=60 fetch --progress --no-tags --no-write-fetch-head origin refs/heads/exp-rtdetr-r18-lite-nbrg-v1:refs/remotes/origin/exp-rtdetr-r18-lite-nbrg-v1",
+        "GIT_TERMINAL_PROMPT=0 -C D:/MyProjects/Crack_RTDETR/outputs/worktrees/nbrg-v1/outputs/nbrg_sync_fixture/main -c http.version=HTTP/1.1 -c http.lowSpeedLimit=1 -c http.lowSpeedTime=60 fetch --progress --no-tags --no-write-fetch-head origin refs/heads/exp-rtdetr-r18-lite-nbrg-v1:refs/remotes/origin/exp-rtdetr-r18-lite-nbrg-v1",
+        "GIT_TERMINAL_PROMPT=0 -C D:/MyProjects/Crack_RTDETR/outputs/worktrees/nbrg-v1/outputs/nbrg_sync_fixture/main -c http.version=HTTP/1.1 -c http.lowSpeedLimit=1 -c http.lowSpeedTime=60 fetch --progress --no-tags --no-write-fetch-head origin refs/heads/exp-rtdetr-r18-lite-nbrg-v1:refs/remotes/origin/exp-rtdetr-r18-lite-nbrg-v1"
+      ],
+      "output_tail": "\n      \"ultralytics-main/ultralytics/utils/tal.py\": \"9a3c0db192297dbfc3fa5dd55d22430814cc623708e62c8f7f286537251d6285\",\n      \"ultralytics-main/ultralytics/utils/torch_utils.py\": \"1db59dddb5f63759eb0f56c7f28e475fc7f3f04d1ce21704adcfc5bfcb3379f7\",\n      \"ultralytics-main/ultralytics/utils/tqdm.py\": \"8615eb11b3272e0788037ddcdd0883f41d6229d3e56dc005244531a1092dcb93\",\n      \"ultralytics-main/ultralytics/utils/triton.py\": \"27f246d41bfec8d0b40b896c2288ecd16aa33495cde46b964e0957d319ac136b\",\n      \"ultralytics-main/ultralytics/utils/tuner.py\": \"b89658789523b6d6a9f013735186088463b0e2fbb85d3758c4c46519c047f612\",\n      \"ultralytics-main/ultralytics/utils/uploads.py\": \"cf28704ffb96cd8e3651f68e0f09fb71b46229cdcc3de5f1a87fe7cbe41fa1b5\"\n    }\n  },\n  \"verified_remote_head\": \"8f13858128df5f35486ca67845a41f51fa3e3979\"\n}\nnbrg_v1 ready at D:/MyProjects/Crack_RTDETR/outputs/worktrees/nbrg-v1/outputs/nbrg_sync_fixture/worktree with space, fixed 8f13858128df5f35486ca67845a41f51fa3e3979; no training started.\n"
+    },
+    {
+      "name": "five_failed_fetches_stop",
+      "exit_code": 1,
+      "fetch_attempts": 5,
+      "fetch_commands": [
+        "GIT_TERMINAL_PROMPT=0 -C D:/MyProjects/Crack_RTDETR/outputs/worktrees/nbrg-v1/outputs/nbrg_sync_fixture/main -c http.version=HTTP/1.1 -c http.lowSpeedLimit=1 -c http.lowSpeedTime=60 fetch --progress --no-tags --no-write-fetch-head origin refs/heads/exp-rtdetr-r18-lite-nbrg-v1:refs/remotes/origin/exp-rtdetr-r18-lite-nbrg-v1",
+        "GIT_TERMINAL_PROMPT=0 -C D:/MyProjects/Crack_RTDETR/outputs/worktrees/nbrg-v1/outputs/nbrg_sync_fixture/main -c http.version=HTTP/1.1 -c http.lowSpeedLimit=1 -c http.lowSpeedTime=60 fetch --progress --no-tags --no-write-fetch-head origin refs/heads/exp-rtdetr-r18-lite-nbrg-v1:refs/remotes/origin/exp-rtdetr-r18-lite-nbrg-v1",
+        "GIT_TERMINAL_PROMPT=0 -C D:/MyProjects/Crack_RTDETR/outputs/worktrees/nbrg-v1/outputs/nbrg_sync_fixture/main -c http.version=HTTP/1.1 -c http.lowSpeedLimit=1 -c http.lowSpeedTime=60 fetch --progress --no-tags --no-write-fetch-head origin refs/heads/exp-rtdetr-r18-lite-nbrg-v1:refs/remotes/origin/exp-rtdetr-r18-lite-nbrg-v1",
+        "GIT_TERMINAL_PROMPT=0 -C D:/MyProjects/Crack_RTDETR/outputs/worktrees/nbrg-v1/outputs/nbrg_sync_fixture/main -c http.version=HTTP/1.1 -c http.lowSpeedLimit=1 -c http.lowSpeedTime=60 fetch --progress --no-tags --no-write-fetch-head origin refs/heads/exp-rtdetr-r18-lite-nbrg-v1:refs/remotes/origin/exp-rtdetr-r18-lite-nbrg-v1",
+        "GIT_TERMINAL_PROMPT=0 -C D:/MyProjects/Crack_RTDETR/outputs/worktrees/nbrg-v1/outputs/nbrg_sync_fixture/main -c http.version=HTTP/1.1 -c http.lowSpeedLimit=1 -c http.lowSpeedTime=60 fetch --progress --no-tags --no-write-fetch-head origin refs/heads/exp-rtdetr-r18-lite-nbrg-v1:refs/remotes/origin/exp-rtdetr-r18-lite-nbrg-v1"
+      ],
+      "output_tail": "Target branch fetch failed: attempt 1/5\nTarget branch fetch failed: attempt 2/5\nTarget branch fetch failed: attempt 3/5\nTarget branch fetch failed: attempt 4/5\nTarget branch fetch failed: attempt 5/5\nFetch exhausted; import the delivered offline bundle, then rerun this same script.\n"
+    },
+    {
+      "name": "wrong_remote_rejected",
+      "exit_code": 1,
+      "fetch_attempts": 0,
+      "fetch_commands": [],
+      "output_tail": "Unexpected origin: https://example.invalid/wrong.git\n"
+    }
+  ],
+  "full_sha_detached": true,
+  "original_main_preserved": true,
+  "training": "NOT_RUN"
+}

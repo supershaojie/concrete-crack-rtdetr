@@ -1,0 +1,247 @@
+{
+  "base_sha": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "implementation_commit": "8f13858128df5f35486ca67845a41f51fa3e3979",
+  "scope": "Task sources/configs/compact audits; manifest excludes itself; final HEAD in external delivery record",
+  "files": {
+    "docs/nbrg_v1/authoritative_c2_args.yaml": {
+      "sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+      "hash_mode": "normalized_LF",
+      "bytes": 1823
+    },
+    "docs/nbrg_v1/authoritative_dataset_inventory.json": {
+      "sha256": "8567e1b4d1aae5f168fb18b633ed4357c7f0aba56c0041a6570647fb542d0446",
+      "hash_mode": "normalized_LF",
+      "bytes": 745
+    },
+    "docs/nbrg_v1/base_audit.json": {
+      "sha256": "36bddaf0021737299592cf31aad506e63d0afcfc504543b8cdd70006e66af30f",
+      "hash_mode": "normalized_LF",
+      "bytes": 3170
+    },
+    "docs/nbrg_v1/channel_selection.json": {
+      "sha256": "4f1540dd8af6ddebd576768779542bc522f2e2fea44a10de1f9d9f00fa1e7d8e",
+      "hash_mode": "normalized_LF",
+      "bytes": 27595
+    },
+    "docs/nbrg_v1/complexity.json": {
+      "sha256": "bcb3de951fcdc560206a9c339a2ffb487463e65b09cd1aa210f995d4e4112f0b",
+      "hash_mode": "normalized_LF",
+      "bytes": 3616
+    },
+    "docs/nbrg_v1/evidence/accumulation_diagnostic.json": {
+      "sha256": "c5970db6abbfccd704a85c616a8db5fe89fe3d6bdc86ef3b1d8427f348180a71",
+      "hash_mode": "normalized_LF",
+      "bytes": 1530
+    },
+    "docs/nbrg_v1/evidence/capacity_log_tail.txt": {
+      "sha256": "a7aa1cbd021d4113cae9ee1f33dacb15ff8b42b22e7ff97d7f77fd8541c3ceff",
+      "hash_mode": "normalized_LF",
+      "bytes": 2602
+    },
+    "docs/nbrg_v1/evidence/capacity_preflight.json": {
+      "sha256": "2a385c7b43accde2b30dcf37876d0b8bf204b7de08598fe89f0e09d0ace173f3",
+      "hash_mode": "normalized_LF",
+      "bytes": 27592
+    },
+    "docs/nbrg_v1/evidence/cpu_cbr_lif_nbr_control_v1_full_fp32_fuse_diagnostic.json.gz": {
+      "sha256": "c2020f6635268144a270a6749228173593f1cb57c4c1f1479e4c4b77acf0af0e",
+      "hash_mode": "raw",
+      "bytes": 20430
+    },
+    "docs/nbrg_v1/evidence/cpu_cbr_lif_nbr_control_v1_native_fp32_fuse_diagnostic.json.gz": {
+      "sha256": "ba54ea618c032b18685ecc305055f05fd5c8472121e43c588a3a0c372be5322d",
+      "hash_mode": "raw",
+      "bytes": 20108
+    },
+    "docs/nbrg_v1/evidence/cpu_cbr_lif_nbrg_v1_full_fp32_fuse_diagnostic.json.gz": {
+      "sha256": "59b702fb62bcc7cd017d981c34f713ad427e5b0223e7378b4dab9f6c854f61d5",
+      "hash_mode": "raw",
+      "bytes": 19440
+    },
+    "docs/nbrg_v1/evidence/cpu_cbr_lif_nbrg_v1_native_fp32_fuse_diagnostic.json.gz": {
+      "sha256": "9caa0b632f23f291a17a30c69ba66e9d7803e2d0654398526de67565d7d1a9eb",
+      "hash_mode": "raw",
+      "bytes": 19209
+    },
+    "docs/nbrg_v1/evidence/cpu_log_tail.txt": {
+      "sha256": "59b5a8744bf4a20243503ec8793983ebc106cc278a6c7dd85133f41bafb58686",
+      "hash_mode": "normalized_LF",
+      "bytes": 2143
+    },
+    "docs/nbrg_v1/evidence/cpu_preflight.full.json.gz": {
+      "sha256": "b22d148c0c77db5540485a52677fade3485a451242c72b68aee57c4a4e5fc475",
+      "hash_mode": "raw",
+      "bytes": 68916
+    },
+    "docs/nbrg_v1/evidence/cpu_preflight.json": {
+      "sha256": "308300a5af2893a727492a8b8365172ded2aff5081331a65793d6894c1e3f680",
+      "hash_mode": "normalized_LF",
+      "bytes": 24133
+    },
+    "docs/nbrg_v1/evidence/cuda_cbr_lif_nbr_control_v1_full_fp32_fuse_diagnostic.json.gz": {
+      "sha256": "50a964c0f594c6528fd96b2e101984c972dd1a60a6a2146bc7cabc220362679b",
+      "hash_mode": "raw",
+      "bytes": 19300
+    },
+    "docs/nbrg_v1/evidence/cuda_cbr_lif_nbr_control_v1_native_amp_fuse_diagnostic.json.gz": {
+      "sha256": "8b2243a98068b9b57a5bb1b181e52491f848c985d41884ef9a01f4f394181583",
+      "hash_mode": "raw",
+      "bytes": 13549
+    },
+    "docs/nbrg_v1/evidence/cuda_cbr_lif_nbr_control_v1_native_fp32_fuse_diagnostic.json.gz": {
+      "sha256": "d106945f99f06cdb18f36e80dd68b233da812986a10329a74a3101c11e256f22",
+      "hash_mode": "raw",
+      "bytes": 19104
+    },
+    "docs/nbrg_v1/evidence/cuda_cbr_lif_nbr_control_v1_native_half_fuse_diagnostic.json.gz": {
+      "sha256": "c489120d911ded74103452f3d86678f2e002257fe86bfb50ea9fb9d3f480e647",
+      "hash_mode": "raw",
+      "bytes": 13194
+    },
+    "docs/nbrg_v1/evidence/cuda_cbr_lif_nbrg_v1_full_fp32_fuse_diagnostic.json.gz": {
+      "sha256": "755fbe34245983a2613b144e4ba668b14bd8edf348cb5316adab3a84c7bd358b",
+      "hash_mode": "raw",
+      "bytes": 19197
+    },
+    "docs/nbrg_v1/evidence/cuda_cbr_lif_nbrg_v1_native_amp_fuse_diagnostic.json.gz": {
+      "sha256": "b317c297cf6baec20eaec259a7c76a79bb9119f65cd9e4f2c86c5bd43e1d6f8c",
+      "hash_mode": "raw",
+      "bytes": 13532
+    },
+    "docs/nbrg_v1/evidence/cuda_cbr_lif_nbrg_v1_native_fp32_fuse_diagnostic.json.gz": {
+      "sha256": "184e2dee1950d2cb0bc492bb1165f5e653218bc348e52c67fcbc7a9caa357e80",
+      "hash_mode": "raw",
+      "bytes": 19117
+    },
+    "docs/nbrg_v1/evidence/cuda_cbr_lif_nbrg_v1_native_half_fuse_diagnostic.json.gz": {
+      "sha256": "4ae21631c9bcd80a39f95f0c1c7f9375604634f3d4dd7e69205cd2c278a7b112",
+      "hash_mode": "raw",
+      "bytes": 13286
+    },
+    "docs/nbrg_v1/evidence/cuda_log_tail.txt": {
+      "sha256": "35440111ffedd34356b0158db1c8ee2e784ee630ce41baae9653d34dc6c5c80e",
+      "hash_mode": "normalized_LF",
+      "bytes": 2598
+    },
+    "docs/nbrg_v1/evidence/cuda_preflight.full.json.gz": {
+      "sha256": "9ecc09df6ac3409635397e57c907cbe3919f25f858b3b9d5eda08cd0a64c34f7",
+      "hash_mode": "raw",
+      "bytes": 101481
+    },
+    "docs/nbrg_v1/evidence/cuda_preflight.json": {
+      "sha256": "20ba95dab772c47b90426787381772cfb3f0140d5f096bdbc57f8f8a83d69be2",
+      "hash_mode": "normalized_LF",
+      "bytes": 20445
+    },
+    "docs/nbrg_v1/evidence/negative_launch_guards.json": {
+      "sha256": "7f5524bb4f35994f8630aa37f0036ef9939157c36f5cce3e247167b2e7e12833",
+      "hash_mode": "normalized_LF",
+      "bytes": 785
+    },
+    "docs/nbrg_v1/evidence/sync_audit.json": {
+      "sha256": "ca2af0c7361c665256dac705975403a7da03ba934ae820b13b60e4165ef2435c",
+      "hash_mode": "normalized_LF",
+      "bytes": 9140
+    },
+    "docs/nbrg_v1/evidence/training_evidence_guard.json": {
+      "sha256": "18fff609730673abf02dd63dda78c2548cae4a3140b6ae2ef640e139b4ae2d2f",
+      "hash_mode": "normalized_LF",
+      "bytes": 225
+    },
+    "docs/nbrg_v1/initialization_audit.full.json.gz": {
+      "sha256": "9e67fc945b986a68883358d75f94da9e45daec81b04e5c64c01ec8d2ce44a9ab",
+      "hash_mode": "raw",
+      "bytes": 42278
+    },
+    "docs/nbrg_v1/initialization_audit.json": {
+      "sha256": "470c293d33cef45e3bc3fb7a355752b213a96d5c6e88e0f7da0d9751d59814b5",
+      "hash_mode": "normalized_LF",
+      "bytes": 19605
+    },
+    "docs/nbrg_v1/preflight.json": {
+      "sha256": "da5e132708cfa848bc6ee3452217679cfdeb8cae2b5da1f3071d99d6b414b310",
+      "hash_mode": "normalized_LF",
+      "bytes": 17218
+    },
+    "docs/nbrg_v1/README.md": {
+      "sha256": "76db951d67827dbc7b396153923e4bf7511b162dd1fc6d2d928f7404821f1d98",
+      "hash_mode": "normalized_LF",
+      "bytes": 10122
+    },
+    "docs/nbrg_v1/recipe_audit.json": {
+      "sha256": "debed251c26a9ee26a8ca50236ed0743df27c697af3853e90ec01a7730f77647",
+      "hash_mode": "normalized_LF",
+      "bytes": 44266
+    },
+    "docs/nbrg_v1/reference_audit.json": {
+      "sha256": "f1c793c3e720315054f018edc3f455da6683d642ec0659c9e3d93d01b4624fab",
+      "hash_mode": "normalized_LF",
+      "bytes": 1715
+    },
+    "docs/nbrg_v1/SERVER_HANDOFF.md": {
+      "sha256": "260d48157d527bb7d5a61dccc3c5cc6b165dde4d49133b54ffd6847b4c1038c3",
+      "hash_mode": "normalized_LF",
+      "bytes": 7908
+    },
+    "tools/init_nbrg_v1.py": {
+      "sha256": "352db66f810a69b322935d8dd9c8a3687f766008a3d1bab19ca17027ca696f03",
+      "hash_mode": "normalized_LF",
+      "bytes": 14238
+    },
+    "tools/nbrg_v1_reload_probe.py": {
+      "sha256": "f48d4aaf6516b1088d9eea8268458e2e003abe2af57528095caa681e6bcf90b7",
+      "hash_mode": "normalized_LF",
+      "bytes": 1854
+    },
+    "tools/preflight_nbrg_v1.py": {
+      "sha256": "df020351c3da90dae6faa719a48cadc3df9d210f0057edf5a12764fd07a77e0f",
+      "hash_mode": "normalized_LF",
+      "bytes": 20832
+    },
+    "tools/sync_c19_lif_v1.sh": {
+      "sha256": "e3f1edee870a6c5b4c44e150f77b29a0df0710596dacc87aaf681acfa49bcebc",
+      "hash_mode": "normalized_LF",
+      "bytes": 6512
+    },
+    "tools/sync_nbrg_v1.sh": {
+      "sha256": "dbea01d99589989df719c8fa9970cb05e8481255c3a5493788fb7a9649a98a74",
+      "hash_mode": "normalized_LF",
+      "bytes": 224
+    },
+    "tools/train_nbrg_v1.py": {
+      "sha256": "d478e4e5899fbaef6684e279127695d4ce3c840dd9961b95306be9ec581be75d",
+      "hash_mode": "normalized_LF",
+      "bytes": 9988
+    },
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-lif-nbr-control-v1.yaml": {
+      "sha256": "475a435421b2b65a60950d52190f1b788ccac8550c28d79dbff0b4cb3cf36f11",
+      "hash_mode": "normalized_LF",
+      "bytes": 2247
+    },
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-lif-nbrg-v1.yaml": {
+      "sha256": "09c794fe3866c2a8433d02336d50551611e6811cad23178d440a44c49752186a",
+      "hash_mode": "normalized_LF",
+      "bytes": 2245
+    },
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-nbrg-v1.yaml": {
+      "sha256": "061db28d8e42f2354415ed42b73e83be9838b10ebc63cb1ba08809f991cf8ee8",
+      "hash_mode": "normalized_LF",
+      "bytes": 2174
+    },
+    "ultralytics-main/ultralytics/nn/modules/__init__.py": {
+      "sha256": "fab69a52514d3c9c8b6d7ebae9f9aa1257982e51adc8d0168d1ac18e664c18e3",
+      "hash_mode": "normalized_LF",
+      "bytes": 3746
+    },
+    "ultralytics-main/ultralytics/nn/modules/nbr_g.py": {
+      "sha256": "149fd591bb73c491f7566b8ee6adecad359946cafdbac966b442b5c9791106d7",
+      "hash_mode": "normalized_LF",
+      "bytes": 3532
+    },
+    "ultralytics-main/ultralytics/nn/tasks.py": {
+      "sha256": "3e758784160d0b554f1f0d442f49fd30703386e359beeaedaa432b9946d6909a",
+      "hash_mode": "normalized_LF",
+      "bytes": 73591
+    }
+  }
+}

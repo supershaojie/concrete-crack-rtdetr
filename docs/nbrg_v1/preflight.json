@@ -439,5 +439,8 @@
         "bytes": 13286
       }
     ]
-  }
+  },
+  "sync_integration": "PASSED_9_LOCAL_CASES",
+  "launch_negative_guards": "PASSED_5_CASES",
+  "compact_evidence": "All complete raw JSON preserved losslessly in .full.json.gz or mode-specific .json.gz"
 }

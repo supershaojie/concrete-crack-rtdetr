@@ -1,0 +1,31 @@
+{
+  "status": "PASSED",
+  "checks": [
+    {
+      "case": "failed_status",
+      "blocked": true,
+      "error": "Incomplete/failed preflight report: D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\guard_failed_status.json"
+    },
+    {
+      "case": "wrong_source",
+      "blocked": true,
+      "error": "Source differs from preflight"
+    },
+    {
+      "case": "stale_code",
+      "blocked": true,
+      "error": "Code differs from preflight"
+    },
+    {
+      "case": "missing_cuda_capacity",
+      "blocked": true,
+      "error": "Require CPU, CUDA and real B16/640 AMP reports"
+    },
+    {
+      "case": "nonzero_gate_as_formal_initial",
+      "blocked": true,
+      "error": "Fresh gates must be trainable zero"
+    }
+  ],
+  "formal_training": "NOT_RUN"
+}
