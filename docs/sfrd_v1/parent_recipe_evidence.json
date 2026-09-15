@@ -1,0 +1,58 @@
+{
+  "status": "PASSED",
+  "archive": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\c19_lif_v1_complete_20260913_115700_919970.tar.gz",
+  "members": {
+    "metadata/launch/actual_train_args.yaml": {
+      "sha256": "31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b",
+      "bytes": 1846,
+      "inventory_match": true
+    },
+    "metadata/launch/authoritative_c2_args.yaml": {
+      "sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+      "bytes": 1823,
+      "inventory_match": true
+    },
+    "metadata/launch/plan.json": {
+      "sha256": "d7b2d31e6534a7d9daa3d152e04dbab5edd96d301407a9c76b905059c0de3c72",
+      "bytes": 61255,
+      "inventory_match": true
+    }
+  },
+  "authoritative_fields": 109,
+  "archived_authoritative_matches_committed_reference": true,
+  "actual_pair_differences": {
+    "model": {
+      "c2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+      "pair": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/weights/c19_lif_v1_controlled_init.pt"
+    },
+    "name": {
+      "c2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "pair": "c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug"
+    },
+    "save_dir": {
+      "c2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "pair": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug"
+    }
+  },
+  "actual_pair_launch_runtime": {
+    "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+    "executable": "/root/miniconda3/envs/rtdetr/bin/python",
+    "torch": "2.1.2+cu121",
+    "cuda": "12.1",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "ultralytics": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/ultralytics-main/ultralytics/__init__.py",
+    "lif_down_module": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/ultralytics-main/ultralytics/nn/modules/lif_down.py",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "cbr_module": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/ultralytics-main/ultralytics/nn/modules/cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    }
+  }
+}

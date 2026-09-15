@@ -1,0 +1,656 @@
+[
+  {
+    "field": "agnostic_nms",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "amp",
+    "original": true,
+    "resolved": true,
+    "changed": false
+  },
+  {
+    "field": "angle",
+    "original": 1.0,
+    "resolved": 1.0,
+    "changed": false
+  },
+  {
+    "field": "augment",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "auto_augment",
+    "original": null,
+    "resolved": null,
+    "changed": false
+  },
+  {
+    "field": "batch",
+    "original": 16,
+    "resolved": 16,
+    "changed": false
+  },
+  {
+    "field": "bgr",
+    "original": 0.0,
+    "resolved": 0.0,
+    "changed": false
+  },
+  {
+    "field": "box",
+    "original": 7.5,
+    "resolved": 7.5,
+    "changed": false
+  },
+  {
+    "field": "cache",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "cfg",
+    "original": null,
+    "resolved": null,
+    "changed": false
+  },
+  {
+    "field": "classes",
+    "original": null,
+    "resolved": null,
+    "changed": false
+  },
+  {
+    "field": "close_mosaic",
+    "original": 10,
+    "resolved": 10,
+    "changed": false
+  },
+  {
+    "field": "cls",
+    "original": 0.5,
+    "resolved": 0.5,
+    "changed": false
+  },
+  {
+    "field": "compile",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "conf",
+    "original": null,
+    "resolved": null,
+    "changed": false
+  },
+  {
+    "field": "copy_paste",
+    "original": 0,
+    "resolved": 0,
+    "changed": false
+  },
+  {
+    "field": "copy_paste_mode",
+    "original": "flip",
+    "resolved": "flip",
+    "changed": false
+  },
+  {
+    "field": "cos_lr",
+    "original": true,
+    "resolved": true,
+    "changed": false
+  },
+  {
+    "field": "cutmix",
+    "original": 0,
+    "resolved": 0,
+    "changed": false
+  },
+  {
+    "field": "data",
+    "original": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "resolved": "D:\\MyProjects\\Crack_RTDETR\\configs\\crack.yaml",
+    "changed": true
+  },
+  {
+    "field": "degrees",
+    "original": 5,
+    "resolved": 5,
+    "changed": false
+  },
+  {
+    "field": "deterministic",
+    "original": true,
+    "resolved": true,
+    "changed": false
+  },
+  {
+    "field": "device",
+    "original": "0",
+    "resolved": "0",
+    "changed": false
+  },
+  {
+    "field": "dfl",
+    "original": 1.5,
+    "resolved": 1.5,
+    "changed": false
+  },
+  {
+    "field": "dnn",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "dropout",
+    "original": 0.0,
+    "resolved": 0.0,
+    "changed": false
+  },
+  {
+    "field": "dynamic",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "embed",
+    "original": null,
+    "resolved": null,
+    "changed": false
+  },
+  {
+    "field": "end2end",
+    "original": null,
+    "resolved": null,
+    "changed": false
+  },
+  {
+    "field": "epochs",
+    "original": 200,
+    "resolved": 200,
+    "changed": false
+  },
+  {
+    "field": "erasing",
+    "original": 0,
+    "resolved": 0,
+    "changed": false
+  },
+  {
+    "field": "exist_ok",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "fliplr",
+    "original": 0.5,
+    "resolved": 0.5,
+    "changed": false
+  },
+  {
+    "field": "flipud",
+    "original": 0.2,
+    "resolved": 0.2,
+    "changed": false
+  },
+  {
+    "field": "format",
+    "original": "torchscript",
+    "resolved": "torchscript",
+    "changed": false
+  },
+  {
+    "field": "fraction",
+    "original": 1.0,
+    "resolved": 1.0,
+    "changed": false
+  },
+  {
+    "field": "freeze",
+    "original": null,
+    "resolved": null,
+    "changed": false
+  },
+  {
+    "field": "half",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "hsv_h",
+    "original": 0.015,
+    "resolved": 0.015,
+    "changed": false
+  },
+  {
+    "field": "hsv_s",
+    "original": 0.5,
+    "resolved": 0.5,
+    "changed": false
+  },
+  {
+    "field": "hsv_v",
+    "original": 0.35,
+    "resolved": 0.35,
+    "changed": false
+  },
+  {
+    "field": "imgsz",
+    "original": 640,
+    "resolved": 640,
+    "changed": false
+  },
+  {
+    "field": "int8",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "iou",
+    "original": 0.7,
+    "resolved": 0.7,
+    "changed": false
+  },
+  {
+    "field": "keras",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "kobj",
+    "original": 1.0,
+    "resolved": 1.0,
+    "changed": false
+  },
+  {
+    "field": "line_width",
+    "original": null,
+    "resolved": null,
+    "changed": false
+  },
+  {
+    "field": "lr0",
+    "original": 0.0005,
+    "resolved": 0.0005,
+    "changed": false
+  },
+  {
+    "field": "lrf",
+    "original": 0.01,
+    "resolved": 0.01,
+    "changed": false
+  },
+  {
+    "field": "mask_ratio",
+    "original": 4,
+    "resolved": 4,
+    "changed": false
+  },
+  {
+    "field": "max_det",
+    "original": 300,
+    "resolved": 300,
+    "changed": false
+  },
+  {
+    "field": "mixup",
+    "original": 0.05,
+    "resolved": 0.05,
+    "changed": false
+  },
+  {
+    "field": "mode",
+    "original": "train",
+    "resolved": "train",
+    "changed": false
+  },
+  {
+    "field": "model",
+    "original": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "resolved": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-sfrd-v1\\weights\\sfrd_v1\\cbr_lif_sfrd_v1_init.pt",
+    "changed": true
+  },
+  {
+    "field": "momentum",
+    "original": 0.937,
+    "resolved": 0.937,
+    "changed": false
+  },
+  {
+    "field": "mosaic",
+    "original": 0.8,
+    "resolved": 0.8,
+    "changed": false
+  },
+  {
+    "field": "multi_scale",
+    "original": 0.0,
+    "resolved": 0.0,
+    "changed": false
+  },
+  {
+    "field": "name",
+    "original": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "resolved": "cbr_lif_sfrd_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+    "changed": true
+  },
+  {
+    "field": "nbs",
+    "original": 64,
+    "resolved": 64,
+    "changed": false
+  },
+  {
+    "field": "nms",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "opset",
+    "original": null,
+    "resolved": null,
+    "changed": false
+  },
+  {
+    "field": "optimize",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "optimizer",
+    "original": "AdamW",
+    "resolved": "AdamW",
+    "changed": false
+  },
+  {
+    "field": "overlap_mask",
+    "original": true,
+    "resolved": true,
+    "changed": false
+  },
+  {
+    "field": "patience",
+    "original": 50,
+    "resolved": 50,
+    "changed": false
+  },
+  {
+    "field": "perspective",
+    "original": 0.0002,
+    "resolved": 0.0002,
+    "changed": false
+  },
+  {
+    "field": "plots",
+    "original": true,
+    "resolved": true,
+    "changed": false
+  },
+  {
+    "field": "pose",
+    "original": 12.0,
+    "resolved": 12.0,
+    "changed": false
+  },
+  {
+    "field": "pretrained",
+    "original": true,
+    "resolved": true,
+    "changed": false
+  },
+  {
+    "field": "profile",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "project",
+    "original": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "resolved": "D:\\MyProjects\\Crack_RTDETR\\runs\\c_series",
+    "changed": true
+  },
+  {
+    "field": "rect",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "resume",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "retina_masks",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "rle",
+    "original": 1.0,
+    "resolved": 1.0,
+    "changed": false
+  },
+  {
+    "field": "save",
+    "original": true,
+    "resolved": true,
+    "changed": false
+  },
+  {
+    "field": "save_conf",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "save_crop",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "save_dir",
+    "original": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "resolved": "D:\\MyProjects\\Crack_RTDETR\\runs\\c_series\\cbr_lif_sfrd_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+    "changed": true
+  },
+  {
+    "field": "save_frames",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "save_json",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "save_period",
+    "original": -1,
+    "resolved": -1,
+    "changed": false
+  },
+  {
+    "field": "save_txt",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "scale",
+    "original": 0.4,
+    "resolved": 0.4,
+    "changed": false
+  },
+  {
+    "field": "seed",
+    "original": 42,
+    "resolved": 42,
+    "changed": false
+  },
+  {
+    "field": "shear",
+    "original": 1.5,
+    "resolved": 1.5,
+    "changed": false
+  },
+  {
+    "field": "show",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "show_boxes",
+    "original": true,
+    "resolved": true,
+    "changed": false
+  },
+  {
+    "field": "show_conf",
+    "original": true,
+    "resolved": true,
+    "changed": false
+  },
+  {
+    "field": "show_labels",
+    "original": true,
+    "resolved": true,
+    "changed": false
+  },
+  {
+    "field": "simplify",
+    "original": true,
+    "resolved": true,
+    "changed": false
+  },
+  {
+    "field": "single_cls",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "source",
+    "original": null,
+    "resolved": null,
+    "changed": false
+  },
+  {
+    "field": "split",
+    "original": "val",
+    "resolved": "val",
+    "changed": false
+  },
+  {
+    "field": "stream_buffer",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "task",
+    "original": "detect",
+    "resolved": "detect",
+    "changed": false
+  },
+  {
+    "field": "time",
+    "original": null,
+    "resolved": null,
+    "changed": false
+  },
+  {
+    "field": "tracker",
+    "original": "botsort.yaml",
+    "resolved": "botsort.yaml",
+    "changed": false
+  },
+  {
+    "field": "translate",
+    "original": 0.1,
+    "resolved": 0.1,
+    "changed": false
+  },
+  {
+    "field": "val",
+    "original": true,
+    "resolved": true,
+    "changed": false
+  },
+  {
+    "field": "verbose",
+    "original": true,
+    "resolved": true,
+    "changed": false
+  },
+  {
+    "field": "vid_stride",
+    "original": 1,
+    "resolved": 1,
+    "changed": false
+  },
+  {
+    "field": "visualize",
+    "original": false,
+    "resolved": false,
+    "changed": false
+  },
+  {
+    "field": "warmup_bias_lr",
+    "original": 0.1,
+    "resolved": 0.1,
+    "changed": false
+  },
+  {
+    "field": "warmup_epochs",
+    "original": 5,
+    "resolved": 5,
+    "changed": false
+  },
+  {
+    "field": "warmup_momentum",
+    "original": 0.8,
+    "resolved": 0.8,
+    "changed": false
+  },
+  {
+    "field": "weight_decay",
+    "original": 0.0001,
+    "resolved": 0.0001,
+    "changed": false
+  },
+  {
+    "field": "workers",
+    "original": 8,
+    "resolved": 8,
+    "changed": false
+  },
+  {
+    "field": "workspace",
+    "original": null,
+    "resolved": null,
+    "changed": false
+  }
+]

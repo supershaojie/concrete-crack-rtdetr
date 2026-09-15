@@ -1,0 +1,70 @@
+{
+  "status": "VERIFIED_REFERENCE",
+  "requested_filename": "1c120da7-e686-4775-a53f-de972f8e6ca7.zip",
+  "actual_path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-20260623.zip",
+  "sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+  "expected_sha256_match": true,
+  "classes": [
+    {
+      "file": "RTDETR-main/ultralytics/nn/extra_modules/block.py",
+      "cls": "Partial_conv3",
+      "line": 1331,
+      "source_file_sha256": "e3e3617c89bd7caf350d2601740f2e399847a16a3a659d7b3e40010b88498cd2",
+      "class_sha256": "5ba498ca89dd06a14e7c04c1e6512f463c0ba6aab0c94c1cb07b03e782d6096d"
+    },
+    {
+      "file": "RTDETR-main/ultralytics/nn/extra_modules/block.py",
+      "cls": "Faster_Block_Rep_EMA",
+      "line": 1450,
+      "source_file_sha256": "e3e3617c89bd7caf350d2601740f2e399847a16a3a659d7b3e40010b88498cd2",
+      "class_sha256": "2d24166708f8a14dcdea768fbdfce0d6d07544de8c1686b9522f68bee751b073"
+    },
+    {
+      "file": "RTDETR-main/ultralytics/nn/extra_modules/block.py",
+      "cls": "Strip_Block",
+      "line": 10446,
+      "source_file_sha256": "e3e3617c89bd7caf350d2601740f2e399847a16a3a659d7b3e40010b88498cd2",
+      "class_sha256": "d5db7a7bb0c824f060d12d8c6887e92fb8fbe9acfe11282796365b80c64066d0"
+    },
+    {
+      "file": "RTDETR-main/ultralytics/nn/extra_modules/block.py",
+      "cls": "Strip_Attention",
+      "line": 10463,
+      "source_file_sha256": "e3e3617c89bd7caf350d2601740f2e399847a16a3a659d7b3e40010b88498cd2",
+      "class_sha256": "b724ab9f75f48c66471c0806dca0b2a0812beb91cfb0d64dd69e71ffb3f04a9a"
+    },
+    {
+      "file": "RTDETR-main/ultralytics/nn/extra_modules/attention.py",
+      "cls": "CPCA",
+      "line": 951,
+      "source_file_sha256": "928204bf285bcf184e55b046a5beca5f5c0e32a0e734bd3f0889f881d8a7bc8d",
+      "class_sha256": "b1154cfa7fbdc1d682176a0c5cf59db5e1a6d6e4c137190c113b68b4de85ba45"
+    }
+  ],
+  "findings": {
+    "Partial_conv3": "Convolves dim//n_div channels and concatenates untouched channels. SFR keeps all C channels in branch2a and uses dense cross-channel spatial factors.",
+    "Faster_Block_Rep_EMA": "Inherited Faster_Block_EMA executes partial RepConv mixing, MLP, DropPath and EMA attention. None are transplanted.",
+    "Strip_Block": "DW5x5 then sequential asymmetric DW convolutions, 1x1 projection, unbounded multiplicative attention. SFR-D uses parallel DW1x5 + DW5x1 on latent rank channels with bounded identity gain.",
+    "Strip_Attention": "Actual forward comments out x = self.spatial_gating_unit(x); the declared strip gating unit does not execute.",
+    "CPCA": "Channel pooling attention, DW5x5, multiple sequential strip scales 7/11/21 and projections. SFR-D has no pooling/channel attention/multiscale strip aggregation."
+  },
+  "no_package_import_or_overwrite": true,
+  "novelty": "NOT_ESTABLISHED; specific combination requires experiments and separate literature review",
+  "references": [
+    {
+      "url": "https://arxiv.org/abs/1405.3866",
+      "title": "Speeding up Convolutional Neural Networks with Low Rank Expansions",
+      "read_scope": "abstract"
+    },
+    {
+      "url": "https://arxiv.org/abs/2303.03667",
+      "title": "Run, Don't Walk: Chasing Higher FLOPS for Faster Neural Networks",
+      "read_scope": "abstract"
+    },
+    {
+      "url": "https://doi.org/10.3390/drones10010006",
+      "title": "EMAFG-RTDETR",
+      "read_scope": "user-provided reference; DOI fetch unavailable"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "status": "PASSED",
+  "input": [
+    1,
+    3,
+    640,
+    640
+  ],
+  "dtype": "FP32",
+  "device": "cpu",
+  "tool": "thop 2.0.18",
+  "convention": "2 FLOPs/MAC; actual full 640 forward; THOP module hooks omit tanh, elementwise calibration, functional attention/grid sampling and other unregistered operations",
+  "models": {
+    "cbr_lif": {
+      "parameters_unfused": 20149765,
+      "parameters_fused": 19944965,
+      "GFLOPs_fused_actual_640": 57.5649536,
+      "GFLOPs_unfused_actual_640": 58.672512,
+      "parameter_delta_by_top_layer": {
+        "8": 256,
+        "10": 256,
+        "12": 256,
+        "14": 50816,
+        "15": 256,
+        "17": 256,
+        "19": 50816,
+        "22": 50816,
+        "23": 256,
+        "25": 50816
+      }
+    },
+    "cbr_lif_sfrd_v1": {
+      "parameters_unfused": 18780549,
+      "parameters_fused": 18574981,
+      "GFLOPs_fused_actual_640": 55.9984384,
+      "GFLOPs_unfused_actual_640": 57.110912,
+      "parameter_delta_by_top_layer": {
+        "6": 256,
+        "7": 512,
+        "8": 256,
+        "10": 256,
+        "12": 256,
+        "14": 50816,
+        "15": 256,
+        "17": 256,
+        "19": 50816,
+        "22": 50816,
+        "23": 256,
+        "25": 50816
+      }
+    },
+    "cbr_lif_sfr_control_v1": {
+      "parameters_unfused": 18773509,
+      "parameters_fused": 18567941,
+      "GFLOPs_fused_actual_640": 55.9871744,
+      "GFLOPs_unfused_actual_640": 57.099648,
+      "parameter_delta_by_top_layer": {
+        "6": 256,
+        "7": 512,
+        "8": 256,
+        "10": 256,
+        "12": 256,
+        "14": 50816,
+        "15": 256,
+        "17": 256,
+        "19": 50816,
+        "22": 50816,
+        "23": 256,
+        "25": 50816
+      }
+    },
+    "sfrd_v1": {
+      "parameters_unfused": 18713556,
+      "parameters_fused": 18507732,
+      "GFLOPs_fused_actual_640": 55.5992576,
+      "GFLOPs_unfused_actual_640": 56.715008,
+      "parameter_delta_by_top_layer": {
+        "6": 256,
+        "7": 512,
+        "8": 256,
+        "10": 256,
+        "12": 256,
+        "14": 50816,
+        "15": 256,
+        "17": 256,
+        "19": 50816,
+        "20": 256,
+        "22": 50816,
+        "23": 256,
+        "25": 50816
+      }
+    }
+  },
+  "analytic_convolution_GFLOPs_reduction": 1.5616,
+  "latency": "NOT_MEASURED",
+  "FPS": null,
+  "fusion_note": "Native BaseModel does not fuse original ConvNormLayer; only new B+BN2 support is added. Each new BN2 fusion reduces C parameters (768 total), beyond the supplied estimate."
+}

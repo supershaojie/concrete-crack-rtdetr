@@ -1,0 +1,57 @@
+{
+  "status": "PASSED",
+  "base_sha": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "branch": "exp-rtdetr-r18-lite-sfrd-v1",
+  "worktree": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-sfrd-v1",
+  "formal_training": "NOT_RUN",
+  "full_val_test": "NOT_RUN",
+  "server_sync": "NOT_RUN",
+  "latency": "NOT_MEASURED",
+  "protected_paths_unchanged": [
+    "ultralytics-main/ultralytics/nn/modules/lif_down.py",
+    "ultralytics-main/ultralytics/nn/modules/cbr.py",
+    "ultralytics-main/ultralytics/nn/modules/block.py",
+    "ultralytics-main/ultralytics/nn/modules/head.py",
+    "ultralytics-main/ultralytics/nn/modules/transformer.py",
+    "ultralytics-main/ultralytics/models/utils/loss.py",
+    "tools/init_c19_lif_v1.py",
+    "tools/train_c19_lif_v1.py",
+    "tools/preflight_c19_lif_v1.py",
+    "tools/check_c19_lif_v1.py",
+    "tools/c19_lif_v1_results.py",
+    "tools/sync_c19_lif_v1.sh",
+    "tools/c19_lif_v1_diagnostic.py",
+    "tools/c19_lif_v1_cutoff.py",
+    "tools/c19_lif_v1_probe.py"
+  ],
+  "source_hashes_match_final_preflight": true,
+  "formal_preflight_predicate_passed": true,
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "factor_sha256": "d79c54442ffd2547c181e94133458636d3e12e8588c72f7c162010f0e46168fb",
+  "new_parameters": 7040,
+  "no_AGENTS_found_in_worktree_or_workspace_ancestors": true,
+  "initial_root_head": "f34502c43a88edc9cb1076bd996b9c3fc2d23e31",
+  "initial_root_branch": "exp-rtdetr-r18-lite-cscef-v4",
+  "nbrg": {
+    "initial_head": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "last_observed_head": "d0c759c17a246ef21be064077ecc20bdb11be6b4",
+    "last_observed_status": "",
+    "note": "Other task advanced independently; no edit/checkout/reset/clean/stash/merge/deletion executed in its worktree"
+  },
+  "development_corrections": [
+    {
+      "issue": "Inherited Conv/BN helper constructed FP32 bias for FP64 input",
+      "resolution": "Only new SpatialFactorConv uses dtype-preserving torch.nn.utils.fusion.fuse_conv_bn_eval"
+    },
+    {
+      "issue": "Strict preliminary FP32 Gaussian block fusion tolerance exceeded",
+      "resolution": "Retained evidence; proved FP64 identity and checked dot-product coefficient/summation roundoff bound. Whole-network original tolerances unchanged."
+    }
+  ],
+  "limits": [
+    "Local B16 is one native-criterion forward/backward with optimizer_steps=0, not sustained training or two concurrent jobs.",
+    "WDDM CUDA allocation peaked at 6532433408 bytes; server Linux CUDA/AMP and combined memory must be rechecked.",
+    "Full pair FP32 fuse checked initial/nonzero; fused AMP inference finite. True-half and AMP before/after fusion equivalence are not claimed.",
+    "Control/standalone full training preflight remains future scope; construction/init/nc1/output/reload are complete."
+  ]
+}

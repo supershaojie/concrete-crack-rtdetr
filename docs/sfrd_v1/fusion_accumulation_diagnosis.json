@@ -1,0 +1,34 @@
+{
+  "(6, False)": {
+    "max_abs": 6.008148193359375e-05,
+    "fail_1e5_1e6": 752,
+    "fp64_max": 4.973799150320701e-14,
+    "fp32_unfused_vs_fp64_max": 4.966391860961039e-05,
+    "fp32_fused_vs_fp64_max": 4.627648759480962e-05,
+    "inherited_fuse_tolerance": true
+  },
+  "(6, True)": {
+    "max_abs": 7.2479248046875e-05,
+    "fail_1e5_1e6": 713,
+    "fp64_max": 7.460698725481052e-14,
+    "fp32_unfused_vs_fp64_max": 5.092336724032975e-05,
+    "fp32_fused_vs_fp64_max": 4.2713080954825955e-05,
+    "inherited_fuse_tolerance": true
+  },
+  "(7, False)": {
+    "max_abs": 0.00020599365234375,
+    "fail_1e5_1e6": 2056,
+    "fp64_max": 1.1368683772161603e-13,
+    "fp32_unfused_vs_fp64_max": 0.00017811462340944217,
+    "fp32_fused_vs_fp64_max": 0.0001705209783438022,
+    "inherited_fuse_tolerance": false
+  },
+  "(7, True)": {
+    "max_abs": 0.00018310546875,
+    "fail_1e5_1e6": 2039,
+    "fp64_max": 9.237055564881302e-14,
+    "fp32_unfused_vs_fp64_max": 0.00012154639549066815,
+    "fp32_fused_vs_fp64_max": 0.00013206251685460302,
+    "inherited_fuse_tolerance": true
+  }
+}

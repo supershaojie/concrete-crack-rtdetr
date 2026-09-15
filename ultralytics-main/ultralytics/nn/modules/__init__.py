@@ -17,6 +17,7 @@ Examples:
     >>> subprocess.run(f"onnxslim {f} {f} && open {f}", shell=True, check=True)  # pip install onnxslim
 """
 
+from .sfr_d import DirectionalCalibration, SFRStage, SpatialFactorConv
 from .block import (
     C1,
     C2,
