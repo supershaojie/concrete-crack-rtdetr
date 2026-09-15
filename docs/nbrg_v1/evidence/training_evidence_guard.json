@@ -1,0 +1,10 @@
+{
+  "status": "PASSED",
+  "variants": [
+    "cbr_lif_nbr_control_v1",
+    "cbr_lif_nbrg_v1",
+    "nbrg_v1"
+  ],
+  "source_and_initial_and_code_and_dataset_and_cuda_environment_bound": true,
+  "formal_start_executed": false
+}

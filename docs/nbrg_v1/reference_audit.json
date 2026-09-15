@@ -1,0 +1,39 @@
+{
+  "status": "PASSED",
+  "archive": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-20260623.zip",
+  "sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+  "files": [
+    {
+      "member": "RTDETR-main/ultralytics/nn/extra_modules/block.py",
+      "sha256": "e3e3617c89bd7caf350d2601740f2e399847a16a3a659d7b3e40010b88498cd2",
+      "classes_read": [
+        "Partial_conv3",
+        "Faster_Block",
+        "Faster_Block_EMA",
+        "Partial_conv3_Rep",
+        "Faster_Block_Rep_EMA"
+      ],
+      "extracted_source_equal": true
+    },
+    {
+      "member": "RTDETR-main/ultralytics/nn/extra_modules/attention.py",
+      "sha256": "928204bf285bcf184e55b046a5beca5f5c0e32a0e734bd3f0889f881d8a7bc8d",
+      "classes_read": [
+        "EMA"
+      ],
+      "extracted_source_equal": true
+    },
+    {
+      "member": "RTDETR-main/ultralytics/cfg/models/rt-detr/rtdetr-r18.yaml",
+      "sha256": "2725a909804022d5980a206ca17d3b7f97c788c1f3bf18fdc6026f5370f0f400",
+      "classes_read": [],
+      "extracted_source_equal": true
+    }
+  ],
+  "differences": [
+    "Partial_conv3 transforms only a leading subset; NBR uses two dense 3x3 convolutions and offline hidden-channel selection.",
+    "Faster_Block_Rep_EMA uses partial RepConv, pointwise MLP, DropPath and EMA; none is imported or added.",
+    "EMA reshapes groups into batch and shares convolutions, pools H/W and globally, uses GroupNorm, softmax and sigmoid. NBR-G has eight independent spatial grouped convolutions on interleaved abs mean/max of X/F and 1+0.5*tanh.",
+    "Reference rtdetr-r18.yaml backbone and head match baseline structural entries; implementation follows actual project ConvNormLayer conv/norm/act keys."
+  ]
+}

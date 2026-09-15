@@ -1,0 +1,38 @@
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 543/552 items from pretrained weights
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 547/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 132 weight(decay=0.0001), 136 bias(decay=0.0)
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 132 weight(decay=0.0001), 136 bias(decay=0.0)
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 524/533 items from pretrained weights
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 528/537 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 524/533 items from pretrained weights
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 528/537 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 119 weight(decay=0.0001), 130 bias(decay=0.0)
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 537/537 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 537/537 items from pretrained weights
+Preflight: PASSED outputs\nbrg_cpu_final\preflight.json

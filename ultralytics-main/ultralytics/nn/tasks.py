@@ -30,6 +30,7 @@ from ultralytics.nn.modules import (
     ADown,
     BasicBlock,
     Blocks,
+    NBRStage,
     Bottleneck,
     BottleneckCSP,
     C2f,
@@ -1673,7 +1674,7 @@ def parse_model(d, ch, verbose=True):
                 legacy = False
         elif m is AIFI:
             args = [ch[f], *args]
-        elif m is Blocks:
+        elif m in {Blocks, NBRStage}:
             block_type = globals()[args[1]] if isinstance(args[1], str) else args[1]
             c1, c2 = ch[f], args[0] * block_type.expansion
             args = [c1, args[0], block_type, *args[2:]]

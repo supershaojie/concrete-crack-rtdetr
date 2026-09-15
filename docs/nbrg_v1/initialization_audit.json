@@ -1,0 +1,662 @@
+{
+  "status": "PASSED",
+  "source": "D:\\rtdetr跑结果\\c2 200e在线\\c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053\\weights\\rtdetr_r18_lite_imagenet_backbone_init.pt",
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "source_nc": 80,
+  "serialized_nc": 80,
+  "trainer_nc": 1,
+  "parent_initialization": {
+    "source": "D:\\rtdetr跑结果\\c2 200e在线\\c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053\\weights\\rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "source_nc": 80,
+    "target_nc": 80,
+    "seed": 42,
+    "c2_commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+    "lif_commit": "0e95bbade3558b0d2b77c5531483c60810391d88",
+    "c19_commit": "025997e3c51eaf6933534308a95da6ebf97bff53",
+    "variant": "c19_lif_v1",
+    "NEW_TRAINABLE": [
+      "model.20.B_proj.weight",
+      "model.20.O_proj.weight",
+      "model.20.P.weight",
+      "model.20.U_dw.weight",
+      "model.20.U_mix.weight",
+      "model.26.cbr.evidence_proj.bias",
+      "model.26.cbr.evidence_proj.weight",
+      "model.26.cbr.geometry_proj.bias",
+      "model.26.cbr.geometry_proj.weight",
+      "model.26.cbr.offset_hidden.bias",
+      "model.26.cbr.offset_hidden.weight",
+      "model.26.cbr.offset_out.bias",
+      "model.26.cbr.offset_out.weight",
+      "model.26.cbr.p3_proj.bias",
+      "model.26.cbr.p3_proj.weight",
+      "model.26.cbr.query_proj.bias",
+      "model.26.cbr.query_proj.weight",
+      "model.26.cbr.score.weight",
+      "model.26.cbr.side_embed.weight"
+    ],
+    "NEW_BUFFER": [],
+    "ALLOWED_CLASS_ADAPTATION": [],
+    "MISSING": [],
+    "UNEXPECTED": [],
+    "SHAPE_MISMATCH": [],
+    "parent_initial_values": {
+      "LIF": {
+        "model.20.B_proj.weight": {
+          "shape": [
+            16,
+            256,
+            1,
+            1
+          ],
+          "equal": true,
+          "sha256": "8f1cbb19dbebb4ea1df2b8b00066355c25db085df8348c679351fc1481e19593"
+        },
+        "model.20.O_proj.weight": {
+          "shape": [
+            256,
+            64,
+            1,
+            1
+          ],
+          "equal": true,
+          "sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+        },
+        "model.20.P.weight": {
+          "shape": [
+            48,
+            1,
+            3,
+            3
+          ],
+          "equal": true,
+          "sha256": "34c97fb2aad50371f916fea56643cc756e7d695eb8b040b021ffc839e2ee054c"
+        },
+        "model.20.U_dw.weight": {
+          "shape": [
+            16,
+            1,
+            3,
+            3
+          ],
+          "equal": true,
+          "sha256": "8574358d302ad3e1d0c177df82506d3978300c9424130094a29a7ea123c55cf8"
+        },
+        "model.20.U_mix.weight": {
+          "shape": [
+            16,
+            3,
+            1,
+            1
+          ],
+          "equal": true,
+          "sha256": "718ece26003c72dc51c290f4bf40bbb628fa5c8608d5b9ac7450b7b09fbc28fe"
+        }
+      },
+      "C19": {
+        "model.26.cbr.evidence_proj.bias": {
+          "shape": [
+            64
+          ],
+          "equal": true,
+          "sha256": "345b0573d9cad899491062e1d3778ae772d7c3e6b6424a7b8d11f303bcc2bb20"
+        },
+        "model.26.cbr.evidence_proj.weight": {
+          "shape": [
+            64,
+            128
+          ],
+          "equal": true,
+          "sha256": "35ad87a0c13b3e9a188042857e36178879b68aade57e2ec6b44d3e36eecba816"
+        },
+        "model.26.cbr.geometry_proj.bias": {
+          "shape": [
+            64
+          ],
+          "equal": true,
+          "sha256": "77dbebc63a45dc5dad3ac7c2541de4a16cf0b187546b2b14a6bfeb6a346e01f3"
+        },
+        "model.26.cbr.geometry_proj.weight": {
+          "shape": [
+            64,
+            2
+          ],
+          "equal": true,
+          "sha256": "86e0b8b298bec258ab057df70d35a966a37859369941306076d3bfc921d1f3c2"
+        },
+        "model.26.cbr.offset_hidden.bias": {
+          "shape": [
+            64
+          ],
+          "equal": true,
+          "sha256": "70912c71be9763019d6e8bfec3e4886fdc562c664f2b9102db58a0bdd0424eca"
+        },
+        "model.26.cbr.offset_hidden.weight": {
+          "shape": [
+            64,
+            64
+          ],
+          "equal": true,
+          "sha256": "1323616ec01b9d9a7437c638961d0dcf5ba340d1cef686005caf6457e3c322ad"
+        },
+        "model.26.cbr.offset_out.bias": {
+          "shape": [
+            1
+          ],
+          "equal": true,
+          "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+        },
+        "model.26.cbr.offset_out.weight": {
+          "shape": [
+            1,
+            64
+          ],
+          "equal": true,
+          "sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1"
+        },
+        "model.26.cbr.p3_proj.bias": {
+          "shape": [
+            64
+          ],
+          "equal": true,
+          "sha256": "f48a2835c0f1750f6e9cb544a7626c82d03a71d3e772dc2c5f1cc0c0dd498800"
+        },
+        "model.26.cbr.p3_proj.weight": {
+          "shape": [
+            64,
+            256,
+            1,
+            1
+          ],
+          "equal": true,
+          "sha256": "8a6ef74ba6f4efaf31b3ae655a12ffef75203ec5e3221125568ab40a87308c68"
+        },
+        "model.26.cbr.query_proj.bias": {
+          "shape": [
+            64
+          ],
+          "equal": true,
+          "sha256": "30ef3d9f14b65c95793d957e8255247f976367e0dfa5f2ae7ed08f02a53d7547"
+        },
+        "model.26.cbr.query_proj.weight": {
+          "shape": [
+            64,
+            256
+          ],
+          "equal": true,
+          "sha256": "ec553f8b33a60937a61a45ee743b4fb1952c2e674ec872fbceea23286891c2da"
+        },
+        "model.26.cbr.score.weight": {
+          "shape": [
+            1,
+            64
+          ],
+          "equal": true,
+          "sha256": "2215e1498a9d222d97ff24bfed03c4850ec663cff1322051527c14413f20b682"
+        },
+        "model.26.cbr.side_embed.weight": {
+          "shape": [
+            4,
+            64
+          ],
+          "equal": true,
+          "sha256": "752ae92584d22dcac346de3e030c8cb23dc12dc8799d40b0fe598771fa54fe3a"
+        }
+      }
+    },
+    "new_parameters": 66993,
+    "public_constructor_equal": true,
+    "COMMON_count": 533
+  },
+  "variants": {
+    "cbr_lif_nbr_control_v1": {
+      "shared_and_sliced_tensors": 552,
+      "shared_and_sliced_exact": true,
+      "NEW_TRAINABLE": [],
+      "MISSING": [],
+      "UNEXPECTED": [],
+      "SHAPE_MISMATCH": [],
+      "checkpoint": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_v1_initial\\cbr_lif_nbr_control_v1.pt",
+      "sha256": "574ef9a154078ff3dc71dea61d4aff467f0cb5e6a3f9b4307cf918c811dc1e62",
+      "reload_exact": true,
+      "state_hash_tensor_count": 552,
+      "state_hash_inventory_sha256": "cfc3c60fff757a3578f3b5162c8d3c0b5c013baabc7f7dc2d976a4e3fe43e2cb",
+      "bn_layer_count": 69,
+      "all_bn_settings": {
+        "eps": 0.001,
+        "momentum": 0.03,
+        "affine": true,
+        "track_running_stats": true
+      }
+    },
+    "cbr_lif_nbrg_v1": {
+      "shared_and_sliced_tensors": 552,
+      "shared_and_sliced_exact": true,
+      "NEW_TRAINABLE": [
+        "model.6.blocks.1.gate.gate_conv.bias",
+        "model.6.blocks.1.gate.gate_conv.weight",
+        "model.7.blocks.1.gate.gate_conv.bias",
+        "model.7.blocks.1.gate.gate_conv.weight"
+      ],
+      "MISSING": [],
+      "UNEXPECTED": [],
+      "SHAPE_MISMATCH": [],
+      "checkpoint": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_v1_initial\\cbr_lif_nbrg_v1.pt",
+      "sha256": "8bef15d7b4526f5a2d321a78ab472033e3a9a731ce6bc080db6317a2bbcfad6b",
+      "reload_exact": true,
+      "state_hash_tensor_count": 556,
+      "state_hash_inventory_sha256": "eda16bb8754c286a9c1aefe242deeb635112be3e9c50b9e256512506127fa66d",
+      "bn_layer_count": 69,
+      "all_bn_settings": {
+        "eps": 0.001,
+        "momentum": 0.03,
+        "affine": true,
+        "track_running_stats": true
+      }
+    },
+    "nbrg_v1": {
+      "shared_and_sliced_tensors": 533,
+      "shared_and_sliced_exact": true,
+      "NEW_TRAINABLE": [
+        "model.6.blocks.1.gate.gate_conv.bias",
+        "model.6.blocks.1.gate.gate_conv.weight",
+        "model.7.blocks.1.gate.gate_conv.bias",
+        "model.7.blocks.1.gate.gate_conv.weight"
+      ],
+      "MISSING": [],
+      "UNEXPECTED": [],
+      "SHAPE_MISMATCH": [],
+      "checkpoint": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_v1_initial\\nbrg_v1.pt",
+      "sha256": "2e2cb9013ec7ee14c8701c3031528b5b53ddd7560e88e6eb17206c2dda713365",
+      "reload_exact": true,
+      "state_hash_tensor_count": 537,
+      "state_hash_inventory_sha256": "b22f74b635c5bc5a743c232afc78ed41cb78b820652f6926dc8f315edf1c01d9",
+      "bn_layer_count": 69,
+      "all_bn_settings": {
+        "eps": 0.001,
+        "momentum": 0.03,
+        "affine": true,
+        "track_running_stats": true
+      }
+    }
+  },
+  "pair_common_tensors": 552,
+  "pair_common_exact": true,
+  "seed": 42,
+  "class_adaptation": "Native original C19/LIF Trainer timing; nine exact C2 class tensors only",
+  "selection_sha256": "20b1394da50c8a2fc900945bfc7249dd34443abd8c57d8312da8030a336476cd",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    }
+  },
+  "nc1_preflight": {
+    "cbr_lif_nbr_control_v1": {
+      "status": "PASSED",
+      "native_get_model": true,
+      "before_optimizer": true,
+      "public_and_sliced_nc1_exact": 552,
+      "gate_trainable_zero": true,
+      "ALLOWED_CLASS_ADAPTATION": [
+        {
+          "name": "model.26.dec_score_head.0.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.dec_score_head.0.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.dec_score_head.1.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.dec_score_head.1.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.dec_score_head.2.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.dec_score_head.2.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.denoising_class_embed.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.enc_score_head.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.enc_score_head.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        }
+      ],
+      "MISSING": [],
+      "UNEXPECTED": [],
+      "SHAPE_MISMATCH": []
+    },
+    "cbr_lif_nbrg_v1": {
+      "status": "PASSED",
+      "native_get_model": true,
+      "before_optimizer": true,
+      "public_and_sliced_nc1_exact": 552,
+      "gate_trainable_zero": true,
+      "ALLOWED_CLASS_ADAPTATION": [
+        {
+          "name": "model.26.dec_score_head.0.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.dec_score_head.0.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.dec_score_head.1.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.dec_score_head.1.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.dec_score_head.2.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.dec_score_head.2.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.denoising_class_embed.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.enc_score_head.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.enc_score_head.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        }
+      ],
+      "MISSING": [],
+      "UNEXPECTED": [],
+      "SHAPE_MISMATCH": []
+    },
+    "nbrg_v1": {
+      "status": "PASSED",
+      "native_get_model": true,
+      "before_optimizer": true,
+      "public_and_sliced_nc1_exact": 533,
+      "gate_trainable_zero": true,
+      "ALLOWED_CLASS_ADAPTATION": [
+        {
+          "name": "model.26.dec_score_head.0.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.dec_score_head.0.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.dec_score_head.1.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.dec_score_head.1.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.dec_score_head.2.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.dec_score_head.2.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.denoising_class_embed.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.enc_score_head.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        },
+        {
+          "name": "model.26.enc_score_head.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "original native C2/C19+LIF RNG and adaptation timing"
+        }
+      ],
+      "MISSING": [],
+      "UNEXPECTED": [],
+      "SHAPE_MISMATCH": []
+    }
+  },
+  "nc1_pair_common_exact": 552,
+  "original_generated_selection_raw_sha256": "20b1394da50c8a2fc900945bfc7249dd34443abd8c57d8312da8030a336476cd",
+  "delivered_selection_lf_sha256": "4f1540dd8af6ddebd576768779542bc522f2e2fea44a10de1f9d9f00fa1e7d8e",
+  "clean_checkpoint_integrity_after_all_checks": {
+    "cbr_lif_nbr_control_v1": true,
+    "cbr_lif_nbrg_v1": true,
+    "nbrg_v1": true
+  },
+  "full_report": {
+    "path": "initialization_audit.full.json.gz",
+    "sha256": "9e67fc945b986a68883358d75f94da9e45daec81b04e5c64c01ec8d2ce44a9ab",
+    "uncompressed_sha256": "6f3457cb34af3cf9e4fad107cc0ddf14b6c25ec4f8db55893b43f68f90215635",
+    "format": "lossless full original JSON"
+  }
+}

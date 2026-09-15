@@ -1,0 +1,1827 @@
+{
+  "status": "PASSED_PLAN_ONLY",
+  "authoritative_source": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\docs\\nbrg_v1\\authoritative_c2_args.yaml",
+  "sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+  "all_fields": 109,
+  "plans": {
+    "cbr_lif_nbr_control_v1": {
+      "action": "plan",
+      "variant": "cbr_lif_nbr_control_v1",
+      "yaml": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cbr-lif-nbr-control-v1.yaml",
+      "args": {
+        "task": "detect",
+        "mode": "train",
+        "model": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_v1_initial\\cbr_lif_nbr_control_v1.pt",
+        "data": "D:\\MyProjects\\Crack_RTDETR\\configs\\crack.yaml",
+        "epochs": 200,
+        "time": null,
+        "patience": 50,
+        "batch": 16,
+        "imgsz": 640,
+        "save": true,
+        "save_period": -1,
+        "cache": false,
+        "device": "0",
+        "workers": 8,
+        "project": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_formal_not_started\\train",
+        "name": "cbr_lif_nbr_control_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+        "exist_ok": false,
+        "pretrained": true,
+        "optimizer": "AdamW",
+        "verbose": true,
+        "seed": 42,
+        "deterministic": true,
+        "single_cls": false,
+        "rect": false,
+        "cos_lr": true,
+        "close_mosaic": 10,
+        "resume": false,
+        "amp": true,
+        "fraction": 1.0,
+        "profile": false,
+        "freeze": null,
+        "multi_scale": 0.0,
+        "compile": false,
+        "overlap_mask": true,
+        "mask_ratio": 4,
+        "dropout": 0.0,
+        "val": true,
+        "split": "val",
+        "save_json": false,
+        "conf": null,
+        "iou": 0.7,
+        "max_det": 300,
+        "half": false,
+        "dnn": false,
+        "plots": true,
+        "end2end": null,
+        "source": null,
+        "vid_stride": 1,
+        "stream_buffer": false,
+        "visualize": false,
+        "augment": false,
+        "agnostic_nms": false,
+        "classes": null,
+        "retina_masks": false,
+        "embed": null,
+        "show": false,
+        "save_frames": false,
+        "save_txt": false,
+        "save_conf": false,
+        "save_crop": false,
+        "show_labels": true,
+        "show_conf": true,
+        "show_boxes": true,
+        "line_width": null,
+        "format": "torchscript",
+        "keras": false,
+        "optimize": false,
+        "int8": false,
+        "dynamic": false,
+        "simplify": true,
+        "opset": null,
+        "workspace": null,
+        "nms": false,
+        "lr0": 0.0005,
+        "lrf": 0.01,
+        "momentum": 0.937,
+        "weight_decay": 0.0001,
+        "warmup_epochs": 5,
+        "warmup_momentum": 0.8,
+        "warmup_bias_lr": 0.1,
+        "box": 7.5,
+        "cls": 0.5,
+        "dfl": 1.5,
+        "pose": 12.0,
+        "kobj": 1.0,
+        "rle": 1.0,
+        "angle": 1.0,
+        "nbs": 64,
+        "hsv_h": 0.015,
+        "hsv_s": 0.5,
+        "hsv_v": 0.35,
+        "degrees": 5,
+        "translate": 0.1,
+        "scale": 0.4,
+        "shear": 1.5,
+        "perspective": 0.0002,
+        "flipud": 0.2,
+        "fliplr": 0.5,
+        "bgr": 0.0,
+        "mosaic": 0.8,
+        "mixup": 0.05,
+        "cutmix": 0,
+        "copy_paste": 0,
+        "copy_paste_mode": "flip",
+        "auto_augment": null,
+        "erasing": 0,
+        "cfg": null,
+        "tracker": "botsort.yaml",
+        "save_dir": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_formal_not_started\\train\\cbr_lif_nbr_control_v1_rtdetr_r18_lite_e200_b16_onlineaug"
+      },
+      "runtime": {
+        "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+        "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+        "torch": "2.7.1+cu118",
+        "cuda": "11.8",
+        "gpu": "NVIDIA GeForce RTX 2060",
+        "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\__init__.py",
+        "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+        "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+        "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+        "module_hashes": {
+          "lif_down": {
+            "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+            "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+          },
+          "cbr": {
+            "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+            "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+          }
+        }
+      },
+      "source_fingerprint": "963488e5a67c7cf7e466597c47b8c384268f81062d6100d195ad15f5df06a186",
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+      "initial_sha256": "574ef9a154078ff3dc71dea61d4aff467f0cb5e6a3f9b4307cf918c811dc1e62",
+      "c2_args_sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+      "formal_training": "NOT_STARTED",
+      "final_test": "NOT_RUN"
+    },
+    "cbr_lif_nbrg_v1": {
+      "action": "plan",
+      "variant": "cbr_lif_nbrg_v1",
+      "yaml": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\cfg\\models\\rt-detr\\rtdetr-resnet18-lite-cbr-lif-nbrg-v1.yaml",
+      "args": {
+        "task": "detect",
+        "mode": "train",
+        "model": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_v1_initial\\cbr_lif_nbrg_v1.pt",
+        "data": "D:\\MyProjects\\Crack_RTDETR\\configs\\crack.yaml",
+        "epochs": 200,
+        "time": null,
+        "patience": 50,
+        "batch": 16,
+        "imgsz": 640,
+        "save": true,
+        "save_period": -1,
+        "cache": false,
+        "device": "0",
+        "workers": 8,
+        "project": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_formal_not_started\\train",
+        "name": "cbr_lif_nbrg_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+        "exist_ok": false,
+        "pretrained": true,
+        "optimizer": "AdamW",
+        "verbose": true,
+        "seed": 42,
+        "deterministic": true,
+        "single_cls": false,
+        "rect": false,
+        "cos_lr": true,
+        "close_mosaic": 10,
+        "resume": false,
+        "amp": true,
+        "fraction": 1.0,
+        "profile": false,
+        "freeze": null,
+        "multi_scale": 0.0,
+        "compile": false,
+        "overlap_mask": true,
+        "mask_ratio": 4,
+        "dropout": 0.0,
+        "val": true,
+        "split": "val",
+        "save_json": false,
+        "conf": null,
+        "iou": 0.7,
+        "max_det": 300,
+        "half": false,
+        "dnn": false,
+        "plots": true,
+        "end2end": null,
+        "source": null,
+        "vid_stride": 1,
+        "stream_buffer": false,
+        "visualize": false,
+        "augment": false,
+        "agnostic_nms": false,
+        "classes": null,
+        "retina_masks": false,
+        "embed": null,
+        "show": false,
+        "save_frames": false,
+        "save_txt": false,
+        "save_conf": false,
+        "save_crop": false,
+        "show_labels": true,
+        "show_conf": true,
+        "show_boxes": true,
+        "line_width": null,
+        "format": "torchscript",
+        "keras": false,
+        "optimize": false,
+        "int8": false,
+        "dynamic": false,
+        "simplify": true,
+        "opset": null,
+        "workspace": null,
+        "nms": false,
+        "lr0": 0.0005,
+        "lrf": 0.01,
+        "momentum": 0.937,
+        "weight_decay": 0.0001,
+        "warmup_epochs": 5,
+        "warmup_momentum": 0.8,
+        "warmup_bias_lr": 0.1,
+        "box": 7.5,
+        "cls": 0.5,
+        "dfl": 1.5,
+        "pose": 12.0,
+        "kobj": 1.0,
+        "rle": 1.0,
+        "angle": 1.0,
+        "nbs": 64,
+        "hsv_h": 0.015,
+        "hsv_s": 0.5,
+        "hsv_v": 0.35,
+        "degrees": 5,
+        "translate": 0.1,
+        "scale": 0.4,
+        "shear": 1.5,
+        "perspective": 0.0002,
+        "flipud": 0.2,
+        "fliplr": 0.5,
+        "bgr": 0.0,
+        "mosaic": 0.8,
+        "mixup": 0.05,
+        "cutmix": 0,
+        "copy_paste": 0,
+        "copy_paste_mode": "flip",
+        "auto_augment": null,
+        "erasing": 0,
+        "cfg": null,
+        "tracker": "botsort.yaml",
+        "save_dir": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_formal_not_started\\train\\cbr_lif_nbrg_v1_rtdetr_r18_lite_e200_b16_onlineaug"
+      },
+      "runtime": {
+        "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+        "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+        "torch": "2.7.1+cu118",
+        "cuda": "11.8",
+        "gpu": "NVIDIA GeForce RTX 2060",
+        "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\__init__.py",
+        "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+        "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+        "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+        "module_hashes": {
+          "lif_down": {
+            "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+            "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+          },
+          "cbr": {
+            "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+            "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+          }
+        }
+      },
+      "source_fingerprint": "963488e5a67c7cf7e466597c47b8c384268f81062d6100d195ad15f5df06a186",
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+      "initial_sha256": "8bef15d7b4526f5a2d321a78ab472033e3a9a731ce6bc080db6317a2bbcfad6b",
+      "c2_args_sha256": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+      "formal_training": "NOT_STARTED",
+      "final_test": "NOT_RUN"
+    }
+  },
+  "changes": {
+    "cbr_lif_nbr_control_v1": [
+      {
+        "field": "agnostic_nms",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "amp",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "angle",
+        "c2": 1.0,
+        "target": 1.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "augment",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "auto_augment",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "batch",
+        "c2": 16,
+        "target": 16,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "bgr",
+        "c2": 0.0,
+        "target": 0.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "box",
+        "c2": 7.5,
+        "target": 7.5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "cache",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "cfg",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "classes",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "close_mosaic",
+        "c2": 10,
+        "target": 10,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "cls",
+        "c2": 0.5,
+        "target": 0.5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "compile",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "conf",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "copy_paste",
+        "c2": 0,
+        "target": 0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "copy_paste_mode",
+        "c2": "flip",
+        "target": "flip",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "cos_lr",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "cutmix",
+        "c2": 0,
+        "target": 0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "data",
+        "c2": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+        "target": "D:\\MyProjects\\Crack_RTDETR\\configs\\crack.yaml",
+        "changed": true,
+        "reason": "experiment identity/environment path mapping"
+      },
+      {
+        "field": "degrees",
+        "c2": 5,
+        "target": 5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "deterministic",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "device",
+        "c2": "0",
+        "target": "0",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "dfl",
+        "c2": 1.5,
+        "target": 1.5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "dnn",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "dropout",
+        "c2": 0.0,
+        "target": 0.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "dynamic",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "embed",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "end2end",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "epochs",
+        "c2": 200,
+        "target": 200,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "erasing",
+        "c2": 0,
+        "target": 0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "exist_ok",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "fliplr",
+        "c2": 0.5,
+        "target": 0.5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "flipud",
+        "c2": 0.2,
+        "target": 0.2,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "format",
+        "c2": "torchscript",
+        "target": "torchscript",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "fraction",
+        "c2": 1.0,
+        "target": 1.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "freeze",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "half",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "hsv_h",
+        "c2": 0.015,
+        "target": 0.015,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "hsv_s",
+        "c2": 0.5,
+        "target": 0.5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "hsv_v",
+        "c2": 0.35,
+        "target": 0.35,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "imgsz",
+        "c2": 640,
+        "target": 640,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "int8",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "iou",
+        "c2": 0.7,
+        "target": 0.7,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "keras",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "kobj",
+        "c2": 1.0,
+        "target": 1.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "line_width",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "lr0",
+        "c2": 0.0005,
+        "target": 0.0005,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "lrf",
+        "c2": 0.01,
+        "target": 0.01,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "mask_ratio",
+        "c2": 4,
+        "target": 4,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "max_det",
+        "c2": 300,
+        "target": 300,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "mixup",
+        "c2": 0.05,
+        "target": 0.05,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "mode",
+        "c2": "train",
+        "target": "train",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "model",
+        "c2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+        "target": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_v1_initial\\cbr_lif_nbr_control_v1.pt",
+        "changed": true,
+        "reason": "experiment identity/environment path mapping"
+      },
+      {
+        "field": "momentum",
+        "c2": 0.937,
+        "target": 0.937,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "mosaic",
+        "c2": 0.8,
+        "target": 0.8,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "multi_scale",
+        "c2": 0.0,
+        "target": 0.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "name",
+        "c2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+        "target": "cbr_lif_nbr_control_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+        "changed": true,
+        "reason": "experiment identity/environment path mapping"
+      },
+      {
+        "field": "nbs",
+        "c2": 64,
+        "target": 64,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "nms",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "opset",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "optimize",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "optimizer",
+        "c2": "AdamW",
+        "target": "AdamW",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "overlap_mask",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "patience",
+        "c2": 50,
+        "target": 50,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "perspective",
+        "c2": 0.0002,
+        "target": 0.0002,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "plots",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "pose",
+        "c2": 12.0,
+        "target": 12.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "pretrained",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "profile",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "project",
+        "c2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+        "target": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_formal_not_started\\train",
+        "changed": true,
+        "reason": "experiment identity/environment path mapping"
+      },
+      {
+        "field": "rect",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "resume",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "retina_masks",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "rle",
+        "c2": 1.0,
+        "target": 1.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "save",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "save_conf",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "save_crop",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "save_dir",
+        "c2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+        "target": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_formal_not_started\\train\\cbr_lif_nbr_control_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+        "changed": true,
+        "reason": "experiment identity/environment path mapping"
+      },
+      {
+        "field": "save_frames",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "save_json",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "save_period",
+        "c2": -1,
+        "target": -1,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "save_txt",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "scale",
+        "c2": 0.4,
+        "target": 0.4,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "seed",
+        "c2": 42,
+        "target": 42,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "shear",
+        "c2": 1.5,
+        "target": 1.5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "show",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "show_boxes",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "show_conf",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "show_labels",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "simplify",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "single_cls",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "source",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "split",
+        "c2": "val",
+        "target": "val",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "stream_buffer",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "task",
+        "c2": "detect",
+        "target": "detect",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "time",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "tracker",
+        "c2": "botsort.yaml",
+        "target": "botsort.yaml",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "translate",
+        "c2": 0.1,
+        "target": 0.1,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "val",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "verbose",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "vid_stride",
+        "c2": 1,
+        "target": 1,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "visualize",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "warmup_bias_lr",
+        "c2": 0.1,
+        "target": 0.1,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "warmup_epochs",
+        "c2": 5,
+        "target": 5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "warmup_momentum",
+        "c2": 0.8,
+        "target": 0.8,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "weight_decay",
+        "c2": 0.0001,
+        "target": 0.0001,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "workers",
+        "c2": 8,
+        "target": 8,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "workspace",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      }
+    ],
+    "cbr_lif_nbrg_v1": [
+      {
+        "field": "agnostic_nms",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "amp",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "angle",
+        "c2": 1.0,
+        "target": 1.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "augment",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "auto_augment",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "batch",
+        "c2": 16,
+        "target": 16,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "bgr",
+        "c2": 0.0,
+        "target": 0.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "box",
+        "c2": 7.5,
+        "target": 7.5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "cache",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "cfg",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "classes",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "close_mosaic",
+        "c2": 10,
+        "target": 10,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "cls",
+        "c2": 0.5,
+        "target": 0.5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "compile",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "conf",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "copy_paste",
+        "c2": 0,
+        "target": 0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "copy_paste_mode",
+        "c2": "flip",
+        "target": "flip",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "cos_lr",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "cutmix",
+        "c2": 0,
+        "target": 0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "data",
+        "c2": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+        "target": "D:\\MyProjects\\Crack_RTDETR\\configs\\crack.yaml",
+        "changed": true,
+        "reason": "experiment identity/environment path mapping"
+      },
+      {
+        "field": "degrees",
+        "c2": 5,
+        "target": 5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "deterministic",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "device",
+        "c2": "0",
+        "target": "0",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "dfl",
+        "c2": 1.5,
+        "target": 1.5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "dnn",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "dropout",
+        "c2": 0.0,
+        "target": 0.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "dynamic",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "embed",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "end2end",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "epochs",
+        "c2": 200,
+        "target": 200,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "erasing",
+        "c2": 0,
+        "target": 0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "exist_ok",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "fliplr",
+        "c2": 0.5,
+        "target": 0.5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "flipud",
+        "c2": 0.2,
+        "target": 0.2,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "format",
+        "c2": "torchscript",
+        "target": "torchscript",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "fraction",
+        "c2": 1.0,
+        "target": 1.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "freeze",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "half",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "hsv_h",
+        "c2": 0.015,
+        "target": 0.015,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "hsv_s",
+        "c2": 0.5,
+        "target": 0.5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "hsv_v",
+        "c2": 0.35,
+        "target": 0.35,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "imgsz",
+        "c2": 640,
+        "target": 640,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "int8",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "iou",
+        "c2": 0.7,
+        "target": 0.7,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "keras",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "kobj",
+        "c2": 1.0,
+        "target": 1.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "line_width",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "lr0",
+        "c2": 0.0005,
+        "target": 0.0005,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "lrf",
+        "c2": 0.01,
+        "target": 0.01,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "mask_ratio",
+        "c2": 4,
+        "target": 4,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "max_det",
+        "c2": 300,
+        "target": 300,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "mixup",
+        "c2": 0.05,
+        "target": 0.05,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "mode",
+        "c2": "train",
+        "target": "train",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "model",
+        "c2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+        "target": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_v1_initial\\cbr_lif_nbrg_v1.pt",
+        "changed": true,
+        "reason": "experiment identity/environment path mapping"
+      },
+      {
+        "field": "momentum",
+        "c2": 0.937,
+        "target": 0.937,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "mosaic",
+        "c2": 0.8,
+        "target": 0.8,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "multi_scale",
+        "c2": 0.0,
+        "target": 0.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "name",
+        "c2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+        "target": "cbr_lif_nbrg_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+        "changed": true,
+        "reason": "experiment identity/environment path mapping"
+      },
+      {
+        "field": "nbs",
+        "c2": 64,
+        "target": 64,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "nms",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "opset",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "optimize",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "optimizer",
+        "c2": "AdamW",
+        "target": "AdamW",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "overlap_mask",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "patience",
+        "c2": 50,
+        "target": 50,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "perspective",
+        "c2": 0.0002,
+        "target": 0.0002,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "plots",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "pose",
+        "c2": 12.0,
+        "target": 12.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "pretrained",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "profile",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "project",
+        "c2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+        "target": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_formal_not_started\\train",
+        "changed": true,
+        "reason": "experiment identity/environment path mapping"
+      },
+      {
+        "field": "rect",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "resume",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "retina_masks",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "rle",
+        "c2": 1.0,
+        "target": 1.0,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "save",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "save_conf",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "save_crop",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "save_dir",
+        "c2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+        "target": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_formal_not_started\\train\\cbr_lif_nbrg_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+        "changed": true,
+        "reason": "experiment identity/environment path mapping"
+      },
+      {
+        "field": "save_frames",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "save_json",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "save_period",
+        "c2": -1,
+        "target": -1,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "save_txt",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "scale",
+        "c2": 0.4,
+        "target": 0.4,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "seed",
+        "c2": 42,
+        "target": 42,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "shear",
+        "c2": 1.5,
+        "target": 1.5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "show",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "show_boxes",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "show_conf",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "show_labels",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "simplify",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "single_cls",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "source",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "split",
+        "c2": "val",
+        "target": "val",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "stream_buffer",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "task",
+        "c2": "detect",
+        "target": "detect",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "time",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "tracker",
+        "c2": "botsort.yaml",
+        "target": "botsort.yaml",
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "translate",
+        "c2": 0.1,
+        "target": 0.1,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "val",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "verbose",
+        "c2": true,
+        "target": true,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "vid_stride",
+        "c2": 1,
+        "target": 1,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "visualize",
+        "c2": false,
+        "target": false,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "warmup_bias_lr",
+        "c2": 0.1,
+        "target": 0.1,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "warmup_epochs",
+        "c2": 5,
+        "target": 5,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "warmup_momentum",
+        "c2": 0.8,
+        "target": 0.8,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "weight_decay",
+        "c2": 0.0001,
+        "target": 0.0001,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "workers",
+        "c2": 8,
+        "target": 8,
+        "changed": false,
+        "reason": "inherited"
+      },
+      {
+        "field": "workspace",
+        "c2": null,
+        "target": null,
+        "changed": false,
+        "reason": "inherited"
+      }
+    ]
+  },
+  "actual_formal_trainer_args": "PENDING_FORMAL_START; strict callback implemented, zero formal epochs executed"
+}

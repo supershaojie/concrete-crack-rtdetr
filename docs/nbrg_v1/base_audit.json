@@ -1,0 +1,73 @@
+{
+  "status": "PASSED",
+  "branch": "exp-rtdetr-r18-lite-nbrg-v1",
+  "base_sha": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "remote": "https://github.com/supershaojie/concrete-crack-rtdetr.git",
+  "original_main": {
+    "path": "D:/MyProjects/Crack_RTDETR",
+    "branch": "exp-rtdetr-r18-lite-cscef-v4",
+    "head": "f34502c43a88edc9cb1076bd996b9c3fc2d23e31",
+    "untracked_user_files_preserved": true
+  },
+  "worktree": "D:/MyProjects/Crack_RTDETR/outputs/worktrees/nbrg-v1",
+  "historical_source": "D:/rtdetr跑结果/C19＋LIF：原 CBR＋LIF-Down v1/metadata/source",
+  "references": {
+    "C2": {
+      "commit": "67c3078e54a657fd96d65fee657a75fbb1dae0d6",
+      "is_ancestor_of_base": true
+    },
+    "LIF": {
+      "commit": "0e95bbade3558b0d2b77c5531483c60810391d88",
+      "is_ancestor_of_base": true
+    },
+    "CBR": {
+      "commit": "025997e3c51eaf6933534308a95da6ebf97bff53",
+      "is_ancestor_of_base": false
+    }
+  },
+  "verified_source": {
+    "ultralytics-main/ultralytics/nn/modules/block.py": {
+      "lf_sha256": "7ee11e94e88c89abc1a6cce14b99e41fe6f1d2d6a8bb031bd4d45184609ca882",
+      "equal_successful_run_source": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/lif_down.py": {
+      "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "equal_successful_run_source": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/cbr.py": {
+      "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "equal_successful_run_source": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/head.py": {
+      "lf_sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+      "equal_successful_run_source": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/transformer.py": {
+      "lf_sha256": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602",
+      "equal_successful_run_source": true
+    },
+    "tools/c19_lif_v1_probe.py": {
+      "lf_sha256": "1f146aca02d953917cc1d4fed0c650fff0422ede0521d903387444c199b5eb07",
+      "equal_successful_run_source": true
+    },
+    "tools/c19_lif_v1_cutoff.py": {
+      "lf_sha256": "0fcb76fdb966d3ebcdc2f55e5c823501a727bd9a27fcdf7ff5b74a0602a314a0",
+      "equal_successful_run_source": true
+    },
+    "tools/c19_lif_v1_diagnostic.py": {
+      "lf_sha256": "a17919c31c9e4eabb9dca2c1d52a51f35b2d8f16a7a665ae3019a21ce872a065",
+      "equal_successful_run_source": true
+    },
+    "tools/init_c19_lif_v1.py": {
+      "lf_sha256": "846f6656c603506304428bb9401ba1309ef8febab5833e88bb18083d9b048af1",
+      "equal_successful_run_source": true
+    }
+  },
+  "reason": "Verified original CBR/LIF source and inherited 216bba0/8bdc14f/a0459d6 fixture/cutoff fixes; a045 launch metadata alone was not treated as final experiment HEAD.",
+  "ancestry_note": "CBR source was incorporated into the LIF lineage; exact file equality is recorded separately from commit ancestry.",
+  "instructions": {
+    "document": "D:\\rtdetr跑结果\\NBR-G\\Codex_NBR_G_v1_完整执行提示词.md",
+    "sha256": "6ab1d4ed2a60cddcb63414772cda9bfd588f341e5119f30ec1f25953615d7592",
+    "AGENTS_md_found": false
+  }
+}

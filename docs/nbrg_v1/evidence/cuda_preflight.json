@@ -1,0 +1,617 @@
+{
+  "status": "PASSED",
+  "mode": "cuda",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    }
+  },
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "source_fingerprint": "93a5a1966bf9648fd3ea13a0e076c1de1ffcde1ad7d3fed86288649fa0625433",
+  "initial_sha256": {
+    "cbr_lif_nbr_control_v1": "574ef9a154078ff3dc71dea61d4aff467f0cb5e6a3f9b4307cf918c811dc1e62",
+    "cbr_lif_nbrg_v1": "8bef15d7b4526f5a2d321a78ab472033e3a9a731ce6bc080db6317a2bbcfad6b",
+    "nbrg_v1": "2e2cb9013ec7ee14c8701c3031528b5b53ddd7560e88e6eb17206c2dda713365"
+  },
+  "variants": {
+    "cbr_lif_nbr_control_v1": {
+      "status": "PASSED",
+      "nc1": {
+        "status": "PASSED",
+        "native_get_model": true,
+        "before_optimizer": true,
+        "public_and_sliced_nc1_exact": 552,
+        "gate_trainable_zero": true,
+        "ALLOWED_CLASS_ADAPTATION": [
+          {
+            "name": "model.26.dec_score_head.0.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.0.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.1.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.1.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.2.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.2.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.denoising_class_embed.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.enc_score_head.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.enc_score_head.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          }
+        ],
+        "MISSING": [],
+        "UNEXPECTED": [],
+        "SHAPE_MISMATCH": []
+      },
+      "criterion": {
+        "status": "PASSED",
+        "loss": 57.50367736816406,
+        "batch": 2,
+        "image_shape": [
+          2,
+          3,
+          160,
+          160
+        ],
+        "amp": true,
+        "device": "cuda",
+        "gate_gradients": {},
+        "optimizer_steps": 0,
+        "disposable": true
+      },
+      "fusion": {
+        "native_fp32": {
+          "status": "PASSED",
+          "diagnostic": "outputs\\nbrg_cuda_final\\cbr_lif_nbr_control_v1\\native_fp32\\fuse_diagnostic.json",
+          "selection": {
+            "kind": "IDENTICAL",
+            "score_dtype_a": "torch.float32",
+            "score_dtype_b": "torch.float32",
+            "statistics_dtype": "float64",
+            "slack_formula": "8 * eps(float64) * max(abs(produced logits), tiny(float64))"
+          },
+          "full_evidence": "See lossless full report and per-mode fuse_diagnostic.json.gz"
+        },
+        "full_fp32": {
+          "status": "PASSED",
+          "diagnostic": "outputs\\nbrg_cuda_final\\cbr_lif_nbr_control_v1\\full_fp32\\fuse_diagnostic.json",
+          "selection": {
+            "kind": "IDENTICAL",
+            "score_dtype_a": "torch.float32",
+            "score_dtype_b": "torch.float32",
+            "statistics_dtype": "float64",
+            "slack_formula": "8 * eps(float64) * max(abs(produced logits), tiny(float64))"
+          },
+          "full_evidence": "See lossless full report and per-mode fuse_diagnostic.json.gz"
+        },
+        "native_amp": {
+          "status": "PASSED",
+          "diagnostic": "outputs\\nbrg_cuda_final\\cbr_lif_nbr_control_v1\\native_amp\\fuse_diagnostic.json",
+          "selection": {
+            "kind": "PERMUTATION",
+            "score_dtype_a": "torch.float16",
+            "score_dtype_b": "torch.float16",
+            "statistics_dtype": "float64",
+            "slack_formula": "8 * eps(float64) * max(abs(produced logits), tiny(float64))"
+          },
+          "full_evidence": "See lossless full report and per-mode fuse_diagnostic.json.gz"
+        },
+        "native_half": {
+          "status": "PASSED",
+          "diagnostic": "outputs\\nbrg_cuda_final\\cbr_lif_nbr_control_v1\\native_half\\fuse_diagnostic.json",
+          "selection": {
+            "kind": "PERMUTATION",
+            "score_dtype_a": "torch.float16",
+            "score_dtype_b": "torch.float16",
+            "statistics_dtype": "float64",
+            "slack_formula": "8 * eps(float64) * max(abs(produced logits), tiny(float64))"
+          },
+          "full_evidence": "See lossless full report and per-mode fuse_diagnostic.json.gz"
+        }
+      },
+      "samples": [
+        {
+          "image": "crack_000001_brightness_contrast_strong.jpg",
+          "image_sha256": "f52412b0f7d6158df8c1e064cfc126a5ee447e7463dd663649f3ee5afd40d053",
+          "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+          "instances": 3
+        },
+        {
+          "image": "crack_000001_clahe_gamma_strong.jpg",
+          "image_sha256": "b597504f8cb893227a8bca17099be73259fc0ce94fadb8bd3e00ca5dce7c9f34",
+          "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+          "instances": 3
+        }
+      ],
+      "peak_allocated_bytes": 402029568,
+      "peak_reserved_bytes": 511705088,
+      "seconds": 6.507741200000002
+    },
+    "cbr_lif_nbrg_v1": {
+      "status": "PASSED",
+      "nc1": {
+        "status": "PASSED",
+        "native_get_model": true,
+        "before_optimizer": true,
+        "public_and_sliced_nc1_exact": 552,
+        "gate_trainable_zero": true,
+        "ALLOWED_CLASS_ADAPTATION": [
+          {
+            "name": "model.26.dec_score_head.0.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.0.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.1.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.1.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.2.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.2.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.denoising_class_embed.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.enc_score_head.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.enc_score_head.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          }
+        ],
+        "MISSING": [],
+        "UNEXPECTED": [],
+        "SHAPE_MISMATCH": []
+      },
+      "criterion": {
+        "status": "PASSED",
+        "loss": 57.50367736816406,
+        "batch": 2,
+        "image_shape": [
+          2,
+          3,
+          160,
+          160
+        ],
+        "amp": true,
+        "device": "cuda",
+        "gate_gradients": {
+          "model.6.blocks.1.gate.gate_conv.weight": 2.272582769393921,
+          "model.6.blocks.1.gate.gate_conv.bias": 0.6076347231864929,
+          "model.7.blocks.1.gate.gate_conv.weight": 4.056461811065674,
+          "model.7.blocks.1.gate.gate_conv.bias": 0.3466687500476837
+        },
+        "optimizer_steps": 0,
+        "disposable": true
+      },
+      "fusion": {
+        "native_fp32": {
+          "status": "PASSED",
+          "diagnostic": "outputs\\nbrg_cuda_final\\cbr_lif_nbrg_v1\\native_fp32\\fuse_diagnostic.json",
+          "selection": {
+            "kind": "IDENTICAL",
+            "score_dtype_a": "torch.float32",
+            "score_dtype_b": "torch.float32",
+            "statistics_dtype": "float64",
+            "slack_formula": "8 * eps(float64) * max(abs(produced logits), tiny(float64))"
+          },
+          "full_evidence": "See lossless full report and per-mode fuse_diagnostic.json.gz"
+        },
+        "full_fp32": {
+          "status": "PASSED",
+          "diagnostic": "outputs\\nbrg_cuda_final\\cbr_lif_nbrg_v1\\full_fp32\\fuse_diagnostic.json",
+          "selection": {
+            "kind": "IDENTICAL",
+            "score_dtype_a": "torch.float32",
+            "score_dtype_b": "torch.float32",
+            "statistics_dtype": "float64",
+            "slack_formula": "8 * eps(float64) * max(abs(produced logits), tiny(float64))"
+          },
+          "full_evidence": "See lossless full report and per-mode fuse_diagnostic.json.gz"
+        },
+        "native_amp": {
+          "status": "PASSED",
+          "diagnostic": "outputs\\nbrg_cuda_final\\cbr_lif_nbrg_v1\\native_amp\\fuse_diagnostic.json",
+          "selection": {
+            "kind": "PERMUTATION",
+            "score_dtype_a": "torch.float16",
+            "score_dtype_b": "torch.float16",
+            "statistics_dtype": "float64",
+            "slack_formula": "8 * eps(float64) * max(abs(produced logits), tiny(float64))"
+          },
+          "full_evidence": "See lossless full report and per-mode fuse_diagnostic.json.gz"
+        },
+        "native_half": {
+          "status": "PASSED",
+          "diagnostic": "outputs\\nbrg_cuda_final\\cbr_lif_nbrg_v1\\native_half\\fuse_diagnostic.json",
+          "selection": {
+            "kind": "PERMUTATION",
+            "score_dtype_a": "torch.float16",
+            "score_dtype_b": "torch.float16",
+            "statistics_dtype": "float64",
+            "slack_formula": "8 * eps(float64) * max(abs(produced logits), tiny(float64))"
+          },
+          "full_evidence": "See lossless full report and per-mode fuse_diagnostic.json.gz"
+        }
+      },
+      "samples": [
+        {
+          "image": "crack_000001_brightness_contrast_strong.jpg",
+          "image_sha256": "f52412b0f7d6158df8c1e064cfc126a5ee447e7463dd663649f3ee5afd40d053",
+          "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+          "instances": 3
+        },
+        {
+          "image": "crack_000001_clahe_gamma_strong.jpg",
+          "image_sha256": "b597504f8cb893227a8bca17099be73259fc0ce94fadb8bd3e00ca5dce7c9f34",
+          "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+          "instances": 3
+        }
+      ],
+      "peak_allocated_bytes": 403469312,
+      "peak_reserved_bytes": 511705088,
+      "seconds": 4.5179896
+    },
+    "nbrg_v1": {
+      "status": "PASSED",
+      "nc1": {
+        "status": "PASSED",
+        "native_get_model": true,
+        "before_optimizer": true,
+        "public_and_sliced_nc1_exact": 533,
+        "gate_trainable_zero": true,
+        "ALLOWED_CLASS_ADAPTATION": [
+          {
+            "name": "model.26.dec_score_head.0.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.0.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.1.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.1.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.2.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.2.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.denoising_class_embed.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.enc_score_head.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.enc_score_head.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          }
+        ],
+        "MISSING": [],
+        "UNEXPECTED": [],
+        "SHAPE_MISMATCH": []
+      },
+      "criterion": {
+        "status": "PASSED",
+        "loss": 57.50367736816406,
+        "batch": 2,
+        "image_shape": [
+          2,
+          3,
+          160,
+          160
+        ],
+        "amp": true,
+        "device": "cuda",
+        "gate_gradients": {
+          "model.6.blocks.1.gate.gate_conv.weight": 2.2728240489959717,
+          "model.6.blocks.1.gate.gate_conv.bias": 0.6076871156692505,
+          "model.7.blocks.1.gate.gate_conv.weight": 4.060486316680908,
+          "model.7.blocks.1.gate.gate_conv.bias": 0.3468613624572754
+        },
+        "optimizer_steps": 0,
+        "disposable": true
+      },
+      "samples": [
+        {
+          "image": "crack_000001_brightness_contrast_strong.jpg",
+          "image_sha256": "f52412b0f7d6158df8c1e064cfc126a5ee447e7463dd663649f3ee5afd40d053",
+          "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+          "instances": 3
+        },
+        {
+          "image": "crack_000001_clahe_gamma_strong.jpg",
+          "image_sha256": "b597504f8cb893227a8bca17099be73259fc0ce94fadb8bd3e00ca5dce7c9f34",
+          "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+          "instances": 3
+        }
+      ],
+      "peak_allocated_bytes": 395674112,
+      "peak_reserved_bytes": 444596224,
+      "seconds": 1.0791261999999975
+    }
+  },
+  "formal_training": "NOT_RUN",
+  "final_test": "NOT_RUN",
+  "dataset_inventory": {
+    "train": {
+      "images": 6048,
+      "boxes": 45573,
+      "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+      "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"
+    },
+    "val": {
+      "images": 1728,
+      "boxes": 12840,
+      "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+      "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+    },
+    "test": {
+      "images": 864,
+      "boxes": 6663,
+      "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+      "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"
+    }
+  },
+  "nc1_pair_common_exact": 552,
+  "full_report": {
+    "path": "evidence/cuda_preflight.full.json.gz",
+    "sha256": "9ecc09df6ac3409635397e57c907cbe3919f25f858b3b9d5eda08cd0a64c34f7",
+    "uncompressed_sha256": "ff2c36b3a980d367f8699eac87638f86e2b5511692f9dd74f502ead0c40efb65",
+    "format": "lossless full original JSON"
+  }
+}

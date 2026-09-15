@@ -63,6 +63,7 @@ from .block import (
     SCDown,
     TorchVision,
 )
+from .nbr_g import InputGuidedGroupGate, NarrowBasicBlock, NBRGBlock, NBRStage
 from .conv import (
     CBAM,
     ChannelAttention,
@@ -113,6 +114,10 @@ from .lif_down import LIFDown
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
 
 __all__ = (
+    "InputGuidedGroupGate",
+    "NarrowBasicBlock",
+    "NBRGBlock",
+    "NBRStage",
     "LIFDown",
     "CrackBoundaryRefinement",
     "RTDETRDecoderCBR",

@@ -1,0 +1,818 @@
+{
+  "status": "PASSED",
+  "mode": "cpu",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    }
+  },
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "source_fingerprint": "93a5a1966bf9648fd3ea13a0e076c1de1ffcde1ad7d3fed86288649fa0625433",
+  "initial_sha256": {
+    "cbr_lif_nbr_control_v1": "574ef9a154078ff3dc71dea61d4aff467f0cb5e6a3f9b4307cf918c811dc1e62",
+    "cbr_lif_nbrg_v1": "8bef15d7b4526f5a2d321a78ab472033e3a9a731ce6bc080db6317a2bbcfad6b",
+    "nbrg_v1": "2e2cb9013ec7ee14c8701c3031528b5b53ddd7560e88e6eb17206c2dda713365"
+  },
+  "variants": {
+    "cbr_lif_nbr_control_v1": {
+      "status": "PASSED",
+      "nc1": {
+        "status": "PASSED",
+        "native_get_model": true,
+        "before_optimizer": true,
+        "public_and_sliced_nc1_exact": 552,
+        "gate_trainable_zero": true,
+        "ALLOWED_CLASS_ADAPTATION": [
+          {
+            "name": "model.26.dec_score_head.0.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.0.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.1.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.1.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.2.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.2.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.denoising_class_embed.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.enc_score_head.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.enc_score_head.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          }
+        ],
+        "MISSING": [],
+        "UNEXPECTED": [],
+        "SHAPE_MISMATCH": []
+      },
+      "train_api": {
+        "status": "PASSED",
+        "real_train_api_get_model": true,
+        "real_recording_trainer_optimizer": true,
+        "optimizer_parameter_tensors": 345,
+        "gates": [],
+        "optimizer_steps": 0
+      },
+      "backbone_outputs": {
+        "4": [
+          1,
+          64,
+          160,
+          160
+        ],
+        "5": [
+          1,
+          128,
+          80,
+          80
+        ],
+        "6": [
+          1,
+          256,
+          40,
+          40
+        ],
+        "7": [
+          1,
+          512,
+          20,
+          20
+        ]
+      },
+      "serialization_zero": {
+        "status": "PASSED",
+        "fresh_process": true,
+        "zero": true,
+        "state_exact": true,
+        "prediction_close": true,
+        "model_ema_exact": true,
+        "native_rebuild_exact": true,
+        "generic_initialize_preserves_gate": true
+      },
+      "serialization_nonzero": {
+        "status": "PASSED",
+        "fresh_process": true,
+        "zero": false,
+        "state_exact": true,
+        "prediction_close": true,
+        "model_ema_exact": true,
+        "native_rebuild_exact": true,
+        "generic_initialize_preserves_gate": true
+      },
+      "complexity": {
+        "variant": "cbr_lif_nbr_control_v1",
+        "nc": 1,
+        "imgsz": 640,
+        "batch": 1,
+        "params_unfused": 17494917,
+        "params_native_fused": 17290117,
+        "params_all_sequential_bn_fused": 17285509,
+        "thop_version": "2.0.18",
+        "thop_gmacs": 27.9198592,
+        "thop_gflops": 55.8397184,
+        "scope": "Actual 640 forward, unfused THOP supported operators; dynamic abs/mean/amax/stack/tanh/broadcast and functional attention/grid_sample are not fully counted.",
+        "latency": "NOT_MEASURED",
+        "native_fusion": "Existing BaseModel.fuse; ConvNormLayer.norm is retained",
+        "extended_fusion": "Independent copy; fold all sequential ConvNormLayer; original LIF shared BN retained"
+      },
+      "criterion": {
+        "status": "PASSED",
+        "loss": 88.37675476074219,
+        "batch": 2,
+        "image_shape": [
+          2,
+          3,
+          160,
+          160
+        ],
+        "amp": false,
+        "device": "cpu",
+        "gate_gradients": {},
+        "optimizer_steps": 0,
+        "disposable": true
+      },
+      "fusion": {
+        "native_fp32": {
+          "status": "PASSED",
+          "diagnostic": "outputs\\nbrg_cpu_final\\cbr_lif_nbr_control_v1\\native_fp32\\fuse_diagnostic.json",
+          "selection": {
+            "kind": "PERMUTATION",
+            "score_dtype_a": "torch.float32",
+            "score_dtype_b": "torch.float32",
+            "statistics_dtype": "float64",
+            "slack_formula": "8 * eps(float64) * max(abs(produced logits), tiny(float64))"
+          },
+          "full_evidence": "See lossless full report and per-mode fuse_diagnostic.json.gz"
+        },
+        "full_fp32": {
+          "status": "PASSED",
+          "diagnostic": "outputs\\nbrg_cpu_final\\cbr_lif_nbr_control_v1\\full_fp32\\fuse_diagnostic.json",
+          "selection": {
+            "kind": "PERMUTATION",
+            "score_dtype_a": "torch.float32",
+            "score_dtype_b": "torch.float32",
+            "statistics_dtype": "float64",
+            "slack_formula": "8 * eps(float64) * max(abs(produced logits), tiny(float64))"
+          },
+          "full_evidence": "See lossless full report and per-mode fuse_diagnostic.json.gz"
+        }
+      }
+    },
+    "cbr_lif_nbrg_v1": {
+      "status": "PASSED",
+      "nc1": {
+        "status": "PASSED",
+        "native_get_model": true,
+        "before_optimizer": true,
+        "public_and_sliced_nc1_exact": 552,
+        "gate_trainable_zero": true,
+        "ALLOWED_CLASS_ADAPTATION": [
+          {
+            "name": "model.26.dec_score_head.0.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.0.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.1.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.1.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.2.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.2.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.denoising_class_embed.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.enc_score_head.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.enc_score_head.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          }
+        ],
+        "MISSING": [],
+        "UNEXPECTED": [],
+        "SHAPE_MISMATCH": []
+      },
+      "train_api": {
+        "status": "PASSED",
+        "real_train_api_get_model": true,
+        "real_recording_trainer_optimizer": true,
+        "optimizer_parameter_tensors": 349,
+        "gates": [
+          {
+            "name": "model.6.blocks.1.gate.gate_conv.weight",
+            "trainable": true,
+            "zero": true
+          },
+          {
+            "name": "model.6.blocks.1.gate.gate_conv.bias",
+            "trainable": true,
+            "zero": true
+          },
+          {
+            "name": "model.7.blocks.1.gate.gate_conv.weight",
+            "trainable": true,
+            "zero": true
+          },
+          {
+            "name": "model.7.blocks.1.gate.gate_conv.bias",
+            "trainable": true,
+            "zero": true
+          }
+        ],
+        "optimizer_steps": 0
+      },
+      "backbone_outputs": {
+        "4": [
+          1,
+          64,
+          160,
+          160
+        ],
+        "5": [
+          1,
+          128,
+          80,
+          80
+        ],
+        "6": [
+          1,
+          256,
+          40,
+          40
+        ],
+        "7": [
+          1,
+          512,
+          20,
+          20
+        ]
+      },
+      "serialization_zero": {
+        "status": "PASSED",
+        "fresh_process": true,
+        "zero": true,
+        "state_exact": true,
+        "prediction_close": true,
+        "model_ema_exact": true,
+        "native_rebuild_exact": true,
+        "generic_initialize_preserves_gate": true
+      },
+      "serialization_nonzero": {
+        "status": "PASSED",
+        "fresh_process": true,
+        "zero": false,
+        "state_exact": true,
+        "prediction_close": true,
+        "model_ema_exact": true,
+        "native_rebuild_exact": true,
+        "generic_initialize_preserves_gate": true
+      },
+      "complexity": {
+        "variant": "cbr_lif_nbrg_v1",
+        "nc": 1,
+        "imgsz": 640,
+        "batch": 1,
+        "params_unfused": 17495509,
+        "params_native_fused": 17290709,
+        "params_all_sequential_bn_fused": 17286101,
+        "thop_version": "2.0.18",
+        "thop_gmacs": 27.9204352,
+        "thop_gflops": 55.8408704,
+        "scope": "Actual 640 forward, unfused THOP supported operators; dynamic abs/mean/amax/stack/tanh/broadcast and functional attention/grid_sample are not fully counted.",
+        "latency": "NOT_MEASURED",
+        "native_fusion": "Existing BaseModel.fuse; ConvNormLayer.norm is retained",
+        "extended_fusion": "Independent copy; fold all sequential ConvNormLayer; original LIF shared BN retained"
+      },
+      "criterion": {
+        "status": "PASSED",
+        "loss": 88.37675476074219,
+        "batch": 2,
+        "image_shape": [
+          2,
+          3,
+          160,
+          160
+        ],
+        "amp": false,
+        "device": "cpu",
+        "gate_gradients": {
+          "model.6.blocks.1.gate.gate_conv.weight": 2.955336570739746,
+          "model.6.blocks.1.gate.gate_conv.bias": 0.7583795189857483,
+          "model.7.blocks.1.gate.gate_conv.weight": 6.902268409729004,
+          "model.7.blocks.1.gate.gate_conv.bias": 0.5675721168518066
+        },
+        "optimizer_steps": 0,
+        "disposable": true
+      },
+      "fusion": {
+        "native_fp32": {
+          "status": "PASSED",
+          "diagnostic": "outputs\\nbrg_cpu_final\\cbr_lif_nbrg_v1\\native_fp32\\fuse_diagnostic.json",
+          "selection": {
+            "kind": "IDENTICAL",
+            "score_dtype_a": "torch.float32",
+            "score_dtype_b": "torch.float32",
+            "statistics_dtype": "float64",
+            "slack_formula": "8 * eps(float64) * max(abs(produced logits), tiny(float64))"
+          },
+          "full_evidence": "See lossless full report and per-mode fuse_diagnostic.json.gz"
+        },
+        "full_fp32": {
+          "status": "PASSED",
+          "diagnostic": "outputs\\nbrg_cpu_final\\cbr_lif_nbrg_v1\\full_fp32\\fuse_diagnostic.json",
+          "selection": {
+            "kind": "IDENTICAL",
+            "score_dtype_a": "torch.float32",
+            "score_dtype_b": "torch.float32",
+            "statistics_dtype": "float64",
+            "slack_formula": "8 * eps(float64) * max(abs(produced logits), tiny(float64))"
+          },
+          "full_evidence": "See lossless full report and per-mode fuse_diagnostic.json.gz"
+        }
+      }
+    },
+    "nbrg_v1": {
+      "status": "PASSED",
+      "nc1": {
+        "status": "PASSED",
+        "native_get_model": true,
+        "before_optimizer": true,
+        "public_and_sliced_nc1_exact": 533,
+        "gate_trainable_zero": true,
+        "ALLOWED_CLASS_ADAPTATION": [
+          {
+            "name": "model.26.dec_score_head.0.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.0.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.1.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.1.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.2.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.dec_score_head.2.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.denoising_class_embed.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.enc_score_head.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          },
+          {
+            "name": "model.26.enc_score_head.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "original native C2/C19+LIF RNG and adaptation timing"
+          }
+        ],
+        "MISSING": [],
+        "UNEXPECTED": [],
+        "SHAPE_MISMATCH": []
+      },
+      "train_api": {
+        "status": "PASSED",
+        "real_train_api_get_model": true,
+        "real_recording_trainer_optimizer": true,
+        "optimizer_parameter_tensors": 330,
+        "gates": [
+          {
+            "name": "model.6.blocks.1.gate.gate_conv.weight",
+            "trainable": true,
+            "zero": true
+          },
+          {
+            "name": "model.6.blocks.1.gate.gate_conv.bias",
+            "trainable": true,
+            "zero": true
+          },
+          {
+            "name": "model.7.blocks.1.gate.gate_conv.weight",
+            "trainable": true,
+            "zero": true
+          },
+          {
+            "name": "model.7.blocks.1.gate.gate_conv.bias",
+            "trainable": true,
+            "zero": true
+          }
+        ],
+        "optimizer_steps": 0
+      },
+      "backbone_outputs": {
+        "4": [
+          1,
+          64,
+          160,
+          160
+        ],
+        "5": [
+          1,
+          128,
+          80,
+          80
+        ],
+        "6": [
+          1,
+          256,
+          40,
+          40
+        ],
+        "7": [
+          1,
+          512,
+          20,
+          20
+        ]
+      },
+      "serialization_zero": {
+        "status": "PASSED",
+        "fresh_process": true,
+        "zero": true,
+        "state_exact": true,
+        "prediction_close": true,
+        "model_ema_exact": true,
+        "native_rebuild_exact": true,
+        "generic_initialize_preserves_gate": true
+      },
+      "serialization_nonzero": {
+        "status": "PASSED",
+        "fresh_process": true,
+        "zero": false,
+        "state_exact": true,
+        "prediction_close": true,
+        "model_ema_exact": true,
+        "native_rebuild_exact": true,
+        "generic_initialize_preserves_gate": true
+      },
+      "complexity": {
+        "variant": "nbrg_v1",
+        "nc": 1,
+        "imgsz": 640,
+        "batch": 1,
+        "params_unfused": 17428516,
+        "params_native_fused": 17223460,
+        "params_all_sequential_bn_fused": 17218852,
+        "thop_version": "2.0.18",
+        "thop_gmacs": 27.7224832,
+        "thop_gflops": 55.4449664,
+        "scope": "Actual 640 forward, unfused THOP supported operators; dynamic abs/mean/amax/stack/tanh/broadcast and functional attention/grid_sample are not fully counted.",
+        "latency": "NOT_MEASURED",
+        "native_fusion": "Existing BaseModel.fuse; ConvNormLayer.norm is retained",
+        "extended_fusion": "Independent copy; fold all sequential ConvNormLayer; original LIF shared BN retained"
+      }
+    }
+  },
+  "formal_training": "NOT_RUN",
+  "final_test": "NOT_RUN",
+  "modules": {
+    "status": "PASSED",
+    "relations": {
+      "6": {
+        "full_width": {
+          "max_abs": 0.0,
+          "rtol": 1e-05,
+          "atol": 1e-06
+        },
+        "masked_wide_fp32_diagnostic": {
+          "max_abs": 7.62939453125e-06,
+          "elements_outside_suggested_tolerance": 7,
+          "note": "Different dense reduction widths change FP32 accumulation; verified with the same source/input in FP64 below, no tolerance widening"
+        },
+        "masked_wide_fp64": {
+          "max_abs": 7.105427357601002e-15,
+          "rtol": 1e-10,
+          "atol": 1e-11
+        },
+        "zero_gate": {
+          "max_abs": 0.0,
+          "rtol": 1e-05,
+          "atol": 1e-06
+        },
+        "gate_shape": [
+          2,
+          8,
+          9,
+          11
+        ]
+      },
+      "7": {
+        "full_width": {
+          "max_abs": 0.0,
+          "rtol": 1e-05,
+          "atol": 1e-06
+        },
+        "masked_wide_fp32_diagnostic": {
+          "max_abs": 5.53131103515625e-05,
+          "elements_outside_suggested_tolerance": 505,
+          "note": "Different dense reduction widths change FP32 accumulation; verified with the same source/input in FP64 below, no tolerance widening"
+        },
+        "masked_wide_fp64": {
+          "max_abs": 6.394884621840902e-14,
+          "rtol": 1e-10,
+          "atol": 1e-11
+        },
+        "zero_gate": {
+          "max_abs": 0.0,
+          "rtol": 1e-05,
+          "atol": 1e-06
+        },
+        "gate_shape": [
+          2,
+          8,
+          9,
+          11
+        ]
+      }
+    },
+    "descriptors_interleaved": true,
+    "contiguous_broadcast": true,
+    "no_inplace": true,
+    "descriptor_gradients": true,
+    "zero_first_step_descriptor_gradient": true,
+    "controlled_fp32_masked_wide": {
+      "6": {
+        "max_abs": 0.0,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "7": {
+        "max_abs": 5.960464477539063e-08,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    "gate_gradient_norms": {
+      "branch2a.conv.weight": 596.4920654296875,
+      "branch2a.norm.weight": 20.51149559020996,
+      "branch2a.norm.bias": 20.004608154296875,
+      "branch2b.conv.weight": 334.35284423828125,
+      "branch2b.norm.weight": 27.7410945892334,
+      "branch2b.norm.bias": 21.944799423217773,
+      "gate.gate_conv.weight": 91.9344711303711,
+      "gate.gate_conv.bias": 17.670106887817383
+    },
+    "score_edge_cases": true
+  },
+  "nc1_pair_common_exact": 552,
+  "full_report": {
+    "path": "evidence/cpu_preflight.full.json.gz",
+    "sha256": "b22d148c0c77db5540485a52677fade3485a451242c72b68aee57c4a4e5fc475",
+    "uncompressed_sha256": "9a4196bbe3503a24233374b78187f31e7557914e22f5414e8e373e76ce164f71",
+    "format": "lossless full original JSON"
+  }
+}

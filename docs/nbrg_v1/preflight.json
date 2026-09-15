@@ -1,0 +1,443 @@
+{
+  "status": "PASSED_LOCAL",
+  "source_fingerprint": "93a5a1966bf9648fd3ea13a0e076c1de1ffcde1ad7d3fed86288649fa0625433",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    }
+  },
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "formal_training": "NOT_RUN",
+  "final_test": "NOT_RUN",
+  "module_checks": {
+    "status": "PASSED",
+    "relations": {
+      "6": {
+        "full_width": {
+          "max_abs": 0.0,
+          "rtol": 1e-05,
+          "atol": 1e-06
+        },
+        "masked_wide_fp32_diagnostic": {
+          "max_abs": 7.62939453125e-06,
+          "elements_outside_suggested_tolerance": 7,
+          "note": "Different dense reduction widths change FP32 accumulation; verified with the same source/input in FP64 below, no tolerance widening"
+        },
+        "masked_wide_fp64": {
+          "max_abs": 7.105427357601002e-15,
+          "rtol": 1e-10,
+          "atol": 1e-11
+        },
+        "zero_gate": {
+          "max_abs": 0.0,
+          "rtol": 1e-05,
+          "atol": 1e-06
+        },
+        "gate_shape": [
+          2,
+          8,
+          9,
+          11
+        ]
+      },
+      "7": {
+        "full_width": {
+          "max_abs": 0.0,
+          "rtol": 1e-05,
+          "atol": 1e-06
+        },
+        "masked_wide_fp32_diagnostic": {
+          "max_abs": 5.53131103515625e-05,
+          "elements_outside_suggested_tolerance": 505,
+          "note": "Different dense reduction widths change FP32 accumulation; verified with the same source/input in FP64 below, no tolerance widening"
+        },
+        "masked_wide_fp64": {
+          "max_abs": 6.394884621840902e-14,
+          "rtol": 1e-10,
+          "atol": 1e-11
+        },
+        "zero_gate": {
+          "max_abs": 0.0,
+          "rtol": 1e-05,
+          "atol": 1e-06
+        },
+        "gate_shape": [
+          2,
+          8,
+          9,
+          11
+        ]
+      }
+    },
+    "descriptors_interleaved": true,
+    "contiguous_broadcast": true,
+    "no_inplace": true,
+    "descriptor_gradients": true,
+    "zero_first_step_descriptor_gradient": true,
+    "controlled_fp32_masked_wide": {
+      "6": {
+        "max_abs": 0.0,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "7": {
+        "max_abs": 5.960464477539063e-08,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    "gate_gradient_norms": {
+      "branch2a.conv.weight": 596.4920654296875,
+      "branch2a.norm.weight": 20.51149559020996,
+      "branch2a.norm.bias": 20.004608154296875,
+      "branch2b.conv.weight": 334.35284423828125,
+      "branch2b.norm.weight": 27.7410945892334,
+      "branch2b.norm.bias": 21.944799423217773,
+      "gate.gate_conv.weight": 91.9344711303711,
+      "gate.gate_conv.bias": 17.670106887817383
+    },
+    "score_edge_cases": true
+  },
+  "nc1_pair_common_exact": 552,
+  "modes": {
+    "cpu": {
+      "status": "PASSED",
+      "report": "evidence/cpu_preflight.json",
+      "variants": {
+        "cbr_lif_nbr_control_v1": {
+          "status": "PASSED",
+          "criterion": {
+            "status": "PASSED",
+            "loss": 88.37675476074219,
+            "batch": 2,
+            "image_shape": [
+              2,
+              3,
+              160,
+              160
+            ],
+            "amp": false,
+            "device": "cpu",
+            "gate_gradients": {},
+            "optimizer_steps": 0,
+            "disposable": true
+          },
+          "peak_allocated_bytes": null,
+          "peak_reserved_bytes": null,
+          "seconds": null
+        },
+        "cbr_lif_nbrg_v1": {
+          "status": "PASSED",
+          "criterion": {
+            "status": "PASSED",
+            "loss": 88.37675476074219,
+            "batch": 2,
+            "image_shape": [
+              2,
+              3,
+              160,
+              160
+            ],
+            "amp": false,
+            "device": "cpu",
+            "gate_gradients": {
+              "model.6.blocks.1.gate.gate_conv.weight": 2.955336570739746,
+              "model.6.blocks.1.gate.gate_conv.bias": 0.7583795189857483,
+              "model.7.blocks.1.gate.gate_conv.weight": 6.902268409729004,
+              "model.7.blocks.1.gate.gate_conv.bias": 0.5675721168518066
+            },
+            "optimizer_steps": 0,
+            "disposable": true
+          },
+          "peak_allocated_bytes": null,
+          "peak_reserved_bytes": null,
+          "seconds": null
+        },
+        "nbrg_v1": {
+          "status": "PASSED",
+          "criterion": null,
+          "peak_allocated_bytes": null,
+          "peak_reserved_bytes": null,
+          "seconds": null
+        }
+      }
+    },
+    "cuda": {
+      "status": "PASSED",
+      "report": "evidence/cuda_preflight.json",
+      "variants": {
+        "cbr_lif_nbr_control_v1": {
+          "status": "PASSED",
+          "criterion": {
+            "status": "PASSED",
+            "loss": 57.50367736816406,
+            "batch": 2,
+            "image_shape": [
+              2,
+              3,
+              160,
+              160
+            ],
+            "amp": true,
+            "device": "cuda",
+            "gate_gradients": {},
+            "optimizer_steps": 0,
+            "disposable": true
+          },
+          "peak_allocated_bytes": 402029568,
+          "peak_reserved_bytes": 511705088,
+          "seconds": 6.507741200000002
+        },
+        "cbr_lif_nbrg_v1": {
+          "status": "PASSED",
+          "criterion": {
+            "status": "PASSED",
+            "loss": 57.50367736816406,
+            "batch": 2,
+            "image_shape": [
+              2,
+              3,
+              160,
+              160
+            ],
+            "amp": true,
+            "device": "cuda",
+            "gate_gradients": {
+              "model.6.blocks.1.gate.gate_conv.weight": 2.272582769393921,
+              "model.6.blocks.1.gate.gate_conv.bias": 0.6076347231864929,
+              "model.7.blocks.1.gate.gate_conv.weight": 4.056461811065674,
+              "model.7.blocks.1.gate.gate_conv.bias": 0.3466687500476837
+            },
+            "optimizer_steps": 0,
+            "disposable": true
+          },
+          "peak_allocated_bytes": 403469312,
+          "peak_reserved_bytes": 511705088,
+          "seconds": 4.5179896
+        },
+        "nbrg_v1": {
+          "status": "PASSED",
+          "criterion": {
+            "status": "PASSED",
+            "loss": 57.50367736816406,
+            "batch": 2,
+            "image_shape": [
+              2,
+              3,
+              160,
+              160
+            ],
+            "amp": true,
+            "device": "cuda",
+            "gate_gradients": {
+              "model.6.blocks.1.gate.gate_conv.weight": 2.2728240489959717,
+              "model.6.blocks.1.gate.gate_conv.bias": 0.6076871156692505,
+              "model.7.blocks.1.gate.gate_conv.weight": 4.060486316680908,
+              "model.7.blocks.1.gate.gate_conv.bias": 0.3468613624572754
+            },
+            "optimizer_steps": 0,
+            "disposable": true
+          },
+          "peak_allocated_bytes": 395674112,
+          "peak_reserved_bytes": 444596224,
+          "seconds": 1.0791261999999975
+        }
+      }
+    },
+    "capacity": {
+      "status": "PASSED",
+      "report": "evidence/capacity_preflight.json",
+      "variants": {
+        "cbr_lif_nbr_control_v1": {
+          "status": "PASSED",
+          "criterion": {
+            "status": "PASSED",
+            "loss": 91.01299285888672,
+            "batch": 16,
+            "image_shape": [
+              16,
+              3,
+              640,
+              640
+            ],
+            "amp": true,
+            "device": "cuda",
+            "gate_gradients": {},
+            "optimizer_steps": 0,
+            "disposable": true
+          },
+          "peak_allocated_bytes": 6405916160,
+          "peak_reserved_bytes": 7866417152,
+          "seconds": 8.877226499999999
+        },
+        "cbr_lif_nbrg_v1": {
+          "status": "PASSED",
+          "criterion": {
+            "status": "PASSED",
+            "loss": 91.01299285888672,
+            "batch": 16,
+            "image_shape": [
+              16,
+              3,
+              640,
+              640
+            ],
+            "amp": true,
+            "device": "cuda",
+            "gate_gradients": {
+              "model.6.blocks.1.gate.gate_conv.weight": 1.612388253211975,
+              "model.6.blocks.1.gate.gate_conv.bias": 0.3900841474533081,
+              "model.7.blocks.1.gate.gate_conv.weight": 2.4718053340911865,
+              "model.7.blocks.1.gate.gate_conv.bias": 0.16774344444274902
+            },
+            "optimizer_steps": 0,
+            "disposable": true
+          },
+          "peak_allocated_bytes": 6501373440,
+          "peak_reserved_bytes": 7969177600,
+          "seconds": 8.974216700000007
+        },
+        "nbrg_v1": {
+          "status": "PASSED",
+          "criterion": {
+            "status": "PASSED",
+            "loss": 91.01299285888672,
+            "batch": 16,
+            "image_shape": [
+              16,
+              3,
+              640,
+              640
+            ],
+            "amp": true,
+            "device": "cuda",
+            "gate_gradients": {
+              "model.6.blocks.1.gate.gate_conv.weight": 1.6128979921340942,
+              "model.6.blocks.1.gate.gate_conv.bias": 0.3902342915534973,
+              "model.7.blocks.1.gate.gate_conv.weight": 2.475168466567993,
+              "model.7.blocks.1.gate.gate_conv.bias": 0.16794273257255554
+            },
+            "optimizer_steps": 0,
+            "disposable": true
+          },
+          "peak_allocated_bytes": 6470186496,
+          "peak_reserved_bytes": 7912554496,
+          "seconds": 6.808002099999996
+        }
+      }
+    }
+  },
+  "server_status": "PENDING_SERVER_ENVIRONMENT_RECHECK",
+  "reason": "Local Windows torch2.7.1+cu118 is not historical Linux torch2.1.2+cu121",
+  "reference_module_archive": "PASSED",
+  "real_source": "PASSED",
+  "dataset": "PASSED_PATH_AND_LABEL_FINGERPRINT",
+  "compile": "PASSED",
+  "entry_help": "PASSED",
+  "shell_syntax": "PASSED",
+  "fusion_evidence": {
+    "compression": "gzip, lossless; no tensors/images/checkpoints",
+    "files": [
+      {
+        "path": "evidence/cpu_cbr_lif_nbr_control_v1_full_fp32_fuse_diagnostic.json.gz",
+        "sha256": "c2020f6635268144a270a6749228173593f1cb57c4c1f1479e4c4b77acf0af0e",
+        "uncompressed_sha256": "b0ce8b4bd39e48629e12941d2d635af590ebd17bc040583fb02ea2608e3aa178",
+        "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_cpu_final\\cbr_lif_nbr_control_v1\\full_fp32\\fuse_diagnostic.json",
+        "bytes": 20430
+      },
+      {
+        "path": "evidence/cpu_cbr_lif_nbr_control_v1_native_fp32_fuse_diagnostic.json.gz",
+        "sha256": "ba54ea618c032b18685ecc305055f05fd5c8472121e43c588a3a0c372be5322d",
+        "uncompressed_sha256": "d35a84eb527fab704dc6b5527517be4b3ac320915d71666eb3221675d398e091",
+        "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_cpu_final\\cbr_lif_nbr_control_v1\\native_fp32\\fuse_diagnostic.json",
+        "bytes": 20108
+      },
+      {
+        "path": "evidence/cpu_cbr_lif_nbrg_v1_full_fp32_fuse_diagnostic.json.gz",
+        "sha256": "59b702fb62bcc7cd017d981c34f713ad427e5b0223e7378b4dab9f6c854f61d5",
+        "uncompressed_sha256": "6eebd7a16c5d720e953aca83820c2fbdb1000e79d0d54861e9665a763dd8d44c",
+        "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_cpu_final\\cbr_lif_nbrg_v1\\full_fp32\\fuse_diagnostic.json",
+        "bytes": 19440
+      },
+      {
+        "path": "evidence/cpu_cbr_lif_nbrg_v1_native_fp32_fuse_diagnostic.json.gz",
+        "sha256": "9caa0b632f23f291a17a30c69ba66e9d7803e2d0654398526de67565d7d1a9eb",
+        "uncompressed_sha256": "5ef85770d7ea2f48ceed70c339fa2636463dbbdaea369e1360e33b7feb587b0a",
+        "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_cpu_final\\cbr_lif_nbrg_v1\\native_fp32\\fuse_diagnostic.json",
+        "bytes": 19209
+      },
+      {
+        "path": "evidence/cuda_cbr_lif_nbr_control_v1_full_fp32_fuse_diagnostic.json.gz",
+        "sha256": "50a964c0f594c6528fd96b2e101984c972dd1a60a6a2146bc7cabc220362679b",
+        "uncompressed_sha256": "c80fa87dee1d76de2ad155fa0da9dd2533ce43915c1c3a88c9cbdc5f7ead595d",
+        "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_cuda_final\\cbr_lif_nbr_control_v1\\full_fp32\\fuse_diagnostic.json",
+        "bytes": 19300
+      },
+      {
+        "path": "evidence/cuda_cbr_lif_nbr_control_v1_native_amp_fuse_diagnostic.json.gz",
+        "sha256": "8b2243a98068b9b57a5bb1b181e52491f848c985d41884ef9a01f4f394181583",
+        "uncompressed_sha256": "970d784732167b892cbbcd5de5f9937413934bbf30f6cd2826f2833fe18c3eb7",
+        "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_cuda_final\\cbr_lif_nbr_control_v1\\native_amp\\fuse_diagnostic.json",
+        "bytes": 13549
+      },
+      {
+        "path": "evidence/cuda_cbr_lif_nbr_control_v1_native_fp32_fuse_diagnostic.json.gz",
+        "sha256": "d106945f99f06cdb18f36e80dd68b233da812986a10329a74a3101c11e256f22",
+        "uncompressed_sha256": "a62575a56dbe03ec8e43d7ae469e1918c20e9f30531600d7dff6bee6f4a4caca",
+        "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_cuda_final\\cbr_lif_nbr_control_v1\\native_fp32\\fuse_diagnostic.json",
+        "bytes": 19104
+      },
+      {
+        "path": "evidence/cuda_cbr_lif_nbr_control_v1_native_half_fuse_diagnostic.json.gz",
+        "sha256": "c489120d911ded74103452f3d86678f2e002257fe86bfb50ea9fb9d3f480e647",
+        "uncompressed_sha256": "7c47df3525e329eb45f25af3da2f37fcd2af7ac499ededd2c2e191ae476e696b",
+        "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_cuda_final\\cbr_lif_nbr_control_v1\\native_half\\fuse_diagnostic.json",
+        "bytes": 13194
+      },
+      {
+        "path": "evidence/cuda_cbr_lif_nbrg_v1_full_fp32_fuse_diagnostic.json.gz",
+        "sha256": "755fbe34245983a2613b144e4ba668b14bd8edf348cb5316adab3a84c7bd358b",
+        "uncompressed_sha256": "eecf9cbe5e995dbc668048f27123a73231b926818f5a0596ca17020808e544a8",
+        "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_cuda_final\\cbr_lif_nbrg_v1\\full_fp32\\fuse_diagnostic.json",
+        "bytes": 19197
+      },
+      {
+        "path": "evidence/cuda_cbr_lif_nbrg_v1_native_amp_fuse_diagnostic.json.gz",
+        "sha256": "b317c297cf6baec20eaec259a7c76a79bb9119f65cd9e4f2c86c5bd43e1d6f8c",
+        "uncompressed_sha256": "07beedbb6db50f172da37342efd3617a80fa075d929c31ceb267443665f6960a",
+        "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_cuda_final\\cbr_lif_nbrg_v1\\native_amp\\fuse_diagnostic.json",
+        "bytes": 13532
+      },
+      {
+        "path": "evidence/cuda_cbr_lif_nbrg_v1_native_fp32_fuse_diagnostic.json.gz",
+        "sha256": "184e2dee1950d2cb0bc492bb1165f5e653218bc348e52c67fcbc7a9caa357e80",
+        "uncompressed_sha256": "99a2ae155f26629af535368df2a648f81eb9902f2aebe630e0a60b506e60305e",
+        "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_cuda_final\\cbr_lif_nbrg_v1\\native_fp32\\fuse_diagnostic.json",
+        "bytes": 19117
+      },
+      {
+        "path": "evidence/cuda_cbr_lif_nbrg_v1_native_half_fuse_diagnostic.json.gz",
+        "sha256": "4ae21631c9bcd80a39f95f0c1c7f9375604634f3d4dd7e69205cd2c278a7b112",
+        "uncompressed_sha256": "fc630699e1d2ffae1f69e2935aef7a681a9fdfc053b6f2d1395846d98ffab57f",
+        "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\nbrg-v1\\outputs\\nbrg_cuda_final\\cbr_lif_nbrg_v1\\native_half\\fuse_diagnostic.json",
+        "bytes": 13286
+      }
+    ]
+  }
+}
