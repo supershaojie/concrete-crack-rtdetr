@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "data_yaml_sha256": "5738ceac3926404a2e4d10a448f6f3d92d654e9d533a4ba614c8d16f126fa9bb",
+  "dataset_root": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det",
+  "config": {
+    "train": "images/train",
+    "val": "images/val",
+    "test": "images/test",
+    "names": {
+      "0": "crack"
+    }
+  },
+  "splits": {
+    "train": {
+      "images": 6048,
+      "boxes": 45573,
+      "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+      "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d",
+      "image_inventory_sha256": "99c658bc0a1858f43cccc8d11cd3f94aa0fc8fe92244df822714ccfc036a0f86"
+    },
+    "val": {
+      "images": 1728,
+      "boxes": 12840,
+      "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+      "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd",
+      "image_inventory_sha256": "49a05b03504e6984a74ab51ddcf66c90d9e174c185ca1df64d9bc7e4d5305264"
+    },
+    "test": {
+      "images": 864,
+      "boxes": 6663,
+      "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+      "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51",
+      "image_inventory_sha256": "825dfead8f6a440a063f5ff2bff01ab2ed2038e088f0565ec61deb5a4d042b02"
+    }
+  }
+}

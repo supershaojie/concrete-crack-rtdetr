@@ -1,0 +1,740 @@
+{
+  "status": "LOCAL_CHECKS_PASSED_SERVER_PREFLIGHT_PENDING",
+  "runtime": {
+    "python": "3.9.25",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-lsrt-v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec"
+  },
+  "variants": {
+    "cbr_lif_lsrt_v1": {
+      "status": "PENDING",
+      "report": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-lsrt-v1\\outputs\\lsrt_v1\\final_preflight_combo\\report.json",
+      "report_sha256": "826d308547ad0c2fdf204c95821d8a98ebc005920ef6ecd9e708f8ef1cf2dafd",
+      "fingerprints": {
+        "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+        "source_tree_sha256": "a193a4e1ea80eb1254f8ba3362e4320568cee6413a516af73d2ef88fd05421eb",
+        "config_sha256": "dd3509191ac4d17df08b4b79896a4240d6fe44f8dd8d88d59296ae49c41ab492",
+        "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+        "initialization_sha256": "6a5a6d8a2d9fa37715e46809067fe69abac2903250680e4e792c994aa4ccb656"
+      },
+      "checks": {
+        "initialization": "PASSED",
+        "native_trainer": "PASSED",
+        "topology": "PASSED",
+        "actual_train_API": "PASSED",
+        "AdamW_coverage": "PASSED",
+        "complexity": "PASSED",
+        "cpu_module": "PASSED",
+        "cpu_initial_equivalence": "PASSED",
+        "cpu_FP32_loss": "PASSED",
+        "cpu_reload_fusion": "PASSED",
+        "cuda_module": "PASSED",
+        "cuda_initial_equivalence": "PASSED",
+        "cuda_FP32_loss": "PASSED",
+        "cuda_reload_fusion": "PASSED",
+        "cuda_AMP_loss": "PASSED"
+      },
+      "graph": {
+        "status": "PASSED",
+        "layer": 18,
+        "inputs": [
+          16,
+          17,
+          15
+        ],
+        "output_channels": 512,
+        "decoder": "RTDETRDecoderCBR",
+        "queries": 300,
+        "decoder_layers": 3,
+        "DN": 100,
+        "label_noise_ratio": 0.5,
+        "box_noise_scale": 1.0,
+        "parameters": 20182542,
+        "added_parameters": 32777
+      },
+      "classification": {
+        "status": "PASSED",
+        "native_get_model": true,
+        "public_states_exact": 552,
+        "loaded_exact": 548,
+        "MISSING": [],
+        "UNEXPECTED": [],
+        "SHAPE_MISMATCH": [],
+        "ALLOWED_CLASS_ADAPTATION": [
+          {
+            "name": "model.26.dec_score_head.0.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.dec_score_head.0.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.dec_score_head.1.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.dec_score_head.1.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.dec_score_head.2.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.dec_score_head.2.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.denoising_class_embed.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.enc_score_head.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.enc_score_head.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          }
+        ],
+        "LSRT_preserved": true,
+        "formal_optimizer_steps": 0
+      },
+      "complexity": {
+        "status": "PASSED",
+        "nc": 1,
+        "imgsz": 640,
+        "device": "cpu",
+        "precision": "FP32",
+        "mode": "eval",
+        "rows": {
+          "parent": {
+            "unfused": {
+              "parameters": 20149765,
+              "thop_MACs": 29336256000.0,
+              "thop_2MAC_GFLOPs": 58.672512
+            },
+            "fused": {
+              "parameters": 19944965,
+              "thop_MACs": 28782476800.0,
+              "thop_2MAC_GFLOPs": 57.5649536
+            }
+          },
+          "LSRT": {
+            "unfused": {
+              "parameters": 20182542,
+              "thop_MACs": 29471014400.0,
+              "thop_2MAC_GFLOPs": 58.9420288
+            },
+            "fused": {
+              "parameters": 19977742,
+              "thop_MACs": 28917235200.0,
+              "thop_2MAC_GFLOPs": 57.8344704
+            }
+          }
+        },
+        "LSRT_core_MACs": 134758400,
+        "LSRT_core_2MAC_GFLOPs": 0.2695168,
+        "limitations": "THOP operator coverage estimate, not measured latency or all operations. LSRT excludes normalization, softmax, mask, difference and memory traffic."
+      },
+      "optimizer": {
+        "status": "PASSED",
+        "total_parameter_tensors": 350,
+        "new": [
+          {
+            "name": "model.20.B_proj.weight",
+            "numel": 4096,
+            "group": "weight",
+            "lr": 0.0005,
+            "weight_decay": 0.0001,
+            "norm": false
+          },
+          {
+            "name": "model.20.P.weight",
+            "numel": 432,
+            "group": "weight",
+            "lr": 0.0005,
+            "weight_decay": 0.0001,
+            "norm": false
+          },
+          {
+            "name": "model.20.U_mix.weight",
+            "numel": 48,
+            "group": "weight",
+            "lr": 0.0005,
+            "weight_decay": 0.0001,
+            "norm": false
+          },
+          {
+            "name": "model.20.U_dw.weight",
+            "numel": 144,
+            "group": "weight",
+            "lr": 0.0005,
+            "weight_decay": 0.0001,
+            "norm": false
+          },
+          {
+            "name": "model.20.O_proj.weight",
+            "numel": 16384,
+            "group": "weight",
+            "lr": 0.0005,
+            "weight_decay": 0.0001,
+            "norm": false
+          },
+          {
+            "name": "model.26.cbr.p3_proj.weight",
+            "numel": 16384,
+            "group": "weight",
+            "lr": 0.0005,
+            "weight_decay": 0.0001,
+            "norm": false
+          },
+          {
+            "name": "model.26.cbr.p3_proj.bias",
+            "numel": 64,
+            "group": "bias",
+            "lr": 0.0005,
+            "weight_decay": 0.0,
+            "norm": false
+          },
+          {
+            "name": "model.26.cbr.query_proj.weight",
+            "numel": 16384,
+            "group": "weight",
+            "lr": 0.0005,
+            "weight_decay": 0.0001,
+            "norm": false
+          },
+          {
+            "name": "model.26.cbr.query_proj.bias",
+            "numel": 64,
+            "group": "bias",
+            "lr": 0.0005,
+            "weight_decay": 0.0,
+            "norm": false
+          },
+          {
+            "name": "model.26.cbr.evidence_proj.weight",
+            "numel": 8192,
+            "group": "weight",
+            "lr": 0.0005,
+            "weight_decay": 0.0001,
+            "norm": false
+          },
+          {
+            "name": "model.26.cbr.evidence_proj.bias",
+            "numel": 64,
+            "group": "bias",
+            "lr": 0.0005,
+            "weight_decay": 0.0,
+            "norm": false
+          },
+          {
+            "name": "model.26.cbr.side_embed.weight",
+            "numel": 256,
+            "group": "weight",
+            "lr": 0.0005,
+            "weight_decay": 0.0001,
+            "norm": false
+          },
+          {
+            "name": "model.26.cbr.geometry_proj.weight",
+            "numel": 128,
+            "group": "weight",
+            "lr": 0.0005,
+            "weight_decay": 0.0001,
+            "norm": false
+          },
+          {
+            "name": "model.26.cbr.geometry_proj.bias",
+            "numel": 64,
+            "group": "bias",
+            "lr": 0.0005,
+            "weight_decay": 0.0,
+            "norm": false
+          },
+          {
+            "name": "model.26.cbr.score.weight",
+            "numel": 64,
+            "group": "weight",
+            "lr": 0.0005,
+            "weight_decay": 0.0001,
+            "norm": false
+          },
+          {
+            "name": "model.26.cbr.offset_hidden.weight",
+            "numel": 4096,
+            "group": "weight",
+            "lr": 0.0005,
+            "weight_decay": 0.0001,
+            "norm": false
+          },
+          {
+            "name": "model.26.cbr.offset_hidden.bias",
+            "numel": 64,
+            "group": "bias",
+            "lr": 0.0005,
+            "weight_decay": 0.0,
+            "norm": false
+          },
+          {
+            "name": "model.26.cbr.offset_out.weight",
+            "numel": 64,
+            "group": "weight",
+            "lr": 0.0005,
+            "weight_decay": 0.0001,
+            "norm": false
+          },
+          {
+            "name": "model.26.cbr.offset_out.bias",
+            "numel": 1,
+            "group": "bias",
+            "lr": 0.0005,
+            "weight_decay": 0.0,
+            "norm": false
+          }
+        ],
+        "no_missing_or_duplicate": true,
+        "LSRT_occurrences": {
+          "model.18.lsrt.rel_bias": 1,
+          "model.18.lsrt.q_proj.weight": 1,
+          "model.18.lsrt.k_proj.weight": 1,
+          "model.18.lsrt.v_proj.weight": 1,
+          "model.18.lsrt.out_proj.weight": 1
+        },
+        "LSRT_groups": [
+          {
+            "name": "model.18.lsrt.rel_bias",
+            "group": 2,
+            "weight_decay": 0.0
+          },
+          {
+            "name": "model.18.lsrt.q_proj.weight",
+            "group": 0,
+            "weight_decay": 0.0001
+          },
+          {
+            "name": "model.18.lsrt.k_proj.weight",
+            "group": 0,
+            "weight_decay": 0.0001
+          },
+          {
+            "name": "model.18.lsrt.v_proj.weight",
+            "group": 0,
+            "weight_decay": 0.0001
+          },
+          {
+            "name": "model.18.lsrt.out_proj.weight",
+            "group": 0,
+            "weight_decay": 0.0001
+          }
+        ]
+      },
+      "pending": [
+        "real train B16/640 AMP capacity, GT/DN/peak memory",
+        "Repeat on existing server Python3.10 / torch2.1.2+cu121 / 4090"
+      ],
+      "capacity": {
+        "status": "PENDING",
+        "reason": "Requires explicit --capacity, CUDA, real training data, B16/640 native AMP"
+      },
+      "actual_warnings": [
+        "'oneOf' deprecated - use 'one_of'",
+        "'parseString' deprecated - use 'parse_string'",
+        "'resetCache' deprecated - use 'reset_cache'",
+        "grid_sampler_2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\Context.cpp:97.)"
+      ]
+    },
+    "lsrt_v1": {
+      "status": "PENDING",
+      "report": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-lsrt-v1\\outputs\\lsrt_v1\\final_preflight_single\\report.json",
+      "report_sha256": "70d80812d91440f33642f231fad1a158461a90de208af1be3cd86d0b5faead40",
+      "fingerprints": {
+        "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+        "source_tree_sha256": "a193a4e1ea80eb1254f8ba3362e4320568cee6413a516af73d2ef88fd05421eb",
+        "config_sha256": "435b2798e42b95122292c5f86afbecc60337c3f37da0bd7e188d567595fddacd",
+        "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+        "initialization_sha256": "1cbca7b51bee23134519e9f50829b359600c5469c7545a8fb89122e87f0501de"
+      },
+      "checks": {
+        "initialization": "PASSED",
+        "native_trainer": "PASSED",
+        "topology": "PASSED",
+        "actual_train_API": "PASSED",
+        "AdamW_coverage": "PASSED",
+        "complexity": "PASSED",
+        "cpu_module": "PASSED",
+        "cpu_initial_equivalence": "PASSED",
+        "cpu_FP32_loss": "PASSED",
+        "cpu_reload_fusion": "PASSED",
+        "cuda_module": "PASSED",
+        "cuda_initial_equivalence": "PASSED",
+        "cuda_FP32_loss": "PASSED",
+        "cuda_reload_fusion": "PASSED",
+        "cuda_AMP_loss": "PASSED"
+      },
+      "graph": {
+        "status": "PASSED",
+        "layer": 18,
+        "inputs": [
+          16,
+          17,
+          15
+        ],
+        "output_channels": 512,
+        "decoder": "RTDETRDecoder",
+        "queries": 300,
+        "decoder_layers": 3,
+        "DN": 100,
+        "label_noise_ratio": 0.5,
+        "box_noise_scale": 1.0,
+        "parameters": 20115549,
+        "added_parameters": 32777
+      },
+      "classification": {
+        "status": "PASSED",
+        "native_get_model": true,
+        "public_states_exact": 533,
+        "loaded_exact": 529,
+        "MISSING": [],
+        "UNEXPECTED": [],
+        "SHAPE_MISMATCH": [],
+        "ALLOWED_CLASS_ADAPTATION": [
+          {
+            "name": "model.26.dec_score_head.0.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.dec_score_head.0.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.dec_score_head.1.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.dec_score_head.1.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.dec_score_head.2.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.dec_score_head.2.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.denoising_class_embed.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.enc_score_head.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          },
+          {
+            "name": "model.26.enc_score_head.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "unchanged native constructor; equal to parent at same RNG"
+          }
+        ],
+        "LSRT_preserved": true,
+        "formal_optimizer_steps": 0
+      },
+      "complexity": {
+        "status": "PASSED",
+        "nc": 1,
+        "imgsz": 640,
+        "device": "cpu",
+        "precision": "FP32",
+        "mode": "eval",
+        "rows": {
+          "parent": {
+            "unfused": {
+              "parameters": 20082772,
+              "thop_MACs": 29138304000.0,
+              "thop_2MAC_GFLOPs": 58.276608
+            },
+            "fused": {
+              "parameters": 19877716,
+              "thop_MACs": 28582886400.0,
+              "thop_2MAC_GFLOPs": 57.1657728
+            }
+          },
+          "LSRT": {
+            "unfused": {
+              "parameters": 20115549,
+              "thop_MACs": 29273062400.0,
+              "thop_2MAC_GFLOPs": 58.5461248
+            },
+            "fused": {
+              "parameters": 19910493,
+              "thop_MACs": 28717644800.0,
+              "thop_2MAC_GFLOPs": 57.4352896
+            }
+          }
+        },
+        "LSRT_core_MACs": 134758400,
+        "LSRT_core_2MAC_GFLOPs": 0.2695168,
+        "limitations": "THOP operator coverage estimate, not measured latency or all operations. LSRT excludes normalization, softmax, mask, difference and memory traffic."
+      },
+      "optimizer": {
+        "status": "PASSED",
+        "total_parameter_tensors": 331,
+        "new": [],
+        "no_missing_or_duplicate": true,
+        "LSRT_occurrences": {
+          "model.18.lsrt.rel_bias": 1,
+          "model.18.lsrt.q_proj.weight": 1,
+          "model.18.lsrt.k_proj.weight": 1,
+          "model.18.lsrt.v_proj.weight": 1,
+          "model.18.lsrt.out_proj.weight": 1
+        },
+        "LSRT_groups": [
+          {
+            "name": "model.18.lsrt.rel_bias",
+            "group": 2,
+            "weight_decay": 0.0
+          },
+          {
+            "name": "model.18.lsrt.q_proj.weight",
+            "group": 0,
+            "weight_decay": 0.0001
+          },
+          {
+            "name": "model.18.lsrt.k_proj.weight",
+            "group": 0,
+            "weight_decay": 0.0001
+          },
+          {
+            "name": "model.18.lsrt.v_proj.weight",
+            "group": 0,
+            "weight_decay": 0.0001
+          },
+          {
+            "name": "model.18.lsrt.out_proj.weight",
+            "group": 0,
+            "weight_decay": 0.0001
+          }
+        ]
+      },
+      "pending": [
+        "real train B16/640 AMP capacity, GT/DN/peak memory",
+        "Repeat on existing server Python3.10 / torch2.1.2+cu121 / 4090"
+      ],
+      "capacity": {
+        "status": "PENDING",
+        "reason": "Requires explicit --capacity, CUDA, real training data, B16/640 native AMP"
+      },
+      "actual_warnings": [
+        "grid_sampler_2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\Context.cpp:97.)"
+      ]
+    }
+  },
+  "base_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "source_identity_note": "Tests ran on the precommit worktree. Actual source_tree_sha256 binds every tool/model Python/YAML/shell byte normalized to LF. Delivery attestation checks the committed tree matches this fingerprint.",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN",
+  "formal_optimizer_steps": 0,
+  "server_login": false,
+  "inherited_regressions": {
+    "CBR": "3 tests PASSED in isolated process; inherited diagnostic optimizer updates only",
+    "LIF": "module_checks PASSED; disposable manual diagnostic output update only"
+  },
+  "lifecycle_faults": {
+    "preflight_rejections": 15,
+    "package_identity_rejections": 4,
+    "plan_does_not_create_formal_run": true,
+    "light_manifest_sha_exclusions_passed": true
+  },
+  "dataset": {
+    "schema": 1,
+    "data_yaml_sha256": "5738ceac3926404a2e4d10a448f6f3d92d654e9d533a4ba614c8d16f126fa9bb",
+    "dataset_root": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det",
+    "config": {
+      "train": "images/train",
+      "val": "images/val",
+      "test": "images/test",
+      "names": {
+        "0": "crack"
+      }
+    },
+    "splits": {
+      "train": {
+        "images": 6048,
+        "boxes": 45573,
+        "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+        "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d",
+        "image_inventory_sha256": "99c658bc0a1858f43cccc8d11cd3f94aa0fc8fe92244df822714ccfc036a0f86"
+      },
+      "val": {
+        "images": 1728,
+        "boxes": 12840,
+        "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+        "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd",
+        "image_inventory_sha256": "49a05b03504e6984a74ab51ddcf66c90d9e174c185ca1df64d9bc7e4d5305264"
+      },
+      "test": {
+        "images": 864,
+        "boxes": 6663,
+        "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+        "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51",
+        "image_inventory_sha256": "825dfead8f6a440a063f5ff2bff01ab2ed2038e088f0565ec61deb5a4d042b02"
+      }
+    }
+  },
+  "baseline_dataset_evidence": {
+    "status": "PASSED",
+    "file": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-lsrt-v1\\docs\\c19_lif_v1\\checks.json",
+    "sha256": "fecd1ccd9d02cf6e66ed923378f83ca7ddc30903a8f921cad91407e120676b57",
+    "splits": {
+      "train": {
+        "paths_labels_counts_equal": true,
+        "historical_image_hash_available": false
+      },
+      "val": {
+        "paths_labels_counts_equal": true,
+        "historical_image_hash_available": false
+      },
+      "test": {
+        "paths_labels_counts_equal": true,
+        "historical_image_hash_available": false
+      }
+    },
+    "note": "Legacy baseline inventories lack image-content hashes; current image bytes are frozen for preflight/start."
+  },
+  "plan": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-lsrt-v1\\outputs\\lsrt_v1\\final_plan_combo\\plan.json",
+  "plan_sha256": "80f43f2c90f96537bf7a2ff734d4e4fd05f1dedc582baa887ff60263e0891dd7"
+}

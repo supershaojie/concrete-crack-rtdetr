@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "audit_date": "2026-09-16",
+  "original_design_spec": {
+    "source": "D:/rtdetr跑结果/LSRT/Codex_LSRT_v1_Full_Prompt.md",
+    "verbatim_copy": "docs/lsrt_v1/DESIGN_SPEC.md",
+    "source_and_copy_sha256": "e2849033b05d608d7b0b4291c77fb01f70013239a1eaedcde73c24582243dce0"
+  },
+  "scope": "Read-only local evidence and primary-paper abstract verification; no server login, training or evaluation",
+  "base": {
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "rationale": "Original CBR + LIF topology and protected fusion/init/entry fixes match the archived successful combination. Launch, preflight and package runtime records name this commit; ten relevant archived-source blobs equal this Git commit byte-for-byte. The archived results.csv reaches epoch 200. No other experiment branch is merged.",
+    "evidence_root": "D:/rtdetr跑结果/C19＋LIF：原 CBR＋LIF-Down v1",
+    "historical_server_worktree": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix",
+    "matched_git_blobs": {
+      "ultralytics-main/ultralytics/nn/modules/cbr.py": "0ee2885f64d529d6563903f4dff34ff3ab137f4e",
+      "ultralytics-main/ultralytics/nn/modules/lif_down.py": "f81c99eaa623b67615307c7c18c1148ffbf7d5d2",
+      "ultralytics-main/ultralytics/nn/modules/head.py": "2fe34f0aaafa8c32a6b9eef853c6f24c94ad3ca6",
+      "ultralytics-main/ultralytics/nn/modules/transformer.py": "d20de815ae22179e32a5b0bc65eccdad94ada159",
+      "ultralytics-main/ultralytics/nn/tasks.py": "b0f74a9a10c7d6c25ac8c87cf1993fa102c90106",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-lif-down.yaml": "b4c6db7e186d9bae9e7cabec40eeee57e1858a45",
+      "tools/init_c19_lif_v1.py": "523c4b69bb1e1155ad5403a4b25aa63d89cb6b43",
+      "tools/train_c19_lif_v1.py": "a454d9d4b50e7440e1f44165119585e3dab796ba",
+      "tools/preflight_c19_lif_v1.py": "3765dcff5f809224f3e6d5bdf62a0aac1d9ca39b",
+      "docs/c19_lif_v1/c2_args.yaml": "f353d5efd1d5fa29f76b840db4df1d7c400217ff"
+    },
+    "limits": [
+      "A launch initialization record alone does not prove final training or test source. Package metadata and matching archived source provide additional evidence; this is still an audit of records, not an independent inspection of server state.",
+      "Historical launch/training_state.json remains training, whereas later results.csv reaches epoch 200; the stale launch status must not be reported as the final lifecycle result.",
+      "Historical test records were read only for provenance; this task has not run final test."
+    ]
+  },
+  "reference_zip": {
+    "prompt_name": "d562592a-72d7-4703-8ea6-1e958de67292.zip",
+    "actual_path": "D:/7.1 rtdetr改/魔鬼面具_RTDETR/RTDETR-20260623.zip",
+    "sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+    "expected_sha256_matches": true,
+    "read_directly_from_zip": true,
+    "member": "RTDETR-main/ultralytics/nn/extra_modules/block.py",
+    "member_bytes": 579266,
+    "member_sha256": "e3e3617c89bd7caf350d2601740f2e399847a16a3a659d7b3e40010b88498cd2",
+    "classes": [
+      {"name": "DySample", "line": 3413, "observed": "Single-input continuous offsets and bilinear grid_sample, with groups and optional scope.", "LSRT_difference": "Low-level Q matches high-level K over fixed coarse 3x3 positions; no offset prediction or grid_sample."},
+      {"name": "CARAFE", "line": 3492, "observed": "Input-conditioned reassembly weights, nearest upsampling and unfolded high-resolution content aggregation.", "LSRT_difference": "Low-level guidance and center-relative projected-value differences; unfold only coarse 32-channel K/V."},
+      {"name": "SFC_G2", "line": 4657, "observed": "Both projected branches use learned offsets and grid_sample, then attention-weighted addition.", "LSRT_difference": "L remains at its original coordinates; only the high-level injection is corrected before original ordered concat."}
+    ],
+    "reuse": "Mechanism comparison only; no extra_modules package import or source copying"
+  },
+  "fixed_initialization_source": {
+    "path": "D:/MyProjects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "verified_locally": true,
+    "source_nc": 80,
+    "historical_combo_init_sha256": "9d583611e4558b873ef07c5a45e5d37c9b2914c7058e27c098d7eb695aad80b4",
+    "historical_common_equal": 533,
+    "historical_common_unequal": 0,
+    "historical_new_parameter_tensors": 19,
+    "historical_missing_unexpected_shape_mismatch": [0, 0, 0],
+    "note": "The historical combo checkpoint hash is evidence only. LSRT initializes from the fixed ImageNet backbone source, never from trained best/last. The original three-3x3 stem is not a direct copy of a torchvision 7x7 stem."
+  },
+  "authoritative_recipe": {
+    "launch_root": "D:/rtdetr跑结果/C19＋LIF：原 CBR＋LIF-Down v1/metadata/launch",
+    "sha256": {
+      "authoritative_c2_args.yaml": "ab0594ac3758b53421dc0a5adbea693505fc9e2591d8e668a25ba950d70234fd",
+      "data_config.yaml": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+      "source_record.json": "0edbd1de6e79cfbf5de49838ab373d3832ace6db3e6678551e2a9950ced10ca4",
+      "initialization.json": "152bc33ebc40d8ed98d9cd0a7377dbfb6720b70de9f6a2fef80c9bfc886394a6",
+      "preflight.json": "38d6a141261538763548375685767edd45819175ca0707df1cc9fb9adaad9aef",
+      "dataset_inventory.json": "8567e1b4d1aae5f168fb18b633ed4357c7f0aba56c0041a6570647fb542d0446"
+    },
+    "original_c2_archive_root": "D:/rtdetr跑结果/c2 200e在线/c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053",
+    "original_c2_args": "train_run/args.yaml",
+    "original_c2_data": "config/crack_autodl.yaml",
+    "original_c2_args_and_data_byte_hash_equal_to_combo_authoritative_copies": true,
+    "historical_parameter_diff_rows": 109,
+    "historical_changed_fields": ["model", "name", "save_dir"],
+    "source_in_repository": "docs/c19_lif_v1/c2_args.yaml",
+    "data_in_repository": "docs/c19_lif_v1/c2_data.yaml"
+  },
+  "historical_dataset_inventory": {
+    "train": {"images": 6048, "boxes": 45573, "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77", "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"},
+    "val": {"images": 1728, "boxes": 12840, "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03", "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"},
+    "test": {"images": 864, "boxes": 6663, "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184", "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"}
+  },
+  "historical_data_limit": "The original inventory includes file-path and label-content fingerprints but not a whole-dataset image-content hash. Do not claim historical full image-byte identity from this inventory. New plan/preflight/start must freeze actual image bytes and compare them across those stages.",
+  "historical_capacity": {
+    "variant": "c19_lif_v1",
+    "status_recorded": "PASSED",
+    "batch": 16,
+    "imgsz": 640,
+    "AMP": true,
+    "optimizer_steps": 0,
+    "peak_allocated_bytes": 6286626304,
+    "peak_reserved_bytes": 7323254784,
+    "not_LSRT_capacity_evidence": true
+  },
+  "historical_environment": {"python": "3.10.13", "torch": "2.1.2+cu121", "cuda": "12.1", "gpu": "NVIDIA GeForce RTX 4090"},
+  "papers": [
+    {"title": "FaPN: Feature-aligned Pyramid Network for Dense Image Prediction", "url": "https://arxiv.org/abs/2108.07058", "checked": "primary arXiv abstract", "supports": "Motivation concerning misalignment between upsampled and local features, especially at boundaries."},
+    {"title": "Frequency-aware Feature Fusion for Dense Image Prediction", "url": "https://arxiv.org/abs/2408.12879", "checked": "primary arXiv abstract", "supports": "Motivation concerning intra-category inconsistency and displaced or blurred boundaries during feature fusion."}
+  ],
+  "claims_limit": "References support the problem motivation, not proof of this dataset's bottleneck, guaranteed AP gains, first-ever alignment/attention/residual innovation, optimal transport or mass conservation."
+}

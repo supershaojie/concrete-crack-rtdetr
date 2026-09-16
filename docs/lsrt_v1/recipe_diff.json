@@ -1,0 +1,765 @@
+[
+  {
+    "field": "agnostic_nms",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "amp",
+    "C2": true,
+    "target": true,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "angle",
+    "C2": 1.0,
+    "target": 1.0,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "augment",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "auto_augment",
+    "C2": null,
+    "target": null,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "batch",
+    "C2": 16,
+    "target": 16,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "bgr",
+    "C2": 0.0,
+    "target": 0.0,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "box",
+    "C2": 7.5,
+    "target": 7.5,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "cache",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "cfg",
+    "C2": null,
+    "target": null,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "classes",
+    "C2": null,
+    "target": null,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "close_mosaic",
+    "C2": 10,
+    "target": 10,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "cls",
+    "C2": 0.5,
+    "target": 0.5,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "compile",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "conf",
+    "C2": null,
+    "target": null,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "copy_paste",
+    "C2": 0,
+    "target": 0,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "copy_paste_mode",
+    "C2": "flip",
+    "target": "flip",
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "cos_lr",
+    "C2": true,
+    "target": true,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "cutmix",
+    "C2": 0,
+    "target": 0,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "data",
+    "C2": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "target": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\crack.yaml",
+    "changed": true,
+    "reason": "model/output identity or explicitly verified environment path"
+  },
+  {
+    "field": "degrees",
+    "C2": 5,
+    "target": 5,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "deterministic",
+    "C2": true,
+    "target": true,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "device",
+    "C2": "0",
+    "target": "0",
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "dfl",
+    "C2": 1.5,
+    "target": 1.5,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "dnn",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "dropout",
+    "C2": 0.0,
+    "target": 0.0,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "dynamic",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "embed",
+    "C2": null,
+    "target": null,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "end2end",
+    "C2": null,
+    "target": null,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "epochs",
+    "C2": 200,
+    "target": 200,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "erasing",
+    "C2": 0,
+    "target": 0,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "exist_ok",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "fliplr",
+    "C2": 0.5,
+    "target": 0.5,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "flipud",
+    "C2": 0.2,
+    "target": 0.2,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "format",
+    "C2": "torchscript",
+    "target": "torchscript",
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "fraction",
+    "C2": 1.0,
+    "target": 1.0,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "freeze",
+    "C2": null,
+    "target": null,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "half",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "hsv_h",
+    "C2": 0.015,
+    "target": 0.015,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "hsv_s",
+    "C2": 0.5,
+    "target": 0.5,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "hsv_v",
+    "C2": 0.35,
+    "target": 0.35,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "imgsz",
+    "C2": 640,
+    "target": 640,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "int8",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "iou",
+    "C2": 0.7,
+    "target": 0.7,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "keras",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "kobj",
+    "C2": 1.0,
+    "target": 1.0,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "line_width",
+    "C2": null,
+    "target": null,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "lr0",
+    "C2": 0.0005,
+    "target": 0.0005,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "lrf",
+    "C2": 0.01,
+    "target": 0.01,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "mask_ratio",
+    "C2": 4,
+    "target": 4,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "max_det",
+    "C2": 300,
+    "target": 300,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "mixup",
+    "C2": 0.05,
+    "target": 0.05,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "mode",
+    "C2": "train",
+    "target": "train",
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "model",
+    "C2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "target": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-lsrt-v1\\weights\\cbr_lif_lsrt_v1_init.pt",
+    "changed": true,
+    "reason": "model/output identity or explicitly verified environment path"
+  },
+  {
+    "field": "momentum",
+    "C2": 0.937,
+    "target": 0.937,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "mosaic",
+    "C2": 0.8,
+    "target": 0.8,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "multi_scale",
+    "C2": 0.0,
+    "target": 0.0,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "name",
+    "C2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "target": "cbr_lif_lsrt_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+    "changed": true,
+    "reason": "model/output identity or explicitly verified environment path"
+  },
+  {
+    "field": "nbs",
+    "C2": 64,
+    "target": 64,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "nms",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "opset",
+    "C2": null,
+    "target": null,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "optimize",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "optimizer",
+    "C2": "AdamW",
+    "target": "AdamW",
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "overlap_mask",
+    "C2": true,
+    "target": true,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "patience",
+    "C2": 50,
+    "target": 50,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "perspective",
+    "C2": 0.0002,
+    "target": 0.0002,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "plots",
+    "C2": true,
+    "target": true,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "pose",
+    "C2": 12.0,
+    "target": 12.0,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "pretrained",
+    "C2": true,
+    "target": true,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "profile",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "project",
+    "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "target": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-lsrt-v1\\outputs\\lsrt_v1\\train",
+    "changed": true,
+    "reason": "model/output identity or explicitly verified environment path"
+  },
+  {
+    "field": "rect",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "resume",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "retina_masks",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "rle",
+    "C2": 1.0,
+    "target": 1.0,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "save",
+    "C2": true,
+    "target": true,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "save_conf",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "save_crop",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "save_dir",
+    "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "target": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-lsrt-v1\\outputs\\lsrt_v1\\train\\cbr_lif_lsrt_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+    "changed": true,
+    "reason": "model/output identity or explicitly verified environment path"
+  },
+  {
+    "field": "save_frames",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "save_json",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "save_period",
+    "C2": -1,
+    "target": -1,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "save_txt",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "scale",
+    "C2": 0.4,
+    "target": 0.4,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "seed",
+    "C2": 42,
+    "target": 42,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "shear",
+    "C2": 1.5,
+    "target": 1.5,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "show",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "show_boxes",
+    "C2": true,
+    "target": true,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "show_conf",
+    "C2": true,
+    "target": true,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "show_labels",
+    "C2": true,
+    "target": true,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "simplify",
+    "C2": true,
+    "target": true,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "single_cls",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "source",
+    "C2": null,
+    "target": null,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "split",
+    "C2": "val",
+    "target": "val",
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "stream_buffer",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "task",
+    "C2": "detect",
+    "target": "detect",
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "time",
+    "C2": null,
+    "target": null,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "tracker",
+    "C2": "botsort.yaml",
+    "target": "botsort.yaml",
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "translate",
+    "C2": 0.1,
+    "target": 0.1,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "val",
+    "C2": true,
+    "target": true,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "verbose",
+    "C2": true,
+    "target": true,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "vid_stride",
+    "C2": 1,
+    "target": 1,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "visualize",
+    "C2": false,
+    "target": false,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "warmup_bias_lr",
+    "C2": 0.1,
+    "target": 0.1,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "warmup_epochs",
+    "C2": 5,
+    "target": 5,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "warmup_momentum",
+    "C2": 0.8,
+    "target": 0.8,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "weight_decay",
+    "C2": 0.0001,
+    "target": 0.0001,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "workers",
+    "C2": 8,
+    "target": 8,
+    "changed": false,
+    "reason": "inherited"
+  },
+  {
+    "field": "workspace",
+    "C2": null,
+    "target": null,
+    "changed": false,
+    "reason": "inherited"
+  }
+]

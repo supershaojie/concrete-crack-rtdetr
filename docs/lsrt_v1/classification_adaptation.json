@@ -1,0 +1,113 @@
+{
+  "status": "PASSED",
+  "native_get_model": true,
+  "public_states_exact": 552,
+  "loaded_exact": 548,
+  "MISSING": [],
+  "UNEXPECTED": [],
+  "SHAPE_MISMATCH": [],
+  "ALLOWED_CLASS_ADAPTATION": [
+    {
+      "name": "model.26.dec_score_head.0.bias",
+      "source_shape": [
+        80
+      ],
+      "target_shape": [
+        1
+      ],
+      "rule": "unchanged native constructor; equal to parent at same RNG"
+    },
+    {
+      "name": "model.26.dec_score_head.0.weight",
+      "source_shape": [
+        80,
+        256
+      ],
+      "target_shape": [
+        1,
+        256
+      ],
+      "rule": "unchanged native constructor; equal to parent at same RNG"
+    },
+    {
+      "name": "model.26.dec_score_head.1.bias",
+      "source_shape": [
+        80
+      ],
+      "target_shape": [
+        1
+      ],
+      "rule": "unchanged native constructor; equal to parent at same RNG"
+    },
+    {
+      "name": "model.26.dec_score_head.1.weight",
+      "source_shape": [
+        80,
+        256
+      ],
+      "target_shape": [
+        1,
+        256
+      ],
+      "rule": "unchanged native constructor; equal to parent at same RNG"
+    },
+    {
+      "name": "model.26.dec_score_head.2.bias",
+      "source_shape": [
+        80
+      ],
+      "target_shape": [
+        1
+      ],
+      "rule": "unchanged native constructor; equal to parent at same RNG"
+    },
+    {
+      "name": "model.26.dec_score_head.2.weight",
+      "source_shape": [
+        80,
+        256
+      ],
+      "target_shape": [
+        1,
+        256
+      ],
+      "rule": "unchanged native constructor; equal to parent at same RNG"
+    },
+    {
+      "name": "model.26.denoising_class_embed.weight",
+      "source_shape": [
+        80,
+        256
+      ],
+      "target_shape": [
+        1,
+        256
+      ],
+      "rule": "unchanged native constructor; equal to parent at same RNG"
+    },
+    {
+      "name": "model.26.enc_score_head.bias",
+      "source_shape": [
+        80
+      ],
+      "target_shape": [
+        1
+      ],
+      "rule": "unchanged native constructor; equal to parent at same RNG"
+    },
+    {
+      "name": "model.26.enc_score_head.weight",
+      "source_shape": [
+        80,
+        256
+      ],
+      "target_shape": [
+        1,
+        256
+      ],
+      "rule": "unchanged native constructor; equal to parent at same RNG"
+    }
+  ],
+  "LSRT_preserved": true,
+  "formal_optimizer_steps": 0
+}

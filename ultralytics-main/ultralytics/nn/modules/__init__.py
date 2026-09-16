@@ -110,10 +110,13 @@ from .transformer import (
 )
 
 from .lif_down import LIFDown
+from .lsrt import LocalSemanticResidualTransport, LSRTConcat
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
 
 __all__ = (
     "LIFDown",
+    "LocalSemanticResidualTransport",
+    "LSRTConcat",
     "CrackBoundaryRefinement",
     "RTDETRDecoderCBR",
     "AIFI",
