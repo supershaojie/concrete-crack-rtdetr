@@ -1,0 +1,1813 @@
+{
+  "formal_training": "NOT_STARTED",
+  "test": "NOT_RUN",
+  "formal_optimizer_steps": 0,
+  "variants": {
+    "cbr_lif_trc_v1": {
+      "status": "PENDING",
+      "local_checks": "PASSED",
+      "runtime": {
+        "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+        "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+        "torch": "2.7.1+cu118",
+        "cuda": "11.8",
+        "gpu": "NVIDIA GeForce RTX 2060",
+        "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-trc-v1\\ultralytics-main\\ultralytics\\__init__.py",
+        "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-trc-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+        "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+        "trc_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-trc-v1\\ultralytics-main\\ultralytics\\nn\\modules\\trc_aifi.py",
+        "base_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec"
+      },
+      "module_checks": {
+        "status": "PASSED",
+        "run": 15,
+        "skipped": []
+      },
+      "topology": {
+        "layer": 9,
+        "channels": 256,
+        "heads": 8,
+        "head_dim": 32,
+        "ffn": 1024,
+        "tokens_at_640": 400,
+        "cbr": true,
+        "lif": true,
+        "new_parameters": 10248
+      },
+      "both_variant_trc_initial_exact": true,
+      "native_nc1": {
+        "status": "PASSED",
+        "native_get_model": true,
+        "loaded_exact": 546,
+        "parent_common_and_bn_exact": true,
+        "new_state_preserved": true,
+        "MISSING": [],
+        "UNEXPECTED": [],
+        "SHAPE_MISMATCH": [],
+        "ALLOWED_CLASS_ADAPTATION": [
+          {
+            "name": "model.26.dec_score_head.0.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ]
+          },
+          {
+            "name": "model.26.dec_score_head.0.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ]
+          },
+          {
+            "name": "model.26.dec_score_head.1.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ]
+          },
+          {
+            "name": "model.26.dec_score_head.1.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ]
+          },
+          {
+            "name": "model.26.dec_score_head.2.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ]
+          },
+          {
+            "name": "model.26.dec_score_head.2.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ]
+          },
+          {
+            "name": "model.26.denoising_class_embed.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ]
+          },
+          {
+            "name": "model.26.enc_score_head.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ]
+          },
+          {
+            "name": "model.26.enc_score_head.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ]
+          }
+        ]
+      },
+      "native_train_api": {
+        "status": "PASSED",
+        "native_get_model": true,
+        "states_exact": 555,
+        "optimizer_steps": 0
+      },
+      "optimizer": {
+        "model.9.trc.descriptor.weight": {
+          "occurrences": 1,
+          "group": "weight"
+        },
+        "model.9.trc.coefficient.weight": {
+          "occurrences": 1,
+          "group": "weight"
+        },
+        "model.9.trc.coefficient.bias": {
+          "occurrences": 1,
+          "group": "bias"
+        }
+      },
+      "serialization_resume": {
+        "zero": {
+          "status": "PASSED",
+          "checkpoint_exact": true,
+          "ema_exact": true,
+          "native_resume": true,
+          "optimizer_exact": true
+        },
+        "nonzero": {
+          "status": "PASSED",
+          "checkpoint_exact": true,
+          "ema_exact": true,
+          "native_resume": true,
+          "optimizer_exact": true
+        }
+      },
+      "cpu": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          256,
+          20,
+          20
+        ],
+        "zero_full_network": {
+          "max_abs": 0.0,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "status": "PASSED"
+        },
+        "fp32": {
+          "matmul_tf32": false,
+          "cudnn_tf32": false,
+          "restore": [
+            false,
+            true
+          ]
+        },
+        "optional_nonzero_summary": {
+          "r_min": -0.9113384485244751,
+          "r_max": 0.3237440586090088,
+          "r_mean": 3.5762788286319847e-08,
+          "r_std": 0.3114727735519409,
+          "lambda_mean": -0.00330860516987741,
+          "lambda_positive_fraction": 0.4791666567325592,
+          "lambda_negative_fraction": 0.5208333134651184,
+          "bias_abs_max": 0.11228527128696442
+        },
+        "nonzero_fusion": {
+          "status": "PASSED",
+          "report": "outputs\\trc_v1\\final_combo_01\\cpu_fp32_fusion\\fuse_diagnostic.json",
+          "tf32": {
+            "matmul_tf32": false,
+            "cudnn_tf32": false,
+            "restore": [
+              false,
+              true
+            ]
+          },
+          "detail_status": "PASSED",
+          "detail_sha256": "29083ab497017dd04fb7a14052838113aef39eec51195abb85226ac97592acfd"
+        }
+      },
+      "cuda": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          256,
+          20,
+          20
+        ],
+        "zero_full_network": {
+          "max_abs": 0.0,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "status": "PASSED"
+        },
+        "fp32": {
+          "matmul_tf32": false,
+          "cudnn_tf32": false,
+          "restore": [
+            false,
+            true
+          ]
+        },
+        "optional_nonzero_summary": {
+          "r_min": -0.9153560400009155,
+          "r_max": 0.32434511184692383,
+          "r_mean": -3.5762788286319847e-08,
+          "r_std": 0.30474987626075745,
+          "lambda_mean": 0.0030885867308825254,
+          "lambda_positive_fraction": 0.491666704416275,
+          "lambda_negative_fraction": 0.5083333849906921,
+          "bias_abs_max": 0.07744120806455612
+        },
+        "nonzero_fusion": {
+          "status": "PASSED",
+          "report": "outputs\\trc_v1\\final_combo_01\\cuda_fp32_fusion\\fuse_diagnostic.json",
+          "tf32": {
+            "matmul_tf32": false,
+            "cudnn_tf32": false,
+            "restore": [
+              false,
+              true
+            ]
+          },
+          "detail_status": "PASSED",
+          "detail_sha256": "46c4837ef15ee64e8f2dc6c7d6e16867f2020a1e8fc912f01385b987a2f93ac6"
+        },
+        "native_amp": {
+          "status": "PASSED",
+          "dtype": "float16 autocast"
+        },
+        "fused_half": {
+          "status": "PASSED",
+          "dtype": "torch.float16",
+          "order": "FP32 fuse then half"
+        }
+      },
+      "complexity": {
+        "status": "PASSED",
+        "rows": [
+          {
+            "model": "parent",
+            "fused": false,
+            "nc": 1,
+            "imgsz": 640,
+            "batch": 1,
+            "parameters": 20149765,
+            "thop_MACs": 29336256000.0,
+            "thop_GFLOPs": 58.672512
+          },
+          {
+            "model": "candidate",
+            "fused": false,
+            "nc": 1,
+            "imgsz": 640,
+            "batch": 1,
+            "parameters": 20160013,
+            "thop_MACs": 29345472000.0,
+            "thop_GFLOPs": 58.690944
+          },
+          {
+            "model": "parent",
+            "fused": true,
+            "nc": 1,
+            "imgsz": 640,
+            "batch": 1,
+            "parameters": 19944965,
+            "thop_MACs": 28782476800.0,
+            "thop_GFLOPs": 57.5649536
+          },
+          {
+            "model": "candidate",
+            "fused": true,
+            "nc": 1,
+            "imgsz": 640,
+            "batch": 1,
+            "parameters": 19955213,
+            "thop_MACs": 28791692800.0,
+            "thop_GFLOPs": 57.5833856
+          }
+        ],
+        "trc_matrix_MACs": 9216000,
+        "trc_matrix_GFLOPs": 0.018432,
+        "B16_FP32_bias_bytes": 81920000,
+        "uncovered": [
+          "TRC functional LN/L2/exp/log/sum/clamp/tanh/bias/mask elementwise",
+          "native MHA QKV/attention functional operations not fully covered by THOP",
+          "native deformable grid sampling, functional activations and CBR/LIF elementwise operations"
+        ],
+        "scope": "Partial THOP operator count, not complete measured FLOPs or latency; only added matrix delta is explicit"
+      },
+      "cpu_loss": {
+        "status": "PASSED",
+        "batch": 2,
+        "imgsz": [
+          160,
+          160
+        ],
+        "amp": false,
+        "device": "cpu",
+        "native_initial_scale": 1.0,
+        "attempts": [
+          {
+            "attempt": 0,
+            "optimizer_update": 0,
+            "loss": 57.09723663330078,
+            "scale_before": 1.0,
+            "scale_after": 1.0,
+            "unscaled_gradients_finite": true,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0,
+              "model.9.trc.coefficient.weight": 0.10621634870767593,
+              "model.9.trc.coefficient.bias": 0.003866515588015318
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 0,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 0.0,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 0.0,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.1,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          },
+          {
+            "attempt": 1,
+            "optimizer_update": 1,
+            "loss": 24.476469039916992,
+            "scale_before": 1.0,
+            "scale_after": 1.0,
+            "unscaled_gradients_finite": true,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0004907951806671917,
+              "model.9.trc.coefficient.weight": 0.005528552923351526,
+              "model.9.trc.coefficient.bias": 0.0002463245182298124
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 1,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 5e-06,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 5e-06,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.09900500000000001,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          }
+        ],
+        "disposable_optimizer_steps": 2,
+        "gt_groups": [
+          3,
+          3
+        ],
+        "optimizer": {
+          "model.9.trc.descriptor.weight": {
+            "occurrences": 1,
+            "group": "weight"
+          },
+          "model.9.trc.coefficient.weight": {
+            "occurrences": 1,
+            "group": "weight"
+          },
+          "model.9.trc.coefficient.bias": {
+            "occurrences": 1,
+            "group": "bias"
+          }
+        },
+        "peak_allocated_bytes": null,
+        "peak_reserved_bytes": null
+      },
+      "cuda_fp32_loss": {
+        "status": "PASSED",
+        "batch": 2,
+        "imgsz": [
+          160,
+          160
+        ],
+        "amp": false,
+        "device": "cuda",
+        "native_initial_scale": 1.0,
+        "attempts": [
+          {
+            "attempt": 0,
+            "optimizer_update": 0,
+            "loss": 57.09416580200195,
+            "scale_before": 1.0,
+            "scale_after": 1.0,
+            "unscaled_gradients_finite": true,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0,
+              "model.9.trc.coefficient.weight": 0.10574313253164291,
+              "model.9.trc.coefficient.bias": 0.0038803634233772755
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 0,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 0.0,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 0.0,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.1,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          },
+          {
+            "attempt": 1,
+            "optimizer_update": 1,
+            "loss": 23.898073196411133,
+            "scale_before": 1.0,
+            "scale_after": 1.0,
+            "unscaled_gradients_finite": true,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0006934162229299545,
+              "model.9.trc.coefficient.weight": 0.008137297816574574,
+              "model.9.trc.coefficient.bias": 0.00038958442746661603
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 1,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 5e-06,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 5e-06,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.09900500000000001,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          }
+        ],
+        "disposable_optimizer_steps": 2,
+        "gt_groups": [
+          3,
+          3
+        ],
+        "optimizer": {
+          "model.9.trc.descriptor.weight": {
+            "occurrences": 1,
+            "group": "weight"
+          },
+          "model.9.trc.coefficient.weight": {
+            "occurrences": 1,
+            "group": "weight"
+          },
+          "model.9.trc.coefficient.bias": {
+            "occurrences": 1,
+            "group": "bias"
+          }
+        },
+        "peak_allocated_bytes": 567890432,
+        "peak_reserved_bytes": 635437056
+      },
+      "cuda_amp_loss": {
+        "status": "PASSED",
+        "batch": 2,
+        "imgsz": [
+          160,
+          160
+        ],
+        "amp": true,
+        "device": "cuda",
+        "native_initial_scale": 65536.0,
+        "attempts": [
+          {
+            "attempt": 0,
+            "optimizer_update": 0,
+            "loss": 57.18769454956055,
+            "scale_before": 65536.0,
+            "scale_after": 32768.0,
+            "unscaled_gradients_finite": false,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0,
+              "model.9.trc.coefficient.weight": 0.10714404284954071,
+              "model.9.trc.coefficient.bias": 0.003792874049395323
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 0,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 0.0,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 0.0,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.1,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          },
+          {
+            "attempt": 1,
+            "optimizer_update": 0,
+            "loss": 57.18769454956055,
+            "scale_before": 32768.0,
+            "scale_after": 16384.0,
+            "unscaled_gradients_finite": false,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0,
+              "model.9.trc.coefficient.weight": 0.10712998360395432,
+              "model.9.trc.coefficient.bias": 0.003791933413594961
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 0,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 0.0,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 0.0,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.1,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          },
+          {
+            "attempt": 2,
+            "optimizer_update": 0,
+            "loss": 57.18769454956055,
+            "scale_before": 16384.0,
+            "scale_after": 8192.0,
+            "unscaled_gradients_finite": false,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0,
+              "model.9.trc.coefficient.weight": 0.10714293271303177,
+              "model.9.trc.coefficient.bias": 0.0037894612178206444
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 0,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 0.0,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 0.0,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.1,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          },
+          {
+            "attempt": 3,
+            "optimizer_update": 0,
+            "loss": 57.18769454956055,
+            "scale_before": 8192.0,
+            "scale_after": 4096.0,
+            "unscaled_gradients_finite": false,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0,
+              "model.9.trc.coefficient.weight": 0.1071283370256424,
+              "model.9.trc.coefficient.bias": 0.003797608194872737
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 0,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 0.0,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 0.0,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.1,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          },
+          {
+            "attempt": 4,
+            "optimizer_update": 0,
+            "loss": 57.18769454956055,
+            "scale_before": 4096.0,
+            "scale_after": 4096.0,
+            "unscaled_gradients_finite": true,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0,
+              "model.9.trc.coefficient.weight": 0.1071457639336586,
+              "model.9.trc.coefficient.bias": 0.0037932945415377617
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 0,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 0.0,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 0.0,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.1,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          },
+          {
+            "attempt": 5,
+            "optimizer_update": 1,
+            "loss": 24.045101165771484,
+            "scale_before": 4096.0,
+            "scale_after": 4096.0,
+            "unscaled_gradients_finite": true,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0006580405752174556,
+              "model.9.trc.coefficient.weight": 0.004561712499707937,
+              "model.9.trc.coefficient.bias": 0.00022943048679735512
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 1,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 5e-06,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 5e-06,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.09900500000000001,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          }
+        ],
+        "disposable_optimizer_steps": 2,
+        "gt_groups": [
+          3,
+          3
+        ],
+        "optimizer": {
+          "model.9.trc.descriptor.weight": {
+            "occurrences": 1,
+            "group": "weight"
+          },
+          "model.9.trc.coefficient.weight": {
+            "occurrences": 1,
+            "group": "weight"
+          },
+          "model.9.trc.coefficient.bias": {
+            "occurrences": 1,
+            "group": "bias"
+          }
+        },
+        "peak_allocated_bytes": 586214400,
+        "peak_reserved_bytes": 635437056
+      },
+      "dataset": {
+        "train": {
+          "images": 6048,
+          "boxes": 45573,
+          "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+          "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"
+        },
+        "val": {
+          "images": 1728,
+          "boxes": 12840,
+          "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+          "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+        },
+        "test": {
+          "images": 864,
+          "boxes": 6663,
+          "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+          "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"
+        }
+      },
+      "server_capacity": {
+        "status": "PENDING",
+        "reason": "Requires explicit --server real B16/640/native AMP"
+      },
+      "formal_optimizer_steps": 0,
+      "initialization": {
+        "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+        "source_nc": 80,
+        "target_nc": 80,
+        "seed": 42,
+        "new_parameters": 10248,
+        "NEW_TRAINABLE": [
+          "model.9.trc.coefficient.bias",
+          "model.9.trc.coefficient.weight",
+          "model.9.trc.descriptor.weight"
+        ],
+        "NEW_BUFFER": [],
+        "MISSING": [],
+        "UNEXPECTED": [],
+        "SHAPE_MISMATCH": [],
+        "public_constructor_exact": true,
+        "parent_state_and_bn_exact": true,
+        "trc_initial_sha256": {
+          "model.9.trc.coefficient.bias": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+          "model.9.trc.coefficient.weight": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+          "model.9.trc.descriptor.weight": "047033566abf675f69f5bc10f7c1b6e519d4adb3ba6c00634666d47adf119c24"
+        },
+        "common_states": 552,
+        "checkpoint_sha256": "280235086509f73489a173856ca31ec9b746a9a11f6ee691908c29257add592e"
+      },
+      "full_report": "outputs/trc_v1/final_combo_01/preflight.json",
+      "full_report_sha256": "4984db2da41b999992e99f2a4ced1b76b4d6768313af66c6e31dab7438aa6e0e",
+      "source_manifest_sha256": "281b8b19adec031e7ef5048a46f32bd97f7c18ea308e26f5a49f0b47d6160f55"
+    },
+    "trc_v1": {
+      "status": "PENDING",
+      "local_checks": "PASSED",
+      "runtime": {
+        "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+        "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+        "torch": "2.7.1+cu118",
+        "cuda": "11.8",
+        "gpu": "NVIDIA GeForce RTX 2060",
+        "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-trc-v1\\ultralytics-main\\ultralytics\\__init__.py",
+        "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-trc-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+        "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+        "trc_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-trc-v1\\ultralytics-main\\ultralytics\\nn\\modules\\trc_aifi.py",
+        "base_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec"
+      },
+      "module_checks": {
+        "status": "PASSED",
+        "run": 15,
+        "skipped": []
+      },
+      "topology": {
+        "layer": 9,
+        "channels": 256,
+        "heads": 8,
+        "head_dim": 32,
+        "ffn": 1024,
+        "tokens_at_640": 400,
+        "cbr": false,
+        "lif": false,
+        "new_parameters": 10248
+      },
+      "both_variant_trc_initial_exact": true,
+      "native_nc1": {
+        "status": "PASSED",
+        "native_get_model": true,
+        "loaded_exact": 527,
+        "parent_common_and_bn_exact": true,
+        "new_state_preserved": true,
+        "MISSING": [],
+        "UNEXPECTED": [],
+        "SHAPE_MISMATCH": [],
+        "ALLOWED_CLASS_ADAPTATION": [
+          {
+            "name": "model.26.dec_score_head.0.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ]
+          },
+          {
+            "name": "model.26.dec_score_head.0.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ]
+          },
+          {
+            "name": "model.26.dec_score_head.1.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ]
+          },
+          {
+            "name": "model.26.dec_score_head.1.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ]
+          },
+          {
+            "name": "model.26.dec_score_head.2.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ]
+          },
+          {
+            "name": "model.26.dec_score_head.2.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ]
+          },
+          {
+            "name": "model.26.denoising_class_embed.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ]
+          },
+          {
+            "name": "model.26.enc_score_head.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ]
+          },
+          {
+            "name": "model.26.enc_score_head.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ]
+          }
+        ]
+      },
+      "native_train_api": {
+        "status": "PASSED",
+        "native_get_model": true,
+        "states_exact": 536,
+        "optimizer_steps": 0
+      },
+      "optimizer": {
+        "model.9.trc.descriptor.weight": {
+          "occurrences": 1,
+          "group": "weight"
+        },
+        "model.9.trc.coefficient.weight": {
+          "occurrences": 1,
+          "group": "weight"
+        },
+        "model.9.trc.coefficient.bias": {
+          "occurrences": 1,
+          "group": "bias"
+        }
+      },
+      "serialization_resume": {
+        "zero": {
+          "status": "PASSED",
+          "checkpoint_exact": true,
+          "ema_exact": true,
+          "native_resume": true,
+          "optimizer_exact": true
+        },
+        "nonzero": {
+          "status": "PASSED",
+          "checkpoint_exact": true,
+          "ema_exact": true,
+          "native_resume": true,
+          "optimizer_exact": true
+        }
+      },
+      "cpu": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          256,
+          20,
+          20
+        ],
+        "zero_full_network": {
+          "max_abs": 0.0,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "status": "PASSED"
+        },
+        "fp32": {
+          "matmul_tf32": false,
+          "cudnn_tf32": false,
+          "restore": [
+            false,
+            true
+          ]
+        },
+        "optional_nonzero_summary": {
+          "r_min": -0.9113384485244751,
+          "r_max": 0.3237440586090088,
+          "r_mean": 3.5762788286319847e-08,
+          "r_std": 0.3114727735519409,
+          "lambda_mean": -0.00330860516987741,
+          "lambda_positive_fraction": 0.4791666567325592,
+          "lambda_negative_fraction": 0.5208333134651184,
+          "bias_abs_max": 0.11228527128696442
+        },
+        "nonzero_fusion": {
+          "status": "PASSED",
+          "acceptance": "PASSED",
+          "report": "outputs\\trc_v1\\final_single_01\\cpu_fp32_fusion\\fuse_diagnostic.json",
+          "detail_status": "PASSED",
+          "detail_sha256": "09b6752b76fa7d4e447fac09aac85a9c0045c778f6216721ef881313723cefe7"
+        }
+      },
+      "cuda": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          256,
+          20,
+          20
+        ],
+        "zero_full_network": {
+          "max_abs": 0.0,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "status": "PASSED"
+        },
+        "fp32": {
+          "matmul_tf32": false,
+          "cudnn_tf32": false,
+          "restore": [
+            false,
+            true
+          ]
+        },
+        "optional_nonzero_summary": {
+          "r_min": -0.8992489576339722,
+          "r_max": 0.3191649913787842,
+          "r_mean": -1.3113022134803032e-07,
+          "r_std": 0.3044876158237457,
+          "lambda_mean": 0.004577391315251589,
+          "lambda_positive_fraction": 0.5,
+          "lambda_negative_fraction": 0.5,
+          "bias_abs_max": 0.053497426211833954
+        },
+        "nonzero_fusion": {
+          "status": "PASSED",
+          "acceptance": "PASS_WITH_CANDIDATE_PERMUTATION",
+          "report": "outputs\\trc_v1\\final_single_01\\cuda_fp32_fusion\\fuse_diagnostic.json",
+          "detail_status": "PASS_WITH_CANDIDATE_PERMUTATION",
+          "detail_sha256": "3b19bfff85f2729c8727d42614d6b8da67f08227866f27fbc0510051b55f58e9"
+        },
+        "native_amp": {
+          "status": "PASSED",
+          "dtype": "float16 autocast"
+        },
+        "fused_half": {
+          "status": "PASSED",
+          "dtype": "torch.float16",
+          "order": "FP32 fuse then half"
+        }
+      },
+      "complexity": {
+        "status": "PASSED",
+        "rows": [
+          {
+            "model": "parent",
+            "fused": false,
+            "nc": 1,
+            "imgsz": 640,
+            "batch": 1,
+            "parameters": 20082772,
+            "thop_MACs": 29138304000.0,
+            "thop_GFLOPs": 58.276608
+          },
+          {
+            "model": "candidate",
+            "fused": false,
+            "nc": 1,
+            "imgsz": 640,
+            "batch": 1,
+            "parameters": 20093020,
+            "thop_MACs": 29147520000.0,
+            "thop_GFLOPs": 58.29504
+          },
+          {
+            "model": "parent",
+            "fused": true,
+            "nc": 1,
+            "imgsz": 640,
+            "batch": 1,
+            "parameters": 19877716,
+            "thop_MACs": 28582886400.0,
+            "thop_GFLOPs": 57.1657728
+          },
+          {
+            "model": "candidate",
+            "fused": true,
+            "nc": 1,
+            "imgsz": 640,
+            "batch": 1,
+            "parameters": 19887964,
+            "thop_MACs": 28592102400.0,
+            "thop_GFLOPs": 57.1842048
+          }
+        ],
+        "trc_matrix_MACs": 9216000,
+        "trc_matrix_GFLOPs": 0.018432,
+        "B16_FP32_bias_bytes": 81920000,
+        "uncovered": [
+          "TRC functional LN/L2/exp/log/sum/clamp/tanh/bias/mask elementwise",
+          "native MHA QKV/attention functional operations not fully covered by THOP",
+          "native deformable grid sampling, functional activations and CBR/LIF elementwise operations"
+        ],
+        "scope": "Partial THOP operator count, not complete measured FLOPs or latency; only added matrix delta is explicit"
+      },
+      "cpu_loss": {
+        "status": "PASSED",
+        "batch": 2,
+        "imgsz": [
+          160,
+          160
+        ],
+        "amp": false,
+        "device": "cpu",
+        "native_initial_scale": 1.0,
+        "attempts": [
+          {
+            "attempt": 0,
+            "optimizer_update": 0,
+            "loss": 57.09723663330078,
+            "scale_before": 1.0,
+            "scale_after": 1.0,
+            "unscaled_gradients_finite": true,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0,
+              "model.9.trc.coefficient.weight": 0.10621634870767593,
+              "model.9.trc.coefficient.bias": 0.003866515588015318
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 0,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 0.0,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 0.0,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.1,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          },
+          {
+            "attempt": 1,
+            "optimizer_update": 1,
+            "loss": 24.47971534729004,
+            "scale_before": 1.0,
+            "scale_after": 1.0,
+            "unscaled_gradients_finite": true,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0004984381375834346,
+              "model.9.trc.coefficient.weight": 0.005552541930228472,
+              "model.9.trc.coefficient.bias": 0.0002493478823453188
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 1,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 5e-06,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 5e-06,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.09900500000000001,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          }
+        ],
+        "disposable_optimizer_steps": 2,
+        "gt_groups": [
+          3,
+          3
+        ],
+        "optimizer": {
+          "model.9.trc.descriptor.weight": {
+            "occurrences": 1,
+            "group": "weight"
+          },
+          "model.9.trc.coefficient.weight": {
+            "occurrences": 1,
+            "group": "weight"
+          },
+          "model.9.trc.coefficient.bias": {
+            "occurrences": 1,
+            "group": "bias"
+          }
+        },
+        "peak_allocated_bytes": null,
+        "peak_reserved_bytes": null
+      },
+      "cuda_fp32_loss": {
+        "status": "PASSED",
+        "batch": 2,
+        "imgsz": [
+          160,
+          160
+        ],
+        "amp": false,
+        "device": "cuda",
+        "native_initial_scale": 1.0,
+        "attempts": [
+          {
+            "attempt": 0,
+            "optimizer_update": 0,
+            "loss": 57.09416580200195,
+            "scale_before": 1.0,
+            "scale_after": 1.0,
+            "unscaled_gradients_finite": true,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0,
+              "model.9.trc.coefficient.weight": 0.10574314743280411,
+              "model.9.trc.coefficient.bias": 0.0038803676143288612
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 0,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 0.0,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 0.0,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.1,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          },
+          {
+            "attempt": 1,
+            "optimizer_update": 1,
+            "loss": 23.898662567138672,
+            "scale_before": 1.0,
+            "scale_after": 1.0,
+            "unscaled_gradients_finite": true,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0006964107742533088,
+              "model.9.trc.coefficient.weight": 0.008143642917275429,
+              "model.9.trc.coefficient.bias": 0.0003933597181458026
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 1,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 5e-06,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 5e-06,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.09900500000000001,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          }
+        ],
+        "disposable_optimizer_steps": 2,
+        "gt_groups": [
+          3,
+          3
+        ],
+        "optimizer": {
+          "model.9.trc.descriptor.weight": {
+            "occurrences": 1,
+            "group": "weight"
+          },
+          "model.9.trc.coefficient.weight": {
+            "occurrences": 1,
+            "group": "weight"
+          },
+          "model.9.trc.coefficient.bias": {
+            "occurrences": 1,
+            "group": "bias"
+          }
+        },
+        "peak_allocated_bytes": 590545408,
+        "peak_reserved_bytes": 648019968
+      },
+      "cuda_amp_loss": {
+        "status": "PASSED",
+        "batch": 2,
+        "imgsz": [
+          160,
+          160
+        ],
+        "amp": true,
+        "device": "cuda",
+        "native_initial_scale": 65536.0,
+        "attempts": [
+          {
+            "attempt": 0,
+            "optimizer_update": 0,
+            "loss": 57.18769454956055,
+            "scale_before": 65536.0,
+            "scale_after": 32768.0,
+            "unscaled_gradients_finite": false,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0,
+              "model.9.trc.coefficient.weight": 0.10714487731456757,
+              "model.9.trc.coefficient.bias": 0.003789603943005204
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 0,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 0.0,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 0.0,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.1,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          },
+          {
+            "attempt": 1,
+            "optimizer_update": 0,
+            "loss": 57.18769454956055,
+            "scale_before": 32768.0,
+            "scale_after": 16384.0,
+            "unscaled_gradients_finite": false,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0,
+              "model.9.trc.coefficient.weight": 0.107127346098423,
+              "model.9.trc.coefficient.bias": 0.00379145797342062
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 0,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 0.0,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 0.0,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.1,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          },
+          {
+            "attempt": 2,
+            "optimizer_update": 0,
+            "loss": 57.18769454956055,
+            "scale_before": 16384.0,
+            "scale_after": 8192.0,
+            "unscaled_gradients_finite": false,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0,
+              "model.9.trc.coefficient.weight": 0.10715358704328537,
+              "model.9.trc.coefficient.bias": 0.003795316442847252
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 0,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 0.0,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 0.0,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.1,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          },
+          {
+            "attempt": 3,
+            "optimizer_update": 0,
+            "loss": 57.18769454956055,
+            "scale_before": 8192.0,
+            "scale_after": 4096.0,
+            "unscaled_gradients_finite": false,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0,
+              "model.9.trc.coefficient.weight": 0.10710955411195755,
+              "model.9.trc.coefficient.bias": 0.003795671509578824
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 0,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 0.0,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 0.0,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.1,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          },
+          {
+            "attempt": 4,
+            "optimizer_update": 0,
+            "loss": 57.18769454956055,
+            "scale_before": 4096.0,
+            "scale_after": 4096.0,
+            "unscaled_gradients_finite": true,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0,
+              "model.9.trc.coefficient.weight": 0.10713618248701096,
+              "model.9.trc.coefficient.bias": 0.0037929522804915905
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 0,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 0.0,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 0.0,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.1,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          },
+          {
+            "attempt": 5,
+            "optimizer_update": 1,
+            "loss": 24.039840698242188,
+            "scale_before": 4096.0,
+            "scale_after": 4096.0,
+            "unscaled_gradients_finite": true,
+            "grad_norms": {
+              "model.9.trc.descriptor.weight": 0.0007584357517771423,
+              "model.9.trc.coefficient.weight": 0.00465520191937685,
+              "model.9.trc.coefficient.bias": 0.00022708198230247945
+            },
+            "dn_split": [
+              198,
+              300
+            ],
+            "warmup": {
+              "batch": 1,
+              "nw": 100,
+              "accumulate": 1,
+              "groups": [
+                {
+                  "kind": "weight",
+                  "lr": 5e-06,
+                  "weight_decay": 0.0001
+                },
+                {
+                  "kind": "bn",
+                  "lr": 5e-06,
+                  "weight_decay": 0.0
+                },
+                {
+                  "kind": "bias",
+                  "lr": 0.09900500000000001,
+                  "weight_decay": 0.0
+                }
+              ],
+              "implementation_sha256": "80e3bf830cc2477c479b6b9928ae0441a9c0b9fece71034281e70cc08c37aa0a"
+            }
+          }
+        ],
+        "disposable_optimizer_steps": 2,
+        "gt_groups": [
+          3,
+          3
+        ],
+        "optimizer": {
+          "model.9.trc.descriptor.weight": {
+            "occurrences": 1,
+            "group": "weight"
+          },
+          "model.9.trc.coefficient.weight": {
+            "occurrences": 1,
+            "group": "weight"
+          },
+          "model.9.trc.coefficient.bias": {
+            "occurrences": 1,
+            "group": "bias"
+          }
+        },
+        "peak_allocated_bytes": 574531072,
+        "peak_reserved_bytes": 648019968
+      },
+      "dataset": {
+        "train": {
+          "images": 6048,
+          "boxes": 45573,
+          "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+          "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"
+        },
+        "val": {
+          "images": 1728,
+          "boxes": 12840,
+          "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+          "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+        },
+        "test": {
+          "images": 864,
+          "boxes": 6663,
+          "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+          "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"
+        }
+      },
+      "server_capacity": {
+        "status": "PENDING",
+        "reason": "Requires explicit --server real B16/640/native AMP"
+      },
+      "formal_optimizer_steps": 0,
+      "initialization": {
+        "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+        "source_nc": 80,
+        "target_nc": 80,
+        "seed": 42,
+        "new_parameters": 10248,
+        "NEW_TRAINABLE": [
+          "model.9.trc.coefficient.bias",
+          "model.9.trc.coefficient.weight",
+          "model.9.trc.descriptor.weight"
+        ],
+        "NEW_BUFFER": [],
+        "MISSING": [],
+        "UNEXPECTED": [],
+        "SHAPE_MISMATCH": [],
+        "public_constructor_exact": true,
+        "parent_state_and_bn_exact": true,
+        "trc_initial_sha256": {
+          "model.9.trc.coefficient.bias": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+          "model.9.trc.coefficient.weight": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+          "model.9.trc.descriptor.weight": "047033566abf675f69f5bc10f7c1b6e519d4adb3ba6c00634666d47adf119c24"
+        },
+        "common_states": 533,
+        "checkpoint_sha256": "5d304648046c611ec9a3834229d1f4989e93324c05a078da7a6be178e6aeadbe"
+      },
+      "full_report": "outputs/trc_v1/final_single_01/preflight.json",
+      "full_report_sha256": "fba88e04d407d83512e330e2a28b7197435dcae8c7b7501c41366ac3b6085c55",
+      "source_manifest_sha256": "281b8b19adec031e7ef5048a46f32bd97f7c18ea308e26f5a49f0b47d6160f55"
+    }
+  },
+  "server_capacity": {
+    "status": "PENDING",
+    "scope": "real online train B16/640/native AMP/loss/backward/GT/DN/peak memory on server"
+  },
+  "resolved_diagnostic_failures": [
+    "Warmup initially omitted native scheduler initial_lr; fixed by creating LambdaLR before warmup.",
+    "Single-module CUDA fusion initially compared query rows without candidate identities; exact ID bijection/alignment and fixed-query replay now checked at unchanged FP32 tolerance.",
+    "Initial gate fixture used unittest enterContext unavailable in local Python; replaced with compatible start/addCleanup."
+  ],
+  "lifecycle": {
+    "status": "PASSED",
+    "checks": 7,
+    "failures": 0,
+    "errors": 0,
+    "formal_training": "NOT_STARTED",
+    "test": "NOT_RUN"
+  },
+  "gates": {
+    "status": "PASSED",
+    "created_utc": "2026-09-16T16:08:21.499408+00:00",
+    "checks": 14,
+    "passed": [
+      "PreflightGateTests.test_changed_data_configuration_is_rejected",
+      "PreflightGateTests.test_changed_dataset_split_or_labels_is_rejected",
+      "PreflightGateTests.test_changed_fixed_source_weight_is_rejected",
+      "PreflightGateTests.test_changed_initialized_weight_is_rejected",
+      "PreflightGateTests.test_changed_model_configuration_is_rejected",
+      "PreflightGateTests.test_changed_source_code_is_rejected",
+      "PreflightGateTests.test_complete_bound_report_is_accepted",
+      "PreflightGateTests.test_failed_preflight_cannot_authorize_start",
+      "PreflightGateTests.test_other_variant_report_is_rejected",
+      "PreflightGateTests.test_pending_failed_or_missing_server_capacity_cannot_authorize_start",
+      "PreflightGateTests.test_pending_preflight_cannot_authorize_start",
+      "PreflightGateTests.test_updated_or_missing_formal_optimizer_count_is_rejected",
+      "FingerprintAndPrecisionTests.test_actual_fingerprint_detects_fixture_edits_and_normalizes_text_line_endings",
+      "FingerprintAndPrecisionTests.test_strict_fp32_restores_tf32_after_success_and_exception"
+    ],
+    "failures": [],
+    "skipped": [],
+    "scope": "Temporary fixtures, mocked gate inventories plus real isolated hashes; no models or CUDA tensors",
+    "python": "3.9.25",
+    "torch": "2.7.1+cu118",
+    "formal_optimizer_steps": 0,
+    "formal_training": "NOT_STARTED",
+    "test": "NOT_RUN"
+  },
+  "sync": {
+    "tests": 9,
+    "status": "PASSED",
+    "report": "docs/trc_v1/sync_checks.json",
+    "scope": "isolated real local git fixtures, no server connection"
+  }
+}

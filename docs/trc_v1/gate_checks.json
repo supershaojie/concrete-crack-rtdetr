@@ -1,0 +1,29 @@
+{
+  "status": "PASSED",
+  "created_utc": "2026-09-16T16:06:48.173614+00:00",
+  "checks": 14,
+  "passed": [
+    "PreflightGateTests.test_changed_data_configuration_is_rejected",
+    "PreflightGateTests.test_changed_dataset_split_or_labels_is_rejected",
+    "PreflightGateTests.test_changed_fixed_source_weight_is_rejected",
+    "PreflightGateTests.test_changed_initialized_weight_is_rejected",
+    "PreflightGateTests.test_changed_model_configuration_is_rejected",
+    "PreflightGateTests.test_changed_source_code_is_rejected",
+    "PreflightGateTests.test_complete_bound_report_is_accepted",
+    "PreflightGateTests.test_failed_preflight_cannot_authorize_start",
+    "PreflightGateTests.test_other_variant_report_is_rejected",
+    "PreflightGateTests.test_pending_failed_or_missing_server_capacity_cannot_authorize_start",
+    "PreflightGateTests.test_pending_preflight_cannot_authorize_start",
+    "PreflightGateTests.test_updated_or_missing_formal_optimizer_count_is_rejected",
+    "FingerprintAndPrecisionTests.test_actual_fingerprint_detects_fixture_edits_and_normalizes_text_line_endings",
+    "FingerprintAndPrecisionTests.test_strict_fp32_restores_tf32_after_success_and_exception"
+  ],
+  "failures": [],
+  "skipped": [],
+  "scope": "Temporary fixtures, mocked gate inventories plus real isolated hashes; no models or CUDA tensors",
+  "python": "3.9.25",
+  "torch": "2.7.1+cu118",
+  "formal_optimizer_steps": 0,
+  "formal_training": "NOT_STARTED",
+  "test": "NOT_RUN"
+}

@@ -111,12 +111,15 @@ from .transformer import (
 
 from .lif_down import LIFDown
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
+from .trc_aifi import AIFI_TRC, TokenRedundancyCalibration
 
 __all__ = (
     "LIFDown",
     "CrackBoundaryRefinement",
     "RTDETRDecoderCBR",
     "AIFI",
+    "AIFI_TRC",
+    "TokenRedundancyCalibration",
     "C1",
     "C2",
     "C2PSA",
