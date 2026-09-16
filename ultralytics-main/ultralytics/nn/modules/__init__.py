@@ -111,8 +111,11 @@ from .transformer import (
 
 from .lif_down import LIFDown
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
+from .bsc_rep import BilateralContextSupport, BSCRepC3
 
 __all__ = (
+    "BilateralContextSupport",
+    "BSCRepC3",
     "LIFDown",
     "CrackBoundaryRefinement",
     "RTDETRDecoderCBR",

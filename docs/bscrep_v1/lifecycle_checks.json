@@ -1,0 +1,30 @@
+{
+  "status": "PASSED",
+  "checks": {
+    "actual_plan_no_run_created": true,
+    "native_resume_ctor_setup_model_ema_optimizer_epoch_exact": true,
+    "redirected_resume_refused_before_ctor": true,
+    "old_run_refused_before_any_initialization": true,
+    "server_false_refused": true,
+    "formal_initialization_unchanged_false_refused": true,
+    "preflight_field_contract_valid": true,
+    "actual_plan_cli": true,
+    "package_includes_new_source": true,
+    "package_no_weights_or_predictions": true,
+    "package_manifest_all_sha256_exact": true,
+    "existing_package_refused": true,
+    "shell_syntax": true,
+    "local_fixture_sync_exact_commit": true,
+    "local_fixture_sync_idempotent": true,
+    "local_fixture_mismatched_head_refused": true,
+    "mock_tmux_worker_syntax": true,
+    "mock_tmux_existing_worker_refused": true
+  },
+  "formal_training": "NOT_STARTED",
+  "test": "NOT_RUN",
+  "diagnostic_optimizer_steps": 1,
+  "formal_optimizer_steps": 0,
+  "native_resume_scope": "Actual AuditedTrainer constructor/check_resume/setup_model/native optimizer/native resume_training; synthetic data metadata only; no train() call",
+  "shell_scope": "Actual sync script against an isolated local fixture Git repository; no network/server access. Actual tmux helper with a shell function mock; no tmux session or worker was launched.",
+  "package_scope": "Isolated empty-run fixture, 375 files, 3940644 bytes; manifest records uncommitted working state explicitly."
+}

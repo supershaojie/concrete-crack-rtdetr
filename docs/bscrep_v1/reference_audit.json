@@ -1,0 +1,67 @@
+{
+  "archive_sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+  "archive_local_path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-20260623.zip",
+  "reference_use": "Read for interface and mechanism comparison only; no reference package import or vendoring.",
+  "sources": [
+    {
+      "path": "RTDETR-main/ultralytics/nn/modules/block.py",
+      "sha256": "4ac3491f755f3da1e47cfdd0a2231a39b63c2f5a406a6ea63c82ad5026dc7ed5",
+      "classes_read": [
+        {
+          "class": "RepC3",
+          "line": 242,
+          "end_line": 256
+        }
+      ],
+      "observations": [
+        "The original cv1/cv2/m/cv3 interface and sum are retained by subclassing the repository RepC3."
+      ]
+    },
+    {
+      "path": "RTDETR-main/ultralytics/nn/extra_modules/block.py",
+      "sha256": "e3e3617c89bd7caf350d2601740f2e399847a16a3a659d7b3e40010b88498cd2",
+      "classes_read": [
+        {
+          "class": "DilatedReparamBlock",
+          "line": 2025,
+          "end_line": 2099
+        },
+        {
+          "class": "UniRepLKNetBlock",
+          "line": 2102,
+          "end_line": 2210
+        }
+      ],
+      "observations": [
+        "DilatedReparamBlock uses depthwise large-kernel and dilated Conv-BN branches then fuses kernels for deployment.",
+        "UniRepLKNetBlock adds normalization, squeeze/excitation, feedforward projections, GRN, optional gamma and DropPath. None of those branches or dependencies are copied into BSC v1."
+      ]
+    },
+    {
+      "path": "RTDETR-main/ultralytics/nn/extra_modules/CFBlock.py",
+      "sha256": "151172688d010cbe6f67e635a3bdd4be137cb643094b28f228a7f735dd0758b3",
+      "classes_read": [
+        {
+          "class": "ConvolutionalAttention",
+          "line": 31,
+          "end_line": 98
+        },
+        {
+          "class": "CFBlock",
+          "line": 100,
+          "end_line": 135
+        }
+      ],
+      "observations": [
+        "ConvolutionalAttention uses learned 7x1/1x7 strip kernels, spatial softmax/channel normalization, transposed-kernel projection and SyncBatchNorm.",
+        "BSC v1 instead gathers fixed +/-1,2,3 offsets in four directions, uses replicate edges and one shared sigmoid gate over [Z,M,D]. It does not import CFBlock/extra_modules/timm/CUDA extensions."
+      ]
+    }
+  ],
+  "mechanism_scope": [
+    "The learned gate decides whether paired endpoint context can supplement the center. There is no monotonicity constraint: greater endpoint agreement need not increase the gate.",
+    "This is feature context at P3, not segmentation, topology reconstruction or a forced bridge across cracks.",
+    "Original CBR samples inside/outside candidate box boundaries; BSC operates on feature-grid bilateral context before the decoder.",
+    "Residual and local-difference formulas are not claimed as original. The candidate is use of same-direction bilateral geometry in P3 context judgment. No guaranteed accuracy gain or academic novelty is claimed."
+  ]
+}

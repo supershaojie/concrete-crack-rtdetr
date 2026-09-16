@@ -1,0 +1,90 @@
+{
+  "status": "PASS",
+  "device": "cpu",
+  "nc": 1,
+  "batch": 1,
+  "imgsz": 640,
+  "policy": "FP32 copies; native THOP leaf hooks only; 2 FLOPs/MAC; TF32 disabled then restored",
+  "uncovered_operators": [
+    "BSC replicate padding, slicing/views, additions, division/means, abs, cat, sigmoid, multiplies, dtype casts",
+    "CBR functional grid_sample, sample geometry, softmax, evidence construction, and residual arithmetic",
+    "LIF functional padding, Haar/align arithmetic, GELU, stacking/concatenation",
+    "Decoder/AIFI functional attention/matmul, deformable grid_sample, topk/query selection and other functional ops",
+    "All native THOP results are partial registered-module operation counts; no speed claim follows from GFLOPs"
+  ],
+  "variants": {
+    "bscrep_v1": {
+      "parent": {
+        "unfused": {
+          "parameters": 20082772,
+          "thop_parameters": 19029330,
+          "macs": 29138304000,
+          "gflops_2_per_mac": 58.276608,
+          "bsc_gate_calls": 0
+        },
+        "fused": {
+          "parameters": 19877716,
+          "thop_parameters": 18824274,
+          "macs": 28582886400,
+          "gflops_2_per_mac": 57.1657728,
+          "bsc_gate_calls": 0
+        }
+      },
+      "bsc": {
+        "unfused": {
+          "parameters": 20094068,
+          "thop_parameters": 19040626,
+          "macs": 29269376000,
+          "gflops_2_per_mac": 58.538752,
+          "bsc_gate_calls": 4
+        },
+        "fused": {
+          "parameters": 19889012,
+          "thop_parameters": 18835570,
+          "macs": 28713958400,
+          "gflops_2_per_mac": 57.4279168,
+          "bsc_gate_calls": 4
+        }
+      }
+    },
+    "cbr_lif_bscrep_v1": {
+      "parent": {
+        "unfused": {
+          "parameters": 20149765,
+          "thop_parameters": 19096067,
+          "macs": 29336256000,
+          "gflops_2_per_mac": 58.672512,
+          "bsc_gate_calls": 0
+        },
+        "fused": {
+          "parameters": 19944965,
+          "thop_parameters": 18891267,
+          "macs": 28782476800,
+          "gflops_2_per_mac": 57.5649536,
+          "bsc_gate_calls": 0
+        }
+      },
+      "bsc": {
+        "unfused": {
+          "parameters": 20161061,
+          "thop_parameters": 19107363,
+          "macs": 29467328000,
+          "gflops_2_per_mac": 58.934656,
+          "bsc_gate_calls": 4
+        },
+        "fused": {
+          "parameters": 19956261,
+          "thop_parameters": 18902563,
+          "macs": 28913548800,
+          "gflops_2_per_mac": 57.8270976,
+          "bsc_gate_calls": 4
+        }
+      }
+    }
+  },
+  "source_report": "outputs/bscrep_v1/math_checks.json",
+  "parameter_count_note": "parameters is the full sum of model parameters; thop_parameters counts only registered modules and is not the full model count.",
+  "added_parameters": 11296,
+  "added_conv_macs": 131072000,
+  "added_conv_gflops_2_per_mac": 0.262144
+}

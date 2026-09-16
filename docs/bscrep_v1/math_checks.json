@@ -1,0 +1,125 @@
+{
+  "status": "PASS",
+  "torch_version": "2.7.1+cu118",
+  "formal_optimizer_updates": 0,
+  "scope": "Local isolated engineering checks; no detector validation or B16/640 real-data capacity claim.",
+  "source_report": "outputs/bscrep_v1/math_checks.json",
+  "implementation_sha256_lf": {
+    "ultralytics-main/ultralytics/nn/modules/bsc_rep.py": "dabd37c8fd58062b237437dcfdea390251c8b93325f0e70b7de7c2c015ebea84",
+    "tools/check_bscrep_v1_math.py": "b3b32fefac08656aa8b7b37c905b265a9f136de78dbe924c841fab028d2a88eb"
+  },
+  "cpu_fp32": {
+    "status": "PASS",
+    "checks": {
+      "parameters_and_initialization": "PASS",
+      "parent_rng_state_paths_and_zero_output": "PASS",
+      "coordinate_directions_radius_replicate_edges": "PASS",
+      "reference_rectangles_small_maps_constant_and_swap": "PASS",
+      "initial_and_nonzero_output_gradients": "PASS",
+      "checkpoint_half_differentiable_fp32_fallback": "PASS",
+      "branch_serialized_reload_and_ema": "PASS",
+      "native_thop_on_float_copy": "PASS"
+    },
+    "reference_max_abs_error": 0.0,
+    "tested_feature_shapes": [
+      "1x1",
+      "1x2",
+      "2x1",
+      "2x3",
+      "5x9",
+      "9x5"
+    ],
+    "constant_feature_max_abs_error_including_edges": 3.727163466749062e-09,
+    "endpoint_swap_bitwise_equal": true,
+    "parent_zero_output_bitwise_equal": true,
+    "initial_out_projection_gradient_max_abs": 0.002284430433064699,
+    "initial_upstream_gradients_zero_and_finite": true,
+    "diagnostic_nonzero_output_all_branch_gradients_finite_nonzero": true,
+    "half_parameter_gradients_finite_nonzero": true,
+    "half_parameter_identity_preserved": true
+  },
+  "cuda_fp32": {
+    "status": "PASS",
+    "checks": {
+      "parameters_and_initialization": "PASS",
+      "parent_rng_state_paths_and_zero_output": "PASS",
+      "coordinate_directions_radius_replicate_edges": "PASS",
+      "reference_rectangles_small_maps_constant_and_swap": "PASS",
+      "initial_and_nonzero_output_gradients": "PASS",
+      "checkpoint_half_differentiable_fp32_fallback": "PASS",
+      "branch_serialized_reload_and_ema": "PASS",
+      "native_thop_on_float_copy": "PASS"
+    },
+    "reference_max_abs_error": 0.0,
+    "tested_feature_shapes": [
+      "1x1",
+      "1x2",
+      "2x1",
+      "2x3",
+      "5x9",
+      "9x5"
+    ],
+    "constant_feature_max_abs_error_including_edges": 5.322632112836345e-09,
+    "endpoint_swap_bitwise_equal": true,
+    "parent_zero_output_bitwise_equal": true,
+    "initial_out_projection_gradient_max_abs": 0.0025141388177871704,
+    "initial_upstream_gradients_zero_and_finite": true,
+    "diagnostic_nonzero_output_all_branch_gradients_finite_nonzero": true,
+    "half_parameter_gradients_finite_nonzero": true,
+    "half_parameter_identity_preserved": true
+  },
+  "coordinate_examples": [
+    {
+      "dy_dx": [
+        0,
+        1
+      ],
+      "plus_top_left": 2.0,
+      "minus_top_left": 0.0
+    },
+    {
+      "dy_dx": [
+        1,
+        0
+      ],
+      "plus_top_left": 200.0,
+      "minus_top_left": 0.0
+    },
+    {
+      "dy_dx": [
+        1,
+        1
+      ],
+      "plus_top_left": 202.0,
+      "minus_top_left": 0.0
+    },
+    {
+      "dy_dx": [
+        1,
+        -1
+      ],
+      "plus_top_left": 200.0,
+      "minus_top_left": 2.0
+    }
+  ],
+  "native_amp": {
+    "status": "PASS",
+    "internal_gate_dtype": "torch.float32",
+    "scale_trace": [
+      {
+        "scale_before": 65536.0,
+        "scale_after": 65536.0,
+        "unscaled_finite": true,
+        "loss": 1.0107345581054688
+      }
+    ]
+  },
+  "branch_thop": {
+    "status": "PASS",
+    "gate_calls": 4,
+    "macs": 131072000,
+    "params": 11296,
+    "conv_gflops_2_per_mac": 0.262144,
+    "uncovered": "BSC replicate padding, slicing/views, additions, division/means, abs, cat, sigmoid, multiplies, dtype casts"
+  }
+}

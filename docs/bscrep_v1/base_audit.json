@@ -1,0 +1,68 @@
+{
+  "base_sha": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "main_head": "f34502c43a88edc9cb1076bd996b9c3fc2d23e31",
+  "main_branch": "exp-rtdetr-r18-lite-cscef-v4",
+  "main_status": "?? cscef_v2_diagnostic.bundle\n?? cscef_v2_diagnostic_cuda_fix.bundle\n?? cscef_v2_diagnostic_full.bundle\n?? cscef_v3_audit_hash_fix.bundle\n?? cscef_v3_cross_platform_hash_fix.bundle\n?? docs/figures/cscef/CSCEF_Module_Diagram_FinalLabels.pdf\n?? docs/figures/cscef/CSCEF_Module_Diagram_FinalLabels_Editable.pptx\n?? docs/figures/cscef/CSCEF_Module_Diagram_FusionFormula_Editable.pptx\n?? docs/figures/cscef/CSCEF_Module_Diagram_ParallelScharr.pdf\n?? docs/figures/cscef/CSCEF_Module_Diagram_ParallelScharr_Editable.pptx\n?? docs/figures/cscef/CSCEF_Module_Diagram_Refined.pdf\n?? docs/figures/cscef/CSCEF_Module_Diagram_Refined_Editable.pptx\n?? docs/figures/cscef/CSCEF_Module_Diagram_Simple.pdf\n?? docs/figures/cscef/CSCEF_Module_Diagram_Simple_Editable.pptx\n?? docs/figures/cscef/CSCEF_Module_Diagram_ThreeLayerGate.pdf\n?? docs/figures/cscef/CSCEF_Module_Diagram_ThreeLayerGate_Editable.pptx\n?? docs/figures/cscef/CSCEF_Module_Diagram_ThreeLayerGate_Star.pdf\n?? docs/figures/cscef/CSCEF_Module_Diagram_ThreeLayerGate_Star_Editable.pptx\n?? output/\n?? tmp/",
+  "remote": "origin\thttps://github.com/supershaojie/concrete-crack-rtdetr.git (fetch)\norigin\thttps://github.com/supershaojie/concrete-crack-rtdetr.git (push)",
+  "worktrees": "D:/MyProjects/Crack_RTDETR                                           f34502c [exp-rtdetr-r18-lite-cscef-v4]\nD:/MyProjects/Crack_RTDETR-gsdr-aifi                                 d895437 [exp-rtdetr-r18-lite-gsdr-aifi]\nD:/MyProjects/Crack_RTDETR-lcr                                       d328d73 [codex/lcr-aifi]\nD:/MyProjects/Crack_RTDETR-rsc-head                                  b847aa0 [codex/rsc-head]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/acr                     5f909e6 [codex/acr-query-attention]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/c17-lif-v1              1e927b8 [codex/rtdetr-c17-lif-v1]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/c19-lif-v1              a0459d6 [codex/rtdetr-c19-lif-v1]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/c24-lif-v1              998ba53 [codex/rtdetr-c24-lif-v1]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/c25                     ac32e22 [codex/c25-cscef-scca]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/c26                     beedcfa [codex/c26-cbr-scca]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/cbr                     025997e [exp-rtdetr-r18-lite-cbr]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-bscrep-v1  a0459d6 [exp-rtdetr-r18-lite-bscrep-v1]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-lsrt-v1    39346d0 [exp-rtdetr-r18-lite-lsrt-v1]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-rcsq-v1    e345895 [exp-rtdetr-r18-lite-rcsq-v1]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-sfrd-v1    3972078 [exp-rtdetr-r18-lite-sfrd-v1]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-trc-v1     a0459d6 [exp-rtdetr-r18-lite-trc-v1]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/cscef-cbr               81d5f01 [exp-rtdetr-r18-lite-cscef-cbr]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/cscef-v5                fad58b0 [exp-rtdetr-r18-lite-cscef-v5]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/cscef-v51               0c53a9c [exp-rtdetr-r18-lite-cscef-v51]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/diag-c20-cbr-gradcheck  91b58ff [codex/diag-c20-cbr-gradcheck]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/diag-c20-cbr-rescue     d73391f [codex/diag-c20-cbr-rescue]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/dra                     737fa75 [codex/dra-aifi]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/evc                     a259582 [codex/evc-deform]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/fsa-deform              c7f1259 [codex/fsa-deform]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/gsdr-aifi-v2            30f2da6 [exp-rtdetr-r18-lite-gsdr-aifi-v2]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/gsdr-aifi-v3            51f1f35 [exp-rtdetr-r18-lite-gsdr-aifi-v3]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/lif-down                0e95bba [codex/lif-down]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/lif-down-figures        8d8852f [codex/lif-down-figures]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/mincompat-v2            33535ab [codex/rtdetr-mincompat-v2]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/nbrg-v1                 d0c759c [exp-rtdetr-r18-lite-nbrg-v1]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/sala                    9621aeb [codex/c21-rtdetr-r18-lite-sala]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/scca                    f6e9dfd [codex/scca-aifi]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/sci-adapter             81e0426 [codex/rtdetr-sci-adapter]\nD:/MyProjects/Crack_RTDETR/outputs/worktrees/triad-compat            05e6de8 [codex/rtdetr-triad-compat]",
+  "applicable_AGENTS": "No AGENTS.md found in repository or ancestor D:/, D:/MyProjects",
+  "successful_archive": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1",
+  "delivery_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "exit": {
+    "exit_code": 0,
+    "finished": "2026-09-13T02:54:51.942256+00:00"
+  },
+  "final_epoch": "200",
+  "source_comparison": [
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/cbr.py",
+      "unchanged_from_base": true,
+      "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "successful_archive_exact": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/lif_down.py",
+      "unchanged_from_base": true,
+      "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "successful_archive_exact": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/block.py",
+      "unchanged_from_base": true,
+      "lf_sha256": "7ee11e94e88c89abc1a6cce14b99e41fe6f1d2d6a8bb031bd4d45184609ca882",
+      "successful_archive_exact": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/conv.py",
+      "unchanged_from_base": true,
+      "lf_sha256": "c802f36ea1596d8910f2b651d57877b50a4960857b97cbb5a20d44a1dbbaa774",
+      "successful_archive_exact": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/head.py",
+      "unchanged_from_base": true,
+      "lf_sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+      "successful_archive_exact": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/engine/trainer.py",
+      "unchanged_from_base": true,
+      "lf_sha256": "18125ba895b64961cf0f7db29214aca27392176e65d72a9166fa818f00a1033a",
+      "successful_archive_exact": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/rtdetr/train.py",
+      "unchanged_from_base": true,
+      "lf_sha256": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+      "successful_archive_exact": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/utils/loss.py",
+      "unchanged_from_base": true,
+      "lf_sha256": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75",
+      "successful_archive_exact": true
+    }
+  ],
+  "training": "NOT_STARTED",
+  "test": "NOT_RUN"
+}

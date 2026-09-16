@@ -1,0 +1,269 @@
+{
+  "status": "PASSED",
+  "base_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "variants": {
+    "cbr_lif_bscrep_v1": {
+      "status": "PASSED",
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+      "init_sha256": "ffdec734b7942d88a6698497ad301e7efc4a9d01b69b5b209c7b9883f91a60fb",
+      "source_nc": 80,
+      "trainer_nc": 1,
+      "native_get_model": true,
+      "class_adaptations": [
+        {
+          "name": "model.26.dec_score_head.0.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.dec_score_head.0.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.dec_score_head.1.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.dec_score_head.1.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.dec_score_head.2.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.dec_score_head.2.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.denoising_class_embed.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.enc_score_head.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.enc_score_head.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        }
+      ],
+      "parent_common_exact": true,
+      "parent_nc1_states": 552,
+      "loaded_exact": 547,
+      "new_trainable": [
+        "model.19.bsc.gate.bias",
+        "model.19.bsc.gate.weight",
+        "model.19.bsc.in_proj.weight",
+        "model.19.bsc.out_proj.weight"
+      ],
+      "new_buffers": [],
+      "new_parameters": 11296,
+      "zero_init_reload_exact": true,
+      "nonzero_reload_exact": true,
+      "nonzero_resume_exact": true,
+      "resume_class_adaptations": [],
+      "nonzero_ema_preserved": true,
+      "nonzero_fuse_preserved": true,
+      "formal_optimizer_steps": 0,
+      "parameters_unfused": 20161061,
+      "parameters_fused": 19956261
+    },
+    "bscrep_v1": {
+      "status": "PASSED",
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+      "init_sha256": "3a4d60957990f024485ce55430eb8ee48d76d70f44764738d088d4640556fdde",
+      "source_nc": 80,
+      "trainer_nc": 1,
+      "native_get_model": true,
+      "class_adaptations": [
+        {
+          "name": "model.26.dec_score_head.0.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.dec_score_head.0.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.dec_score_head.1.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.dec_score_head.1.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.dec_score_head.2.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.dec_score_head.2.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.denoising_class_embed.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.enc_score_head.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        },
+        {
+          "name": "model.26.enc_score_head.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "Native RTDETRTrainer class constructor; exact corresponding parent value"
+        }
+      ],
+      "parent_common_exact": true,
+      "parent_nc1_states": 533,
+      "loaded_exact": 528,
+      "new_trainable": [
+        "model.19.bsc.gate.bias",
+        "model.19.bsc.gate.weight",
+        "model.19.bsc.in_proj.weight",
+        "model.19.bsc.out_proj.weight"
+      ],
+      "new_buffers": [],
+      "new_parameters": 11296,
+      "zero_init_reload_exact": true,
+      "nonzero_reload_exact": true,
+      "nonzero_resume_exact": true,
+      "resume_class_adaptations": [],
+      "nonzero_ema_preserved": true,
+      "nonzero_fuse_preserved": true,
+      "formal_optimizer_steps": 0,
+      "parameters_unfused": 20094068,
+      "parameters_fused": 19889012
+    }
+  },
+  "bsc_initials_identical": true,
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN"
+}

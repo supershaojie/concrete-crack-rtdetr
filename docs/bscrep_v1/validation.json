@@ -1,0 +1,264 @@
+{
+  "status": "PENDING",
+  "meaning": "All completed local mandatory checks passed; actual server B16/640/AMP online-augmentation capacity remains PENDING.",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN",
+  "formal_optimizer_steps": 0,
+  "server_login_or_sync": "NOT_PERFORMED",
+  "local_precision_scope": "Synthetic B2 160x192 CPU FP32, CUDA FP32 and native AMP original RTDETR loss/backward; not capacity or accuracy evidence.",
+  "local_trainer_scope": "Public RTDETR.train calls production AuditedTrainer.get_model at nc=1 using synthetic class metadata, stopped before epochs; native AdamW coverage checked. Full real-data _setup_train remains part of the server capacity gate.",
+  "identity_scope": "Each preflight requires the complete start/end source/config/init/data/recipe/HEAD fingerprint to match. These runs precede the delivery commit; fresh server preflight binds its delivered HEAD.",
+  "variants": {
+    "cbr_lif_bscrep_v1": {
+      "status": "PENDING",
+      "report": "outputs/bscrep_v1/preflight_main_frozen/checks.json",
+      "report_sha256": "8cc95763116000d11b203b7f69fa7a872ba68270c1c9a3b5d58f03422699aeb1",
+      "runtime": {
+        "python": "3.9.25",
+        "torch": "2.7.1+cu118",
+        "cuda": "11.8",
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2060"
+      },
+      "executed_head": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+      "initialized_sha256": "ffdec734b7942d88a6698497ad301e7efc4a9d01b69b5b209c7b9883f91a60fb",
+      "normalized_code_manifest_sha256": "1e7e97c52c85d9da28bb9465aa2fd47a74287eb438501b366f94b5c309407364",
+      "formal_initialization_unchanged": true,
+      "completed_checks": [
+        "BSC coordinate/replicate/reference formula/constant-field/symmetry math",
+        "Original parent common initialization including BN buffers and explicit nc80-to-nc1 shape allowlist",
+        "Public Trainer nc1 construction plus every trainable tensor in AdamW exactly once",
+        "Zero and nonzero BSC checkpoint reload, native EMA, native resume and optimizer state",
+        "Zero BSC whole-model original parent equivalence",
+        "CPU FP32, CUDA FP32 and native AMP original loss/backward",
+        "Zero and nonzero whole-model fusion with candidate-aware checks, strict TF32 policy and restoration",
+        "Nonzero whole-model checkpoint half inference/fusion",
+        "Native THOP on FP32 copies for same nc1/B1/640 parent/new fused and unfused models, gate counted four times",
+        "Original train/val/test split path and label inventory fingerprints"
+      ],
+      "amp": {
+        "False": {
+          "native_initial_scale": 65536.0,
+          "scales": [
+            65536.0,
+            32768.0,
+            16384.0,
+            8192.0,
+            4096.0,
+            2048.0
+          ],
+          "final_scale": 2048.0,
+          "successful_unscaled_finite": true,
+          "diagnostic_optimizer_steps": 1,
+          "formal_optimizer_steps": 0
+        },
+        "True": {
+          "native_initial_scale": 65536.0,
+          "scales": [
+            65536.0,
+            32768.0,
+            16384.0,
+            8192.0,
+            4096.0,
+            2048.0
+          ],
+          "final_scale": 2048.0,
+          "successful_unscaled_finite": true,
+          "diagnostic_optimizer_steps": 1,
+          "formal_optimizer_steps": 0
+        }
+      },
+      "cost_nc1_640": {
+        "parent": {
+          "unfused": {
+            "parameters": 20149765,
+            "thop_parameters": 19096067,
+            "macs": 29336256000,
+            "gflops_2_per_mac": 58.672512,
+            "bsc_gate_calls": 0
+          },
+          "fused": {
+            "parameters": 19944965,
+            "thop_parameters": 18891267,
+            "macs": 28782476800,
+            "gflops_2_per_mac": 57.5649536,
+            "bsc_gate_calls": 0
+          }
+        },
+        "bsc": {
+          "unfused": {
+            "parameters": 20161061,
+            "thop_parameters": 19107363,
+            "macs": 29467328000,
+            "gflops_2_per_mac": 58.934656,
+            "bsc_gate_calls": 4
+          },
+          "fused": {
+            "parameters": 19956261,
+            "thop_parameters": 18902563,
+            "macs": 28913548800,
+            "gflops_2_per_mac": 57.8270976,
+            "bsc_gate_calls": 4
+          }
+        }
+      },
+      "cost_limit": "Partial THOP registered-module counts; functional attention/grid_sample, BSC means/abs/sigmoid/padding and other listed operations are not all covered; not a speed measurement.",
+      "dataset": {
+        "train": {
+          "images": 6048,
+          "boxes": 45573,
+          "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+          "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"
+        },
+        "val": {
+          "images": 1728,
+          "boxes": 12840,
+          "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+          "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+        },
+        "test": {
+          "images": 864,
+          "boxes": 6663,
+          "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+          "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"
+        }
+      },
+      "capacity": {
+        "status": "PENDING",
+        "reason": "Requires --server verified real train online augmentation B16/640/native AMP"
+      },
+      "required_server_check": "Run the same preflight entry with --server and verified --data, without lowering B16/640, disabling AMP or changing augmentation."
+    },
+    "bscrep_v1": {
+      "status": "PENDING",
+      "report": "outputs/bscrep_v1/preflight_single_frozen/checks.json",
+      "report_sha256": "931bb182ffc3cb66157c88d6a0b34ab9767b4a887b56d69338d4d214a09801df",
+      "runtime": {
+        "python": "3.9.25",
+        "torch": "2.7.1+cu118",
+        "cuda": "11.8",
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2060"
+      },
+      "executed_head": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+      "initialized_sha256": "3a4d60957990f024485ce55430eb8ee48d76d70f44764738d088d4640556fdde",
+      "normalized_code_manifest_sha256": "1e7e97c52c85d9da28bb9465aa2fd47a74287eb438501b366f94b5c309407364",
+      "formal_initialization_unchanged": true,
+      "completed_checks": [
+        "BSC coordinate/replicate/reference formula/constant-field/symmetry math",
+        "Original parent common initialization including BN buffers and explicit nc80-to-nc1 shape allowlist",
+        "Public Trainer nc1 construction plus every trainable tensor in AdamW exactly once",
+        "Zero and nonzero BSC checkpoint reload, native EMA, native resume and optimizer state",
+        "Zero BSC whole-model original parent equivalence",
+        "CPU FP32, CUDA FP32 and native AMP original loss/backward",
+        "Zero and nonzero whole-model fusion with candidate-aware checks, strict TF32 policy and restoration",
+        "Nonzero whole-model checkpoint half inference/fusion",
+        "Native THOP on FP32 copies for same nc1/B1/640 parent/new fused and unfused models, gate counted four times",
+        "Original train/val/test split path and label inventory fingerprints"
+      ],
+      "amp": {
+        "False": {
+          "native_initial_scale": 65536.0,
+          "scales": [
+            65536.0,
+            32768.0,
+            16384.0,
+            8192.0,
+            4096.0,
+            2048.0
+          ],
+          "final_scale": 2048.0,
+          "successful_unscaled_finite": true,
+          "diagnostic_optimizer_steps": 1,
+          "formal_optimizer_steps": 0
+        },
+        "True": {
+          "native_initial_scale": 65536.0,
+          "scales": [
+            65536.0,
+            32768.0,
+            16384.0,
+            8192.0,
+            4096.0,
+            2048.0
+          ],
+          "final_scale": 2048.0,
+          "successful_unscaled_finite": true,
+          "diagnostic_optimizer_steps": 1,
+          "formal_optimizer_steps": 0
+        }
+      },
+      "cost_nc1_640": {
+        "parent": {
+          "unfused": {
+            "parameters": 20082772,
+            "thop_parameters": 19029330,
+            "macs": 29138304000,
+            "gflops_2_per_mac": 58.276608,
+            "bsc_gate_calls": 0
+          },
+          "fused": {
+            "parameters": 19877716,
+            "thop_parameters": 18824274,
+            "macs": 28582886400,
+            "gflops_2_per_mac": 57.1657728,
+            "bsc_gate_calls": 0
+          }
+        },
+        "bsc": {
+          "unfused": {
+            "parameters": 20094068,
+            "thop_parameters": 19040626,
+            "macs": 29269376000,
+            "gflops_2_per_mac": 58.538752,
+            "bsc_gate_calls": 4
+          },
+          "fused": {
+            "parameters": 19889012,
+            "thop_parameters": 18835570,
+            "macs": 28713958400,
+            "gflops_2_per_mac": 57.4279168,
+            "bsc_gate_calls": 4
+          }
+        }
+      },
+      "cost_limit": "Partial THOP registered-module counts; functional attention/grid_sample, BSC means/abs/sigmoid/padding and other listed operations are not all covered; not a speed measurement.",
+      "dataset": {
+        "train": {
+          "images": 6048,
+          "boxes": 45573,
+          "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+          "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"
+        },
+        "val": {
+          "images": 1728,
+          "boxes": 12840,
+          "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+          "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+        },
+        "test": {
+          "images": 864,
+          "boxes": 6663,
+          "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+          "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"
+        }
+      },
+      "capacity": {
+        "status": "PENDING",
+        "reason": "Requires --server verified real train online augmentation B16/640/native AMP"
+      },
+      "required_server_check": "Run the same preflight entry with --server and verified --data, without lowering B16/640, disabling AMP or changing augmentation."
+    }
+  },
+  "debug_history": [
+    {
+      "report": "outputs/bscrep_v1/preflight_main_01/checks.json",
+      "status": "FAILED",
+      "reason": "Diagnostic parent_from originally constructed a bare RepC3 without the full model initialize_weights BN epsilon adjustment, causing a false parent equivalence mismatch.",
+      "fix": "Construct the complete original parent YAML through the native model constructor, then strict-load every shared tensor; original architecture unchanged.",
+      "subsequent_result": "Both frozen whole-model parent equivalence checks passed with the original strict tolerance. Failed debug evidence retained; no tolerance relaxation."
+    }
+  ]
+}
