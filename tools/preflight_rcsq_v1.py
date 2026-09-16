@@ -86,18 +86,87 @@ def actual_capacity(initialized,variant,data,output):
     require(torch.count_nonzero(trainer.model.model[-1].rcsq.out_proj.weight)==0,'Capacity initial RCS-Q changed')
     batch=trainer.preprocess_batch(next(iter(trainer.train_loader)))
     require(batch['img'].shape==(16,3,640,640),'Capacity loader did not produce full B16/640')
-    model=trainer.model.train();trainer.optimizer.zero_grad(set_to_none=True)
+    # Native AMP scale calibration on one fixed batch; no parameter updates.
+    import random
+    import numpy as np
+    model=trainer.model.train()
+    require(type(trainer.optimizer) is torch.optim.AdamW and
+            not getattr(trainer.optimizer, '_step_supports_amp_scaling', False),
+            'Capacity calibration requires the original non-fused AdamW')
+    require(trainer.scaler.is_enabled(), 'Native AMP scaler must remain enabled')
+    buffers={k:v.detach().clone() for k,v in model.named_buffers()}
+    rng=(random.getstate(),np.random.get_state(),torch.get_rng_state(),torch.cuda.get_rng_state_all())
+    versions={k:p._version for k,p in model.named_parameters()}
+    step_attempts=[0]
+    def forbid_optimizer_update(*unused, **kwargs):
+        step_attempts[0]+=1
+        raise RuntimeError('Capacity probe attempted a real optimizer update')
+    guard=trainer.optimizer.register_step_pre_hook(forbid_optimizer_update)
+    scale_audit=dict(status='RUNNING',initial_scale=float(trainer.scaler.get_scale()),
+                     backoff_factor=float(trainer.scaler.get_backoff_factor()),
+                     max_attempts=17,optimizer_steps=0,same_batch_and_rng=True,trials=[])
     torch.cuda.reset_peak_memory_stats();started=time.perf_counter()
-    with torch.autocast('cuda',dtype=torch.float16):
-        predictions=model.predict(batch['img'],batch=targets(batch));loss=model.loss(batch,preds=predictions)[0]
-    trainer.scaler.scale(loss).backward();trainer.scaler.unscale_(trainer.optimizer)
-    require(torch.isfinite(loss) and all(torch.isfinite(p.grad).all() for p in model.parameters() if p.grad is not None),
-            'Capacity loss/backward nonfinite')
+    try:
+        for attempt in range(1,18):
+            trainer.optimizer.zero_grad(set_to_none=True)
+            with torch.no_grad():
+                for k,v in model.named_buffers(): v.copy_(buffers[k])
+            random.setstate(rng[0]);np.random.set_state(rng[1])
+            torch.set_rng_state(rng[2]);torch.cuda.set_rng_state_all(rng[3])
+            scale=float(trainer.scaler.get_scale())
+            row=dict(attempt=attempt,scale=scale)
+            scale_audit['trials'].append(row)
+            with torch.autocast('cuda',dtype=torch.float16):
+                predictions=model.predict(batch['img'],batch=targets(batch))
+                loss=model.loss(batch,preds=predictions)[0]
+            finite_loss=bool(torch.isfinite(loss).all())
+            row.update(loss=float(loss.detach()) if finite_loss else str(float(loss.detach())),
+                       loss_finite=finite_loss)
+            require(finite_loss, 'Capacity forward loss is nonfinite; scale backoff cannot fix it')
+            trainer.scaler.scale(loss).backward()
+            trainer.scaler.unscale_(trainer.optimizer)
+            gradients=[(n,p.grad) for n,p in model.named_parameters() if p.grad is not None]
+            require(gradients, 'Capacity backward produced no parameter gradients')
+            bad=[n for n,g in gradients if not torch.isfinite(g).all()]
+            row.update(gradients_finite=not bad,bad_gradients=bad)
+            if not bad:
+                g=model.model[-1].rcsq.out_proj.weight.grad
+                require(g is not None and bool(torch.isfinite(g).all()) and
+                        bool(torch.count_nonzero(g)>0), 'Capacity first RCS-Q gradient missing')
+                row['rcsq_out_grad_norm']=float(g.detach().double().norm())
+                require(versions=={k:p._version for k,p in model.named_parameters()},
+                        'Capacity probe changed parameters')
+                scale_audit['status']='FINITE_GRADIENTS'
+                print(f'Capacity AMP finite at scale={scale}; optimizer updates=0',flush=True)
+                break
+            print(f'Capacity AMP overflow at scale={scale}; native backoff',flush=True)
+            require(attempt<17, 'Capacity AMP remained nonfinite after bounded scale calibration')
+            # Native GradScaler must skip the actual AdamW update on overflow.
+            # The pre-hook aborts before any update if that assumption is violated.
+            trainer.scaler.step(trainer.optimizer)
+            require(step_attempts[0]==0 and
+                    versions=={k:p._version for k,p in model.named_parameters()},
+                    'Overflow trial attempted an optimizer update')
+            trainer.scaler.update()
+            row.update(native_step_skipped=True,next_scale=float(trainer.scaler.get_scale()))
+            require(0<row['next_scale']<scale, 'Native GradScaler did not lower the scale')
+            write_json(output/'amp_scale_calibration.json',scale_audit)
+            del predictions,loss,gradients,bad
+        require(scale_audit['status']=='FINITE_GRADIENTS', 'Capacity scale probe did not finish')
+    except BaseException as error:
+        scale_audit.update(status='FAILED',error=repr(error))
+        raise
+    finally:
+        guard.remove()
+        scale_audit['optimizer_step_attempts']=step_attempts[0]
+        scale_audit['parameters_unchanged']=versions=={k:p._version for k,p in model.named_parameters()}
+        write_json(output/'amp_scale_calibration.json',scale_audit)
     torch.cuda.synchronize()
     report=dict(status='PASSED',batch=16,imgsz=640,AMP=True,loss=float(loss),optimizer_steps=0,
                 gt_groups=targets(batch)['gt_groups'],dn_num_split=predictions[-1]['dn_num_split'] if predictions[-1] else [0,300],
                 total_queries=predictions[0].shape[2],peak_allocated_bytes=torch.cuda.max_memory_allocated(),
                 peak_reserved_bytes=torch.cuda.max_memory_reserved(),seconds=time.perf_counter()-started,
+                amp_scale_calibration=scale_audit,
                 native_online_augmentation=True,native_trainer_setup=True,rcsq_gradients=grad_norms(model.model[-1].rcsq),
                 samples=[str(p) for p in batch.get('im_file',[])])
     require(report['rcsq_gradients']['out_proj.weight']>0,'Capacity first gradient missing')
