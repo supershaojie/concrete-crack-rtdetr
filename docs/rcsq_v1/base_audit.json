@@ -1,0 +1,198 @@
+{
+  "base_sha": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "chosen_from": "actual Git history + successful CBR/LIF result package + matched numerical source",
+  "result_directory": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1",
+  "evidence_files": {
+    "training/args.yaml": {
+      "sha256": "31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b",
+      "bytes": 1846
+    },
+    "training/results.csv": {
+      "sha256": "52aee9b8ffe59925d24fbe733cfa64d27d50e495545ad4b3ffda1af80ae9d9ad",
+      "bytes": 25349
+    },
+    "metadata/package.json": {
+      "sha256": "9cfa0003babdefb298be5f9daac1cc553a15ba39da689d26ce2adfd3e0352fc2",
+      "bytes": 2083
+    },
+    "metadata/c19_lif_v1_delivery.json": {
+      "sha256": "7a7e9c19620a202b3258b1cc842428894385ad0da7a1a894476c73f09b11e518",
+      "bytes": 50699
+    },
+    "metadata/launch/source_record.json": {
+      "sha256": "0edbd1de6e79cfbf5de49838ab373d3832ace6db3e6678551e2a9950ced10ca4",
+      "bytes": 1425
+    },
+    "metadata/launch/training_state.json": {
+      "sha256": "e7b6dd42ae0d95ed6d51d2835d587f0d90667e9f64bfe04708d6297ad13c8d47",
+      "bytes": 44
+    },
+    "metadata/launch/exit_code.json": {
+      "sha256": "ee5ba5c9008109b8ef600d77ec2e1651f8044d95f06ec323f745fe9d5d9019a1",
+      "bytes": 71
+    },
+    "metadata/launch/dataset_inventory.json": {
+      "sha256": "8567e1b4d1aae5f168fb18b633ed4357c7f0aba56c0041a6570647fb542d0446",
+      "bytes": 745
+    },
+    "metadata/launch/data_config.yaml": {
+      "sha256": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+      "bytes": 137
+    },
+    "val/metrics.json": {
+      "sha256": "45a1f17e11bc4e3437ee90a0c9a8f6e9c46d68556c14bd71a4bf9ba89c651619",
+      "bytes": 6421
+    },
+    "test/metrics.json": {
+      "sha256": "51f9e6c0d225a545c6913783e872fc906580287bea9d01994ce6913c9ad8edaa",
+      "bytes": 6423
+    }
+  },
+  "core_source_checks": [
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/head.py",
+      "base_lf_sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+      "archive_exists": true,
+      "archive_lf_sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+      "archive_matches_base": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/transformer.py",
+      "base_lf_sha256": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602",
+      "archive_exists": true,
+      "archive_lf_sha256": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602",
+      "archive_matches_base": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/cbr.py",
+      "base_lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "archive_exists": true,
+      "archive_lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "archive_matches_base": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/lif_down.py",
+      "base_lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "archive_exists": true,
+      "archive_lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "archive_matches_base": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/tasks.py",
+      "base_lf_sha256": "c5a19e3eaf10acf2a5aa6a53e4a3f9afd01d7b79e4f9a41744af9755d6ebcbd8",
+      "archive_exists": true,
+      "archive_lf_sha256": "c5a19e3eaf10acf2a5aa6a53e4a3f9afd01d7b79e4f9a41744af9755d6ebcbd8",
+      "archive_matches_base": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/utils/ops.py",
+      "base_lf_sha256": "7d520895c245adafb06b07c6b330dabbd6a36a69cd0fe742cd71f2797f474dde",
+      "archive_exists": true,
+      "archive_lf_sha256": "7d520895c245adafb06b07c6b330dabbd6a36a69cd0fe742cd71f2797f474dde",
+      "archive_matches_base": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/rtdetr/train.py",
+      "base_lf_sha256": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+      "archive_exists": true,
+      "archive_lf_sha256": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+      "archive_matches_base": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/utils/loss.py",
+      "base_lf_sha256": "47ef8869db5caa09f303ce9446921f77e9bc2a552956ba7e3c76410c8e4c5fc8",
+      "archive_exists": true,
+      "archive_lf_sha256": "47ef8869db5caa09f303ce9446921f77e9bc2a552956ba7e3c76410c8e4c5fc8",
+      "archive_matches_base": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-lif-down.yaml",
+      "base_lf_sha256": "14192de425c6b3718af8a9dc42373db25a0ea725bf608f270e7241b8a66d603a",
+      "archive_exists": true,
+      "archive_lf_sha256": "14192de425c6b3718af8a9dc42373db25a0ea725bf608f270e7241b8a66d603a",
+      "archive_matches_base": true
+    },
+    {
+      "path": "tools/init_c19_lif_v1.py",
+      "base_lf_sha256": "846f6656c603506304428bb9401ba1309ef8febab5833e88bb18083d9b048af1",
+      "archive_exists": true,
+      "archive_lf_sha256": "846f6656c603506304428bb9401ba1309ef8febab5833e88bb18083d9b048af1",
+      "archive_matches_base": true
+    },
+    {
+      "path": "tools/train_c19_lif_v1.py",
+      "base_lf_sha256": "84759327c483aca917772b6e14f976fed841c5763220f14029fd4389950084f6",
+      "archive_exists": true,
+      "archive_lf_sha256": "84759327c483aca917772b6e14f976fed841c5763220f14029fd4389950084f6",
+      "archive_matches_base": true
+    },
+    {
+      "path": "tools/preflight_c19_lif_v1.py",
+      "base_lf_sha256": "6a59a540277969a34bd31e0da2b0f93c56d845f9b0bc6244ee5903c55fde6ce3",
+      "archive_exists": true,
+      "archive_lf_sha256": "6a59a540277969a34bd31e0da2b0f93c56d845f9b0bc6244ee5903c55fde6ce3",
+      "archive_matches_base": true
+    },
+    {
+      "path": "tools/check_c19_lif_v1.py",
+      "base_lf_sha256": "086adaf437441d630ccd123868b4b111acc7ac6d7a8d932a85ed897a79fb498e",
+      "archive_exists": true,
+      "archive_lf_sha256": "086adaf437441d630ccd123868b4b111acc7ac6d7a8d932a85ed897a79fb498e",
+      "archive_matches_base": true
+    }
+  ],
+  "all_available_archived_core_sources_equal_base": true,
+  "training_csv_rows": 200,
+  "training_csv_final_epoch": 200,
+  "training_state": {
+    "status": "training",
+    "pid": 361407
+  },
+  "exit_code": {
+    "exit_code": 0,
+    "finished": "2026-09-13T02:54:51.942256+00:00"
+  },
+  "packaging_runtime_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "test_runtime_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "historical_test_status": "completed",
+  "historical_test_checkpoint_matches_training_best": true,
+  "historical_source_note": "a0459d6 launch record alone is insufficient; independent final results, package/test runtime, and archived source comparisons above support selected numerical base. This does not certify an unrecorded remote working-tree state. No historical checkpoint was used as RCS-Q initialization.",
+  "authoritative_args_field_count": 109,
+  "c2_args_field_count": 109,
+  "authoritative_vs_C2_diff": {
+    "model": {
+      "C2": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+      "CBR_LIF_actual": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/weights/c19_lif_v1_controlled_init.pt"
+    },
+    "name": {
+      "C2": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "CBR_LIF_actual": "c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug"
+    },
+    "save_dir": {
+      "C2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "CBR_LIF_actual": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug"
+    }
+  },
+  "dataset_inventory": {
+    "train": {
+      "images": 6048,
+      "boxes": 45573,
+      "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+      "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"
+    },
+    "val": {
+      "images": 1728,
+      "boxes": 12840,
+      "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+      "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+    },
+    "test": {
+      "images": 864,
+      "boxes": 6663,
+      "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+      "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"
+    }
+  },
+  "new_experiment_formal_training": "NOT_STARTED",
+  "new_experiment_final_test": "NOT_RUN"
+}

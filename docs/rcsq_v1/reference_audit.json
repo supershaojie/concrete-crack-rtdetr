@@ -1,0 +1,44 @@
+{
+  "read_date": "2026-09-16",
+  "reference_archive": {
+    "absolute_path": "D:/7.1 rtdetr改/魔鬼面具_RTDETR/RTDETR-20260623.zip",
+    "sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+    "matches_requested_archive": true,
+    "files_actually_read": [
+      {
+        "path": "RTDETR-main/ultralytics/nn/modules/head.py",
+        "sha256": "aed0a42d770d60aa082681eaebc8589a82481f542307d73e306aa2d0df964257",
+        "class": "RTDETRDecoder",
+        "methods": ["forward", "_get_encoder_input", "_get_decoder_input"],
+        "semantics": "top-k encoder scores choose content/features and reference logits; encoder boxes are sigmoid before DN concatenation; training detaches reference logits and non-learned normal contents before DN embeddings concatenate; decoder receives full DN+normal logits.",
+        "rcsq_difference": "RCS-Q preserves native selection and detach sequence, then adds query-local support from original Neck P3 before decoder. It does not replace top-k or import this alternate Ultralytics tree."
+      },
+      {
+        "path": "RTDETR-main/ultralytics/nn/modules/transformer.py",
+        "sha256": "2a8906995d3b9e8dedfc97a63a405a7b25c820c26c0860a7adeee950541d91e0",
+        "class": "MSDeformAttn",
+        "methods": ["__init__", "_reset_parameters", "forward"],
+        "semantics": "Learned query-conditioned offsets and weights over levels/points; 2D references normalize offsets by W,H, 4D references scale offsets by box width/height divided by n_points and multiplied by 0.5.",
+        "rcsq_difference": "RCS-Q has fixed 5x5 bin centers, one P3 map, two support heads and zero-value null slot. No learned sampling offsets or replacement of native MSDeformAttn."
+      },
+      {
+        "path": "RTDETR-main/ultralytics/nn/extra_modules/block.py",
+        "sha256": "e3e3617c89bd7caf350d2601740f2e399847a16a3a659d7b3e40010b88498cd2",
+        "class": "DySample",
+        "methods": ["__init__", "_init_pos", "sample", "forward_lp", "forward_pl", "forward"],
+        "semantics": "Pixel centers arange(H/W)+0.5, coordinate order x,y, normalizer W,H, normalized coordinates 2*(coords+offset)/normalizer-1, bilinear grid_sample align_corners=False padding_mode=border.",
+        "rcsq_difference": "Only sampling coordinate/interpolation conventions are borrowed. RCS-Q uses per-box normalized bin centers and explicit true image-bound masks, not learned upsampling offsets, pixel shuffle, or extra_modules imports. meshgrid indexing is explicit in RCS-Q."
+      }
+    ]
+  },
+  "research_attribution": {
+    "title": "Enhancing DETR’s Variants through Improved Content Query and Similar Query Aggregation",
+    "arxiv": "2405.03318v1",
+    "url": "https://arxiv.org/html/2405.03318v1",
+    "publication_date": "2024-05-06",
+    "sections_actually_read": ["Abstract", "3.2 Self-Adaptive Content Query", "3.3 Similar Query Aggregation Strategy"],
+    "attribution": "SACQ already studies content-query enhancement through global self-attention pooling and later local ROI features; associated QA aggregates similar predictions before matching. RCS-Q tests centered local value evidence plus a zero-value null slot at initialization, retains the native query and matching, and makes no claim to first content enhancement or first region sampling."
+  },
+  "original_cbr_difference": "Original CBR acts after decoder with final query/final boxes and 36 four-edge inside/outside points. RCS-Q acts before decoder on 25 within-region points with region-mean-centered values. CBR math and its state_dict member cbr are retained.",
+  "archive_or_external_code_copied_into_project": false
+}

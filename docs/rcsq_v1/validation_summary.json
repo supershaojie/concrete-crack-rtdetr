@@ -1,0 +1,897 @@
+{
+  "code_fingerprint": "db2d74f6e28be2c66bc5726aec09a7a202674272e00fa9d3d1b600f88fad216d",
+  "reported_precommit_head": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "precommit_scope_note": "Tests ran on the reviewed working-tree content. Final delivery SHA is generated after commit; this portable content fingerprint binds the numerical source.",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-rcsq-v1\\ultralytics-main\\ultralytics\\__init__.py"
+  },
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "formal_training": "NOT_STARTED",
+  "formal_training_updates": 0,
+  "final_test": "NOT_RUN",
+  "evidence": {
+    "initialized_final/initialization.json": {
+      "path": "outputs/rcsq_v1/initialized_final/initialization.json",
+      "sha256": "a0bebc5d296302e88c155ccc27ba882685d12c1b7b37cf9dd603e4100a981ed7"
+    },
+    "cpu_final/checks.json": {
+      "path": "outputs/rcsq_v1/cpu_final/checks.json",
+      "sha256": "7bbc83866032df5157d52b07d7510c72c824d6449975f881d50d10da468b3d0c"
+    },
+    "cuda_final/checks.json": {
+      "path": "outputs/rcsq_v1/cuda_final/checks.json",
+      "sha256": "0518c73dad74111f7746857322924b85a660ca912fbf51ec8a2ef800e718596d"
+    },
+    "lifecycle_checks_v2/checks.json": {
+      "path": "outputs/rcsq_v1/lifecycle_checks_v2/checks.json",
+      "sha256": "585a03fb5bcfdeae8d1b6ad24e83d077b2c149ac963d4153042433555822dc06"
+    },
+    "local_data.inventory.json": {
+      "path": "outputs/rcsq_v1/local_data.inventory.json",
+      "sha256": "519e775260c30d3321f0cb2195e2e926e5bf07250a75ea12ac294b6307964eb4"
+    }
+  },
+  "initialization": {
+    "status": "PASSED",
+    "shared_rcsq_exact": true,
+    "missing": [],
+    "unexpected": [],
+    "shape_mismatch": [],
+    "outputs": {
+      "cbr_lif_rcsq_v1": {
+        "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-rcsq-v1\\outputs\\rcsq_v1\\initialized_final\\cbr_lif_rcsq_v1_controlled_init.pt",
+        "sha256": "fed1746af3d1b7e01c5726feb97249072c5af8d4e6cb8d46022fe369bfabfc47",
+        "reload_exact": true
+      },
+      "rcsq_v1": {
+        "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-rcsq-v1\\outputs\\rcsq_v1\\initialized_final\\rcsq_v1_controlled_init.pt",
+        "sha256": "3022e1c81fa64db7c2cbf9c98cd51d60e1fd532fd8bcaef75ca274a8207a66ba",
+        "reload_exact": true
+      }
+    },
+    "native_nc1": {
+      "cbr_lif_rcsq_v1": {
+        "native_get_model": true,
+        "target_nc": 1,
+        "common_exact": true,
+        "loaded_exact": 552,
+        "missing": [],
+        "unexpected": [],
+        "shape_mismatch": [],
+        "ALLOWED_CLASS_ADAPTATION": [
+          {
+            "name": "model.26.dec_score_head.0.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.dec_score_head.0.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.dec_score_head.1.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.dec_score_head.1.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.dec_score_head.2.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.dec_score_head.2.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.denoising_class_embed.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.enc_score_head.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.enc_score_head.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          }
+        ]
+      },
+      "rcsq_v1": {
+        "native_get_model": true,
+        "target_nc": 1,
+        "common_exact": true,
+        "loaded_exact": 533,
+        "missing": [],
+        "unexpected": [],
+        "shape_mismatch": [],
+        "ALLOWED_CLASS_ADAPTATION": [
+          {
+            "name": "model.26.dec_score_head.0.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.dec_score_head.0.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.dec_score_head.1.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.dec_score_head.1.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.dec_score_head.2.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.dec_score_head.2.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.denoising_class_embed.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.enc_score_head.bias",
+            "source_shape": [
+              80
+            ],
+            "target_shape": [
+              1
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          },
+          {
+            "name": "model.26.enc_score_head.weight",
+            "source_shape": [
+              80,
+              256
+            ],
+            "target_shape": [
+              1,
+              256
+            ],
+            "rule": "Native RTDETRTrainer constructor, same RNG as original reference"
+          }
+        ]
+      }
+    }
+  },
+  "CPU": {
+    "status": "LOCAL_PASSED_SERVER_PENDING",
+    "device": "cpu",
+    "finished_utc": "2026-09-16T07:46:52.000246+00:00",
+    "module_status": "PASSED",
+    "module_parameters": 58370,
+    "DN_status": "PASSED",
+    "DN_cases": [
+      {
+        "gt_groups": [
+          0,
+          0
+        ],
+        "DN": 0,
+        "valid_slots": [
+          300,
+          300
+        ],
+        "scatter_exact": true,
+        "actual_scatter_writes": 0
+      },
+      {
+        "gt_groups": [
+          0,
+          3
+        ],
+        "DN": 198,
+        "valid_slots": [
+          300,
+          498
+        ],
+        "scatter_exact": true,
+        "actual_scatter_writes": 2
+      },
+      {
+        "gt_groups": [
+          1,
+          3
+        ],
+        "DN": 198,
+        "valid_slots": [
+          366,
+          498
+        ],
+        "scatter_exact": true,
+        "actual_scatter_writes": 2
+      },
+      {
+        "gt_groups": [
+          2,
+          7
+        ],
+        "DN": 196,
+        "valid_slots": [
+          356,
+          496
+        ],
+        "scatter_exact": true,
+        "actual_scatter_writes": 2
+      }
+    ],
+    "variants": {
+      "cbr_lif_rcsq_v1": {
+        "status": "PASSED",
+        "topology": {
+          "decoder": 26,
+          "decoder_inputs": [
+            19,
+            22,
+            25
+          ],
+          "rcsq_parameters": 58370
+        },
+        "native_trainer": {
+          "status": "PASSED",
+          "native_constructor": true,
+          "native_setup_model": true,
+          "common_state_exact": true,
+          "epochs_started": 0,
+          "optimizer_steps": 0,
+          "fixture_only": true
+        },
+        "optimizer_exactly_once": true,
+        "initial_max_abs_error": 0.0,
+        "normal_queries": 300,
+        "train_DN_queries": 498,
+        "native_FP32_loss_status": "PASSED",
+        "native_AMP_loss_status": "NOT_RUN_CPU",
+        "reload_EMA_nonzero_preserved": true,
+        "fusion_status": "PASSED",
+        "fusion_nonzero_rcsq": true,
+        "fusion_modes": {
+          "fp32": {
+            "status": "PASSED",
+            "acceptance": "PASSED"
+          }
+        }
+      },
+      "rcsq_v1": {
+        "status": "PASSED",
+        "topology": {
+          "decoder": 26,
+          "decoder_inputs": [
+            19,
+            22,
+            25
+          ],
+          "rcsq_parameters": 58370
+        },
+        "native_trainer": {
+          "status": "PASSED",
+          "native_constructor": true,
+          "native_setup_model": true,
+          "common_state_exact": true,
+          "epochs_started": 0,
+          "optimizer_steps": 0,
+          "fixture_only": true
+        },
+        "optimizer_exactly_once": true,
+        "initial_max_abs_error": 0.0,
+        "normal_queries": 300,
+        "train_DN_queries": 498,
+        "native_FP32_loss_status": "PASSED",
+        "native_AMP_loss_status": "NOT_RUN_CPU",
+        "reload_EMA_nonzero_preserved": true,
+        "fusion_status": "PASSED",
+        "fusion_nonzero_rcsq": true,
+        "fusion_modes": {
+          "fp32": {
+            "status": "PASSED",
+            "acceptance": null
+          }
+        }
+      }
+    },
+    "capacity": {
+      "status": "PENDING",
+      "reason": "Requires actual server CUDA, B16/640 and real training loader"
+    },
+    "native_amp": {
+      "status": "PENDING",
+      "reason": "Run with --capacity on server"
+    },
+    "tf32_diagnostic": {
+      "matmul": false,
+      "cudnn": false,
+      "restored_on_exit": true
+    },
+    "warnings": [
+      "'oneOf' deprecated - use 'one_of'",
+      "'parseString' deprecated - use 'parse_string'",
+      "'resetCache' deprecated - use 'reset_cache'"
+    ],
+    "complexity": {
+      "models": {
+        "cbr_lif_rcsq_v1": {
+          "unfused": {
+            "parameters": 20208135,
+            "thop_gflops": 58.672512,
+            "rcsq_functional_projection_attention_gflops": 0.3544832,
+            "thop_plus_rcsq_major_gflops": 59.0269952,
+            "milliseconds_per_image": 645.4074999999998,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cpu"
+          },
+          "fused": {
+            "parameters": 20003335,
+            "thop_gflops": 57.5649536,
+            "rcsq_functional_projection_attention_gflops": 0.3544832,
+            "thop_plus_rcsq_major_gflops": 57.9194368,
+            "milliseconds_per_image": 561.330133333333,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cpu"
+          }
+        },
+        "combo": {
+          "unfused": {
+            "parameters": 20149765,
+            "thop_gflops": 58.672512,
+            "rcsq_functional_projection_attention_gflops": 0.0,
+            "thop_plus_rcsq_major_gflops": 58.672512,
+            "milliseconds_per_image": 482.57313333333224,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cpu"
+          },
+          "fused": {
+            "parameters": 19944965,
+            "thop_gflops": 57.5649536,
+            "rcsq_functional_projection_attention_gflops": 0.0,
+            "thop_plus_rcsq_major_gflops": 57.5649536,
+            "milliseconds_per_image": 479.02613333333005,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cpu"
+          }
+        },
+        "rcsq_v1": {
+          "unfused": {
+            "parameters": 20141142,
+            "thop_gflops": 58.276608,
+            "rcsq_functional_projection_attention_gflops": 0.3544832,
+            "thop_plus_rcsq_major_gflops": 58.6310912,
+            "milliseconds_per_image": 469.47276666666465,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cpu"
+          },
+          "fused": {
+            "parameters": 19936086,
+            "thop_gflops": 57.1657728,
+            "rcsq_functional_projection_attention_gflops": 0.3544832,
+            "thop_plus_rcsq_major_gflops": 57.520256,
+            "milliseconds_per_image": 510.48466666666553,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cpu"
+          }
+        },
+        "baseline": {
+          "unfused": {
+            "parameters": 20082772,
+            "thop_gflops": 58.276608,
+            "rcsq_functional_projection_attention_gflops": 0.0,
+            "thop_plus_rcsq_major_gflops": 58.276608,
+            "milliseconds_per_image": 480.89153333333456,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cpu"
+          },
+          "fused": {
+            "parameters": 19877716,
+            "thop_gflops": 57.1657728,
+            "rcsq_functional_projection_attention_gflops": 0.0,
+            "thop_plus_rcsq_major_gflops": 57.1657728,
+            "milliseconds_per_image": 534.4654333333333,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cpu"
+          }
+        }
+      },
+      "tool": "THOP 2.0.18",
+      "uncovered": [
+        "grid_sample",
+        "centering/reductions",
+        "functional normalization",
+        "softmax",
+        "elementwise and indexing"
+      ],
+      "note": "THOP does not count functional RCSQ projections; analytic major MACs are separate. Timing is local synthetic inference, not training capacity or a speed claim."
+    }
+  },
+  "CUDA": {
+    "status": "LOCAL_PASSED_SERVER_PENDING",
+    "device": "cuda",
+    "finished_utc": "2026-09-16T07:48:51.257492+00:00",
+    "module_status": "PASSED",
+    "module_parameters": 58370,
+    "DN_status": "PASSED",
+    "DN_cases": [
+      {
+        "gt_groups": [
+          0,
+          0
+        ],
+        "DN": 0,
+        "valid_slots": [
+          300,
+          300
+        ],
+        "scatter_exact": true,
+        "actual_scatter_writes": 0
+      },
+      {
+        "gt_groups": [
+          0,
+          3
+        ],
+        "DN": 198,
+        "valid_slots": [
+          300,
+          498
+        ],
+        "scatter_exact": true,
+        "actual_scatter_writes": 2
+      },
+      {
+        "gt_groups": [
+          1,
+          3
+        ],
+        "DN": 198,
+        "valid_slots": [
+          366,
+          498
+        ],
+        "scatter_exact": true,
+        "actual_scatter_writes": 2
+      },
+      {
+        "gt_groups": [
+          2,
+          7
+        ],
+        "DN": 196,
+        "valid_slots": [
+          356,
+          496
+        ],
+        "scatter_exact": true,
+        "actual_scatter_writes": 2
+      }
+    ],
+    "variants": {
+      "cbr_lif_rcsq_v1": {
+        "status": "PASSED",
+        "topology": {
+          "decoder": 26,
+          "decoder_inputs": [
+            19,
+            22,
+            25
+          ],
+          "rcsq_parameters": 58370
+        },
+        "native_trainer": {
+          "status": "PASSED",
+          "native_constructor": true,
+          "native_setup_model": true,
+          "common_state_exact": true,
+          "epochs_started": 0,
+          "optimizer_steps": 0,
+          "fixture_only": true
+        },
+        "optimizer_exactly_once": true,
+        "initial_max_abs_error": 0.0,
+        "normal_queries": 300,
+        "train_DN_queries": 498,
+        "native_FP32_loss_status": "PASSED",
+        "native_AMP_loss_status": "PASSED",
+        "reload_EMA_nonzero_preserved": true,
+        "fusion_status": "PASSED",
+        "fusion_nonzero_rcsq": true,
+        "fusion_modes": {
+          "fp32": {
+            "status": "PASSED",
+            "acceptance": "PASSED"
+          },
+          "amp": {
+            "status": "PASS_WITH_CANDIDATE_PERMUTATION",
+            "acceptance": "PASSED"
+          },
+          "half": {
+            "status": "PASS_WITH_CANDIDATE_PERMUTATION",
+            "acceptance": "PASSED"
+          }
+        }
+      },
+      "rcsq_v1": {
+        "status": "PASSED",
+        "topology": {
+          "decoder": 26,
+          "decoder_inputs": [
+            19,
+            22,
+            25
+          ],
+          "rcsq_parameters": 58370
+        },
+        "native_trainer": {
+          "status": "PASSED",
+          "native_constructor": true,
+          "native_setup_model": true,
+          "common_state_exact": true,
+          "epochs_started": 0,
+          "optimizer_steps": 0,
+          "fixture_only": true
+        },
+        "optimizer_exactly_once": true,
+        "initial_max_abs_error": 0.0,
+        "normal_queries": 300,
+        "train_DN_queries": 498,
+        "native_FP32_loss_status": "PASSED",
+        "native_AMP_loss_status": "PASSED",
+        "reload_EMA_nonzero_preserved": true,
+        "fusion_status": "PASSED",
+        "fusion_nonzero_rcsq": true,
+        "fusion_modes": {
+          "fp32": {
+            "status": "PASSED",
+            "acceptance": null
+          },
+          "amp": {
+            "status": "PASS_WITH_CANDIDATE_PERMUTATION",
+            "acceptance": null
+          },
+          "half": {
+            "status": "PASS_WITH_CANDIDATE_PERMUTATION",
+            "acceptance": null
+          }
+        }
+      }
+    },
+    "capacity": {
+      "status": "PENDING",
+      "reason": "Requires actual server CUDA, B16/640 and real training loader"
+    },
+    "native_amp": {
+      "status": "PENDING",
+      "reason": "Run with --capacity on server"
+    },
+    "tf32_diagnostic": {
+      "matmul": false,
+      "cudnn": false,
+      "restored_on_exit": true
+    },
+    "warnings": [
+      "grid_sampler_2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\Context.cpp:97.)",
+      "'oneOf' deprecated - use 'one_of'",
+      "'parseString' deprecated - use 'parse_string'",
+      "'resetCache' deprecated - use 'reset_cache'"
+    ],
+    "complexity": {
+      "models": {
+        "cbr_lif_rcsq_v1": {
+          "unfused": {
+            "parameters": 20208135,
+            "thop_gflops": 58.672512,
+            "rcsq_functional_projection_attention_gflops": 0.3544832,
+            "thop_plus_rcsq_major_gflops": 59.0269952,
+            "milliseconds_per_image": 63.10969999999827,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cuda"
+          },
+          "fused": {
+            "parameters": 20003335,
+            "thop_gflops": 57.5649536,
+            "rcsq_functional_projection_attention_gflops": 0.3544832,
+            "thop_plus_rcsq_major_gflops": 57.9194368,
+            "milliseconds_per_image": 52.41216666666541,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cuda"
+          }
+        },
+        "combo": {
+          "unfused": {
+            "parameters": 20149765,
+            "thop_gflops": 58.672512,
+            "rcsq_functional_projection_attention_gflops": 0.0,
+            "thop_plus_rcsq_major_gflops": 58.672512,
+            "milliseconds_per_image": 45.40776666666583,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cuda"
+          },
+          "fused": {
+            "parameters": 19944965,
+            "thop_gflops": 57.5649536,
+            "rcsq_functional_projection_attention_gflops": 0.0,
+            "thop_plus_rcsq_major_gflops": 57.5649536,
+            "milliseconds_per_image": 41.034633333334604,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cuda"
+          }
+        },
+        "rcsq_v1": {
+          "unfused": {
+            "parameters": 20141142,
+            "thop_gflops": 58.276608,
+            "rcsq_functional_projection_attention_gflops": 0.3544832,
+            "thop_plus_rcsq_major_gflops": 58.6310912,
+            "milliseconds_per_image": 49.61879999999989,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cuda"
+          },
+          "fused": {
+            "parameters": 19936086,
+            "thop_gflops": 57.1657728,
+            "rcsq_functional_projection_attention_gflops": 0.3544832,
+            "thop_plus_rcsq_major_gflops": 57.520256,
+            "milliseconds_per_image": 39.43999999999903,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cuda"
+          }
+        },
+        "baseline": {
+          "unfused": {
+            "parameters": 20082772,
+            "thop_gflops": 58.276608,
+            "rcsq_functional_projection_attention_gflops": 0.0,
+            "thop_plus_rcsq_major_gflops": 58.276608,
+            "milliseconds_per_image": 39.81153333333509,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cuda"
+          },
+          "fused": {
+            "parameters": 19877716,
+            "thop_gflops": 57.1657728,
+            "rcsq_functional_projection_attention_gflops": 0.0,
+            "thop_plus_rcsq_major_gflops": 57.1657728,
+            "milliseconds_per_image": 34.556699999996,
+            "iterations": 3,
+            "warmup": 1,
+            "batch": 1,
+            "imgsz": 640,
+            "device": "cuda"
+          }
+        }
+      },
+      "tool": "THOP 2.0.18",
+      "uncovered": [
+        "grid_sample",
+        "centering/reductions",
+        "functional normalization",
+        "softmax",
+        "elementwise and indexing"
+      ],
+      "note": "THOP does not count functional RCSQ projections; analytic major MACs are separate. Timing is local synthetic inference, not training capacity or a speed claim."
+    }
+  },
+  "local_data_inventory": {
+    "status": "PASSED",
+    "config": {
+      "path": "D:/MyProjects/Crack_RTDETR/datasets/crack_det",
+      "train": "images/train",
+      "val": "images/val",
+      "test": "images/test",
+      "names": {
+        "0": "crack"
+      }
+    },
+    "resolved": {
+      "path": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det",
+      "train": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\images\\train",
+      "val": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\images\\val",
+      "test": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\images\\test",
+      "names": {
+        "0": "crack"
+      },
+      "yaml_file": "outputs\\rcsq_v1\\local_data.yaml",
+      "nc": 1,
+      "channels": 3
+    },
+    "inventory": {
+      "train": {
+        "images": 6048,
+        "boxes": 45573,
+        "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+        "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"
+      },
+      "val": {
+        "images": 1728,
+        "boxes": 12840,
+        "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+        "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+      },
+      "test": {
+        "images": 864,
+        "boxes": 6663,
+        "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+        "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"
+      }
+    }
+  },
+  "lifecycle": {
+    "status": "PASSED",
+    "full_recipe_fields": 109,
+    "altered_AMP_rejected": true,
+    "forged_old_PASSED_cannot_start": true,
+    "fresh_pending_rejected": true,
+    "active_owner_recovery_rejected": true,
+    "dead_failed_gate_preserved": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-rcsq-v1\\outputs\\rcsq_v1\\lifecycle_checks_v2\\failed_preflight_20260916T074400899935",
+    "formal_training_calls": 0,
+    "final_test_calls": 0,
+    "scope": "control-flow fixtures/mocks only; no replacement for CUDA or native Trainer checks"
+  }
+}
