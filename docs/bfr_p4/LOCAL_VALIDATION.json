@@ -1,0 +1,181 @@
+{
+  "status": "PASSED_LOCAL_SERVER_PENDING",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN",
+  "server_login": "NOT_PERFORMED",
+  "base_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "variants": {
+    "cbr_lif_bfr_p4_v1": {
+      "initialization_status": "PASSED",
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+      "checkpoint_sha256": "3be6795a7d262335c426b0ba7e46a5fccc3fe97085bee7ab8680e2c890eaa43f",
+      "common_state_count": 552,
+      "new_trainable_count": 8,
+      "new_parameters": 20688,
+      "trainer_class_adaptations": 9,
+      "local_status": "PASSED_LOCAL",
+      "modes": {
+        "cpu_fp32": {
+          "status": "PASSED",
+          "actual_batches": 2,
+          "effective_updates": 2,
+          "scale_history": [
+            1.0,
+            1.0
+          ],
+          "peak_allocated_bytes": null
+        },
+        "cuda_fp32": {
+          "status": "PASSED",
+          "actual_batches": 2,
+          "effective_updates": 2,
+          "scale_history": [
+            1.0,
+            1.0
+          ],
+          "peak_allocated_bytes": 600261632
+        },
+        "cuda_amp": {
+          "status": "PASSED",
+          "actual_batches": 6,
+          "effective_updates": 2,
+          "scale_history": [
+            65536.0,
+            32768.0,
+            16384.0,
+            8192.0,
+            4096.0,
+            4096.0
+          ],
+          "peak_allocated_bytes": 616722944
+        }
+      },
+      "benchmark_cuda": {
+        "device": "cuda",
+        "batch": 1,
+        "imgsz": 640,
+        "first_ms": 1409.2408999999968,
+        "subsequent_ms": [
+          40.7439000000025,
+          42.32329999999962,
+          44.25839999999681
+        ],
+        "cache": "No persistent DCT cache: constants regenerated in FP32 on every call",
+        "peak_allocated_bytes": 162054656
+      },
+      "learned_lifecycle_rechecks": {
+        "cpu_fp32": {
+          "status": "PASSED",
+          "sha256": "4e2c23f282406de0b427c5726e06d16557e83914ffcef50f1d27958d0e71bcac"
+        },
+        "cuda_amp": {
+          "status": "PASSED",
+          "sha256": "3185e1543c5319496423fde3e886e2e445f823766efc2edc1bb4a382799c3785"
+        },
+        "cuda_fp32": {
+          "status": "PASSED",
+          "sha256": "8ab660744c07f8f00482e07bdabe9dcdbf6a7777a4583c3866553b502a22dc94"
+        }
+      },
+      "native_save_roundtrips": {
+        "native_save_cpu": {
+          "status": "PASSED",
+          "sha256": "509f1db759b7cc1733472acc8abcf19714b44222caed6730f505f44474f736a4"
+        },
+        "native_save_cuda_amp": {
+          "status": "PASSED",
+          "sha256": "b8ec0d16fc1d76bca05334b837752c891724637b317661215bbfc223312bfbd4"
+        }
+      }
+    },
+    "bfr_p4_v1": {
+      "initialization_status": "PASSED",
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+      "checkpoint_sha256": "8a65ae9c3511b782c22c04c0e4765dd241bb5b1f26560e3b1f1eea6e319f6f0f",
+      "common_state_count": 533,
+      "new_trainable_count": 8,
+      "new_parameters": 20688,
+      "trainer_class_adaptations": 9,
+      "local_status": "PASSED_LOCAL",
+      "modes": {
+        "cpu_fp32": {
+          "status": "PASSED",
+          "actual_batches": 2,
+          "effective_updates": 2,
+          "scale_history": [
+            1.0,
+            1.0
+          ],
+          "peak_allocated_bytes": null
+        },
+        "cuda_fp32": {
+          "status": "PASSED",
+          "actual_batches": 2,
+          "effective_updates": 2,
+          "scale_history": [
+            1.0,
+            1.0
+          ],
+          "peak_allocated_bytes": 595418112
+        },
+        "cuda_amp": {
+          "status": "PASSED",
+          "actual_batches": 6,
+          "effective_updates": 2,
+          "scale_history": [
+            65536.0,
+            32768.0,
+            16384.0,
+            8192.0,
+            4096.0,
+            4096.0
+          ],
+          "peak_allocated_bytes": 611466752
+        }
+      },
+      "benchmark_cuda": {
+        "device": "cuda",
+        "batch": 1,
+        "imgsz": 640,
+        "first_ms": 436.4967000000029,
+        "subsequent_ms": [
+          40.64990000000179,
+          38.19109999999881,
+          36.8206000000022
+        ],
+        "cache": "No persistent DCT cache: constants regenerated in FP32 on every call",
+        "peak_allocated_bytes": 161783296
+      },
+      "learned_lifecycle_rechecks": {
+        "cpu_fp32": {
+          "status": "PASSED",
+          "sha256": "d368ef98a3128fd0b4c208cbb89798bf46a4cdd6211a9d549392309042de1453"
+        },
+        "cuda_amp": {
+          "status": "PASSED",
+          "sha256": "9d2a10d5715bde07b371fbe063d28365e33814ad1998be84e96f6768fd5e75ef"
+        },
+        "cuda_fp32": {
+          "status": "PASSED",
+          "sha256": "3e7a34e5f2282e8dedc1536bee49fdb7c4c5274c2a334cc64bec919a91b3c4b3"
+        }
+      },
+      "native_save_roundtrips": {
+        "native_save_cpu": {
+          "status": "PASSED",
+          "sha256": "d58529ffa179f3f119b2f3c3f36c793f97bcc38eae4aa2aee6c06c79449b6951"
+        },
+        "native_save_cuda_amp": {
+          "status": "PASSED",
+          "sha256": "5fdff03d1296ac36b844bc33f62b1472f2ab24b3a8be51c29207c8adef168df3"
+        }
+      }
+    }
+  },
+  "pending": [
+    "Server B16/640 real online-augmented native AMP capacity and learned lifecycle at final code identity",
+    "Specified reference archive not found in bounded search"
+  ],
+  "precision_note": "Low-precision fusion native candidate drift was observed; continuous features and fixed-candidate diagnostic replay pass. Native output equality is not claimed.",
+  "full_evidence": "outputs/bfr_p4/<variant> plus immutable final delivery artifact; no weights are committed"
+}

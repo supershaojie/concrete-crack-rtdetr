@@ -1,0 +1,13 @@
+{
+  "status": "PENDING",
+  "reason": "Exact named reference ZIP not found in bounded project, attachments or Downloads search; no archive source claimed read.",
+  "filename": "dc2eda42-6ea1-467d-ab90-02d26882d4d0.zip",
+  "expected_sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+  "actual_path": null,
+  "searched": [
+    "D:\\rtdetr跑结果",
+    "D:\\MyProjects\\Crack_RTDETR",
+    "C:\\Users\\o'v'o\\Downloads"
+  ],
+  "implementation_source": "User exact mathematical contract; no package code copied."
+}

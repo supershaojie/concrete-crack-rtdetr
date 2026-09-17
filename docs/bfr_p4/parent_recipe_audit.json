@@ -1,0 +1,664 @@
+{
+  "status": "PASSED",
+  "source": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\training\\args.yaml",
+  "source_sha256": "31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b",
+  "prompt_sha256": "8e0ca8d2b9c3eaed0a80215c9a2470f141092ade13c1d2f82eda63dddba11b63",
+  "field_count": 109,
+  "differences": [],
+  "fields": [
+    {
+      "field": "agnostic_nms",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "amp",
+      "appendix": true,
+      "actual": true,
+      "equal": true
+    },
+    {
+      "field": "angle",
+      "appendix": 1.0,
+      "actual": 1.0,
+      "equal": true
+    },
+    {
+      "field": "augment",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "auto_augment",
+      "appendix": null,
+      "actual": null,
+      "equal": true
+    },
+    {
+      "field": "batch",
+      "appendix": 16,
+      "actual": 16,
+      "equal": true
+    },
+    {
+      "field": "bgr",
+      "appendix": 0.0,
+      "actual": 0.0,
+      "equal": true
+    },
+    {
+      "field": "box",
+      "appendix": 7.5,
+      "actual": 7.5,
+      "equal": true
+    },
+    {
+      "field": "cache",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "cfg",
+      "appendix": null,
+      "actual": null,
+      "equal": true
+    },
+    {
+      "field": "classes",
+      "appendix": null,
+      "actual": null,
+      "equal": true
+    },
+    {
+      "field": "close_mosaic",
+      "appendix": 10,
+      "actual": 10,
+      "equal": true
+    },
+    {
+      "field": "cls",
+      "appendix": 0.5,
+      "actual": 0.5,
+      "equal": true
+    },
+    {
+      "field": "compile",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "conf",
+      "appendix": null,
+      "actual": null,
+      "equal": true
+    },
+    {
+      "field": "copy_paste",
+      "appendix": 0,
+      "actual": 0,
+      "equal": true
+    },
+    {
+      "field": "copy_paste_mode",
+      "appendix": "flip",
+      "actual": "flip",
+      "equal": true
+    },
+    {
+      "field": "cos_lr",
+      "appendix": true,
+      "actual": true,
+      "equal": true
+    },
+    {
+      "field": "cutmix",
+      "appendix": 0,
+      "actual": 0,
+      "equal": true
+    },
+    {
+      "field": "data",
+      "appendix": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+      "actual": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+      "equal": true
+    },
+    {
+      "field": "degrees",
+      "appendix": 5,
+      "actual": 5,
+      "equal": true
+    },
+    {
+      "field": "deterministic",
+      "appendix": true,
+      "actual": true,
+      "equal": true
+    },
+    {
+      "field": "device",
+      "appendix": "0",
+      "actual": "0",
+      "equal": true
+    },
+    {
+      "field": "dfl",
+      "appendix": 1.5,
+      "actual": 1.5,
+      "equal": true
+    },
+    {
+      "field": "dnn",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "dropout",
+      "appendix": 0.0,
+      "actual": 0.0,
+      "equal": true
+    },
+    {
+      "field": "dynamic",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "embed",
+      "appendix": null,
+      "actual": null,
+      "equal": true
+    },
+    {
+      "field": "end2end",
+      "appendix": null,
+      "actual": null,
+      "equal": true
+    },
+    {
+      "field": "epochs",
+      "appendix": 200,
+      "actual": 200,
+      "equal": true
+    },
+    {
+      "field": "erasing",
+      "appendix": 0,
+      "actual": 0,
+      "equal": true
+    },
+    {
+      "field": "exist_ok",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "fliplr",
+      "appendix": 0.5,
+      "actual": 0.5,
+      "equal": true
+    },
+    {
+      "field": "flipud",
+      "appendix": 0.2,
+      "actual": 0.2,
+      "equal": true
+    },
+    {
+      "field": "format",
+      "appendix": "torchscript",
+      "actual": "torchscript",
+      "equal": true
+    },
+    {
+      "field": "fraction",
+      "appendix": 1.0,
+      "actual": 1.0,
+      "equal": true
+    },
+    {
+      "field": "freeze",
+      "appendix": null,
+      "actual": null,
+      "equal": true
+    },
+    {
+      "field": "half",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "hsv_h",
+      "appendix": 0.015,
+      "actual": 0.015,
+      "equal": true
+    },
+    {
+      "field": "hsv_s",
+      "appendix": 0.5,
+      "actual": 0.5,
+      "equal": true
+    },
+    {
+      "field": "hsv_v",
+      "appendix": 0.35,
+      "actual": 0.35,
+      "equal": true
+    },
+    {
+      "field": "imgsz",
+      "appendix": 640,
+      "actual": 640,
+      "equal": true
+    },
+    {
+      "field": "int8",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "iou",
+      "appendix": 0.7,
+      "actual": 0.7,
+      "equal": true
+    },
+    {
+      "field": "keras",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "kobj",
+      "appendix": 1.0,
+      "actual": 1.0,
+      "equal": true
+    },
+    {
+      "field": "line_width",
+      "appendix": null,
+      "actual": null,
+      "equal": true
+    },
+    {
+      "field": "lr0",
+      "appendix": 0.0005,
+      "actual": 0.0005,
+      "equal": true
+    },
+    {
+      "field": "lrf",
+      "appendix": 0.01,
+      "actual": 0.01,
+      "equal": true
+    },
+    {
+      "field": "mask_ratio",
+      "appendix": 4,
+      "actual": 4,
+      "equal": true
+    },
+    {
+      "field": "max_det",
+      "appendix": 300,
+      "actual": 300,
+      "equal": true
+    },
+    {
+      "field": "mixup",
+      "appendix": 0.05,
+      "actual": 0.05,
+      "equal": true
+    },
+    {
+      "field": "mode",
+      "appendix": "train",
+      "actual": "train",
+      "equal": true
+    },
+    {
+      "field": "model",
+      "appendix": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/weights/c19_lif_v1_controlled_init.pt",
+      "actual": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/weights/c19_lif_v1_controlled_init.pt",
+      "equal": true
+    },
+    {
+      "field": "momentum",
+      "appendix": 0.937,
+      "actual": 0.937,
+      "equal": true
+    },
+    {
+      "field": "mosaic",
+      "appendix": 0.8,
+      "actual": 0.8,
+      "equal": true
+    },
+    {
+      "field": "multi_scale",
+      "appendix": 0.0,
+      "actual": 0.0,
+      "equal": true
+    },
+    {
+      "field": "name",
+      "appendix": "c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "actual": "c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "equal": true
+    },
+    {
+      "field": "nbs",
+      "appendix": 64,
+      "actual": 64,
+      "equal": true
+    },
+    {
+      "field": "nms",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "opset",
+      "appendix": null,
+      "actual": null,
+      "equal": true
+    },
+    {
+      "field": "optimize",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "optimizer",
+      "appendix": "AdamW",
+      "actual": "AdamW",
+      "equal": true
+    },
+    {
+      "field": "overlap_mask",
+      "appendix": true,
+      "actual": true,
+      "equal": true
+    },
+    {
+      "field": "patience",
+      "appendix": 50,
+      "actual": 50,
+      "equal": true
+    },
+    {
+      "field": "perspective",
+      "appendix": 0.0002,
+      "actual": 0.0002,
+      "equal": true
+    },
+    {
+      "field": "plots",
+      "appendix": true,
+      "actual": true,
+      "equal": true
+    },
+    {
+      "field": "pose",
+      "appendix": 12.0,
+      "actual": 12.0,
+      "equal": true
+    },
+    {
+      "field": "pretrained",
+      "appendix": true,
+      "actual": true,
+      "equal": true
+    },
+    {
+      "field": "profile",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "project",
+      "appendix": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+      "actual": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+      "equal": true
+    },
+    {
+      "field": "rect",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "resume",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "retina_masks",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "rle",
+      "appendix": 1.0,
+      "actual": 1.0,
+      "equal": true
+    },
+    {
+      "field": "save",
+      "appendix": true,
+      "actual": true,
+      "equal": true
+    },
+    {
+      "field": "save_conf",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "save_crop",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "save_dir",
+      "appendix": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "actual": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "equal": true
+    },
+    {
+      "field": "save_frames",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "save_json",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "save_period",
+      "appendix": -1,
+      "actual": -1,
+      "equal": true
+    },
+    {
+      "field": "save_txt",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "scale",
+      "appendix": 0.4,
+      "actual": 0.4,
+      "equal": true
+    },
+    {
+      "field": "seed",
+      "appendix": 42,
+      "actual": 42,
+      "equal": true
+    },
+    {
+      "field": "shear",
+      "appendix": 1.5,
+      "actual": 1.5,
+      "equal": true
+    },
+    {
+      "field": "show",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "show_boxes",
+      "appendix": true,
+      "actual": true,
+      "equal": true
+    },
+    {
+      "field": "show_conf",
+      "appendix": true,
+      "actual": true,
+      "equal": true
+    },
+    {
+      "field": "show_labels",
+      "appendix": true,
+      "actual": true,
+      "equal": true
+    },
+    {
+      "field": "simplify",
+      "appendix": true,
+      "actual": true,
+      "equal": true
+    },
+    {
+      "field": "single_cls",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "source",
+      "appendix": null,
+      "actual": null,
+      "equal": true
+    },
+    {
+      "field": "split",
+      "appendix": "val",
+      "actual": "val",
+      "equal": true
+    },
+    {
+      "field": "stream_buffer",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "task",
+      "appendix": "detect",
+      "actual": "detect",
+      "equal": true
+    },
+    {
+      "field": "time",
+      "appendix": null,
+      "actual": null,
+      "equal": true
+    },
+    {
+      "field": "tracker",
+      "appendix": "botsort.yaml",
+      "actual": "botsort.yaml",
+      "equal": true
+    },
+    {
+      "field": "translate",
+      "appendix": 0.1,
+      "actual": 0.1,
+      "equal": true
+    },
+    {
+      "field": "val",
+      "appendix": true,
+      "actual": true,
+      "equal": true
+    },
+    {
+      "field": "verbose",
+      "appendix": true,
+      "actual": true,
+      "equal": true
+    },
+    {
+      "field": "vid_stride",
+      "appendix": 1,
+      "actual": 1,
+      "equal": true
+    },
+    {
+      "field": "visualize",
+      "appendix": false,
+      "actual": false,
+      "equal": true
+    },
+    {
+      "field": "warmup_bias_lr",
+      "appendix": 0.1,
+      "actual": 0.1,
+      "equal": true
+    },
+    {
+      "field": "warmup_epochs",
+      "appendix": 5,
+      "actual": 5,
+      "equal": true
+    },
+    {
+      "field": "warmup_momentum",
+      "appendix": 0.8,
+      "actual": 0.8,
+      "equal": true
+    },
+    {
+      "field": "weight_decay",
+      "appendix": 0.0001,
+      "actual": 0.0001,
+      "equal": true
+    },
+    {
+      "field": "workers",
+      "appendix": 8,
+      "actual": 8,
+      "equal": true
+    },
+    {
+      "field": "workspace",
+      "appendix": null,
+      "actual": null,
+      "equal": true
+    }
+  ]
+}
