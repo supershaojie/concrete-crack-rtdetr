@@ -62,6 +62,7 @@ from ultralytics.nn.modules import (
     Pose,
     Pose26,
     RepC3,
+    PSDBRepC3,
     RepConv,
     RepNCSPELAN4,
     RepVGGDW,
@@ -1671,6 +1672,17 @@ def parse_model(d, ch, verbose=True):
                     args.extend((True, 1.2))
             if m is C2fCIB:
                 legacy = False
+        elif m is PSDBRepC3:
+            if not isinstance(f, (list, tuple)) or len(f) != 2:
+                raise ValueError("PSDBRepC3 requires [fusion_input, P2] source indices")
+            c1, c2 = ch[f[0]], args[0]
+            if c2 != nc:
+                c2 = make_divisible(min(c2, max_channels) * width, 8)
+            e = args[1] if len(args) > 1 else 0.5
+            detail_channels = args[2] if len(args) > 2 else 32
+            phase_channels = args[3] if len(args) > 3 else 8
+            args = [c1, c2, n, e, ch[f[1]], detail_channels, phase_channels]
+            n = 1  # The inherited RepC3 owns the internal repeats.
         elif m is AIFI:
             args = [ch[f], *args]
         elif m is Blocks:

@@ -111,8 +111,11 @@ from .transformer import (
 
 from .lif_down import LIFDown
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
+from .psdb_p3 import PSDBP3, PSDBRepC3
 
 __all__ = (
+    "PSDBP3",
+    "PSDBRepC3",
     "LIFDown",
     "CrackBoundaryRefinement",
     "RTDETRDecoderCBR",

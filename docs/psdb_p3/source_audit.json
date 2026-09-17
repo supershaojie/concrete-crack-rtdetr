@@ -1,0 +1,50 @@
+{
+  "base_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "remote": "https://github.com/supershaojie/concrete-crack-rtdetr.git",
+  "sdb_reference_commit": "f976779bcdb114178f83a3d2fa959baf6d9655ec",
+  "sdb_reference_read_only_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-sdb-p3-v1",
+  "original_module_lf_sha256": {
+    "lif_down": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+    "cbr": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+  },
+  "applicable_AGENTS_md": [],
+  "source_weight": {
+    "path": "D:/MyProjects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "verified": true
+  },
+  "parent_args": {
+    "path": "D:/rtdetr跑结果/C19＋LIF：原 CBR＋LIF-Down v1/training/args.yaml",
+    "fields": 109,
+    "appendix_exact": true
+  },
+  "module_archive": {
+    "status": "PENDING_NOT_VISIBLE_LOCALLY",
+    "expected_filename": "dc2eda42-6ea1-467d-ab90-02d26882d4d0.zip",
+    "expected_sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+    "bounded_searches": [
+      "D:/rtdetr跑结果 *.zip recursive depth3",
+      "C:/Users/o'v'o/Downloads *.zip recursive depth3",
+      "D:/MyProjects/Crack_RTDETR root *.zip",
+      "D:/MyProjects/Crack_RTDETR/tmp and output filename or block.py"
+    ],
+    "SPDConv_read": false,
+    "CARAFE_read": false,
+    "implementation_basis": "Complete attached mathematical contract; no archive installation/training scripts executed"
+  },
+  "papers": [
+    {
+      "url": "https://arxiv.org/abs/2208.03641",
+      "read": "abstract only",
+      "use": "Mechanism context; no PSDB accuracy or novelty evidence"
+    },
+    {
+      "url": "https://arxiv.org/abs/2012.04733",
+      "read": "abstract only",
+      "use": "Mechanism context; no PSDB accuracy or novelty evidence"
+    }
+  ],
+  "formal_training": "NOT_STARTED",
+  "test": "NOT_RUN",
+  "server_access": "NOT_ACCESSED"
+}
