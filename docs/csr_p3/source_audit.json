@@ -1,0 +1,44 @@
+{
+  "base_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "branch": "exp-rtdetr-r18-lite-csr-p3-v1",
+  "remote": "https://github.com/supershaojie/concrete-crack-rtdetr.git",
+  "contract_sha256": "c88aff552cd882139ca0a57879d3f2260df672817091acf004f31977829dceea",
+  "applicable_agents_files": [],
+  "module_package": {
+    "actual_path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-20260623.zip",
+    "sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+    "exact_expected_match": true,
+    "reference_files": [
+      {
+        "path": "RTDETR-main/ultralytics/nn/extra_modules/dynamic_snake_conv.py",
+        "bytes": 13850,
+        "sha256": "70db86a39e7379764a34dce186ec8ca9b0ed8540dcf2cff1d1ac29cfe20adcc7",
+        "extracted_path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\dynamic_snake_conv.py",
+        "extracted_exact": true
+      },
+      {
+        "path": "RTDETR-main/ultralytics/nn/extra_modules/block.py",
+        "bytes": 579266,
+        "sha256": "e3e3617c89bd7caf350d2601740f2e399847a16a3a659d7b3e40010b88498cd2",
+        "extracted_path": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-main\\ultralytics\\nn\\extra_modules\\block.py",
+        "extracted_exact": true
+      }
+    ],
+    "executed_archive_scripts": false
+  },
+  "parent_args": {
+    "path": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\training\\args.yaml",
+    "sha256": "31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b",
+    "appendix_exact": true,
+    "field_count": 109
+  },
+  "unified_source": {
+    "path": "D:/rtdetr跑结果/c2 200e在线/c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e"
+  },
+  "parent_dataset_inventory_source": "D:/rtdetr跑结果/C19＋LIF：原 CBR＋LIF-Down v1/metadata/launch/dataset_inventory.json",
+  "paper": "https://arxiv.org/abs/2307.08388",
+  "paper_scope": "Motivation only; no topology guarantee or accuracy claim.",
+  "formal_training": "NOT_STARTED",
+  "test": "NOT_RUN"
+}

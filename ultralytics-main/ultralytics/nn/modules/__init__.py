@@ -110,10 +110,14 @@ from .transformer import (
 )
 
 from .lif_down import LIFDown
+from .csr_p3 import CSR, CSRConv, CurvedSamplingResidual
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
 
 __all__ = (
     "LIFDown",
+    "CSR",
+    "CSRConv",
+    "CurvedSamplingResidual",
     "CrackBoundaryRefinement",
     "RTDETRDecoderCBR",
     "AIFI",
