@@ -111,8 +111,11 @@ from .transformer import (
 
 from .lif_down import LIFDown
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
+from .sdb_p3 import SDBP3, SDBRepC3
 
 __all__ = (
+    "SDBP3",
+    "SDBRepC3",
     "LIFDown",
     "CrackBoundaryRefinement",
     "RTDETRDecoderCBR",

@@ -68,6 +68,7 @@ from ultralytics.nn.modules import (
     ResNetLayer,
     RTDETRDecoder,
     RTDETRDecoderCBR,
+    SDBRepC3,
     SCDown,
     Segment,
     Segment26,
@@ -1649,7 +1650,16 @@ def parse_model(d, ch, verbose=True):
                 with contextlib.suppress(ValueError):
                     args[j] = locals()[a] if a in locals() else ast.literal_eval(a)
         n = n_ = max(round(n * depth), 1) if n > 1 else n  # depth gain
-        if m in base_modules:
+        if m is SDBRepC3:
+            if not isinstance(f, list) or len(f) != 2 or len(args) != 3:
+                raise ValueError("SDBRepC3 expects from=[fusion_input, P2] and args=[c2, e, detail_channels]")
+            c1, p2_channels = ch[f[0]], ch[f[1]]
+            c2 = args[0]
+            if c2 != nc:
+                c2 = make_divisible(min(c2, max_channels) * width, 8)
+            args = [c1, c2, n, args[1], p2_channels, args[2]]
+            n = 1  # Original depth-scaled RepConv repeats live inside this single two-input wrapper.
+        elif m in base_modules:
             c1, c2 = ch[f], args[0]
             if c2 != nc:  # if c2 != nc (e.g., Classify() output)
                 c2 = make_divisible(min(c2, max_channels) * width, 8)

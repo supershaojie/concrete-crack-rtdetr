@@ -1,0 +1,34 @@
+{
+  "base_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "remote": "https://github.com/supershaojie/concrete-crack-rtdetr.git",
+  "original_module_lf_sha256": {
+    "lif_down": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+    "cbr": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+  },
+  "module_archive": {
+    "status": "NOT_VISIBLE_LOCALLY",
+    "expected_filename": "dc2eda42-6ea1-467d-ab90-02d26882d4d0.zip",
+    "expected_sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+    "bounded_searches": [
+      "D:/rtdetr跑结果 (*.zip)",
+      "D:/MyProjects/Crack_RTDETR (root *.zip)",
+      "D:/MyProjects/Crack_RTDETR/tmp and output (filename/block.py)",
+      "C:/Users/o'v'o/Downloads (*.zip)"
+    ],
+    "reference_SPDConv_read": false,
+    "implementation_basis": "Full attached mathematical contract; archive unavailable; no third-party scripts executed"
+  },
+  "paper": {
+    "url": "https://arxiv.org/abs/2208.03641",
+    "read": "abstract",
+    "use": "Space-to-depth mechanism reference only; no SDB accuracy claim"
+  },
+  "source_weight": {
+    "path": "D:/MyProjects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "verified": true
+  },
+  "applicable_AGENTS_md": [],
+  "formal_training": "NOT_STARTED",
+  "test": "NOT_RUN"
+}
