@@ -1,0 +1,44 @@
+{
+  "prompt_path": "D:\\rtdetr跑结果\\SRE未跑\\SRE_Codex_Prompt.md",
+  "prompt_sha256": "fb0b30b79e635c7f8f7c48d530dee933219f4a3c25172550ff6f9bd30b9e1f9a",
+  "base_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "origin": "https://github.com/supershaojie/concrete-crack-rtdetr.git",
+  "reference_zip": {
+    "status": "PENDING",
+    "reason": "Not found in bounded depth-3 search of D:/rtdetr跑结果, D:/MyProjects, user Downloads and Desktop; historical /workspace path unavailable on Windows",
+    "expected_sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc"
+  },
+  "local_data_identity": {
+    "train": {
+      "images": 6048,
+      "boxes": 45573,
+      "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+      "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"
+    },
+    "val": {
+      "images": 1728,
+      "boxes": 12840,
+      "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+      "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+    },
+    "test": {
+      "images": 864,
+      "boxes": 6663,
+      "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+      "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"
+    }
+  },
+  "parent_data_equal": true,
+  "module_hashes": {
+    "lif_down": {
+      "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+      "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+    },
+    "cbr": {
+      "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+      "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+    }
+  },
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN"
+}

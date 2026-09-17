@@ -1,0 +1,17 @@
+{
+  "batches": 0,
+  "final_test": "NOT_RUN",
+  "raw_report": "local_real_capacity.json",
+  "status": "PENDING",
+  "initial_attempt_wall_guard": "not present; manual tool-session interruption after prolonged Windows setup",
+  "formal_training": "NOT_STARTED",
+  "effective_updates": 0,
+  "elapsed_since_last_progress_seconds": 462.1444841,
+  "raw_report_sha256": "8e4226bfc5f605aa3b2be88f9a65db8f90405d032766d97e255ada3e97e27519",
+  "observed_process_exit_utc": "2026-09-17T17:08:29.4327288Z",
+  "last_progress_utc": "2026-09-17T17:00:47.2996668Z",
+  "raw_report_status": "RUNNING at interruption",
+  "original_batch_budget": 24,
+  "next_step": "Run unchanged B16/640 native AMP preflight on server; new default POSIX600s wall guard is implemented.",
+  "reason": "Native Windows dataloader startup stopped progressing before first B16 batch; disposable helper interrupted via its tool session. No B16 peak-memory result or effective optimizer update was obtained."
+}

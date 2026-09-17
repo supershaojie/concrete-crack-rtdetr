@@ -1,0 +1,88 @@
+{
+  "status": "PASSED",
+  "checks": [
+    {
+      "help_output": "check_sre.py.txt",
+      "exit_code": 0,
+      "basis": "prior batch checked every return code before syntax-stage exception"
+    },
+    {
+      "help_output": "eval_sre.py.txt",
+      "exit_code": 0,
+      "basis": "prior batch checked every return code before syntax-stage exception"
+    },
+    {
+      "help_output": "eval_sre.py_compare.txt",
+      "exit_code": 0,
+      "basis": "prior batch checked every return code before syntax-stage exception"
+    },
+    {
+      "help_output": "eval_sre.py_recall.txt",
+      "exit_code": 0,
+      "basis": "prior batch checked every return code before syntax-stage exception"
+    },
+    {
+      "help_output": "eval_sre.py_test.txt",
+      "exit_code": 0,
+      "basis": "prior batch checked every return code before syntax-stage exception"
+    },
+    {
+      "help_output": "eval_sre.py_val.txt",
+      "exit_code": 0,
+      "basis": "prior batch checked every return code before syntax-stage exception"
+    },
+    {
+      "help_output": "init_sre.py.txt",
+      "exit_code": 0,
+      "basis": "prior batch checked every return code before syntax-stage exception"
+    },
+    {
+      "help_output": "make_sre_handoff.py.txt",
+      "exit_code": 0,
+      "basis": "prior batch checked every return code before syntax-stage exception"
+    },
+    {
+      "help_output": "pack_sre_light.py.txt",
+      "exit_code": 0,
+      "basis": "prior batch checked every return code before syntax-stage exception"
+    },
+    {
+      "help_output": "preflight_sre.py.txt",
+      "exit_code": 0,
+      "basis": "prior batch checked every return code before syntax-stage exception"
+    },
+    {
+      "help_output": "train_sre.py.txt",
+      "exit_code": 0,
+      "basis": "prior batch checked every return code before syntax-stage exception"
+    },
+    {
+      "bash_block": 0,
+      "syntax": "PASSED"
+    },
+    {
+      "bash_block": 1,
+      "syntax": "PASSED"
+    },
+    {
+      "bash_block": 2,
+      "syntax": "PASSED"
+    },
+    {
+      "bash_block": 3,
+      "syntax": "PASSED"
+    },
+    {
+      "bash_block": 4,
+      "syntax": "PASSED"
+    },
+    {
+      "bash_block": 5,
+      "syntax": "PASSED"
+    },
+    {
+      "bash_block": 6,
+      "syntax": "PASSED"
+    }
+  ]
+}

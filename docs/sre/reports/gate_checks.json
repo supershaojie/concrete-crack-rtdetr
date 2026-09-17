@@ -1,0 +1,115 @@
+{
+  "status": "PASSED",
+  "schema": "sre_actual_gate_checks_v1",
+  "count": 20,
+  "checks": [
+    {
+      "case": "valid complete evidence",
+      "result": "ACCEPTED"
+    },
+    {
+      "case": "PENDING server preflight",
+      "result": "REJECTED",
+      "reason": "Server preflight is not PASSED; inspect PENDING/FAILED checks"
+    },
+    {
+      "case": "stale execution commit",
+      "result": "REJECTED",
+      "reason": "Preflight commit/code/config identity changed"
+    },
+    {
+      "case": "modified executable hash",
+      "result": "REJECTED",
+      "reason": "Preflight commit/code/config identity changed"
+    },
+    {
+      "case": "wrong experiment variant",
+      "result": "REJECTED",
+      "reason": "Preflight commit/code/config identity changed"
+    },
+    {
+      "case": "controlled init file changed",
+      "result": "REJECTED",
+      "reason": "Controlled init hash changed"
+    },
+    {
+      "case": "initialization report hash changed",
+      "result": "REJECTED",
+      "reason": "Controlled init hash changed"
+    },
+    {
+      "case": "unified source file changed",
+      "result": "REJECTED",
+      "reason": "Unified source missing/changed"
+    },
+    {
+      "case": "source report hash changed",
+      "result": "REJECTED",
+      "reason": "Unified source missing/changed"
+    },
+    {
+      "case": "data identity changed",
+      "result": "REJECTED",
+      "reason": "Data identity changed since preflight"
+    },
+    {
+      "case": "only one effective update",
+      "result": "REJECTED",
+      "reason": "Real B16/640 native AMP/two effective updates gate not passed"
+    },
+    {
+      "case": "native AMP disabled",
+      "result": "REJECTED",
+      "reason": "Real B16/640 native AMP/two effective updates gate not passed"
+    },
+    {
+      "case": "batch reduced",
+      "result": "REJECTED",
+      "reason": "Real B16/640 native AMP/two effective updates gate not passed"
+    },
+    {
+      "case": "image size reduced",
+      "result": "REJECTED",
+      "reason": "Real B16/640 native AMP/two effective updates gate not passed"
+    },
+    {
+      "case": "upstream gradients unverified",
+      "result": "REJECTED",
+      "reason": "Real B16/640 native AMP/two effective updates gate not passed"
+    },
+    {
+      "case": "capacity still PENDING",
+      "result": "REJECTED",
+      "reason": "Real B16/640 native AMP/two effective updates gate not passed"
+    },
+    {
+      "case": "native resume evidence missing",
+      "result": "REJECTED",
+      "reason": "Native optimizer/scaler/epoch resume not verified"
+    },
+    {
+      "case": "core lifecycle still PENDING",
+      "result": "REJECTED",
+      "reason": "Mathematics/structure/lifecycle checks not passed"
+    },
+    {
+      "case": "CUDA evidence absent",
+      "result": "REJECTED",
+      "reason": "CUDA server preflight required"
+    },
+    {
+      "case": "dirty source guard propagated",
+      "result": "REJECTED",
+      "reason": "Synthetic dirty executable/config state rejected"
+    }
+  ],
+  "source_lf_sha256": {
+    "sre_common.py": "c34d2c8d4c17a0b8ca70b94ad3c26a7d5fa3a63f3e07245fd457eb727936ac3e",
+    "check_sre_gate.py": "65063812c8091b2c09b50bf1706388fefcac77ae3582a2de8b4b45f7bb7cdc00"
+  },
+  "execution_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "scope": "Actual common.gate; only external paths/JSON/hashes/identity/clean-state probes mocked. No model or training execution.",
+  "server_preflight": "NOT_RUN_BY_THIS_TEST",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN"
+}

@@ -1,0 +1,122 @@
+{
+  "status": "ACHIEVED",
+  "R_at_P": 0.835202492211838,
+  "threshold": 0.6047021150588989,
+  "precision": 0.8658162441466172,
+  "recall": 0.835202492211838,
+  "TP": 10724,
+  "FP": 1662,
+  "FN": 2116,
+  "selected_predictions": 12386,
+  "gt_count": 12840,
+  "predictions": 518400,
+  "precision_target": 0.8656,
+  "threshold_rule": "score >= original unique threshold, all ties included",
+  "tie_break": "maximum Recall, then highest Precision, then highest threshold",
+  "empty_predictions": "undefined Precision; never a successful working point",
+  "realizable_nonempty_points": 506183,
+  "schema": "sre_val_fixed_validator_labels_unique_scores_v1",
+  "role": "parent",
+  "split": "val",
+  "matching_IoU": 0.5,
+  "score_floor": 0.001,
+  "candidate_pool": "original corrected validator conf > 0.001, at most 300 queries/image, nc=1; pretruncated",
+  "matching": "RTDETRValidator._process_batch -> BaseValidator.match_predictions(use_scipy=False); class-aware IoU >= threshold, IoU-sorted greedy unique prediction then unique GT; one fixed candidate pool, no rematching at score thresholds",
+  "policy": "corrected_sorted_conf_mask_v1",
+  "data_identity": {
+    "images": 1728,
+    "boxes": 12840,
+    "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+    "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+  },
+  "checkpoint_sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa",
+  "checkpoint": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\training\\weights\\best.pt",
+  "checkpoint_file_verified": true,
+  "evaluation_report": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\val\\metrics.json",
+  "evaluation_report_sha256": "45a1f17e11bc4e3437ee90a0c9a8f6e9c46d68556c14bd71a4bf9ba89c651619",
+  "predictions_gt": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\val\\predictions_gt.jsonl.gz",
+  "predictions_gt_sha256": "3c9b43f23b86329effa8bd2fb78f51b4eb0ab413cf35a06e46c9e5037d0b9f16",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-sre-v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-sre-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-sre-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    }
+  },
+  "source_sha256": {
+    "ultralytics-main/ultralytics/models/yolo/detect/val.py": "3943b3fc05ddbaf32eb9f425437c4baccdff4d84cc000d03f197f8950634ef2d",
+    "ultralytics-main/ultralytics/engine/validator.py": "4897c61f7ab694eb8ac5cfa2d4c960a69c15807c56be2fcc68118f35b26238dc",
+    "tools/c19_lif_v1_results.py": "0d99a7c3ccec16d4106d2a7f8b94cc3edae0b35f1a46d3db8a2dad2838bf1023",
+    "tools/eval_sre.py": "fbb0595338a46f043632b4533f00340ca1fe108731d32b9ea8f1fa75fa208bb7"
+  },
+  "original_metrics": {
+    "precision": 0.8655727028797452,
+    "recall": 0.835202492211838,
+    "mAP50": 0.8956724997170779,
+    "AP75": 0.5453045665315482,
+    "mAP50_95": 0.5245427221919051,
+    "ap_by_class": [
+      [
+        0.8956724997170779,
+        0.8603126427566504,
+        0.8113047993273436,
+        0.7414990716698165,
+        0.6540360319087519,
+        0.5453045665315482,
+        0.4105416224095811,
+        0.24408417635724655,
+        0.07924259867304224,
+        0.0034292125679925636
+      ]
+    ]
+  },
+  "reconstructed_metrics": {
+    "precision": 0.8655727028797452,
+    "recall": 0.835202492211838,
+    "mAP50": 0.8956724997170779,
+    "AP75": 0.545304565423428,
+    "mAP50_95": 0.5245428513356194,
+    "ap_by_class": [
+      [
+        0.8956724997170779,
+        0.8603126427566504,
+        0.8113047993273436,
+        0.7414990716698165,
+        0.6540360319087519,
+        0.545304565423428,
+        0.4105416224095811,
+        0.24408417345472316,
+        0.07924389412082863,
+        0.0034292125679925636
+      ]
+    ]
+  },
+  "metric_reconstruction_max_abs_error": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "mAP50": 0.0,
+    "AP75": 1.1081202622165165e-09,
+    "mAP50_95": 1.2914371427807936e-07,
+    "ap_by_class": 1.2954477863896807e-06
+  },
+  "metric_reconstruction_policy": "P/R/AP50 required exactly equal; higher-IoU AP differences disclosed and not used by this IoU=.50 diagnostic",
+  "archive_roundtrip_caveat": "Historical boxes were exported in float32 original-image pixels. Reversing scale can change high-IoU boundary matches. This is archived-prediction reconstruction, not new model inference or a new official val run.",
+  "tp_label_origin": "original validator matcher replayed once on archived fixed candidates; exact historical P/R/AP50 audited",
+  "matching_replayed_images": 1728,
+  "interpretation": "fixed validator matching-label PR diagnostic; no threshold rematching, smoothing or interpolation",
+  "comparison": "Parent and candidate use their own val threshold; historical maximum-F1 Recall is not parent R_at_P"
+}

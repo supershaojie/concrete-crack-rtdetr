@@ -1,0 +1,7 @@
+path: /root/autodl-tmp/projects/Crack_RTDETR/datasets/crack_det
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: crack

@@ -1,0 +1,57 @@
+{
+  "status": "PASSED",
+  "checks": [
+    {
+      "command": "preflight_sre.py --help",
+      "exit_code": 0
+    },
+    {
+      "command": "check_sre_gate.py --help",
+      "exit_code": 0
+    },
+    {
+      "command": "check_sre_resume.py --help",
+      "exit_code": 0
+    },
+    {
+      "command": "train_sre.py --help",
+      "exit_code": 0
+    },
+    {
+      "command": "make_sre_handoff.py --help",
+      "exit_code": 0
+    },
+    {
+      "bash_block": 0,
+      "syntax": "PASSED"
+    },
+    {
+      "bash_block": 1,
+      "syntax": "PASSED"
+    },
+    {
+      "bash_block": 2,
+      "syntax": "PASSED"
+    },
+    {
+      "bash_block": 3,
+      "syntax": "PASSED"
+    },
+    {
+      "bash_block": 4,
+      "syntax": "PASSED"
+    },
+    {
+      "bash_block": 5,
+      "syntax": "PASSED"
+    },
+    {
+      "bash_block": 6,
+      "syntax": "PASSED"
+    },
+    {
+      "parent_actual_vs_appendix": "EXACT",
+      "fields": 109
+    }
+  ]
+}

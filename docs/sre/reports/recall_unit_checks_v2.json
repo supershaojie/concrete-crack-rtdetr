@@ -1,0 +1,21 @@
+{
+  "status": "PASSED",
+  "checks": [
+    "ties pooled; impossible internal tie point rejected",
+    "no achieved point is null",
+    "empty prediction never a valid point",
+    "maximum recall ties choose highest precision",
+    "whole dataset original score groups",
+    "actual validator: two predictions cannot duplicate one GT",
+    "actual validator: one prediction cannot match two GT",
+    "actual validator class-aware match",
+    "original corrected_sorted_conf_mask_v1 filters sorted scores",
+    "impossible TP count rejected",
+    "two-image synthetic API smoke: actual validator capture, image identity, empty image and full metric JSON",
+    "light archive bounded and independently hash verified; weights/raw predictions excluded",
+    "excluded evidence recorded only in manifest"
+  ],
+  "count": 13,
+  "training": "NOT_STARTED",
+  "final_test": "NOT_RUN"
+}
