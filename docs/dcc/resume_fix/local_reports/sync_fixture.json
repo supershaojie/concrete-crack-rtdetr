@@ -1,0 +1,95 @@
+{
+  "status": "PASSED",
+  "scope": "Isolated local Git repository reading existing object alternates plus fixture-only commits; no remote connection or real branch movement",
+  "old_commit": "5049bb0010f91aa89cd0294024ea73f6b0396164",
+  "fixture_target": "1068f797c819680cd1acd89424514cb0c2146d13",
+  "fixture_directory": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\resume_fix_ops\\sync_fixture_1789749161",
+  "script_lf_sha256": "b70e4fa77d986126b0845a8f38ac715456bed4d31b948487876e5e5348a61ffd",
+  "bash_syntax": "PASSED",
+  "cases": {
+    "clean": {
+      "status": "PASSED",
+      "expected_success": true,
+      "exit_code": 0,
+      "head": "1068f797c819680cd1acd89424514cb0c2146d13",
+      "output_preserved": true,
+      "local_changes_preserved_on_rejection": false,
+      "backup_count": 0,
+      "stdout": "Verified worktree: D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-dcc-v1/outputs/dcc/resume_fix_ops/sync_fixture_1789749161/clean\nHEAD: 1068f797c819680cd1acd89424514cb0c2146d13\nBase ancestor: a0459d6a652cb702699087c88fa39a3e4c4087ec\nSync complete. Formal training NOT_STARTED; final test NOT_RUN.\n",
+      "stderr": "Previous HEAD position was 5049bb0 feat(rtdetr): add DCC v1 with controlled init and bounded audit tools\nHEAD is now at 1068f79 Isolated DCC sync fixture target\n",
+      "idempotent_rerun_passed": true
+    },
+    "known_hookfix": {
+      "status": "PASSED",
+      "expected_success": true,
+      "exit_code": 0,
+      "head": "1068f797c819680cd1acd89424514cb0c2146d13",
+      "output_preserved": true,
+      "local_changes_preserved_on_rejection": false,
+      "backup_count": 1,
+      "stdout": "Verified local hook fix backed up before absorption: D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-dcc-v1/outputs/dcc/resume_fix_ops/sync_fixture_1789749161/known_hookfix/outputs/dcc/sync_backups/20260918T163315Z_1491\nVerified worktree: D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-dcc-v1/outputs/dcc/resume_fix_ops/sync_fixture_1789749161/known_hookfix\nHEAD: 1068f797c819680cd1acd89424514cb0c2146d13\nBase ancestor: a0459d6a652cb702699087c88fa39a3e4c4087ec\nSync complete. Formal training NOT_STARTED; final test NOT_RUN.\n",
+      "stderr": "Previous HEAD position was 5049bb0 feat(rtdetr): add DCC v1 with controlled init and bounded audit tools\nHEAD is now at 1068f79 Isolated DCC sync fixture target\n",
+      "idempotent_rerun_passed": true
+    },
+    "unknown_extra_line": {
+      "status": "PASSED",
+      "expected_success": false,
+      "exit_code": 2,
+      "head": "5049bb0010f91aa89cd0294024ea73f6b0396164",
+      "output_preserved": true,
+      "local_changes_preserved_on_rejection": true,
+      "backup_count": 0,
+      "stdout": "",
+      "stderr": "Tracked changes are not exactly the verified HEAD5049 preflight hook fix already included in the target.\nNo stash, restore, reset or checkout was performed. Preserve/review the other edits before syncing.\n",
+      "idempotent_rerun_passed": false
+    },
+    "known_plus_other_edit": {
+      "status": "PASSED",
+      "expected_success": false,
+      "exit_code": 2,
+      "head": "5049bb0010f91aa89cd0294024ea73f6b0396164",
+      "output_preserved": true,
+      "local_changes_preserved_on_rejection": true,
+      "backup_count": 0,
+      "stdout": "",
+      "stderr": "Tracked changes are not exactly the verified HEAD5049 preflight hook fix already included in the target.\nNo stash, restore, reset or checkout was performed. Preserve/review the other edits before syncing.\n",
+      "idempotent_rerun_passed": false
+    },
+    "staged_hookfix": {
+      "status": "PASSED",
+      "expected_success": false,
+      "exit_code": 2,
+      "head": "5049bb0010f91aa89cd0294024ea73f6b0396164",
+      "output_preserved": true,
+      "local_changes_preserved_on_rejection": true,
+      "backup_count": 0,
+      "stdout": "",
+      "stderr": "Tracked changes are not exactly the verified HEAD5049 preflight hook fix already included in the target.\nNo stash, restore, reset or checkout was performed. Preserve/review the other edits before syncing.\n",
+      "idempotent_rerun_passed": false
+    },
+    "ignored_output_collision": {
+      "status": "PASSED",
+      "expected_success": false,
+      "exit_code": 1,
+      "head": "5049bb0010f91aa89cd0294024ea73f6b0396164",
+      "output_preserved": true,
+      "local_changes_preserved_on_rejection": true,
+      "backup_count": 1,
+      "stdout": "Verified local hook fix backed up before absorption: D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-dcc-v1/outputs/dcc/resume_fix_ops/sync_fixture_1789749161/ignored_output_collision/outputs/dcc/sync_backups/20260918T163413Z_1156\n",
+      "stderr": "error: The following untracked working tree files would be overwritten by checkout:\n\toutputs/dcc/preserve.txt\nPlease move or remove them before you switch branches.\nAborting\nCheckout failed; the verified local hook fix was restored from its backup.\nPinned checkout failed; all output directories were preserved.\n",
+      "idempotent_rerun_passed": false
+    },
+    "other_named_branch": {
+      "status": "PASSED",
+      "expected_success": false,
+      "exit_code": 2,
+      "head": "5049bb0010f91aa89cd0294024ea73f6b0396164",
+      "output_preserved": true,
+      "local_changes_preserved_on_rejection": true,
+      "backup_count": 0,
+      "stdout": "",
+      "stderr": "Existing worktree is on another named branch; preserved untouched: fixture-unrelated\n",
+      "idempotent_rerun_passed": false
+    }
+  }
+}

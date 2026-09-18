@@ -5,7 +5,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 source "$ROOT/docs/dcc/environment.sh"
 mode="${1:---help}"
 if [[ "$mode" == --help ]]; then
-  printf '%s\n' 'Usage: bash tools/autodl_dcc.sh {init-preflight|plan|start|resume|val|test|pack|status}'
+  printf '%s\n' 'Usage: bash tools/autodl_dcc.sh {init-preflight|resume-verify|plan|start|resume|val|test|pack|status}'
   exit 0
 fi
 mkdir -p "$DCC_META/command_logs"
@@ -24,6 +24,40 @@ PY
 train=(python -u tools/train_dcc.py)
 common=(--variant "$DCC_VARIANT" --main "$DCC_MAIN" --data "$DCC_DATA" --init "$DCC_INIT")
 case "$mode" in
+  resume-verify)
+    # Affected engineering checks only. Never promotes old reports or writes
+    # passed_gates.sh, and never falls through to a formal start/resume.
+    python -u tools/check_dcc_checkpoint.py --output "$DCC_META/checkpoint_policy_${stamp}.json"
+    checks="$DCC_META/resume_checks_${stamp}"
+    python -u tools/check_dcc_resume.py --variant "$DCC_VARIANT" \
+      --source "$DCC_MAIN/weights/rtdetr_r18_lite_imagenet_backbone_init.pt" --initialized "$DCC_INIT" \
+      --real-dataset "$DCC_MAIN/datasets/crack_det" --output "$checks"
+    capacity="$DCC_META/capacity_resume_fix_${stamp}"
+    python -u tools/preflight_dcc.py "${common[@]}" --output "$capacity" --max-batches 16 --target-updates 2
+    python - "$checks/resume_checks.json" "$capacity/preflight.json" <<'PY'
+import json, sys
+from pathlib import Path
+sys.path.insert(0, 'tools')
+from dcc_common import sha256, write_json
+from train_dcc import code_identity
+checks_path, capacity_path = map(Path, sys.argv[1:])
+checks, capacity = [json.loads(p.read_text()) for p in (checks_path, capacity_path)]
+assert checks['code_identity'] == capacity['code_identity'] == code_identity(), 'Validation source changed'
+complete = checks['status'] == 'PASSED' and capacity['status'] == 'PASSED'
+summary = dict(status='AFFECTED_CHECKS_PASSED' if complete else 'UNRESOLVED',
+               checks=str(checks_path), checks_sha256=sha256(checks_path),
+               capacity=str(capacity_path), capacity_sha256=sha256(capacity_path),
+               saving_and_restoring_state={k: v.get('dcc', {}).get('checkpoint_resume', {}).get('restoration', {}).get('status', 'PENDING')
+                                          for k, v in checks['devices'].items()},
+               raw_next_update_allclose={k: v.get('dcc', {}).get('checkpoint_resume', {}).get('raw_next_update_allclose')
+                                         for k, v in checks['devices'].items()},
+               formal_start='BLOCKED: targeted diagnostics do not replace the complete strict gate',
+               formal_training='NOT_STARTED', final_test='NOT_RUN')
+write_json(checks_path.parent / 'verification_summary.json', summary)
+print(json.dumps(summary, indent=2))
+sys.exit(0 if complete else 3)
+PY
+    ;;
   init-preflight)
     # Existing controlled weights are verified, never silently overwritten.
     existing=()

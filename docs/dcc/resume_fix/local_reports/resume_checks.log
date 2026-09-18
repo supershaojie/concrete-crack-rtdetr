@@ -1,0 +1,177 @@
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+WARNING no model scale passed. Assuming scale='l'.
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 543/552 items from pretrained weights
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 547/556 items from pretrained weights
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 543/552 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+BEGIN C+D cpu_fp32
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\tools\dcc_resume_audit.py:241: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  trainer.scaler = torch.cuda.amp.GradScaler(enabled=amp)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\tools\dcc_resume_audit.py:241: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  trainer.scaler = torch.cuda.amp.GradScaler(enabled=amp)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+WARNING no model scale passed. Assuming scale='l'.
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       928  ultralytics.nn.modules.block.ConvNormLayer   [3, 32, 3, 2, None, False, 'relu']
+  1                  -1  1      9280  ultralytics.nn.modules.block.ConvNormLayer   [32, 32, 3, 1, None, False, 'relu']
+  2                  -1  1     18560  ultralytics.nn.modules.block.ConvNormLayer   [32, 64, 3, 1, None, False, 'relu']
+  3                  -1  1         0  torch.nn.modules.pooling.MaxPool2d           [3, 2, 1]                     
+  4                  -1  1    152192  ultralytics.nn.modules.block.Blocks          [64, 64, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 2, 'relu']
+  5                  -1  1    525568  ultralytics.nn.modules.block.Blocks          [64, 128, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 3, 'relu']
+  6                  -1  1   2099712  ultralytics.nn.modules.block.Blocks          [128, 256, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 4, 'relu']
+  7                  -1  1   8393728  ultralytics.nn.modules.block.Blocks          [256, 512, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 5, 'relu']
+  8                  -1  1    131584  ultralytics.nn.modules.conv.Conv             [512, 256, 1, 1, None, 1, 1, False]
+  9                  -1  1    789760  ultralytics.nn.modules.transformer.AIFI      [256, 1024, 8]                
+ 10                  -1  1     66048  ultralytics.nn.modules.conv.Conv             [256, 256, 1, 1]              
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12                   6  1     66048  ultralytics.nn.modules.conv.Conv             [256, 256, 1, 1, None, 1, 1, False]
+ 13            [-2, -1]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 14                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]            
+ 15                  -1  1     66048  ultralytics.nn.modules.conv.Conv             [256, 256, 1, 1]              
+ 16                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 17                   5  1     51712  ultralytics.nn.modules.dcc.DCCConv           [128, 256, 1, 1, None, 1, 1, False]
+ 18            [-2, -1]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 19                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]            
+ 20                  -1  1    611440  ultralytics.nn.modules.lif_down.LIFDown      [256, 256, 3, 2]              
+ 21            [-1, 15]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 22                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]            
+ 23                  -1  1    590336  ultralytics.nn.modules.conv.Conv             [256, 256, 3, 2]              
+ 24            [-1, 10]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 25                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]            
+ 26        [19, 22, 25]  1   3963573  ultralytics.nn.modules.cbr.RTDETRDecoderCBR  [1, [256, 256, 256], 256, 300, 4, 8, 3]
+rtdetr-resnet18-lite-cbr-lif-dcc-v1 summary: 310 layers, 20,168,197 parameters, 20,168,197 gradients, 58.7 GFLOPs
+
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\tools\dcc_resume_audit.py:481: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  trainer.scaler = torch.cuda.amp.GradScaler(enabled=amp)
+Resuming training D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\outputs\dcc\resume_fix_local_20260919\cpu_fp32\dcc\checkpoint\_resume_audit_xyweqoxp\last.pt from epoch 2 to 200 total epochs
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+PASSED C+D cpu_fp32
+BEGIN C+D cuda_fp32
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+D:\miniconda3\envs\rtdetr\lib\site-packages\torch\autograd\graph.py:824: UserWarning: grid_sampler_2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\aten\src\ATen\Context.cpp:97.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+WARNING no model scale passed. Assuming scale='l'.
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       928  ultralytics.nn.modules.block.ConvNormLayer   [3, 32, 3, 2, None, False, 'relu']
+  1                  -1  1      9280  ultralytics.nn.modules.block.ConvNormLayer   [32, 32, 3, 1, None, False, 'relu']
+  2                  -1  1     18560  ultralytics.nn.modules.block.ConvNormLayer   [32, 64, 3, 1, None, False, 'relu']
+  3                  -1  1         0  torch.nn.modules.pooling.MaxPool2d           [3, 2, 1]                     
+  4                  -1  1    152192  ultralytics.nn.modules.block.Blocks          [64, 64, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 2, 'relu']
+  5                  -1  1    525568  ultralytics.nn.modules.block.Blocks          [64, 128, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 3, 'relu']
+  6                  -1  1   2099712  ultralytics.nn.modules.block.Blocks          [128, 256, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 4, 'relu']
+  7                  -1  1   8393728  ultralytics.nn.modules.block.Blocks          [256, 512, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 5, 'relu']
+  8                  -1  1    131584  ultralytics.nn.modules.conv.Conv             [512, 256, 1, 1, None, 1, 1, False]
+  9                  -1  1    789760  ultralytics.nn.modules.transformer.AIFI      [256, 1024, 8]                
+ 10                  -1  1     66048  ultralytics.nn.modules.conv.Conv             [256, 256, 1, 1]              
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12                   6  1     66048  ultralytics.nn.modules.conv.Conv             [256, 256, 1, 1, None, 1, 1, False]
+ 13            [-2, -1]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 14                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]            
+ 15                  -1  1     66048  ultralytics.nn.modules.conv.Conv             [256, 256, 1, 1]              
+ 16                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 17                   5  1     51712  ultralytics.nn.modules.dcc.DCCConv           [128, 256, 1, 1, None, 1, 1, False]
+ 18            [-2, -1]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 19                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]            
+ 20                  -1  1    611440  ultralytics.nn.modules.lif_down.LIFDown      [256, 256, 3, 2]              
+ 21            [-1, 15]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 22                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]            
+ 23                  -1  1    590336  ultralytics.nn.modules.conv.Conv             [256, 256, 3, 2]              
+ 24            [-1, 10]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 25                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]            
+ 26        [19, 22, 25]  1   3963573  ultralytics.nn.modules.cbr.RTDETRDecoderCBR  [1, [256, 256, 256], 256, 300, 4, 8, 3]
+rtdetr-resnet18-lite-cbr-lif-dcc-v1 summary: 310 layers, 20,168,197 parameters, 20,168,197 gradients, 58.7 GFLOPs
+
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Resuming training D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\outputs\dcc\resume_fix_local_20260919\cuda_fp32\dcc\checkpoint\_resume_audit_ssa9jmuc\last.pt from epoch 2 to 200 total epochs
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+UNRESOLVED C+D cuda_fp32
+BEGIN C+D cuda_native_amp
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+WARNING no model scale passed. Assuming scale='l'.
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       928  ultralytics.nn.modules.block.ConvNormLayer   [3, 32, 3, 2, None, False, 'relu']
+  1                  -1  1      9280  ultralytics.nn.modules.block.ConvNormLayer   [32, 32, 3, 1, None, False, 'relu']
+  2                  -1  1     18560  ultralytics.nn.modules.block.ConvNormLayer   [32, 64, 3, 1, None, False, 'relu']
+  3                  -1  1         0  torch.nn.modules.pooling.MaxPool2d           [3, 2, 1]                     
+  4                  -1  1    152192  ultralytics.nn.modules.block.Blocks          [64, 64, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 2, 'relu']
+  5                  -1  1    525568  ultralytics.nn.modules.block.Blocks          [64, 128, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 3, 'relu']
+  6                  -1  1   2099712  ultralytics.nn.modules.block.Blocks          [128, 256, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 4, 'relu']
+  7                  -1  1   8393728  ultralytics.nn.modules.block.Blocks          [256, 512, <class 'ultralytics.nn.modules.block.BasicBlock'>, 2, 5, 'relu']
+  8                  -1  1    131584  ultralytics.nn.modules.conv.Conv             [512, 256, 1, 1, None, 1, 1, False]
+  9                  -1  1    789760  ultralytics.nn.modules.transformer.AIFI      [256, 1024, 8]                
+ 10                  -1  1     66048  ultralytics.nn.modules.conv.Conv             [256, 256, 1, 1]              
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12                   6  1     66048  ultralytics.nn.modules.conv.Conv             [256, 256, 1, 1, None, 1, 1, False]
+ 13            [-2, -1]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 14                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]            
+ 15                  -1  1     66048  ultralytics.nn.modules.conv.Conv             [256, 256, 1, 1]              
+ 16                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 17                   5  1     51712  ultralytics.nn.modules.dcc.DCCConv           [128, 256, 1, 1, None, 1, 1, False]
+ 18            [-2, -1]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 19                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]            
+ 20                  -1  1    611440  ultralytics.nn.modules.lif_down.LIFDown      [256, 256, 3, 2]              
+ 21            [-1, 15]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 22                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]            
+ 23                  -1  1    590336  ultralytics.nn.modules.conv.Conv             [256, 256, 3, 2]              
+ 24            [-1, 10]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 25                  -1  3    657920  ultralytics.nn.modules.block.RepC3           [512, 256, 3, 0.5]            
+ 26        [19, 22, 25]  1   3963573  ultralytics.nn.modules.cbr.RTDETRDecoderCBR  [1, [256, 256, 256], 256, 300, 4, 8, 3]
+rtdetr-resnet18-lite-cbr-lif-dcc-v1 summary: 310 layers, 20,168,197 parameters, 20,168,197 gradients, 58.7 GFLOPs
+
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Resuming training D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\outputs\dcc\resume_fix_local_20260919\cuda_native_amp\dcc\checkpoint\_resume_audit_cs11k4zp\last.pt from epoch 2 to 200 total epochs
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 0 weight(decay=0.0), 1 weight(decay=0.0001), 1 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 0 weight(decay=0.0), 1 weight(decay=0.0001), 1 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 0 weight(decay=0.0), 1 weight(decay=0.0001), 1 bias(decay=0.0)
+UNRESOLVED C+D cuda_native_amp
+{
+  "status": "UNRESOLVED",
+  "admission": "BLOCKED",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN"
+}

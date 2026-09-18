@@ -13,13 +13,21 @@ target="${1,,}"
 [[ "$target" =~ ^[0-9a-f]{40}$ ]] || { printf 'Target must be a complete 40-hex commit SHA.\n' >&2; exit 2; }
 base=a0459d6a652cb702699087c88fa39a3e4c4087ec
 branch=exp-rtdetr-r18-lite-dcc-v1
+# Exact server-side patch read from DCC_RESUME_DIAG_20260918T154901_136532Z.zip.
+# Only this unstaged change at this old HEAD can be absorbed automatically.
+hookfix_head=5049bb0010f91aa89cd0294024ea73f6b0396164
+hookfix_path=tools/preflight_dcc.py
+hookfix_before=03f17cfa41a2cca3434a5e9038d803afc90b796038b3d92c88779e4cc94565ff
+hookfix_after=34e17dea109bbf9706e668384574f166dc9728bb9c3d59e93e8d2d38fca4a16c
+hookfix_block=$'        # DCC_PREFLIGHT_DETACH_BEFORE_SAVE_V1\n        for handle in handles:\n            handle.remove()\n        handles.clear()'
+lf_sha256() { sed 's/\r$//' | sha256sum | cut -d ' ' -f1; }
 main="${2:-/root/autodl-tmp/projects/Crack_RTDETR}"
 worktree="${3:-/root/autodl-tmp/projects/Crack_RTDETR-dcc-v1}"
 [[ -d "$main" ]] || { printf 'Existing main repository is missing. Nothing cloned.\n' >&2; exit 2; }
 main="$(cd "$main" && pwd -P)"
 worktree="$(realpath -m -- "$worktree")"
 [[ "$worktree" != "$main" ]] || { printf 'Worktree must differ from the main repository.\n' >&2; exit 2; }
-[[ "$(git -C "$main" rev-parse --show-toplevel)" == "$main" ]] || {
+[[ "$(cd "$(git -C "$main" rev-parse --show-toplevel)" && pwd -P)" == "$main" ]] || {
   printf 'MAIN_REPO is not the repository root.\n' >&2; exit 2;
 }
 origin="$(git -C "$main" remote get-url origin)"
@@ -67,9 +75,64 @@ if [[ -e "$worktree" || -L "$worktree" ]]; then
   [[ "$common_main" == "$common_target" ]] || {
     printf 'Existing worktree belongs to a different repository; preserved untouched.\n' >&2; exit 2;
   }
-  [[ "$(git -C "$worktree" rev-parse HEAD)" == "$target" ]] || {
-    printf 'Existing worktree HEAD differs from the fixed target; no checkout or reset performed.\n' >&2; exit 2;
+  current="$(git -C "$worktree" rev-parse HEAD)"
+  current_branch="$(git -C "$worktree" symbolic-ref --quiet --short HEAD || true)"
+  [[ -z "$current_branch" || "$current_branch" == "$branch" ]] || {
+    printf 'Existing worktree is on another named branch; preserved untouched: %s\n' "$current_branch" >&2; exit 2;
   }
+  git -C "$worktree" merge-base --is-ancestor "$current" "$target" || {
+    printf 'Pinned target is not a fast-forward descendant of the existing HEAD; worktree preserved.\n' >&2; exit 2;
+  }
+  dirty="$(git -C "$worktree" status --porcelain --untracked-files=no)"
+  backup=""
+  if [[ -n "$dirty" ]]; then
+    # Reject every other staged/unstaged change. Untracked outputs stay in place.
+    [[ "$current" == "$hookfix_head" && "$dirty" == " M $hookfix_path" && ! -L "$worktree/$hookfix_path" ]] &&
+      [[ -z "$(git -C "$worktree" diff --summary)" ]] &&
+      [[ "$(git -C "$worktree" show "$current:$hookfix_path" | lf_sha256)" == "$hookfix_before" ]] &&
+      [[ "$(lf_sha256 < "$worktree/$hookfix_path")" == "$hookfix_after" ]] &&
+      [[ "$(git -C "$worktree" show "$target:$hookfix_path" | sed 's/\r$//' | sed -n '/# DCC_PREFLIGHT_DETACH_BEFORE_SAVE_V1$/,+3p')" == "$hookfix_block" ]] || {
+      printf '%s\n' 'Tracked changes are not exactly the verified HEAD5049 preflight hook fix already included in the target.' \
+        'No stash, restore, reset or checkout was performed. Preserve/review the other edits before syncing.' >&2
+      exit 2
+    }
+    backup="$worktree/outputs/dcc/sync_backups/$(date -u +%Y%m%dT%H%M%SZ)_$$"
+    mkdir -p -- "$(dirname "$backup")"
+    mkdir -- "$backup"
+    git -C "$worktree" diff --binary HEAD -- "$hookfix_path" > "$backup/known_hookfix.patch"
+    cp -- "$worktree/$hookfix_path" "$backup/preflight_dcc.py.original"
+    printf 'old_head=%s\ntarget=%s\npath=%s\nbefore_lf_sha256=%s\nafter_lf_sha256=%s\n' \
+      "$current" "$target" "$hookfix_path" "$hookfix_before" "$hookfix_after" > "$backup/identity.txt"
+    sha256sum "$backup/known_hookfix.patch" "$backup/preflight_dcc.py.original" > "$backup/SHA256SUMS"
+    # Recheck immediately before reversing only the backed-up four-line patch.
+    [[ "$(git -C "$worktree" rev-parse HEAD)" == "$current" &&
+       "$(git -C "$worktree" status --porcelain --untracked-files=no)" == "$dirty" &&
+       "$(lf_sha256 < "$worktree/$hookfix_path")" == "$hookfix_after" ]] || {
+      printf 'Worktree changed during backup; no patch removed. Backup: %s\n' "$backup" >&2; exit 2;
+    }
+    git -C "$worktree" apply --reverse --check "$backup/known_hookfix.patch"
+    git -C "$worktree" apply --reverse "$backup/known_hookfix.patch"
+    printf 'Verified local hook fix backed up before absorption: %s\n' "$backup"
+  fi
+  if [[ "$current" != "$target" ]]; then
+    # Detach at the fixed descendant without moving any other branch. Protect
+    # ignored outputs too; an untracked/ignored collision must stop the checkout.
+    if git -C "$worktree" switch --detach --no-overwrite-ignore "$target"; then
+      :
+    else
+      rc=$?
+      if [[ -n "$backup" && "$(git -C "$worktree" rev-parse HEAD)" == "$current" &&
+            -z "$(git -C "$worktree" status --porcelain --untracked-files=no)" ]]; then
+        if git -C "$worktree" apply "$backup/known_hookfix.patch"; then
+          printf 'Checkout failed; the verified local hook fix was restored from its backup.\n' >&2
+        else
+          printf 'Checkout failed; manual recovery patch remains at %s/known_hookfix.patch\n' "$backup" >&2
+        fi
+      fi
+      printf 'Pinned checkout failed; all output directories were preserved.\n' >&2
+      exit "$rc"
+    fi
+  fi
 else
   git -C "$main" worktree add --detach "$worktree" "$target"
 fi

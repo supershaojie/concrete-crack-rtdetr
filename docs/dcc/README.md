@@ -4,6 +4,10 @@ Branch: `exp-rtdetr-r18-lite-dcc-v1`. Fixed parent: `a0459d6a652cb702699087c88fa
 The implementation starts from this commit, never from another candidate's HEAD.
 Formal training is **NOT_STARTED**; final test is **NOT_RUN**. Engineering evidence is not evidence of accuracy gains.
 
+The current checkpoint repair and its limits are documented in
+[resume_fix/README.md](resume_fix/README.md). Original reports below are historical;
+they do not certify the changed source. Server verification of the repair is PENDING.
+
 ## Exact mathematical and graph contract
 
 Both configurations replace only graph node 17 with `DCCConv`, retaining 27 nodes and all original public state keys.
@@ -85,12 +89,12 @@ relative L2 and exceeded fraction. Continuous P3/P4/P5, projections, encoder and
 before final output. If candidate identities change, full native IDs/scores and fixed-candidate diagnostic
 replay are recorded; diagnostic IDs are never installed in production. TF32 changes are scoped and restored.
 
-The native resume test actually invokes save_model, setup_model and resume_training, verifies optimizer,
-scaler, epoch and EMA, then compares one further update with the same serialized-state direct control and
-restored RNG. Native serialization quantizes EMA/optimizer moments to half. Both controls use the same
-quantization and freshly reconstructed ephemeral anchor caches; comparing a serialized half anchor cache
-to regenerated FP32 anchors is not a valid same-state control. Diagnostic checkpoint epoch metadata does
-not mean a formal epoch was completed. All updated models are disposable and never used for formal start.
+The resume test invokes the DCC-specific save_model and native setup_model/resume_training. The current
+policy retains native EMA-half saving while preserving FP32 optimizer states, with an explicit parameter-name
+mapping. Complete restoration and AMP/scaler gradient replay are audited separately from independent CUDA
+backward trajectories. Both checkpoint controls use the same saved state and freshly reconstructed ephemeral
+anchor caches. Historical reports used native half optimizer moments and remain unchanged. Diagnostic epoch
+metadata does not mean a formal epoch was completed; disposable updated models never become formal start weights.
 
 `preflight_dcc.py` executes the real native Trainer using original train images and online augmentation,
 B16/640, original warmup/accumulation and default GradScaler. At most16 batches, target at least2 effective

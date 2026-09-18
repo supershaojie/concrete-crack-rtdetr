@@ -1,0 +1,14 @@
+{
+  "dcc_worktree": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1",
+  "branch": "exp-rtdetr-r18-lite-dcc-v1",
+  "starting_head": "5049bb0010f91aa89cd0294024ea73f6b0396164",
+  "starting_tracked_and_untracked_status": "CLEAN",
+  "fixed_parent": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "main_head_before_and_after": "f34502c43a88edc9cb1076bd996b9c3fc2d23e31",
+  "gra_head_before_and_after": "2aac27d556331ca88c73f98bc7ee6947eecb569e",
+  "main_preexisting_untracked_files": "PRESERVED",
+  "shared_ultralytics_sources": "UNCHANGED",
+  "old_outputs_and_failed_reports": "PRESERVED",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN"
+}

@@ -9,6 +9,7 @@ import hashlib
 from pathlib import Path
 from types import SimpleNamespace
 import time
+from tempfile import TemporaryDirectory
 
 import torch
 from dcc_common import (ROOT, controlled_models, native_rebuild, verify_model,
@@ -22,6 +23,8 @@ from ultralytics.models.rtdetr.train import RTDETRTrainer
 from ultralytics.nn.modules import DCCConv
 from ultralytics.utils.patches import torch_load
 from ultralytics.utils.torch_utils import ModelEMA
+
+from dcc_checkpoint import DCCCheckpointTrainer
 
 ATOL, RTOL = 2e-5, 2e-4  # Declared before any run; never tuned to outcomes.
 
@@ -147,112 +150,47 @@ def do_step(t,batch,amp,gradient_capture=None):
 
 
 def make_trainer(model,amp,device):
-    t=RTDETRTrainer.__new__(RTDETRTrainer);t.model=model.to(device);t.optimizer=optimizer(t.model)
+    t=DCCCheckpointTrainer.__new__(DCCCheckpointTrainer);t.model=model.to(device);t.optimizer=optimizer(t.model)
     t.scaler=scaler(amp);t.ema=ModelEMA(t.model);return t
 
 
 def lifecycle(t,batch,amp,folder,variant):
+    from dcc_resume_audit import audit_checkpoint_resume
+
     folder.mkdir(parents=True,exist_ok=False)
     m=t.model.eval();require(torch.count_nonzero(m.model[17].dcc.W_o.weight)>0,'Lifecycle needs actually updated W_o')
-    torch.save(m.state_dict(),folder/'state.pt')
-    with torch.random.fork_rng(devices=[]): rebuilt=native_rebuild(m.yaml,m,1,3).to(batch['img'].device)
-    rebuilt.load_state_dict(torch_load(folder/'state.pt',map_location=batch['img'].device),strict=True)
-    assert_state(m.state_dict(),rebuilt.state_dict())
-    torch.save(dict(model=deepcopy(m).cpu(),epoch=-1,train_args=dict(task='detect')),folder/'model.pt')
-    loaded=RTDETR(str(folder/'model.pt')).model.to(batch['img'].device)
-    assert_state(m.state_dict(),loaded.state_dict());verify_model(loaded,variant,zero=False)
-    wide=build(variant,nc=80)
-    wide.load_state_dict({**wide.state_dict(),**{k:v.detach().cpu() for k,v in m.state_dict().items()
-                         if v.shape==wide.state_dict()[k].shape}},strict=True)
-    adapted=native_rebuild(wide.yaml,wide,nc=1)
-    require(all(torch.equal(adapted.state_dict()[k],m.state_dict()[k].cpu()) for k in DCC_KEYS),
-            'Learned DCC lost during actual nc80-to1 reconstruction')
-    del wide,adapted
-    ema_copy=deepcopy(t.ema.ema).eval()
-    with strict_precision(),torch.no_grad():
-        ema_comparison=metric(t.ema.ema.eval()(batch['img'])[0],ema_copy(batch['img'])[0])
-    require(ema_comparison['allclose'],'EMA own-copy comparison failed')
-    # Execute native checkpoint serializer, setup_model, and resume_training.
-    # Parent saves EMA/optimizer moments in half. Direct control uses that same
-    # quantized checkpoint state, not the pre-serialization FP32 live model.
-    t.args=SimpleNamespace(**{**DEFAULT_CFG_DICT,'model':str(folder/'last.pt'),'epochs':200,'close_mosaic':10,
-                             'data':'diagnostic_only','task':'detect'})
-    t.epoch=0;t.best_fitness=0.;t.fitness=0.;t.metrics={};t.save_period=-1
-    t.wdir=folder;t.last=folder/'last.pt';t.best=folder/'best.pt';t.csv=folder/'absent_results.csv'
-    t.save_model();ckpt=torch_load(t.last,map_location='cpu')
-    moment_underflow=sum(int(((v['exp_avg_sq'].detach().cpu()!=0)&(ckpt['optimizer']['state'][k]['exp_avg_sq'].cpu()==0)).sum())
-                         for k,v in t.optimizer.state_dict()['state'].items() if 'exp_avg_sq' in v)
-    resumed=RTDETRTrainer.__new__(RTDETRTrainer);resumed.args=deepcopy(t.args)
-    resumed.model=str(t.last);resumed.data=dict(nc=1,channels=3);resumed.epochs=200;resumed.resume=True
-    loaded_ckpt=resumed.setup_model();resumed.model.to(batch['img'].device)
-    resumed.optimizer=optimizer(resumed.model);resumed.scaler=scaler(amp);resumed.ema=ModelEMA(resumed.model)
-    resumed.resume_training(loaded_ckpt)
-    require(resumed.start_epoch==1 and resumed.scaler.state_dict()==ckpt['scaler'],'Native epoch/scaler restore mismatch')
-    require(resumed.ema.updates==ckpt['updates'],'EMA updates restore mismatch')
-    assert_state(resumed.ema.ema.state_dict(),ckpt['ema'].float().state_dict())
-    # Both controls need identical ephemeral decoder caches as well as state_dict.
-    # A serialized EMA can carry half-quantized, nonpersistent anchor caches;
-    # native setup_model constructs fresh ones. Copy that structure, then restore
-    # the independently loaded checkpoint weights/optimizer without resume logic.
-    direct_model=deepcopy(resumed.model).requires_grad_(True)
-    direct_model.load_state_dict(ckpt['ema'].float().state_dict(),strict=True)
-    direct=make_trainer(direct_model,amp,batch['img'].device)
-    direct.optimizer.load_state_dict(deepcopy(ckpt['optimizer']));direct.scaler.load_state_dict(ckpt['scaler'])
-    direct.ema.ema.load_state_dict(ckpt['ema'].float().state_dict());direct.ema.updates=ckpt['updates']
-    assert_state(direct.model.state_dict(),resumed.model.state_dict())
-    for k,values in direct.optimizer.state_dict()['state'].items():
-        for name,v in values.items():
-            other=resumed.optimizer.state_dict()['state'][k][name]
-            require(torch.equal(v,other) if isinstance(v,torch.Tensor) else v==other,'Optimizer restore mismatch')
-    states=[deepcopy(direct.optimizer.state_dict()),deepcopy(resumed.optimizer.state_dict())]
-    ga,gb={},{}
-    rng=rng_state();a=do_step(direct,batch,amp,ga);restore_rng(rng);b=do_step(resumed,batch,amp,gb)
-    errors={k:metric(v,resumed.model.state_dict()[k]) for k,v in direct.model.state_dict().items()}
-    grad_errors={k:metric(v,gb[k]) for k,v in ga.items()}
-    raw_equal=all(v['allclose'] for v in errors.values())
-    write_json(folder/'resume_comparison.json',dict(direct=a,resumed=b,errors=errors,gradient_errors=grad_errors))
-    require(all(torch.isfinite(v).all() for v in direct.model.state_dict().values()) and
-            all(torch.isfinite(v).all() for v in resumed.model.state_dict().values()),'Nonfinite resumed state')
-    require(set(ga)==set(gb) and all(torch.isfinite(v).all() for v in list(ga.values())+list(gb.values())),
-            'Missing/nonfinite resumed gradient')
-    require(a['forward_hashes']==b['forward_hashes'] and a['loss']==b['loss'],
-            'Same-state resumed forward or loss differs')
-    # Keep the predeclared FP32 gradient comparison result, including AMP failures.
-    # Exact full forward identity isolates any remaining difference to backward.
-    # Do not relabel raw CUDA trajectories as equal or widen their tolerance.
-    if not batch['img'].is_cuda:
-        require(all(v['allclose'] for v in grad_errors.values()),'CPU resumed gradient mismatch')
-    replay_exact=False
-    if not raw_equal:
-        require(batch['img'].is_cuda,'CPU native resume update mismatch')
-        # A strict diagnostic separates native CUDA backward variation from state
-        # restoration. Replay identical unscaled gradients through the same native
-        # optimizer_step on both independently restored optimizer states. Never
-        # used in formal training. Do not relax the raw comparison tolerance.
-        replays=[]
-        for state in states:
-            replica=make_trainer(deepcopy(resumed.model).requires_grad_(True),False,batch['img'].device)
-            replica.model.load_state_dict(ckpt['ema'].float().state_dict(),strict=True)
-            replica.optimizer.load_state_dict(state)
-            for n,p in replica.model.named_parameters():p.grad=ga[n].to(p.device,p.dtype).clone() if n in ga else None
-            replica.optimizer_step()
-            replays.append({k:v.detach().cpu().clone() for k,v in replica.model.state_dict().items()})
-            del replica
-        assert_state(replays[0],replays[1]);replay_exact=True
-        del replays
-    require(not a['skipped'] and not b['skipped'],'Resume comparison must include effective updates')
-    return dict(status='PASSED' if raw_equal else 'PRECISION_NOTE',state_dict_exact=True,full_model_exact=True,native_get_model_nonzero_preserved=True,
-                ema_own_copy=ema_comparison,native_save_model=True,native_setup_model=True,native_resume_training=True,
-                diagnostic_epoch_metadata=0,completed_training_epochs=0,start_epoch=resumed.start_epoch,
-                optimizer_scaler_ema_restored=True,quantization='native EMA half + optimizer moments half; same quantized direct control',
-                learned_nc80_to1=True,ephemeral_caches='same fresh native reconstruction in both controls',
-                raw_next_update_allclose=raw_equal,fixed_gradient_replay_exact=replay_exact,
-                gradient_allclose=all(v['allclose'] for v in grad_errors.values()),gradient_max_abs=max(v['max_abs'] for v in grad_errors.values()),
-                captured_forward_hashes_exact=True,loss_exact=True,optimizer_second_moment_nonzero_to_half_zero=moment_underflow,
-                precision_note=None if raw_equal else 'Exact native restored state, forward tensors and loss; CUDA backward gradients differ (original tolerance results retained). Native serializer underflow is counted. Amplification by quantized moments is a numerical inference. Raw next weights NOT allclose; identical-gradient native optimizer replay is exact. This proves restore consistency, not native trajectory equality. No formal policy changed.',
-                direct_step=a,resumed_step=b,max_state_abs=max(v['max_abs'] for v in errors.values()),
-                max_state_relative_L2=max(v.get('relative_L2',0.) for v in errors.values()),
-                checkpoint_sha256=sha256(t.last))
+    # Only these newly created disposable weights are removed. Historical reports
+    # and earlier output directories remain untouched.
+    with TemporaryDirectory(prefix='lifecycle_',dir=folder) as temporary:
+        scratch=Path(temporary)
+        torch.save(m.state_dict(),scratch/'state.pt')
+        with torch.random.fork_rng(devices=[]): rebuilt=native_rebuild(m.yaml,m,1,3).to(batch['img'].device)
+        rebuilt.load_state_dict(torch_load(scratch/'state.pt',map_location=batch['img'].device),strict=True)
+        assert_state(m.state_dict(),rebuilt.state_dict())
+        del rebuilt
+        torch.save(dict(model=deepcopy(m).cpu(),epoch=-1,train_args=dict(task='detect')),scratch/'model.pt')
+        loaded=RTDETR(str(scratch/'model.pt')).model.to(batch['img'].device)
+        assert_state(m.state_dict(),loaded.state_dict());verify_model(loaded,variant,zero=False)
+        del loaded
+        wide=build(variant,nc=80)
+        wide.load_state_dict({**wide.state_dict(),**{k:v.detach().cpu() for k,v in m.state_dict().items()
+                             if v.shape==wide.state_dict()[k].shape}},strict=True)
+        adapted=native_rebuild(wide.yaml,wide,nc=1)
+        require(all(torch.equal(adapted.state_dict()[k],m.state_dict()[k].cpu()) for k in DCC_KEYS),
+                'Learned DCC lost during actual nc80-to1 reconstruction')
+        del wide,adapted
+        ema_copy=deepcopy(t.ema.ema).eval()
+        with strict_precision(),torch.no_grad():
+            ema_comparison=metric(t.ema.ema.eval()(batch['img'])[0],ema_copy(batch['img'])[0])
+        require(ema_comparison['allclose'],'EMA own-copy comparison failed')
+        del ema_copy
+    # The same DCC-specific serializer is used by the actual training entry.
+    # Restore-state correctness and independent backward trajectories are reported
+    # separately; the strict launch gate continues to require raw allclose.
+    report=audit_checkpoint_resume(t,batch,amp,folder)
+    report.update(state_dict_exact=True,full_model_exact=True,native_get_model_nonzero_preserved=True,
+                  ema_own_copy=ema_comparison,learned_nc80_to1=True)
+    return report
 
 
 def fusion(model,image,folder):

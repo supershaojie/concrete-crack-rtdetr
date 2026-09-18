@@ -1,0 +1,133 @@
+{
+  "status": "PASSED",
+  "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+  "torch": "2.7.1+cu118",
+  "device": "cpu",
+  "policy": "optimizer_fp32_v1",
+  "source_sha256": {
+    "dcc_checkpoint.py": "ff1eb2ac7f31aa7485d49dd2425d6dcb9657fbc4e663709a1e7c4060ae46cde8",
+    "check_dcc_checkpoint.py": "0719fd15a6bf4877b31017fa8d2c28cece37c990e959747a9a343c87d8a77b77"
+  },
+  "native_fields": [
+    "best_fitness",
+    "date",
+    "docs",
+    "ema",
+    "epoch",
+    "git",
+    "license",
+    "model",
+    "optimizer",
+    "scaler",
+    "train_args",
+    "train_metrics",
+    "train_results",
+    "updates",
+    "version"
+  ],
+  "extra_fields": [
+    "dcc_checkpoint"
+  ],
+  "native_semantics_except_optimizer_precision": true,
+  "optimizer_copy_exact_fp32": true,
+  "active_optimizer_values_and_storage_unchanged": true,
+  "active_model_and_ema_unchanged": true,
+  "ema_checkpoint_dtype": "torch.float16",
+  "optimizer_param_names": [
+    [
+      "0.weight",
+      "1.weight"
+    ],
+    [
+      "0.bias",
+      "1.bias"
+    ]
+  ],
+  "second_moments": [
+    {
+      "parameter_id": 0,
+      "nonzero_live": 6,
+      "nonzero_native_half": 0,
+      "nonzero_dcc_fp32": 6,
+      "native_dtype": "torch.float16",
+      "dcc_dtype": "torch.float32",
+      "live_min": 1.8407086802971546e-18,
+      "live_max": 1.9260089942178815e-13
+    },
+    {
+      "parameter_id": 1,
+      "nonzero_live": 2,
+      "nonzero_native_half": 0,
+      "nonzero_dcc_fp32": 2,
+      "native_dtype": "torch.float16",
+      "dcc_dtype": "torch.float32",
+      "live_min": 1.7301873096123993e-13,
+      "live_max": 2.658780856069909e-13
+    },
+    {
+      "parameter_id": 2,
+      "nonzero_live": 2,
+      "nonzero_native_half": 0,
+      "nonzero_dcc_fp32": 2,
+      "native_dtype": "torch.float16",
+      "dcc_dtype": "torch.float32",
+      "live_min": 4.305681787671045e-13,
+      "live_max": 6.216942650787149e-13
+    },
+    {
+      "parameter_id": 3,
+      "nonzero_live": 1,
+      "nonzero_native_half": 0,
+      "nonzero_dcc_fp32": 1,
+      "native_dtype": "torch.float16",
+      "dcc_dtype": "torch.float32",
+      "live_min": 1.599999971922672e-12,
+      "live_max": 1.599999971922672e-12
+    }
+  ],
+  "last_best_periodic_routing": true,
+  "mismatched_half_live_moments_rejected": true,
+  "policy_validation": {
+    "policy": "optimizer_fp32_v1",
+    "optimizer_param_names": [
+      [
+        "0.weight",
+        "1.weight"
+      ],
+      [
+        "0.bias",
+        "1.bias"
+      ]
+    ],
+    "parameter_ids_by_group": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "state_entries": 4,
+    "fp32_moment_tensors": 8,
+    "original_tensors_inspected_before_cast": true,
+    "checkpoint_unmodified": true
+  },
+  "rejected_invalid_policies": [
+    "historical_native_half_without_policy",
+    "half_moments_cannot_be_relabelled_fp32",
+    "missing_name",
+    "duplicate_name",
+    "duplicate_param_id",
+    "unknown_state_id",
+    "missing_optimizer",
+    "missing_live_trainable_parameter"
+  ],
+  "native_serializer": {
+    "native_serializer_sha256": "5f2b57d19a7b7ea4441ff2a7f922a59e202c38a86141c4c4aa907f5b709eec71",
+    "native_serializer_ast_sha256": "b5b321397df68dafb67ff2c9eb763c491f6c177acf527a46cbbbcbc5d8551de3"
+  },
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN"
+}

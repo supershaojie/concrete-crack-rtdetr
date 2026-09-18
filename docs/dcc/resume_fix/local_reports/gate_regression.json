@@ -1,0 +1,48 @@
+{
+  "status": "PASSED",
+  "scope": "synthetic gate regression only; no training/capacity certification",
+  "cases": {
+    "complete_synthetic_contract": {
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "reason": null
+    },
+    "raw_false_with_exact_replay": {
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "reason": "Native resume next-update mismatch remains unresolved: cuda_native_amp"
+    },
+    "old_half_serializer": {
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "reason": "Engineering check used the historical FP16 optimizer serializer"
+    },
+    "missing_complete_restoration": {
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "reason": "Strict complete-state restore/replay evidence missing: cuda_native_amp"
+    },
+    "model_only_replay": {
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "reason": "Strict complete-state restore/replay evidence missing: cuda_native_amp"
+    },
+    "amp_replay_disabled": {
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "reason": "Same-gradient replay did not exercise native AMP/scaler"
+    },
+    "stale_capacity_after_code_change": {
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "reason": "Code/config differs from capacity-tested tree"
+    },
+    "stale_engineering_after_code_change": {
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "reason": "Code/config differs from engineering-tested tree"
+    }
+  },
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN"
+}

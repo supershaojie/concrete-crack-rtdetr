@@ -1,0 +1,298 @@
+{
+  "created_utc": "2026-09-18T15:49:01.304521+00:00",
+  "worktree": "/root/autodl-tmp/projects/Crack_RTDETR-dcc-v1",
+  "head": {
+    "exit_code": 0,
+    "stdout": "5049bb0010f91aa89cd0294024ea73f6b0396164\n",
+    "stderr": ""
+  },
+  "status": {
+    "exit_code": 0,
+    "stdout": " M tools/preflight_dcc.py\n",
+    "stderr": ""
+  },
+  "preflight_diff": {
+    "exit_code": 0,
+    "stdout": "diff --git a/tools/preflight_dcc.py b/tools/preflight_dcc.py\nindex c1ae401..dd7661b 100644\n--- a/tools/preflight_dcc.py\n+++ b/tools/preflight_dcc.py\n@@ -174,6 +174,10 @@ def run(args):\n                 \"Not all DCC projections received later finite nonzero gradients\")\n         # Native lifecycle checks run separately in check_dcc; preserve an inspectable\n         # learned state here, but never label a mid-epoch budget stop as resumable.\n+        # DCC_PREFLIGHT_DETACH_BEFORE_SAVE_V1\n+        for handle in handles:\n+            handle.remove()\n+        handles.clear()\n         torch.save({\"model\": deepcopy(trainer.model).cpu(), \"optimizer\": trainer.optimizer.state_dict(),\n                     \"scaler\": trainer.scaler.state_dict(), \"ema\": deepcopy(trainer.ema.ema).cpu(),\n                     \"epoch\": trainer.epoch, \"batches\": report[\"capacity\"][\"observed_batches\"],\n",
+    "stderr": ""
+  },
+  "files": [
+    {
+      "path": "docs/dcc/README.md",
+      "bytes": 10741,
+      "mtime_utc": "2026-09-18T15:26:20.900629+00:00",
+      "sha256": "8e60cf907a0cbae094d691d6b25e0d73a9982907e7ea5986126227220d1f9aaa"
+    },
+    {
+      "path": "docs/dcc/environment.sh",
+      "bytes": 586,
+      "mtime_utc": "2026-09-18T15:26:20.908628+00:00",
+      "sha256": "0259d8bfdc1bfd12fb2843937f6e37f6a07ef611a9e7b749096f6e3e108a0cac"
+    },
+    {
+      "path": "tools/autodl_dcc.sh",
+      "bytes": 3848,
+      "mtime_utc": "2026-09-18T15:26:20.916628+00:00",
+      "sha256": "bf463130087267eff3ece944836c0f15ab6c8c4b977e5a44823b332e319168d0"
+    },
+    {
+      "path": "tools/check_dcc.py",
+      "bytes": 23670,
+      "mtime_utc": "2026-09-18T15:26:20.916628+00:00",
+      "sha256": "ca4f0d1d57e258d292204190f35b2aeef72cd27d059c5472a51bc002e0b6c936"
+    },
+    {
+      "path": "tools/check_dcc_math.py",
+      "bytes": 15039,
+      "mtime_utc": "2026-09-18T15:26:20.916628+00:00",
+      "sha256": "fb5db558e444c4623f1fdf9e105084ff775fef7d614e55374c3451dbf9a44829"
+    },
+    {
+      "path": "tools/dcc_common.py",
+      "bytes": 13663,
+      "mtime_utc": "2026-09-18T15:26:20.916628+00:00",
+      "sha256": "869a18dec1653b31f3638ab1691c97c0bf48060bfb085424996177f10ca87f4b"
+    },
+    {
+      "path": "tools/eval_dcc.py",
+      "bytes": 10788,
+      "mtime_utc": "2026-09-18T15:26:20.916628+00:00",
+      "sha256": "ad4e0fa126eedee038cd44671bb5b208ada4266f39b8dd19531160e6599b7426"
+    },
+    {
+      "path": "tools/init_dcc.py",
+      "bytes": 6436,
+      "mtime_utc": "2026-09-18T15:26:20.920628+00:00",
+      "sha256": "08109f9cdc311ea70450ea26a4f9db2f708a3b8d5661a432bde8abfd999f6662"
+    },
+    {
+      "path": "tools/pack_dcc_light.py",
+      "bytes": 6664,
+      "mtime_utc": "2026-09-18T15:26:20.920628+00:00",
+      "sha256": "f9bb4ef68b0bc2e8be84e2d9aad5d59b62bc8df397bd004f138e8cf83255231a"
+    },
+    {
+      "path": "tools/preflight_dcc.py",
+      "bytes": 12706,
+      "mtime_utc": "2026-09-18T15:41:51.126060+00:00",
+      "sha256": "34e17dea109bbf9706e668384574f166dc9728bb9c3d59e93e8d2d38fca4a16c"
+    },
+    {
+      "path": "tools/sync_dcc.sh",
+      "bytes": 4646,
+      "mtime_utc": "2026-09-18T15:26:20.920628+00:00",
+      "sha256": "f81818e1302eb075cb3da6ca6de323afb15ba73904f8195d60e0b8d45ffbdfaf"
+    },
+    {
+      "path": "tools/train_dcc.py",
+      "bytes": 20143,
+      "mtime_utc": "2026-09-18T15:26:20.920628+00:00",
+      "sha256": "86bc471cd14d8e74ae57f0db3c58d9988455f6f1c9ba927e66f5b0a3f7f5209e"
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/dcc.py",
+      "bytes": 3481,
+      "mtime_utc": "2026-09-18T15:26:20.992625+00:00",
+      "sha256": "a9667237105c5736410944b3fd9aa3ac61953950816f662735787ae499a27f7e"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/checks_20260918T154151Z_185462/checks.json",
+      "bytes": 1541686,
+      "mtime_utc": "2026-09-18T15:43:10.879765+00:00",
+      "sha256": "b895f4b81ab5b355b861fa34e6bb0241641d15fc0ba40f9814469566357bbd72"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/checks_20260918T152733Z_170981/checks.json",
+      "bytes": 1538778,
+      "mtime_utc": "2026-09-18T15:28:39.506448+00:00",
+      "sha256": "e0274e9723276ac9f8f12aecd0ddfbf76fdaa579ea8e89436708396a009406e2"
+    },
+    {
+      "path": "docs/dcc/operations_gate_final.json",
+      "bytes": 32327,
+      "mtime_utc": "2026-09-18T15:26:20.912628+00:00",
+      "sha256": "5e8f199ce9e298aa3edb3e52194f232835c086bb20060cfea0ccb19893143450"
+    },
+    {
+      "path": "docs/dcc/checks_local.json",
+      "bytes": 1534084,
+      "mtime_utc": "2026-09-18T15:26:20.908628+00:00",
+      "sha256": "c50acf5e2c03a1bf7a7702116c9127c4a10d97ebadc8304637bb813a06be5ba0"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/capacity_20260918T154151Z_185462/preflight.json",
+      "bytes": 194629,
+      "mtime_utc": "2026-09-18T15:43:37.510985+00:00",
+      "sha256": "fd5c033223a8682be7cf995f19e75b371ab90b29c5d96df0ea1cdcfc17506edf"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/checks_20260918T154151Z_185462/cuda_native_amp/resume_comparison.json",
+      "bytes": 201971,
+      "mtime_utc": "2026-09-18T15:43:08.759827+00:00",
+      "sha256": "55c8cceff593684772b0bf3fb41af89f84f1d4939ec396f6c1166ea5a3a000d0"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/checks_20260918T154151Z_185462/cuda_fp32/resume_comparison.json",
+      "bytes": 202055,
+      "mtime_utc": "2026-09-18T15:42:56.144194+00:00",
+      "sha256": "47142b25d35bb790f86d007fe4cb7b4db77004164fd93a3d8fa1277e8e3c8175"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/checks_20260918T154151Z_185462/cpu_fp32/resume_comparison.json",
+      "bytes": 178514,
+      "mtime_utc": "2026-09-18T15:42:45.028516+00:00",
+      "sha256": "42383efc2693fbdb6782768608254ff7626620f241c504c5086750e79308a23f"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/module_20260918T154151Z_185462.json",
+      "bytes": 15219,
+      "mtime_utc": "2026-09-18T15:42:09.841528+00:00",
+      "sha256": "9eb0f9adebffb3239ace3a0db430d40c310f2659a6b36e6b9edcf9990dd2558e"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/initialization_20260918T154151Z_185462.json",
+      "bytes": 363211,
+      "mtime_utc": "2026-09-18T15:42:06.137634+00:00",
+      "sha256": "206b236bf0bb98c5bd6c8e2c7949f877243c3a7d99f399f6d8a5211c61776a19"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/capacity_20260918T152733Z_170981/preflight.json",
+      "bytes": 194631,
+      "mtime_utc": "2026-09-18T15:29:16.018124+00:00",
+      "sha256": "719d8153693cdcc99095eb2ead90626b932f75ab4f8518e0f09991fd5234b975"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/checks_20260918T152733Z_170981/cuda_native_amp/resume_comparison.json",
+      "bytes": 201950,
+      "mtime_utc": "2026-09-18T15:28:36.130475+00:00",
+      "sha256": "8779c52941986b8442c5b19f91481472c24f2af812758c077e5fac76dac67ffc"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/checks_20260918T152733Z_170981/cuda_fp32/resume_comparison.json",
+      "bytes": 202021,
+      "mtime_utc": "2026-09-18T15:28:21.454584+00:00",
+      "sha256": "6589f63672bf7db698343736d85780bbc23b98f1f32c40452298ed6f3a111e8c"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/checks_20260918T152733Z_170981/cpu_fp32/resume_comparison.json",
+      "bytes": 178514,
+      "mtime_utc": "2026-09-18T15:28:10.518657+00:00",
+      "sha256": "42383efc2693fbdb6782768608254ff7626620f241c504c5086750e79308a23f"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/module_20260918T152733Z_170981.json",
+      "bytes": 15220,
+      "mtime_utc": "2026-09-18T15:27:50.982773+00:00",
+      "sha256": "85a696c61eda46c913fba43995e4ae68c54717d9e858762eab111051cd927073"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/initialization_20260918T152733Z_170981.json",
+      "bytes": 363212,
+      "mtime_utc": "2026-09-18T15:27:47.462792+00:00",
+      "sha256": "a46901cd2d432afb78e6f0666d50a7fe78af2f67376db258783bc9f13f1b53b9"
+    },
+    {
+      "path": "docs/dcc/module_checks.json",
+      "bytes": 15144,
+      "mtime_utc": "2026-09-18T15:26:20.912628+00:00",
+      "sha256": "9a8643b802f1841030f74a6f1acf8be15eb87c905ad8c10850e8f1bbcc1d2dc3"
+    },
+    {
+      "path": "docs/dcc/module_checks_final.json",
+      "bytes": 15215,
+      "mtime_utc": "2026-09-18T15:26:20.912628+00:00",
+      "sha256": "d94dae3215d64686c2ae208d25bf48bc571213ed4f9794d7e079353a3c17d349"
+    },
+    {
+      "path": "docs/dcc/module_initialization_recheck.json",
+      "bytes": 7822,
+      "mtime_utc": "2026-09-18T15:26:20.912628+00:00",
+      "sha256": "8b9bb90adfa201924660bbb91d897e9d6ada31c6524a909328656e9a7a51087d"
+    },
+    {
+      "path": "docs/dcc/operations_checks.json",
+      "bytes": 48852,
+      "mtime_utc": "2026-09-18T15:26:20.912628+00:00",
+      "sha256": "99c719f8f3a855a3e63c24431abf65460d0c7e8076e9d9d5886c4bd7e27efc22"
+    },
+    {
+      "path": "docs/dcc/operations_final_identity.json",
+      "bytes": 30992,
+      "mtime_utc": "2026-09-18T15:26:20.912628+00:00",
+      "sha256": "b428c6e2f025e376f5b226a13a785dc25c7e38f3b17a92e818cb742e817ce97a"
+    },
+    {
+      "path": "docs/dcc/operations_review_checks.json",
+      "bytes": 29440,
+      "mtime_utc": "2026-09-18T15:26:20.912628+00:00",
+      "sha256": "16c4afce30f53f1fa509645d57374400d5389826cdcb8c1f04111712e6b2e3e7"
+    },
+    {
+      "path": "docs/dcc/parameter_counts.json",
+      "bytes": 3186,
+      "mtime_utc": "2026-09-18T15:26:20.912628+00:00",
+      "sha256": "dc59a15e772fa3fb6efc8e128b1a645751a57c5943e756386a553e81f2b832b6"
+    },
+    {
+      "path": "docs/dcc/parent_dataset_identity.json",
+      "bytes": 745,
+      "mtime_utc": "2026-09-18T15:26:20.912628+00:00",
+      "sha256": "8567e1b4d1aae5f168fb18b633ed4357c7f0aba56c0041a6570647fb542d0446"
+    },
+    {
+      "path": "docs/dcc/provenance.json",
+      "bytes": 936,
+      "mtime_utc": "2026-09-18T15:26:20.912628+00:00",
+      "sha256": "760932b3497aefe9a023b3e830f770882de43d841055cd98f94379d93b21f582"
+    },
+    {
+      "path": "docs/dcc/recipe_diff.json",
+      "bytes": 13513,
+      "mtime_utc": "2026-09-18T15:26:20.912628+00:00",
+      "sha256": "4cef133f127be7893365f0b58d1e6b573c5a2b4560f869b67fcb1f36a321babe"
+    },
+    {
+      "path": "docs/dcc/tested_source_identity.json",
+      "bytes": 28104,
+      "mtime_utc": "2026-09-18T15:26:20.912628+00:00",
+      "sha256": "910a004ac27f5212e17eba9435422a59ca9256cab64ba151d5e0a5375af02958"
+    },
+    {
+      "path": "docs/dcc/validation_summary.json",
+      "bytes": 5281,
+      "mtime_utc": "2026-09-18T15:26:20.912628+00:00",
+      "sha256": "e9b67fc6d6a5d246c23717cfe61c66751c827de827e5d760ec423faa22ff89e6"
+    },
+    {
+      "path": "docs/dcc/initialization_attempt1_failed.json",
+      "bytes": 121,
+      "mtime_utc": "2026-09-18T15:26:20.908628+00:00",
+      "sha256": "b6c52e028777225e579717fcbafb8c2cd968d76d48c87e95ecdb3b27d7b47017"
+    },
+    {
+      "path": "docs/dcc/initialization_cbr_lif_dcc_v1.json",
+      "bytes": 363351,
+      "mtime_utc": "2026-09-18T15:26:20.908628+00:00",
+      "sha256": "aa89cdc1f894fd653cce8ef6e5b3ffce2e24f62b254d1e0f0dd1f0badb0fb5a3"
+    },
+    {
+      "path": "docs/dcc/initialization_dcc_v1.json",
+      "bytes": 243266,
+      "mtime_utc": "2026-09-18T15:26:20.908628+00:00",
+      "sha256": "6de1b1da44c4d783c860f1f09f1301eebe591e85ec9013c63702a5689f30a328"
+    },
+    {
+      "path": "docs/dcc/attempt_history.json",
+      "bytes": 3568,
+      "mtime_utc": "2026-09-18T15:26:20.900629+00:00",
+      "sha256": "90439ef6e44dd6ed1abd9c4d3c65929568cfde738a431d33c73ac7b172ec31cf"
+    },
+    {
+      "path": "docs/dcc/capacity_local.json",
+      "bytes": 177270,
+      "mtime_utc": "2026-09-18T15:26:20.900629+00:00",
+      "sha256": "2fd02e2dab3d77659bcf739da6b99e52481d13fade13ceaf1fd7b2f8f6ce1bf8"
+    }
+  ],
+  "skipped": []
+}

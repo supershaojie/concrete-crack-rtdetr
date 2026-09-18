@@ -16,7 +16,7 @@ from dcc_common import (ROOT, MODEL_DIR, VARIANTS, BASE_COMMIT, SOURCE_SHA256, r
                         sha256, write_json, runtime, verify_model, build_training_model, is_added)
 from ultralytics import RTDETR
 from ultralytics.data.utils import check_det_dataset, img2label_paths
-from ultralytics.models.rtdetr.train import RTDETRTrainer
+from dcc_checkpoint import DCCCheckpointTrainer, require_checkpoint_policy, optimizer_param_names
 from ultralytics.utils import YAML
 
 DEFAULT_MAIN = Path(os.environ.get("DCC_MAIN", "/root/autodl-tmp/projects/Crack_RTDETR"))
@@ -173,9 +173,16 @@ def strict_gate(preflight_path, checks_path, variant, init, data):
         observed = checks.get("devices", {}).get(device, {})
         lifecycle = observed.get("lifecycle", {})
         accepted_lifecycle = lifecycle.get("status") == "PASSED"
-        # Same-gradient replay isolates restoration, but does not certify native
-        # continuation when half-stored AdamW moments amplify CUDA backward noise.
-        # Preserve that PRECISION_NOTE for inspection; do not bypass this gate.
+        # Independent CUDA backward equality is a separate requirement. Neither
+        # restore correctness, same-gradient replay nor parent variation waives it.
+        require(lifecycle.get("checkpoint_policy") == "optimizer_fp32_v1",
+                "Engineering check used the historical FP16 optimizer serializer")
+        require(lifecycle.get("restoration", {}).get("status") == "PASSED" and
+                lifecycle.get("same_gradient_replay", {}).get("status") == "PASSED",
+                "Strict complete-state restore/replay evidence missing: " + device)
+        if device == "cuda_native_amp":
+            require(lifecycle.get("same_gradient_replay", {}).get("amp_scaler_path") is True,
+                    "Same-gradient replay did not exercise native AMP/scaler")
         require(lifecycle.get("raw_next_update_allclose") is True,
                 "Native resume next-update mismatch remains unresolved: " + device)
         require(observed.get("status") == "PASSED" and accepted_lifecycle and
@@ -189,7 +196,8 @@ def plan(args):
     recipe_args, differences = recipe(args.variant, args.init, args.main, args.data, args.parent_args)
     return {"variant": args.variant, "runtime": runtime(), "code_identity": code_identity(),
             "args": recipe_args, "recipe_differences": differences,
-            "formal_training": "NOT_STARTED", "final_test": "NOT_RUN"}
+            "formal_training": "NOT_STARTED", "final_test": "NOT_RUN",
+            "checkpoint_policy": "optimizer_fp32_v1", "checkpoint_ema_dtype": "float16"}
 
 
 def run(args):
@@ -224,6 +232,8 @@ def run(args):
         require(original["variant"] == args.variant and original["code_identity"] == code_identity() and
                 original["init_sha256"] == info["init_sha256"], "Resume launch source/initialization changed")
         saved = checkpoint(args.checkpoint)
+        # Validate source precision before native loading can upcast old moments.
+        info["resume_checkpoint_policy"] = require_checkpoint_policy(saved)
         require(0 <= saved.get("epoch", -1) < 199 and saved.get("optimizer") is not None and
                 saved.get("ema") is not None and saved.get("scaler") is not None,
                 "Checkpoint is completed/stripped or lacks native optimizer/scaler/epoch/EMA")
@@ -240,7 +250,7 @@ def run(args):
     write_json(state_path, state)
     training_variant = args.variant
 
-    class RecordingTrainer(RTDETRTrainer):
+    class RecordingTrainer(DCCCheckpointTrainer):
         def get_model(self, cfg=None, weights=None, verbose=True):
             model, audit = build_training_model(cfg, weights, self.data, training_variant)
             write_json(out / ("resume_rebuild.json" if saved else "start_rebuild.json"), audit)
@@ -268,19 +278,31 @@ def run(args):
         changes = {k: [v, actual.get(k)] for k, v in train_args.items() if k not in ignored and actual.get(k) != v}
         require(not changes, "Actual native recipe changed: " + repr(changes))
         if saved:
+            require(optimizer_param_names(trainer.model, trainer.optimizer) ==
+                    saved["dcc_checkpoint"]["optimizer_param_names"],
+                    "Native optimizer parameter-name/group-order mapping differs")
             require(trainer.start_epoch == saved["epoch"] + 1 and trainer.scaler.state_dict() == saved["scaler"] and
                     trainer.ema.updates == saved["updates"], "Native resume did not restore epoch/scaler/EMA updates")
             require(len(trainer.optimizer.state) == len(saved["optimizer"]["state"]), "Native optimizer restore mismatch")
             restored = trainer.optimizer.state_dict()
+            require(restored["param_groups"] == saved["optimizer"]["param_groups"],
+                    "Native optimizer group hyperparameters/order differ")
+            require(set(restored["state"]) == set(saved["optimizer"]["state"]),
+                    "Native optimizer state IDs differ")
             for key, parameters in saved["optimizer"]["state"].items():
+                require(set(restored["state"][key]) == set(parameters), "Native optimizer state fields differ")
                 for field, value in parameters.items():
                     observed = restored["state"][key][field]
-                    equal = (torch.equal(observed.detach().cpu(), value.detach().cpu().to(observed.dtype))
+                    equal = (observed.dtype == value.dtype and torch.equal(observed.detach().cpu(), value.detach().cpu())
                              if torch.is_tensor(value) else observed == value)
                     require(equal, "Native optimizer state restore mismatch: %s.%s" % (key, field))
-            saved_ema = saved["ema"].float().state_dict()
-            require(all(torch.equal(v.detach().cpu(), saved_ema[k].detach().cpu())
-                        for k, v in trainer.ema.ema.state_dict().items()), "Native EMA weight restore mismatch")
+            saved_ema = {k: v.detach().cpu().float() if v.is_floating_point() else v.detach().cpu()
+                         for k, v in saved["ema"].state_dict().items()}
+            for name, model in (("model", trainer.model), ("EMA", trainer.ema.ema)):
+                actual_state = model.state_dict()
+                require(set(actual_state) == set(saved_ema) and
+                        all(torch.equal(v.detach().cpu(), saved_ema[k]) for k, v in actual_state.items()),
+                        "Native " + name + " weight/buffer restore mismatch")
         write_json(out / "setup.json", {"coverage": optimizer_coverage(trainer.model, trainer.optimizer),
                    "native_resume": bool(saved), "start_epoch": trainer.start_epoch, "runtime": runtime()})
         YAML.save(out / "actual_train_args.yaml", actual)

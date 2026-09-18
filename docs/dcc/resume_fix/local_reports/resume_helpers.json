@@ -1,0 +1,184 @@
+{
+  "status": "PASSED",
+  "cpu_effective_native_replay": true,
+  "strict_saved_oracle": true,
+  "unregistered_cache_alias_rejected": true,
+  "optimizer_step_mutation_rejected": true,
+  "storage": {
+    "status": "PASSED",
+    "checked": "all reachable tensor storages: model/cache/grad/optimizer/scaler/EMA",
+    "first_tensors": 10,
+    "second_tensors": 10,
+    "shared_storage_count": 0
+  },
+  "tiny_cuda_amp_overflow": {
+    "status": "PASSED",
+    "fixture": "Two independent Linear(3,2)+Tanh FP32 models; no detector forward",
+    "amp_scaler_path": true,
+    "storage_independence": {
+      "status": "PASSED",
+      "checked": "all reachable tensor storages: model/cache/grad/optimizer/scaler/EMA",
+      "first_tensors": 10,
+      "second_tensors": 10,
+      "shared_storage_count": 0
+    },
+    "first": {
+      "skipped": true,
+      "scale_before": 65536.0,
+      "scale_after": 32768.0,
+      "ema_updates_before": 1,
+      "ema_updates_after": 2
+    },
+    "second": {
+      "skipped": true,
+      "scale_before": 65536.0,
+      "scale_after": 32768.0,
+      "ema_updates_before": 1,
+      "ema_updates_after": 2
+    },
+    "complete_state_comparison": {
+      "status": "PASSED",
+      "exact_requested": true,
+      "exact": true,
+      "allclose": true,
+      "metadata_errors": [],
+      "failed_tensors": [],
+      "tensors": {
+        "state.optimizer.0.bias.step": {
+          "equal": true,
+          "allclose": true,
+          "finite": true,
+          "shape": [],
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceeded_fraction": 0.0,
+          "atol": 2e-05,
+          "rtol": 0.0002
+        },
+        "state.optimizer.0.bias.exp_avg": {
+          "equal": true,
+          "allclose": true,
+          "finite": true,
+          "shape": [
+            2
+          ],
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceeded_fraction": 0.0,
+          "atol": 2e-05,
+          "rtol": 0.0002
+        },
+        "state.optimizer.0.bias.exp_avg_sq": {
+          "equal": true,
+          "allclose": true,
+          "finite": true,
+          "shape": [
+            2
+          ],
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceeded_fraction": 0.0,
+          "atol": 2e-05,
+          "rtol": 0.0002
+        },
+        "state.optimizer.0.weight.step": {
+          "equal": true,
+          "allclose": true,
+          "finite": true,
+          "shape": [],
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceeded_fraction": 0.0,
+          "atol": 2e-05,
+          "rtol": 0.0002
+        },
+        "state.optimizer.0.weight.exp_avg": {
+          "equal": true,
+          "allclose": true,
+          "finite": true,
+          "shape": [
+            2,
+            3
+          ],
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceeded_fraction": 0.0,
+          "atol": 2e-05,
+          "rtol": 0.0002
+        },
+        "state.optimizer.0.weight.exp_avg_sq": {
+          "equal": true,
+          "allclose": true,
+          "finite": true,
+          "shape": [
+            2,
+            3
+          ],
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceeded_fraction": 0.0,
+          "atol": 2e-05,
+          "rtol": 0.0002
+        },
+        "state.ema.0.bias": {
+          "equal": true,
+          "allclose": true,
+          "finite": true,
+          "shape": [
+            2
+          ],
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceeded_fraction": 0.0,
+          "atol": 2e-05,
+          "rtol": 0.0002
+        },
+        "state.ema.0.weight": {
+          "equal": true,
+          "allclose": true,
+          "finite": true,
+          "shape": [
+            2,
+            3
+          ],
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceeded_fraction": 0.0,
+          "atol": 2e-05,
+          "rtol": 0.0002
+        },
+        "state.model.0.bias": {
+          "equal": true,
+          "allclose": true,
+          "finite": true,
+          "shape": [
+            2
+          ],
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceeded_fraction": 0.0,
+          "atol": 2e-05,
+          "rtol": 0.0002
+        },
+        "state.model.0.weight": {
+          "equal": true,
+          "allclose": true,
+          "finite": true,
+          "shape": [
+            2,
+            3
+          ],
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceeded_fraction": 0.0,
+          "atol": 2e-05,
+          "rtol": 0.0002
+        }
+      },
+      "max_abs": 0.0
+    },
+    "model_optimizer_unchanged_on_skip": true,
+    "native_ema_updates_on_skipped_step": true,
+    "note": "Inherited optimizer_step updates EMA even when scaler skips optimizer; observed and preserved"
+  }
+}

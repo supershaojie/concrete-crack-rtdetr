@@ -1,0 +1,14 @@
+{
+  "status": "PASSED",
+  "original_pickle_failure": "AttributeError(\"Can't pickle local object 'exercise.<locals>.local_loss_hook'\")",
+  "exact_zip_patch": true,
+  "nonzero_dcc_output_projection": true,
+  "hooks_removed_before_deepcopy": true,
+  "handle_list_empty": true,
+  "full_model_reload_state_exact": true,
+  "forward_exact": true,
+  "serialized_bytes": 216258,
+  "scope": "CPU small DCCConv synthetic nonzero-state pickle regression; not detection loss or capacity training",
+  "torch": "2.7.1+cu118",
+  "preflight_lf_sha256": "34e17dea109bbf9706e668384574f166dc9728bb9c3d59e93e8d2d38fca4a16c"
+}

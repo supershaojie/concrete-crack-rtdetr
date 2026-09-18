@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import shutil
 import time
+from tempfile import TemporaryDirectory
 
 import torch
 
@@ -14,7 +15,7 @@ from dcc_common import ROOT, VARIANTS, require, sha256, write_json, runtime, ver
 from train_dcc import (DEFAULT_MAIN, recipe, code_identity, dataset_identity, verify_initialization,
                        optimizer_coverage, disable_oom_retry)
 from ultralytics import RTDETR
-from ultralytics.models.rtdetr.train import RTDETRTrainer
+from dcc_checkpoint import DCCCheckpointTrainer
 from ultralytics.utils import ASSETS
 
 
@@ -76,7 +77,7 @@ def run(args):
         require(args.workers == train_args["workers"], "Capacity workers must match the full recipe (8)")
         torch.cuda.reset_peak_memory_stats()
 
-        class CapacityTrainer(RTDETRTrainer):
+        class CapacityTrainer(DCCCheckpointTrainer):
             def get_model(self, cfg=None, weights=None, verbose=True):
                 model, audit = build_training_model(cfg, weights, self.data, args.variant)
                 report["trainer_rebuild"] = audit
@@ -172,13 +173,22 @@ def run(args):
         require(all(any(step["applied"] and step["gradients"][n]["finite"] and
                         (step["gradients"][n]["norm"] or 0) > 0 for step in report["steps"]) for n in branch),
                 "Not all DCC projections received later finite nonzero gradients")
-        # Native lifecycle checks run separately in check_dcc; preserve an inspectable
-        # learned state here, but never label a mid-epoch budget stop as resumable.
-        torch.save({"model": deepcopy(trainer.model).cpu(), "optimizer": trainer.optimizer.state_dict(),
-                    "scaler": trainer.scaler.state_dict(), "ema": deepcopy(trainer.ema.ema).cpu(),
-                    "epoch": trainer.epoch, "batches": report["capacity"]["observed_batches"],
-                    "kind": "bounded_mid_epoch_diagnostic_NOT_FORMAL_RESUME"}, out / "learned_diagnostic.pt")
-        report["learned_diagnostic_sha256"] = sha256(out / "learned_diagnostic.pt")
+        # Exercise diagnostic serialization, retaining only its hash and size.
+        # A mid-epoch budget stop is never a resumable formal checkpoint.
+        # DCC_PREFLIGHT_DETACH_BEFORE_SAVE_V1
+        for handle in handles:
+            handle.remove()
+        handles.clear()
+        with TemporaryDirectory(prefix="diagnostic_", dir=out) as temporary:
+            diagnostic = Path(temporary) / "learned_diagnostic.pt"
+            torch.save({"model": deepcopy(trainer.model).cpu(), "optimizer": trainer.optimizer.state_dict(),
+                        "scaler": trainer.scaler.state_dict(), "ema": deepcopy(trainer.ema.ema).cpu(),
+                        "epoch": trainer.epoch, "batches": report["capacity"]["observed_batches"],
+                        "kind": "bounded_mid_epoch_diagnostic_NOT_FORMAL_RESUME"}, diagnostic)
+            report["learned_diagnostic_sha256"] = sha256(diagnostic)
+            report["learned_diagnostic_bytes"] = diagnostic.stat().st_size
+        report["learned_diagnostic_retained"] = False
+        report["checkpoint_policy"] = "optimizer_fp32_v1"
         report["status"] = "PASSED"
     except BaseException as error:
         report.update(status="FAILED", error=repr(error))
