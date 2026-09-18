@@ -1,0 +1,69 @@
+{
+  "status": "PASSED",
+  "parameters": [
+    {
+      "variant": "cbr_lif_dcc_v1",
+      "baseline": true,
+      "unfused": 20149765,
+      "fused": 19944965,
+      "nodes": 27
+    },
+    {
+      "variant": "cbr_lif_dcc_v1",
+      "baseline": false,
+      "unfused": 20168197,
+      "fused": 19963397,
+      "nodes": 27
+    },
+    {
+      "variant": "dcc_v1",
+      "baseline": true,
+      "unfused": 20082772,
+      "fused": 19877716,
+      "nodes": 27
+    },
+    {
+      "variant": "dcc_v1",
+      "baseline": false,
+      "unfused": 20101204,
+      "fused": 19896148,
+      "nodes": 27
+    }
+  ],
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "worktree": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "module_hashes": {
+      "lif_down": {
+        "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    },
+    "files": {
+      "ultralytics-main/ultralytics/nn/modules/dcc.py": "a9667237105c5736410944b3fd9aa3ac61953950816f662735787ae499a27f7e",
+      "ultralytics-main/ultralytics/nn/tasks.py": "e7cdc0c5eaf0eb2fe242b431885354ea612a828ecd27b76e9f703859729f4ff5",
+      "ultralytics-main/ultralytics/nn/modules/__init__.py": "e02fb4885661b8761106b13f8e6a0f903413ab5edfeadb5da655472c61b18ec6",
+      "tools/check_dcc.py": "9caa059b28fa825dc08c7b931bc679b01c1c572d7690b9e79552c1b5ba98c9f7",
+      "tools/check_dcc_math.py": "d9d6d612a873dfd6b304d63df2c80bad0e6064c0896017886209bf6a5eb2c760",
+      "tools/dcc_common.py": "c5e5c432ba93ee5042a4c71c53f00f91a6bf6a8f0f158402ff8fee3953292384",
+      "tools/init_dcc.py": "d333dc3e937786a121813022e076ed961d355ee7b8f19cfd57f68735bc682347",
+      "tools/preflight_dcc.py": "d788a1f2531f8a23b21bc8352bfdf666f67065e4cdc91dbfce4855d57cd9a276",
+      "tools/train_dcc.py": "c1d8753f92fe28e0c5407ebb7e76ee20e0995e8f7d9dd03758901986ad3f644a",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-lif-dcc-v1.yaml": "d347ea2fe08c37ecc4004f210b21e1727258ff9f516bd14e17d5e56e48892b00",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-dcc-v1.yaml": "621c69b00d52b004093e5dc657fa18e326bdbd1e6d89f81f9965f740308e6c1d"
+    }
+  }
+}

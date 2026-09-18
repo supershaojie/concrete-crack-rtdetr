@@ -1,0 +1,5 @@
+{
+  "status": "FAILED",
+  "variant": "cbr_lif_dcc_v1",
+  "error": "RuntimeError('Parent projection contract differs')"
+}

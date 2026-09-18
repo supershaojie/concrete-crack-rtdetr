@@ -46,6 +46,7 @@ from ultralytics.nn.modules import (
     ConvNormLayer,
     Conv,
     Conv2,
+    DCCConv,
     ConvTranspose,
     Detect,
     DWConv,
@@ -1581,6 +1582,7 @@ def parse_model(d, ch, verbose=True):
         {
             Classify,
             Conv,
+            DCCConv,
             LIFDown,
             ConvTranspose,
             GhostConv,

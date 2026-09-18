@@ -1,0 +1,23 @@
+{
+  "base": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "attachment": {
+    "path": "D:\\rtdetr跑结果\\DCC\\DCC_Codex_Prompt.md",
+    "sha256": "18eb32c7959587960dd4b4eaeedf57a381834a039e28efe008c20c6fedbb45f0"
+  },
+  "reference_zip": {
+    "status": "PENDING",
+    "reason": "Not found in bounded repository, attachment directory, or provided result resources; no ZIP classes read",
+    "expected_sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc"
+  },
+  "SCCA": {
+    "status": "SOURCE_READ",
+    "commit": "f6e9dfda765046ae7691302cf5ec89d3f76cec5d",
+    "path": "ultralytics-main/ultralytics/nn/modules/scca_aifi.py",
+    "lf_sha256": "67b0d347d5305c16d48bb031cd10fd1d23b7ea447b58b2423166eb68b81dedca"
+  },
+  "parent_args": {
+    "actual_path": "D:/rtdetr跑结果/C19＋LIF：原 CBR＋LIF-Down v1/metadata/launch/actual_train_args.yaml",
+    "appendix_all_fields_equal": true,
+    "fields": 109
+  }
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\cbr_lif_dcc_v1\\checks_local_v1\\checks.json",
+    "sha256": "b35ebddba12d5fd6e6952e30b806b14cb7e833081ed68c7200042e503b909363",
+    "status": "FAILED",
+    "error": "RuntimeError('Native resumed update differs from same checkpoint-state control')",
+    "caution": "Original attempt retained; later attempts may correct diagnostic controls/status. Never relabel old attempt."
+  },
+  {
+    "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\cbr_lif_dcc_v1\\checks_local_v2\\checks.json",
+    "sha256": "e63ba885ee15abbb7a4d43778e088bad9215226da15d4dfd6646f9c7fad4ea5b",
+    "status": "FAILED",
+    "error": "RuntimeError('Native resumed update differs from same checkpoint-state control')",
+    "caution": "Original attempt retained; later attempts may correct diagnostic controls/status. Never relabel old attempt."
+  },
+  {
+    "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\cbr_lif_dcc_v1\\checks_local_v3\\checks.json",
+    "sha256": "291c752c389dff0bae09ebdc0e81513036d36b4f384f805bfa1f5f4fcd50f3e7",
+    "status": "FAILED",
+    "error": "RuntimeError('Native resumed update differs from same checkpoint-state control')",
+    "caution": "Original attempt retained; later attempts may correct diagnostic controls/status. Never relabel old attempt."
+  },
+  {
+    "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\cbr_lif_dcc_v1\\checks_local_v4\\checks.json",
+    "sha256": "0d0498f32a8ad888825b23b657fe6acefd42bc4bb3de36c2445360baed3bbe88",
+    "status": "FAILED",
+    "error": "RuntimeError('Unexplained resumed gradient mismatch')",
+    "caution": "Original attempt retained; later attempts may correct diagnostic controls/status. Never relabel old attempt."
+  },
+  {
+    "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\cbr_lif_dcc_v1\\checks_local_v5\\checks.json",
+    "sha256": "f7f9a8a3366fa67a0dbeb14230d6c3853688b31fb285423caabbb0113eb31f24",
+    "status": "PASSED",
+    "error": null,
+    "caution": "Original attempt retained; later attempts may correct diagnostic controls/status. Never relabel old attempt."
+  },
+  {
+    "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\cbr_lif_dcc_v1\\checks_local_v6\\checks.json",
+    "sha256": "17a6a0d33444a7d066a4a002075a35640f5f066cf27b84829f96d5f08138c21b",
+    "status": "PRECISION_NOTE",
+    "error": null,
+    "caution": "Original attempt retained; later attempts may correct diagnostic controls/status. Never relabel old attempt."
+  },
+  {
+    "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\cbr_lif_dcc_v1\\capacity_local_v1\\preflight.json",
+    "sha256": "0662123c6c2f84eaead58de214241f1db57bf01ac53bbdf8618e05a8ee483852",
+    "status": "FAILED",
+    "error": "PermissionError(13, 'Permission denied')"
+  },
+  {
+    "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\cbr_lif_dcc_v1\\capacity_local_v2\\preflight.json",
+    "sha256": "5b0ac81993a7fcc3e20ba1302ee58156e9a4becb473ca00019d423511287d5fa",
+    "status": "FAILED",
+    "error": "RuntimeError('CUDA error: CUBLAS_STATUS_EXECUTION_FAILED when calling `cublasGemmEx( handle, opa, opb, m, n, k, alpha_ptr, a, CUDA_R_16F, lda, b, CUDA_R_16F, ldb, beta_ptr, c, CUDA_R_16F, ldc, compute_type, CUBLAS_GEMM_DEFAULT_TENSOR_OP)`')"
+  }
+]

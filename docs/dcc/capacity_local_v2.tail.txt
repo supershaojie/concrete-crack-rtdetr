@@ -1,0 +1,132 @@
+Readable log tail: ANSI escapes/trailing whitespace removed; original log retained in outputs/dcc/cbr_lif_dcc_v1.
+New https://pypi.org/project/ultralytics/8.4.155 available  Update with 'pip install -U ultralytics'
+Ultralytics 8.4.21  Python-3.9.25 torch-2.7.1+cu118 CUDA:0 (NVIDIA GeForce RTX 2060, 6144MiB)
+engine\trainer: agnostic_nms=False, amp=True, angle=1.0, augment=False, auto_augment=None, batch=16, bgr=0.0, box=7.5, cache=False, cfg=None, classes=None, close_mosaic=10, cls=0.5, compile=False, conf=None, copy_paste=0, copy_paste_mode=flip, cos_lr=True, cutmix=0, data=D:\MyProjects\Crack_RTDETR\configs\crack.yaml, degrees=5, deterministic=True, device=0, dfl=1.5, dnn=False, dropout=0.0, dynamic=False, embed=None, end2end=None, epochs=200, erasing=0, exist_ok=False, fliplr=0.5, flipud=0.2, format=torchscript, fraction=1.0, freeze=None, half=False, hsv_h=0.015, hsv_s=0.5, hsv_v=0.35, imgsz=640, int8=False, iou=0.7, keras=False, kobj=1.0, line_width=None, lr0=0.0005, lrf=0.01, mask_ratio=4, max_det=300, mixup=0.05, mode=train, model=D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\outputs\dcc\cbr_lif_dcc_v1\controlled_init.pt, momentum=0.937, mosaic=0.8, multi_scale=0.0, name=native_capacity, nbs=64, nms=False, opset=None, optimize=False, optimizer=AdamW, overlap_mask=True, patience=50, perspective=0.0002, plots=True, pose=12.0, pretrained=True, profile=False, project=D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\outputs\dcc\cbr_lif_dcc_v1\capacity_local_v2, rect=False, resume=False, retina_masks=False, rle=1.0, save=True, save_conf=False, save_crop=False, save_dir=D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\outputs\dcc\cbr_lif_dcc_v1\capacity_local_v2\native_capacity, save_frames=False, save_json=False, save_period=-1, save_txt=False, scale=0.4, seed=42, shear=1.5, show=False, show_boxes=True, show_conf=True, show_labels=True, simplify=True, single_cls=False, source=None, split=val, stream_buffer=False, task=detect, time=None, tracker=botsort.yaml, translate=0.1, val=True, verbose=True, vid_stride=1, visualize=False, warmup_bias_lr=0.1, warmup_epochs=5, warmup_momentum=0.8, weight_decay=0.0001, workers=8, workspace=None
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 552/552 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+AMP: running Automatic Mixed Precision (AMP) checks...
+AMP: checks passed
+train: Fast image access  (ping: 0.10.0 ms, read: 1826.5115.6 MB/s, size: 4546.7 KB)
+
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 230 images, 0 backgrounds, 0 corrupt: 4% ──────────── 230/6048 685.0it/s 0.1s<8.5s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 464 images, 0 backgrounds, 0 corrupt: 8% ╸─────────── 464/6048 1.2Kit/s 0.2s<4.8s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 701 images, 0 backgrounds, 0 corrupt: 12% ━─────────── 701/6048 1.5Kit/s 0.3s<3.5s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 932 images, 0 backgrounds, 0 corrupt: 15% ━╸────────── 932/6048 1.8Kit/s 0.4s<2.9s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 1175 images, 0 backgrounds, 0 corrupt: 19% ━━────────── 1175/6048 2.0Kit/s 0.5s<2.5s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 1420 images, 0 backgrounds, 0 corrupt: 23% ━━╸───────── 1420/6048 2.1Kit/s 0.6s<2.2s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 1660 images, 0 backgrounds, 0 corrupt: 27% ━━━───────── 1660/6048 2.2Kit/s 0.7s<2.0s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 1881 images, 0 backgrounds, 0 corrupt: 31% ━━━╸──────── 1881/6048 2.2Kit/s 0.8s<1.9s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 2122 images, 0 backgrounds, 0 corrupt: 35% ━━━━──────── 2122/6048 2.2Kit/s 0.9s<1.8s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 2350 images, 0 backgrounds, 0 corrupt: 39% ━━━━╸─────── 2350/6048 2.3Kit/s 1.0s<1.6s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 2590 images, 0 backgrounds, 0 corrupt: 43% ━━━━━─────── 2590/6048 2.3Kit/s 1.1s<1.5s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 2823 images, 0 backgrounds, 0 corrupt: 47% ━━━━━╸────── 2823/6048 2.3Kit/s 1.2s<1.4s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 3043 images, 0 backgrounds, 0 corrupt: 50% ━━━━━━────── 3043/6048 2.3Kit/s 1.3s<1.3s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 3265 images, 0 backgrounds, 0 corrupt: 54% ━━━━━━────── 3265/6048 2.2Kit/s 1.4s<1.2s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 3464 images, 0 backgrounds, 0 corrupt: 57% ━━━━━━╸───── 3464/6048 2.2Kit/s 1.5s<1.2s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 3673 images, 0 backgrounds, 0 corrupt: 61% ━━━━━━━───── 3673/6048 2.1Kit/s 1.6s<1.1s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 3894 images, 0 backgrounds, 0 corrupt: 64% ━━━━━━━╸──── 3894/6048 2.2Kit/s 1.7s<1.0s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 4119 images, 0 backgrounds, 0 corrupt: 68% ━━━━━━━━──── 4119/6048 2.2Kit/s 1.8s<0.9s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 4317 images, 0 backgrounds, 0 corrupt: 71% ━━━━━━━━╸─── 4317/6048 2.1Kit/s 1.9s<0.8s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 4526 images, 0 backgrounds, 0 corrupt: 75% ━━━━━━━━╸─── 4526/6048 2.1Kit/s 2.0s<0.7s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 4723 images, 0 backgrounds, 0 corrupt: 78% ━━━━━━━━━─── 4723/6048 2.1Kit/s 2.1s<0.6s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 4930 images, 0 backgrounds, 0 corrupt: 82% ━━━━━━━━━╸── 4930/6048 2.0Kit/s 2.2s<0.5s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 5145 images, 0 backgrounds, 0 corrupt: 85% ━━━━━━━━━━── 5145/6048 2.1Kit/s 2.3s<0.4s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 5354 images, 0 backgrounds, 0 corrupt: 89% ━━━━━━━━━━╸─ 5354/6048 2.1Kit/s 2.4s<0.3s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 5553 images, 0 backgrounds, 0 corrupt: 92% ━━━━━━━━━━━─ 5553/6048 2.0Kit/s 2.5s<0.2s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 5757 images, 0 backgrounds, 0 corrupt: 95% ━━━━━━━━━━━─ 5757/6048 2.0Kit/s 2.6s<0.1s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 5978 images, 0 backgrounds, 0 corrupt: 99% ━━━━━━━━━━━╸ 5978/6048 2.1Kit/s 2.7s<0.0s
+train: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train... 6048 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 6048/6048 2.2Kit/s 2.8s
+train: New cache created: D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train.cache
+val: Fast image access  (ping: 0.10.0 ms, read: 274.1181.9 MB/s, size: 4957.9 KB)
+
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 110 images, 0 backgrounds, 0 corrupt: 6% ╸─────────── 110/1728 318.2it/s 0.1s<5.1s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 214 images, 0 backgrounds, 0 corrupt: 12% ━─────────── 214/1728 532.4it/s 0.2s<2.8s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 303 images, 0 backgrounds, 0 corrupt: 18% ━━────────── 303/1728 556.0it/s 0.4s<2.6s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 384 images, 0 backgrounds, 0 corrupt: 22% ━━╸───────── 384/1728 632.1it/s 0.5s<2.1s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 476 images, 0 backgrounds, 0 corrupt: 28% ━━━───────── 476/1728 717.8it/s 0.6s<1.7s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 525 images, 0 backgrounds, 0 corrupt: 30% ━━━╸──────── 525/1728 583.7it/s 0.7s<2.1s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 620 images, 0 backgrounds, 0 corrupt: 36% ━━━━──────── 620/1728 691.5it/s 0.8s<1.6s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 734 images, 0 backgrounds, 0 corrupt: 42% ━━━━━─────── 734/1728 816.4it/s 0.9s<1.2s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 775 images, 0 backgrounds, 0 corrupt: 45% ━━━━━─────── 775/1728 655.8it/s 1.1s<1.5s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 792 images, 0 backgrounds, 0 corrupt: 46% ━━━━━─────── 792/1728 499.5it/s 1.2s<1.9s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 798 images, 0 backgrounds, 0 corrupt: 46% ━━━━━╸────── 798/1728 359.2it/s 1.4s<2.6s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 825 images, 0 backgrounds, 0 corrupt: 48% ━━━━━╸────── 825/1728 330.9it/s 1.5s<2.7s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 902 images, 0 backgrounds, 0 corrupt: 52% ━━━━━━────── 902/1728 430.9it/s 1.6s<1.9s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 917 images, 0 backgrounds, 0 corrupt: 53% ━━━━━━────── 917/1728 336.5it/s 1.7s<2.4s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 925 images, 0 backgrounds, 0 corrupt: 54% ━━━━━━────── 925/1728 255.3it/s 1.9s<3.1s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1008 images, 0 backgrounds, 0 corrupt: 58% ━━━━━━━───── 1008/1728 407.8it/s 2.0s<1.8s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1042 images, 0 backgrounds, 0 corrupt: 60% ━━━━━━━───── 1042/1728 374.9it/s 2.1s<1.8s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1078 images, 0 backgrounds, 0 corrupt: 62% ━━━━━━━───── 1078/1728 368.8it/s 2.2s<1.8s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1147 images, 0 backgrounds, 0 corrupt: 66% ━━━━━━━╸──── 1147/1728 450.4it/s 2.3s<1.3s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1197 images, 0 backgrounds, 0 corrupt: 69% ━━━━━━━━──── 1197/1728 446.7it/s 2.4s<1.2s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1209 images, 0 backgrounds, 0 corrupt: 70% ━━━━━━━━──── 1209/1728 344.9it/s 2.5s<1.5s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1260 images, 0 backgrounds, 0 corrupt: 73% ━━━━━━━━╸─── 1260/1728 393.3it/s 2.6s<1.2s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1298 images, 0 backgrounds, 0 corrupt: 75% ━━━━━━━━━─── 1298/1728 388.5it/s 2.7s<1.1s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1349 images, 0 backgrounds, 0 corrupt: 78% ━━━━━━━━━─── 1349/1728 412.7it/s 2.8s<0.9s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1370 images, 0 backgrounds, 0 corrupt: 79% ━━━━━━━━━╸── 1370/1728 349.6it/s 2.9s<1.0s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1437 images, 0 backgrounds, 0 corrupt: 83% ━━━━━━━━━╸── 1437/1728 444.3it/s 3.0s<0.7s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1497 images, 0 backgrounds, 0 corrupt: 87% ━━━━━━━━━━── 1497/1728 467.9it/s 3.2s<0.5s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1511 images, 0 backgrounds, 0 corrupt: 87% ━━━━━━━━━━── 1511/1728 365.6it/s 3.3s<0.6s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1531 images, 0 backgrounds, 0 corrupt: 89% ━━━━━━━━━━╸─ 1531/1728 312.7it/s 3.4s<0.6s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1602 images, 0 backgrounds, 0 corrupt: 93% ━━━━━━━━━━━─ 1602/1728 430.3it/s 3.5s<0.3s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1651 images, 0 backgrounds, 0 corrupt: 96% ━━━━━━━━━━━─ 1651/1728 447.2it/s 3.6s<0.2s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1719 images, 0 backgrounds, 0 corrupt: 99% ━━━━━━━━━━━╸ 1719/1728 509.7it/s 3.7s<0.0s
+val: Scanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val... 1728 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 1728/1728 470.2it/s 3.7s
+val: New cache created: D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val.cache
+optimizer: AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Plotting labels to D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\outputs\dcc\cbr_lif_dcc_v1\capacity_local_v2\native_capacity\labels.jpg...
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\outputs\dcc\cbr_lif_dcc_v1\capacity_local_v2\native_capacity
+Starting training for 200 epochs...
+
+      Epoch    GPU_mem  giou_loss   cls_loss    l1_loss  Instances       Size
+
+: 0% ──────────── 0/378  11.7s
+Traceback (most recent call last):
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\tools\preflight_dcc.py", line 217, in <module>
+    raise SystemExit(main())
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\tools\preflight_dcc.py", line 211, in main
+    result = run(args)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\tools\preflight_dcc.py", line 163, in run
+    model.train(trainer=CapacityTrainer, **train_args)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\ultralytics-main\ultralytics\engine\model.py", line 777, in train
+    self.trainer.train()
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\ultralytics-main\ultralytics\engine\trainer.py", line 244, in train
+    self._do_train()
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\ultralytics-main\ultralytics\engine\trainer.py", line 436, in _do_train
+    loss, self.loss_items = self.model(batch)
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1857, in _call_impl
+    return inner()
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1805, in inner
+    result = forward_call(*args, **kwargs)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\ultralytics-main\ultralytics\nn\tasks.py", line 147, in forward
+    return self.loss(x, *args, **kwargs)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\ultralytics-main\ultralytics\nn\tasks.py", line 802, in loss
+    preds = self.predict(img, batch=targets)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\ultralytics-main\ultralytics\nn\tasks.py", line 852, in predict
+    x = head([y[j] for j in head.f], batch)  # head inference
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1857, in _call_impl
+    return inner()
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1805, in inner
+    result = forward_call(*args, **kwargs)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\ultralytics-main\ultralytics\nn\modules\cbr.py", line 101, in forward
+    return self._forward_cbr(x, batch, False)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\ultralytics-main\ultralytics\nn\modules\cbr.py", line 118, in _forward_cbr
+    embed, refer_bbox, enc_bboxes, enc_scores = self._get_decoder_input(feats, shapes, dn_embed, dn_bbox)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dcc-v1\ultralytics-main\ultralytics\nn\modules\head.py", line 1673, in _get_decoder_input
+    enc_outputs_scores = self.enc_score_head(features)  # (bs, h*w, nc)
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: CUDA error: CUBLAS_STATUS_EXECUTION_FAILED when calling `cublasGemmEx( handle, opa, opb, m, n, k, alpha_ptr, a, CUDA_R_16F, lda, b, CUDA_R_16F, ldb, beta_ptr, c, CUDA_R_16F, ldc, compute_type, CUBLAS_GEMM_DEFAULT_TENSOR_OP)`

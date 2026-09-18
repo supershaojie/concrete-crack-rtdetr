@@ -1,0 +1,695 @@
+{
+  "status": "PASSED",
+  "torch": "2.7.1+cu118",
+  "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+  "cuda_available": true,
+  "default_precision_flags": {
+    "matmul_allow_tf32": false,
+    "cudnn_allow_tf32": true
+  },
+  "strict_precision_flags": {
+    "matmul_allow_tf32": false,
+    "cudnn_allow_tf32": false
+  },
+  "head": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "source_sha256": {
+    "ultralytics-main/ultralytics/nn/modules/dcc.py": "a9667237105c5736410944b3fd9aa3ac61953950816f662735787ae499a27f7e",
+    "tools/check_dcc_math.py": "fb5db558e444c4623f1fdf9e105084ff775fef7d614e55374c3451dbf9a44829"
+  },
+  "tolerance": {
+    "atol": 2e-05,
+    "rtol": 0.0002
+  },
+  "devices": [
+    {
+      "device": "cpu",
+      "status": "PASSED",
+      "new_trainable_parameters": 18432,
+      "gradient_steps": [
+        {
+          "step": 1,
+          "loss": 2.015047550201416,
+          "gradient_norms": {
+            "W_d.weight": 0.0,
+            "W_q.weight": 0.0,
+            "W_k.weight": 0.0,
+            "W_o.weight": 0.049892596900463104
+          },
+          "W_o_norm_after_update": 0.004989259876310825
+        },
+        {
+          "step": 2,
+          "loss": 2.014798879623413,
+          "gradient_norms": {
+            "W_d.weight": 0.0001726035407045856,
+            "W_q.weight": 1.288480416405946e-05,
+            "W_k.weight": 1.2852534382545855e-05,
+            "W_o.weight": 0.049874596297740936
+          },
+          "W_o_norm_after_update": 0.009976720437407494
+        }
+      ],
+      "shapes": [
+        {
+          "shape": [
+            1,
+            256,
+            7,
+            11
+          ],
+          "input": "random",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 1.5481726123312e-08,
+          "residual_abs_max": 1.2903752326965332
+        },
+        {
+          "shape": [
+            1,
+            256,
+            7,
+            11
+          ],
+          "input": "zero",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 0.0,
+          "residual_abs_max": 0.0
+        },
+        {
+          "shape": [
+            1,
+            256,
+            7,
+            11
+          ],
+          "input": "constant",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 6.242321859417643e-08,
+          "residual_abs_max": 6.242321859417643e-08
+        },
+        {
+          "shape": [
+            1,
+            256,
+            7,
+            11
+          ],
+          "input": "low_amplitude",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 1.4995220141611931e-16,
+          "residual_abs_max": 1.3287381861459835e-08
+        },
+        {
+          "shape": [
+            2,
+            256,
+            9,
+            5
+          ],
+          "input": "random",
+          "attention_shape": [
+            2,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 2.4669700948720674e-08,
+          "residual_abs_max": 1.3539499044418335
+        },
+        {
+          "shape": [
+            2,
+            256,
+            9,
+            5
+          ],
+          "input": "zero",
+          "attention_shape": [
+            2,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 0.0,
+          "residual_abs_max": 0.0
+        },
+        {
+          "shape": [
+            2,
+            256,
+            9,
+            5
+          ],
+          "input": "constant",
+          "attention_shape": [
+            2,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 5.448149309472683e-08,
+          "residual_abs_max": 5.448148954201315e-08
+        },
+        {
+          "shape": [
+            2,
+            256,
+            9,
+            5
+          ],
+          "input": "low_amplitude",
+          "attention_shape": [
+            2,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 1.973729836261267e-16,
+          "residual_abs_max": 1.3672154963728644e-08
+        },
+        {
+          "shape": [
+            1,
+            256,
+            1,
+            1
+          ],
+          "input": "random",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 0.0,
+          "residual_abs_max": 0.0
+        },
+        {
+          "shape": [
+            1,
+            256,
+            1,
+            1
+          ],
+          "input": "zero",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 0.0,
+          "residual_abs_max": 0.0
+        },
+        {
+          "shape": [
+            1,
+            256,
+            1,
+            1
+          ],
+          "input": "constant",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 0.0,
+          "residual_abs_max": 0.0
+        },
+        {
+          "shape": [
+            1,
+            256,
+            1,
+            1
+          ],
+          "input": "low_amplitude",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 0.0,
+          "residual_abs_max": 0.0
+        }
+      ],
+      "actual_matmul_shapes": [
+        {
+          "left": [
+            2,
+            4,
+            8,
+            77
+          ],
+          "right": [
+            2,
+            4,
+            77,
+            8
+          ],
+          "output": [
+            2,
+            4,
+            8,
+            8
+          ]
+        },
+        {
+          "left": [
+            2,
+            4,
+            8,
+            8
+          ],
+          "right": [
+            2,
+            4,
+            8,
+            77
+          ],
+          "output": [
+            2,
+            4,
+            8,
+            77
+          ]
+        }
+      ],
+      "attention_input_change_max_abs": 0.05382595211267471,
+      "nonzero_branch_max_abs": 1.5307527780532837,
+      "spatial_permutation_equivariance": {
+        "max_abs": 2.384185791015625e-07,
+        "relative_L2": 4.27946034164961e-08,
+        "exceed_fraction": 0.0,
+        "allclose": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "state_dict_reload": {
+        "max_abs": 0.0,
+        "relative_L2": 0.0,
+        "exceed_fraction": 0.0,
+        "allclose": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "complete_module_reload": {
+        "max_abs": 0.0,
+        "relative_L2": 0.0,
+        "exceed_fraction": 0.0,
+        "allclose": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "ema_own_weight_reference": {
+        "max_abs": 0.0,
+        "relative_L2": 0.0,
+        "exceed_fraction": 0.0,
+        "allclose": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "nonzero_wrapper_fusion": {
+        "max_abs": 1.7881393432617188e-06,
+        "relative_L2": 2.9125286005182716e-07,
+        "exceed_fraction": 0.0,
+        "allclose": true,
+        "atol": 2e-05,
+        "rtol": 0.0002,
+        "dcc_calls": 1
+      }
+    },
+    {
+      "device": "cuda",
+      "status": "PASSED",
+      "new_trainable_parameters": 18432,
+      "gradient_steps": [
+        {
+          "step": 1,
+          "loss": 2.015287399291992,
+          "gradient_norms": {
+            "W_d.weight": 0.0,
+            "W_q.weight": 0.0,
+            "W_k.weight": 0.0,
+            "W_o.weight": 0.050395525991916656
+          },
+          "W_o_norm_after_update": 0.00503955315798521
+        },
+        {
+          "step": 2,
+          "loss": 2.01503324508667,
+          "gradient_norms": {
+            "W_d.weight": 0.00017490565369371325,
+            "W_q.weight": 1.3329080502444413e-05,
+            "W_k.weight": 1.3109289284329861e-05,
+            "W_o.weight": 0.050377100706100464
+          },
+          "W_o_norm_after_update": 0.010077263228595257
+        }
+      ],
+      "shapes": [
+        {
+          "shape": [
+            1,
+            256,
+            7,
+            11
+          ],
+          "input": "random",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 1.5481726123312e-08,
+          "residual_abs_max": 1.2153888940811157
+        },
+        {
+          "shape": [
+            1,
+            256,
+            7,
+            11
+          ],
+          "input": "zero",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 0.0,
+          "residual_abs_max": 0.0
+        },
+        {
+          "shape": [
+            1,
+            256,
+            7,
+            11
+          ],
+          "input": "constant",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 3.95349282200641e-08,
+          "residual_abs_max": 3.95349282200641e-08
+        },
+        {
+          "shape": [
+            1,
+            256,
+            7,
+            11
+          ],
+          "input": "low_amplitude",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 1.7302176577441082e-16,
+          "residual_abs_max": 1.2209237176818988e-08
+        },
+        {
+          "shape": [
+            2,
+            256,
+            9,
+            5
+          ],
+          "input": "random",
+          "attention_shape": [
+            2,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 2.3841858265427618e-08,
+          "residual_abs_max": 1.2775918245315552
+        },
+        {
+          "shape": [
+            2,
+            256,
+            9,
+            5
+          ],
+          "input": "zero",
+          "attention_shape": [
+            2,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 0.0,
+          "residual_abs_max": 0.0
+        },
+        {
+          "shape": [
+            2,
+            256,
+            9,
+            5
+          ],
+          "input": "constant",
+          "attention_shape": [
+            2,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 6.028902532762004e-08,
+          "residual_abs_max": 6.028902532762004e-08
+        },
+        {
+          "shape": [
+            2,
+            256,
+            9,
+            5
+          ],
+          "input": "low_amplitude",
+          "attention_shape": [
+            2,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 1.973729836261267e-16,
+          "residual_abs_max": 1.1929385479447774e-08
+        },
+        {
+          "shape": [
+            1,
+            256,
+            1,
+            1
+          ],
+          "input": "random",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 0.0,
+          "residual_abs_max": 0.0
+        },
+        {
+          "shape": [
+            1,
+            256,
+            1,
+            1
+          ],
+          "input": "zero",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 0.0,
+          "residual_abs_max": 0.0
+        },
+        {
+          "shape": [
+            1,
+            256,
+            1,
+            1
+          ],
+          "input": "constant",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 0.0,
+          "residual_abs_max": 0.0
+        },
+        {
+          "shape": [
+            1,
+            256,
+            1,
+            1
+          ],
+          "input": "low_amplitude",
+          "attention_shape": [
+            1,
+            4,
+            8,
+            8
+          ],
+          "branch_mean_abs_max": 0.0,
+          "residual_abs_max": 0.0
+        }
+      ],
+      "actual_matmul_shapes": [
+        {
+          "left": [
+            2,
+            4,
+            8,
+            77
+          ],
+          "right": [
+            2,
+            4,
+            77,
+            8
+          ],
+          "output": [
+            2,
+            4,
+            8,
+            8
+          ]
+        },
+        {
+          "left": [
+            2,
+            4,
+            8,
+            8
+          ],
+          "right": [
+            2,
+            4,
+            8,
+            77
+          ],
+          "output": [
+            2,
+            4,
+            8,
+            77
+          ]
+        }
+      ],
+      "attention_input_change_max_abs": 0.06766289472579956,
+      "nonzero_branch_max_abs": 1.2669092416763306,
+      "spatial_permutation_equivariance": {
+        "max_abs": 2.384185791015625e-07,
+        "relative_L2": 4.041658030473627e-08,
+        "exceed_fraction": 0.0,
+        "allclose": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "state_dict_reload": {
+        "max_abs": 0.0,
+        "relative_L2": 0.0,
+        "exceed_fraction": 0.0,
+        "allclose": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "complete_module_reload": {
+        "max_abs": 0.0,
+        "relative_L2": 0.0,
+        "exceed_fraction": 0.0,
+        "allclose": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "ema_own_weight_reference": {
+        "max_abs": 0.0,
+        "relative_L2": 0.0,
+        "exceed_fraction": 0.0,
+        "allclose": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "nonzero_wrapper_fusion": {
+        "max_abs": 1.9073486328125e-06,
+        "relative_L2": 2.8270670782148954e-07,
+        "exceed_fraction": 0.0,
+        "allclose": true,
+        "atol": 2e-05,
+        "rtol": 0.0002,
+        "dcc_calls": 1
+      },
+      "native_amp": {
+        "finite": true,
+        "output_dtype": "torch.float16"
+      },
+      "cuda_half": {
+        "finite": true,
+        "branch_dtype": "torch.float32",
+        "branch_mean_abs_max": 2.1287373641598606e-08,
+        "final_output_difference_mean_abs_max": 8.521141717210412e-05
+      },
+      "native_amp_optimizer_steps": [
+        {
+          "loss": 2.023502826690674,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0
+        },
+        {
+          "loss": 2.018470048904419,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0
+        }
+      ]
+    }
+  ],
+  "constructor_preserves_cpu_cuda_rng": true,
+  "upstream_matches_torch_conv2d_default_initialization_exactly": true,
+  "original_conv_state_and_later_cpu_rng_preserved": true,
+  "restored_precision_flags": {
+    "matmul_allow_tf32": false,
+    "cudnn_allow_tf32": true
+  },
+  "seconds": 4.072551250457764
+}

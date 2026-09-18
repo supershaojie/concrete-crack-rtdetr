@@ -111,8 +111,11 @@ from .transformer import (
 
 from .lif_down import LIFDown
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
+from .dcc import DCC, DCCConv
 
 __all__ = (
+    "DCC",
+    "DCCConv",
     "LIFDown",
     "CrackBoundaryRefinement",
     "RTDETRDecoderCBR",
