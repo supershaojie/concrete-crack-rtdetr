@@ -1,0 +1,11 @@
+--- tested/check_gra.py
++++ delivery/check_gra.py
+@@ -323,6 +323,8 @@
+                     row['cuda_amp']=detection_updates(target,batch,'cuda',True,args.output/variant/'cuda_amp');persist()
+             del target;gc.collect()
+         report['status']='PASSED_LOCAL_CHECKS_SERVER_PENDING'
++        if str(torch.__version__).startswith('2.1.'):
++            report['torch21']=dict(status='PASSED',reason='All requested checks actually executed in this Torch 2.1 process')
+     except BaseException as error:
+         report['status']='FAILED';report['error']=repr(error);report['traceback']=traceback.format_exc();raise
+     finally:

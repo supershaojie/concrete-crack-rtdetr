@@ -110,9 +110,11 @@ from .transformer import (
 )
 
 from .lif_down import LIFDown
+from .gra import GRAConcat
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
 
 __all__ = (
+    "GRAConcat",
     "LIFDown",
     "CrackBoundaryRefinement",
     "RTDETRDecoderCBR",

@@ -1,0 +1,606 @@
+{
+  "status": "PASSED",
+  "device": "cpu",
+  "torch": "2.7.1+cu118",
+  "cuda_runtime": "11.8",
+  "initialization": {
+    "status": "PASSED",
+    "parameters": 8744,
+    "CPU_RNG_unchanged": true,
+    "CUDA_RNG_unchanged": true,
+    "state": {
+      "high_proj.weight": {
+        "shape": [
+          16,
+          256,
+          1,
+          1
+        ],
+        "min": -0.062353409826755524,
+        "max": 0.06247555464506149,
+        "mean": -0.0004167310253251344,
+        "std": 0.03579723462462425,
+        "nonzero": 4096
+      },
+      "lateral_proj.weight": {
+        "shape": [
+          16,
+          256,
+          1,
+          1
+        ],
+        "min": -0.06249316781759262,
+        "max": 0.062388814985752106,
+        "mean": 0.00022121498477645218,
+        "std": 0.03633544594049454,
+        "nonzero": 4096
+      },
+      "depthwise.weight": {
+        "shape": [
+          32,
+          1,
+          3,
+          3
+        ],
+        "min": -0.3312000036239624,
+        "max": 0.32933953404426575,
+        "mean": 0.012929893098771572,
+        "std": 0.19121775031089783,
+        "nonzero": 288
+      },
+      "offset.weight": {
+        "shape": [
+          8,
+          32,
+          1,
+          1
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "mean": 0.0,
+        "std": 0.0,
+        "nonzero": 0
+      },
+      "offset.bias": {
+        "shape": [
+          8
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "mean": 0.0,
+        "std": 0.0,
+        "nonzero": 0
+      }
+    }
+  },
+  "analytic_ramps": [
+    {
+      "status": "PASSED",
+      "source_shape": [
+        1,
+        12,
+        7,
+        11
+      ],
+      "target_shape": [
+        1,
+        12,
+        14,
+        22
+      ],
+      "dtype": "torch.float32",
+      "device": "cpu",
+      "offsets_xy": [
+        [
+          0.20000000298023224,
+          -0.10000000149011612
+        ],
+        [
+          -0.15000000596046448,
+          0.22499999403953552
+        ],
+        [
+          0.07500000298023224,
+          0.125
+        ],
+        [
+          -0.22499999403953552,
+          -0.17499999701976776
+        ]
+      ],
+      "zero_offset": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          24,
+          14,
+          22
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu",
+        "max_abs": 0.0,
+        "relative_L2": 0.0,
+        "over_tolerance_fraction": 0.0,
+        "finite": true,
+        "atol": 0,
+        "rtol": 0
+      },
+      "all_pixels": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          12,
+          14,
+          22
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu",
+        "max_abs": 9.5367431640625e-07,
+        "relative_L2": 2.914092192440876e-06,
+        "over_tolerance_fraction": 0.0,
+        "finite": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "interior": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          12,
+          180
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu",
+        "max_abs": 9.5367431640625e-07,
+        "relative_L2": 2.8421093247743556e-06,
+        "over_tolerance_fraction": 0.0,
+        "finite": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "border": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          12,
+          128
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu",
+        "max_abs": 9.5367431640625e-07,
+        "relative_L2": 3.049406814170652e-06,
+        "over_tolerance_fraction": 0.0,
+        "finite": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "constant_channels": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          4,
+          14,
+          22
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu",
+        "max_abs": 2.384185791015625e-07,
+        "relative_L2": 4.129531002609073e+23,
+        "over_tolerance_fraction": 0.0,
+        "finite": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "lateral_unchanged": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          12,
+          14,
+          22
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu",
+        "max_abs": 0.0,
+        "relative_L2": 0.0,
+        "over_tolerance_fraction": 0.0,
+        "finite": true,
+        "atol": 0,
+        "rtol": 0
+      },
+      "wrong_target_units_error_at_least": 0.05625009536743164,
+      "mutation_sensitivity": [
+        {
+          "mutation": "target_pixel_denominator",
+          "status": "PASSED_FAULT_REJECTED",
+          "oracle_result": {
+            "status": "FAILED",
+            "shape": [
+              1,
+              12,
+              14,
+              22
+            ],
+            "dtype": "torch.float32",
+            "device": "cpu",
+            "max_abs": 0.056250572204589844,
+            "relative_L2": 0.5000007748603821,
+            "over_tolerance_fraction": 0.588744580745697,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          }
+        },
+        {
+          "mutation": "xy_swap",
+          "status": "PASSED_FAULT_REJECTED",
+          "oracle_result": {
+            "status": "FAILED",
+            "shape": [
+              1,
+              12,
+              14,
+              22
+            ],
+            "dtype": "torch.float32",
+            "device": "cpu",
+            "max_abs": 0.1875009536743164,
+            "relative_L2": 1.444096565246582,
+            "over_tolerance_fraction": 0.588744580745697,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          }
+        },
+        {
+          "mutation": "group_roll",
+          "status": "PASSED_FAULT_REJECTED",
+          "oracle_result": {
+            "status": "FAILED",
+            "shape": [
+              1,
+              12,
+              14,
+              22
+            ],
+            "dtype": "torch.float32",
+            "device": "cpu",
+            "max_abs": 0.21250104904174805,
+            "relative_L2": 1.7113827466964722,
+            "over_tolerance_fraction": 0.588744580745697,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          }
+        }
+      ]
+    },
+    {
+      "status": "PASSED",
+      "source_shape": [
+        1,
+        12,
+        7,
+        11
+      ],
+      "target_shape": [
+        1,
+        12,
+        13,
+        19
+      ],
+      "dtype": "torch.float32",
+      "device": "cpu",
+      "offsets_xy": [
+        [
+          0.20000000298023224,
+          -0.10000000149011612
+        ],
+        [
+          -0.15000000596046448,
+          0.22499999403953552
+        ],
+        [
+          0.07500000298023224,
+          0.125
+        ],
+        [
+          -0.22499999403953552,
+          -0.17499999701976776
+        ]
+      ],
+      "zero_offset": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          24,
+          13,
+          19
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu",
+        "max_abs": 0.0,
+        "relative_L2": 0.0,
+        "over_tolerance_fraction": 0.0,
+        "finite": true,
+        "atol": 0,
+        "rtol": 0
+      },
+      "all_pixels": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          12,
+          13,
+          19
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu",
+        "max_abs": 9.5367431640625e-07,
+        "relative_L2": 2.999167008965742e-06,
+        "over_tolerance_fraction": 0.0,
+        "finite": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "interior": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          12,
+          187
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu",
+        "max_abs": 9.5367431640625e-07,
+        "relative_L2": 2.9489501685020514e-06,
+        "over_tolerance_fraction": 0.0,
+        "finite": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "border": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          12,
+          60
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu",
+        "max_abs": 9.5367431640625e-07,
+        "relative_L2": 3.3116095892182784e-06,
+        "over_tolerance_fraction": 0.0,
+        "finite": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "constant_channels": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          4,
+          13,
+          19
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu",
+        "max_abs": 4.76837158203125e-07,
+        "relative_L2": 6.419616817446523e+23,
+        "over_tolerance_fraction": 0.0,
+        "finite": true,
+        "atol": 2e-05,
+        "rtol": 0.0002
+      },
+      "lateral_unchanged": {
+        "status": "PASSED",
+        "shape": [
+          1,
+          12,
+          13,
+          19
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu",
+        "max_abs": 0.0,
+        "relative_L2": 0.0,
+        "over_tolerance_fraction": 0.0,
+        "finite": true,
+        "atol": 0,
+        "rtol": 0
+      },
+      "wrong_target_units_error_at_least": 0.05625009536743164,
+      "mutation_sensitivity": []
+    }
+  ],
+  "gradient_and_state": {
+    "status": "PASSED",
+    "first_loss": 0.17971287667751312,
+    "second_loss": 0.17971231043338776,
+    "first_step_gradients": {
+      "high_proj.weight": {
+        "finite": true,
+        "max_abs": 0.0,
+        "nonzero": false
+      },
+      "lateral_proj.weight": {
+        "finite": true,
+        "max_abs": 0.0,
+        "nonzero": false
+      },
+      "depthwise.weight": {
+        "finite": true,
+        "max_abs": 0.0,
+        "nonzero": false
+      },
+      "offset.weight": {
+        "finite": true,
+        "max_abs": 0.00014060994726605713,
+        "nonzero": true
+      },
+      "offset.bias": {
+        "finite": true,
+        "max_abs": 0.0008868841687217355,
+        "nonzero": true
+      }
+    },
+    "second_step_gradients": {
+      "high_proj.weight": {
+        "finite": true,
+        "max_abs": 1.0856375354251213e-08,
+        "nonzero": true
+      },
+      "lateral_proj.weight": {
+        "finite": true,
+        "max_abs": 1.395641646695367e-08,
+        "nonzero": true
+      },
+      "depthwise.weight": {
+        "finite": true,
+        "max_abs": 1.663832804865706e-08,
+        "nonzero": true
+      },
+      "offset.weight": {
+        "finite": true,
+        "max_abs": 0.00014060433022677898,
+        "nonzero": true
+      },
+      "offset.bias": {
+        "finite": true,
+        "max_abs": 0.0008867341093719006,
+        "nonzero": true
+      },
+      "H": {
+        "finite": true,
+        "max_abs": 0.0006941353785805404,
+        "nonzero": true
+      },
+      "L": {
+        "finite": true,
+        "max_abs": 0.00028088828548789024,
+        "nonzero": true
+      }
+    },
+    "zero_residual_max_abs": 0.0,
+    "learned_offset_max_abs": 4.8892194172367454e-05,
+    "learned_offset_mean_abs": 2.434154157526791e-05,
+    "learned_tanh_saturation_fraction": 0.0,
+    "learned_residual_max_abs": 0.00011444091796875,
+    "reload": {
+      "status": "PASSED",
+      "shape": [
+        2,
+        24,
+        14,
+        22
+      ],
+      "dtype": "torch.float32",
+      "device": "cpu",
+      "max_abs": 0.0,
+      "relative_L2": 0.0,
+      "over_tolerance_fraction": 0.0,
+      "finite": true,
+      "atol": 0,
+      "rtol": 0
+    },
+    "EMA_self_copy": {
+      "status": "PASSED",
+      "shape": [
+        2,
+        24,
+        14,
+        22
+      ],
+      "dtype": "torch.float32",
+      "device": "cpu",
+      "max_abs": 0.0,
+      "relative_L2": 0.0,
+      "over_tolerance_fraction": 0.0,
+      "finite": true,
+      "atol": 0,
+      "rtol": 0
+    },
+    "same_quantization_half_float": {
+      "status": "PASSED",
+      "shape": [
+        2,
+        24,
+        14,
+        22
+      ],
+      "dtype": "torch.float32",
+      "device": "cpu",
+      "max_abs": 0.0,
+      "relative_L2": 0.0,
+      "over_tolerance_fraction": 0.0,
+      "finite": true,
+      "atol": 0,
+      "rtol": 0
+    },
+    "numeric_modes": [
+      {
+        "status": "PASSED",
+        "mode": "fp32",
+        "input_dtype": "torch.float32",
+        "output_dtype": "torch.float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          24,
+          14,
+          22
+        ],
+        "finite": true,
+        "sampling": [
+          {
+            "source_dtype": "torch.float32",
+            "grid_dtype": "torch.float32",
+            "source_shape": [
+              8,
+              3,
+              7,
+              11
+            ],
+            "grid_shape": [
+              8,
+              14,
+              22,
+              2
+            ],
+            "device": "cpu",
+            "mode": "bilinear",
+            "padding_mode": "border",
+            "align_corners": false
+          },
+          {
+            "source_dtype": "torch.float32",
+            "grid_dtype": "torch.float32",
+            "source_shape": [
+              8,
+              3,
+              7,
+              11
+            ],
+            "grid_shape": [
+              8,
+              14,
+              22,
+              2
+            ],
+            "device": "cpu",
+            "mode": "bilinear",
+            "padding_mode": "border",
+            "align_corners": false
+          }
+        ],
+        "offset_weight_gradient": {
+          "finite": true,
+          "max_abs": 0.0005632259999401867,
+          "nonzero": true
+        },
+        "residual_max_abs": 0.00011444091796875
+      }
+    ],
+    "CPU_half": "NOT_REQUIRED: not a substitute for CUDA explicit half"
+  }
+}

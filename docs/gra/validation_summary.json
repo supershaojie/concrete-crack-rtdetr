@@ -1,0 +1,321 @@
+{
+  "status": "PASSED_LOCAL_CHECKS_SERVER_PENDING",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-gra-v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-gra-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-gra-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    },
+    "gra_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-gra-v1\\ultralytics-main\\ultralytics\\nn\\modules\\gra.py",
+    "gra_sha256": "31fceceebfaf02beadb32649af535cd8ef7cb6def5a4b2f93d80f139e7d471fc",
+    "base_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec"
+  },
+  "branch": "exp-rtdetr-r18-lite-gra-v1",
+  "base_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "data": {
+    "train": {
+      "images": 6048,
+      "boxes": 45573,
+      "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+      "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"
+    },
+    "val": {
+      "images": 1728,
+      "boxes": 12840,
+      "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+      "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+    },
+    "test": {
+      "images": 864,
+      "boxes": 6663,
+      "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+      "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"
+    }
+  },
+  "variants": {
+    "cbr_lif_gra_v1": {
+      "initialization_sha256": "633cf8864a46adfceabe62b65e030722a7a914c9965af4a4ee34b64c68d87522",
+      "common_states": 552,
+      "new_trainable_parameters": 8744,
+      "class_adaptations": 9,
+      "parameters": {
+        "parent_unfused": 20149765,
+        "candidate_unfused": 20158509,
+        "parent_fused": 19944965,
+        "candidate_fused": 19953709
+      },
+      "zero_common_max_abs": 0.0,
+      "boundaries": {
+        "cpu_fp32": {
+          "status": "PASSED",
+          "effective_updates": 2,
+          "batches": 2,
+          "scaler_skipped_steps": 0,
+          "learned": {
+            "offset_abs_max": 0.0003012802335433662,
+            "offset_abs_mean": 0.00021233203005976975,
+            "saturation_fraction": 0.0,
+            "finite": true,
+            "residual_abs_max": 5.5050477385520935e-06,
+            "offset_weight_nonzero": 256
+          },
+          "native_learned_setup_model": {
+            "status": "PASSED",
+            "checkpoint_model_selection": "EMA",
+            "all_state_exact": true
+          },
+          "native_resume_ema_note": null,
+          "fusion_strict_status": "PASSED",
+          "native_output_allclose": true,
+          "fusion_continuous_max_abs": 2.1457672119140625e-06,
+          "fixed_candidate_max_abs": 9.5367431640625e-07
+        },
+        "cuda_fp32": {
+          "status": "PASSED",
+          "effective_updates": 2,
+          "batches": 2,
+          "scaler_skipped_steps": 0,
+          "learned": {
+            "offset_abs_max": 0.0002933289506472647,
+            "offset_abs_mean": 0.00018169410759583116,
+            "saturation_fraction": 0.0,
+            "finite": true,
+            "residual_abs_max": 5.185604095458984e-06,
+            "offset_weight_nonzero": 256
+          },
+          "native_learned_setup_model": {
+            "status": "PASSED",
+            "checkpoint_model_selection": "EMA",
+            "all_state_exact": true
+          },
+          "native_resume_ema_note": null,
+          "fusion_strict_status": "PRECISION_NOTE",
+          "native_output_allclose": false,
+          "fusion_continuous_max_abs": 1.6689300537109375e-06,
+          "fixed_candidate_max_abs": 4.76837158203125e-07
+        },
+        "cuda_amp": {
+          "status": "PASSED",
+          "effective_updates": 2,
+          "batches": 6,
+          "scaler_skipped_steps": 4,
+          "learned": {
+            "offset_abs_max": 0.00031368681811727583,
+            "offset_abs_mean": 0.00014129490591585636,
+            "saturation_fraction": 0.0,
+            "finite": true,
+            "residual_abs_max": 6.92903995513916e-06,
+            "offset_weight_nonzero": 256
+          },
+          "native_learned_setup_model": {
+            "status": "PASSED",
+            "checkpoint_model_selection": "EMA",
+            "all_state_exact": true
+          },
+          "native_resume_ema_note": "PRECISION_NOTE: unchanged native resume inherits immediate-model shape-only anchor cache; regenerating both diagnostic caches gives exact EMA output. Learned parameters/buffers are exact.",
+          "fusion_strict_status": "PASSED",
+          "native_output_allclose": true,
+          "fusion_continuous_max_abs": 1.6689300537109375e-06,
+          "fixed_candidate_max_abs": 4.917383193969727e-07
+        }
+      }
+    },
+    "gra_v1": {
+      "initialization_sha256": "539caa99c45fc8fdf6b1e39a23f8fb1b375e0422295f34f6f0345def2ead96f9",
+      "common_states": 533,
+      "new_trainable_parameters": 8744,
+      "class_adaptations": 9,
+      "parameters": {
+        "parent_unfused": 20082772,
+        "candidate_unfused": 20091516,
+        "parent_fused": 19877716,
+        "candidate_fused": 19886460
+      },
+      "zero_common_max_abs": 0.0,
+      "boundaries": {
+        "cpu_fp32": {
+          "status": "PASSED",
+          "effective_updates": 2,
+          "batches": 2,
+          "scaler_skipped_steps": 0,
+          "learned": {
+            "offset_abs_max": 0.00029221849399618804,
+            "offset_abs_mean": 0.00018330472812522203,
+            "saturation_fraction": 0.0,
+            "finite": true,
+            "residual_abs_max": 5.248934030532837e-06,
+            "offset_weight_nonzero": 256
+          },
+          "native_learned_setup_model": {
+            "status": "PASSED",
+            "checkpoint_model_selection": "EMA",
+            "all_state_exact": true
+          },
+          "native_resume_ema_note": null,
+          "fusion_strict_status": "PASSED",
+          "native_output_allclose": true,
+          "fusion_continuous_max_abs": 2.384185791015625e-06,
+          "fixed_candidate_max_abs": 9.5367431640625e-07
+        },
+        "cuda_fp32": {
+          "status": "PASSED",
+          "effective_updates": 2,
+          "batches": 2,
+          "scaler_skipped_steps": 0,
+          "learned": {
+            "offset_abs_max": 0.00030321042868308723,
+            "offset_abs_mean": 0.00019068989786319435,
+            "saturation_fraction": 0.0,
+            "finite": true,
+            "residual_abs_max": 5.345791578292847e-06,
+            "offset_weight_nonzero": 256
+          },
+          "native_learned_setup_model": {
+            "status": "PASSED",
+            "checkpoint_model_selection": "EMA",
+            "all_state_exact": true
+          },
+          "native_resume_ema_note": null,
+          "fusion_strict_status": "PASSED",
+          "native_output_allclose": true,
+          "fusion_continuous_max_abs": 1.430511474609375e-06,
+          "fixed_candidate_max_abs": 7.152557373046875e-07
+        },
+        "cuda_amp": {
+          "status": "PASSED",
+          "effective_updates": 2,
+          "batches": 6,
+          "scaler_skipped_steps": 4,
+          "learned": {
+            "offset_abs_max": 0.00031080632470548153,
+            "offset_abs_mean": 0.00014438951620832086,
+            "saturation_fraction": 0.0,
+            "finite": true,
+            "residual_abs_max": 6.666406989097595e-06,
+            "offset_weight_nonzero": 256
+          },
+          "native_learned_setup_model": {
+            "status": "PASSED",
+            "checkpoint_model_selection": "EMA",
+            "all_state_exact": true
+          },
+          "native_resume_ema_note": "PRECISION_NOTE: unchanged native resume inherits immediate-model shape-only anchor cache; regenerating both diagnostic caches gives exact EMA output. Learned parameters/buffers are exact.",
+          "fusion_strict_status": "PASSED",
+          "native_output_allclose": true,
+          "fusion_continuous_max_abs": 1.6689300537109375e-06,
+          "fixed_candidate_max_abs": 7.152557373046875e-07
+        }
+      }
+    }
+  },
+  "archives": [
+    {
+      "source": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-gra-v1\\outputs\\gra\\local_checks_01\\checks.json",
+      "source_sha256": "7388ad4beab81dd43737b320d81e5384a2177596a32814e2a966ab7c060399cf",
+      "archive": "docs/gra/local_first_failure.json.gz",
+      "archive_sha256": "99bf6ffc199d1b02f990f125f2ea94b7054b87c814ee08c1f47c48a479886a8b",
+      "immutable_copy": true
+    },
+    {
+      "source": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-gra-v1\\outputs\\gra\\local_checks_02\\checks.json",
+      "source_sha256": "03a8e8ddf94a4aa3c27fd439c0504fba953c8f5341cebb45d5a93384f6368754",
+      "archive": "docs/gra/local_checks.json.gz",
+      "archive_sha256": "dae7ea3a5c73c74fdafda67842c0feeea7217c9ab96955b2856c0ad71b5982cb",
+      "immutable_copy": true
+    },
+    {
+      "source": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-gra-v1\\outputs\\gra\\cache_diagnostic.json",
+      "source_sha256": "04208f2f81123208cb0c62e1a10220518189daf2e342e118cb3e3042e9b7e3db",
+      "archive": "docs/gra/cache_diagnostic.json.gz",
+      "archive_sha256": "bfda6ab80e6a782899ed85d99e15c3b70953c49cb06db4b888a92811b39009d7",
+      "immutable_copy": true
+    },
+    {
+      "source": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-gra-v1\\outputs\\gra\\module_cpu.json",
+      "source_sha256": "38865fec23374bec3b4c94f661fee4e52be351b4e4c17fcaf95bb2cd37f839c9",
+      "archive": "docs/gra/module_cpu.json",
+      "archive_sha256": "38865fec23374bec3b4c94f661fee4e52be351b4e4c17fcaf95bb2cd37f839c9",
+      "immutable_copy": true
+    },
+    {
+      "source": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-gra-v1\\outputs\\gra\\module_cuda.json",
+      "source_sha256": "6f500a4e699cc758a453c3405df50c25f1f836228fe624400cf5c0688dc2621f",
+      "archive": "docs/gra/module_cuda.json",
+      "archive_sha256": "6f500a4e699cc758a453c3405df50c25f1f836228fe624400cf5c0688dc2621f",
+      "immutable_copy": true
+    },
+    {
+      "source": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-gra-v1\\outputs\\gra\\cbr_lif_gra_v1\\init_audit.json",
+      "source_sha256": "e51a26615885cfd6b6b58ea5dce869095fa1c9d3f68261fa2728ec9748da059a",
+      "archive": "docs/gra/initialization_main.json.gz",
+      "archive_sha256": "9600895ffdf7590604492fd1959234fe7f930c10d41dfb07f1f3591374527f3a",
+      "immutable_copy": true
+    },
+    {
+      "source": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-gra-v1\\outputs\\gra\\gra_v1\\init_audit.json",
+      "source_sha256": "b9506190211b5d6aaa8ac939db3e09e80257f590707aeb48f67e317fb90079d3",
+      "archive": "docs/gra/initialization_ablation.json.gz",
+      "archive_sha256": "d1be59b72c091aafb0283c1302216260d2f05773ab5e06c6dd7695afe3f150e8",
+      "immutable_copy": true
+    },
+    {
+      "source": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-gra-v1\\outputs\\gra\\ops_checks02\\ops_checks.json",
+      "source_sha256": "9f3bb741b37e28d6739773c46516cc41392a1349e9ef46b478f1f737f599bfbf",
+      "archive": "docs/gra/ops_checks.json",
+      "archive_sha256": "9f3bb741b37e28d6739773c46516cc41392a1349e9ef46b478f1f737f599bfbf",
+      "immutable_copy": true
+    },
+    {
+      "source": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-gra-v1\\outputs\\gra\\parent_fixed_p.json",
+      "source_sha256": "7e91ddd707ae9ecc4b113fa71ecd9d3e3edd214a6ea58443860e33dcabd6f21e",
+      "archive": "docs/gra/parent_fixed_p.json",
+      "archive_sha256": "7e91ddd707ae9ecc4b113fa71ecd9d3e3edd214a6ea58443860e33dcabd6f21e",
+      "immutable_copy": true
+    },
+    {
+      "source": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-gra-v1\\outputs\\gra\\native_smoke\\native_smoke.json",
+      "source_sha256": "12099781123e2abab6a02d2b0ea110b88b13fcf33ed5335686f3815cf9ddfda6",
+      "archive": "docs/gra/native_smoke.json",
+      "archive_sha256": "12099781123e2abab6a02d2b0ea110b88b13fcf33ed5335686f3815cf9ddfda6",
+      "immutable_copy": true
+    },
+    {
+      "source": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-gra-v1\\outputs\\gra\\init_cli_protection.json",
+      "source_sha256": "3e1a56013b79198a6cacad013ccd6e56841e26e60106020414b20379a44d7485",
+      "archive": "docs/gra/init_cli_protection.json",
+      "archive_sha256": "3e1a56013b79198a6cacad013ccd6e56841e26e60106020414b20379a44d7485",
+      "immutable_copy": true
+    }
+  ],
+  "PENDING": [
+    "Actual server PyTorch 2.1 runtime checks",
+    "Actual server B16/640 online augmentation/native AMP capacity, memory and elapsed time",
+    "200-epoch formal training",
+    "Independent trained val/test and fusion metric impact",
+    "Reference ZIP unavailable locally"
+  ],
+  "FLOPs": "PARTIAL: convolution estimate only; two grid_sample calls and elementwise costs disclosed",
+  "first_failure": {
+    "status": "FAILED",
+    "report": "local_first_failure.json.gz",
+    "reason": "Diagnostic incorrectly compared native resume EMA with different cached anchor precision",
+    "resolution": "Native model-state exact; EMA own reload exact; actual learned native setup_model exact; isolated recache diagnostic exact; production decoder unchanged"
+  }
+}

@@ -59,6 +59,7 @@ from ultralytics.nn.modules import (
     Index,
     LRPCHead,
     LIFDown,
+    GRAConcat,
     Pose,
     Pose26,
     RepC3,
@@ -1689,6 +1690,12 @@ def parse_model(d, ch, verbose=True):
             args = [ch[f]]
         elif m is Concat:
             c2 = sum(ch[x] for x in f)
+        elif m is GRAConcat:
+            if not isinstance(f, list) or len(f) != 3:
+                raise ValueError("GRAConcat requires [high, up, lateral] source indices")
+            channels = [ch[x] for x in f]
+            args = [*channels, *args]
+            c2 = channels[1] + channels[2]
         elif m in frozenset(
             {
                 Detect,

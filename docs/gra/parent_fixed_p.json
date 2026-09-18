@@ -1,0 +1,25 @@
+{
+  "status": "ACHIEVED",
+  "working_point": {
+    "threshold": 0.6047021150588989,
+    "precision": 0.8658162441466172,
+    "recall": 0.835202492211838,
+    "TP": 10724,
+    "FP": 1662,
+    "FN": 2116
+  },
+  "precision_target": 0.8656,
+  "matching_iou": 0.5,
+  "formal_eval_iou": 0.7,
+  "score_floor": 0.001,
+  "max_det": 300,
+  "GT": 12840,
+  "images": 1728,
+  "threshold_operator": ">=; complete groups of equal original scores included",
+  "tie_break": "maximum recall, then maximum precision, then highest original threshold",
+  "matching": "native one-to-one, fixed floor candidate pool; no per-threshold rematching/interpolation",
+  "checkpoint_sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa",
+  "data_sha256": "ea2a922586a03526e1b4c8e64c02b2c71dce1a458f1c140f038afa744d68c6aa",
+  "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+  "predictions_sha256": "3c9b43f23b86329effa8bd2fb78f51b4eb0ab413cf35a06e46c9e5037d0b9f16"
+}

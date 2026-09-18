@@ -1,0 +1,302 @@
+{
+  "status": "PASSED_CORE_REVIEW",
+  "scope": "Independent static mathematics/parser/YAML review plus pointers to actual core numerical reports; no precision benefit claim",
+  "base_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "original_module_hashes": {
+    "lif_down.py": {
+      "actual": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "expected": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "status": "PASSED"
+    },
+    "cbr.py": {
+      "actual": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "expected": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "status": "PASSED"
+    }
+  },
+  "variants": [
+    {
+      "variant": "cbr_lif_gra_v1",
+      "status": "PASSED",
+      "parent": "rtdetr-resnet18-lite-cbr-lif-down.yaml",
+      "candidate": "rtdetr-resnet18-lite-cbr-lif-gra-v1.yaml",
+      "node_count": 27,
+      "changes": [
+        {
+          "index": 18,
+          "parent": [
+            [
+              -2,
+              -1
+            ],
+            1,
+            "Concat",
+            [
+              1
+            ]
+          ],
+          "candidate": [
+            [
+              15,
+              16,
+              17
+            ],
+            1,
+            "GRAConcat",
+            [
+              16,
+              4,
+              0.25,
+              0.5
+            ]
+          ]
+        }
+      ],
+      "all_other_nodes_exact": true,
+      "layer20": [
+        -1,
+        1,
+        "LIFDown",
+        [
+          256,
+          3,
+          2
+        ]
+      ],
+      "decoder": [
+        [
+          19,
+          22,
+          25
+        ],
+        1,
+        "RTDETRDecoderCBR",
+        [
+          "nc",
+          256,
+          300,
+          4,
+          8,
+          3
+        ]
+      ],
+      "decoder_layers": 3,
+      "hidden_dim": 256,
+      "queries": 300
+    },
+    {
+      "variant": "gra_v1",
+      "status": "PASSED",
+      "parent": "rtdetr-resnet18-lite.yaml",
+      "candidate": "rtdetr-resnet18-lite-gra-v1.yaml",
+      "node_count": 27,
+      "changes": [
+        {
+          "index": 18,
+          "parent": [
+            [
+              -2,
+              -1
+            ],
+            1,
+            "Concat",
+            [
+              1
+            ]
+          ],
+          "candidate": [
+            [
+              15,
+              16,
+              17
+            ],
+            1,
+            "GRAConcat",
+            [
+              16,
+              4,
+              0.25,
+              0.5
+            ]
+          ]
+        }
+      ],
+      "all_other_nodes_exact": true,
+      "layer20": [
+        -1,
+        1,
+        "Conv",
+        [
+          256,
+          3,
+          2
+        ]
+      ],
+      "decoder": [
+        [
+          19,
+          22,
+          25
+        ],
+        1,
+        "RTDETRDecoder",
+        [
+          "nc",
+          256,
+          300,
+          4,
+          8,
+          3
+        ]
+      ],
+      "decoder_layers": 3,
+      "hidden_dim": 256,
+      "queries": 300
+    }
+  ],
+  "parser": {
+    "status": "PASSED",
+    "special_case_count": 1,
+    "channel_arguments": "[ch[15], ch[16], ch[17], 16, 4, 0.25, 0.5]",
+    "output_channels": "ch[16]+ch[17]=512",
+    "width_scaling_not_applied": true
+  },
+  "math": {
+    "group_order": "g0_dx,g0_dy,g1_dx,g1_dy,...",
+    "reshape": "B,G,2,Ht,Wt -> B,G,Ht,Wt,2 -> B*G,Ht,Wt,2",
+    "normalization": "2*dx/Ws and 2*dy/Hs",
+    "sampling": "Two bilinear border align_corners=False calls from the same full H",
+    "residual": "cat(U+0.5*(shifted-reference),L)",
+    "grid_and_sampling_dtype": "float32 under locally disabled autocast",
+    "final_dtype": "U dtype",
+    "zero_init_only": [
+      "offset.weight",
+      "offset.bias"
+    ],
+    "rng": "fork_rng(devices=[]), CPU default_generator.manual_seed(42), CUDA RNG untouched",
+    "base_class": "nn.Module",
+    "fusion": "not eligible for Conv-BN rewrite; no forward_fuse bypass"
+  },
+  "warmup": {
+    "path": "ultralytics-main/ultralytics/nn/autobackend.py",
+    "change": "warmup input torch.empty -> torch.zeros",
+    "reason": "Allocator contents can contain NaN/Inf; deterministic finite warmup required",
+    "scope": "Only warmup input; output allocation retained"
+  },
+  "module_reports": {
+    "cpu": {
+      "path": "outputs/gra/module_cpu.json",
+      "sha256": "2caf370d746aff8b3c09e685b55576c85d515a758c7a06ae5b943bef062e75df",
+      "status": "PASSED",
+      "torch": "2.7.1+cu118",
+      "analytic_max_abs": 9.5367431640625e-07,
+      "mutation_sensitivity": [
+        {
+          "mutation": "target_pixel_denominator",
+          "status": "PASSED_FAULT_REJECTED",
+          "max_abs": 0.056250572204589844
+        },
+        {
+          "mutation": "xy_swap",
+          "status": "PASSED_FAULT_REJECTED",
+          "max_abs": 0.1875009536743164
+        },
+        {
+          "mutation": "group_roll",
+          "status": "PASSED_FAULT_REJECTED",
+          "max_abs": 0.21250104904174805
+        }
+      ],
+      "modes": [
+        "fp32"
+      ]
+    },
+    "cuda": {
+      "path": "outputs/gra/module_cuda.json",
+      "sha256": "039abb49e69edc82f4ee712e0a1703dd25440c341052c0ff46538607cdea9ea0",
+      "status": "PASSED",
+      "torch": "2.7.1+cu118",
+      "analytic_max_abs": 9.5367431640625e-07,
+      "mutation_sensitivity": [
+        {
+          "mutation": "target_pixel_denominator",
+          "status": "PASSED_FAULT_REJECTED",
+          "max_abs": 0.056250572204589844
+        },
+        {
+          "mutation": "xy_swap",
+          "status": "PASSED_FAULT_REJECTED",
+          "max_abs": 0.1875009536743164
+        },
+        {
+          "mutation": "group_roll",
+          "status": "PASSED_FAULT_REJECTED",
+          "max_abs": 0.21250104904174805
+        }
+      ],
+      "modes": [
+        "fp32",
+        "native_amp",
+        "explicit_half"
+      ]
+    }
+  },
+  "actual_parameter_construction": [
+    {
+      "yaml": "rtdetr-resnet18-lite-cbr-lif-gra-v1.yaml",
+      "changed_nodes": [
+        18
+      ],
+      "save": [
+        5,
+        6,
+        10,
+        11,
+        15,
+        15,
+        16,
+        17,
+        19,
+        22,
+        25
+      ],
+      "parameters_unfused": 20158509,
+      "parameters_fused": 19953709,
+      "GRA_retained": true
+    },
+    {
+      "yaml": "rtdetr-resnet18-lite-gra-v1.yaml",
+      "changed_nodes": [
+        18
+      ],
+      "save": [
+        5,
+        6,
+        10,
+        11,
+        15,
+        15,
+        16,
+        17,
+        19,
+        22,
+        25
+      ],
+      "parameters_unfused": 20091516,
+      "parameters_fused": 19886460,
+      "GRA_retained": true
+    }
+  ],
+  "source_hashes": {
+    "ultralytics-main/ultralytics/nn/modules/gra.py": "31fceceebfaf02beadb32649af535cd8ef7cb6def5a4b2f93d80f139e7d471fc",
+    "ultralytics-main/ultralytics/nn/tasks.py": "dfe46c2be1d986123723eb9d3f66708d1149cb6d50e5f22f6fcc9e01853a944e",
+    "ultralytics-main/ultralytics/nn/modules/__init__.py": "e2a5ff51799bdf7c61464499076b5045ea49389b4e13b62ed074890df513eeae",
+    "ultralytics-main/ultralytics/nn/autobackend.py": "1879db86b5b9b3346426e48411d86d2196319984057ffa637ddc0cf45be78230",
+    "tools/check_gra_module.py": "27e02d67607c62bcce1107a148de9913be7a9680afe64d7a685bab95bc8b4b08"
+  },
+  "remaining_boundaries": [
+    "Server native Torch 2.1 compatibility and B16/640 online-augmentation capacity are separate server checks",
+    "Whole-network learned-state/fusion/native-resume audit belongs to check_gra.py",
+    "No formal training and no final test executed"
+  ]
+}

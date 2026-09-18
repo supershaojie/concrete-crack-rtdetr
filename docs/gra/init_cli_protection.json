@@ -1,0 +1,26 @@
+{
+  "status": "PASSED",
+  "scope": "Existing output and successful audit rerun refusal; no numerical initialization change",
+  "variants": [
+    {
+      "variant": "cbr_lif_gra_v1",
+      "status": "PASSED",
+      "rerun_exit_code": 1,
+      "initialized_sha256_before": "633cf8864a46adfceabe62b65e030722a7a914c9965af4a4ee34b64c68d87522",
+      "initialized_sha256_after": "633cf8864a46adfceabe62b65e030722a7a914c9965af4a4ee34b64c68d87522",
+      "audit_sha256_before": "e51a26615885cfd6b6b58ea5dce869095fa1c9d3f68261fa2728ec9748da059a",
+      "audit_sha256_after": "e51a26615885cfd6b6b58ea5dce869095fa1c9d3f68261fa2728ec9748da059a",
+      "preserved": true
+    },
+    {
+      "variant": "gra_v1",
+      "status": "PASSED",
+      "rerun_exit_code": 1,
+      "initialized_sha256_before": "539caa99c45fc8fdf6b1e39a23f8fb1b375e0422295f34f6f0345def2ead96f9",
+      "initialized_sha256_after": "539caa99c45fc8fdf6b1e39a23f8fb1b375e0422295f34f6f0345def2ead96f9",
+      "audit_sha256_before": "b9506190211b5d6aaa8ac939db3e09e80257f590707aeb48f67e317fb90079d3",
+      "audit_sha256_after": "b9506190211b5d6aaa8ac939db3e09e80257f590707aeb48f67e317fb90079d3",
+      "preserved": true
+    }
+  ]
+}
