@@ -1,0 +1,68 @@
+{
+  "status": "PASSED",
+  "scope": "Syntax and immutable experiment-source audit, no model execution",
+  "base": "3edabd6ae46a3f05701b7fe04abcf2c25b452c42",
+  "parsed_python": [
+    "tools/check_dcc.py",
+    "tools/check_dcc_acceptance.py",
+    "tools/check_dcc_gate.py",
+    "tools/check_dcc_math.py",
+    "tools/check_dcc_resume.py",
+    "tools/check_dcc_shell_flow.py",
+    "tools/dcc_acceptance.py",
+    "tools/dcc_resume_audit.py",
+    "tools/init_dcc.py",
+    "tools/preflight_dcc.py",
+    "tools/train_dcc.py"
+  ],
+  "protected_unchanged_lf_sha256": {
+    "ultralytics-main/ultralytics/nn/modules/dcc.py": "a9667237105c5736410944b3fd9aa3ac61953950816f662735787ae499a27f7e",
+    "ultralytics-main/ultralytics/nn/modules/cbr.py": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+    "ultralytics-main/ultralytics/nn/modules/lif_down.py": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+    "ultralytics-main/ultralytics/nn/tasks.py": "fafd83b18ecc8ac9a866b3e62410268be686a6152382e35a0f40ea83c4cccc64",
+    "ultralytics-main/ultralytics/engine/trainer.py": "18125ba895b64961cf0f7db29214aca27392176e65d72a9166fa818f00a1033a",
+    "tools/dcc_checkpoint.py": "ff1eb2ac7f31aa7485d49dd2425d6dcb9657fbc4e663709a1e7c4060ae46cde8",
+    "tools/dcc_common.py": "869a18dec1653b31f3638ab1691c97c0bf48060bfb085424996177f10ca87f4b",
+    "docs/dcc/parent_actual_args.yaml": "31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b",
+    "docs/dcc/parent_dataset_identity.json": "8567e1b4d1aae5f168fb18b633ed4357c7f0aba56c0041a6570647fb542d0446",
+    "docs/dcc/environment.sh": "0259d8bfdc1bfd12fb2843937f6e37f6a07ef611a9e7b749096f6e3e108a0cac",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-lif-dcc-v1.yaml": "fc5ca4a629e6c0cb278663350ebd091402f5f0d6ba4782a3582ce5577d7dfaf0",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-dcc-v1.yaml": "1584f1f5f19ecb80cfee73a195c834389b38d801d27ba88d3492862fde1e77d8"
+  },
+  "new_server_full_preflight": "PENDING",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN",
+  "recipe": {
+    "archived_fields_compared": 109,
+    "only_identity_overrides": [
+      "data",
+      "model",
+      "name",
+      "project",
+      "save_dir"
+    ],
+    "epochs": 200,
+    "batch": 16,
+    "imgsz": 640,
+    "seed": 42,
+    "AMP": true,
+    "optimizer": "AdamW",
+    "lr0": 0.0005
+  },
+  "cli_help": {
+    "train_dcc": "PASSED",
+    "check_dcc": "PASSED",
+    "check_dcc_resume": "PASSED",
+    "check_dcc_math": "PASSED",
+    "preflight_dcc": "PASSED",
+    "init_dcc": "PASSED"
+  },
+  "final_parsed_python_files": 16,
+  "bash_syntax": "PASSED",
+  "acceptance_source_lf_sha256": {
+    "tools/check_dcc_acceptance.py": "db49fad3dffe517b5b4b8bac15dcc99aa8ef706bd96de2ad7c2f2033c81dc434",
+    "tools/check_dcc_gate.py": "f23fd0edc291f8948c02b9642cb992853e98d5baa8105a48dce3fcd1284c1dc6",
+    "tools/dcc_acceptance.py": "bbf59ee1cd3111f3b8aab877dc3d42168727da37246d26c0d4e1c064d0a19672",
+    "tools/train_dcc.py": "6ff20811c1700e9c145225a80fc8affb8950f4c0c5afc74cf4e90a0c046169ac"
+  }
+}

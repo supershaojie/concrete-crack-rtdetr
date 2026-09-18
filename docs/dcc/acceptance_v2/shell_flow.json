@@ -1,0 +1,171 @@
+{
+  "status": "PASSED",
+  "contract_version": "dcc_acceptance_v2",
+  "scope": "Inert shell control-flow fixtures; all model/check commands are stubs",
+  "wrapper_lf_sha256": "afa818f783a4313c7ad4eb8661e8dde32f72404db9d3dd67825e39427078c89e",
+  "bash_syntax": "PASSED",
+  "cases": {
+    "full_passed": {
+      "status": "PASSED",
+      "exit_code": 0,
+      "permit_emitted": true,
+      "no_automatic_start": true,
+      "events": [
+        "init_dcc",
+        "check_dcc_math",
+        "check_dcc",
+        "preflight_dcc",
+        "strict_gate"
+      ],
+      "stdout": "Previous permit preserved and revoked: D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-dcc-v1/outputs/dcc/dcc_inert_shell_ukqmw_dc/full_passed/outputs/dcc/cbr_lif_dcc_v1/passed_gates_20260918T172456Z_351.superseded.sh\nImport: D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\dcc_inert_shell_ukqmw_dc\\full_passed\\ultralytics-main\\ultralytics\\__init__.py PyTorch: fixture CUDA: fixture\nPreflight complete. Formal training NOT_STARTED; final test NOT_RUN.\n",
+      "stderr": ""
+    },
+    "full_precision_note": {
+      "status": "PASSED",
+      "exit_code": 0,
+      "permit_emitted": true,
+      "no_automatic_start": true,
+      "events": [
+        "init_dcc",
+        "check_dcc_math",
+        "check_dcc",
+        "preflight_dcc",
+        "strict_gate"
+      ],
+      "stdout": "Previous permit preserved and revoked: D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-dcc-v1/outputs/dcc/dcc_inert_shell_ukqmw_dc/full_precision_note/outputs/dcc/cbr_lif_dcc_v1/passed_gates_20260918T172501Z_1776.superseded.sh\nImport: D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\dcc_inert_shell_ukqmw_dc\\full_precision_note\\ultralytics-main\\ultralytics\\__init__.py PyTorch: fixture CUDA: fixture\nPreflight complete. Formal training NOT_STARTED; final test NOT_RUN.\n",
+      "stderr": ""
+    },
+    "initializer_failed": {
+      "status": "PASSED",
+      "exit_code": 21,
+      "permit_emitted": false,
+      "no_automatic_start": true,
+      "events": [
+        "init_dcc"
+      ],
+      "stdout": "Previous permit preserved and revoked: D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-dcc-v1/outputs/dcc/dcc_inert_shell_ukqmw_dc/initializer_failed/outputs/dcc/cbr_lif_dcc_v1/passed_gates_20260918T172506Z_776.superseded.sh\nImport: D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\dcc_inert_shell_ukqmw_dc\\initializer_failed\\ultralytics-main\\ultralytics\\__init__.py PyTorch: fixture CUDA: fixture\n",
+      "stderr": ""
+    },
+    "math_failed": {
+      "status": "PASSED",
+      "exit_code": 22,
+      "permit_emitted": false,
+      "no_automatic_start": true,
+      "events": [
+        "init_dcc",
+        "check_dcc_math"
+      ],
+      "stdout": "Previous permit preserved and revoked: D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-dcc-v1/outputs/dcc/dcc_inert_shell_ukqmw_dc/math_failed/outputs/dcc/cbr_lif_dcc_v1/passed_gates_20260918T172509Z_87.superseded.sh\nImport: D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\dcc_inert_shell_ukqmw_dc\\math_failed\\ultralytics-main\\ultralytics\\__init__.py PyTorch: fixture CUDA: fixture\n",
+      "stderr": ""
+    },
+    "fusion_failed": {
+      "status": "PASSED",
+      "exit_code": 1,
+      "permit_emitted": false,
+      "no_automatic_start": true,
+      "events": [
+        "init_dcc",
+        "check_dcc_math",
+        "check_dcc",
+        "preflight_dcc",
+        "strict_gate"
+      ],
+      "stdout": "Previous permit preserved and revoked: D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-dcc-v1/outputs/dcc/dcc_inert_shell_ukqmw_dc/fusion_failed/outputs/dcc/cbr_lif_dcc_v1/passed_gates_20260918T172512Z_1428.superseded.sh\nImport: D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\dcc_inert_shell_ukqmw_dc\\fusion_failed\\ultralytics-main\\ultralytics\\__init__.py PyTorch: fixture CUDA: fixture\nTraceback (most recent call last):\n  File \"<stdin>\", line 6, in <module>\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\dcc_inert_shell_ukqmw_dc\\fusion_failed\\tools\\train_dcc.py\", line 22, in strict_gate\n    assert report.get('status') in ('PASSED','PRECISION_NOTE'), 'failed required check'\nAssertionError: failed required check\n",
+      "stderr": ""
+    },
+    "capacity_failed": {
+      "status": "PASSED",
+      "exit_code": 24,
+      "permit_emitted": false,
+      "no_automatic_start": true,
+      "events": [
+        "init_dcc",
+        "check_dcc_math",
+        "check_dcc",
+        "preflight_dcc"
+      ],
+      "stdout": "Previous permit preserved and revoked: D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-dcc-v1/outputs/dcc/dcc_inert_shell_ukqmw_dc/capacity_failed/outputs/dcc/cbr_lif_dcc_v1/passed_gates_20260918T172517Z_288.superseded.sh\nImport: D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\dcc_inert_shell_ukqmw_dc\\capacity_failed\\ultralytics-main\\ultralytics\\__init__.py PyTorch: fixture CUDA: fixture\n",
+      "stderr": ""
+    },
+    "full_legacy_rejected": {
+      "status": "PASSED",
+      "exit_code": 1,
+      "permit_emitted": false,
+      "no_automatic_start": true,
+      "events": [
+        "init_dcc",
+        "check_dcc_math",
+        "check_dcc",
+        "preflight_dcc",
+        "strict_gate"
+      ],
+      "stdout": "Previous permit preserved and revoked: D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-dcc-v1/outputs/dcc/dcc_inert_shell_ukqmw_dc/full_legacy_rejected/outputs/dcc/cbr_lif_dcc_v1/passed_gates_20260918T172520Z_442.superseded.sh\nImport: D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\dcc_inert_shell_ukqmw_dc\\full_legacy_rejected\\ultralytics-main\\ultralytics\\__init__.py PyTorch: fixture CUDA: fixture\nTraceback (most recent call last):\n  File \"<stdin>\", line 6, in <module>\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\dcc_inert_shell_ukqmw_dc\\full_legacy_rejected\\tools\\train_dcc.py\", line 18, in strict_gate\n    assert report.get('contract_version')==CONTRACT, 'stale contract'\nAssertionError: stale contract\n",
+      "stderr": ""
+    },
+    "partial_precision_note": {
+      "status": "PASSED",
+      "exit_code": 0,
+      "permit_emitted": false,
+      "no_automatic_start": true,
+      "events": [
+        "check_dcc_checkpoint",
+        "check_dcc_resume",
+        "preflight_dcc"
+      ],
+      "stdout": "Import: D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\dcc_inert_shell_ukqmw_dc\\partial_precision_note\\ultralytics-main\\ultralytics\\__init__.py PyTorch: fixture CUDA: fixture\n{\n  \"status\": \"PRECISION_NOTE\",\n  \"contract_version\": \"dcc_acceptance_v2\",\n  \"report_kind\": \"partial_verification_summary\",\n  \"checks\": \"D:\\\\MyProjects\\\\Crack_RTDETR\\\\outputs\\\\worktrees\\\\Crack_RTDETR-dcc-v1\\\\outputs\\\\dcc\\\\dcc_inert_shell_ukqmw_dc\\\\partial_precision_note\\\\outputs\\\\dcc\\\\cbr_lif_dcc_v1\\\\resume_checks_20260918T172525Z_1557\\\\resume_checks.json\",\n  \"checks_sha256\": \"0bb02aadf8cc094859d51fe50dd26324f8bf6ce85bd00d38104c988238e158d4\",\n  \"capacity\": \"D:\\\\MyProjects\\\\Crack_RTDETR\\\\outputs\\\\worktrees\\\\Crack_RTDETR-dcc-v1\\\\outputs\\\\dcc\\\\dcc_inert_shell_ukqmw_dc\\\\partial_precision_note\\\\outputs\\\\dcc\\\\cbr_lif_dcc_v1\\\\capacity_resume_fix_20260918T172525Z_1557\\\\preflight.json\",\n  \"capacity_sha256\": \"8b75b76f32ec36ace2ba22ac82f21ec6c2c841ce86954661ae5826b4dafa5c8f\",\n  \"saving_and_restoring_state\": {\n    \"cpu_fp32\": \"PASSED\",\n    \"cuda_fp32\": \"PASSED\",\n    \"cuda_native_amp\": \"PASSED\"\n  },\n  \"raw_next_update_allclose\": {\n    \"cpu_fp32\": false,\n    \"cuda_fp32\": false,\n    \"cuda_native_amp\": false\n  },\n  \"formal_start\": \"BLOCKED: targeted diagnostics do not replace the complete strict gate\",\n  \"formal_training\": \"NOT_STARTED\",\n  \"final_test\": \"NOT_RUN\"\n}\n",
+      "stderr": ""
+    },
+    "partial_failed": {
+      "status": "PASSED",
+      "exit_code": 3,
+      "permit_emitted": false,
+      "no_automatic_start": true,
+      "events": [
+        "check_dcc_checkpoint",
+        "check_dcc_resume",
+        "preflight_dcc"
+      ],
+      "stdout": "Import: D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\dcc_inert_shell_ukqmw_dc\\partial_failed\\ultralytics-main\\ultralytics\\__init__.py PyTorch: fixture CUDA: fixture\n{\n  \"status\": \"FAILED\",\n  \"contract_version\": \"dcc_acceptance_v2\",\n  \"report_kind\": \"partial_verification_summary\",\n  \"checks\": \"D:\\\\MyProjects\\\\Crack_RTDETR\\\\outputs\\\\worktrees\\\\Crack_RTDETR-dcc-v1\\\\outputs\\\\dcc\\\\dcc_inert_shell_ukqmw_dc\\\\partial_failed\\\\outputs\\\\dcc\\\\cbr_lif_dcc_v1\\\\resume_checks_20260918T172529Z_1821\\\\resume_checks.json\",\n  \"checks_sha256\": \"17a6022c57b733e0b398d0a0aa111ca12a00e344b121e06deb805b5e5e6d5d55\",\n  \"capacity\": \"D:\\\\MyProjects\\\\Crack_RTDETR\\\\outputs\\\\worktrees\\\\Crack_RTDETR-dcc-v1\\\\outputs\\\\dcc\\\\dcc_inert_shell_ukqmw_dc\\\\partial_failed\\\\outputs\\\\dcc\\\\cbr_lif_dcc_v1\\\\capacity_resume_fix_20260918T172529Z_1821\\\\preflight.json\",\n  \"capacity_sha256\": \"8b75b76f32ec36ace2ba22ac82f21ec6c2c841ce86954661ae5826b4dafa5c8f\",\n  \"saving_and_restoring_state\": {\n    \"cpu_fp32\": \"PASSED\",\n    \"cuda_fp32\": \"PASSED\",\n    \"cuda_native_amp\": \"PASSED\"\n  },\n  \"raw_next_update_allclose\": {\n    \"cpu_fp32\": false,\n    \"cuda_fp32\": false,\n    \"cuda_native_amp\": false\n  },\n  \"formal_start\": \"BLOCKED: targeted diagnostics do not replace the complete strict gate\",\n  \"formal_training\": \"NOT_STARTED\",\n  \"final_test\": \"NOT_RUN\"\n}\n",
+      "stderr": ""
+    },
+    "partial_legacy_rejected": {
+      "status": "PASSED",
+      "exit_code": 1,
+      "permit_emitted": false,
+      "no_automatic_start": true,
+      "events": [
+        "check_dcc_checkpoint",
+        "check_dcc_resume",
+        "preflight_dcc"
+      ],
+      "stdout": "Import: D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\dcc_inert_shell_ukqmw_dc\\partial_legacy_rejected\\ultralytics-main\\ultralytics\\__init__.py PyTorch: fixture CUDA: fixture\nTraceback (most recent call last):\n  File \"<stdin>\", line 8, in <module>\nAssertionError: Old acceptance contract is not reusable\n",
+      "stderr": ""
+    },
+    "full_then_changed_math": {
+      "status": "PASSED",
+      "exit_code": 0,
+      "permit_emitted": true,
+      "no_automatic_start": true,
+      "events": [
+        "init_dcc",
+        "check_dcc_math",
+        "check_dcc",
+        "preflight_dcc",
+        "strict_gate"
+      ],
+      "stdout": "Previous permit preserved and revoked: D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-dcc-v1/outputs/dcc/dcc_inert_shell_ukqmw_dc/full_then_changed_math/outputs/dcc/cbr_lif_dcc_v1/passed_gates_20260918T172536Z_374.superseded.sh\nImport: D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\dcc_inert_shell_ukqmw_dc\\full_then_changed_math\\ultralytics-main\\ultralytics\\__init__.py PyTorch: fixture CUDA: fixture\nPreflight complete. Formal training NOT_STARTED; final test NOT_RUN.\n",
+      "stderr": ""
+    }
+  },
+  "real_model_execution": false,
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN",
+  "evidence_type": "INERT_STUB_REGRESSION_ONLY",
+  "server_validation": "NOT_RUN",
+  "acceptance_scope_note": "This PASS verifies shell control flow with deliberately fake init/math/full/capacity commands. It is not new server acceptance, a model test, or permission to train.",
+  "original_report": {
+    "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dcc-v1\\outputs\\dcc\\acceptance_v2_shell_flow.json",
+    "sha256": "b17cb91d0ad31a46e4ee2d0abc32c405d08d21c3909a10cf141c52bf0e5a8542",
+    "preserved": true
+  }
+}

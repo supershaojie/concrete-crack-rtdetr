@@ -223,6 +223,9 @@ def run_device(device):
 
 
 def main():
+    from dcc_acceptance import CONTRACT_VERSION
+    from dcc_common import runtime
+    from train_dcc import code_identity
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
     parser.add_argument("--output", type=Path, default=ROOT / "outputs/dcc/module_checks.json")
@@ -234,6 +237,8 @@ def main():
              "cudnn_allow_tf32": torch.backends.cudnn.allow_tf32}
     files = ["ultralytics-main/ultralytics/nn/modules/dcc.py", "tools/check_dcc_math.py"]
     report = {"status": "RUNNING", "torch": torch.__version__, "python": sys.version,
+              "report_kind": "dcc_math_audit", "contract_version": CONTRACT_VERSION,
+              "code_identity": code_identity(), "runtime": runtime(),
               "cuda_available": torch.cuda.is_available(), "default_precision_flags": flags,
               "strict_precision_flags": {"matmul_allow_tf32": False, "cudnn_allow_tf32": False},
               "head": subprocess.check_output(["git", "-c", "safe.directory=" + ROOT.as_posix(), "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),

@@ -29,6 +29,18 @@ from ultralytics.utils.torch_utils import ModelEMA
 ATOL, RTOL = 2e-5, 2e-4
 
 
+def attach_mode_acceptance(checkpoint_report, acceptance):
+    """Annotate a newly generated report; never rewrite raw tensor findings."""
+    checkpoint_report.setdefault("raw_status", checkpoint_report["status"])
+    checkpoint_report.setdefault("raw_admission", checkpoint_report.get("admission"))
+    checkpoint_report["contract_version"] = acceptance["contract_version"]
+    checkpoint_report["status"] = acceptance["status"]
+    checkpoint_report["checkpoint_correctness"] = deepcopy(acceptance["restoration"])
+    checkpoint_report["trajectory_repeatability"] = deepcopy(acceptance["trajectory"])
+    checkpoint_report["admission"] = "REQUIRES_FULL_ENGINEERING_GATE"
+    return checkpoint_report
+
+
 def _cpu(value):
     if isinstance(value, torch.Tensor):
         return value.detach().cpu().clone()
@@ -118,10 +130,11 @@ def tensor_metric(left, right):
     if not finite:
         return dict(equal=equal, allclose=False, finite=False, shape=list(left.shape), dtype=str(left.dtype),
                     max_abs=None, relative_L2=None, exceeded_fraction=None)
+    original_dtype = str(left.dtype)
     left, right = left.double(), right.double()
     difference = (left - right).abs()
     failed = difference > ATOL + RTOL * right.abs()
-    return dict(equal=equal, allclose=bool(not failed.any()), finite=True, shape=list(left.shape),
+    return dict(equal=equal, allclose=bool(not failed.any()), finite=True, shape=list(left.shape), dtype=original_dtype,
                 max_abs=float(difference.max()) if difference.numel() else 0.,
                 relative_L2=float(torch.linalg.vector_norm(left-right) /
                                   torch.linalg.vector_norm(right).clamp_min(1e-12)),
@@ -451,7 +464,9 @@ def audit_live_control(trainer, batch, amp, folder, label):
         report["initial_state"] = compare_states(snapshot(first), snapshot(second), exact=True)
         require(report["initial_state"]["status"] == "PASSED", "Live controls start from different state")
         raw, _ = _raw_pair(first, second, batch, amp)
-        report.update(raw, admission="PASSED" if raw["status"] == "PASSED" else "BLOCKED")
+        from dcc_acceptance import CONTRACT_VERSION
+        report.update(raw, raw_status=raw["status"], contract_version=CONTRACT_VERSION,
+                      admission="REQUIRES_MODE_ACCEPTANCE")
         del first, second
     except BaseException as error:
         report["error"] = repr(error)
@@ -501,12 +516,13 @@ def audit_checkpoint_resume(trainer, batch, amp, folder, trainer_cls=None):
     checkpoint files are removed; JSON evidence is retained in ``folder``.
     """
     from dcc_checkpoint import DCCCheckpointTrainer, optimizer_param_names, require_checkpoint_policy
+    from dcc_acceptance import CONTRACT_VERSION, evaluate_checkpoint
     trainer_cls = trainer_cls or DCCCheckpointTrainer
     folder = Path(folder).resolve()
     folder.mkdir(parents=True, exist_ok=True)
     device = next(trainer.model.parameters()).device
     saved_rng = rng_state()
-    report = dict(status="FAILED", seed=42, atol=ATOL, rtol=RTOL, native_setup_model=True,
+    report = dict(status="FAILED", contract_version=CONTRACT_VERSION, seed=42, atol=ATOL, rtol=RTOL, native_setup_model=True,
                   native_resume_training=True, completed_training_epochs=0, diagnostic_epoch_metadata=0,
                   formal_training="NOT_STARTED", final_test="NOT_RUN")
     try:
@@ -562,7 +578,14 @@ def audit_checkpoint_resume(trainer, batch, amp, folder, trainer_cls=None):
             require(replay["status"] == "PASSED", "Native same-gradient replay state mismatch")
             if amp:
                 replay["overflow_fixture"] = audit_amp_overflow_fixture(device, checkpoint["scaler"])
-            report["admission"] = "PASSED" if report["status"] == "PASSED" else "BLOCKED"
+            report["raw_status"] = report["status"]
+            report["raw_admission"] = "PASSED" if report["raw_status"] == "PASSED" else "BLOCKED"
+            label = "cpu_fp32" if device.type == "cpu" else "cuda_native_amp" if amp else "cuda_fp32"
+            report["checkpoint_correctness"] = evaluate_checkpoint(report, label)
+            report["trajectory_repeatability"] = dict(status="PENDING", reason="Requires matching parent/DCC live controls")
+            if report["checkpoint_correctness"]["status"] == "FAILED":
+                report["status"] = "FAILED"
+            report["admission"] = "REQUIRES_FULL_ENGINEERING_GATE"
             report["temporary_checkpoints"] = "removed after audit; hashes retained"
             del replay_a, replay_b, checkpoint, proxy
     except BaseException as error:

@@ -18,7 +18,10 @@ BASH
 
 This verifies/reuses the same controlled initial checkpoint, runs module checks, full engineering checks on
 real train samples, and the native B16/640 online-augmentation capacity check (≤16 batches, ≥2 effective
-updates). Only after both pass is `outputs/dcc/cbr_lif_dcc_v1/passed_gates.sh` written. Logs have real exit-code
+updates). Contract `dcc_acceptance_v2` binds initialization and mathematical reports
+to full engineering checks and capacity, re-evaluates complete restore/trajectory
+evidence and verifies all current code/runtime/data/init identities. Only after
+all required checks pass is `outputs/dcc/cbr_lif_dcc_v1/passed_gates.sh` written. Logs have real exit-code
 sidecars. A resource failure stops the preflight and does not change B16, disable AMP, start training or stop
 another experiment. Reports require the exact runtime, source/config hashes, init hash and dataset identity
 at later start/resume. Source public hash is checked by initialization and engineering checks.
@@ -31,7 +34,10 @@ bash /root/autodl-tmp/projects/Crack_RTDETR-dcc-v1/tools/autodl_dcc.sh plan
 BASH
 ```
 
-Explicit formal start, only when the user chooses to run it (not executed in this delivery):
+Explicit formal start, only after the NEW complete `init-preflight` genuinely passes
+and the user chooses to run it (not executed in this delivery). `resume-verify` is
+a partial diagnostic and can never generate `passed_gates.sh`. CUDA raw differences
+remain false/recorded when independently classified as `PRECISION_NOTE`:
 
 ```bash
 bash -Eeuo pipefail <<'BASH'

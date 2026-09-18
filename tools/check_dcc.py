@@ -6,9 +6,12 @@ from contextlib import contextmanager, nullcontext
 from copy import deepcopy
 import gc
 import hashlib
+import json
+import os
 from pathlib import Path
 from types import SimpleNamespace
 import time
+import traceback
 from tempfile import TemporaryDirectory
 
 import torch
@@ -25,6 +28,9 @@ from ultralytics.utils.patches import torch_load
 from ultralytics.utils.torch_utils import ModelEMA
 
 from dcc_checkpoint import DCCCheckpointTrainer
+from dcc_acceptance import CONTRACT_VERSION, evaluate_mode
+from dcc_resume_audit import (audit_live_control, attach_mode_acceptance, bounded_updates,
+                              make_audit_trainer, seed42)
 
 ATOL, RTOL = 2e-5, 2e-4  # Declared before any run; never tuned to outcomes.
 
@@ -185,8 +191,8 @@ def lifecycle(t,batch,amp,folder,variant):
         require(ema_comparison['allclose'],'EMA own-copy comparison failed')
         del ema_copy
     # The same DCC-specific serializer is used by the actual training entry.
-    # Restore-state correctness and independent backward trajectories are reported
-    # separately; the strict launch gate continues to require raw allclose.
+    # Restore correctness is the hard requirement. Independent CUDA trajectories
+    # retain their original measurements and receive a separate mode assessment.
     report=audit_checkpoint_resume(t,batch,amp,folder)
     report.update(state_dict_exact=True,full_model_exact=True,native_get_model_nonzero_preserved=True,
                   ema_own_copy=ema_comparison,learned_nc80_to1=True)
@@ -217,6 +223,20 @@ def fusion(model,image,folder):
     return result
 
 
+def prerequisite_records(args):
+    records = {}
+    for key, supplied in (("initialization", args.initialization_report), ("math", args.math_report)):
+        path = supplied.resolve()
+        require(path.is_file(), "Missing prerequisite report: " + str(path))
+        data = json.loads(path.read_text(encoding="utf-8"))
+        require(data.get("status") == "PASSED", key + " prerequisite is not PASSED")
+        if key == "initialization":
+            require(data.get("variant") == args.variant and data.get("output_sha256") == sha256(args.initialized),
+                    "Initialization prerequisite variant/checkpoint differs")
+        records[key] = dict(path=str(path), sha256=sha256(path))
+    return records
+
+
 def run(args):
     args.output.mkdir(parents=True,exist_ok=False);torch.set_num_threads(4)
     previous=(torch.are_deterministic_algorithms_enabled(),torch.is_deterministic_algorithms_warn_only_enabled(),
@@ -224,11 +244,14 @@ def run(args):
     torch.manual_seed(42)
     torch.use_deterministic_algorithms(True,warn_only=True)
     torch.backends.cudnn.deterministic=True;torch.backends.cudnn.benchmark=False
-    report=dict(status='FAILED',variant=args.variant,runtime=runtime(),initialization_sha256=sha256(args.initialized),
+    report=dict(status='FAILED',report_kind='full_preflight_engineering',contract_version=CONTRACT_VERSION,
+                variant=args.variant,runtime=runtime(),initialization_sha256=sha256(args.initialized),
                 formal_training='NOT_STARTED',final_test='NOT_RUN',tolerances=dict(atol=ATOL,rtol=RTOL),devices={},
                 precision=dict(deterministic_warn_only=True,cudnn_deterministic=True,cudnn_benchmark=False,
+                               cublas_workspace_config=os.environ.get('CUBLAS_WORKSPACE_CONFIG'),
                                matmul_tf32=torch.backends.cuda.matmul.allow_tf32,cudnn_tf32=torch.backends.cudnn.allow_tf32))
     try:
+        report['prerequisites']=prerequisite_records(args)
         parent,target,report['controlled_initialization']=controlled_models(args.source,args.variant)
         initial=RTDETR(str(args.initialized)).model
         assert_state(initial.state_dict(),target.state_dict());verify_model(initial,args.variant,zero=True)
@@ -242,9 +265,12 @@ def run(args):
         require(report['parameters']['target']['unfused']-report['parameters']['parent']['unfused']==18432,'DCC count mismatch')
         with strict_precision():report['initial_equivalence']=equivalence(parent,target,batch['img'])
         for device,amp,label in [('cpu',False,'cpu_fp32'),('cuda',False,'cuda_fp32'),('cuda',True,'cuda_native_amp')]:
-            if args.device!='all' and args.device!=device:continue
+            if args.device!='all' and args.device!=device:
+                report['devices'][label]=dict(status='PENDING',reason='Excluded by requested --device subset')
+                continue
             if device=='cuda' and not torch.cuda.is_available():report['devices'][label]=dict(status='PENDING',reason='No CUDA');continue
             print('BEGIN '+label,flush=True);started=time.perf_counter()
+            seed42()
             t=make_trainer(deepcopy(initial),amp,device);data={k:v.to(device) for k,v in batch.items()}
             rows=[];effective=0;upstream=False
             for i in range(16 if amp else 4):
@@ -257,16 +283,32 @@ def run(args):
             info=dict(status='RUNNING',steps=rows,effective_updates=effective,optimizer_every_parameter_once=True,
                       scope='B2/160 real train images, native detection loss; fixed-lr smoke is NOT B16/640 capacity')
             report['devices'][label]=info
+            parent_name='parent_cbr_lif' if args.variant=='cbr_lif_dcc_v1' else 'parent_c2'
+            info['parent_variant']=parent_name
             info['lifecycle']=lifecycle(t,data,amp,args.output/label,args.variant)
+            info['live_controls']={'dcc':audit_live_control(t,data,amp,args.output/label/'dcc_live','dcc')}
             # Original model after updates, never the formal initialization.
             info['fusion']=fusion(t.model,data['img'][:1],args.output/label)
-            info['status']='PASSED' if info['lifecycle']['status']=='PASSED' else 'PRECISION_NOTE'
+            del t;gc.collect()
+            if device=='cuda':torch.cuda.empty_cache()
+            seed42()
+            parent_trainer=make_audit_trainer(deepcopy(parent),amp,device)
+            info['parent_updates']=bounded_updates(parent_trainer,data,amp,max_batches=16 if amp else 4,target_updates=3)
+            info['live_controls']['parent']=audit_live_control(parent_trainer,data,amp,args.output/label/'parent_live',parent_name)
+            del parent_trainer;gc.collect()
+            if device=='cuda':torch.cuda.empty_cache()
+            info['acceptance']=evaluate_mode(label,info['lifecycle'],info['live_controls']['parent'],info['live_controls']['dcc'])
+            attach_mode_acceptance(info['lifecycle'],info['acceptance'])
+            write_json(args.output/label/'resume_comparison.json',info['lifecycle'])
+            info['status']=info['acceptance']['status']
             info['seconds']=time.perf_counter()-started
             write_json(args.output/'checks.json',report)
-            del t,data;gc.collect()
+            del data;gc.collect()
             if torch.cuda.is_available():torch.cuda.empty_cache()
             print(info['status']+' '+label,flush=True)
-        report['status']='PRECISION_NOTE' if any(v['status']=='PRECISION_NOTE' for v in report['devices'].values()) else 'PASSED'
+        statuses=[value['status'] for value in report['devices'].values()]
+        report['status']=('FAILED' if 'FAILED' in statuses else 'PENDING' if 'PENDING' in statuses
+                          else 'PRECISION_NOTE' if 'PRECISION_NOTE' in statuses else 'PASSED')
         report['server_torch_2_1_2']=dict(status='PASSED' if str(torch.__version__).startswith('2.1.2') else 'PENDING',
                                       reason='Actual executed runtime recorded; rerun on server when it differs')
         report['capacity']=dict(status='PENDING',reason='Separate native online-augmentation B16/640 preflight required')
@@ -278,11 +320,22 @@ def run(args):
         from train_dcc import code_identity
         report['code_identity']=code_identity()
         write_json(args.output/'checks.json',report)
+    return report
+
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    for name in ('source','initialized','real-dataset','output','initialization-report','math-report'):
+        p.add_argument('--'+name,type=Path,required=True)
+    p.add_argument('--variant',choices=['cbr_lif_dcc_v1','dcc_v1'],default='cbr_lif_dcc_v1')
+    p.add_argument('--device',choices=['cpu','cuda','all'],default='all')
+    try:
+        report=run(p.parse_args())
+    except Exception:
+        traceback.print_exc()
+        return 3
+    return 0 if report['status'] in {'PASSED','PRECISION_NOTE'} else 3
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__)
-    for name in ('source','initialized','real-dataset','output'):p.add_argument('--'+name,type=Path,required=True)
-    p.add_argument('--variant',choices=['cbr_lif_dcc_v1','dcc_v1'],default='cbr_lif_dcc_v1')
-    p.add_argument('--device',choices=['cpu','cuda','all'],default='all')
-    run(p.parse_args())
+    raise SystemExit(main())

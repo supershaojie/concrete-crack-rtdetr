@@ -1,0 +1,198 @@
+{
+  "checks": "/root/autodl-tmp/projects/Crack_RTDETR-dcc-v1/outputs/dcc/cbr_lif_dcc_v1/resume_checks_20260918T170113Z_261617/resume_checks.json",
+  "capacity": "/root/autodl-tmp/projects/Crack_RTDETR-dcc-v1/outputs/dcc/cbr_lif_dcc_v1/capacity_resume_fix_20260918T170113Z_261617/preflight.json",
+  "files": [
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/resume_checks_20260918T170113Z_261617/cpu_fp32/dcc/checkpoint/resume_comparison.json",
+      "bytes": 4608763,
+      "sha256": "1018aca32738028b65511b55bca3cb6aae5411b84c630efe98ef044ed09106e5"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/resume_checks_20260918T170113Z_261617/cpu_fp32/dcc/live/live_control.json",
+      "bytes": 1734226,
+      "sha256": "6040f02f0b6005a8b5a4dddbbbe0eca8c07489440c40623b4192223663602635"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/resume_checks_20260918T170113Z_261617/cpu_fp32/parent_cbr_lif/live/live_control.json",
+      "bytes": 1717489,
+      "sha256": "f86a1f58450b9fde5b4115cf825d05e437d2e7e836a52742bd5ccb9c12d0dda3"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/resume_checks_20260918T170113Z_261617/cuda_fp32/dcc/checkpoint/resume_comparison.json",
+      "bytes": 4676386,
+      "sha256": "9743ab273f61cef4f9a4f43b0e2e9fc2430e70ffafc716a122af9bd2959f2ab3"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/resume_checks_20260918T170113Z_261617/cuda_fp32/dcc/live/live_control.json",
+      "bytes": 1801435,
+      "sha256": "317790e6c3f291a8023ae9e0d7f510568aab8262065963e0147c89e781befd90"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/resume_checks_20260918T170113Z_261617/cuda_fp32/parent_cbr_lif/live/live_control.json",
+      "bytes": 1782089,
+      "sha256": "bd485c211cd6eeeed595e23353a06faa12570c5318e272e4101fdba7d3b919bc"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/resume_checks_20260918T170113Z_261617/cuda_native_amp/dcc/checkpoint/resume_comparison.json",
+      "bytes": 4682816,
+      "sha256": "f2c97e1799a5aeb81f7cdb918cf448833e063d5b98032ba4c76cfa6f489c27b2"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/resume_checks_20260918T170113Z_261617/cuda_native_amp/dcc/live/live_control.json",
+      "bytes": 1803655,
+      "sha256": "47c4583b77267d230a21cdb9758373ed6f2c839c313a56aad6338eefaff74084"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/resume_checks_20260918T170113Z_261617/cuda_native_amp/parent_cbr_lif/live/live_control.json",
+      "bytes": 1785938,
+      "sha256": "5fe2a8050594ef3296c3ced44e49e2116909e7a56d5cfe97137a8daac3ffd415"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/resume_checks_20260918T170113Z_261617/verification_summary.json",
+      "bytes": 889,
+      "sha256": "e49c2bca43dc18228eefa39ee2d24ba29c21aae6a53f8f4393a2c795dbbc1f56"
+    },
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/capacity_resume_fix_20260918T170113Z_261617/preflight.json",
+      "bytes": 195813,
+      "sha256": "068df47e0cb623ca854ed07028b20f7a9f17de16c8c25718ebe4de71e3574b11"
+    },
+    {
+      "path": "tools/autodl_dcc.sh",
+      "bytes": 6101,
+      "sha256": "2d1ece7425dec0283079117c5fb1906d692309cbda1d4d05b1547ac70e485e49"
+    },
+    {
+      "path": "tools/check_dcc.py",
+      "bytes": 17695,
+      "sha256": "809df8b632649e0c90910e427a3ad8083cc6d6b1657de1ffc9db596af4124502"
+    },
+    {
+      "path": "tools/check_dcc_checkpoint.py",
+      "bytes": 11038,
+      "sha256": "0719fd15a6bf4877b31017fa8d2c28cece37c990e959747a9a343c87d8a77b77"
+    },
+    {
+      "path": "tools/check_dcc_gate.py",
+      "bytes": 4279,
+      "sha256": "cf11167491c040cd969565744497264e3c0d5ef9cee72556606f904353017ec5"
+    },
+    {
+      "path": "tools/check_dcc_math.py",
+      "bytes": 15039,
+      "sha256": "fb5db558e444c4623f1fdf9e105084ff775fef7d614e55374c3451dbf9a44829"
+    },
+    {
+      "path": "tools/check_dcc_resume.py",
+      "bytes": 6227,
+      "sha256": "3750b23e240d9b716cbe2e726871e45ec83c7b99fa55b3bd10642c9403995d75"
+    },
+    {
+      "path": "tools/dcc_checkpoint.py",
+      "bytes": 10164,
+      "sha256": "ff1eb2ac7f31aa7485d49dd2425d6dcb9657fbc4e663709a1e7c4060ae46cde8"
+    },
+    {
+      "path": "tools/dcc_common.py",
+      "bytes": 13663,
+      "sha256": "869a18dec1653b31f3638ab1691c97c0bf48060bfb085424996177f10ca87f4b"
+    },
+    {
+      "path": "tools/dcc_resume_audit.py",
+      "bytes": 33533,
+      "sha256": "a392af1a1fe60bf63949a7c36bfe59b129aace219cb26f379b1f9539c649da5a"
+    },
+    {
+      "path": "tools/eval_dcc.py",
+      "bytes": 10788,
+      "sha256": "ad4e0fa126eedee038cd44671bb5b208ada4266f39b8dd19531160e6599b7426"
+    },
+    {
+      "path": "tools/init_dcc.py",
+      "bytes": 6436,
+      "sha256": "08109f9cdc311ea70450ea26a4f9db2f708a3b8d5661a432bde8abfd999f6662"
+    },
+    {
+      "path": "tools/pack_dcc_light.py",
+      "bytes": 6664,
+      "sha256": "f9bb4ef68b0bc2e8be84e2d9aad5d59b62bc8df397bd004f138e8cf83255231a"
+    },
+    {
+      "path": "tools/preflight_dcc.py",
+      "bytes": 13038,
+      "sha256": "542a51b45769d233df84417363e2d0490ff1b4773420086e7c6efc274d0b0120"
+    },
+    {
+      "path": "tools/sync_dcc.sh",
+      "bytes": 8730,
+      "sha256": "b70e4fa77d986126b0845a8f38ac715456bed4d31b948487876e5e5348a61ffd"
+    },
+    {
+      "path": "tools/train_dcc.py",
+      "bytes": 21933,
+      "sha256": "3228060d68afeee8f9e0958ae005a083f886f0da57a41e2127aa185025ad0399"
+    },
+    {
+      "path": "docs/dcc/README.md",
+      "bytes": 10997,
+      "sha256": "8f75029a7929129bff242234fa08be728b5bb5228bee70ccfcff8d2fce18536d"
+    },
+    {
+      "path": "docs/dcc/environment.sh",
+      "bytes": 586,
+      "sha256": "0259d8bfdc1bfd12fb2843937f6e37f6a07ef611a9e7b749096f6e3e108a0cac"
+    },
+    {
+      "path": "docs/dcc/resume_fix/README.md",
+      "bytes": 9304,
+      "sha256": "d960614aa2ffb38191887fa58bf3c0cf23e5fc3beb3a0c2654e27a4f1addee56"
+    },
+    {
+      "path": "tools/c19_lif_v1_probe.py",
+      "bytes": 10540,
+      "sha256": "1f146aca02d953917cc1d4fed0c650fff0422ede0521d903387444c199b5eb07"
+    },
+    {
+      "path": "tools/c19_lif_v1_diagnostic.py",
+      "bytes": 21731,
+      "sha256": "a17919c31c9e4eabb9dca2c1d52a51f35b2d8f16a7a665ae3019a21ce872a065"
+    },
+    {
+      "path": "ultralytics-main/ultralytics/engine/trainer.py",
+      "bytes": 49640,
+      "sha256": "18125ba895b64961cf0f7db29214aca27392176e65d72a9166fa818f00a1033a"
+    },
+    {
+      "path": "ultralytics-main/ultralytics/utils/torch_utils.py",
+      "bytes": 40544,
+      "sha256": "cda1bf8718c24b4882e885114a16a1434b68e8ccea67d56b8155f7c81934aef8"
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/rtdetr/train.py",
+      "bytes": 3740,
+      "sha256": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48"
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/dcc.py",
+      "bytes": 3481,
+      "sha256": "a9667237105c5736410944b3fd9aa3ac61953950816f662735787ae499a27f7e"
+    },
+    {
+      "path": "diagnostic/resume_verify_20260918T170112Z_261554.log.tail.txt",
+      "bytes": 27034,
+      "sha256": "4ba5f61ebb2e8896e553badbd87755000adeb10fc360d465c4984694bbb99a8d"
+    },
+    {
+      "path": "diagnostic/git_and_paths.json",
+      "bytes": 513,
+      "sha256": "277fc2e61399886c4f87a2cca65ee28d0a6c1f387a04f3fd7969afa83bf1e3b6"
+    }
+  ],
+  "omitted": [
+    {
+      "path": "outputs/dcc/cbr_lif_dcc_v1/resume_checks_20260918T170113Z_261617/resume_checks.json",
+      "reason": "individual_size_limit"
+    }
+  ],
+  "missing": []
+}

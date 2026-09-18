@@ -145,56 +145,230 @@ def disable_oom_retry(trainer):
     trainer._oom_retries = 3
 
 
+def _finite(value):
+    import math
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
+def _metric_pass(row, name):
+    require(isinstance(row, dict) and row.get("allclose") is True, "Comparison failed/missing: " + name)
+    require(_finite(row.get("max_abs")) and row["max_abs"] >= 0, "Nonfinite metric: " + name)
+    for key in ("relative_L2", "exceeded_fraction", "exceed_fraction"):
+        if key in row:
+            require(_finite(row[key]) and row[key] >= 0, "Invalid metric: " + name + "." + key)
+    if "atol" in row or "rtol" in row:
+        require(row.get("atol") == 2e-5 and row.get("rtol") == 2e-4, "Tolerance changed: " + name)
+
+
+def _equivalence_pass(report, name):
+    require(report.get("status") in {"PASSED", "PRECISION_NOTE"}, "Missing equivalence: " + name)
+    required = {"scale_0", "scale_1", "scale_2", "projection_0", "projection_1", "projection_2",
+                "encoder_features", "candidate_scores"}
+    continuous = report.get("continuous", {})
+    require(set(continuous) == required, "Incomplete continuous path: " + name)
+    for key, row in continuous.items():
+        _metric_pass(row, name + "." + key)
+    first, second = report.get("candidate_indices_a"), report.get("candidate_indices_b")
+    require(isinstance(first, list) and first and isinstance(second, list) and second,
+            "Missing candidate selection evidence: " + name)
+    key = "native_outputs" if first == second else "fixed_candidate_diagnostic_only"
+    outputs = report.get(key, {})
+    needed = {"boxes", "scores", "raw_boxes", "raw_scores"}
+    if first != second:
+        needed |= {"selected_features", "reference_boxes"}
+    require(set(outputs) == needed, "Missing selected/output path: " + name)
+    for field, row in outputs.items():
+        _metric_pass(row, name + "." + field)
+
+
+def _controlled_pass(report, variant):
+    from dcc_common import DCC_KEYS
+    require(report.get("variant") == variant and report.get("source_sha256") == SOURCE_SHA256 and
+            report.get("base_commit") == BASE_COMMIT and report.get("seed") == 42 and
+            report.get("source_nc") == 80 and report.get("target_nc") == 1,
+            "Controlled source/class/seed identity changed")
+    require(report.get("new_parameters") == 18432 and set(report.get("NEW_TRAINABLE", [])) == set(DCC_KEYS),
+            "DCC added parameter identity/count changed")
+    for key in ("variant_new_state_exact", "public_constructor_equal", "parent_target_nc1_exact"):
+        require(report.get(key) is True, "Controlled initialization failed: " + key)
+    for key in ("MISSING", "UNEXPECTED", "SHAPE_MISMATCH", "STATE_DICT_NEW_BUFFER"):
+        require(report.get(key) == [], "Controlled initialization mismatch/missing: " + key)
+    for scope in (report, report.get("native_trainer", {})):
+        common = scope.get("COMMON", [])
+        require(common and all(row.get("equal") is True for row in common), "Missing/exact public initialization audit")
+    require(report.get("native_trainer", {}).get("native_get_model") is True,
+            "Native reconstruction audit missing")
+
+
+def _math_pass(report):
+    require(report.get("tolerance") == {"atol": 2e-5, "rtol": 2e-4}, "Math tolerance changed")
+    for key in ("constructor_preserves_cpu_cuda_rng", "upstream_matches_torch_conv2d_default_initialization_exactly",
+                "original_conv_state_and_later_cpu_rng_preserved"):
+        require(report.get(key) is True, "Missing math/init evidence: " + key)
+    rows = report.get("devices", [])
+    require(len(rows) == 2 and {d.get("device") for d in rows} == {"cpu", "cuda"}, "Math CPU/CUDA coverage missing")
+    for device in rows:
+        require(device.get("status") == "PASSED" and device.get("new_trainable_parameters") == 18432,
+                "Math device PENDING/FAILED")
+        shapes = device.get("shapes", [])
+        require(len(shapes) == 12 and all(row.get("attention_shape") == [row["shape"][0], 4, 8, 8]
+                and _finite(row.get("branch_mean_abs_max")) and _finite(row.get("residual_abs_max")) for row in shapes),
+                "Missing channel-attention shape/input evidence")
+        matmuls = device.get("actual_matmul_shapes", [])
+        require(len(matmuls) == 2 and [r.get("output") for r in matmuls] == [[2, 4, 8, 8], [2, 4, 8, 77]],
+                "Channel attention matmul evidence missing")
+        for key in ("attention_input_change_max_abs", "nonzero_branch_max_abs"):
+            require(_finite(device.get(key)) and device[key] > 1e-5, "Nonzero branch/input dependence missing")
+        for key in ("spatial_permutation_equivariance", "state_dict_reload", "complete_module_reload",
+                    "ema_own_weight_reference", "nonzero_wrapper_fusion"):
+            _metric_pass(device.get(key), "math." + key)
+        require(device["nonzero_wrapper_fusion"].get("dcc_calls") == 1, "Fused DCC missing/duplicated")
+        steps = device.get("gradient_steps", [])
+        require(len(steps) == 2, "Missing two-step DCC startup")
+        required = {"W_d.weight", "W_q.weight", "W_k.weight", "W_o.weight"}
+        for index, step in enumerate(steps):
+            gradients = step.get("gradient_norms", {})
+            require(_finite(step.get("loss")) and set(gradients) == required and
+                    all(_finite(v) and v >= 0 for v in gradients.values()), "Nonfinite/missing mathematical gradients")
+            require(gradients["W_o.weight"] > 0 and (index == 0 or all(v > 0 for v in gradients.values())),
+                    "DCC gradients did not start")
+        if device["device"] == "cuda":
+            require(device.get("native_amp", {}).get("finite") is True and
+                    device.get("cuda_half", {}).get("finite") is True and
+                    device["cuda_half"].get("branch_dtype") == "torch.float32", "CUDA half/AMP math missing")
+            steps = device.get("native_amp_optimizer_steps", [])
+            require(len(steps) == 2 and all(_finite(s.get("loss")) and s.get("scale_after", 0) >=
+                    s.get("scale_before", 1) > 0 for s in steps), "Native AMP mathematical updates missing")
+
+
 def strict_gate(preflight_path, checks_path, variant, init, data):
-    require(preflight_path and checks_path, "start/resume require explicit preflight and engineering check reports")
+    """Full, current-tree contract. Partial resume diagnostics can never authorize training."""
+    from dcc_acceptance import CONTRACT_VERSION, evaluate_mode
+    from dcc_common import DCC_KEYS
+    require(preflight_path and checks_path, "start/resume require explicit capacity and full engineering reports")
     capacity = json.loads(Path(preflight_path).read_text(encoding="utf-8"))
     checks = json.loads(Path(checks_path).read_text(encoding="utf-8"))
-    require(capacity.get("status") == "PASSED", "Native B16/640 preflight is not PASSED")
-    require(capacity.get("variant") == variant and capacity.get("init_sha256") == sha256(init), "Preflight init/variant changed")
-    require(capacity.get("code_identity") == code_identity(), "Code/config differs from capacity-tested tree")
-    current_runtime = runtime()
-    for key in ("python", "torch", "cuda", "gpu", "ultralytics", "worktree"):
-        require(capacity.get("runtime", {}).get(key) == current_runtime.get(key),
-                "Capacity check must run in the actual training environment: " + key)
+    current_identity, current_runtime, init_hash = code_identity(), runtime(), sha256(init)
+
+    def fresh(report, kind):
+        require(report.get("report_kind") == kind and report.get("contract_version") == CONTRACT_VERSION,
+                "Wrong/old report kind or acceptance contract: " + kind)
+        require(report.get("status") in {"PASSED", "PRECISION_NOTE"} and not report.get("error") and
+                not report.get("pending") and not report.get("failed"), "Incomplete report: " + kind)
+        require(report.get("code_identity") == current_identity, "Code/config differs from tested tree: " + kind)
+        for key in ("python", "torch", "cuda", "gpu", "ultralytics", "worktree"):
+            require(key in report.get("runtime", {}) and report["runtime"][key] == current_runtime.get(key),
+                    "Report must run in actual training environment: " + kind + "." + key)
+
+    fresh(capacity, "native_capacity")
+    fresh(checks, "full_preflight_engineering")
+    require(capacity.get("status") == "PASSED" and capacity.get("variant") == variant and
+            capacity.get("init_sha256") == init_hash, "Capacity init/variant/status changed")
+    require(checks.get("variant") == variant and checks.get("initialization_sha256") == init_hash,
+            "Engineering initialization/variant changed")
     require(capacity.get("dataset_identity") == dataset_identity(data), "Actual data path/label identity changed")
+    for split, recorded in capacity["dataset_identity"]["splits"].items():
+        for key, check_key in (("images", "images"), ("boxes", "boxes"),
+                               ("paths_sha256", "split_paths_sha256"),
+                               ("labels_sha256", "label_inventory_sha256")):
+            require(checks.get("data_identity", {}).get(split, {}).get(check_key) == recorded[key],
+                    "Full engineering/capacity dataset differs: " + split + "." + key)
     c = capacity.get("capacity", {})
     require(c.get("batch") == 16 and c.get("imgsz") == 640 and c.get("AMP") is True and
-            c.get("effective_updates", 0) >= 2 and c.get("observed_batches", 99) <= 16,
-            "Missing bounded B16/640 native AMP update evidence")
-    require(checks.get("status") in {"PASSED", "PRECISION_NOTE"}, "Engineering lifecycle checks are not complete")
-    require(checks.get("variant") == variant and checks.get("initialization_sha256") == sha256(init),
-            "Engineering check initialization/variant changed")
-    require(checks.get("code_identity") == code_identity(), "Code/config differs from engineering-tested tree")
-    for key in ("python", "torch", "cuda", "gpu", "ultralytics", "worktree"):
-        require(checks.get("runtime", {}).get(key) == current_runtime.get(key),
-                "Engineering checks must run in the actual training environment: " + key)
-    require(not checks.get("pending") and not checks.get("failed"), "Required engineering items remain PENDING/FAILED")
-    for device in ("cpu_fp32", "cuda_fp32", "cuda_native_amp"):
-        observed = checks.get("devices", {}).get(device, {})
-        lifecycle = observed.get("lifecycle", {})
-        accepted_lifecycle = lifecycle.get("status") == "PASSED"
-        # Independent CUDA backward equality is a separate requirement. Neither
-        # restore correctness, same-gradient replay nor parent variation waives it.
-        require(lifecycle.get("checkpoint_policy") == "optimizer_fp32_v1",
-                "Engineering check used the historical FP16 optimizer serializer")
-        require(lifecycle.get("restoration", {}).get("status") == "PASSED" and
-                lifecycle.get("same_gradient_replay", {}).get("status") == "PASSED",
-                "Strict complete-state restore/replay evidence missing: " + device)
-        if device == "cuda_native_amp":
-            require(lifecycle.get("same_gradient_replay", {}).get("amp_scaler_path") is True,
-                    "Same-gradient replay did not exercise native AMP/scaler")
-        require(lifecycle.get("raw_next_update_allclose") is True,
-                "Native resume next-update mismatch remains unresolved: " + device)
-        require(observed.get("status") == "PASSED" and accepted_lifecycle and
-                observed.get("fusion", {}).get("status") == "PASSED", "Missing engineering/lifecycle/fusion gate: " + device)
-        if device != "cpu_fp32":
-            require(observed.get("fusion", {}).get("cuda_half", {}).get("status") == "PASSED", "CUDA half lifecycle gate missing")
-    return {"capacity_report_sha256": sha256(preflight_path), "checks_report_sha256": sha256(checks_path)}
+            2 <= c.get("effective_updates", 0) <= c.get("observed_batches", 0) <= 16 and
+            capacity.get("checkpoint_policy") == "optimizer_fp32_v1", "Missing B16/640 native AMP capacity evidence")
+    expected_recipe, _ = recipe(variant, init, data=data)
+    for key, value in expected_recipe.items():
+        if key not in IDENTITY_FIELDS:
+            require(capacity.get("actual_recipe", {}).get(key) == value and
+                    capacity.get("recipe", {}).get(key) == value, "Capacity recipe changed: " + key)
+    require(capacity.get("optimizer_coverage", {}).get("every_parameter_exactly_once") is True,
+            "Capacity optimizer coverage missing")
+    steps = capacity.get("steps", [])
+    require(sum(s.get("effective") is True for s in steps) == c["effective_updates"], "Capacity update evidence missing")
+    for name in DCC_KEYS:
+        require(any(s.get("effective") is True and s.get("gradients", {}).get(name, {}).get("finite") is True and
+                    _finite(s["gradients"][name].get("norm")) and s["gradients"][name]["norm"] > 0 for s in steps),
+                "Capacity DCC gradient startup missing: " + name)
+
+    prerequisite_hashes = {}
+    prerequisites = {}
+    for name, kind in (("initialization", "controlled_initialization_audit"), ("math", "dcc_math_audit")):
+        reference = checks.get("prerequisites", {}).get(name, {})
+        path = Path(reference.get("path", ""))
+        require(path.is_absolute() and path.is_file() and sha256(path) == reference.get("sha256"),
+                "Missing/changed bound prerequisite: " + name)
+        report = json.loads(path.read_text(encoding="utf-8"))
+        fresh(report, kind)
+        require(report.get("status") == "PASSED", "Prerequisite not PASSED: " + name)
+        prerequisites[name] = report
+        prerequisite_hashes[name + "_report_sha256"] = reference["sha256"]
+    initialization = prerequisites["initialization"]
+    _controlled_pass(initialization, variant)
+    require(initialization.get("output_sha256") == init_hash and initialization.get("reload_exact") is True,
+            "Initialization output/reload changed")
+    reconstruction = initialization.get("training_reconstruction", {})
+    require(reconstruction.get("status") == "PASSED" and reconstruction.get("training_updates") == 0 and
+            all(reconstruction.get(k) is True for k in ("native_setup_model", "native_get_model",
+                "actual_model_train_dispatch", "public_and_added_values_exact")), "Native initialization reconstruction missing")
+    _math_pass(prerequisites["math"])
+    _controlled_pass(checks.get("controlled_initialization", {}), variant)
+    wiring = checks.get("wiring_640", {})
+    require(wiring.get("status") == "PASSED" and wiring.get("nodes") == 27 and
+            wiring.get("dcc_after_complete_projection") is True and wiring.get("concat") == [16, 17] and
+            wiring.get("p3_downsample") == 20 and wiring.get("decoder_from") == [19, 22, 25], "Wiring contract incomplete")
+    counts = checks.get("parameters", {})
+    for kind in ("fused", "unfused"):
+        require(counts.get("target", {}).get(kind, 0) - counts.get("parent", {}).get(kind, 0) == 18432,
+                "DCC added parameter count changed: " + kind)
+    _equivalence_pass(checks.get("initial_equivalence", {}), "initial")
+    require(checks.get("tolerances") == {"atol": 2e-5, "rtol": 2e-4}, "Engineering tolerance changed")
+    modes = {}
+    for mode in ("cpu_fp32", "cuda_fp32", "cuda_native_amp"):
+        observed = checks.get("devices", {}).get(mode, {})
+        lifecycle, controls = observed.get("lifecycle", {}), observed.get("live_controls", {})
+        require(all(item.get("contract_version") == CONTRACT_VERSION for item in
+                    (lifecycle, controls.get("parent", {}), controls.get("dcc", {}))),
+                "Missing current-contract nested evidence: " + mode)
+        acceptance = evaluate_mode(mode, lifecycle, controls.get("parent", {}), controls.get("dcc", {}))
+        require(acceptance["status"] in {"PASSED", "PRECISION_NOTE"}, "Restore/trajectory evidence blocked: " +
+                mode + " " + repr(acceptance.get("failures")))
+        require(observed.get("status") == acceptance["status"] and observed.get("acceptance") == acceptance,
+                "Stored mode summary differs from raw evidence: " + mode)
+        require(observed.get("optimizer_every_parameter_once") is True and observed.get("effective_updates", 0) >= 3,
+                "Network optimizer/startup evidence missing: " + mode)
+        steps = observed.get("steps", [])
+        require(sum(s.get("skipped") is False for s in steps) == observed["effective_updates"] and
+                all(_finite(s.get("loss")) for s in steps), "Invalid network update evidence: " + mode)
+        require(any(not s.get("skipped", True) and set(s.get("dcc_grad_norms", {})) == set(DCC_KEYS) and
+                    all(_finite(v) and v > 0 for v in s["dcc_grad_norms"].values()) for s in steps),
+                "Network DCC gradient startup missing: " + mode)
+        for key in ("state_dict_exact", "full_model_exact", "native_get_model_nonzero_preserved", "learned_nc80_to1"):
+            require(lifecycle.get(key) is True, "Missing full lifecycle evidence: " + mode + "." + key)
+        _metric_pass(lifecycle.get("ema_own_copy"), mode + ".ema_own_copy")
+        fusion = observed.get("fusion", {})
+        require(fusion.get("status") == "PASSED" and fusion.get("dcc_calls") == 1 and
+                fusion.get("dcc_state_exact") is True, "Fusion evidence missing: " + mode)
+        _equivalence_pass(fusion.get("strict_fp32", {}), mode + ".fusion")
+        if mode != "cpu_fp32":
+            require(fusion.get("cuda_half", {}).get("status") == "PASSED", "CUDA half lifecycle missing")
+        modes[mode] = acceptance
+    expected_status = "PRECISION_NOTE" if any(v["status"] == "PRECISION_NOTE" for v in modes.values()) else "PASSED"
+    require(checks["status"] == expected_status, "Full engineering summary disagrees with mode evidence")
+    return dict(contract_version=CONTRACT_VERSION, status=expected_status,
+                capacity_report_sha256=sha256(preflight_path), checks_report_sha256=sha256(checks_path),
+                **prerequisite_hashes, modes=modes,
+                components={name: "PASSED" for name in ("initialization", "mathematics", "wiring",
+                    "gradient_startup", "checkpoint_correctness", "fusion", "cuda_half",
+                    "native_B16_640_AMP_capacity", "source_runtime_data_init_identity")},
+                trajectory_repeatability={name: result["trajectory"]["status"] for name, result in modes.items()})
 
 
 def plan(args):
     recipe_args, differences = recipe(args.variant, args.init, args.main, args.data, args.parent_args)
+    from dcc_acceptance import CONTRACT_VERSION
     return {"variant": args.variant, "runtime": runtime(), "code_identity": code_identity(),
+            "contract_version": CONTRACT_VERSION,
             "args": recipe_args, "recipe_differences": differences,
             "formal_training": "NOT_STARTED", "final_test": "NOT_RUN",
             "checkpoint_policy": "optimizer_fp32_v1", "checkpoint_ema_dtype": "float16"}

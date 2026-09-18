@@ -16,6 +16,7 @@ from train_dcc import (DEFAULT_MAIN, recipe, code_identity, dataset_identity, ve
                        optimizer_coverage, disable_oom_retry)
 from ultralytics import RTDETR
 from dcc_checkpoint import DCCCheckpointTrainer
+from dcc_acceptance import CONTRACT_VERSION
 from ultralytics.utils import ASSETS
 
 
@@ -30,6 +31,7 @@ def run(args):
     require(not out.exists(), "Previous preflight output protected: " + str(out))
     out.mkdir(parents=True, exist_ok=False)
     report = dict(status="PENDING", variant=args.variant, runtime=runtime(), code_identity=code_identity(),
+                  report_kind="native_capacity", contract_version=CONTRACT_VERSION,
                   formal_training="NOT_STARTED", final_test="NOT_RUN", full_validation="NOT_RUN",
                   init_sha256=sha256(args.init) if args.init.is_file() else None,
                   capacity=dict(batch=16, imgsz=640, AMP=True, observed_batches=0, effective_updates=0,

@@ -64,6 +64,8 @@ def audit_checkpoint_reconstruction(output, expected, variant):
 
 
 def initialize(source, output, variant="cbr_lif_dcc_v1", verify_existing=False):
+    from dcc_acceptance import CONTRACT_VERSION
+    from train_dcc import code_identity
     output = Path(output)
     require(output.is_file() if verify_existing else not output.exists(),
             "Expected existing initialization for verification" if verify_existing else "Existing initialization preserved: " + str(output))
@@ -93,7 +95,9 @@ def initialize(source, output, variant="cbr_lif_dcc_v1", verify_existing=False):
     verify_model(restored, variant, zero=True)
     report.update(dcc=metadata, output=str(output.resolve()), output_sha256=sha256(output), reload_exact=True,
                   training_reconstruction=audit_checkpoint_reconstruction(output, target, variant),
-                  status="PASSED", existing_checkpoint_verified=verify_existing, runtime=runtime())
+                  status="PASSED", existing_checkpoint_verified=verify_existing, runtime=runtime(),
+                  report_kind="controlled_initialization_audit", contract_version=CONTRACT_VERSION,
+                  code_identity=code_identity())
     return report
 
 

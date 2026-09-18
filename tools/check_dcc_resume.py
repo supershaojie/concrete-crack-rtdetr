@@ -1,7 +1,7 @@
 """C+D bounded continuation audit only: no math/fusion, formal training, validation or test.
 
-Exit 0 means diagnostics completed, including UNRESOLVED numerical findings.
-Admission remains BLOCKED unless every requested control passes; read the JSON.
+Exit 0 means the requested A/B diagnostics are PASSED or PRECISION_NOTE.
+This partial report is never sufficient for the full engineering launch gate.
 """
 from __future__ import annotations
 
@@ -12,12 +12,15 @@ import json
 import os
 from pathlib import Path
 import time
+import traceback
 
 import torch
 
 from dcc_common import controlled_models, runtime, require, sha256, write_json
 from dcc_resume_audit import (ATOL, RTOL, make_audit_trainer, bounded_updates, audit_live_control,
-                              audit_checkpoint_resume, seed42, rng_state, restore_rng, compare_states)
+                              audit_checkpoint_resume, seed42, rng_state, restore_rng, compare_states,
+                              attach_mode_acceptance)
+from dcc_acceptance import CONTRACT_VERSION, evaluate_mode
 from c19_lif_v1_data import dataset_inventory, real_batch
 from ultralytics import RTDETR
 
@@ -32,7 +35,9 @@ def run(args):
     torch.use_deterministic_algorithms(True, warn_only=True)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
-    report = dict(status="FAILED", admission="BLOCKED", variant=args.variant, runtime=runtime(),
+    report = dict(status="FAILED", admission="BLOCKED", report_kind="partial_resume_diagnostic",
+                  contract_version=CONTRACT_VERSION, full_engineering_eligible=False,
+                  variant=args.variant, runtime=runtime(),
                   initialization_sha256=sha256(args.initialized), seed=42, tolerances=dict(atol=ATOL, rtol=RTOL),
                   formal_training="NOT_STARTED", final_test="NOT_RUN", full_validation="NOT_RUN", devices={},
                   scope="One fixed B2/160 real train batch; bounded live-FP32 parent/DCC controls + checkpoint restore/replay",
@@ -58,7 +63,9 @@ def run(args):
             print("BEGIN C+D " + label, flush=True)
             entry = report["devices"][label] = dict(status="RUNNING", admission="BLOCKED")
             data = {key: value.to(device) for key, value in batch.items()}
-            for model_name, model in (("parent_cbr_lif", parent), ("dcc", target)):
+            parent_name = "parent_cbr_lif" if args.variant == "cbr_lif_dcc_v1" else "parent_c2"
+            entry["parent_variant"] = parent_name
+            for model_name, model in ((parent_name, parent), ("dcc", target)):
                 seed42()
                 trainer = make_audit_trainer(deepcopy(model), amp, device)
                 current = entry[model_name] = {}
@@ -71,14 +78,19 @@ def run(args):
                 if device == "cuda":
                     torch.cuda.empty_cache()
                 write_json(args.output / "resume_checks.json", report)
-            checks = [entry["parent_cbr_lif"]["live_control"], entry["dcc"]["live_control"], entry["dcc"]["checkpoint_resume"]]
-            entry["status"] = "PASSED" if all(item["status"] == "PASSED" for item in checks) else "UNRESOLVED"
-            entry["admission"] = "PASSED" if entry["status"] == "PASSED" else "BLOCKED"
+            checkpoint_report = entry["dcc"]["checkpoint_resume"]
+            entry["acceptance"] = evaluate_mode(label, checkpoint_report, entry[parent_name]["live_control"], entry["dcc"]["live_control"])
+            attach_mode_acceptance(checkpoint_report, entry["acceptance"])
+            write_json(args.output / label / "dcc" / "checkpoint" / "resume_comparison.json", checkpoint_report)
+            entry["status"] = entry["acceptance"]["status"]
+            entry["diagnostic_acceptance"] = "ACCEPTED" if entry["status"] in {"PASSED", "PRECISION_NOTE"} else "BLOCKED"
             del data
             print(entry["status"] + " C+D " + label, flush=True)
-        report["status"] = "PASSED" if all(item["status"] == "PASSED" for item in report["devices"].values()) else "UNRESOLVED"
-        report["admission"] = "PASSED" if report["status"] == "PASSED" and set(report["devices"]) == {
-            "cpu_fp32", "cuda_fp32", "cuda_native_amp"} else "BLOCKED"
+        statuses = [item["status"] for item in report["devices"].values()]
+        report["status"] = ("FAILED" if "FAILED" in statuses else "PENDING" if "PENDING" in statuses else
+                            "PRECISION_NOTE" if "PRECISION_NOTE" in statuses else "PASSED")
+        report["diagnostic_acceptance"] = "ACCEPTED" if report["status"] in {"PASSED", "PRECISION_NOTE"} else "BLOCKED"
+        report["admission_reason"] = "Partial continuation diagnostics exclude full math/initialization/wiring/fusion/capacity gates"
     except BaseException as error:
         report.update(status="FAILED", admission="BLOCKED", error=repr(error))
         raise
@@ -97,12 +109,16 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("source", "initialized", "real-dataset", "output"):
         parser.add_argument("--" + name, type=Path, required=True)
-    parser.add_argument("--variant", choices=("cbr_lif_dcc_v1",), default="cbr_lif_dcc_v1")
+    parser.add_argument("--variant", choices=("cbr_lif_dcc_v1", "dcc_v1"), default="cbr_lif_dcc_v1")
     parser.add_argument("--device", choices=("cpu", "cuda", "all"), default="all")
     args = parser.parse_args()
-    result = run(args)
+    try:
+        result = run(args)
+    except Exception:
+        traceback.print_exc()
+        return 3
     print(json.dumps({key: result[key] for key in ("status", "admission", "formal_training", "final_test")}, indent=2))
-    return 0  # Completed diagnostics are not admission; server wrapper checks the JSON.
+    return 0 if result["status"] in {"PASSED", "PRECISION_NOTE"} else 3
 
 
 if __name__ == "__main__":

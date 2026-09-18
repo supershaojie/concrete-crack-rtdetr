@@ -1,0 +1,16 @@
+{
+  "head": {
+    "exit_code": 0,
+    "output": "3edabd6ae46a3f05701b7fe04abcf2c25b452c42\n"
+  },
+  "status": {
+    "exit_code": 0,
+    "output": ""
+  },
+  "working_diff": {
+    "exit_code": 0,
+    "output": ""
+  },
+  "selected_checks": "/root/autodl-tmp/projects/Crack_RTDETR-dcc-v1/outputs/dcc/cbr_lif_dcc_v1/resume_checks_20260918T170113Z_261617/resume_checks.json",
+  "selected_capacity": "/root/autodl-tmp/projects/Crack_RTDETR-dcc-v1/outputs/dcc/cbr_lif_dcc_v1/capacity_resume_fix_20260918T170113Z_261617"
+}

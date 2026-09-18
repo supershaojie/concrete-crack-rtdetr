@@ -4,9 +4,12 @@ Branch: `exp-rtdetr-r18-lite-dcc-v1`. Fixed parent: `a0459d6a652cb702699087c88fa
 The implementation starts from this commit, never from another candidate's HEAD.
 Formal training is **NOT_STARTED**; final test is **NOT_RUN**. Engineering evidence is not evidence of accuracy gains.
 
-The current checkpoint repair and its limits are documented in
-[resume_fix/README.md](resume_fix/README.md). Original reports below are historical;
-they do not certify the changed source. Server verification of the repair is PENDING.
+The current acceptance contract is **dcc_acceptance_v2**; see
+[acceptance_v2/README.md](acceptance_v2/README.md) for the evidence, A/B separation,
+negative tests and full-entry requirements. The earlier checkpoint repair remains
+documented in [resume_fix/README.md](resume_fix/README.md). All earlier reports,
+including their raw failures, remain historical and unchanged. The new commit
+requires one complete server `init-preflight`; its result is **PENDING**.
 
 ## Exact mathematical and graph contract
 

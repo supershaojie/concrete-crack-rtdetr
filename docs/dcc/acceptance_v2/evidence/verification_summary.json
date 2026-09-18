@@ -1,0 +1,20 @@
+{
+  "status": "UNRESOLVED",
+  "checks": "/root/autodl-tmp/projects/Crack_RTDETR-dcc-v1/outputs/dcc/cbr_lif_dcc_v1/resume_checks_20260918T170113Z_261617/resume_checks.json",
+  "checks_sha256": "93c884b180e76ea84792c8ab10bbdf0a11a9853450a5bbbea986f7466d159460",
+  "capacity": "/root/autodl-tmp/projects/Crack_RTDETR-dcc-v1/outputs/dcc/cbr_lif_dcc_v1/capacity_resume_fix_20260918T170113Z_261617/preflight.json",
+  "capacity_sha256": "068df47e0cb623ca854ed07028b20f7a9f17de16c8c25718ebe4de71e3574b11",
+  "saving_and_restoring_state": {
+    "cpu_fp32": "PASSED",
+    "cuda_fp32": "PASSED",
+    "cuda_native_amp": "PASSED"
+  },
+  "raw_next_update_allclose": {
+    "cpu_fp32": true,
+    "cuda_fp32": false,
+    "cuda_native_amp": false
+  },
+  "formal_start": "BLOCKED: targeted diagnostics do not replace the complete strict gate",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN"
+}
