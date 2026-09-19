@@ -1,0 +1,60 @@
+{
+  "status": "PASSED_SCOPE_AND_RETENTION_AUDIT",
+  "baseline": "343df78240277301a03fa520a532312008bf6850",
+  "final_code_sha256": "a064962a70e0c71d5f7f8b6cce2116db597a0848f9b8d3ee3ef4765b8e54f23b",
+  "targeted_probe_code_sha256": "7730c4e55dfe19d57056a3f455e6ebe433709439066202cdece7aadd781e8618",
+  "only_later_code_change": "blc_server.py: resource-error metadata and retained-byte printing; checked backend/lifecycle functions unchanged",
+  "production_model_recipe_threshold_and_json_identity_unchanged": true,
+  "controlled_init_sha256": {
+    "cbr_lif_blc_v1": "b9f1b0d33492d5e1a3fa312b6612eff5019bdf5f513f5a0ad774fdc0b56ced05",
+    "blc_v1": "b41daaab1ebcf169e47d8d25b59d90feba606dea1606222948cd6a8a89be8702"
+  },
+  "source_contract": {
+    "lif_down": {
+      "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+      "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+    },
+    "cbr": {
+      "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+      "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+    }
+  },
+  "checks": {
+    "targeted_cuda_runs": 1,
+    "targeted_cuda_forwards": 15,
+    "fault_fixture_runs": 2,
+    "light_init_variants": 2,
+    "training_batches": 0,
+    "real_validation_batches": 0
+  },
+  "runtime_retained_bytes": 250574,
+  "retained_runtime_files": [
+    {
+      "path": "outputs/blc_v1/backend-check-20260919T185853061497Z/report.json",
+      "bytes": 12199
+    },
+    {
+      "path": "outputs/blc_v1/light-faults-20260919T190031319563Z/report.json",
+      "bytes": 3831
+    },
+    {
+      "path": "outputs/blc_v1/light-faults-20260919T190515677987Z/report.json",
+      "bytes": 4814
+    },
+    {
+      "path": "outputs/blc_v1/cbr_lif_blc_v1/init-preflight-20260919T190252555973Z/report.json",
+      "bytes": 111769
+    },
+    {
+      "path": "outputs/blc_v1/blc_v1/init-preflight-20260919T190321859325Z/report.json",
+      "bytes": 111705
+    },
+    {
+      "path": "outputs/blc_v1/light-init-audit-20260920.log",
+      "bytes": 6256
+    }
+  ],
+  "retained_probe_checkpoints": 0,
+  "server_new_sha_preflight": "PENDING",
+  "natural_fusion_amp_half": "PENDING"
+}

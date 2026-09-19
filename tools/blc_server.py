@@ -17,6 +17,7 @@ import traceback
 
 import torch
 from blc_common import *
+from blc_probe_io import temporary_probe, retained_size, compact_audit
 
 
 def environment(strict=False):
@@ -52,7 +53,6 @@ def init_one(variant):
 
 
 def init_preflight(variant):
-    from check_blc import topology_checks, math_checks
     from blc_preflight import api_reconstruction
     p = paths(variant)
     folder = p["evidence"]/("init-preflight-"+stamp())
@@ -60,21 +60,28 @@ def init_preflight(variant):
     report = dict(status="FAILED", phase="init-preflight", variant=variant)
     try:
         report["context"] = evidence_context(variant)
-        with tempfile.TemporaryDirectory(prefix="controlled-reference-", dir=folder) as tmp:
-            temp = Path(tmp)/"reference.pt"
-            report["current_source_audit"] = initialize(p["source"], temp, variant)
+        with temporary_probe(folder, "controlled-reference-audit", report) as tmp:
+            temp = tmp/"reference.pt"
+            report["current_source_audit"] = compact_audit(initialize(p["source"], temp, variant))
             expected = torch_load(temp, map_location="cpu")["model"].state_dict()
-            actual = torch_load(p["init"], map_location="cpu")["model"].state_dict()
+            saved = torch_load(p["init"], map_location="cpu")
+            require(saved.get("epoch") == -1 and saved.get("optimizer") is None and saved.get("ema") is None,
+                    "Existing file is not untrained controlled_init")
+            actual = saved["model"].state_dict()
             require(set(actual) == set(expected) and all(torch.equal(v, actual[k]) for k, v in expected.items()),
                     "Existing controlled_init differs from current source/initialization logic")
-        report["math"] = math_checks()
-        report["structure"] = topology_checks(variant, p["init"])
-        report["actual_train_api"] = api_reconstruction(variant, folder)
+            verify_model(saved["model"], variant, zero=True)
+            report["structure"] = dict(status="PASSED", exact_saved_state=True, tensors=len(actual),
+                                        topology_parameters_and_zero_initialization=True)
+            report["actual_train_api"] = compact_audit(api_reconstruction(variant, tmp))
+        report["math"] = dict(status="NOT_RUN", reason="Light source/state/structure/Trainer audit; standalone model math checks are separate")
+        require(sha256(p["init"]) == report["context"]["init_sha256"], "Init audit changed controlled_init")
         report["status"] = "PASSED"
     except BaseException as error:
         report.update(error=repr(error), traceback=traceback.format_exc())
         raise
     finally:
+        report["retained_bytes_before_report"] = retained_size(folder)
         write_json(folder/"report.json", report)
         print(folder/"report.json", report["status"], flush=True)
     return report
@@ -103,19 +110,23 @@ def require_evidence(variant, phase):
 def preflight(variant):
     from blc_preflight import capacity
     environment(strict=True)
-    require_evidence(variant, "init-preflight")
     # Both configurations must have current source/structure/Trainer evidence.
     for other in VARIANTS:
         require_evidence(other, "init-preflight")
     p = paths(variant)
     folder = p["evidence"]/("preflight-"+stamp())
     folder.mkdir(parents=True, exist_ok=False)
-    report = dict(status="FAILED", phase="preflight", variant=variant)
+    report = dict(status="FAILED", phase="preflight", variant=variant, stage="native_amp_resources",
+                  capacity=dict(status="NOT_RUN"), lifecycle=dict(status="NOT_RUN"),
+                  native_half_ema_epoch_val=dict(status="NOT_RUN"), native_resume=dict(status="NOT_RUN"))
+    created_resources = []
+    retained_before = retained_size(p["evidence"])
     try:
         report["context"] = evidence_context(variant)
         from ultralytics.utils import ASSETS
         import shutil
         resources = []
+        report["native_amp_resources"] = resources
         for dest, candidates in (
             (ROOT/"yolo26n.pt", [MAIN/"yolo26n.pt", MAIN/"weights/yolo26n.pt"]),
             (ASSETS/"bus.jpg", [MAIN/"ultralytics-main/ultralytics/assets/bus.jpg", MAIN/"bus.jpg"]),
@@ -125,9 +136,10 @@ def preflight(variant):
                 require(source is not None, "Native AMP check resource missing (no automatic download): "+str(dest))
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 with source.open("rb") as src, dest.open("xb") as dst:
+                    created_resources.append(dest)
                     shutil.copyfileobj(src, dst)
-            resources.append(dict(path=str(dest), sha256=sha256(dest)))
-        report["native_amp_resources"] = resources
+            resources.append(dict(path=str(dest), sha256=sha256(dest), bytes=dest.stat().st_size,
+                                  temporary=dest in created_resources, purpose="unchanged native AMP check"))
         capacity(variant, folder, report)
         report["status"] = "PASSED" if all(report[key]["status"] == "PASSED" for key in
             ("capacity", "lifecycle", "native_half_ema_epoch_val", "native_resume")) else "PENDING"
@@ -135,8 +147,24 @@ def preflight(variant):
         report.update(error=repr(error), traceback=traceback.format_exc())
         raise
     finally:
+        cleanup_errors = []
+        for dest in created_resources:
+            try:
+                if not any(row["path"] == str(dest) for row in report.get("native_amp_resources", [])) and dest.is_file():
+                    report.setdefault("native_amp_resources", []).append(dict(path=str(dest), sha256=sha256(dest),
+                        bytes=dest.stat().st_size, temporary=True, purpose="partial native AMP resource copy"))
+                dest.unlink()
+            except OSError as error:
+                cleanup_errors.append(dict(path=str(dest), error=repr(error)))
+        if cleanup_errors:
+            report.update(status="FAILED", resource_cleanup_errors=cleanup_errors)
+        for resource in report.get("native_amp_resources", []):
+            resource["cleaned"] = resource["temporary"] and not Path(resource["path"]).exists()
+        report["new_retained_bytes_before_report"] = retained_size(p["evidence"]) - retained_before
+        report["retention_target_bytes"] = 10 * 1024 * 1024
         write_json(folder/"report.json", report)
         print(folder/"report.json", report["status"], flush=True)
+        print("New retained bytes (including report; log may still grow):", retained_size(p["evidence"]) - retained_before, flush=True)
     if report["status"] != "PASSED":
         raise SystemExit("PENDING: capacity finished but lifecycle precision evidence requires review; start remains blocked")
 

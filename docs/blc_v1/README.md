@@ -40,6 +40,8 @@ FP32/FP64 保持；functional 参数转换可微，不替换 Parameter。Wd Xavi
 
 ## 验证边界
 
+当前默认采用[轻量预检约定与 AutoBackend 修复](light_preflight_fix/README.md)：初始化入口只做当前源、保存初值逐张量、结构和实际 Trainer 重建审计，零训练 batch；数学长矩阵不重复执行。主预检只保存一次原生 checkpoint，供生命周期和真实 resume 共用，移除重复模拟恢复/外部梯度回放。开始与续训合计最多 16 个训练 batch，原生 half EMA 验证限一个真实 batch。报告保留失败模式、原始差异和未执行项；检查点及本次借用的 AMP 资源在依赖结束后清理，默认仅留小型 JSON/日志，新增留存目标不超过 10 MiB。历史报告与正式初值保留，PENDING 仍不放行。
+
 详见 `VALIDATION.md` 和 `local_reports/` 原始记录。服务器 Python3.10 / PyTorch2.1.2+cu121 / RTX4090 的
 B16/640 native AMP 容量与真实恢复续更仍为 PENDING。本机是 Python3.9.25 / torch2.7.1+cu118 / RTX2060 6GiB。
 CUDA AMP/half 的融合自然输出存在未放行的数值差异，保持 PENDING，不以有限性或固定候选重放替代自然输出验收。
