@@ -1,0 +1,30 @@
+{
+  "report_log_bytes": 235557,
+  "files": {
+    "check.log": 1635,
+    "data_verified.json": 1038,
+    "init.log": 1213,
+    "initialization.json": 843,
+    "init_reuse.json": 881,
+    "local.json": 39874,
+    "local_fusion_guard_failed.json": 38053,
+    "ops.json": 33426,
+    "ops.log": 35091,
+    "plan.log": 3829,
+    "preflight.json": 38963,
+    "preflight.log": 1748,
+    "preflight_before_cli_hardening.json": 38963
+  },
+  "measurement_scope": "RDM outputs reports/logs at delivery; excludes necessary formal init and later explicit light packs",
+  "required_main_init_bytes": 81432603,
+  "required_main_init_sha256": "5dac7ce5dae8ad6f94890c9d5f70efa9e37d4fac855dae0d2fe5d25bc070a443",
+  "single_module_init_persisted": false,
+  "temporary_checkpoints_retained": 0,
+  "temporary_directories_retained": 0,
+  "temporary_files_cleaned": true,
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN",
+  "server_login": false,
+  "start_guard_refusal": "Start refused: server.status=PENDING; start=NOT_RUN; save_reload=NOT_RUN; resume=NOT_RUN; half_ema_val=NOT_RUN; backend_fp32=NOT_RUN; backend_half=NOT_RUN; training batch budget/evidence invalid; effective optimizer updates insufficient; native half EMA validation must contain exactly one batch; startup exceeded eight batches",
+  "content_sha256": "74e62debaea54dd0f8baa8f56ab0d9e935093db5ad4917c7fa269b617fc1c8f4"
+}

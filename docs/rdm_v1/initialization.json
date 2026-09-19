@@ -1,0 +1,27 @@
+{
+  "status": "PASSED",
+  "variant": "cbr_lif_rdm_v1",
+  "reused": true,
+  "output": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-rdm-v1\\weights\\cbr_lif_rdm_v1_controlled_init.pt",
+  "output_sha256": "5dac7ce5dae8ad6f94890c9d5f70efa9e37d4fac855dae0d2fe5d25bc070a443",
+  "COMMON": 552,
+  "NEW": [
+    "model.5.rdm.Dc.weight",
+    "model.5.rdm.Dl.weight",
+    "model.5.rdm.Pc.weight",
+    "model.5.rdm.Wd.weight",
+    "model.5.rdm.Wg.bias",
+    "model.5.rdm.Wg.weight",
+    "model.5.rdm.Wo.weight"
+  ],
+  "MISSING": [],
+  "UNEXPECTED": [],
+  "SHAPE_MISMATCH": [],
+  "common_parameters_and_buffers_exact": true,
+  "public_constructor_equal": true,
+  "new_buffers": [],
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "source_nc": 80,
+  "source_epoch": -1,
+  "mtime_and_sha256_unchanged": true
+}

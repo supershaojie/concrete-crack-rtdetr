@@ -1,0 +1,26 @@
+{
+  "base": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "actual_args": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\training\\args.yaml",
+  "actual_args_lf_sha256": "31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b",
+  "recipe_fields": 109,
+  "attachment_matches_actual": true,
+  "dataset_matches_actual_mother": true,
+  "reference_zip": {
+    "status": "NOT_FOUND",
+    "name": "c0a84cd5-02a6-4827-be29-317c8cc5990b.zip",
+    "expected_bytes": 21038947,
+    "expected_sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+    "searched": [
+      "D:/rtdetr跑结果 (depth 3)",
+      "D:/Downloads (depth 3)",
+      "C:/Users/o'v'o/Downloads (depth 3)",
+      "D:/MyProjects/Crack_RTDETR/outputs (depth 3)",
+      "D:/MyProjects/Crack_RTDETR (depth 2)"
+    ]
+  },
+  "sources": [
+    "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/06713.pdf",
+    "https://github.com/Zheng-MJ/SMFANet",
+    "https://raw.githubusercontent.com/Zheng-MJ/SMFANet/main/basicsr/archs/SMFANet_arch.py"
+  ]
+}

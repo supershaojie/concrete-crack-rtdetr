@@ -63,6 +63,7 @@ from .block import (
     SCDown,
     TorchVision,
 )
+from .rdm import RDM, RDMBlocks
 from .conv import (
     CBAM,
     ChannelAttention,
@@ -113,6 +114,8 @@ from .lif_down import LIFDown
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
 
 __all__ = (
+    "RDM",
+    "RDMBlocks",
     "LIFDown",
     "CrackBoundaryRefinement",
     "RTDETRDecoderCBR",
