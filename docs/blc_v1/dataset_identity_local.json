@@ -1,0 +1,33 @@
+{
+  "inventory": {
+    "train": {
+      "images": 6048,
+      "boxes": 45573,
+      "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+      "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"
+    },
+    "val": {
+      "images": 1728,
+      "boxes": 12840,
+      "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+      "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+    },
+    "test": {
+      "images": 864,
+      "boxes": 6663,
+      "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+      "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"
+    }
+  },
+  "data_yaml": {
+    "path": "D:/MyProjects/Crack_RTDETR/datasets/crack_det",
+    "train": "images/train",
+    "val": "images/val",
+    "test": "images/test",
+    "names": {
+      "0": "crack"
+    }
+  },
+  "resolved_root": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det",
+  "data_sha256": "5738ceac3926404a2e4d10a448f6f3d92d654e9d533a4ba614c8d16f126fa9bb"
+}

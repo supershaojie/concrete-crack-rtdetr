@@ -1,0 +1,9 @@
+{
+  "status": "PASSED",
+  "thop_version": "2.0.18",
+  "thop_path": "D:\\miniconda3\\envs\\rtdetr\\lib\\site-packages\\thop\\__init__.py",
+  "default_hook_MACs": 0.0,
+  "explicit_projection_MACs": 54732800.0,
+  "projection_GFLOPs": 0.1094656,
+  "scope": "Three functional conv2d projections only; excludes fixed line/contrast/softmax/fusion/cast ops. No full network GFLOPs claim."
+}

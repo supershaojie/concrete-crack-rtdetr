@@ -1,0 +1,8 @@
+{
+  "args_path": "D:\\rtdetr\u8dd1\u7ed3\u679c\\C19\uff0bLIF\uff1a\u539f CBR\uff0bLIF-Down v1\\training\\args.yaml",
+  "args_sha256": "31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b",
+  "args_fields": 109,
+  "snapshot_exact": true,
+  "dataset_inventory_path": "D:\\rtdetr\u8dd1\u7ed3\u679c\\C19\uff0bLIF\uff1a\u539f CBR\uff0bLIF-Down v1\\metadata\\launch\\dataset_inventory.json",
+  "dataset_inventory_sha256": "8567e1b4d1aae5f168fb18b633ed4357c7f0aba56c0041a6570647fb542d0446"
+}

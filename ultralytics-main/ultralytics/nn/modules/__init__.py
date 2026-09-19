@@ -17,6 +17,7 @@ Examples:
     >>> subprocess.run(f"onnxslim {f} {f} && open {f}", shell=True, check=True)  # pip install onnxslim
 """
 
+from .blc import BLC, BLCBlocks
 from .block import (
     C1,
     C2,
@@ -113,6 +114,8 @@ from .lif_down import LIFDown
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
 
 __all__ = (
+    "BLC",
+    "BLCBlocks",
     "LIFDown",
     "CrackBoundaryRefinement",
     "RTDETRDecoderCBR",

@@ -1,0 +1,36 @@
+{
+  "cbr_lif_blc_v1": [
+    {
+      "field": "model",
+      "parent": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/weights/c19_lif_v1_controlled_init.pt",
+      "candidate": "/root/autodl-tmp/projects/Crack_RTDETR-blc-v1/weights/cbr_lif_blc_v1_controlled_init.pt"
+    },
+    {
+      "field": "name",
+      "parent": "c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "candidate": "cbr_lif_blc_v1_rtdetr_r18_lite_e200_b16_onlineaug"
+    },
+    {
+      "field": "save_dir",
+      "parent": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "candidate": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/cbr_lif_blc_v1_rtdetr_r18_lite_e200_b16_onlineaug"
+    }
+  ],
+  "blc_v1": [
+    {
+      "field": "model",
+      "parent": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/weights/c19_lif_v1_controlled_init.pt",
+      "candidate": "/root/autodl-tmp/projects/Crack_RTDETR-blc-v1/weights/blc_v1_controlled_init.pt"
+    },
+    {
+      "field": "name",
+      "parent": "c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "candidate": "blc_v1_rtdetr_r18_lite_e200_b16_onlineaug"
+    },
+    {
+      "field": "save_dir",
+      "parent": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "candidate": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/blc_v1_rtdetr_r18_lite_e200_b16_onlineaug"
+    }
+  ]
+}

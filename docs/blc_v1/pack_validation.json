@@ -1,0 +1,14 @@
+{
+  "status": "PASSED",
+  "bytes": 1776179,
+  "sha256": "61639077163fc3b1436501db06e22d75239c1465c3f396c5431438a687952804",
+  "scope": "precommit light-pack creation + exact byte readback; after-commit handoff package has its own hash",
+  "missing": [
+    "formal args.yaml",
+    "formal results.csv"
+  ],
+  "evaluation": {
+    "val": "NOT_RUN",
+    "test": "NOT_RUN"
+  }
+}

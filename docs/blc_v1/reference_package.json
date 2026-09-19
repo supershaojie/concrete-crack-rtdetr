@@ -1,0 +1,20 @@
+{
+  "status": "PENDING",
+  "description": "本机参考包未核对",
+  "expected_filename": "c0a84cd5-02a6-4827-be29-317c8cc5990b.zip",
+  "expected_size": 21038947,
+  "expected_sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+  "bounded_search": [
+    "D:/rtdetr跑结果/BLC",
+    "D:/Downloads (depth 2)",
+    "D:/BaiduNetdiskDownload (depth 2)",
+    "D:/rtdetr项目 (depth 2)",
+    "D:/rtdetr跑结果 (ZIP size, depth 2)",
+    "D:/MyProjects/Crack_RTDETR (exact filename)"
+  ],
+  "unavailable": [
+    "C:/Users/o'v'o/Downloads: access unavailable",
+    "/workspace/scratch/00484fe92169/upload: not this Windows host"
+  ],
+  "copied_reference_code": false
+}
