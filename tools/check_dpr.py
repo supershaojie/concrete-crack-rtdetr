@@ -23,7 +23,7 @@ sys.path.insert(0, str(ROOT / "ultralytics-main"))
 import torch
 import torch.nn.functional as F
 from ultralytics.nn.modules import ConvNormLayer, DPRConvNormLayer
-from ultralytics.nn.modules.dpr import count_dpr_conv_norm
+from ultralytics.nn.modules.dpr import count_dpr_conv_norm, profile_dpr, thop_dpr_semantics
 from ultralytics.nn.tasks import RTDETRDetectionModel
 from ultralytics.nn.autobackend import AutoBackend
 from ultralytics.utils import YAML
@@ -367,6 +367,79 @@ def audit_cuda_half(model, image):
         "fold_order":"independent eval FP32 copy -> DPR fold preserving norm -> parent-native fusion -> half"}
 
 
+def _profile_snapshot(model):
+    """Capture tensor state and module bookkeeping without changing the model."""
+    hook_names = ("_forward_hooks", "_forward_hooks_with_kwargs", "_forward_hooks_always_called",
+                  "_forward_pre_hooks", "_forward_pre_hooks_with_kwargs", "_backward_hooks", "_backward_pre_hooks")
+    return {
+        "state": {key: value.detach().clone() for key, value in model.state_dict().items()},
+        "parameters": {key: id(value) for key, value in model.named_parameters()},
+        "modules": {
+            name: {"identity": id(module), "training": module.training,
+                   "buffers": {key: (id(value), None if value is None else value.detach().clone())
+                               for key, value in module._buffers.items()},
+                   "non_persistent_buffers": set(module._non_persistent_buffers_set),
+                   "hooks": {key: dict(getattr(module, key, {})) for key in hook_names}}
+            for name, module in model.named_modules()
+        },
+    }
+
+
+def _assert_profile_unchanged(model, before, label):
+    state = model.state_dict()
+    assert set(state) == set(before["state"]), f"{label}: state_dict keys changed"
+    for key, value in before["state"].items():
+        assert torch.equal(value, state[key]), f"{label}: state_dict tensor changed: {key}"
+    assert {key: id(value) for key, value in model.named_parameters()} == before["parameters"], (
+        f"{label}: parameter objects changed")
+    modules = dict(model.named_modules())
+    assert set(modules) == set(before["modules"]), f"{label}: module tree changed"
+    for name, original in before["modules"].items():
+        module = modules[name]
+        assert id(module) == original["identity"] and module.training == original["training"], (
+            f"{label}: module identity/training changed: {name}")
+        assert set(module._buffers) == set(original["buffers"]), f"{label}: buffers leaked/removed: {name}"
+        assert module._non_persistent_buffers_set == original["non_persistent_buffers"], (
+            f"{label}: buffer persistence changed: {name}")
+        for key, (identity, value) in original["buffers"].items():
+            current = module._buffers[key]
+            assert id(current) == identity, f"{label}: buffer object changed: {name}.{key}"
+            assert (current is None if value is None else torch.equal(current, value)), (
+                f"{label}: buffer value changed: {name}.{key}")
+        for key, hooks in original["hooks"].items():
+            assert dict(getattr(module, key, {})) == hooks, f"{label}: hooks leaked/removed: {name}.{key}"
+
+
+def _profile_repeated(model, image, custom_ops, label):
+    """Run the real THOP twice on one isolated copy and check both objects."""
+    original = _profile_snapshot(model)
+    isolated = deepcopy(model)
+    # Exercise restoration of a pre-existing hook and mixed child training flags.
+    # THOP evaluates every module during the measurement itself.
+    hook_calls = []
+    handle = isolated.register_forward_hook(lambda module, inputs, output: hook_calls.append(1))
+    leaf = next(module for module in isolated.modules() if not list(module.children()))
+    leaf.training = not isolated.training
+    before = _profile_snapshot(isolated)
+    input_before = image.detach().clone()
+    readings = []
+    try:
+        for index in range(2):
+            operations, parameters = profile_dpr(isolated, inputs=(image,), custom_ops=custom_ops, verbose=False)
+            readings.append({"gflops": float(operations) * 2 / 1e9, "thop_parameters": float(parameters)})
+            _assert_profile_unchanged(isolated, before, f"{label} isolated profile {index + 1}")
+            _assert_profile_unchanged(model, original, f"{label} original profile {index + 1}")
+            assert torch.equal(image, input_before), f"{label}: profiling changed the input"
+        assert readings[0] == readings[1], f"{label}: repeated profile counts changed: {readings}"
+        assert len(hook_calls) == 2, f"{label}: pre-existing hook did not survive both calls"
+    finally:
+        handle.remove()
+    return readings[0]["gflops"], {"status": "PASSED", "readings": readings,
+        "original_state_unchanged": True, "isolated_state_unchanged": True,
+        "module_training_flags_restored": True, "mixed_training_flags_exercised": True,
+        "existing_hook_preserved": True, "no_hook_or_buffer_residue": True, "input_unchanged": True}
+
+
 def structure(variant, imgsz):
     parent_yaml, target_yaml, expected_training, expected_intermediate, expected_deploy = VARIANTS[variant]
     p_cfg, d_cfg = YAML.load(CFG / parent_yaml), YAML.load(CFG / target_yaml)
@@ -409,18 +482,32 @@ def structure(variant, imgsz):
     parent_fused = deepcopy(parent).fuse(verbose=False)
     assert params(deployed) == params(parent_fused) == expected_deploy
     assert isinstance(deployed.get_submodule(TARGET).norm,torch.nn.BatchNorm2d)
-    import thop
-    def flops(m,custom):
-        return float(thop.profile(deepcopy(m), inputs=(image,), custom_ops=custom, verbose=False)[0])*2/1e9
-    parent_flops = flops(parent,{})
-    raw_dpr_flops = flops(candidate,{})
-    corrected_flops = flops(candidate,{DPRConvNormLayer:count_dpr_conv_norm})
-    deploy_flops = flops(deployed,{DPRConvNormLayer:count_dpr_conv_norm})
-    parent_fused_flops = flops(parent_fused,{})
+    thop_semantics = thop_dpr_semantics()
+    profile_checks = {}
+    def flops(model, custom_ops, label):
+        value, profile_checks[label] = _profile_repeated(model, image, custom_ops, label)
+        return value
+    parent_flops = flops(parent, {}, "parent_unfused")
+    raw_dpr_flops = flops(candidate, {}, "raw_candidate")
+    corrected_flops = flops(candidate, {DPRConvNormLayer: count_dpr_conv_norm}, "candidate_corrected")
+    deploy_flops = flops(deployed, {DPRConvNormLayer: count_dpr_conv_norm}, "standard_deploy")
+    parent_fused_flops = flops(parent_fused, {}, "parent_native_fused")
     missed_conv_flops = 2*128*128*3*3*(imgsz//8)**2/1e9
-    assert abs(parent_flops-corrected_flops) < 1e-9
-    assert abs(parent_flops-raw_dpr_flops-missed_conv_flops) < 1e-9
-    assert abs(parent_fused_flops-deploy_flops) < 1e-9
+    flops_diagnostic = {
+        "variant": variant, "thop": thop_semantics,
+        "parent_flops": parent_flops, "raw_dpr_flops": raw_dpr_flops,
+        "corrected_flops": corrected_flops, "deploy_flops": deploy_flops,
+        "parent_fused_flops": parent_fused_flops, "missed_conv_flops": missed_conv_flops,
+        "differences": {"parent_minus_corrected": parent_flops-corrected_flops,
+                        "parent_minus_raw_minus_missed": parent_flops-raw_dpr_flops-missed_conv_flops,
+                        "parent_fused_minus_deploy": parent_fused_flops-deploy_flops},
+        "absolute_tolerance": 1e-9,
+    }
+    diagnostic_text = "DPR FLOPs diagnostics: " + json.dumps(flops_diagnostic, sort_keys=True)
+    print(diagnostic_text, flush=True)
+    assert abs(parent_flops-corrected_flops) < 1e-9, diagnostic_text
+    assert abs(parent_flops-raw_dpr_flops-missed_conv_flops) < 1e-9, diagnostic_text
+    assert abs(parent_fused_flops-deploy_flops) < 1e-9, diagnostic_text
     del parent_fused,deployed,parent,ps,ds,pc,dc
     # Two bounded local synthetic MSE updates make all four groups nonzero. This
     # is a lifecycle fixture, explicitly not actual detector-loss preflight.
@@ -452,6 +539,7 @@ def structure(variant, imgsz):
             "gflops":{"parent_unfused":parent_flops,"raw_thop_candidate_incorrect":raw_dpr_flops,
                       "candidate_corrected":corrected_flops,"missing_functional_conv":missed_conv_flops,
                       "standard_deploy":deploy_flops,"parent_native_fused":parent_fused_flops,
+                      "diagnostics":flops_diagnostic,"repeated_profile":profile_checks,
                       "convention":"THOP MAC*2, conv/BN same as parent; kernel construction separately documented",
                       "kernel_construction":{"difference_parameters":3072,"dense_diagonal_elements":128*128*9,
                                              "dense_kernel_additions":128*128*9,"note":"CD reduction, four maps, three delta sums, diag allocation and dense add each forward; not included in THOP convolution GFLOPs"}},

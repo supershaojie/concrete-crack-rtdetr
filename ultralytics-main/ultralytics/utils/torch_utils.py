@@ -414,7 +414,7 @@ def get_flops(model, imgsz=640):
 
     try:
         model = unwrap_model(model)
-        from ultralytics.nn.modules.dpr import DPRConvNormLayer, count_dpr_conv_norm
+        from ultralytics.nn.modules.dpr import DPRConvNormLayer, count_dpr_conv_norm, profile_dpr
 
         custom_ops = {DPRConvNormLayer: count_dpr_conv_norm}
         p = next(model.parameters())
@@ -424,12 +424,12 @@ def get_flops(model, imgsz=640):
             # Method 1: Use stride-based input tensor
             stride = max(int(model.stride.max()), 32) if hasattr(model, "stride") else 32  # max stride
             im = torch.empty((1, p.shape[1], stride, stride), device=p.device)  # input image in BCHW format
-            flops = thop.profile(deepcopy(model), inputs=[im], custom_ops=custom_ops, verbose=False)[0] / 1e9 * 2
+            flops = profile_dpr(deepcopy(model), inputs=[im], custom_ops=custom_ops, verbose=False)[0] / 1e9 * 2
             return flops * imgsz[0] / stride * imgsz[1] / stride  # imgsz GFLOPs
         except Exception:
             # Method 2: Use actual image size (required for RTDETR models)
             im = torch.empty((1, p.shape[1], *imgsz), device=p.device)  # input image in BCHW format
-            return thop.profile(deepcopy(model), inputs=[im], custom_ops=custom_ops, verbose=False)[0] / 1e9 * 2
+            return profile_dpr(deepcopy(model), inputs=[im], custom_ops=custom_ops, verbose=False)[0] / 1e9 * 2
     except Exception:
         return 0.0
 

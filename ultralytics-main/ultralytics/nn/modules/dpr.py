@@ -6,6 +6,8 @@ This changes optimization parameterization, not the deployed convolution family.
 CD/HD/VD/AD have redundant directions (including CD/AD center nullspaces).
 """
 
+from functools import lru_cache
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -99,16 +101,100 @@ class BlocksDPR(Blocks):
         self.blocks[1].branch2b = DPRConvNormLayer(self.blocks[1].branch2b)
 
 
-def count_dpr_conv_norm(module, inputs, output):
-    """THOP hook: count the functional dense convolution plus original norm/act.
+@lru_cache(maxsize=None)
+def _probe_thop_semantics(profile):
+    """Measure custom-parent aggregation, without version guesses or model/RNG state."""
+    class Leaf(nn.Module):
+        def forward(self, x):
+            return x
 
-    THOP otherwise misses F.conv2d and reports an incorrect reduction in GFLOPs.
-    Kernel-construction arithmetic/allocation is reported separately by check_dpr.
+    class Parent(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.child = Leaf()
+
+        def forward(self, x):
+            return self.child(x)
+
+    def parent_hook(module, inputs, output):
+        module.total_ops += 7
+
+    def child_hook(module, inputs, output):
+        module.total_ops += 11
+
+    # The custom module must be nested: legacy THOP treats a root differently.
+    operations = float(profile(nn.Sequential(Parent()), inputs=(torch.zeros(1),),
+                               custom_ops={Parent: parent_hook, Leaf: child_hook}, verbose=False)[0])
+    if operations not in (7.0, 18.0):
+        raise RuntimeError(f"Unsupported THOP custom-parent aggregation: probe={operations}, expected 7 or 18")
+    return operations
+
+
+def thop_dpr_semantics():
+    """Return the installed profiler's measured nested-module counting convention."""
+    import thop
+
+    operations = _probe_thop_semantics(thop.profile)
+    return {"version": getattr(thop, "__version__", "unknown"),
+            "mode": "accumulate_children" if operations == 18 else "replace_subtree",
+            "nested_probe_ops": operations, "parent_probe_ops": 7, "child_probe_ops": 11}
+
+
+def count_dpr_conv_norm(module, inputs, output):
+    """Count only missing operations under the installed THOP aggregation rules.
+
+    New THOP accumulates executed children: only an unfolded functional conv is
+    missing. Legacy THOP replaces the entire custom parent's subtree, so its
+    hook must also include the executed conv (when deployed), norm and act.
+    Kernel-construction arithmetic/allocation remains separately reported.
     """
-    conv = module.conv
-    macs = output.numel() * (conv.in_channels // conv.groups) * conv.kernel_size[0] * conv.kernel_size[1]
-    if conv.bias is not None:
-        macs += output.numel()
-    norm_ops = getattr(module.norm, "total_ops", 0)
-    act_ops = getattr(module.act, "total_ops", 0)
-    module.total_ops += macs + norm_ops + act_ops
+    accumulates_children = thop_dpr_semantics()["mode"] == "accumulate_children"
+    if module.deployed:
+        if accumulates_children:
+            return  # conv/norm/act children already account for everything.
+        macs = getattr(module.conv, "total_ops", 0)
+    else:
+        conv = module.conv
+        macs = output.numel() * (conv.in_channels // conv.groups) * conv.kernel_size[0] * conv.kernel_size[1]
+        if conv.bias is not None:
+            macs += output.numel()
+    if not accumulates_children:
+        macs = macs + getattr(module.norm, "total_ops", 0) + getattr(module.act, "total_ops", 0)
+    module.total_ops += macs
+
+
+def profile_dpr(model, inputs, custom_ops=None, **kwargs):
+    """Profile an isolated model copy, restoring THOP counters/hooks even on failure.
+
+    Callers own the copy. Legacy THOP leaves counters on unsupported containers
+    and restores only a single global training flag. Preserve pre-existing
+    counters/hooks and every module's mode instead of leaking profiling state.
+    """
+    import thop
+
+    # Legacy THOP always descends into its root even when that root has a
+    # custom hook. Match the detector's nested DPR layout for standalone probes.
+    if isinstance(model, DPRConvNormLayer) and thop_dpr_semantics()["mode"] == "replace_subtree":
+        model = nn.Sequential(model)
+    hook_attributes = ("_forward_hooks", "_forward_hooks_with_kwargs", "_forward_hooks_always_called")
+    snapshots = []
+    for module in model.modules():
+        counters = {key: module._buffers[key] for key in ("total_ops", "total_params") if key in module._buffers}
+        hooks = {key: set(getattr(module, key, {})) for key in hook_attributes}
+        snapshots.append((module, module.training, counters, set(module._non_persistent_buffers_set), hooks))
+    try:
+        return thop.profile(model, inputs=inputs,
+                            custom_ops={DPRConvNormLayer: count_dpr_conv_norm} if custom_ops is None else custom_ops,
+                            **kwargs)
+    finally:
+        for module, training, counters, non_persistent, hooks in snapshots:
+            for key in ("total_ops", "total_params"):
+                module._buffers.pop(key, None)
+            module._buffers.update(counters)
+            module._non_persistent_buffers_set.clear()
+            module._non_persistent_buffers_set.update(non_persistent)
+            for key, original_ids in hooks.items():
+                collection = getattr(module, key, {})
+                for hook_id in set(collection) - original_ids:
+                    collection.pop(hook_id)
+            module.training = training
