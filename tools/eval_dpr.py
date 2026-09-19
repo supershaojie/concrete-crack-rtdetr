@@ -23,6 +23,7 @@ from ultralytics.utils import YAML
 from ultralytics.data.utils import check_det_dataset
 
 POLICY = "corrected_sorted_conf_mask_v1"
+from dpr_acceptance import CONTRACT, scope as capability_scope, policy as acceptance_policy
 EVAL = dict(imgsz=640, batch=16, workers=0, half=False, conf=.001, iou=.7, max_det=300, augment=False, rect=False, seed=42)
 
 
@@ -65,6 +66,7 @@ def evaluate(weights, data, split, output, device="0", val_report=None, evidence
     require(weights.is_file() and data.is_file(), "Missing checkpoint/data config")
     inventory = dataset_identity(data)
     require(evidence_scope == "full_split", "Formal independent full-split entry only")
+    require(EVAL["half"] is False and capability_scope()["independent_evaluation"] == "FP32_ONLY", "R1 independent evaluation scope")
     require(not output.exists(), f"Preserve previous evaluation: {output}; use a new timestamp directory")
     settings = dict(EVAL, data=str(data), split=split, device=device, plots=True, save_json=False, save_txt=False,
                     project=str(output), name="plots", exist_ok=False)
@@ -84,7 +86,7 @@ def evaluate(weights, data, split, output, device="0", val_report=None, evidence
     require(resolved["nc"] == 1, "Expected crack nc=1")
     output.mkdir(parents=True, exist_ok=False)
     seen, counts = set(), dict(images=0, predictions=0, metric_predictions=0, ground_truth=0, historical_mask_affected_images=0)
-    report = dict(status="failed", variant=variant, dataset_inventory=inventory, evidence_scope=evidence_scope, runtime=info, split=split, settings=settings, checkpoint=str(weights),
+    report = dict(status="failed", contract=CONTRACT, acceptance_policy=acceptance_policy(), capability_scope=capability_scope(), variant=variant, dataset_inventory=inventory, evidence_scope=evidence_scope, runtime=info, split=split, settings=settings, checkpoint=str(weights),
                   checkpoint_sha256=digest, data_sha256=data_digest, data_config=YAML.load(data), policy=POLICY,
                   boxes="original final Decoder layer; no extra NMS", precision_recall_policy="each model own maximum-F1 working point", selection="Training val selects best; freeze checkpoint/config before independent test",
                   full_server_preflight="bounded_required")

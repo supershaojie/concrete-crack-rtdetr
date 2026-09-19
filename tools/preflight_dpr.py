@@ -64,17 +64,18 @@ def metric(left, right):
         return dict(equal=False, raw_allclose=False, finite=False, reason="shape/dtype mismatch")
     equal = bool(torch.equal(left, right))
     if not left.is_floating_point():
-        return dict(equal=equal, raw_allclose=equal, finite=True, max_abs=0 if equal else float((left-right).abs().max()))
+        return dict(equal=equal, raw_allclose=equal, finite=True, floating=False, max_abs=0 if equal else float((left-right).abs().max()))
     a, b = left.detach().cpu().double(), right.detach().cpu().double()
     finite = bool(torch.isfinite(a).all() and torch.isfinite(b).all())
     if not finite:
         return dict(equal=equal, raw_allclose=False, finite=False, max_abs=None, relative_L2=None, exceeded_fraction=None)
     delta = (a - b).abs()
     exceeded = delta > ATOL + RTOL * b.abs()
-    return dict(equal=equal, raw_allclose=not bool(exceeded.any()), finite=True,
+    return dict(equal=equal, raw_allclose=not bool(exceeded.any()), finite=True, floating=True, atol=ATOL, rtol=RTOL,
                 max_abs=float(delta.max()) if delta.numel() else 0.,
                 relative_L2=float(torch.linalg.vector_norm(a-b) / torch.linalg.vector_norm(b).clamp_min(1e-12)),
-                exceeded_fraction=float(exceeded.double().mean()) if delta.numel() else 0.)
+                exceeded_fraction=float(exceeded.double().mean()) if delta.numel() else 0.,
+                exceeded_coordinates=exceeded.nonzero().tolist() if bool(exceeded.any()) else [])
 
 
 def compare(left, right, exact=False):
@@ -465,6 +466,9 @@ def classify_b(parent, candidate, a_status, device):
 
 
 def lifecycle(args, report):
+    from supplement_dpr import collect_mode
+    from dpr_r1_evidence import half_paths
+    from dpr_acceptance import validate_half
     parent80, _, _ = controlled_models(args.source, args.variant)
     initialized = RTDETR(str(args.initialized)).model
     seed42()
@@ -487,29 +491,13 @@ def lifecycle(args, report):
         print("BEGIN lifecycle " + label, flush=True)
         batch = {key: value.to(device) for key, value in batch_cpu.items()}
         try:
-            seed42()
-            p = make_trainer(deepcopy(parent), device, amp, args.variant)
-            # Parent has no DPR parameters; only genuine optimizer updates are required.
-            parent_steps = []
-            for _ in range(16):
-                row, _, _ = one_step(p, batch, amp)
-                parent_steps.append(row)
-                if sum(r["effective_update"] for r in parent_steps) >= 2:
-                    break
-            require(sum(r["effective_update"] for r in parent_steps) >= 2, "Parent has insufficient effective updates")
-            parent_b = live_pair(p, batch, amp, device)
-            del p
-            seed42()
-            c = make_trainer(deepcopy(candidate), device, amp, args.variant)
-            entry["updates"] = bounded_updates(c, batch, amp)
-            entry["gradients"] = entry["updates"]["gradients"]
-            candidate_b = live_pair(c, batch, amp, device)
-            entry["B"] = classify_b(parent_b, candidate_b, "PENDING", device)
-            entry["A"] = dict(status="FAILED", stage="not_started")
-            with tempfile.TemporaryDirectory(prefix="dpr_lifecycle_", dir=ROOT / "outputs/dpr") as temporary:
-                entry["A"] = checkpoint_a(c, batch, amp, args.variant, device, temporary, entry["A"])
-            entry["B"] = classify_b(parent_b, candidate_b, entry["A"]["status"], device)
-            entry["status"] = entry["B"]["status"]
+            c = collect_mode(args, parent, candidate, batch_cpu, label, args.output / label,
+                             report["code_identity"], str(args.output), entry)
+            if amp:
+                half_output = args.output / "true_ema_half"
+                half_output.mkdir()
+                report["half_R1"] = half_paths(c, batch_cpu, half_output)
+                report["half_assessment"] = validate_half(report["half_R1"])
             if not amp:
                 from check_dpr import audit_learned_model
                 move(c, device)
@@ -736,17 +724,22 @@ def capacity_subprocess(args):
 
 
 def run(args):
+    from dpr_acceptance import FULL_SCHEMA, policy, scope
+    from supplement_dpr import verify as verify_supplement
     revoke_permit(args.variant)
     args.output = (args.output or paths(args.variant)["meta"] / ("preflight_" + timestamp())).resolve()
     args.output.mkdir(parents=True, exist_ok=False)
     torch.set_num_threads(args.threads)
-    report = dict(contract=CONTRACT, report_kind="full_preflight_engineering", report_schema="dpr_full_preflight_v2",
+    report = dict(contract=CONTRACT, report_kind="full_preflight_engineering", report_schema=FULL_SCHEMA, policy=policy(), capability_scope=scope(),
                   statistics_version="allclose_right_reference_v2", status="PENDING", variant=args.variant,
                   formal_training="NOT_STARTED", final_test="NOT_RUN", checks={}, output=str(args.output),
                   environment=environment(), tolerances=dict(atol=ATOL, rtol=RTOL))
     started = time.perf_counter()
     try:
         report["code_identity"] = code_identity()
+        require(args.supplement is not None, "R1 targeted supplement must pass before complete admission checks")
+        report["supplement"] = file_record(args.supplement)
+        report["supplement_verified"] = verify_supplement(args.supplement, args, server=True)
         report["source_sha256"] = sha256(args.source)
         require(report["source_sha256"] == SOURCE_SHA256, "Wrong public source")
         report["initialization_sha256"] = sha256(args.initialized)
@@ -762,6 +755,8 @@ def run(args):
         report["mathematics_verified"] = validate_math_report(math_report, args.variant)
         require(report["mathematics_verified"], "DPR mathematics/structure report missing or failed")
         lifecycle(args, report)
+        require(all(report["checks"].get(mode, {}).get("status") == "PASSED" for mode in
+                    ("cpu_fp32", "cuda_fp32", "cuda_native_amp")), "BLOCKED: new lifecycle check failed; capacity not started")
         if args.capacity:
             print("BEGIN native B16/640 AMP capacity", flush=True)
             report["checks"]["capacity"] = capacity_subprocess(args)
@@ -770,7 +765,9 @@ def run(args):
         # Inference details are interpreted by the audited module implementation.
         normalize_inference(report)
         statuses = [item.get("status", "PENDING") for item in report["checks"].values()]
-        report["status"] = "FAILED" if "FAILED" in statuses else "PENDING" if "PENDING" in statuses else "PASSED"
+        report["status"] = "BLOCKED" if any(s not in ("PASSED", "PRECISION_NOTE") for s in statuses) else "PASSED"
+        report["code_identity_at_end"] = code_identity()
+        report["source_stable_during_checks"] = report["code_identity"] == report["code_identity_at_end"]
         if not report["environment"]["server_environment"]:
             report["server_admission"] = "PENDING; local engineering evidence never grants server start"
         atomic_json(args.output / "preflight.json", report)
@@ -807,14 +804,24 @@ def normalize_inference(report):
     for key in ("cpu_fp32", "cuda_fp32", "cuda_half", "ema", "fold_norm_retained", "native_fuse",
                 "fuse_idempotent", "deploy_reload", "autobackend"):
         inference.setdefault(key, dict(status="PENDING", reason="Required learned inference leaf not completed"))
-    statuses = [inference[key].get("status", "PENDING") for key in inference if key != "status" and isinstance(inference[key], dict)]
+    from dpr_acceptance import validate_half, validate_original_half_finiteness
+    try:
+        report["half_assessment"] = validate_half(report.get("half_R1", {}))
+        validate_original_half_finiteness(inference.get("cuda_half", {}))
+        half_status = "PASSED"
+    except Exception as error:
+        report["half_assessment"] = dict(status="BLOCKED", reason=str(error))
+        half_status = "FAILED"
+    # The raw cuda_half aggregate retains its failures. H0--H2 and the explicit
+    # H3/H4 capability restriction govern the approved support profile.
+    statuses = [inference[key].get("status", "PENDING") for key in inference if key not in ("status", "cuda_half") and isinstance(inference[key], dict)] + [half_status]
     inference["status"] = "FAILED" if "FAILED" in statuses else "PENDING" if "PENDING" in statuses else "PASSED"
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--variant", choices=tuple(VARIANTS), default=MAIN)
-    for key in ("source", "initialized", "data", "init-report", "math-report", "output"):
+    for key in ("source", "initialized", "data", "init-report", "math-report", "output", "supplement"):
         parser.add_argument("--" + key, type=Path)
     parser.add_argument("--device", choices=("cpu", "cuda", "all"), default="all")
     parser.add_argument("--capacity", action="store_true", help="Run original B16/640/AMP native training path, at most 16 batches")

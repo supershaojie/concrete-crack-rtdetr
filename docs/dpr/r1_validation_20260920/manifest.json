@@ -1,0 +1,128 @@
+{
+  "local_01__supplement.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\local_01\\supplement.json",
+    "original_bytes": 13240228,
+    "original_sha256": "8a1b52fd0a211a30490a42a5c39ee0d2210fc639059fb269d779d1c25e7bb87b",
+    "gzip_bytes": 340587,
+    "gzip_sha256": "68305d37cb81c1365e55975c08e11759f4e336c90c6d939d3581d04b25c6d412"
+  },
+  "local_01__worker.log.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\local_01\\worker.log",
+    "original_bytes": 6329,
+    "original_sha256": "3194e2d62ec8fbc1c7dd5c7090690159e61221f79598559292cdc8454bf47f03",
+    "gzip_bytes": 1471,
+    "gzip_sha256": "1e1488cf64b0c703bc8b6b446ef75e88babd789d0bf3b6f6c8192fb9460a4bb5"
+  },
+  "local_01__exit_status.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\local_01\\exit_status.json",
+    "original_bytes": 174,
+    "original_sha256": "409c487f6c9dfd1c236bcb265a86d0e1597db58f6c713918b5a4a155fe8170e1",
+    "gzip_bytes": 152,
+    "gzip_sha256": "e41ec502d069f753b993ac644ef2ef00de5fb6b906a7ebfc6c3d72b67da27aa8"
+  },
+  "local_amp_02__supplement.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\local_amp_02\\supplement.json",
+    "original_bytes": 368051362,
+    "original_sha256": "8255cf4aa22fd2e7ca17b7e2f9ddaa4b6694cafa38abdbb4bc5d9850d97497cb",
+    "gzip_bytes": 8633801,
+    "gzip_sha256": "b6fced7ba1b559e1a2cb184571da3187bd423c0453c431f5713bbed124f1c401"
+  },
+  "local_amp_02__worker.log.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\local_amp_02\\worker.log",
+    "original_bytes": 5677,
+    "original_sha256": "d84634cdf6b451c096c1c11f39bcfb4c9ead71d806d243c9c16c73217e33a3b7",
+    "gzip_bytes": 1402,
+    "gzip_sha256": "ee0a689b15017bb348d6d0cc1f04e7661f31412e6b8958bc372a9333d6945be8"
+  },
+  "local_amp_02__exit_status.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\local_amp_02\\exit_status.json",
+    "original_bytes": 174,
+    "original_sha256": "409c487f6c9dfd1c236bcb265a86d0e1597db58f6c713918b5a4a155fe8170e1",
+    "gzip_bytes": 152,
+    "gzip_sha256": "e41ec502d069f753b993ac644ef2ef00de5fb6b906a7ebfc6c3d72b67da27aa8"
+  },
+  "half_03__report.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\half_03\\report.json",
+    "original_bytes": 87525,
+    "original_sha256": "c7225e6be5fafadbbdf374a120d9740a05698a7ea0165910a1dd6d273341333f",
+    "gzip_bytes": 31592,
+    "gzip_sha256": "4b3cc097378c7e7449eb139cc26f01a8ca443a2e23280f5747daef1e70832c78"
+  },
+  "half_04__report.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\half_04\\report.json",
+    "original_bytes": 2094340,
+    "original_sha256": "33d4d148714686ee21e48c3f72afe0796a27d53aa9d7b7821fb7d9b1b86afeb0",
+    "gzip_bytes": 202874,
+    "gzip_sha256": "ec87b5445be23f35e0d87466f9ab63c8e1dfa3ab210f948a27710a287c98c6d0"
+  },
+  "single_candidate_05__report.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\single_candidate_05\\report.json",
+    "original_bytes": 5270405,
+    "original_sha256": "9a8c7052b1b4a321c9f1b6ff545e60e766b3a338c70ac1762e77cc794cb6c356",
+    "gzip_bytes": 145366,
+    "gzip_sha256": "fa1796ff0859f45e44fb6a081a0c5799bbe16ec517dca43cb4273b774aac1bf5"
+  },
+  "unit_01_failure.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\unit_01_failure.json",
+    "original_bytes": 36961,
+    "original_sha256": "c7dc89ffe4d398f7c661946905b646cf8db5d171936be8c8c9660f42e838d409",
+    "gzip_bytes": 1011,
+    "gzip_sha256": "570aaea3587733dfe3b89974cff0f9f5eba6a7a588747e5026e6a841a7b2ad21"
+  },
+  "unit_02.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\unit_02.json",
+    "original_bytes": 821,
+    "original_sha256": "bd06232c9ba6c652bb530bb338b738944428a97cfd3d13345a54e2f28cc8f63e",
+    "gzip_bytes": 316,
+    "gzip_sha256": "8b4a38b85e2feea5aff321237a507e69357089b02f9116ed256427428b27307a"
+  },
+  "unit_03.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\unit_03.json",
+    "original_bytes": 1661,
+    "original_sha256": "bb995b4473dd6e6c81d8104126c260edc4d2ffcfaacc4b3aca6e99d33899d68e",
+    "gzip_bytes": 494,
+    "gzip_sha256": "f82a9b399dc3c7f2476bfb87e9436b584ab6e2cd1fff74feccd491bc07632813"
+  },
+  "observation_regression.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\observation_regression.json",
+    "original_bytes": 678189,
+    "original_sha256": "43891b90a81f0127246b6c5765aa3bdf1ec7b16a6fc2d780d8a69314c30faf16",
+    "gzip_bytes": 38926,
+    "gzip_sha256": "1ef1f868c61836e61f0792a0ef559048552701f8fdf10cf3f6ef3320c7e928d9"
+  },
+  "syntax.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\syntax.json",
+    "original_bytes": 392,
+    "original_sha256": "fa8a228450ff2f558152cc26c5dff49dabc8b77188da4f398e4844ab3941bfc9",
+    "gzip_bytes": 195,
+    "gzip_sha256": "415ada27ffff696f4f0aca4102512e0b39d19891cde78182658fd81aad292341"
+  },
+  "original_half_finiteness.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\original_half_finiteness.json",
+    "original_bytes": 172,
+    "original_sha256": "6e1f03ced47a937cc05487b302e3f2447f9b354601e9b6d0453da1d765c4ac53",
+    "gzip_bytes": 155,
+    "gzip_sha256": "a08dc0c8afeee083aa8a60eb928542c3467997fe2b4c2ac6cd02349d6ef955a3"
+  },
+  "protected_source_initial.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\protected_source_initial.json",
+    "original_bytes": 2032,
+    "original_sha256": "cb6df22c43f683dc26bf65554e0890d2abda86af673e571fdd2b8d2df951b87a",
+    "gzip_bytes": 707,
+    "gzip_sha256": "0df07b83777614991fca3becbb73366d121e53bb8027a406a7f4d949679d20a1"
+  },
+  "unit_final.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\unit_final.json",
+    "original_bytes": 1993,
+    "original_sha256": "6a249c52e33a4074ac62b53ea8bd1bd2e0fa7253c4a9ce19ed505ceac0fe0a05",
+    "gzip_bytes": 540,
+    "gzip_sha256": "0663768ca9dbe0c2f2d869b97a214fef65f1e1394c7204ced7dbbd7020492845"
+  },
+  "matched_controls.json.gz": {
+    "original_path": "outputs\\dpr\\r1_implementation\\matched_controls.json",
+    "original_bytes": 115,
+    "original_sha256": "7ec1a65f2e59bf7eeab786e59471c67dd5977a9b4cc171bba3b81f0563fb77bc",
+    "gzip_bytes": 92,
+    "gzip_sha256": "5cb513d83fce1ab1975e5a4aaf9b5c17a9617529b4550629e1a5fdea2eba7da4"
+  }
+}

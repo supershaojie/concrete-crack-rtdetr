@@ -12,7 +12,7 @@ case "$VARIANT" in cbr_lif_dpr_v1|dpr_v1) ;; *) echo "Unknown DPR_VARIANT: $VARI
 if [ "$ACTION" = help ] || [ "$ACTION" = --help ] || [ "$ACTION" = -h ]; then
   cat <<'HELP'
 Usage: bash tools/dpr_server.sh ACTION [tool arguments]
-Actions: environment | init | diagnose | init-preflight | plan | start | resume | val | test | pack
+Actions: environment | init | diagnose | supplement | init-preflight | plan | start | resume | val | test | pack
 Set DPR_VARIANT=cbr_lif_dpr_v1 (default) or dpr_v1.
 Set DPR_MAIN only to an explicitly verified equivalent main repository/data root.
 init-preflight performs initialization, CPU mathematical/structure checks,
@@ -20,6 +20,9 @@ CPU/CUDA lifecycle checks, and native B16/640/AMP capacity (<=16 batches).
 It never starts formal training, evaluation, or the other variant automatically.
 diagnose collects bounded failure attribution only (default timeout 900 seconds),
 without capacity or formal admission; optional --scope inference|gradients|all.
+supplement collects fresh CUDA R1 B1--B8 / true EMA H0--H4, no capacity/start.
+init-preflight requires DPR_R1_SUPPLEMENT=/absolute/path/supplement.json;
+the supplement must independently pass on the current fixed server version.
 resume requires --checkpoint PATH; val/test require --weights PATH (test also
 requires --val-report PATH). pack forwards --run-dir/--output/--metadata.
 HELP
@@ -64,6 +67,9 @@ case "$ACTION" in
     printf '{"command_exit":%s,"tee_exit":%s,"effective_exit":%s}\n' "$COMMAND_RC" "$TEE_RC" "$RC" > "$LOG.exit_status.json"
     exit "$RC"
     ;;
+  supplement)
+    python tools/supplement_dpr.py --variant "$VARIANT" --source "$SOURCE" --initialized "$INITIALIZED" --data "$DATA" "$@"
+    ;;
   init|init-preflight)
     if [ "$#" -ne 0 ]; then echo "$ACTION takes no extra arguments; preserves the bounded contract." >&2; exit 2; fi
     STAMP=$(date -u +%Y%m%dT%H%M%S)_$$
@@ -73,6 +79,11 @@ case "$ACTION" in
       mv -- "$META/start_permit.json" "$META/start_permit.revoked.$STAMP.json"
     fi
     mkdir -- "$SESSION"
+    verify_targeted() {
+      if [ "$ACTION" = init ]; then return 0; fi
+      test -n "${DPR_R1_SUPPLEMENT:-}" || { echo "BLOCKED: passed R1 supplement required before full preflight" >&2; return 3; }
+      python tools/supplement_dpr.py --variant "$VARIANT" --source "$SOURCE" --initialized "$INITIALIZED" --data "$DATA" --verify "$DPR_R1_SUPPLEMENT"
+    }
     initialize_controlled() {
       if [ -f "$INITIALIZED" ]; then
         python tools/init_dpr.py --variant "$VARIANT" --source "$SOURCE" --output "$INITIALIZED" --report "$SESSION/init.json" --verify-existing
@@ -82,8 +93,9 @@ case "$ACTION" in
     }
     bounded_checks() {
       if [ "$ACTION" = init ]; then return 0; fi
+      test -n "${DPR_R1_SUPPLEMENT:-}" || { echo "BLOCKED: set DPR_R1_SUPPLEMENT to passed fixed-version targeted evidence" >&2; return 3; }
       python tools/preflight_dpr.py --variant "$VARIANT" --source "$SOURCE" --initialized "$INITIALIZED" --data "$DATA" \
-        --init-report "$SESSION/init.json" --math-report "$SESSION/math.json" --output "$SESSION/bounded" --device all --capacity
+        --init-report "$SESSION/init.json" --math-report "$SESSION/math.json" --output "$SESSION/bounded" --device all --capacity --supplement "$DPR_R1_SUPPLEMENT"
     }
     final_verify() {
       if [ "$ACTION" = init ]; then return 0; fi
@@ -91,7 +103,7 @@ case "$ACTION" in
     }
     set +e
     {
-      python tools/train_dpr.py environment --variant "$VARIANT" &&
+      verify_targeted && python tools/train_dpr.py environment --variant "$VARIANT" &&
       initialize_controlled &&
       python tools/check_dpr.py --variant "$VARIANT" --output "$SESSION/math.json" --imgsz 640 &&
       bounded_checks && final_verify

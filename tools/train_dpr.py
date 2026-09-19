@@ -26,7 +26,7 @@ from ultralytics.utils import YAML
 from dpr_checkpoint import DPRCheckpointTrainer, optimizer_param_names, require_checkpoint_policy
 from dpr_data import dataset_identity
 
-CONTRACT = "dpr_acceptance_v1"
+from dpr_acceptance import CONTRACT, FULL_SCHEMA, policy as acceptance_policy, scope as capability_scope
 BASE_COMMIT = "a0459d6a652cb702699087c88fa39a3e4c4087ec"
 SERVER_MAIN = Path(os.environ.get("DPR_MAIN", "/root/autodl-tmp/projects/Crack_RTDETR"))
 LIF_SHA = "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
@@ -86,7 +86,7 @@ def code_identity():
     files += list((ROOT / "tools").glob("*dpr*"))
     files += [ROOT / "tools/c19_lif_v1_data.py", ROOT / "tools/init_c19_lif_v1.py",
               ROOT / "tools/init_lif_down.py", ROOT / "docs/dpr/parent_args.yaml",
-              ROOT / "docs/dpr/parent_dataset_inventory.json"]
+              ROOT / "docs/dpr/parent_dataset_inventory.json", ROOT / "docs/dpr/acceptance_review_bb768787.md"]
     entries = {p.relative_to(ROOT).as_posix(): sha256(p) for p in sorted(set(files)) if p.is_file()}
     for name, expected in (("lif_down.py", LIF_SHA), ("cbr.py", CBR_SHA)):
         raw = (ROOT / "ultralytics-main/ultralytics/nn/modules" / name).read_bytes().replace(b"\r\n", b"\n")
@@ -199,8 +199,11 @@ def strict_gate(variant, source, initialized, data, report_path):
     report = load_json(report_path)
     require(report.get("contract") == CONTRACT and report.get("report_kind") == "full_preflight_engineering",
             "Only this complete DPR preflight contract is eligible")
-    require(report.get("report_schema") == "dpr_full_preflight_v2" and
-            report.get("statistics_version") == "allclose_right_reference_v2", "Stale preflight evidence format")
+    require(report.get("report_schema") == FULL_SCHEMA and
+             report.get("statistics_version") == "allclose_right_reference_v2", "Stale preflight evidence format")
+    from dpr_acceptance import validate_scope, validate_b, validate_half
+    require(report.get("policy") == acceptance_policy(), "Unapproved/unknown R1 policy")
+    validate_scope(report.get("capability_scope"))
     require(report.get("variant") == variant, "Wrong preflight variant")
     require(report.get("status") in accepted, "Preflight contains failed or pending checks")
     env = environment()
@@ -208,6 +211,13 @@ def strict_gate(variant, source, initialized, data, report_path):
     require(report.get("environment") == env, "Preflight runtime differs from this server environment")
     identity = code_identity()
     require(report.get("code_identity") == identity, "Preflight HEAD/code/config contents are stale")
+    require(report.get("source_stable_during_checks") is True and report.get("code_identity_at_end") == identity,
+            "Preflight source changed during checks")
+    from supplement_dpr import verify as verify_supplement
+    from types import SimpleNamespace
+    supplement = report.get("supplement", {})
+    evidence_file(supplement)
+    verify_supplement(supplement["path"], SimpleNamespace(variant=variant, source=source, initialized=initialized, data=data), server=True)
     require(not git("status", "--porcelain", "--untracked-files=no"), "Tracked source edits block formal start")
     require(sha256(source) == SOURCE_SHA256 == report.get("source_sha256"), "Public source identity mismatch")
     require(sha256(initialized) == report.get("initialization_sha256"), "Controlled initialization changed")
@@ -286,8 +296,12 @@ def strict_gate(variant, source, initialized, data, report_path):
                     and row.get("scale_after", 0) < row.get("scale_before", 0) for row in a["overflow_rows"]),
                     "Actual native AMP overflow steps missing")
         b = item.get("B", {})
-        require(b.get("atol") == 2e-5 and b.get("rtol") == 2e-4 and b.get("status") in {"PASSED", "PRECISION_NOTE"},
-                "Independent backward B evidence missing")
+        assessment = validate_b(item, mode)
+        require(item.get("assessment") == assessment, "B8 stored assessment disagrees with independently validated facts")
+        require(item.get("binding", {}).get("code_identity") == identity and item["binding"].get("session") == report.get("output"),
+                "B evidence belongs to another full preflight")
+        require(b.get("atol") == 2e-5 and b.get("rtol") == 2e-4,
+                 "Independent backward B evidence missing")
         require(b.get("parent") and b.get("candidate"), "Missing matched live parent/candidate controls")
         for control in ("parent", "candidate"):
             evidence = b[control]
@@ -296,27 +310,12 @@ def strict_gate(variant, source, initialized, data, report_path):
             tensor_evidence(evidence.get("forward"), mode + ":" + control + ":forward", exact=True)
             for key in ("state", "gradients"):
                 tensor_evidence(evidence.get(key), mode + ":" + control + ":" + key,
-                                allow_raw_failure=b["status"] == "PRECISION_NOTE")
+                                allow_raw_failure=assessment["status"] == "EXPLAINED_BACKWARD_VARIATION")
             complete_state_inventory(evidence["state"], mode + ":" + control, candidate=control == "candidate")
             require(len(evidence.get("steps", [])) == 2 and all(row.get("effective_update") is True and
                     row.get("finite_gradients") is True for row in evidence["steps"]), "Live independent updates missing")
-        if b["status"] == "PRECISION_NOTE":
-            require(mode != "cpu_fp32" and b.get("raw_allclose") is False and bool(b.get("explanation")),
-                    "Unsupported/unexplained backward precision note")
-            parent_b, candidate_b = b["parent"], b["candidate"]
-            require(set(candidate_b["state"]["failed_tensors"]) <= set(parent_b["state"]["failed_tensors"]),
-                    "Candidate state failures are not supported by parent controls")
-            require(all(row["raw_allclose"] for collection in (candidate_b["state"], candidate_b["gradients"])
-                        for key, row in collection["tensors"].items() if ".dpr_" in key), "New DPR updates/gradients fail original tolerance")
-            require(all((".model." in key or ".ema." in key or ".optimizer." in key) and not key.endswith(".step")
-                        for control in (parent_b, candidate_b) for key in control["state"]["failed_tensors"]),
-                    "Precision note contains lost metadata/state")
-            from preflight_dpr import gradient_support
-
-            for control in (parent_b, candidate_b):
-                support = gradient_support(control)
-                require(support and all(support.values()),
-                        "Backward precision note lacks finite differing gradients for each failed persistent tensor")
+        # R1 B1--B8 replace the old subset/raw-added-gradient restrictions only
+        # after full causal and functional proof. Raw B is never rewritten.
         require(all(item.get("gradients", {}).get(k, {}).get("finite_nonzero") is True
                     for k in ("dpr_cd", "dpr_hd", "dpr_vd", "dpr_ad", "conv.weight")), "Missing actual DPR/W gradients")
         updates = item.get("updates", {})
@@ -324,7 +323,7 @@ def strict_gate(variant, source, initialized, data, report_path):
                 and 0 < updates.get("observed_batches", 0) <= 16 and all(updates.get("parameter_changes", {}).get(name) is True
                 for name in new_names | {TARGET + ".conv.weight"}), "Actual DPR/W updates incomplete")
     inference = leaves["learned_inference"]
-    for key in ("cpu_fp32", "cuda_fp32", "cuda_half", "ema", "fold_norm_retained", "native_fuse",
+    for key in ("cpu_fp32", "cuda_fp32", "ema", "fold_norm_retained", "native_fuse",
                 "fuse_idempotent", "deploy_reload", "autobackend"):
         require(inference.get(key, {}).get("status") in {"PASSED", "PRECISION_NOTE"}, "Learned inference gate incomplete: " + key)
     required_inference = {"training_state_reload", "training_full_reload", "ema_retains_nonzero", "dpr_fold_only",
@@ -340,12 +339,16 @@ def strict_gate(variant, source, initialized, data, report_path):
             inference_leaf(details["checks"][key], mode + ":" + key)
         require(details["checks"]["autobackend_saved_best"].get("norm_retained") is True, "Native inference removed original norm")
     half = inference["cuda_half"]
+    from dpr_acceptance import validate_original_half_finiteness
+    validate_original_half_finiteness(half)
     require(str(half.get("device", "")).startswith("cuda") and half.get("dtype") == "float16"
             and half.get("atol") == HALF_ATOL and half.get("rtol") == HALF_RTOL,
             "Explicit CUDA half evidence/threshold missing")
-    for key in ("native_half_vs_fp32", "fp32_fold_then_half", "half_deploy_reload", "autobackend_half"):
+    for key in ("half_deploy_reload", "autobackend_half"):
         inference_leaf(half.get("checks", {}).get(key), "cuda_half:" + key, half=True)
+    validate_half(report.get("half_R1", {}))
     return dict(status="PASSED", contract=CONTRACT, variant=variant, head=identity["head"],
+                policy=acceptance_policy(), capability_scope=capability_scope(),
                 report=str(Path(report_path).resolve()), report_sha256=sha256(report_path),
                 initialization_sha256=sha256(initialized), source_sha256=sha256(source), environment=env)
 

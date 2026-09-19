@@ -13,6 +13,7 @@ import subprocess
 import tarfile
 
 import yaml
+from dpr_acceptance import CONTRACT, FULL_SCHEMA, scope as capability_scope, policy as acceptance_policy
 
 ROOT = Path(__file__).resolve().parents[1]
 LIMIT = 20 * 1024 * 1024
@@ -35,6 +36,13 @@ def assess_evidence(entries, variant, head):
             except (ValueError, UnicodeDecodeError):
                 rejected[name] = ['invalid JSON']
     run_name = variant + '_rtdetr_r18_lite_e200_b16_onlineaug'
+
+    def r1_facts(value):
+        from dpr_acceptance import validate_full_assessments
+        try:
+            return validate_full_assessments(value, files=False)
+        except (RuntimeError, KeyError, TypeError, ValueError):
+            return False
 
     def choose(label, candidates, check):
         failures = []
@@ -80,7 +88,9 @@ def assess_evidence(entries, variant, head):
         lambda value: predicate((value.get('status') == 'PASSED', 'preflight did not pass'),
             (value.get('variant') == variant, 'wrong variant'),
             (value.get('report_kind') == 'full_preflight_engineering', 'wrong preflight kind'),
-            (value.get('contract') == 'dpr_acceptance_v1', 'wrong preflight contract'),
+            (value.get('contract') == CONTRACT and value.get('report_schema') == FULL_SCHEMA, 'wrong preflight contract'),
+            (value.get('policy') == acceptance_policy() and value.get('capability_scope') == capability_scope(), 'wrong approved capability scope'),
+            (r1_facts(value), 'R1 substantive B/H evidence missing or failed'),
             (value.get('code_identity', {}).get('head') == head, 'wrong preflight source HEAD'),
             (bool(init) and value.get('initialization_sha256') == init.get('output_sha256'), 'different initialization'),
             (bool(selection) and value.get('dataset_identity') == frozen.get('dataset_inventory'), 'different frozen dataset')))
@@ -112,6 +122,8 @@ def assess_evidence(entries, variant, head):
     for split in ('val', 'test'):
         def evaluation_check(value):
             errors = predicate((value.get('status') == 'completed', 'evaluation did not complete'),
+                (value.get('contract') == CONTRACT and value.get('capability_scope') == capability_scope()
+                 and value.get('acceptance_policy') == acceptance_policy(), 'wrong evaluation capability scope'),
                 (value.get('variant') == variant, 'wrong variant'), (value.get('policy') == POLICY, 'wrong policy'),
                 (value.get('evidence_scope') == 'full_split' and value.get('export_complete') is True, 'incomplete split/export'),
                 (bool(selection) and value.get('checkpoint_sha256') == frozen.get('checkpoint_sha256'), 'different frozen best SHA'),

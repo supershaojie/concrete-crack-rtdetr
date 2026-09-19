@@ -218,14 +218,19 @@ def file_reference(checkpoint, device, half):
                        selected=selected, order="load CPU -> float -> fuse CPU -> eval -> to(device) -> inplace=True -> dtype -> requires_grad=False")
 
 
-def backend_audit(checkpoint, model, image, legacy_capture, half=False, legacy_model=None):
+def backend_audit(checkpoint, model, image, legacy_capture, half=False, legacy_model=None, memory_entry=False):
     """Keep the raw backend gate; separately retain the former mismatched comparison."""
     from ultralytics.nn.autobackend import AutoBackend
     device = next(model.parameters()).device
     reference, provenance = file_reference(checkpoint, device, half)
     source_state_sha256 = state_fingerprint(model)
     source_matches_checkpoint = source_state_sha256 == provenance["checkpoint_state_sha256"]
-    backend = AutoBackend(model=str(checkpoint), device=device, fp16=half, fuse=True, verbose=False).eval()
+    if memory_entry:
+        from ultralytics import RTDETR
+        backend_input = RTDETR(str(checkpoint)).model
+    else:
+        backend_input = str(checkpoint)
+    backend = AutoBackend(model=backend_input, device=device, fp16=half, fuse=True, verbose=False).eval()
     reference_identity = model_identity(reference, image)
     backend_identity = model_identity(backend.model, image)
     legacy_identity = model_identity(legacy_model, image) if legacy_model is not None else None

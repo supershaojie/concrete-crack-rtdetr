@@ -1,0 +1,253 @@
+{
+  "contract": "dpr_acceptance_v2",
+  "full_schema": "dpr_full_preflight_v3",
+  "admission": "BLOCKED",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN",
+  "old_failure_archives": "UNCHANGED",
+  "server_fixed_SHA_supplement": "PENDING",
+  "full_admission_capacity": "NOT_RUN; requires passing server supplement",
+  "unit_03": "PASSED",
+  "observation_regression": "PASSED",
+  "syntax": "PASSED",
+  "records": {
+    "cuda_fp32": {
+      "A": "PASSED",
+      "B_raw_status": "PRECISION_NOTE",
+      "B_raw_allclose": false,
+      "B6_parent_exact": [
+        true,
+        true
+      ],
+      "B6_candidate_exact": [
+        true,
+        true
+      ],
+      "B6_delta_exact": [
+        true,
+        true
+      ],
+      "B7_failed": {
+        "encoder_features": {
+          "raw_allclose": false,
+          "max_abs": 4.887580871582031e-05,
+          "relative_L2": 1.2591505765158217e-05,
+          "exceed_fraction": 0.0037425595801323652,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "output": {
+          "raw_allclose": false,
+          "max_abs": 0.45930546522140503,
+          "relative_L2": 0.045860160142183304,
+          "exceed_fraction": 0.004666666500270367,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        }
+      },
+      "raw_assessment": {
+        "status": "REJECTED",
+        "reason": "R1 BLOCKED: original raw tolerance failed"
+      },
+      "complete_current_contract": "NOT_ESTABLISHED; development records, not fixed-SHA server admission"
+    },
+    "cuda_native_amp": {
+      "A": "PASSED",
+      "B_raw_status": "FAILED",
+      "B_raw_allclose": false,
+      "B6_parent_exact": [
+        true,
+        true
+      ],
+      "B6_candidate_exact": [
+        true,
+        true
+      ],
+      "B6_delta_exact": [
+        true,
+        true
+      ],
+      "B7_failed": {
+        "dpr_input": {
+          "raw_allclose": false,
+          "max_abs": 0.0001726839691400528,
+          "relative_L2": 5.14085877512116e-05,
+          "exceed_fraction": 0.018095703795552254,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "effective_kernel": {
+          "raw_allclose": false,
+          "max_abs": 2.4697277694940567e-05,
+          "relative_L2": 1.4334741536004003e-05,
+          "exceed_fraction": 1.3563368156610522e-05,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "conv_output": {
+          "raw_allclose": false,
+          "max_abs": 9.98377799987793e-05,
+          "relative_L2": 4.5231630792841315e-05,
+          "exceed_fraction": 0.023378906771540642,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "norm_output": {
+          "raw_allclose": false,
+          "max_abs": 0.0002703666687011719,
+          "relative_L2": 4.380235986900516e-05,
+          "exceed_fraction": 0.040400389581918716,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "target": {
+          "raw_allclose": false,
+          "max_abs": 0.0002703666687011719,
+          "relative_L2": 4.380235986900516e-05,
+          "exceed_fraction": 0.040400389581918716,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "P3": {
+          "raw_allclose": false,
+          "max_abs": 0.00031813979148864746,
+          "relative_L2": 6.358201790135354e-05,
+          "exceed_fraction": 0.050273437052965164,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "P4": {
+          "raw_allclose": false,
+          "max_abs": 0.0014277100563049316,
+          "relative_L2": 0.00011304171493975446,
+          "exceed_fraction": 0.08638671785593033,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "P5": {
+          "raw_allclose": false,
+          "max_abs": 0.003418445587158203,
+          "relative_L2": 0.0003186929679941386,
+          "exceed_fraction": 0.36738282442092896,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "encoder_features": {
+          "raw_allclose": false,
+          "max_abs": 0.000906825065612793,
+          "relative_L2": 0.0002688707609195262,
+          "exceed_fraction": 0.4655952453613281,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "candidate_scores": {
+          "raw_allclose": false,
+          "max_abs": 0.00011995434761047363,
+          "relative_L2": 5.514115036930889e-05,
+          "exceed_fraction": 0.029523810371756554,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "output": {
+          "raw_allclose": false,
+          "max_abs": 0.6022104620933533,
+          "relative_L2": 0.07558640092611313,
+          "exceed_fraction": 0.013333333656191826,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        }
+      },
+      "raw_assessment": {
+        "status": "REJECTED",
+        "reason": "R1 BLOCKED: original raw tolerance failed"
+      },
+      "complete_current_contract": "NOT_ESTABLISHED; development records, not fixed-SHA server admission"
+    },
+    "H_local": {
+      "status": "H_CHECKS_PASSED",
+      "assessment": {
+        "status": "PASSED",
+        "H0": "PASSED",
+        "H1": "PASSED",
+        "H2": "PASSED",
+        "H3": "NOT_SUPPORTED_UNDER_THIS_PROFILE",
+        "H4": "NOT_SUPPORTED_UNDER_THIS_PROFILE",
+        "scope": {
+          "profile": "native_amp_native_half_epoch_final_independent_fp32_v1",
+          "native_amp_training": "REQUIRES_FULL_ADMISSION",
+          "native_half_epoch_final_validation": "REQUIRES_H0_H1_H2",
+          "independent_evaluation": "FP32_ONLY",
+          "fp16_cross_precision_H3": "NOT_SUPPORTED_UNDER_THIS_PROFILE",
+          "fp16_cross_conversion_H4": "NOT_SUPPORTED_UNDER_THIS_PROFILE",
+          "arbitrary_half_deployment": "NOT_AUTHORIZED"
+        }
+      },
+      "uses_retained_actual_local_AMP_saver_state": true,
+      "fresh_A_B": "NOT_CLAIMED",
+      "H0_elapsed": 14.140999999995984,
+      "H1_elapsed": 0.6870000000053551,
+      "H2": {
+        "native_ema_half": {
+          "status": "PASSED",
+          "raw_max_abs": 0.0,
+          "elapsed_seconds": 4.078000000001339
+        },
+        "final_eval_half": {
+          "status": "PASSED",
+          "raw_max_abs": 0.0,
+          "elapsed_seconds": 2.7180000000007567
+        },
+        "independent_memory_fp32": {
+          "status": "PASSED",
+          "raw_max_abs": 0.0,
+          "elapsed_seconds": 4.109000000004016
+        }
+      }
+    },
+    "dpr_v1_candidate_only": {
+      "status": "COLLECTOR_CHECKS_PASSED",
+      "initial_exact": true,
+      "source_stable": true,
+      "B6_exact": [
+        true,
+        true
+      ],
+      "remaining": "parent/A/H/full server admission NOT_RUN"
+    }
+  },
+  "retained_development_failures": [
+    "local_01: GradScaler deep-copy lazy tensor issue; B7 raw failure",
+    "local_amp_02: engineering SimpleNamespace incompatible with native strip_optimizer; B7 raw failures",
+    "unit_01_failure: synthetic test initial scale overflow; effective-gradient fixture corrected",
+    "half_03: ad-hoc restored test fixture lacked saver metadata; production and collector were unaffected"
+  ],
+  "source_identity_notice": "Original code identities remain untouched. Development evidence is not relabeled to the delivery SHA. Whole same-version diagnosis not rerun.",
+  "unit_final": "PASSED; A/initial/RNG/moments/adjoints/scale/artifact/replay/actual-index/policy/H0-H4 fault injection",
+  "matched_controls": "PASSED; actual controls match; changed candidate TF32 rejected"
+}
