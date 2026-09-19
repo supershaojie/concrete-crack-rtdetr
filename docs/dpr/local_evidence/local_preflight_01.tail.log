@@ -1,0 +1,101 @@
+Readable tail (trailing whitespace stripped); original bytes are retained in local_preflight_01.log.gz.
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 543/552 items from pretrained weights
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 547/556 items from pretrained weights
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 543/552 items from pretrained weights
+BEGIN lifecycle cpu_fp32
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\tools\preflight_dpr.py:176: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  trainer.scaler = torch.cuda.amp.GradScaler(enabled=amp)
+Traceback (most recent call last):
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\tools\preflight_dpr.py", line 438, in lifecycle
+    row, _, _ = one_step(p, batch, amp)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\tools\preflight_dpr.py", line 197, in one_step
+    loss, components = trainer.model(batch)
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\ultralytics-main\ultralytics\nn\tasks.py", line 148, in forward
+    return self.loss(x, *args, **kwargs)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\ultralytics-main\ultralytics\nn\tasks.py", line 793, in loss
+    self.criterion = self.init_criterion()
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\ultralytics-main\ultralytics\nn\tasks.py", line 779, in init_criterion
+    return RTDETRDetectionLoss(nc=self.nc, use_vfl=True)
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1940, in __getattr__
+    raise AttributeError(
+AttributeError: 'RTDETRDetectionModel' object has no attribute 'nc'
+
+BEGIN lifecycle cuda_fp32
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\tools\preflight_dpr.py:176: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  trainer.scaler = torch.cuda.amp.GradScaler(enabled=amp)
+Traceback (most recent call last):
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\tools\preflight_dpr.py", line 438, in lifecycle
+    row, _, _ = one_step(p, batch, amp)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\tools\preflight_dpr.py", line 197, in one_step
+    loss, components = trainer.model(batch)
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\ultralytics-main\ultralytics\nn\tasks.py", line 148, in forward
+    return self.loss(x, *args, **kwargs)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\ultralytics-main\ultralytics\nn\tasks.py", line 793, in loss
+    self.criterion = self.init_criterion()
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\ultralytics-main\ultralytics\nn\tasks.py", line 779, in init_criterion
+    return RTDETRDetectionLoss(nc=self.nc, use_vfl=True)
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1940, in __getattr__
+    raise AttributeError(
+AttributeError: 'RTDETRDetectionModel' object has no attribute 'nc'
+
+BEGIN lifecycle cuda_native_amp
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+Traceback (most recent call last):
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\tools\preflight_dpr.py", line 438, in lifecycle
+    row, _, _ = one_step(p, batch, amp)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\tools\preflight_dpr.py", line 197, in one_step
+    loss, components = trainer.model(batch)
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\ultralytics-main\ultralytics\nn\tasks.py", line 148, in forward
+    return self.loss(x, *args, **kwargs)
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\ultralytics-main\ultralytics\nn\tasks.py", line 793, in loss
+    self.criterion = self.init_criterion()
+  File "D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\ultralytics-main\ultralytics\nn\tasks.py", line 779, in init_criterion
+    return RTDETRDetectionLoss(nc=self.nc, use_vfl=True)
+  File "D:\miniconda3\envs\rtdetr\lib\site-packages\torch\nn\modules\module.py", line 1940, in __getattr__
+    raise AttributeError(
+AttributeError: 'RTDETRDetectionModel' object has no attribute 'nc'
+
+BEGIN native B16/640 AMP capacity
+Ultralytics 8.4.21  Python-3.9.25 torch-2.7.1+cu118 CUDA:0 (NVIDIA GeForce RTX 2060, 6144MiB)
+[34m[1mengine\trainer: [0magnostic_nms=False, amp=True, angle=1.0, augment=False, auto_augment=None, batch=16, bgr=0.0, box=7.5, cache=False, cfg=None, classes=None, close_mosaic=10, cls=0.5, compile=False, conf=None, copy_paste=0, copy_paste_mode=flip, cos_lr=True, cutmix=0, data=D:\MyProjects\Crack_RTDETR\configs\crack.yaml, degrees=5, deterministic=True, device=0, dfl=1.5, dnn=False, dropout=0.0, dynamic=False, embed=None, end2end=None, epochs=200, erasing=0, exist_ok=False, fliplr=0.5, flipud=0.2, format=torchscript, fraction=1.0, freeze=None, half=False, hsv_h=0.015, hsv_s=0.5, hsv_v=0.35, imgsz=640, int8=False, iou=0.7, keras=False, kobj=1.0, line_width=None, lr0=0.0005, lrf=0.01, mask_ratio=4, max_det=300, mixup=0.05, mode=train, model=D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\weights\cbr_lif_dpr_v1_controlled_init.pt, momentum=0.937, mosaic=0.8, multi_scale=0.0, name=bounded_capacity, nbs=64, nms=False, opset=None, optimize=False, optimizer=AdamW, overlap_mask=True, patience=50, perspective=0.0002, plots=True, pose=12.0, pretrained=True, profile=False, project=D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\outputs\dpr\dpr_native_capacity_4t39x154, rect=False, resume=False, retina_masks=False, rle=1.0, save=True, save_conf=False, save_crop=False, save_dir=D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\outputs\dpr\dpr_native_capacity_4t39x154\bounded_capacity, save_frames=False, save_json=False, save_period=-1, save_txt=False, scale=0.4, seed=42, shear=1.5, show=False, show_boxes=True, show_conf=True, show_labels=True, simplify=True, single_cls=False, source=None, split=val, stream_buffer=False, task=detect, time=None, tracker=botsort.yaml, translate=0.1, val=True, verbose=True, vid_stride=1, visualize=False, warmup_bias_lr=0.1, warmup_epochs=5, warmup_momentum=0.8, weight_decay=0.0001, workers=8, workspace=None
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 543/552 items from pretrained weights
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 547/556 items from pretrained weights
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks...
+[34m[1mAMP: [0mchecks passed
+[34m[1mtrain: [0mFast image access  (ping: 0.20.0 ms, read: 246.6108.5 MB/s, size: 4546.7 KB)
+
+[K[34m[1mtrain: [0mScanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\train.cache... 6048 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 6048/6048  0.0s
+[34m[1mval: [0mFast image access  (ping: 0.20.0 ms, read: 227.0124.3 MB/s, size: 4957.9 KB)
+
+[K[34m[1mval: [0mScanning D:\MyProjects\Crack_RTDETR\datasets\crack_det\labels\val.cache... 1728 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 1728/1728  0.0s
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Plotting labels to D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\outputs\dpr\dpr_native_capacity_4t39x154\bounded_capacity\labels.jpg...
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to [1mD:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\outputs\dpr\dpr_native_capacity_4t39x154\bounded_capacity[0m
+Starting training for 200 epochs...
+
+      Epoch    GPU_mem  giou_loss   cls_loss    l1_loss  Instances       Size

@@ -1,0 +1,20 @@
+{
+  "status": "PASSED",
+  "policy": "corrected_sorted_conf_mask_v1",
+  "fixed_settings": {
+    "imgsz": 640,
+    "batch": 16,
+    "workers": 0,
+    "half": false,
+    "conf": 0.001,
+    "iou": 0.7,
+    "max_det": 300,
+    "augment": false,
+    "rect": false,
+    "seed": 42
+  },
+  "sorted_confidence_mask": true,
+  "native_one_to_one_duplicate_fixture": true,
+  "full_independent_val": "NOT_RUN",
+  "final_test": "NOT_RUN"
+}

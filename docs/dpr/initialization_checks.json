@@ -1,0 +1,36 @@
+{
+  "status": "PASSED",
+  "variants": [
+    {
+      "variant": "cbr_lif_dpr_v1",
+      "status": "PASSED",
+      "report": "docs/dpr/cbr_lif_dpr_v1_init.json.gz",
+      "report_sha256": "8e24c6b571c97b7a5c3c96f0a32d67ad3ee93955c2ade1d46a159c3d9d0fdb8e",
+      "init_sha256": "295af5d801640b33c164b16700ec76532707c8d3fd2c8cc4e382ed55859090c9",
+      "public_tensor_count": 552,
+      "new_parameters": 3072,
+      "nc1_parameters": 20152837,
+      "class_adaptations": 9,
+      "actual_train_entry": true
+    },
+    {
+      "variant": "dpr_v1",
+      "status": "PASSED",
+      "report": "docs/dpr/dpr_v1_init.json.gz",
+      "report_sha256": "ee62e3f4f815a06318d1639fefcb834d0dca051b054fe688966ad3fd2876703e",
+      "init_sha256": "8a1d90348ca59bce410e17427a9a2d94994f0b42d80c9eb2559afd63caae7843",
+      "public_tensor_count": 533,
+      "new_parameters": 3072,
+      "nc1_parameters": 20085844,
+      "class_adaptations": 9,
+      "actual_train_entry": true
+    }
+  ],
+  "failed_attempt": {
+    "report": "docs/dpr/init.failed-runtime.json",
+    "reason": "Native CPU device selection changed process CUDA_VISIBLE_DEVICES during reconstruction; runtime identity then raised Invalid device id.",
+    "repair": "The reconstruction-only audit selects CPU without changing GPU visibility and restores RNG/environment/precision flags.",
+    "recheck": "Strict --verify-existing reconstructed from the fixed public source and compared every tensor; existing initialization was preserved."
+  },
+  "scope": "nc=80 public initialization, native nc=1 get_model and actual RTDETR.train reconstruction; stopped before optimizer/data batches. Not real-data loss or training evidence."
+}

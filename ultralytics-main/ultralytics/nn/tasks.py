@@ -30,6 +30,8 @@ from ultralytics.nn.modules import (
     ADown,
     BasicBlock,
     Blocks,
+    BlocksDPR,
+    DPRConvNormLayer,
     Bottleneck,
     BottleneckCSP,
     C2f,
@@ -235,6 +237,11 @@ class BaseModel(torch.nn.Module):
         Returns:
             (torch.nn.Module): The fused model is returned.
         """
+        # DPR must be folded even when the normal BN-count heuristic says fused.
+        # Its original backbone norm intentionally follows the unchanged parent policy.
+        for m in self.model.modules():
+            if isinstance(m, DPRConvNormLayer):
+                m.switch_to_deploy()
         if not self.is_fused():
             for m in self.model.modules():
                 if isinstance(m, (Conv, Conv2, DWConv)) and not isinstance(m, LIFDown) and hasattr(m, "bn"):
@@ -1673,7 +1680,7 @@ def parse_model(d, ch, verbose=True):
                 legacy = False
         elif m is AIFI:
             args = [ch[f], *args]
-        elif m is Blocks:
+        elif m in (Blocks, BlocksDPR):
             block_type = globals()[args[1]] if isinstance(args[1], str) else args[1]
             c1, c2 = ch[f], args[0] * block_type.expansion
             args = [c1, args[0], block_type, *args[2:]]

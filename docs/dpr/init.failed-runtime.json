@@ -1,0 +1,7 @@
+{
+  "status": "FAILED",
+  "variant": "cbr_lif_dpr_v1",
+  "error": "AssertionError('Invalid device id')",
+  "output": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dpr-v1\\weights\\cbr_lif_dpr_v1_controlled_init.pt",
+  "source": "D:\\MyProjects\\Crack_RTDETR\\weights\\rtdetr_r18_lite_imagenet_backbone_init.pt"
+}

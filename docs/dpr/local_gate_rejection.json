@@ -1,0 +1,7 @@
+{
+  "status": "PASSED",
+  "test": "Actual strict_gate rejects real failed local_preflight_03",
+  "exit_code": 3,
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN"
+}

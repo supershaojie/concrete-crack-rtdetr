@@ -1,0 +1,102 @@
+{
+  "status": "PASSED",
+  "lossless_gzip_verified": true,
+  "manifest": [
+    {
+      "source": "outputs\\dpr\\local_preflight_01\\preflight.json",
+      "artifact": "docs\\dpr\\local_evidence\\local_preflight_01_preflight.json.gz",
+      "uncompressed_bytes": 70599,
+      "uncompressed_sha256": "5254cb272d0b3c95b3116db17f7fafee6c8467d2dc44baf1e12282d851b256ff",
+      "gzip_sha256": "471aae41fc3e6a7cb0d5d3224903280208b83b2d23a2e17b9889e571036a095d"
+    },
+    {
+      "source": "outputs\\dpr\\local_preflight_01\\capacity_timeout.json",
+      "artifact": "docs\\dpr\\local_evidence\\local_preflight_01_capacity_timeout.json.gz",
+      "uncompressed_bytes": 775,
+      "uncompressed_sha256": "0326d143ec964ee75cde378a6df05466faf0af8360012e2d2d5522c3238c578b",
+      "gzip_sha256": "604789c562c86d5415d96fa61210a2d33a71023ada6ad2553d01ea1d10489e7d"
+    },
+    {
+      "source": "outputs\\dpr\\local_preflight_01.log",
+      "artifact": "docs\\dpr\\local_evidence\\local_preflight_01.log.gz",
+      "uncompressed_bytes": 9809,
+      "uncompressed_sha256": "28a28fa77fc770de11e83ebea9a4a1030046ba390a7dbf58ee21e36a055c1c6d",
+      "gzip_sha256": "368c3424d279db751b2c54aa379d21d7ca0540f81840ffb5d6e42594ec95d937"
+    },
+    {
+      "source": "outputs\\dpr\\local_preflight_02\\preflight.json",
+      "artifact": "docs\\dpr\\local_evidence\\local_preflight_02_preflight.json.gz",
+      "uncompressed_bytes": 7368252,
+      "uncompressed_sha256": "6d3f9a063894dd7a5ad021870affad74d3a9837a2c1ba442e26ba2020d0b765a",
+      "gzip_sha256": "ed6800b7002d947965f1052fb97b23bf5e14264ed54bb463471b694dc129e5b4"
+    },
+    {
+      "source": "outputs\\dpr\\local_preflight_02.log",
+      "artifact": "docs\\dpr\\local_evidence\\local_preflight_02.log.gz",
+      "uncompressed_bytes": 8191,
+      "uncompressed_sha256": "16ccbabd833b83bf8a7f473ccba710679f7f10146547b654a0701d25b0842270",
+      "gzip_sha256": "d8be19d64df500e764df6794c8fdd0a8864a8eaed9c13e45d325ad2fef049c68"
+    },
+    {
+      "source": "outputs\\dpr\\local_preflight_03\\preflight.json",
+      "artifact": "docs\\dpr\\local_evidence\\local_preflight_03_preflight.json.gz",
+      "uncompressed_bytes": 10899645,
+      "uncompressed_sha256": "6157ef6adf86a512f236ca2e593b9f4936965d3bca2186ed00769f9120107113",
+      "gzip_sha256": "3426e31300c6ff5afd53cc2fa2dc22df43059c44b9da3c0a78742cbd4a8b1c67"
+    },
+    {
+      "source": "outputs\\dpr\\local_preflight_03.log",
+      "artifact": "docs\\dpr\\local_evidence\\local_preflight_03.log.gz",
+      "uncompressed_bytes": 9924,
+      "uncompressed_sha256": "6c5ce3e3f454196c1177cb36a76bc8d256b8554600192d0c79ef49e620112eae",
+      "gzip_sha256": "a3f9fe4bd8e7c98175715f918ee3a657cab15cdcad832acdf996b9ef10bf3055"
+    }
+  ],
+  "executed_source_snapshot": {
+    "path": "tools/preflight_dpr.py",
+    "expected_runtime_sha256": "fdda9fe70b8b484a453c6f6f40ad8f176f984636e3fa7f758b6d4845d8a0e92d",
+    "reconstructed_sha256": "fdda9fe70b8b484a453c6f6f40ad8f176f984636e3fa7f758b6d4845d8a0e92d",
+    "exact_runtime_source_reconstructed": true
+  },
+  "source_drift_note": "During local03, strict admission checks and checkpoint purpose/scaler metadata validation were strengthened; after it, JSON nonfinite encoding and capacity effective-gradient rejection were hardened. No mathematical thresholds, seed, batch, forward, gradient, active optimizer, AMP, EMA, or recipe were changed in response to raw B/half failures. Local03 source_stable_during_checks=false and cannot grant server start.",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN",
+  "additional_runtime_source_snapshots": [
+    {
+      "path": "tools/dpr_checkpoint.py",
+      "runtime_sha256": "3f90823ab5e41857c6e753f13627f68ca6e2461755a195b9b89aaa9412e1df2c",
+      "snapshot_sha256": "3f90823ab5e41857c6e753f13627f68ca6e2461755a195b9b89aaa9412e1df2c",
+      "exact_snapshot": true
+    },
+    {
+      "path": "tools/init_dpr.py",
+      "runtime_sha256": "c59c57632ed00f1c2eae4e078e6654465a1ef4e114c71f90c7e944296a4f914c",
+      "snapshot_sha256": "c59c57632ed00f1c2eae4e078e6654465a1ef4e114c71f90c7e944296a4f914c",
+      "exact_snapshot": true
+    },
+    {
+      "path": "tools/check_dpr.py",
+      "runtime_sha256": "3f9185696d8ebf3e4ea7dce3a97614b76f99363cd62a634dd7894201b6425810",
+      "snapshot_sha256": "3f9185696d8ebf3e4ea7dce3a97614b76f99363cd62a634dd7894201b6425810",
+      "exact_snapshot": true
+    },
+    {
+      "path": "tools/dpr_data.py",
+      "runtime_sha256": "449594ded04e012bc90a04eca7ebbd24260c00685093b620425c0f2fe57a9a54",
+      "snapshot_sha256": "449594ded04e012bc90a04eca7ebbd24260c00685093b620425c0f2fe57a9a54",
+      "exact_snapshot": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/dpr.py",
+      "runtime_sha256": "c3696a330d16edc742f471c0200982c08690a7fd008c7f1e05dabbb31ccb0cc9",
+      "snapshot_sha256": "c3696a330d16edc742f471c0200982c08690a7fd008c7f1e05dabbb31ccb0cc9",
+      "exact_snapshot": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/tasks.py",
+      "runtime_sha256": "e9d28cc63b47b945d06f9435c75234491d641e4959e9780d2939a7da25f2a917",
+      "snapshot_sha256": "e9d28cc63b47b945d06f9435c75234491d641e4959e9780d2939a7da25f2a917",
+      "exact_snapshot": true
+    }
+  ]
+}

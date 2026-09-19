@@ -1,0 +1,52 @@
+{
+  "status": "PASSED",
+  "scope": "CPU Linear fixture for shared saver metadata and rejection paths; not detector or server admission",
+  "policy": {
+    "policy": "optimizer_fp32_v1",
+    "optimizer_param_names": [
+      [
+        "weight",
+        "bias"
+      ]
+    ],
+    "parameter_ids_by_group": [
+      [
+        0,
+        1
+      ]
+    ],
+    "state_entries": 2,
+    "fp32_moment_tensors": 4,
+    "original_tensors_inspected_before_cast": true,
+    "checkpoint_unmodified": true
+  },
+  "failures_rejected": {
+    "missing_scaler": {
+      "rejected": true,
+      "reason": "Checkpoint omits native continuation fields: ['scaler']"
+    },
+    "false_amp_mode": {
+      "rejected": true,
+      "reason": "Saved scaler enabled mode disagrees with original scaler state"
+    },
+    "missing_purpose": {
+      "rejected": true,
+      "reason": "Checkpoint purpose is absent or unsupported"
+    },
+    "half_optimizer": {
+      "rejected": true,
+      "reason": "Original AdamW checkpoint moment is not FP32; casting cannot recover lost information"
+    },
+    "nonfinite_step": {
+      "rejected": true,
+      "reason": "Invalid AdamW step counter"
+    },
+    "duplicate_name": {
+      "rejected": true,
+      "reason": "Checkpoint optimizer names must be unique original EMA parameter names"
+    }
+  },
+  "nonfinite_reporting": "explicit tagged JSON values; no model/tensor alteration",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN"
+}

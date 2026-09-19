@@ -1,0 +1,45 @@
+{
+  "base_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "base_blobs": {
+    "ultralytics-main/ultralytics/nn/modules/block.py": "7ee11e94e88c89abc1a6cce14b99e41fe6f1d2d6a8bb031bd4d45184609ca882",
+    "ultralytics-main/ultralytics/nn/tasks.py": "c5a19e3eaf10acf2a5aa6a53e4a3f9afd01d7b79e4f9a41744af9755d6ebcbd8",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-lif-down.yaml": "14192de425c6b3718af8a9dc42373db25a0ea725bf608f270e7241b8a66d603a",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite.yaml": "3493d693cbef958a38a2a135822a6c5379b65804905bc71566e395069e8f4f16"
+  },
+  "parent_args_source": "D:/rtdetr跑结果/C19＋LIF：原 CBR＋LIF-Down v1/training/args.yaml",
+  "parent_args_sha256": "31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b",
+  "recipe_appendix_exact": true,
+  "recipe_fields": 109,
+  "prompt_sha256": "13836088f8a008ab3618b4baea6f0fb0b366eff5d0faeafa9201974f7cf2278e",
+  "reference_zip": {
+    "status": "NOT_FOUND_NOT_READ",
+    "searched": [
+      "D:/rtdetr跑结果",
+      "D:/MyProjects/Crack_RTDETR",
+      "C:/Users/o'v'o/Downloads"
+    ],
+    "expected_sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+    "implementation_source": "User mathematical contract; no third-party archive source imported",
+    "license": "Repository AGPL-3.0; prompt is not a third-party code license"
+  },
+  "dataset": {
+    "train": {
+      "images": 6048,
+      "boxes": 45573,
+      "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+      "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"
+    },
+    "val": {
+      "images": 1728,
+      "boxes": 12840,
+      "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+      "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+    },
+    "test": {
+      "images": 864,
+      "boxes": 6663,
+      "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+      "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"
+    }
+  }
+}

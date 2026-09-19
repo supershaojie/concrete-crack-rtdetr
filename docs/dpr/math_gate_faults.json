@@ -1,0 +1,22 @@
+[
+  {
+    "case": "missing_math",
+    "rejected": true,
+    "reason": "DPR mathematical evidence rejected: CPU FP64 absent"
+  },
+  {
+    "case": "stale_source",
+    "rejected": true,
+    "reason": "DPR mathematical evidence rejected: mathematical source/config identity changed"
+  },
+  {
+    "case": "wrong_count",
+    "rejected": true,
+    "reason": "DPR mathematical evidence rejected: parameter counts differ"
+  },
+  {
+    "case": "fake_precision",
+    "rejected": true,
+    "reason": "DPR mathematical evidence rejected: unexplained precision note: native_fuse"
+  }
+]

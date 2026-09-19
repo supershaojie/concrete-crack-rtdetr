@@ -111,8 +111,11 @@ from .transformer import (
 
 from .lif_down import LIFDown
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
+from .dpr import BlocksDPR, DPRConvNormLayer
 
 __all__ = (
+    "BlocksDPR",
+    "DPRConvNormLayer",
     "LIFDown",
     "CrackBoundaryRefinement",
     "RTDETRDecoderCBR",

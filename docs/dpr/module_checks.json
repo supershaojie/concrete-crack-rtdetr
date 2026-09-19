@@ -1,0 +1,1582 @@
+{
+  "report_kind": "dpr_mathematical_structural_v1",
+  "status": "PASSED",
+  "torch_version": "2.7.1+cu118",
+  "source_root": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dpr-v1",
+  "source_identity": {
+    "tools/check_dpr.py": "3f9185696d8ebf3e4ea7dce3a97614b76f99363cd62a634dd7894201b6425810",
+    "ultralytics-main/ultralytics/nn/modules/dpr.py": "c3696a330d16edc742f471c0200982c08690a7fd008c7f1e05dabbb31ccb0cc9",
+    "ultralytics-main/ultralytics/nn/modules/__init__.py": "6b646c7f6c55f571c590584f28da7324ed3bf64b8c8c16a10eec5b34ca2871e1",
+    "ultralytics-main/ultralytics/nn/tasks.py": "a58525ac422b4a9597e06ba377b23bb9b65dcd4cfba280e1251944873c9db689",
+    "ultralytics-main/ultralytics/utils/torch_utils.py": "bdd313695c7e23c3a6921b32c8133a01b65fe3286ab3d31d919d27fd284c22b7",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-lif-down.yaml": "14192de425c6b3718af8a9dc42373db25a0ea725bf608f270e7241b8a66d603a",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-lif-dpr-v1.yaml": "1de254e8964f78f260df6ad068cf88c9ef3f0dcf231a7c50c3075cc5961996b6",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite.yaml": "3493d693cbef958a38a2a135822a6c5379b65804905bc71566e395069e8f4f16",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-dpr-v1.yaml": "fd0d1f7cb3ef81331a7da0733bcbbe68b4181a6f5b5c16becfde814e90c5514c"
+  },
+  "checks": {
+    "cpu_fp64_math": {
+      "status": "PASSED",
+      "device": "cpu",
+      "dtype": "float64",
+      "atol": 1e-10,
+      "rtol": 1e-09,
+      "mappings": {
+        "dpr_cd": {
+          "max_abs": 8.326672684688674e-17,
+          "zero_sum_max_abs": 8.326672684688674e-17
+        },
+        "dpr_hd": {
+          "max_abs": 0.0,
+          "zero_sum_max_abs": 2.7755575615628914e-17
+        },
+        "dpr_vd": {
+          "max_abs": 0.0,
+          "zero_sum_max_abs": 2.7755575615628914e-17
+        },
+        "dpr_ad": {
+          "max_abs": 0.0,
+          "zero_sum_max_abs": 5.551115123125783e-17
+        }
+      },
+      "gradients": {
+        "input": {
+          "max_abs_difference": 1.3322676295501878e-15,
+          "gradient_norm": 32.69649414971633
+        },
+        "conv.weight": {
+          "max_abs_difference": 0.0,
+          "gradient_norm": 1495.68937288475
+        },
+        "dpr_cd": {
+          "max_abs_difference": 3.552713678800501e-15,
+          "gradient_norm": 174.8011310664182
+        },
+        "dpr_hd": {
+          "max_abs_difference": 3.552713678800501e-15,
+          "gradient_norm": 102.21264243513183
+        },
+        "dpr_vd": {
+          "max_abs_difference": 3.552713678800501e-15,
+          "gradient_norm": 105.00370239757535
+        },
+        "dpr_ad": {
+          "max_abs_difference": 3.552713678800501e-15,
+          "gradient_norm": 175.66373015688856
+        }
+      },
+      "directional_gradcheck": true,
+      "forward_conv2d_calls": 1,
+      "half_kernel_arithmetic": "float32",
+      "nullspace": "CD center and AD center gradients exactly zero; groups have nonzero effective gradients"
+    },
+    "cbr_lif_dpr_v1": {
+      "status": "PASSED",
+      "variant": "cbr_lif_dpr_v1",
+      "nc": 1,
+      "device": "cpu",
+      "dtype": "float32",
+      "parent_yaml": "rtdetr-resnet18-lite-cbr-lif-down.yaml",
+      "target_yaml": "rtdetr-resnet18-lite-cbr-lif-dpr-v1.yaml",
+      "target": "model.5.blocks.1.branch2b",
+      "target_definition": {
+        "conv": "Conv2d(128,128,3,stride=1,padding=1,bias=False)",
+        "norm": "BatchNorm2d(128)",
+        "act": "Identity"
+      },
+      "public_state_equal": true,
+      "new_state_keys": [
+        "model.5.blocks.1.branch2b.dpr_cd",
+        "model.5.blocks.1.branch2b.dpr_hd",
+        "model.5.blocks.1.branch2b.dpr_vd",
+        "model.5.blocks.1.branch2b.dpr_ad"
+      ],
+      "new_buffers": [],
+      "graph_nodes": 27,
+      "changed_top_level_definition": [
+        5
+      ],
+      "shapes": {
+        "target": [
+          1,
+          128,
+          80,
+          80
+        ],
+        "P3": [
+          1,
+          128,
+          80,
+          80
+        ],
+        "P4": [
+          1,
+          256,
+          40,
+          40
+        ],
+        "P5": [
+          1,
+          512,
+          20,
+          20
+        ]
+      },
+      "parameters": {
+        "parent_unfused": 20149765,
+        "candidate_unfused": 20152837,
+        "new_trainable": 3072,
+        "native_fuse_without_dpr_fold": 19948037,
+        "standard_deploy": 19944965,
+        "parent_native_fused": 19944965
+      },
+      "gflops": {
+        "parent_unfused": 58.672512,
+        "raw_thop_candidate_incorrect": 56.7850752,
+        "candidate_corrected": 58.672512,
+        "missing_functional_conv": 1.8874368,
+        "standard_deploy": 57.5649536,
+        "parent_native_fused": 57.5649536,
+        "convention": "THOP MAC*2, conv/BN same as parent; kernel construction separately documented",
+        "kernel_construction": {
+          "difference_parameters": 3072,
+          "dense_diagonal_elements": 147456,
+          "dense_kernel_additions": 147456,
+          "note": "CD reduction, four maps, three delta sums, diag allocation and dense add each forward; not included in THOP convolution GFLOPs"
+        }
+      },
+      "zero_initialization": {
+        "status": "PASSED",
+        "details": {
+          "target": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          },
+          "P3": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          },
+          "P4": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          },
+          "P5": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          },
+          "encoder_features": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          },
+          "candidate_scores": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          },
+          "output": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          },
+          "candidate_index_changes": 0
+        }
+      },
+      "nonzero_fixture": {
+        "source": "two local synthetic MSE updates, not detector loss",
+        "losses": [
+          1.3010149002075195,
+          1.2043853998184204
+        ],
+        "gradients": [
+          {
+            "dpr_cd": 0.0755748301744461,
+            "dpr_hd": 0.04680066928267479,
+            "dpr_vd": 0.04462409391999245,
+            "dpr_ad": 0.07182440906763077,
+            "conv.weight": 0.6292629837989807
+          },
+          {
+            "dpr_cd": 0.07105609774589539,
+            "dpr_hd": 0.04424799233675003,
+            "dpr_vd": 0.0421675406396389,
+            "dpr_ad": 0.0678345113992691,
+            "conv.weight": 0.6019430756568909
+          }
+        ]
+      },
+      "learned_lifecycle": {
+        "device": "cpu",
+        "dtype": "torch.float32",
+        "input_shape": [
+          1,
+          3,
+          640,
+          640
+        ],
+        "checks": {
+          "training_state_reload": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          },
+          "training_full_reload": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          },
+          "ema_retains_nonzero": {
+            "status": "PASSED",
+            "updates": 1
+          },
+          "dpr_fold_only": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          },
+          "deploy_state_reload": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          },
+          "deploy_full_reload_idempotent": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          },
+          "native_fuse": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 1.6391277313232422e-06,
+                "relative_L2": 8.743419499523952e-08,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 7.152557373046875e-07,
+                "relative_L2": 2.3206462174130138e-07,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 1.7881393432617188e-07,
+                "relative_L2": 5.7940159337022124e-08,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          },
+          "native_fuse_again": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          },
+          "autobackend_saved_best": {
+            "status": "PASSED",
+            "comparison": {
+              "raw_allclose": true,
+              "max_abs": 1.7881393432617188e-07,
+              "relative_L2": 5.149833626205691e-08,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002
+            },
+            "deployed": true,
+            "norm_retained": true
+          },
+          "native_fused_saved_reload": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          }
+        },
+        "status": "PASSED"
+      }
+    },
+    "dpr_v1": {
+      "status": "PASSED",
+      "variant": "dpr_v1",
+      "nc": 1,
+      "device": "cpu",
+      "dtype": "float32",
+      "parent_yaml": "rtdetr-resnet18-lite.yaml",
+      "target_yaml": "rtdetr-resnet18-lite-dpr-v1.yaml",
+      "target": "model.5.blocks.1.branch2b",
+      "target_definition": {
+        "conv": "Conv2d(128,128,3,stride=1,padding=1,bias=False)",
+        "norm": "BatchNorm2d(128)",
+        "act": "Identity"
+      },
+      "public_state_equal": true,
+      "new_state_keys": [
+        "model.5.blocks.1.branch2b.dpr_cd",
+        "model.5.blocks.1.branch2b.dpr_hd",
+        "model.5.blocks.1.branch2b.dpr_vd",
+        "model.5.blocks.1.branch2b.dpr_ad"
+      ],
+      "new_buffers": [],
+      "graph_nodes": 27,
+      "changed_top_level_definition": [
+        5
+      ],
+      "shapes": {
+        "target": [
+          1,
+          128,
+          80,
+          80
+        ],
+        "P3": [
+          1,
+          128,
+          80,
+          80
+        ],
+        "P4": [
+          1,
+          256,
+          40,
+          40
+        ],
+        "P5": [
+          1,
+          512,
+          20,
+          20
+        ]
+      },
+      "parameters": {
+        "parent_unfused": 20082772,
+        "candidate_unfused": 20085844,
+        "new_trainable": 3072,
+        "native_fuse_without_dpr_fold": 19880788,
+        "standard_deploy": 19877716,
+        "parent_native_fused": 19877716
+      },
+      "gflops": {
+        "parent_unfused": 58.276608,
+        "raw_thop_candidate_incorrect": 56.3891712,
+        "candidate_corrected": 58.276608,
+        "missing_functional_conv": 1.8874368,
+        "standard_deploy": 57.1657728,
+        "parent_native_fused": 57.1657728,
+        "convention": "THOP MAC*2, conv/BN same as parent; kernel construction separately documented",
+        "kernel_construction": {
+          "difference_parameters": 3072,
+          "dense_diagonal_elements": 147456,
+          "dense_kernel_additions": 147456,
+          "note": "CD reduction, four maps, three delta sums, diag allocation and dense add each forward; not included in THOP convolution GFLOPs"
+        }
+      },
+      "zero_initialization": {
+        "status": "PASSED",
+        "details": {
+          "target": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          },
+          "P3": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          },
+          "P4": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          },
+          "P5": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          },
+          "encoder_features": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          },
+          "candidate_scores": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          },
+          "output": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002
+          },
+          "candidate_index_changes": 0
+        }
+      },
+      "nonzero_fixture": {
+        "source": "two local synthetic MSE updates, not detector loss",
+        "losses": [
+          1.2252998352050781,
+          1.1313964128494263
+        ],
+        "gradients": [
+          {
+            "dpr_cd": 0.07349575310945511,
+            "dpr_hd": 0.04446126148104668,
+            "dpr_vd": 0.039872024208307266,
+            "dpr_ad": 0.06809667497873306,
+            "conv.weight": 0.6130427718162537
+          },
+          {
+            "dpr_cd": 0.06893003731966019,
+            "dpr_hd": 0.041954755783081055,
+            "dpr_vd": 0.0375588983297348,
+            "dpr_ad": 0.06418158113956451,
+            "conv.weight": 0.5855916738510132
+          }
+        ]
+      },
+      "learned_lifecycle": {
+        "device": "cpu",
+        "dtype": "torch.float32",
+        "input_shape": [
+          1,
+          3,
+          640,
+          640
+        ],
+        "checks": {
+          "training_state_reload": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          },
+          "training_full_reload": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          },
+          "ema_retains_nonzero": {
+            "status": "PASSED",
+            "updates": 1
+          },
+          "dpr_fold_only": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          },
+          "deploy_state_reload": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          },
+          "deploy_full_reload_idempotent": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          },
+          "native_fuse": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 1.9371509552001953e-06,
+                "relative_L2": 8.705743681503009e-08,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 7.748603820800781e-07,
+                "relative_L2": 2.3981314711818413e-07,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 1.7881393432617188e-07,
+                "relative_L2": 5.9069090951879843e-08,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          },
+          "native_fuse_again": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          },
+          "autobackend_saved_best": {
+            "status": "PASSED",
+            "comparison": {
+              "raw_allclose": true,
+              "max_abs": 1.1920928955078125e-07,
+              "relative_L2": 5.339119013569871e-08,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002
+            },
+            "deployed": true,
+            "norm_retained": true
+          },
+          "native_fused_saved_reload": {
+            "status": "PASSED",
+            "details": {
+              "target": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P3": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P4": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "P5": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "encoder_features": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_scores": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "output": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002
+              },
+              "candidate_index_changes": 0
+            }
+          }
+        },
+        "status": "PASSED"
+      }
+    }
+  },
+  "real_detection_loss": "PENDING_SEPARATE_PREFLIGHT",
+  "cuda_lifecycle": "PENDING_SEPARATE_PREFLIGHT",
+  "capacity_B16_640_AMP": "PENDING_SEPARATE_PREFLIGHT",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN",
+  "elapsed_seconds": 65.83641195297241
+}

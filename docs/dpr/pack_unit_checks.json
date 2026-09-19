@@ -1,0 +1,118 @@
+{
+  "status": "PASSED",
+  "scope": "Synthetic unit fixtures only; no real val/test or training invoked",
+  "pack_source_sha256": "bbe9c7ae625ad95523a869e5d7507477dd8c426a2fc63007cb1991be230be76b",
+  "checks": [
+    {
+      "case": "synthetic_complete_fixture",
+      "status": "PASSED",
+      "missing": []
+    },
+    {
+      "case": "failed_metrics_with_existing_curve",
+      "status": "PASSED",
+      "missing": [
+        "test metrics: metadata/evaluation_test/metrics.json: evaluation did not complete",
+        "test PR curve: no successful matching evaluation",
+        "test confusion matrix: no successful matching evaluation"
+      ]
+    },
+    {
+      "case": "missing_core_map",
+      "status": "PASSED",
+      "missing": [
+        "test metrics: metadata/evaluation_test/metrics.json: missing/nonfinite mAP50_95",
+        "test PR curve: no successful matching evaluation",
+        "test confusion matrix: no successful matching evaluation"
+      ]
+    },
+    {
+      "case": "wrong_variant",
+      "status": "PASSED",
+      "missing": [
+        "test metrics: metadata/evaluation_test/metrics.json: wrong variant",
+        "test PR curve: no successful matching evaluation",
+        "test confusion matrix: no successful matching evaluation"
+      ]
+    },
+    {
+      "case": "different_frozen_checkpoint",
+      "status": "PASSED",
+      "missing": [
+        "test metrics: metadata/evaluation_test/metrics.json: different frozen best SHA",
+        "test PR curve: no successful matching evaluation",
+        "test confusion matrix: no successful matching evaluation"
+      ]
+    },
+    {
+      "case": "different_source_head",
+      "status": "PASSED",
+      "missing": [
+        "val metrics: metadata/evaluation_val/metrics.json: wrong evaluation source HEAD",
+        "val PR curve: no successful matching evaluation",
+        "val confusion matrix: no successful matching evaluation"
+      ]
+    },
+    {
+      "case": "failed_initialization",
+      "status": "PASSED",
+      "missing": [
+        "initialization audit: metadata/check/init.json: initialization did not pass",
+        "preflight report: metadata/check/bounded/preflight.json: different initialization"
+      ]
+    },
+    {
+      "case": "mismatched_val_test_data",
+      "status": "PASSED",
+      "missing": [
+        "test metrics: metadata/evaluation_test/metrics.json: val/test data config differs",
+        "test PR curve: no successful matching evaluation",
+        "test confusion matrix: no successful matching evaluation"
+      ]
+    },
+    {
+      "case": "missing_confusion_matrix",
+      "status": "PASSED",
+      "missing": [
+        "test confusion matrix: missing PNG in selected successful evaluation"
+      ]
+    },
+    {
+      "case": "missing_data_config_sha",
+      "status": "PASSED",
+      "missing": [
+        "frozen best selection: no eligible report",
+        "initialization audit: no eligible report",
+        "preflight report: no eligible report",
+        "training completion state: no eligible report",
+        "training args: missing/invalid or wrong variant ('training/args.yaml')",
+        "training results: missing/invalid ('training/results.csv')",
+        "val metrics: no eligible report",
+        "val PR curve: no successful matching evaluation",
+        "val confusion matrix: no successful matching evaluation",
+        "test metrics: metadata/evaluation_test/metrics.json: evaluation did not complete; wrong variant; wrong policy; incomplete split/export; different frozen best SHA; wrong evaluation source HEAD; different frozen dataset; missing data configuration SHA256; wrong effective evaluation settings; missing/nonfinite precision; missing/nonfinite recall; missing/nonfinite mAP50; missing/nonfinite AP75; missing/nonfinite mAP50_95; missing/invalid ten IoU AP values; missing/wrong full-split images; missing/wrong full-split ground_truth; missing/nonfinite speed metrics",
+        "test PR curve: no successful matching evaluation",
+        "test confusion matrix: no successful matching evaluation"
+      ]
+    },
+    {
+      "case": "malformed_nested_report",
+      "status": "PASSED",
+      "missing": [
+        "frozen best selection: no eligible report",
+        "initialization audit: metadata/init.json: invalid report schema: 'NoneType' object has no attribute 'get'",
+        "preflight report: no eligible report",
+        "training completion state: no eligible report",
+        "training args: missing/invalid or wrong variant ('training/args.yaml')",
+        "training results: missing/invalid ('training/results.csv')",
+        "val metrics: no eligible report",
+        "val PR curve: no successful matching evaluation",
+        "val confusion matrix: no successful matching evaluation",
+        "test metrics: no eligible report",
+        "test PR curve: no successful matching evaluation",
+        "test confusion matrix: no successful matching evaluation"
+      ]
+    }
+  ],
+  "latest_source_sha256": "5f47be3bd5a55deff9572501bbb224960e01fb6f5749a0f8ae91c5cf48d0dd97"
+}

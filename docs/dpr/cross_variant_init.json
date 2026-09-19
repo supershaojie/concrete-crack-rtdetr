@@ -1,0 +1,9 @@
+{
+  "status": "PASSED",
+  "four_new_tensor_initial_values_equal": true,
+  "variants": [
+    "cbr_lif_dpr_v1",
+    "dpr_v1"
+  ],
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e"
+}

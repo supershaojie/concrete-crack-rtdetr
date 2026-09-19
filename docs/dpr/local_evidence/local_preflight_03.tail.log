@@ -1,0 +1,101 @@
+Readable tail (trailing whitespace stripped); original bytes are retained in local_preflight_03.log.gz.
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\tools\preflight_dpr.py:178: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  trainer.scaler = torch.cuda.amp.GradScaler(enabled=amp)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\tools\preflight_dpr.py:178: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  trainer.scaler = torch.cuda.amp.GradScaler(enabled=amp)
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 552/552 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\tools\preflight_dpr.py:313: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  trainer.scaler = torch.cuda.amp.GradScaler(enabled=amp)
+Resuming training D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\outputs\dpr\dpr_lifecycle_2ph14o5q\native_checkpoint\last.pt from epoch 2 to 200 total epochs
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 552/552 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Resuming training D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\outputs\dpr\dpr_lifecycle_2ph14o5q\native_checkpoint\last.pt from epoch 2 to 200 total epochs
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 552/552 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Resuming training D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\outputs\dpr\dpr_lifecycle_2ph14o5q\native_checkpoint\last.pt from epoch 2 to 200 total epochs
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 552/552 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Resuming training D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\outputs\dpr\dpr_lifecycle_2ph14o5q\native_checkpoint\last.pt from epoch 2 to 200 total epochs
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 552/552 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Resuming training D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\outputs\dpr\dpr_lifecycle_2ph14o5q\native_checkpoint\last.pt from epoch 2 to 200 total epochs
+rtdetr-resnet18-lite-cbr-lif-dpr-v1 summary: 231 layers, 19,944,965 parameters, 16,564,741 gradients, 57.6 GFLOPs
+BEGIN lifecycle cuda_fp32
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+D:\miniconda3\envs\rtdetr\lib\site-packages\torch\autograd\graph.py:824: UserWarning: grid_sampler_2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\aten\src\ATen\Context.cpp:97.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 552/552 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Resuming training D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\outputs\dpr\dpr_lifecycle_7zu8hhlb\native_checkpoint\last.pt from epoch 2 to 200 total epochs
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 552/552 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Resuming training D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\outputs\dpr\dpr_lifecycle_7zu8hhlb\native_checkpoint\last.pt from epoch 2 to 200 total epochs
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 552/552 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Resuming training D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\outputs\dpr\dpr_lifecycle_7zu8hhlb\native_checkpoint\last.pt from epoch 2 to 200 total epochs
+rtdetr-resnet18-lite-cbr-lif-dpr-v1 summary: 231 layers, 19,944,965 parameters, 16,564,741 gradients, 57.6 GFLOPs
+rtdetr-resnet18-lite-cbr-lif-dpr-v1 summary: 231 layers, 19,944,965 parameters, 16,564,741 gradients, 57.6 GFLOPs
+BEGIN lifecycle cuda_native_amp
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 130 weight(decay=0.0001), 134 bias(decay=0.0)
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 552/552 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Resuming training D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\outputs\dpr\dpr_lifecycle_uqwsrh_2\native_checkpoint\last.pt from epoch 2 to 200 total epochs
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 552/552 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Resuming training D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\outputs\dpr\dpr_lifecycle_uqwsrh_2\native_checkpoint\last.pt from epoch 2 to 200 total epochs
+Overriding model.yaml nc=80 with nc=1
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 552/552 items from pretrained weights
+WARNING no model scale passed. Assuming scale='l'.
+Transferred 556/556 items from pretrained weights
+[34m[1moptimizer:[0m AdamW(lr=0.0005, momentum=0.937) with parameter groups 81 weight(decay=0.0), 134 weight(decay=0.0001), 134 bias(decay=0.0)
+Resuming training D:\MyProjects\Crack_RTDETR\outputs\worktrees\Crack_RTDETR-dpr-v1\outputs\dpr\dpr_lifecycle_uqwsrh_2\native_checkpoint\last.pt from epoch 2 to 200 total epochs
+{
+  "status": "FAILED",
+  "report": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dpr-v1\\outputs\\dpr\\local_preflight_03\\preflight.json"
+}

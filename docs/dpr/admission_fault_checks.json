@@ -1,0 +1,77 @@
+{
+  "report_kind": "dpr_gate_fault_unit_test",
+  "scope": "Mocked runtime and metrics; NO server/CUDA/preflight/permit evidence",
+  "status": "PASSED",
+  "cases": [
+    {
+      "case": "complete_mock_schema",
+      "accepted": true,
+      "scope": "Only unit fixture; not actual preflight"
+    },
+    {
+      "case": "missing_capacity",
+      "rejected": true,
+      "reason": "Missing complete preflight check categories"
+    },
+    {
+      "case": "missing_A_tensor_inventory",
+      "rejected": true,
+      "reason": "cpu_fp32:saved byte restoration: incomplete model/EMA tensor inventory"
+    },
+    {
+      "case": "missing_saved_optimizer_raw_evidence",
+      "rejected": true,
+      "reason": "cpu_fp32:saved live FP32 optimizer: missing/nonfinite tensor evidence"
+    },
+    {
+      "case": "failed_cpu_native_continuation",
+      "rejected": true,
+      "reason": "CPU actual native saved-state continuation differs"
+    },
+    {
+      "case": "false_A_summary",
+      "rejected": true,
+      "reason": "cpu_fp32:same gradient replay: not exact"
+    },
+    {
+      "case": "missing_B_control",
+      "rejected": true,
+      "reason": "Missing matched live parent/candidate controls"
+    },
+    {
+      "case": "fake_B_precision_note",
+      "rejected": true,
+      "reason": "Unsupported/unexplained backward precision note"
+    },
+    {
+      "case": "fake_fusion_precision_note",
+      "rejected": true,
+      "reason": "Candidate precision note lacks continuous/fixed-candidate evidence: cuda_fp32:native_fuse"
+    },
+    {
+      "case": "cpu_as_cuda_inference",
+      "rejected": true,
+      "reason": "Learned inference device/precision mismatch: cuda_fp32"
+    },
+    {
+      "case": "missing_half_reload",
+      "rejected": true,
+      "reason": "Inference leaf incomplete: cuda_half:half_deploy_reload"
+    },
+    {
+      "case": "supported_candidate_precision_note",
+      "accepted": true,
+      "scope": "Synthetic note used only for gate logic"
+    },
+    {
+      "case": "supported_subtolerance_gradient_precision_note",
+      "accepted": true,
+      "scope": "Synthetic gate fixture, original raw_allclose remains false"
+    },
+    {
+      "case": "state_difference_without_gradient_support",
+      "rejected": true,
+      "reason": "Backward precision note lacks finite differing gradients for each failed persistent tensor"
+    }
+  ]
+}

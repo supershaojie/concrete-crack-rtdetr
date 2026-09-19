@@ -1,0 +1,170 @@
+{
+  "timestamp": "2026-09-19T06:59:30.300711+00:00",
+  "python": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+  "checks": [
+    {
+      "tool": "tools/init_dpr.py",
+      "args": [
+        "--help"
+      ],
+      "status": "PASSED",
+      "returncode": 0,
+      "source_sha256": "c59c57632ed00f1c2eae4e078e6654465a1ef4e114c71f90c7e944296a4f914c",
+      "stdout": "usage: init_dpr.py [-h] [--variant {cbr_lif_dpr_v1,dpr_v1}] --source SOURCE\n                   [--output OUTPUT] [--report REPORT] [--verify-existing]\n\nDPR-1 controlled public initialization and actual nc=1 Trainer rebuild audit.\nThis entry never optimizes a model. Its train-entry audit stops immediately\nafter the native RTDETR.train -> Trainer.get_model reconstruction, before data\nloading.\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --variant {cbr_lif_dpr_v1,dpr_v1}\n  --source SOURCE\n  --output OUTPUT\n  --report REPORT\n  --verify-existing     Reaudit an existing exact controlled init without\n                        replacing it\n",
+      "stderr": ""
+    },
+    {
+      "tool": "tools/eval_dpr.py",
+      "args": [
+        "--help"
+      ],
+      "status": "PASSED",
+      "returncode": 0,
+      "source_sha256": "929d1158ab120babee522e4b17b35576816e103abb647d949ee6361a71074c9a",
+      "stdout": "usage: eval_dpr.py [-h] [--variant {cbr_lif_dpr_v1,dpr_v1}] --weights WEIGHTS\n                   --data DATA [--output OUTPUT] [--val-report VAL_REPORT]\n                   [--launch LAUNCH] [--device DEVICE]\n                   {val,test}\n\nDPR independent val/test using the successful parent corrected final-box\nprotocol.\n\npositional arguments:\n  {val,test}\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --variant {cbr_lif_dpr_v1,dpr_v1}\n  --weights WEIGHTS\n  --data DATA\n  --output OUTPUT\n  --val-report VAL_REPORT\n  --launch LAUNCH       Completed training launch record; defaults to latest\n                        for variant\n  --device DEVICE\n",
+      "stderr": ""
+    },
+    {
+      "tool": "tools/pack_dpr_light.py",
+      "args": [
+        "--help"
+      ],
+      "status": "PASSED",
+      "returncode": 0,
+      "source_sha256": "5f47be3bd5a55deff9572501bbb224960e01fb6f5749a0f8ae91c5cf48d0dd97",
+      "stdout": "usage: pack_dpr_light.py [-h] [--variant {cbr_lif_dpr_v1,dpr_v1}]\n                         [--output OUTPUT] [--run-dir RUN_DIR]\n                         [--metadata METADATA]\n\nCreate and read-back verify a <20 MiB evidence archive; never invokes\ntraining/evaluation.\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --variant {cbr_lif_dpr_v1,dpr_v1}\n  --output OUTPUT\n  --run-dir RUN_DIR\n  --metadata METADATA\n",
+      "stderr": ""
+    },
+    {
+      "tool": "tools/train_dpr.py",
+      "args": [
+        "--help"
+      ],
+      "status": "PASSED",
+      "returncode": 0,
+      "source_sha256": "2467b75cb8a638e43be0be007794699b2534887c456a6e434d673b1b4c8e501e",
+      "stdout": "usage: train_dpr.py [-h] [--variant {cbr_lif_dpr_v1,dpr_v1}] [--source SOURCE]\n                    [--initialized INITIALIZED] [--data DATA]\n                    [--report REPORT] [--checkpoint CHECKPOINT]\n                    {environment,plan,verify,start,resume}\n\nDPR formal training admission, unchanged parent recipe, and explicit resume.\nPreflight never calls start. Formal start accepts only current, complete\nserver evidence. A completed training run is never silently restarted after\nfinal val.\n\npositional arguments:\n  {environment,plan,verify,start,resume}\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --variant {cbr_lif_dpr_v1,dpr_v1}\n  --source SOURCE\n  --initialized INITIALIZED\n  --data DATA\n  --report REPORT\n  --checkpoint CHECKPOINT\n",
+      "stderr": ""
+    },
+    {
+      "tool": "tools/preflight_dpr.py",
+      "args": [
+        "--help"
+      ],
+      "status": "PASSED",
+      "returncode": 0,
+      "source_sha256": "3326b46deef024758631c5c3c3bbc8a6a73cd8ffdb84ecc36203e8389651e851",
+      "stdout": "usage: preflight_dpr.py [-h] [--variant {cbr_lif_dpr_v1,dpr_v1}]\n                        [--source SOURCE] [--initialized INITIALIZED]\n                        [--data DATA] [--init-report INIT_REPORT]\n                        [--math-report MATH_REPORT] [--output OUTPUT]\n                        [--device {cpu,cuda,all}] [--capacity]\n                        [--threads THREADS]\n\nBounded real-data DPR engineering checks; never starts formal training or\ntest. CPU/CUDA B2/160 lifecycle probes are distinct from native B16/640 AMP\ncapacity. Every invocation owns a fresh timestamp directory. Unknown checks\nremain PENDING.\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --variant {cbr_lif_dpr_v1,dpr_v1}\n  --source SOURCE\n  --initialized INITIALIZED\n  --data DATA\n  --init-report INIT_REPORT\n  --math-report MATH_REPORT\n  --output OUTPUT\n  --device {cpu,cuda,all}\n  --capacity            Run original B16/640/AMP native training path, at most\n                        16 batches\n  --threads THREADS\n",
+      "stderr": ""
+    },
+    {
+      "tool": "tools/check_dpr.py",
+      "args": [
+        "--help"
+      ],
+      "status": "PASSED",
+      "returncode": 0,
+      "source_sha256": "3f9185696d8ebf3e4ea7dce3a97614b76f99363cd62a634dd7894201b6425810",
+      "stdout": "usage: check_dpr.py [-h] [--variant {both,cbr_lif_dpr_v1,dpr_v1}] --output\n                    OUTPUT [--imgsz IMGSZ] [--threads THREADS] [--math-only]\n\nBounded DPR mathematics/structure/deployment checks; never starts training or\ntest. Random model checks are explicitly not public-source initialization\nevidence. Real detection-loss, native optimizer/resume and B16 CUDA evidence\nbelong to preflight.\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --variant {both,cbr_lif_dpr_v1,dpr_v1}\n  --output OUTPUT\n  --imgsz IMGSZ\n  --threads THREADS\n  --math-only\n",
+      "stderr": ""
+    }
+  ],
+  "pending": [],
+  "scope": "Help only; no training or evaluation run",
+  "shell_checks": [
+    {
+      "tool": "tools/dpr_server.sh",
+      "args": [
+        "-n",
+        "tools/dpr_server.sh"
+      ],
+      "status": "PASSED",
+      "returncode": 0,
+      "source_sha256": "417f91913fadf2cd9f659103a9917136acdcdfe0f0ef659d5f9bc4b88d953f96",
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "tool": "tools/sync_dpr.sh",
+      "args": [
+        "-n",
+        "tools/sync_dpr.sh"
+      ],
+      "status": "PASSED",
+      "returncode": 0,
+      "source_sha256": "ac0dcd5a0420ac6465f278b846f6382c1cfd75893cb37635ba4191f496be5a75",
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "tool": "tools/dpr_server.sh",
+      "args": [
+        "tools/dpr_server.sh",
+        "--help"
+      ],
+      "status": "PASSED",
+      "returncode": 0,
+      "source_sha256": "417f91913fadf2cd9f659103a9917136acdcdfe0f0ef659d5f9bc4b88d953f96",
+      "stdout": "Usage: bash tools/dpr_server.sh ACTION [tool arguments]\nActions: environment | init | init-preflight | plan | start | resume | val | test | pack\nSet DPR_VARIANT=cbr_lif_dpr_v1 (default) or dpr_v1.\nSet DPR_MAIN only to an explicitly verified equivalent main repository/data root.\ninit-preflight performs initialization, CPU mathematical/structure checks,\nCPU/CUDA lifecycle checks, and native B16/640/AMP capacity (<=16 batches).\nIt never starts formal training, evaluation, or the other variant automatically.\nresume requires --checkpoint PATH; val/test require --weights PATH (test also\nrequires --val-report PATH). pack forwards --run-dir/--output/--metadata.\n",
+      "stderr": ""
+    }
+  ],
+  "server_runtime": "PENDING: Linux Conda activation and server execution were not performed; no server login",
+  "server_cli_mapping": {
+    "status": "PASSED",
+    "method": "Read server action routing and cross-checked arguments against executed Python --help.",
+    "routes": {
+      "environment": "train_dpr.py environment --variant",
+      "plan": "train_dpr.py plan --variant --source --initialized --data",
+      "init": "init_dpr.py --variant --source --output --report [--verify-existing]; check_dpr.py --variant --output --imgsz",
+      "init-preflight": "init plus preflight_dpr.py --variant --source --initialized --data --init-report --math-report --output --device all --capacity; train_dpr.py verify --report",
+      "start/resume": "train_dpr.py start/resume --variant --source --initialized --data; resume requires --checkpoint",
+      "val/test": "eval_dpr.py val/test --variant --data; caller supplies --weights and test --val-report; --launch supported",
+      "pack": "pack_dpr_light.py --variant; forwards --run-dir/--output/--metadata"
+    },
+    "shell_paths": "Current worktree PYTHONPATH verified by runtime assertion; main/source/data/run roots match contract; Conda source runs before set -u.",
+    "pipeline_error_recording": "Command and tee status retained separately; effective exit prioritizes command failure, then tee failure."
+  },
+  "pipeline_exit_checks": {
+    "status": "PASSED",
+    "method": "Executed exact shared PIPESTATUS selection block extracted from all three server pipeline routes with simulated command/tee exit codes.",
+    "cases": [
+      {
+        "command_exit": 0,
+        "tee_exit": 0,
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "status": "PASSED",
+        "stdout": "0 0 0\n",
+        "stderr": ""
+      },
+      {
+        "command_exit": 7,
+        "tee_exit": 0,
+        "expected_exit": 7,
+        "actual_exit": 7,
+        "status": "PASSED",
+        "stdout": "7 0 7\n",
+        "stderr": ""
+      },
+      {
+        "command_exit": 0,
+        "tee_exit": 9,
+        "expected_exit": 9,
+        "actual_exit": 9,
+        "status": "PASSED",
+        "stdout": "0 9 9\n",
+        "stderr": ""
+      },
+      {
+        "command_exit": 7,
+        "tee_exit": 9,
+        "expected_exit": 7,
+        "actual_exit": 7,
+        "status": "PASSED",
+        "stdout": "7 9 7\n",
+        "stderr": ""
+      }
+    ]
+  }
+}

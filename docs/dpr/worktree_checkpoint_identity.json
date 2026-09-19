@@ -1,0 +1,13 @@
+{
+  "status": "PASSED",
+  "scope": "CPU Linear metadata fixture only; no detector training/val/test",
+  "actual_head": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "native_git_commit": null,
+  "saved_code_head": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "fp32_optimizer_unchanged": true,
+  "original_native_git_fields_preserved": true,
+  "first_fixture_attempt": {
+    "status": "FAILED",
+    "reason": "Fixture omitted train_args.optimizer; policy correctly rejected. Fixture corrected to AdamW; production policy not relaxed."
+  }
+}
