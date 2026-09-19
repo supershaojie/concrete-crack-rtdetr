@@ -1,0 +1,2509 @@
+{
+  "status": "BLOCKED",
+  "collection_status": "COMPLETED",
+  "elapsed_seconds": 138.04699999999866,
+  "source_stable": true,
+  "profiler": {
+    "version": "2.1.6",
+    "mode": "accumulate_children",
+    "nested_probe_ops": 18.0,
+    "parent_probe_ops": 7,
+    "child_probe_ops": 11
+  },
+  "raw_blockers": [
+    "cuda_fp32/B",
+    "cuda_fp32/original_half_checks",
+    "cuda_native_amp/B"
+  ],
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN",
+  "capacity": "NOT_RUN_DIAGNOSTIC",
+  "checkpoint_A": "NOT_RERUN_DIAGNOSTIC",
+  "scope": "Local Windows torch 2.7.1+cu118; exact server torch 2.1.2+cu121 PENDING. No full-preflight admission.",
+  "code_identity": {
+    "head": "2f4319281cac92a1e56663c3c4a48ba7bafc6ccb",
+    "files": {
+      "docs/dpr/parent_args.yaml": "31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b",
+      "docs/dpr/parent_dataset_inventory.json": "8567e1b4d1aae5f168fb18b633ed4357c7f0aba56c0041a6570647fb542d0446",
+      "tools/c19_lif_v1_data.py": "3727e5f6560d6ffa755ba83700f0ce232d38fae0bec4e272a92958e5e8bdaa56",
+      "tools/check_dpr.py": "79a4a79d3a567495ba68ada2a993f12b61ec9309f01855c72d8884c2ca282541",
+      "tools/diagnose_dpr.py": "008db43f62a70e86e1c4c266248e41291965b9f7780ae89f4e91a769482115e0",
+      "tools/dpr_checkpoint.py": "221bfd0c6ac680d515650eb256aa9f5377d5b4d1cfc2a3307851fd175fa72261",
+      "tools/dpr_data.py": "449594ded04e012bc90a04eca7ebbd24260c00685093b620425c0f2fe57a9a54",
+      "tools/dpr_diagnostics.py": "5dc0bbb49be84af06a3c326233eb2a2bbeea68ace760d692d14df6a3dbc82b7b",
+      "tools/dpr_server.sh": "c05cb49eca33aa361e5a732bc3ee059644004c825b8e92520e3ba5e63a2b22c5",
+      "tools/eval_dpr.py": "929d1158ab120babee522e4b17b35576816e103abb647d949ee6361a71074c9a",
+      "tools/init_c19_lif_v1.py": "9dc02505d3fd9081c42dd2f59e553eac71f0ed945760c7510e352e7038a03c79",
+      "tools/init_dpr.py": "c59c57632ed00f1c2eae4e078e6654465a1ef4e114c71f90c7e944296a4f914c",
+      "tools/init_lif_down.py": "a62c78fded37350c8cfb9d34dab21e7f76694cc22fcbed40033288ec9d4ab769",
+      "tools/pack_dpr_light.py": "5f47be3bd5a55deff9572501bbb224960e01fb6f5749a0f8ae91c5cf48d0dd97",
+      "tools/preflight_dpr.py": "7056bb35e4a8b0dfead7b33f2520a6912ad99e9ab7b405f1b7f682815c4db26f",
+      "tools/sync_dpr.sh": "ac0dcd5a0420ac6465f278b846f6382c1cfd75893cb37635ba4191f496be5a75",
+      "tools/test_dpr_diagnostics.py": "390d40bd7767f7f3d2cdcd83fab501784461f1f78e86019d4324c4c68b489eca",
+      "tools/train_dpr.py": "fd7e98cbe1557dc160bbb37c2a65103edcdfbaef6a0ad18bf755d4570b85ba8f",
+      "ultralytics-main/ultralytics/__init__.py": "f3d4af8d98af16b4065da995d30cd3b9c93e793178c859535794823ebd5ddda0",
+      "ultralytics-main/ultralytics/cfg/__init__.py": "a12c0bbfb3b0c61caa64575fa0049be203d460b0cc1c2d5f17038a67a5aa56e0",
+      "ultralytics-main/ultralytics/cfg/datasets/african-wildlife.yaml": "017a7f7adc990f9ecfbb096f56cba47e45069b0bb58a705fc99f9461994ba44a",
+      "ultralytics-main/ultralytics/cfg/datasets/Argoverse.yaml": "f97b4f1fb020d2b1b8aff01f15cf90fb53639e1ac7b81cc878a4f187741bd22a",
+      "ultralytics-main/ultralytics/cfg/datasets/brain-tumor.yaml": "5bcf63533b94a4d14e8f75439fd10dbbdca111e7eb92a36ea850f78a27b95484",
+      "ultralytics-main/ultralytics/cfg/datasets/carparts-seg.yaml": "45ca7438e226623c2d005079ed5cf1615ca93b0528e4a85be8b6517fcf4d27fa",
+      "ultralytics-main/ultralytics/cfg/datasets/coco-pose.yaml": "b73df9ceaab08e941fb47e4d31d6b79efbf15c5d6ea71c271513a0ea8bc51eb4",
+      "ultralytics-main/ultralytics/cfg/datasets/coco.yaml": "3b399e1f643060c20aec3c98ad3d6ff46aef182b7b803ba80cc338dd7a8f9a8c",
+      "ultralytics-main/ultralytics/cfg/datasets/coco12-formats.yaml": "4354a459722be1968d1142a7cda0efded2fb67a1eaa06322fbb5a5745304e755",
+      "ultralytics-main/ultralytics/cfg/datasets/coco128-seg.yaml": "d378b2dcb69390c160d6c6809ba851f157660469727a0616f33e15b7f2a117af",
+      "ultralytics-main/ultralytics/cfg/datasets/coco128.yaml": "c6cedc1e00c98c29f2a4ff0805eedc32d278c74ecf449c263e4fb11e6cb6b59c",
+      "ultralytics-main/ultralytics/cfg/datasets/coco8-grayscale.yaml": "70c6f295375971e80f45c6766b3c5733a19b02c886abc5d1f41140909a2cb4eb",
+      "ultralytics-main/ultralytics/cfg/datasets/coco8-multispectral.yaml": "25ac4f60bb720cab1294aabf53255fcb70e47e9bf15d96064a566728fdc62ef7",
+      "ultralytics-main/ultralytics/cfg/datasets/coco8-pose.yaml": "4745f178d7e3b0df576e395accdb1743d5d64e5072a3fecb34184af31dcd2def",
+      "ultralytics-main/ultralytics/cfg/datasets/coco8-seg.yaml": "f9a43ddff5da26c92b7b5cc7c89e64fbeb2ddfa3d4061c5f3f706cbcc3a61067",
+      "ultralytics-main/ultralytics/cfg/datasets/coco8.yaml": "9775a2349e76e667bcbcc875c82815c068235aaf453e47adedff1296ff52dfe5",
+      "ultralytics-main/ultralytics/cfg/datasets/construction-ppe.yaml": "6bb8cc263630e8edb403206a4ab42b9e70dfabb163350a4025503d2f41e30001",
+      "ultralytics-main/ultralytics/cfg/datasets/crack-seg.yaml": "d134ec81135e0994a60f0a8906697d15938ee3707879647a091bcb31e15597fe",
+      "ultralytics-main/ultralytics/cfg/datasets/dog-pose.yaml": "3ced0226761643bf8a73e3db3d38039200036429c30290af1e22e84989bd9007",
+      "ultralytics-main/ultralytics/cfg/datasets/dota8-multispectral.yaml": "66a611b5b12e959df4ad49ae5bdbf744d85b48b10f53456b2d93de60a06d4dc0",
+      "ultralytics-main/ultralytics/cfg/datasets/dota8.yaml": "7f118a8c8c953173589cc303b21244501e23dccbbe1f5db2b63b6e72d72b263f",
+      "ultralytics-main/ultralytics/cfg/datasets/DOTAv1.5.yaml": "2ad2021b9de4fd08b1e32348e5c6b6e24c6f65860cd357cf49931a851f6f95dc",
+      "ultralytics-main/ultralytics/cfg/datasets/DOTAv1.yaml": "c5190ebe7f5e7719e22b6567239362af74bea3215797463686e7a53d612f04b1",
+      "ultralytics-main/ultralytics/cfg/datasets/GlobalWheat2020.yaml": "c339c94f7d6b32f1c2e9cbbb7a537890bdbe4f5d255d74a544da2a5bee111c1c",
+      "ultralytics-main/ultralytics/cfg/datasets/hand-keypoints.yaml": "978ac8798ca30fe2ae6308c8c0def1f6e68b7427c5e95d2a59182e22413935b2",
+      "ultralytics-main/ultralytics/cfg/datasets/HomeObjects-3K.yaml": "6d65113c0a44dedecfa86a0e61bae8335a0c7f6055548862572d9ce6d4ca3de8",
+      "ultralytics-main/ultralytics/cfg/datasets/ImageNet.yaml": "6ac2c4e19c35501b829ec8acfd88dbdb960587394fc0cce5bef711b9657e652b",
+      "ultralytics-main/ultralytics/cfg/datasets/kitti.yaml": "88da620701048fb127513681394bd2371699ae76aec23988ddecb01b9c7fa7a2",
+      "ultralytics-main/ultralytics/cfg/datasets/lvis.yaml": "f7fa7aa11c84abfc06ae4fa31a6e80def9cf524859363d16e910417bcc6cb930",
+      "ultralytics-main/ultralytics/cfg/datasets/medical-pills.yaml": "0c1170c43a1625d23a3844b80bbbf4946530a60cbaf663750efc4e907cdca61a",
+      "ultralytics-main/ultralytics/cfg/datasets/Objects365.yaml": "b5f72b8706c61a9bc47d2c9aa4d296fe72a5cba39e5751df166d8c898a42bf29",
+      "ultralytics-main/ultralytics/cfg/datasets/open-images-v7.yaml": "79186eddc9dfd3ad26a391a046e19dc58e804d24546adcef98e70069119418b7",
+      "ultralytics-main/ultralytics/cfg/datasets/package-seg.yaml": "e2fbba2c2ba79292be01abad4ffa728b3d664a8bb8e1ab1a2b35c61f02565735",
+      "ultralytics-main/ultralytics/cfg/datasets/signature.yaml": "9befe369f1b799a91b420c217843c930a6726c5e59bfeae10caeea6f61074141",
+      "ultralytics-main/ultralytics/cfg/datasets/SKU-110K.yaml": "73c12798fbc8520c2fa940d6b3530dfd16a9e3acaec53df13efcdff663acf7ca",
+      "ultralytics-main/ultralytics/cfg/datasets/tiger-pose.yaml": "bccd627b2e011d7e56c2ae5c9146b7aa4e1dd162a68c6d8898588ad6d678b4e9",
+      "ultralytics-main/ultralytics/cfg/datasets/TT100K.yaml": "7671764034c880efc2d1d2f9e4cc218c1130d7d6895d47b92f1753d8c617cec7",
+      "ultralytics-main/ultralytics/cfg/datasets/VisDrone.yaml": "09e452a01d9eaab7a70fd62d9f719480ec0bf3f18cd26109b7e0996648dc43b8",
+      "ultralytics-main/ultralytics/cfg/datasets/VOC.yaml": "8bde77397adb7a7b7eba39b5a1a50181d481670350bb0acf8d7098c149ccb2ea",
+      "ultralytics-main/ultralytics/cfg/datasets/xView.yaml": "c46314a1e48b16086d33cfcf2321ea5fa8b8b2ce5c136bb45286bcc583f11de2",
+      "ultralytics-main/ultralytics/cfg/default.yaml": "8281a342de8eb6da8f42039291df6d2f4dded4835964f46902afad7f4bf71dbd",
+      "ultralytics-main/ultralytics/cfg/models/11/yolo11-cls-resnet18.yaml": "201bae70c64673e08bd5b9010b64feab9c23c72e4437deeb97aac4130c551e53",
+      "ultralytics-main/ultralytics/cfg/models/11/yolo11-cls.yaml": "3e4f75a4b116049abf1ea7cf3dafa1ff0a114672b186c328e830fa933d47f017",
+      "ultralytics-main/ultralytics/cfg/models/11/yolo11-obb.yaml": "152af354f9c9c386c5db156e5b1c4c712cae816c2990a2fee788e3b00e7786de",
+      "ultralytics-main/ultralytics/cfg/models/11/yolo11-pose.yaml": "f75a108a6256c27861263a46729c9c662390d6995f821190707175fc9764bb91",
+      "ultralytics-main/ultralytics/cfg/models/11/yolo11-seg.yaml": "6dc34ced2910fafbad6683e98325ba66dfde5026e5bc4c90eabe55f92c8031ec",
+      "ultralytics-main/ultralytics/cfg/models/11/yolo11.yaml": "82dbd23b77fe8636d41bd252c48d3d2d60b6da10af726047042beb8f2f1dc1bb",
+      "ultralytics-main/ultralytics/cfg/models/11/yoloe-11-seg.yaml": "e0f4c2afe44f2d36b9dbac2cb982509cc708dcaf3603e95e75965032304f5086",
+      "ultralytics-main/ultralytics/cfg/models/11/yoloe-11.yaml": "784faa94d95186ade211f29a441a13fc92849dad8934948abbb0902d18f60d21",
+      "ultralytics-main/ultralytics/cfg/models/12/yolo12-cls.yaml": "1f71b4585131e47c454a6c90fada841ec196502c210a45bfcbb17576b04e03f1",
+      "ultralytics-main/ultralytics/cfg/models/12/yolo12-obb.yaml": "9bb0862c873dcdc96c47c49d66793750c2729705ffb7dd7a600dff6f56868cd0",
+      "ultralytics-main/ultralytics/cfg/models/12/yolo12-pose.yaml": "ec5c2d516a47fb46ad94b938593bced4b3a3bd6b343e47dae2f6b9e97b29df9b",
+      "ultralytics-main/ultralytics/cfg/models/12/yolo12-seg.yaml": "bbbbc5b179fbda87d1c8f954b570fd46b7d599bab9bba9e41f73e70314ca879a",
+      "ultralytics-main/ultralytics/cfg/models/12/yolo12.yaml": "ba241573a6273a0a340d3c3542c8994d3fd58c20b2e356ddd8e23c3743596e28",
+      "ultralytics-main/ultralytics/cfg/models/26/yolo26-cls.yaml": "4b1c088e2064d4e266fbc9cc8b97603f6abfdf5bc14d4d49908251410f9b8f63",
+      "ultralytics-main/ultralytics/cfg/models/26/yolo26-obb.yaml": "a90bcc1f3fc792f45cbeccf1bd3033dd4b200b7e3d6ab08fafd690af410cbd6b",
+      "ultralytics-main/ultralytics/cfg/models/26/yolo26-p2.yaml": "a69ee8f2f5f7ecd4e81e25ad3747afde23498383a471d513960787704fa37fa6",
+      "ultralytics-main/ultralytics/cfg/models/26/yolo26-p6.yaml": "5024b2978c188f0d5e13ffe9bcfcc8bf17a82e07562c6d2b95ed03ec159b4582",
+      "ultralytics-main/ultralytics/cfg/models/26/yolo26-pose.yaml": "a1f4f4709053f8f546a620b99c44e247a20055a949ba8c384e1b06ddfbb38e75",
+      "ultralytics-main/ultralytics/cfg/models/26/yolo26-seg.yaml": "0dd4b74008580e62892cdf1f8eae8aa20fd1789fad9771e88396df6c936ed76f",
+      "ultralytics-main/ultralytics/cfg/models/26/yolo26.yaml": "9e742b3edec062fbf99067b6500ebf7e0665a841faa114d04adb17544fe11f3b",
+      "ultralytics-main/ultralytics/cfg/models/26/yoloe-26-seg.yaml": "89622810275af18071f22737eb482473f473c8b02a341328c76a72d5199b6cc7",
+      "ultralytics-main/ultralytics/cfg/models/26/yoloe-26.yaml": "3838eca9ddbd8bdc6d51ebddd1b8702ddc1343bba44760a2dbca4aa4ec3c9d05",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-l.yaml": "bfb7d2f81198b9029b1390cc1cf0cddbab6584ee4eeb0f6ea5491ff8a2f81a18",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet101.yaml": "755f5e6c3af1fdd95696c2c56f76979b2c849d2c35b7cdec3a1921f3abbe2c86",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-lif-down.yaml": "0eb049100668cc6fd70181fda6f6406a14da04aaa78582725ae18dc347b6ba56",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-lif-dpr-v1.yaml": "6f39c4235d0bbb10b0f01dbde158332d7040b16b50def3e83ed355f44952bbdf",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr.yaml": "7aeeb81543518be478ce6003e093828f01d18317104f1635e8756d8c0c887cbe",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-dpr-v1.yaml": "ff81a5a0f6e3320f634a038d4e4991edea70d4a295d35af15de55448d936059c",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-lif-down.yaml": "296f1e60cf622423965d113c30ad8eb6c1b4b02ee8714db78bbd7c27f8f120ab",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite.yaml": "5fbfe7c88f23482fb6694fb18fd875d963f4bad1f026dc927314ab0fb0dbbf0b",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18.yaml": "9305bc6e15e7fd0db859a1e241de5e9a51be9d71ef01c7991e6ac16c71864f02",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet50.yaml": "bc6b3d8e42ecf81d4417ad1b70b01f519b4fd3388b8441bb858ebf17e67d5615",
+      "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-x.yaml": "9c9609937971c5e98ae30be4eeb91bd0e558ff4b962b54f5cbd3d642d55fbc14",
+      "ultralytics-main/ultralytics/cfg/models/v10/yolov10b.yaml": "71077adc5f36e65244ed4621f4df854a378402cb18634ff2c3e0b6009a6b145b",
+      "ultralytics-main/ultralytics/cfg/models/v10/yolov10l.yaml": "de228f91433bd2ed49d1f48ca07012f17a8e0b43e4c7eac13441563e3fee96d6",
+      "ultralytics-main/ultralytics/cfg/models/v10/yolov10m.yaml": "8f413df7baceb4ab161a004171841fb6a3ec1012d0dc7c1150337e1ed737a180",
+      "ultralytics-main/ultralytics/cfg/models/v10/yolov10n.yaml": "a01efa944a1873512f0dc270cbed21b80d6afd916d1c657dd0aac98340d86dd9",
+      "ultralytics-main/ultralytics/cfg/models/v10/yolov10s.yaml": "947a8e94e8f1a43f625849399bdcc261a46804e30ba034b114d23322a3059512",
+      "ultralytics-main/ultralytics/cfg/models/v10/yolov10x.yaml": "1e00f13b36038a179017a28651761e3e65ef773274db60b17dc4a265d4504b48",
+      "ultralytics-main/ultralytics/cfg/models/v3/yolov3-spp.yaml": "8b9f86ed89cb6ef543a33a38d51bd069c49649518cdcf908baa16d6d3955efc3",
+      "ultralytics-main/ultralytics/cfg/models/v3/yolov3-tiny.yaml": "54280233b0a3791a35f6378d86349fd074083470a44732f7e1deeba4ff91ef23",
+      "ultralytics-main/ultralytics/cfg/models/v3/yolov3.yaml": "78964abc04f1d3ec78d200419f799f6c65f856d354cebc9f90ddc795a53ef1ae",
+      "ultralytics-main/ultralytics/cfg/models/v5/yolov5-p6.yaml": "ac74afa587a4d7972e335ed7b836e901ae276e0385f0b63214375c95651eb71b",
+      "ultralytics-main/ultralytics/cfg/models/v5/yolov5.yaml": "d378797c062bc5a95caec4bf5eb0f0ff10c2fbff339c950844e503aa7c9c6de0",
+      "ultralytics-main/ultralytics/cfg/models/v6/yolov6.yaml": "353f78ce3d86ce995845fb50398450c7ddf71245d253907708aa7f36175fa9cb",
+      "ultralytics-main/ultralytics/cfg/models/v8/yoloe-v8-seg.yaml": "adc48d83072d9643dc9a57a1de2412c05c29ad6b7505a8ce65252cd654d39a23",
+      "ultralytics-main/ultralytics/cfg/models/v8/yoloe-v8.yaml": "7228cbd958b55e3772953b0d1efef82ce61ccbd4649bbccaf17615f42c87bf6e",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-cls-resnet101.yaml": "f18f0c6ed3618d40751c9eeba5d0fb8dc9bcad085ce05d109e552f5142c55710",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-cls-resnet50.yaml": "fd2918c638a5c871de3455c5949ba4d705a4edb0d69ae236227a8fb046a42d32",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-cls.yaml": "a199910c774e6657c115ed3c97e7f473c39fb1398c99b33c7263ec70f507407f",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-ghost-p2.yaml": "0e95b4ac316d516f1f3b996b6d322385b93b4981f6b9c910828aa67e55033e94",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-ghost-p6.yaml": "226d94d9b5bd82c4d940d406d0718ef2f907e7ae32deace82f26cbd86eec374c",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-ghost.yaml": "36691d1d4b4516b0c58a25504bfa092835f908fef4acd5f6f4187cd5a7a262fc",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-obb.yaml": "d5104da76dd0b28d0578d345147e90e0aee3b0c75f0e9c23a803f42e2c3ddfb8",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-p2.yaml": "2c49104a04c3b8c96b17666e195f398f8e78416ae8f45aed7267592145be655e",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-p6.yaml": "f2b78a131fcff4375b5137ee7775d95cae37d2df8c869ef400a8e47a34293ce8",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-pose-p6.yaml": "6febe22337fbc1ccd1cd6e0d91d2a8232dcb9ebad74b94669f96b2203b6987ba",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-pose.yaml": "7f1918ff83937af8475a1f97aec5b428067dae8cb826a5fc6fe7ea3f9964bcc1",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-rtdetr.yaml": "3d00e8bd29b38874b08a5545b284cc24ea1b00392b99a829fce81e96f8c77abe",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-seg-p6.yaml": "a027d7761bc1b373be6a429cccb759287f045ff975dcfc1a0ef4f37ca0d1d7c9",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-seg.yaml": "d4b3417cb6cc4457bb54dda8423ebd2d6018712dff5f08fa4e3f9c5980d87542",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-world.yaml": "a2f1cd63bc7c4e2b05e19729aad98d4f97c942c034ef9df880ae3e0adbbfa856",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8-worldv2.yaml": "e2e95f248854c1f3ff6b8a7a8d104b9dbccdd5d159023c0fd8fa7f2eff4f79d5",
+      "ultralytics-main/ultralytics/cfg/models/v8/yolov8.yaml": "51c06f732fabe902bdc897e34db82fd19e5d0b403f70619f7843273176a01ef4",
+      "ultralytics-main/ultralytics/cfg/models/v9/yolov9c-seg.yaml": "f838af35a3458a3b4e3d357aefe51894e1733729de9864cf4dd56818c5bbea92",
+      "ultralytics-main/ultralytics/cfg/models/v9/yolov9c.yaml": "ccd7cf973aa95b89651f0bc2f016618f3b3a434596c22363757f7c350bb287ef",
+      "ultralytics-main/ultralytics/cfg/models/v9/yolov9e-seg.yaml": "b4c51872d81e9ef69d7f8de4d06ca285233ec1b4e558cc5e5004c8d76a4db1cb",
+      "ultralytics-main/ultralytics/cfg/models/v9/yolov9e.yaml": "36c840fb7e11c2281c8dab5add59c74b687254e8b86825fc499752c1a731d49b",
+      "ultralytics-main/ultralytics/cfg/models/v9/yolov9m.yaml": "1217febada7db2ef546b1ead29b85173d9b99de095a9f4e49cde6a476d16cb54",
+      "ultralytics-main/ultralytics/cfg/models/v9/yolov9s.yaml": "b3ba1624d7a1bb90a4aeb8ac42271e411c11a8e87ce454c99340a49c861cb8a2",
+      "ultralytics-main/ultralytics/cfg/models/v9/yolov9t.yaml": "3ad820d19cf50e3eec9c4c15145cfccd066a190346a81634c10d58e75d6dc3f0",
+      "ultralytics-main/ultralytics/cfg/trackers/botsort.yaml": "0ceba152ec164ceb480377fe78e5e921657f8a140f74db6a234e90600c61390a",
+      "ultralytics-main/ultralytics/cfg/trackers/bytetrack.yaml": "3cb360e7bedc87f586cbe27402880c0944cce1d4be579c27193f0cc6ebb2070a",
+      "ultralytics-main/ultralytics/data/__init__.py": "7b15dd5e16996a11926ee63e1301d5bac105040c25e5d2b13a894c137b2be3fa",
+      "ultralytics-main/ultralytics/data/annotator.py": "6dfb56d6f08feab2898962e1cd5084ea00ef8e9126e60c4ce5db3407132aae4d",
+      "ultralytics-main/ultralytics/data/augment.py": "64f09f2562c45568ebadafc8a922e5e6e0d094c6c9036d5b9388ddcf4445659b",
+      "ultralytics-main/ultralytics/data/base.py": "84a413ef15c76621c424ddf3bafbe2a45be5f86634290408335e68d29bfcbbcc",
+      "ultralytics-main/ultralytics/data/build.py": "2fd0faa948e085bf69cfc412086bb6f5e487bfa1a1bca2a4aa1969eb1a22e3da",
+      "ultralytics-main/ultralytics/data/converter.py": "03250c400b7237151aa98d93f9eb31cca125b65a99d12a3e4b939ab4002651ba",
+      "ultralytics-main/ultralytics/data/dataset.py": "8541cd9f8677f8917fb8997b95e6461ab56be9d686f3b0983a8405ef2a50b21d",
+      "ultralytics-main/ultralytics/data/loaders.py": "b88a5baa547bd30b215cdd6d10a4bd683c7da1be23b5978b44bc8fd952f03136",
+      "ultralytics-main/ultralytics/data/split.py": "4a007b5badc082f30341d80ab6fab620f5b8ed114f0c65d17074b017aad81620",
+      "ultralytics-main/ultralytics/data/split_dota.py": "4a82b14885c12c0e63dced5e3b280a809135dc19b3c016d7019fd1a6923f2193",
+      "ultralytics-main/ultralytics/data/utils.py": "6659c7d797fe6278bfffe8c05bc4baffe18203cd5935ef6d4f71ba431392d232",
+      "ultralytics-main/ultralytics/engine/__init__.py": "7cd29367640feb4566385a2e553261a0ca258b31f0b94907a0cdf1e5197e8b9e",
+      "ultralytics-main/ultralytics/engine/exporter.py": "862c7e52d4868d8b8793e567222fc2e3dcfe16c0bddd1d0473fe4aed497b21b3",
+      "ultralytics-main/ultralytics/engine/model.py": "212f5fd3c6666dab593779b8bda53c698440009a20880288d26fff8fc9ea9c9e",
+      "ultralytics-main/ultralytics/engine/predictor.py": "0dc7a09fe4d4b02f36df2fea5d5c66b548d9a78045f4bbe3d31a144791fc46f5",
+      "ultralytics-main/ultralytics/engine/results.py": "52ed56b2b84a9f3734f1a358a1ec1729e988d71926c2312518fef86669185ff7",
+      "ultralytics-main/ultralytics/engine/trainer.py": "d954c4c79d2cf328392c3867eae03ad53366b57fb505feb944ce78196f691ac6",
+      "ultralytics-main/ultralytics/engine/tuner.py": "fbeef238b3d66c5eb3d1ab6025e8bb57b377d425a8ba7db156a1c9abcf84c860",
+      "ultralytics-main/ultralytics/engine/validator.py": "4897c61f7ab694eb8ac5cfa2d4c960a69c15807c56be2fcc68118f35b26238dc",
+      "ultralytics-main/ultralytics/hub/__init__.py": "7016ce2687076938766a8b3a2082d2fce196af911e4412aaa2cbb5698b78a882",
+      "ultralytics-main/ultralytics/hub/auth.py": "4837f8b36cbcda76eb5b17889e59bd112f396af36d70783031daa4c49e45fc39",
+      "ultralytics-main/ultralytics/hub/google/__init__.py": "9e799276bacf1745c69aeb7cb44ed94c7196c69db9d0d5a40dc5147744022b56",
+      "ultralytics-main/ultralytics/hub/session.py": "eefbc8cdc8df334a2c2a3094b7325783b3c665bd8dc8cd799b1444ce64e6783e",
+      "ultralytics-main/ultralytics/hub/utils.py": "a4c1b73a4a5e03a13fec34c8f312bad924e1ed8672f49585e6e42b88b0a5aa56",
+      "ultralytics-main/ultralytics/models/__init__.py": "3048e857267d3d135f57f1a6cb001b4f774403782c868976a33c9a47b1813a76",
+      "ultralytics-main/ultralytics/models/fastsam/__init__.py": "2fe2c7a5e0346d9957422bf63db1b1fc48d9c2ca409349848cd42451927abc52",
+      "ultralytics-main/ultralytics/models/fastsam/model.py": "84dd4e16aa0eeb42f1804fb9b5f041647aab33aa91a8e8831301ee1430feb770",
+      "ultralytics-main/ultralytics/models/fastsam/predict.py": "92df42d0f2e2f0d48b5089d31f86b1454a8410ad4f8d4ce7e7f8145a12b8c78c",
+      "ultralytics-main/ultralytics/models/fastsam/utils.py": "b9a63e8dfc86dda701477b3e3acbf7572ce6bed2baf59596f5461d80b3d9cc4b",
+      "ultralytics-main/ultralytics/models/fastsam/val.py": "5a1ef536e81b2b2aa6118a1d89ff571cf6fd2705050f4092f3171e2eec202284",
+      "ultralytics-main/ultralytics/models/nas/__init__.py": "cb6f011f66ef2a97caa7c350447487b9fba385b4338fa7343abf1fa49a4d9e9c",
+      "ultralytics-main/ultralytics/models/nas/model.py": "608b8e84af25f6b56fd929f904a46b436dd523b29d1c7df359119c1c76f6f77c",
+      "ultralytics-main/ultralytics/models/nas/predict.py": "486cead1b9a6ad37d667cbf7c0e2275432bf69aa2fa0b52a9e793f397e30d58a",
+      "ultralytics-main/ultralytics/models/nas/val.py": "3e0c81173cb3526572b1113ab15529a201878cbbac0a76edb4bae3f3a09aaea7",
+      "ultralytics-main/ultralytics/models/rtdetr/__init__.py": "ab015850a8250dfa00496a28538149b6855fdbd05b8a0e77aa070086dccc6aa1",
+      "ultralytics-main/ultralytics/models/rtdetr/model.py": "1fff1f945c4fae96a504c17b1a3a36e4b6cb26cb0004f0274f2ef60b82d28179",
+      "ultralytics-main/ultralytics/models/rtdetr/predict.py": "b3111d3c4d224c6fbd0332676be78bfd23dd3e2fdf8e73e47f2efa6396704c02",
+      "ultralytics-main/ultralytics/models/rtdetr/train.py": "91f9148261328acdddb551ad04ab7acd462b56ed9dade690a7008d42ea9798ad",
+      "ultralytics-main/ultralytics/models/rtdetr/val.py": "5f7eb3025f37a46903e103ba0c82bac1cf9fdebdd9f1590c748a90666a355106",
+      "ultralytics-main/ultralytics/models/sam/__init__.py": "66c708325ab08c47887c542b6943a173678baa0e755b98c95121d55ac0dc5a43",
+      "ultralytics-main/ultralytics/models/sam/amg.py": "fb19b690e8b4f509a086e4b1306a72352a5cadd9bde917ae78552859d9a67687",
+      "ultralytics-main/ultralytics/models/sam/build.py": "2577f903366173ffccc585a6da66a12f2858cea30ec17ec1c0568ed9b7975d23",
+      "ultralytics-main/ultralytics/models/sam/build_sam3.py": "08990a9bf24d6c0b85d4766f047c1b8bd54733b28f4e29dea9bc100043b2ae3c",
+      "ultralytics-main/ultralytics/models/sam/model.py": "939458208dcabf4912e7248c288be71a2aee05543cca8c705dfd27b60e04cc4d",
+      "ultralytics-main/ultralytics/models/sam/modules/__init__.py": "7cd29367640feb4566385a2e553261a0ca258b31f0b94907a0cdf1e5197e8b9e",
+      "ultralytics-main/ultralytics/models/sam/modules/blocks.py": "156e2f3a0f69c4050b9806145252c59a02ec275fb0ff4db68960206880f0c1ab",
+      "ultralytics-main/ultralytics/models/sam/modules/decoders.py": "359597952c482663372212d5fec17256debc6412fdee75ce25d78d71fded23b8",
+      "ultralytics-main/ultralytics/models/sam/modules/encoders.py": "26c88f7f653e5afb6e4cb4139d92150f21cc611089fe20ab8f1b7d85cfff92bb",
+      "ultralytics-main/ultralytics/models/sam/modules/memory_attention.py": "60d1e53eb3ab881bd094f6242929b6d1d5b7ac00ec091fa61b9370a6c73f50ab",
+      "ultralytics-main/ultralytics/models/sam/modules/sam.py": "84ebb12cf355be6e29d2ca15ba25954745c19c2957effc4963e33042ae1b7d1c",
+      "ultralytics-main/ultralytics/models/sam/modules/tiny_encoder.py": "460c953b7f7b6ef76461cf6c8642a6874e753710b1d453ac9e0bcc851dc4d351",
+      "ultralytics-main/ultralytics/models/sam/modules/transformer.py": "e08abe1cb30d7ae3e546a5e087e7790610e6abd50c3b607660bd8b75897ca777",
+      "ultralytics-main/ultralytics/models/sam/modules/utils.py": "c38f432cc709ba48f0dab2e0f473b25102cfe1961bab0dfab7301667e3f95e16",
+      "ultralytics-main/ultralytics/models/sam/predict.py": "21cf07308d5c0f6d2e3cebab5f6cd4013b4dd867559ff5e17f29690e845b0650",
+      "ultralytics-main/ultralytics/models/sam/sam3/__init__.py": "ab4046cf93255fa93a1ad3612edb126366ee4ef023fd1ff969c08b08065d05a8",
+      "ultralytics-main/ultralytics/models/sam/sam3/decoder.py": "fedfb7e95a8e2f016a86c5486e30f0e28428bc137942e98127dc06591298b178",
+      "ultralytics-main/ultralytics/models/sam/sam3/encoder.py": "c49ab36ac0783a4bb4d1dc4d141d1fdbb8a337bd696e43ce696d7c191c28544b",
+      "ultralytics-main/ultralytics/models/sam/sam3/geometry_encoders.py": "df00ade9578493bd3d7503f7fb50ed974bcf3453c4d7441d4bd424e0e9ec2afd",
+      "ultralytics-main/ultralytics/models/sam/sam3/maskformer_segmentation.py": "95ff445f8bbd5402db0038af2dc45fda3320cc27b6cb33fb64526431064f9f1a",
+      "ultralytics-main/ultralytics/models/sam/sam3/model_misc.py": "966813c61d9ed003d47485b070b6ff912ff30b25091355f5261195081da658cd",
+      "ultralytics-main/ultralytics/models/sam/sam3/necks.py": "d0ca64c9c4e7d94b500dc392fa5f9661324bc8ce440e29c81bbc264d4d28f0a2",
+      "ultralytics-main/ultralytics/models/sam/sam3/sam3_image.py": "57dcc8818015b645c0a2bffc69bd0b874de496d31411f49263461faf9f67c752",
+      "ultralytics-main/ultralytics/models/sam/sam3/text_encoder_ve.py": "8be59d399597e966bd1392a678540bbee48ad560dcdb8084cc3a95739018a5a0",
+      "ultralytics-main/ultralytics/models/sam/sam3/vitdet.py": "08d74bad1e44a97189bd8fb374fb044244537fbbc9f2e8a7cbc2bd6ed0d39c15",
+      "ultralytics-main/ultralytics/models/sam/sam3/vl_combiner.py": "3cf3664410d336e0e6b9ebd01950fbb5639557ce8dc98e5e3b27d38e08bb414a",
+      "ultralytics-main/ultralytics/models/utils/__init__.py": "7cd29367640feb4566385a2e553261a0ca258b31f0b94907a0cdf1e5197e8b9e",
+      "ultralytics-main/ultralytics/models/utils/loss.py": "db5c644d54350eacc6b8a5dbe3f5fd9b38b99383413f055a782194f859df14a8",
+      "ultralytics-main/ultralytics/models/utils/ops.py": "99b11ae1cb287cf39a872f952cce9b5784635255cb1c5af50ac872fa8cb182ba",
+      "ultralytics-main/ultralytics/models/yolo/__init__.py": "b5269b2d6cda41ce11ebb2a043d739c8adee15a82dc673e6a74f87227a319d5e",
+      "ultralytics-main/ultralytics/models/yolo/classify/__init__.py": "8f4a716b58f32cb4d4ee2fc2c5f2b5eb128e5eaad201a75c723c9141f4468593",
+      "ultralytics-main/ultralytics/models/yolo/classify/predict.py": "de9976aac0f1af1836fe54a1cfc1eeac1511eb77ff336bbc44a762b8ce65879e",
+      "ultralytics-main/ultralytics/models/yolo/classify/train.py": "193bf7493c2b136b3c2dedd557caa97bdd6295630c56d9e9ceae393402046206",
+      "ultralytics-main/ultralytics/models/yolo/classify/val.py": "fc47eb297fdf567c4a846d6327562c33709db0a9917c7f2f9296831195914648",
+      "ultralytics-main/ultralytics/models/yolo/detect/__init__.py": "e950043d2d189973912c9312ef217e0cffcbd0d99d397b01040b778c5e0f6611",
+      "ultralytics-main/ultralytics/models/yolo/detect/predict.py": "9709782830566bfa88666ce1a16fe64fa97fa3f31845067438097a20345f8545",
+      "ultralytics-main/ultralytics/models/yolo/detect/train.py": "3766dd53cd9732d6797a27fe1fd8c9b3ed13ea8020cb7dc726984749d4342e4b",
+      "ultralytics-main/ultralytics/models/yolo/detect/val.py": "3943b3fc05ddbaf32eb9f425437c4baccdff4d84cc000d03f197f8950634ef2d",
+      "ultralytics-main/ultralytics/models/yolo/model.py": "1a03fbe8232b5ef2261907d007f9e0fad3aec56145f2a543cb68f64f6a80bf1e",
+      "ultralytics-main/ultralytics/models/yolo/obb/__init__.py": "d0a6fb4bdd35e202119d95b04ed34e98629c255e6376ebba390d74a2ad221b1c",
+      "ultralytics-main/ultralytics/models/yolo/obb/predict.py": "556923a69cb1a9e64ac6158d5deb0ce18897f8d077313efb9aacc74b82a460aa",
+      "ultralytics-main/ultralytics/models/yolo/obb/train.py": "31b146a6b23ac0b3ccd08e17f7f755ed2455f98b9859ed401e4366dc18c95c50",
+      "ultralytics-main/ultralytics/models/yolo/obb/val.py": "3bbc1523cba0781921e537cf849b44a44024fdd25f841bd8bc2286bdd3ab28a6",
+      "ultralytics-main/ultralytics/models/yolo/pose/__init__.py": "b13ea0421b0b6b1bf39c2bb3116dfc2a8604052b5b3004f88acd535e11e8042b",
+      "ultralytics-main/ultralytics/models/yolo/pose/predict.py": "c0804c10a53a45ece99acc3e216835e4ae90d3fc0d43e67e7bba291eb132fbac",
+      "ultralytics-main/ultralytics/models/yolo/pose/train.py": "762ceaa7e4691a90957ebe367781bbbe20c0d11974bd7873524e5d5fe0a7efda",
+      "ultralytics-main/ultralytics/models/yolo/pose/val.py": "610aa52edcef4282836223db04b4f626065e621200ae23399f3db3fb8b8a3a8e",
+      "ultralytics-main/ultralytics/models/yolo/segment/__init__.py": "53c366828a68dbe2bcb6a9e4718e51ff7a655e1bde5befe8c259847c6f16f52a",
+      "ultralytics-main/ultralytics/models/yolo/segment/predict.py": "8874147d1a1a18a182b4665bdfa15182f091714443fd33361740ced2d80c1250",
+      "ultralytics-main/ultralytics/models/yolo/segment/train.py": "bae21d6695b6af47dfeedf6206844dfbe0d6158882cce90abba3797d08923d06",
+      "ultralytics-main/ultralytics/models/yolo/segment/val.py": "26042515754cc6ea3469102565ecf4634d9557d275a19016ebb519267ae243fb",
+      "ultralytics-main/ultralytics/models/yolo/world/__init__.py": "e4191e3b7a2ed8235fa7c9fd459cf7ebf6d967fd1223631e55671ac3b59e70db",
+      "ultralytics-main/ultralytics/models/yolo/world/train.py": "895c742757b86bf07c3138de37c5d48b1d71203b1f19417897ab4404085d2580",
+      "ultralytics-main/ultralytics/models/yolo/world/train_world.py": "b1f7a630ef854c63ee4a5432e98c079d2bd4c65492d72407b726c68129262a1c",
+      "ultralytics-main/ultralytics/models/yolo/yoloe/__init__.py": "9e73c8dfbde4ffa5dbd6221386555e54eff6fad1c3814bb796fd3b510b0fa4fb",
+      "ultralytics-main/ultralytics/models/yolo/yoloe/predict.py": "0cffcfc84ce0a25327eece2f35544b2ec1750414a9b80e149816c2f4eecc3f3b",
+      "ultralytics-main/ultralytics/models/yolo/yoloe/train.py": "e9eadf1a562f17e01e0fe2631e8b9476c7591b56afb6b31130044a0a94ef2032",
+      "ultralytics-main/ultralytics/models/yolo/yoloe/train_seg.py": "3c783b07a6baed6f88941ded7ef066c35ef296d0141b42b2ee096bdcbce263c1",
+      "ultralytics-main/ultralytics/models/yolo/yoloe/val.py": "d79b712712dd07b2369d337cbaee24966227ad5482f9b9a67e5cd0b725286eb8",
+      "ultralytics-main/ultralytics/nn/__init__.py": "141449ab02f9d1f57066719e50940c61c17fd0f4eaeed9d24c6ae820e1b8064c",
+      "ultralytics-main/ultralytics/nn/autobackend.py": "ba9c51fcfb60a3d5b8a9a9d4bd66805e21b405eba661abb8f5cbf1bcaee09ed8",
+      "ultralytics-main/ultralytics/nn/modules/__init__.py": "93611e46fb45828a871284baa3df86ad670404009b446d9099c01e37b643b919",
+      "ultralytics-main/ultralytics/nn/modules/activation.py": "e99a486de49f3b344108e9f74afc4548f0797158eac04ec0291f8bffb631069e",
+      "ultralytics-main/ultralytics/nn/modules/block.py": "6d0ede6e9c8861c940745d0e63103a8bc71fa00b5319d12b3e2013be54baae51",
+      "ultralytics-main/ultralytics/nn/modules/cbr.py": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+      "ultralytics-main/ultralytics/nn/modules/conv.py": "e5d933506fb4fea82f85ec21e9913243f1f4c8de725263a04d2fa557162fde59",
+      "ultralytics-main/ultralytics/nn/modules/dpr.py": "819ae2dd9e2e491316045a65d555c625cb77e136d91443f86ab1b67f4760b6d1",
+      "ultralytics-main/ultralytics/nn/modules/head.py": "f96f372951fbea16ff4f5ce974a1f934f1f51d27a3866c50f296771d8dd4ef98",
+      "ultralytics-main/ultralytics/nn/modules/lif_down.py": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+      "ultralytics-main/ultralytics/nn/modules/transformer.py": "453bf72ed98bd86815ecfd97169637c40db1dbb58916f462ba213e905b96b777",
+      "ultralytics-main/ultralytics/nn/modules/utils.py": "11637c9a947b6173fb56cd149b96f9a7ca22b67f77817bea9c0dd1fc6c25cc09",
+      "ultralytics-main/ultralytics/nn/tasks.py": "e9d28cc63b47b945d06f9435c75234491d641e4959e9780d2939a7da25f2a917",
+      "ultralytics-main/ultralytics/nn/text_model.py": "5edff104751733f02e1d7521bd43a604a187c039695068facf1e0f14d05b41be",
+      "ultralytics-main/ultralytics/optim/__init__.py": "8ba6c49dab1dd567e083950a640e369163e6c2108a679583f90e269a61f06328",
+      "ultralytics-main/ultralytics/optim/muon.py": "eda3933535de99100a2ba52b8c24865c25c4dca7214ada5d691e64067ea261a3",
+      "ultralytics-main/ultralytics/solutions/__init__.py": "875678add1e66a4cf523fb9e67fc411afe9290b27bfb1a02eef80bd6844b4f20",
+      "ultralytics-main/ultralytics/solutions/ai_gym.py": "14922496bc056e866f60e791a8761457c564e18263df348f5d332eb410e52a6f",
+      "ultralytics-main/ultralytics/solutions/analytics.py": "8367fb35da185813808c6cabbac38b12b89915a43929b67787d08be82317a2ad",
+      "ultralytics-main/ultralytics/solutions/config.py": "cbd8c8facc0777fb03408ec3276df883424909b3ebfc18433c906e28caa9e880",
+      "ultralytics-main/ultralytics/solutions/distance_calculation.py": "0bcf36e346bd982de2bcc1b094e9a69a40e1289d6ad6ea9f001154ad0c9ab49d",
+      "ultralytics-main/ultralytics/solutions/heatmap.py": "927618a93e234eebf5094dce555cdb21739e7226d3d4c84c3f50188eff374b29",
+      "ultralytics-main/ultralytics/solutions/instance_segmentation.py": "3c7f4c4ef35cf801e3497058026eb49d7063c90045ccdcaa2b54eef3bf53f68b",
+      "ultralytics-main/ultralytics/solutions/object_blurrer.py": "7767d8def5ab31b03d6f4a2d0c2d2dfa954ff2fef89390cf88f569800ea83a33",
+      "ultralytics-main/ultralytics/solutions/object_counter.py": "d78653f15e4b5913c133bbecb6683e26a627f4f654ecdaf07a1547017a8624ce",
+      "ultralytics-main/ultralytics/solutions/object_cropper.py": "38b712af11282441da6aa0e734bbdaa3d2b69cc08f25211788424257b89a42fa",
+      "ultralytics-main/ultralytics/solutions/parking_management.py": "8544a5b802916c9dd83230eecc2b4711e00a530d37b76ddf73a30937242578d6",
+      "ultralytics-main/ultralytics/solutions/queue_management.py": "ae49a0abfdeb120fc0961ba8b0c5874051859fe5f7ef7fe13d5827d163482bbf",
+      "ultralytics-main/ultralytics/solutions/region_counter.py": "5a8e9b738d79cc81871a9f719a5e97dafa0a8b5e57afa3837248230b7640d8ab",
+      "ultralytics-main/ultralytics/solutions/security_alarm.py": "24f23c207d02e7668e62dc79debe3f729a3f9b4fde9095ea9da30553689a3ad0",
+      "ultralytics-main/ultralytics/solutions/similarity_search.py": "6b9a6cdb65b71f8be3419bdc1bbf040a7f3b733d2018e2ff8b61b6e6497ec0c1",
+      "ultralytics-main/ultralytics/solutions/solutions.py": "7fe9b4d2b1239b6646cccc8ab4bcc1fdf24168c8a188f1f46717f193caa9c95e",
+      "ultralytics-main/ultralytics/solutions/speed_estimation.py": "c8e818f70a4f8d679adc1c479f31c60d55862b94d5fb552bcebfe23a62cbebff",
+      "ultralytics-main/ultralytics/solutions/streamlit_inference.py": "9dc5dd1a6a2dd724d08188e5fd8fdf169c06ae20a2ec086a421e47278fa5fe38",
+      "ultralytics-main/ultralytics/solutions/trackzone.py": "21e9534a82db750b06719ac6bb3693f41d35e809da97c2ffaf38008f345fc7c8",
+      "ultralytics-main/ultralytics/solutions/vision_eye.py": "7f6983a94cdaa90078d7d7b0fff0211686d60dde406ad696eb6d971a8bdb88cd",
+      "ultralytics-main/ultralytics/trackers/__init__.py": "9c1d9774c6cb2cfeafe6a9e26cac1a1ba8333e3148593a3bd935f607f4f2504f",
+      "ultralytics-main/ultralytics/trackers/basetrack.py": "58bd66588b841beee2aa9ec41014ed29daaec032fe0471aae6cb55e200670d12",
+      "ultralytics-main/ultralytics/trackers/bot_sort.py": "6fe960a1c407e05019c585f2c84c406e51a0267bd7b7e17f2506a13e17be7215",
+      "ultralytics-main/ultralytics/trackers/byte_tracker.py": "f0a84f569793e5fbb523526edc180ae4a32fc647c1fbd772b9ab5d736c3648ed",
+      "ultralytics-main/ultralytics/trackers/track.py": "f05db90a8855dbd86c4c4a82bad4516dab7d821dddf05ef9fb6d56e2a462d231",
+      "ultralytics-main/ultralytics/trackers/utils/__init__.py": "7cd29367640feb4566385a2e553261a0ca258b31f0b94907a0cdf1e5197e8b9e",
+      "ultralytics-main/ultralytics/trackers/utils/gmc.py": "6663123167c8ccf101075702136d61d35d549f9a4d944cb0a7b568c69531412c",
+      "ultralytics-main/ultralytics/trackers/utils/kalman_filter.py": "f5d5419383900ee4a3b8334eb99b8cf76c86b031531710fc9fde8248818e95ac",
+      "ultralytics-main/ultralytics/trackers/utils/matching.py": "b69fca5fd69c7a7807d88744a377bba9b235fbc06ae0bae97ead42296fccb413",
+      "ultralytics-main/ultralytics/utils/__init__.py": "267c241c171364d0d5154ee35524feee5291485c86cd2550f1f0c8d7be46a873",
+      "ultralytics-main/ultralytics/utils/autobatch.py": "625e4c19a51f6a072f1c2a8d416c2434b28c0fa2a55fe7a8080f0ebc9fcb8349",
+      "ultralytics-main/ultralytics/utils/autodevice.py": "4410eb81ddfd2152fef49c1353008e99302bca611ad1c4d1fef6ccfb11dab434",
+      "ultralytics-main/ultralytics/utils/benchmarks.py": "a180c73d103f4e970231beb9ddc841b311b913e9fd4be9fed97e04fa6517f7de",
+      "ultralytics-main/ultralytics/utils/callbacks/__init__.py": "8af8ba38766b8889a786302d18a12adfbaef723c0e9851033225e9e30555e1e2",
+      "ultralytics-main/ultralytics/utils/callbacks/base.py": "e5390884c0a11a515658672aa66c124855ec09043b9230e99adc9f08583f2685",
+      "ultralytics-main/ultralytics/utils/callbacks/clearml.py": "e00ce8c685c6236b920c3aa0bb9fbaee43749856bb8df74697d997e812dead41",
+      "ultralytics-main/ultralytics/utils/callbacks/comet.py": "357aa25c8cc74b5c432fae85697c64d822f6e66b5fdc8ec883a8223a06f0d15a",
+      "ultralytics-main/ultralytics/utils/callbacks/dvc.py": "3c5caed8d422da0ef281ef905497357fc4f3d520d9e2b870b2ea52a039bd1053",
+      "ultralytics-main/ultralytics/utils/callbacks/hub.py": "d50d41d07037efd05e2534ec66168221c322f7a9ef7333a344d56ff1a7831cc0",
+      "ultralytics-main/ultralytics/utils/callbacks/mlflow.py": "3b4fd22ad44bc6df0d141faf5ad237e14f95926f3077bf4d1d82494667a14288",
+      "ultralytics-main/ultralytics/utils/callbacks/neptune.py": "774ad942b030460d2717f57ee9aa8e3b83ca043e8b04a2553b936bdacd5517d1",
+      "ultralytics-main/ultralytics/utils/callbacks/platform.py": "1f226086e22be852b01d19361df5808002d96e43cd3beca72fe632e78565f3b6",
+      "ultralytics-main/ultralytics/utils/callbacks/raytune.py": "125d9123f6af4316b9e90075905895c3c01bdfebdac806202033cf3d4553ac46",
+      "ultralytics-main/ultralytics/utils/callbacks/tensorboard.py": "276168d2730f5f4daffbdc8a2ac51cb7aa7d225ee8b8ed9f3e84dc1d3493ff7d",
+      "ultralytics-main/ultralytics/utils/callbacks/wb.py": "b9a8ae8812b7ed21d9f2ba5c9aa98ad2a30878d9eb68c8958e66355649eea74c",
+      "ultralytics-main/ultralytics/utils/checks.py": "c8137105d4a21337b5de3dbe2e93e989fef0250752dac09355db6ff15200cb8d",
+      "ultralytics-main/ultralytics/utils/cpu.py": "fc8f5253464ab1e516d0b82c67eaaa33c252f08f2a36466981ec78472c1dfd2a",
+      "ultralytics-main/ultralytics/utils/dist.py": "0bda345b364dd24d88d2785064af2e9466ae47c75d2d1a409095ebb4f600b666",
+      "ultralytics-main/ultralytics/utils/downloads.py": "45333c15cffa7667288fd151c4248aa0a12192b65358274fbe9f7c2cf8820a8e",
+      "ultralytics-main/ultralytics/utils/errors.py": "8d09e957b9261e3dfb0167ef199611d5f4453b36ecaaa425d88f7cc9cfa32431",
+      "ultralytics-main/ultralytics/utils/events.py": "7c3bd07410b9831938f8e3ab0c839252ec7d55712df2a4e1877c577d1f439c20",
+      "ultralytics-main/ultralytics/utils/export/__init__.py": "691399673724fb45855859dc9ad5eac8123120b696413777ed4cd4ecd1b3b7f6",
+      "ultralytics-main/ultralytics/utils/export/engine.py": "53cef95e18e16283bff566c7e55dfb34d46f4ea81c45d700f40b36b14ed5e3f1",
+      "ultralytics-main/ultralytics/utils/export/executorch.py": "810bced8d36c1b2c557636ba97517dd9e39d5d17b43925b0a2119799744cfaba",
+      "ultralytics-main/ultralytics/utils/export/imx.py": "f32df33ab2010d77cbe488760129e53a902f5abd5b1975bff632c3e2bd5274f5",
+      "ultralytics-main/ultralytics/utils/export/tensorflow.py": "3369a10a6400c7f6376d3b08322312b70d5bac2c9517b779c3a109324df6820d",
+      "ultralytics-main/ultralytics/utils/files.py": "b6706045b5edb1e9460dab3cd30402e3fb39790a659cab3b3a2775c0c40bdbf1",
+      "ultralytics-main/ultralytics/utils/git.py": "f6095fde959960051efdf4c5413def25a8d5d8ff4eb34ad07e5011be570a90cf",
+      "ultralytics-main/ultralytics/utils/instance.py": "f235085ad03117206f323a8b30db012f6b7c5229297fc1a8daebe864b98191f1",
+      "ultralytics-main/ultralytics/utils/logger.py": "c820086606f00ff4b7e02e896d3811d2e60e59ccc4e5df266c88a360f91f5046",
+      "ultralytics-main/ultralytics/utils/loss.py": "11ee0be24ac61cecdd266c92a21ba1d5b90bfa9158d804c181a4885da3f75cab",
+      "ultralytics-main/ultralytics/utils/metrics.py": "ee797b4154211b2d07d85a2465cc5285b2e4b99b90dd96dbac5ae22b083a12ad",
+      "ultralytics-main/ultralytics/utils/nms.py": "803551883e86e51973f56cbd02a986c574673aec31ccf60dca15d1dfab2c54cb",
+      "ultralytics-main/ultralytics/utils/ops.py": "d50ed2206272650a6f663b1ea522249bcd60df1988eabed03e7b19956a9f2065",
+      "ultralytics-main/ultralytics/utils/patches.py": "334e0845b9163aad987266e0b3129e963fe001974a3695e8e8e3406407618baa",
+      "ultralytics-main/ultralytics/utils/plotting.py": "4c652397371e8da256302de31f341d88992bf8570586ece4f4fd2bd568065716",
+      "ultralytics-main/ultralytics/utils/tal.py": "9a3c0db192297dbfc3fa5dd55d22430814cc623708e62c8f7f286537251d6285",
+      "ultralytics-main/ultralytics/utils/torch_utils.py": "37b00a6e3fbd1f7dbc575eb6de88962780b271150aa9c532be9eeb39fe642a63",
+      "ultralytics-main/ultralytics/utils/tqdm.py": "8615eb11b3272e0788037ddcdd0883f41d6229d3e56dc005244531a1092dcb93",
+      "ultralytics-main/ultralytics/utils/triton.py": "27f246d41bfec8d0b40b896c2288ecd16aa33495cde46b964e0957d319ac136b",
+      "ultralytics-main/ultralytics/utils/tuner.py": "b89658789523b6d6a9f013735186088463b0e2fbb85d3758c4c46519c047f612",
+      "ultralytics-main/ultralytics/utils/uploads.py": "cf28704ffb96cd8e3651f68e0f09fb71b46229cdcc3de5f1a87fe7cbe41fa1b5"
+    },
+    "content_sha256": "75a72fd5d9c5e558a1fe12bceaddcddaa05778348d206cd78143775825f53922"
+  },
+  "modes": {
+    "cpu_fp32": {
+      "status": "COLLECTED",
+      "B_status": "PASSED",
+      "B_raw_allclose": true,
+      "B_failure_names": {
+        "parent": {
+          "state": [],
+          "gradients": []
+        },
+        "candidate": {
+          "state": [],
+          "gradients": []
+        }
+      },
+      "new_DPR_gradients": {
+        "state.model.5.blocks.1.branch2b.dpr_hd": {
+          "equal": true,
+          "raw_allclose": true,
+          "finite": true,
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceeded_fraction": 0.0
+        },
+        "state.model.5.blocks.1.branch2b.dpr_vd": {
+          "equal": true,
+          "raw_allclose": true,
+          "finite": true,
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceeded_fraction": 0.0
+        },
+        "state.model.5.blocks.1.branch2b.dpr_cd": {
+          "equal": true,
+          "raw_allclose": true,
+          "finite": true,
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceeded_fraction": 0.0
+        },
+        "state.model.5.blocks.1.branch2b.dpr_ad": {
+          "equal": true,
+          "raw_allclose": true,
+          "finite": true,
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceeded_fraction": 0.0
+        }
+      },
+      "analytic": [
+        {
+          "status": "PASSED",
+          "comparisons": {
+            "dpr_cd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_hd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_vd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_ad": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            }
+          },
+          "kernel_gradient_equals_W": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "local_mapping": {
+            "status": "PASSED",
+            "comparisons": {
+              "dpr_cd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_hd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_vd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_ad": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              }
+            },
+            "stage": "pre-clip gradients; scaled values divided once by the same recorded scale"
+          },
+          "frozen_local_replay": {
+            "dpr_cd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_hd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_vd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_ad": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            }
+          },
+          "local_output": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "scale": 1.0,
+          "amp": false,
+          "capture_stage": "same backward, before native unscale and clip; arithmetic division only, no second unscale_"
+        },
+        {
+          "status": "PASSED",
+          "comparisons": {
+            "dpr_cd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_hd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_vd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_ad": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            }
+          },
+          "kernel_gradient_equals_W": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "local_mapping": {
+            "status": "PASSED",
+            "comparisons": {
+              "dpr_cd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_hd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_vd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_ad": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              }
+            },
+            "stage": "pre-clip gradients; scaled values divided once by the same recorded scale"
+          },
+          "frozen_local_replay": {
+            "dpr_cd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_hd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_vd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_ad": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            }
+          },
+          "local_output": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "scale": 1.0,
+          "amp": false,
+          "capture_stage": "same backward, before native unscale and clip; arithmetic division only, no second unscale_"
+        }
+      ],
+      "delta": {
+        "status": "PASSED",
+        "comparisons": {
+          "dpr_cd": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "dpr_hd": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "dpr_vd": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "dpr_ad": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          }
+        },
+        "stage": "pre-clip gradients; scaled values divided once by the same recorded scale"
+      },
+      "long_term_trajectory_equivalence": "NOT_CLAIMED",
+      "backend": {
+        "status": "PASSED",
+        "comparison": {
+          "raw_allclose": true,
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceed_fraction": 0.0,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "legacy_comparison": {
+          "raw_allclose": true,
+          "max_abs": 1.7881393432617188e-07,
+          "relative_L2": 3.103700052520253e-08,
+          "exceed_fraction": 0.0,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "identities_equal": true,
+        "source_matches_checkpoint": true,
+        "checkpoint_unchanged": true,
+        "observer_output_exact": true,
+        "storage_independent": true
+      }
+    },
+    "cuda_fp32": {
+      "status": "COLLECTED",
+      "B_status": "FAILED",
+      "B_raw_allclose": false,
+      "B_failure_names": {
+        "parent": {
+          "state": [
+            "state.model.model.12.bn.bias",
+            "state.model.model.17.bn.bias",
+            "state.model.model.9.norm2.bias",
+            "state.ema.model.12.bn.bias",
+            "state.ema.model.17.bn.bias",
+            "state.ema.model.9.norm2.bias"
+          ],
+          "gradients": []
+        },
+        "candidate": {
+          "state": [
+            "state.model.model.12.bn.bias",
+            "state.model.model.17.bn.bias",
+            "state.model.model.9.norm2.bias",
+            "state.ema.model.12.bn.bias",
+            "state.ema.model.17.bn.bias",
+            "state.ema.model.9.norm2.bias"
+          ],
+          "gradients": []
+        }
+      },
+      "new_DPR_gradients": {
+        "state.model.5.blocks.1.branch2b.dpr_hd": {
+          "equal": false,
+          "raw_allclose": true,
+          "finite": true,
+          "max_abs": 9.313225746154785e-08,
+          "relative_L2": 1.773826282421083e-06,
+          "exceeded_fraction": 0.0
+        },
+        "state.model.5.blocks.1.branch2b.dpr_vd": {
+          "equal": false,
+          "raw_allclose": true,
+          "finite": true,
+          "max_abs": 8.009374141693115e-08,
+          "relative_L2": 1.8696139658968116e-06,
+          "exceeded_fraction": 0.0
+        },
+        "state.model.5.blocks.1.branch2b.dpr_cd": {
+          "equal": false,
+          "raw_allclose": true,
+          "finite": true,
+          "max_abs": 8.847564458847046e-08,
+          "relative_L2": 1.8695926476698984e-06,
+          "exceeded_fraction": 0.0
+        },
+        "state.model.5.blocks.1.branch2b.dpr_ad": {
+          "equal": false,
+          "raw_allclose": true,
+          "finite": true,
+          "max_abs": 1.2014061212539673e-07,
+          "relative_L2": 2.1285139346420073e-06,
+          "exceeded_fraction": 0.0
+        }
+      },
+      "analytic": [
+        {
+          "status": "PASSED",
+          "comparisons": {
+            "dpr_cd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_hd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_vd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_ad": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            }
+          },
+          "kernel_gradient_equals_W": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "local_mapping": {
+            "status": "PASSED",
+            "comparisons": {
+              "dpr_cd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_hd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_vd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_ad": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              }
+            },
+            "stage": "pre-clip gradients; scaled values divided once by the same recorded scale"
+          },
+          "frozen_local_replay": {
+            "dpr_cd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_hd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_vd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_ad": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            }
+          },
+          "local_output": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "scale": 1.0,
+          "amp": false,
+          "capture_stage": "same backward, before native unscale and clip; arithmetic division only, no second unscale_"
+        },
+        {
+          "status": "PASSED",
+          "comparisons": {
+            "dpr_cd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_hd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_vd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_ad": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            }
+          },
+          "kernel_gradient_equals_W": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "local_mapping": {
+            "status": "PASSED",
+            "comparisons": {
+              "dpr_cd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_hd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_vd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_ad": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              }
+            },
+            "stage": "pre-clip gradients; scaled values divided once by the same recorded scale"
+          },
+          "frozen_local_replay": {
+            "dpr_cd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_hd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_vd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_ad": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            }
+          },
+          "local_output": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "scale": 1.0,
+          "amp": false,
+          "capture_stage": "same backward, before native unscale and clip; arithmetic division only, no second unscale_"
+        }
+      ],
+      "delta": {
+        "status": "PASSED",
+        "comparisons": {
+          "dpr_cd": {
+            "raw_allclose": true,
+            "max_abs": 1.862645149230957e-09,
+            "relative_L2": 0.017799245193600655,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "dpr_hd": {
+            "raw_allclose": true,
+            "max_abs": 5.587935447692871e-09,
+            "relative_L2": 0.02061673440039158,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "dpr_vd": {
+            "raw_allclose": true,
+            "max_abs": 1.862645149230957e-09,
+            "relative_L2": 0.015063678845763206,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "dpr_ad": {
+            "raw_allclose": true,
+            "max_abs": 3.725290298461914e-09,
+            "relative_L2": 0.014162092469632626,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          }
+        },
+        "stage": "pre-clip gradients; scaled values divided once by the same recorded scale"
+      },
+      "long_term_trajectory_equivalence": "NOT_CLAIMED",
+      "backend": {
+        "status": "PASSED",
+        "comparison": {
+          "raw_allclose": true,
+          "max_abs": 0.0,
+          "relative_L2": 0.0,
+          "exceed_fraction": 0.0,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "legacy_comparison": {
+          "raw_allclose": true,
+          "max_abs": 1.7881393432617188e-07,
+          "relative_L2": 2.4592543113044485e-08,
+          "exceed_fraction": 0.0,
+          "finite": true,
+          "atol": 2e-05,
+          "rtol": 0.0002,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "identities_equal": true,
+        "source_matches_checkpoint": true,
+        "checkpoint_unchanged": true,
+        "observer_output_exact": true,
+        "storage_independent": true
+      },
+      "original_half_checks": {
+        "native_half_vs_fp32": {
+          "status": "FAILED",
+          "output": {
+            "raw_allclose": false,
+            "max_abs": 0.8998786211013794,
+            "relative_L2": 0.5208972692489624,
+            "exceed_fraction": 0.25600001215934753,
+            "finite": true,
+            "atol": 0.002,
+            "rtol": 0.02,
+            "statistics_version": "allclose_right_reference_v2"
+          }
+        },
+        "fp32_fold_then_half": {
+          "status": "FAILED",
+          "output": {
+            "raw_allclose": false,
+            "max_abs": 0.8562614917755127,
+            "relative_L2": 0.5033259391784668,
+            "exceed_fraction": 0.24933333694934845,
+            "finite": true,
+            "atol": 0.002,
+            "rtol": 0.02,
+            "statistics_version": "allclose_right_reference_v2"
+          }
+        },
+        "half_deploy_reload": {
+          "status": "PASSED",
+          "output": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 0.002,
+            "rtol": 0.02,
+            "statistics_version": "allclose_right_reference_v2"
+          }
+        },
+        "autobackend_half": {
+          "status": "PASSED",
+          "output": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 0.002,
+            "rtol": 0.02,
+            "statistics_version": "allclose_right_reference_v2"
+          }
+        }
+      },
+      "half_decomposition": {
+        "U32_to_D32": {
+          "first_exceeded": null,
+          "selection": {
+            "changed_positions": 0,
+            "batches": [
+              {
+                "same_set": true,
+                "removed": [],
+                "added": [],
+                "changed_positions": 0
+              },
+              {
+                "same_set": true,
+                "removed": [],
+                "added": [],
+                "changed_positions": 0
+              }
+            ],
+            "interpretation": "index-array positions; not a count of added/lost detections"
+          },
+          "fixed_replay_output": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "candidate_sensitivity_complete": false
+        },
+        "D32_to_N32": {
+          "first_exceeded": null,
+          "selection": {
+            "changed_positions": 0,
+            "batches": [
+              {
+                "same_set": true,
+                "removed": [],
+                "added": [],
+                "changed_positions": 0
+              },
+              {
+                "same_set": true,
+                "removed": [],
+                "added": [],
+                "changed_positions": 0
+              }
+            ],
+            "interpretation": "index-array positions; not a count of added/lost detections"
+          },
+          "fixed_replay_output": {
+            "raw_allclose": true,
+            "max_abs": 1.7881393432617188e-07,
+            "relative_L2": 2.693607648041052e-08,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "candidate_sensitivity_complete": false
+        },
+        "U32_to_U16": {
+          "first_exceeded": "norm_output",
+          "selection": {
+            "changed_positions": 411,
+            "batches": [
+              {
+                "same_set": false,
+                "removed": [
+                  190
+                ],
+                "added": [
+                  162
+                ],
+                "changed_positions": 205
+              },
+              {
+                "same_set": true,
+                "removed": [],
+                "added": [],
+                "changed_positions": 206
+              }
+            ],
+            "interpretation": "index-array positions; not a count of added/lost detections"
+          },
+          "fixed_replay_output": {
+            "raw_allclose": true,
+            "max_abs": 0.000742495059967041,
+            "relative_L2": 0.0004756886628456414,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 0.002,
+            "rtol": 0.02,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "candidate_sensitivity_complete": false
+        },
+        "D32_to_D16": {
+          "first_exceeded": "norm_output",
+          "selection": {
+            "changed_positions": 404,
+            "batches": [
+              {
+                "same_set": true,
+                "removed": [],
+                "added": [],
+                "changed_positions": 210
+              },
+              {
+                "same_set": true,
+                "removed": [],
+                "added": [],
+                "changed_positions": 194
+              }
+            ],
+            "interpretation": "index-array positions; not a count of added/lost detections"
+          },
+          "fixed_replay_output": {
+            "raw_allclose": true,
+            "max_abs": 0.000742495059967041,
+            "relative_L2": 0.0004744099860545248,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 0.002,
+            "rtol": 0.02,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "candidate_sensitivity_complete": false
+        },
+        "N32_to_N16": {
+          "first_exceeded": "norm_output",
+          "selection": {
+            "changed_positions": 399,
+            "batches": [
+              {
+                "same_set": false,
+                "removed": [
+                  154
+                ],
+                "added": [
+                  162
+                ],
+                "changed_positions": 203
+              },
+              {
+                "same_set": false,
+                "removed": [
+                  190
+                ],
+                "added": [
+                  191
+                ],
+                "changed_positions": 196
+              }
+            ],
+            "interpretation": "index-array positions; not a count of added/lost detections"
+          },
+          "fixed_replay_output": {
+            "raw_allclose": true,
+            "max_abs": 0.000742495059967041,
+            "relative_L2": 0.00047565370914526284,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 0.002,
+            "rtol": 0.02,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "candidate_sensitivity_complete": false
+        },
+        "U16_to_D16": {
+          "first_exceeded": "P5",
+          "selection": {
+            "changed_positions": 387,
+            "batches": [
+              {
+                "same_set": false,
+                "removed": [
+                  162
+                ],
+                "added": [
+                  190
+                ],
+                "changed_positions": 198
+              },
+              {
+                "same_set": true,
+                "removed": [],
+                "added": [],
+                "changed_positions": 189
+              }
+            ],
+            "interpretation": "index-array positions; not a count of added/lost detections"
+          },
+          "fixed_replay_output": {
+            "raw_allclose": true,
+            "max_abs": 0.0004883408546447754,
+            "relative_L2": 7.061223732307553e-05,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 0.002,
+            "rtol": 0.02,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "candidate_sensitivity_complete": false
+        },
+        "D16_to_N16": {
+          "first_exceeded": "encoder_features",
+          "selection": {
+            "changed_positions": 387,
+            "batches": [
+              {
+                "same_set": false,
+                "removed": [
+                  154
+                ],
+                "added": [
+                  162
+                ],
+                "changed_positions": 196
+              },
+              {
+                "same_set": false,
+                "removed": [
+                  190
+                ],
+                "added": [
+                  191
+                ],
+                "changed_positions": 191
+              }
+            ],
+            "interpretation": "index-array positions; not a count of added/lost detections"
+          },
+          "fixed_replay_output": {
+            "raw_allclose": true,
+            "max_abs": 0.00048828125,
+            "relative_L2": 8.27072944957763e-05,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 0.002,
+            "rtol": 0.02,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "candidate_sensitivity_complete": false
+        },
+        "U32_to_same_effective_plain32": {
+          "first_exceeded": null,
+          "selection": {
+            "changed_positions": 0,
+            "batches": [
+              {
+                "same_set": true,
+                "removed": [],
+                "added": [],
+                "changed_positions": 0
+              },
+              {
+                "same_set": true,
+                "removed": [],
+                "added": [],
+                "changed_positions": 0
+              }
+            ],
+            "interpretation": "index-array positions; not a count of added/lost detections"
+          },
+          "fixed_replay_output": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "candidate_sensitivity_complete": false
+        },
+        "same_effective_plain32_to_half": {
+          "first_exceeded": "norm_output",
+          "selection": {
+            "changed_positions": 404,
+            "batches": [
+              {
+                "same_set": true,
+                "removed": [],
+                "added": [],
+                "changed_positions": 210
+              },
+              {
+                "same_set": true,
+                "removed": [],
+                "added": [],
+                "changed_positions": 194
+              }
+            ],
+            "interpretation": "index-array positions; not a count of added/lost detections"
+          },
+          "fixed_replay_output": {
+            "raw_allclose": true,
+            "max_abs": 0.000742495059967041,
+            "relative_L2": 0.0004744099860545248,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 0.002,
+            "rtol": 0.02,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "candidate_sensitivity_complete": false
+        }
+      },
+      "half_local_rounding_order": {
+        "kernel": {
+          "raw_allclose": true,
+          "max_abs": 6.103515625e-05,
+          "relative_L2": 2.8378633942338638e-05,
+          "exceed_fraction": 0.0,
+          "finite": true,
+          "atol": 0.002,
+          "rtol": 0.02,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "output": {
+          "raw_allclose": true,
+          "max_abs": 0.00390625,
+          "relative_L2": 3.867642590194009e-05,
+          "exceed_fraction": 0.0,
+          "finite": true,
+          "atol": 0.002,
+          "rtol": 0.02,
+          "statistics_version": "allclose_right_reference_v2"
+        },
+        "input": {
+          "shape": [
+            2,
+            128,
+            20,
+            20
+          ],
+          "dtype": "torch.float16",
+          "device": "cuda:0",
+          "sha256": "668aae94d67eb13e8ce8a684d3832d216c442f85ddf8a9452ea04db031a02307",
+          "finite": true
+        },
+        "paths": [
+          "FP32 parameters -> effective kernel -> half",
+          "parameters -> half -> FP32 effective kernel -> half"
+        ],
+        "production_unfolded_half": "parameters -> half -> FP32 effective kernel -> half"
+      }
+    },
+    "cuda_native_amp": {
+      "status": "COLLECTED",
+      "B_status": "FAILED",
+      "B_raw_allclose": false,
+      "B_failure_names": {
+        "parent": {
+          "state": [
+            "state.model.model.14.m.0.conv1.conv.weight",
+            "state.model.model.9.fc2.weight",
+            "state.model.model.10.conv.weight",
+            "state.model.model.9.ma.in_proj_weight",
+            "state.model.model.20.conv.weight",
+            "state.model.model.14.m.1.conv1.conv.weight",
+            "state.model.model.9.ma.in_proj_bias",
+            "state.model.model.6.blocks.0.branch2b.conv.weight",
+            "state.model.model.7.blocks.1.branch2b.conv.weight",
+            "state.model.model.19.cv1.conv.weight",
+            "state.model.model.12.bn.bias",
+            "state.model.model.6.blocks.1.branch2b.conv.weight",
+            "state.model.model.17.bn.bias",
+            "state.model.model.6.blocks.0.branch2a.conv.weight",
+            "state.model.model.9.fc1.weight",
+            "state.model.model.7.blocks.1.branch2a.conv.weight",
+            "state.model.model.7.blocks.0.branch2b.conv.weight",
+            "state.model.model.22.m.0.conv1.conv.weight",
+            "state.model.model.19.m.1.conv1.conv.weight",
+            "state.model.model.14.cv2.conv.weight",
+            "state.model.model.7.blocks.0.branch2a.conv.weight",
+            "state.model.model.19.m.0.conv1.conv.weight",
+            "state.model.model.23.conv.weight",
+            "state.model.model.22.m.1.conv1.conv.weight",
+            "state.model.model.19.m.2.conv1.conv.weight",
+            "state.model.model.9.norm2.bias",
+            "state.model.model.6.blocks.1.branch2a.conv.weight",
+            "state.ema.model.14.m.0.conv1.conv.weight",
+            "state.ema.model.9.fc2.weight",
+            "state.ema.model.10.conv.weight",
+            "state.ema.model.9.ma.in_proj_weight",
+            "state.ema.model.20.conv.weight",
+            "state.ema.model.14.m.1.conv1.conv.weight",
+            "state.ema.model.9.ma.in_proj_bias",
+            "state.ema.model.6.blocks.0.branch2b.conv.weight",
+            "state.ema.model.7.blocks.1.branch2b.conv.weight",
+            "state.ema.model.19.cv1.conv.weight",
+            "state.ema.model.12.bn.bias",
+            "state.ema.model.6.blocks.1.branch2b.conv.weight",
+            "state.ema.model.17.bn.bias",
+            "state.ema.model.6.blocks.0.branch2a.conv.weight",
+            "state.ema.model.9.fc1.weight",
+            "state.ema.model.7.blocks.1.branch2a.conv.weight",
+            "state.ema.model.7.blocks.0.branch2b.conv.weight",
+            "state.ema.model.22.m.0.conv1.conv.weight",
+            "state.ema.model.19.m.1.conv1.conv.weight",
+            "state.ema.model.14.cv2.conv.weight",
+            "state.ema.model.7.blocks.0.branch2a.conv.weight",
+            "state.ema.model.19.m.0.conv1.conv.weight",
+            "state.ema.model.23.conv.weight",
+            "state.ema.model.22.m.1.conv1.conv.weight",
+            "state.ema.model.19.m.2.conv1.conv.weight",
+            "state.ema.model.9.norm2.bias",
+            "state.ema.model.6.blocks.1.branch2a.conv.weight",
+            "state.optimizer.model.1.conv.weight.exp_avg",
+            "state.optimizer.model.0.conv.weight.exp_avg"
+          ],
+          "gradients": [
+            "state.model.14.m.0.conv1.bn.weight",
+            "state.model.14.cv1.conv.weight",
+            "state.model.4.blocks.0.short.norm.weight",
+            "state.model.14.m.0.conv1.conv.weight",
+            "state.model.19.m.2.conv1.bn.weight",
+            "state.model.9.fc2.weight",
+            "state.model.1.norm.bias",
+            "state.model.10.conv.weight",
+            "state.model.4.blocks.1.branch2a.conv.weight",
+            "state.model.7.blocks.0.branch2b.norm.weight",
+            "state.model.5.blocks.1.branch2b.conv.weight",
+            "state.model.14.cv1.bn.weight",
+            "state.model.19.m.1.conv1.bn.weight",
+            "state.model.20.O_proj.weight",
+            "state.model.6.blocks.0.branch2b.norm.weight",
+            "state.model.4.blocks.1.branch2b.norm.bias",
+            "state.model.1.norm.weight",
+            "state.model.19.m.0.conv1.bn.bias",
+            "state.model.20.conv.weight",
+            "state.model.6.blocks.0.short.conv.norm.bias",
+            "state.model.22.cv1.conv.weight",
+            "state.model.5.blocks.0.short.conv.norm.weight",
+            "state.model.19.m.1.conv2.conv.weight",
+            "state.model.10.bn.bias",
+            "state.model.14.cv1.bn.bias",
+            "state.model.6.blocks.0.short.conv.norm.weight",
+            "state.model.6.blocks.1.branch2a.norm.bias",
+            "state.model.4.blocks.0.branch2a.conv.weight",
+            "state.model.19.cv1.bn.bias",
+            "state.model.5.blocks.0.branch2a.norm.weight",
+            "state.model.9.norm1.weight",
+            "state.model.14.m.1.conv1.conv.weight",
+            "state.model.6.blocks.1.branch2b.norm.weight",
+            "state.model.14.m.2.conv2.bn.bias",
+            "state.model.4.blocks.1.branch2b.norm.weight",
+            "state.model.4.blocks.0.branch2b.norm.weight",
+            "state.model.6.blocks.1.branch2a.norm.weight",
+            "state.model.22.m.2.conv2.conv.weight",
+            "state.model.2.conv.weight",
+            "state.model.22.m.1.conv2.conv.weight",
+            "state.model.6.blocks.0.branch2b.conv.weight",
+            "state.model.1.conv.weight",
+            "state.model.7.blocks.1.branch2b.conv.weight",
+            "state.model.19.cv1.conv.weight",
+            "state.model.7.blocks.0.short.conv.conv.weight",
+            "state.model.6.blocks.0.branch2b.norm.bias",
+            "state.model.7.blocks.0.branch2b.norm.bias",
+            "state.model.4.blocks.0.branch2b.norm.bias",
+            "state.model.14.m.0.conv2.bn.weight",
+            "state.model.17.conv.weight",
+            "state.model.19.m.2.conv2.bn.weight",
+            "state.model.15.bn.weight",
+            "state.model.14.m.1.conv1.bn.bias",
+            "state.model.22.cv1.bn.weight",
+            "state.model.25.m.1.conv2.conv.weight",
+            "state.model.12.conv.weight",
+            "state.model.19.cv1.bn.weight",
+            "state.model.5.blocks.0.branch2b.norm.weight",
+            "state.model.9.norm2.weight",
+            "state.model.6.blocks.1.branch2b.conv.weight",
+            "state.model.14.m.2.conv1.conv.weight",
+            "state.model.5.blocks.0.branch2a.norm.bias",
+            "state.model.19.m.1.conv1.bn.bias",
+            "state.model.14.m.0.conv2.conv.weight",
+            "state.model.19.m.0.conv2.bn.weight",
+            "state.model.22.m.0.conv2.bn.weight",
+            "state.model.7.blocks.1.branch2a.norm.bias",
+            "state.model.25.m.0.conv1.conv.weight",
+            "state.model.7.blocks.0.branch2a.norm.bias",
+            "state.model.6.blocks.0.branch2a.conv.weight",
+            "state.model.14.cv3.bn.bias",
+            "state.model.25.m.0.conv2.conv.weight",
+            "state.model.5.blocks.0.short.conv.norm.bias",
+            "state.model.25.m.1.conv1.conv.weight",
+            "state.model.4.blocks.0.short.conv.weight",
+            "state.model.5.blocks.1.branch2b.norm.weight",
+            "state.model.19.m.0.conv2.bn.bias",
+            "state.model.10.bn.weight",
+            "state.model.5.blocks.0.branch2b.norm.bias",
+            "state.model.14.m.2.conv2.conv.weight",
+            "state.model.14.m.1.conv1.bn.weight",
+            "state.model.22.cv2.conv.weight",
+            "state.model.7.blocks.1.branch2a.conv.weight",
+            "state.model.14.m.1.conv2.conv.weight",
+            "state.model.2.norm.bias",
+            "state.model.4.blocks.1.branch2b.conv.weight",
+            "state.model.14.m.1.conv2.bn.weight",
+            "state.model.8.bn.weight",
+            "state.model.7.blocks.0.branch2b.conv.weight",
+            "state.model.12.bn.weight",
+            "state.model.25.cv1.conv.weight",
+            "state.model.15.bn.bias",
+            "state.model.25.m.2.conv1.conv.weight",
+            "state.model.2.norm.weight",
+            "state.model.4.blocks.1.branch2a.norm.bias",
+            "state.model.20.bn.weight",
+            "state.model.5.blocks.0.branch2b.conv.weight",
+            "state.model.6.blocks.0.short.conv.conv.weight",
+            "state.model.14.m.2.conv2.bn.weight",
+            "state.model.19.m.0.conv1.bn.weight",
+            "state.model.19.cv2.bn.weight",
+            "state.model.9.ma.out_proj.weight",
+            "state.model.19.m.2.conv1.bn.bias",
+            "state.model.5.blocks.1.branch2a.conv.weight",
+            "state.model.14.m.2.conv1.bn.bias",
+            "state.model.15.conv.weight",
+            "state.model.5.blocks.0.branch2a.conv.weight",
+            "state.model.4.blocks.0.branch2a.norm.bias",
+            "state.model.22.m.2.conv1.conv.weight",
+            "state.model.14.m.1.conv2.bn.bias",
+            "state.model.26.input_proj.0.0.weight",
+            "state.model.0.conv.weight",
+            "state.model.14.m.0.conv2.bn.bias",
+            "state.model.6.blocks.1.branch2b.norm.bias",
+            "state.model.19.m.2.conv2.conv.weight",
+            "state.model.22.m.0.conv1.conv.weight",
+            "state.model.7.blocks.0.branch2a.norm.weight",
+            "state.model.19.m.1.conv1.conv.weight",
+            "state.model.0.norm.weight",
+            "state.model.4.blocks.1.branch2a.norm.weight",
+            "state.model.4.blocks.0.short.norm.bias",
+            "state.model.14.m.0.conv1.bn.bias",
+            "state.model.5.blocks.1.branch2a.norm.bias",
+            "state.model.22.cv3.conv.weight",
+            "state.model.14.cv3.bn.weight",
+            "state.model.14.cv2.conv.weight",
+            "state.model.7.blocks.0.branch2a.conv.weight",
+            "state.model.19.cv2.conv.weight",
+            "state.model.19.m.0.conv1.conv.weight",
+            "state.model.26.decoder.layers.0.cross_attn.value_proj.bias",
+            "state.model.14.m.2.conv1.bn.weight",
+            "state.model.23.conv.weight",
+            "state.model.26.input_proj.1.0.weight",
+            "state.model.22.m.0.conv2.conv.weight",
+            "state.model.5.blocks.1.branch2b.norm.bias",
+            "state.model.22.m.1.conv1.conv.weight",
+            "state.model.4.blocks.0.branch2b.conv.weight",
+            "state.model.8.conv.weight",
+            "state.model.7.blocks.0.short.conv.norm.weight",
+            "state.model.5.blocks.0.short.conv.conv.weight",
+            "state.model.6.blocks.0.branch2a.norm.bias",
+            "state.model.0.norm.bias",
+            "state.model.4.blocks.0.branch2a.norm.weight",
+            "state.model.7.blocks.0.short.conv.norm.bias",
+            "state.model.19.m.0.conv2.conv.weight",
+            "state.model.25.m.2.conv2.conv.weight",
+            "state.model.19.m.2.conv1.conv.weight",
+            "state.model.25.cv3.conv.weight",
+            "state.model.14.cv2.bn.weight",
+            "state.model.19.m.1.conv2.bn.bias",
+            "state.model.19.cv3.conv.weight",
+            "state.model.7.blocks.1.branch2a.norm.weight",
+            "state.model.19.cv3.bn.weight",
+            "state.model.6.blocks.0.branch2a.norm.weight",
+            "state.model.19.m.2.conv2.bn.bias",
+            "state.model.14.cv3.conv.weight",
+            "state.model.5.blocks.1.branch2a.norm.weight",
+            "state.model.6.blocks.1.branch2a.conv.weight",
+            "state.model.17.bn.weight",
+            "state.model.19.m.1.conv2.bn.weight"
+          ]
+        },
+        "candidate": {
+          "state": [
+            "state.model.model.14.cv1.conv.weight",
+            "state.model.model.14.m.0.conv1.conv.weight",
+            "state.model.model.9.fc2.weight",
+            "state.model.model.20.conv.weight",
+            "state.model.model.14.m.1.conv1.conv.weight",
+            "state.model.model.9.ma.in_proj_bias",
+            "state.model.model.6.blocks.0.branch2b.conv.weight",
+            "state.model.model.7.blocks.1.branch2b.conv.weight",
+            "state.model.model.12.bn.bias",
+            "state.model.model.6.blocks.1.branch2b.conv.weight",
+            "state.model.model.17.bn.bias",
+            "state.model.model.6.blocks.0.branch2a.conv.weight",
+            "state.model.model.7.blocks.1.branch2a.conv.weight",
+            "state.model.model.7.blocks.0.branch2b.conv.weight",
+            "state.model.model.15.conv.weight",
+            "state.model.model.22.m.0.conv1.conv.weight",
+            "state.model.model.7.blocks.0.branch2a.conv.weight",
+            "state.model.model.19.m.0.conv1.conv.weight",
+            "state.model.model.23.conv.weight",
+            "state.model.model.22.m.1.conv1.conv.weight",
+            "state.model.model.8.conv.weight",
+            "state.model.model.9.norm2.bias",
+            "state.model.model.6.blocks.1.branch2a.conv.weight",
+            "state.ema.model.14.cv1.conv.weight",
+            "state.ema.model.14.m.0.conv1.conv.weight",
+            "state.ema.model.9.fc2.weight",
+            "state.ema.model.20.conv.weight",
+            "state.ema.model.14.m.1.conv1.conv.weight",
+            "state.ema.model.9.ma.in_proj_bias",
+            "state.ema.model.6.blocks.0.branch2b.conv.weight",
+            "state.ema.model.7.blocks.1.branch2b.conv.weight",
+            "state.ema.model.12.bn.bias",
+            "state.ema.model.6.blocks.1.branch2b.conv.weight",
+            "state.ema.model.17.bn.bias",
+            "state.ema.model.6.blocks.0.branch2a.conv.weight",
+            "state.ema.model.7.blocks.1.branch2a.conv.weight",
+            "state.ema.model.7.blocks.0.branch2b.conv.weight",
+            "state.ema.model.15.conv.weight",
+            "state.ema.model.22.m.0.conv1.conv.weight",
+            "state.ema.model.7.blocks.0.branch2a.conv.weight",
+            "state.ema.model.19.m.0.conv1.conv.weight",
+            "state.ema.model.23.conv.weight",
+            "state.ema.model.22.m.1.conv1.conv.weight",
+            "state.ema.model.8.conv.weight",
+            "state.ema.model.9.norm2.bias",
+            "state.ema.model.6.blocks.1.branch2a.conv.weight",
+            "state.optimizer.model.1.conv.weight.exp_avg",
+            "state.optimizer.model.0.conv.weight.exp_avg"
+          ],
+          "gradients": [
+            "state.model.14.m.0.conv1.bn.weight",
+            "state.model.14.cv1.conv.weight",
+            "state.model.4.blocks.0.short.norm.weight",
+            "state.model.14.m.0.conv1.conv.weight",
+            "state.model.19.m.2.conv1.bn.weight",
+            "state.model.9.fc2.weight",
+            "state.model.1.norm.bias",
+            "state.model.10.conv.weight",
+            "state.model.4.blocks.1.branch2a.conv.weight",
+            "state.model.7.blocks.0.branch2b.norm.weight",
+            "state.model.5.blocks.1.branch2b.conv.weight",
+            "state.model.14.cv1.bn.weight",
+            "state.model.19.m.1.conv1.bn.weight",
+            "state.model.20.O_proj.weight",
+            "state.model.6.blocks.0.branch2b.norm.weight",
+            "state.model.4.blocks.1.branch2b.norm.bias",
+            "state.model.1.norm.weight",
+            "state.model.19.m.0.conv1.bn.bias",
+            "state.model.20.conv.weight",
+            "state.model.6.blocks.0.short.conv.norm.bias",
+            "state.model.22.cv1.conv.weight",
+            "state.model.5.blocks.0.short.conv.norm.weight",
+            "state.model.19.m.1.conv2.conv.weight",
+            "state.model.10.bn.bias",
+            "state.model.14.cv1.bn.bias",
+            "state.model.6.blocks.0.short.conv.norm.weight",
+            "state.model.6.blocks.1.branch2a.norm.bias",
+            "state.model.4.blocks.0.branch2a.conv.weight",
+            "state.model.19.cv1.bn.bias",
+            "state.model.5.blocks.0.branch2a.norm.weight",
+            "state.model.9.norm1.weight",
+            "state.model.14.m.1.conv1.conv.weight",
+            "state.model.6.blocks.1.branch2b.norm.weight",
+            "state.model.14.m.2.conv2.bn.bias",
+            "state.model.4.blocks.1.branch2b.norm.weight",
+            "state.model.4.blocks.0.branch2b.norm.weight",
+            "state.model.6.blocks.1.branch2a.norm.weight",
+            "state.model.22.m.2.conv2.conv.weight",
+            "state.model.2.conv.weight",
+            "state.model.22.m.1.conv2.conv.weight",
+            "state.model.6.blocks.0.branch2b.conv.weight",
+            "state.model.1.conv.weight",
+            "state.model.7.blocks.1.branch2b.conv.weight",
+            "state.model.19.cv1.conv.weight",
+            "state.model.7.blocks.0.short.conv.conv.weight",
+            "state.model.6.blocks.0.branch2b.norm.bias",
+            "state.model.7.blocks.0.branch2b.norm.bias",
+            "state.model.4.blocks.0.branch2b.norm.bias",
+            "state.model.14.m.0.conv2.bn.weight",
+            "state.model.17.conv.weight",
+            "state.model.19.m.2.conv2.bn.weight",
+            "state.model.15.bn.weight",
+            "state.model.14.m.1.conv1.bn.bias",
+            "state.model.22.cv1.bn.weight",
+            "state.model.25.m.1.conv2.conv.weight",
+            "state.model.12.conv.weight",
+            "state.model.19.cv1.bn.weight",
+            "state.model.5.blocks.0.branch2b.norm.weight",
+            "state.model.9.norm2.weight",
+            "state.model.6.blocks.1.branch2b.conv.weight",
+            "state.model.14.m.2.conv1.conv.weight",
+            "state.model.5.blocks.0.branch2a.norm.bias",
+            "state.model.14.m.0.conv2.conv.weight",
+            "state.model.19.m.0.conv2.bn.weight",
+            "state.model.7.blocks.1.branch2a.norm.bias",
+            "state.model.25.m.0.conv1.conv.weight",
+            "state.model.7.blocks.0.branch2a.norm.bias",
+            "state.model.6.blocks.0.branch2a.conv.weight",
+            "state.model.14.cv3.bn.bias",
+            "state.model.25.m.0.conv2.conv.weight",
+            "state.model.5.blocks.0.short.conv.norm.bias",
+            "state.model.25.m.1.conv1.conv.weight",
+            "state.model.4.blocks.0.short.conv.weight",
+            "state.model.5.blocks.1.branch2b.norm.weight",
+            "state.model.5.blocks.1.branch2b.dpr_hd",
+            "state.model.19.m.0.conv2.bn.bias",
+            "state.model.10.bn.weight",
+            "state.model.5.blocks.0.branch2b.norm.bias",
+            "state.model.14.m.2.conv2.conv.weight",
+            "state.model.14.m.1.conv1.bn.weight",
+            "state.model.22.cv2.conv.weight",
+            "state.model.7.blocks.1.branch2a.conv.weight",
+            "state.model.14.m.1.conv2.conv.weight",
+            "state.model.2.norm.bias",
+            "state.model.4.blocks.1.branch2b.conv.weight",
+            "state.model.5.blocks.1.branch2b.dpr_vd",
+            "state.model.8.bn.weight",
+            "state.model.14.m.1.conv2.bn.weight",
+            "state.model.7.blocks.0.branch2b.conv.weight",
+            "state.model.12.bn.weight",
+            "state.model.25.cv1.conv.weight",
+            "state.model.15.bn.bias",
+            "state.model.25.m.2.conv1.conv.weight",
+            "state.model.2.norm.weight",
+            "state.model.4.blocks.1.branch2a.norm.bias",
+            "state.model.20.bn.weight",
+            "state.model.5.blocks.0.branch2b.conv.weight",
+            "state.model.6.blocks.0.short.conv.conv.weight",
+            "state.model.14.m.2.conv2.bn.weight",
+            "state.model.19.m.0.conv1.bn.weight",
+            "state.model.9.ma.out_proj.weight",
+            "state.model.5.blocks.1.branch2a.conv.weight",
+            "state.model.14.m.2.conv1.bn.bias",
+            "state.model.15.conv.weight",
+            "state.model.5.blocks.0.branch2a.conv.weight",
+            "state.model.4.blocks.0.branch2a.norm.bias",
+            "state.model.22.m.2.conv1.conv.weight",
+            "state.model.14.m.1.conv2.bn.bias",
+            "state.model.26.input_proj.0.0.weight",
+            "state.model.0.conv.weight",
+            "state.model.25.cv2.conv.weight",
+            "state.model.14.m.0.conv2.bn.bias",
+            "state.model.6.blocks.1.branch2b.norm.bias",
+            "state.model.19.m.2.conv2.conv.weight",
+            "state.model.5.blocks.1.branch2b.dpr_cd",
+            "state.model.22.m.0.conv1.conv.weight",
+            "state.model.7.blocks.0.branch2a.norm.weight",
+            "state.model.19.m.1.conv1.conv.weight",
+            "state.model.0.norm.weight",
+            "state.model.4.blocks.1.branch2a.norm.weight",
+            "state.model.4.blocks.0.short.norm.bias",
+            "state.model.14.m.0.conv1.bn.bias",
+            "state.model.5.blocks.1.branch2a.norm.bias",
+            "state.model.22.cv3.conv.weight",
+            "state.model.14.cv3.bn.weight",
+            "state.model.14.cv2.conv.weight",
+            "state.model.7.blocks.0.branch2a.conv.weight",
+            "state.model.19.cv2.conv.weight",
+            "state.model.19.m.0.conv1.conv.weight",
+            "state.model.14.m.2.conv1.bn.weight",
+            "state.model.23.conv.weight",
+            "state.model.22.m.0.conv2.conv.weight",
+            "state.model.5.blocks.1.branch2b.norm.bias",
+            "state.model.22.m.1.conv1.conv.weight",
+            "state.model.4.blocks.0.branch2b.conv.weight",
+            "state.model.8.conv.weight",
+            "state.model.22.m.1.conv1.bn.weight",
+            "state.model.7.blocks.0.short.conv.norm.weight",
+            "state.model.5.blocks.0.short.conv.conv.weight",
+            "state.model.6.blocks.0.branch2a.norm.bias",
+            "state.model.0.norm.bias",
+            "state.model.4.blocks.0.branch2a.norm.weight",
+            "state.model.7.blocks.0.short.conv.norm.bias",
+            "state.model.19.m.0.conv2.conv.weight",
+            "state.model.22.cv1.bn.bias",
+            "state.model.5.blocks.1.branch2b.dpr_ad",
+            "state.model.25.m.2.conv2.conv.weight",
+            "state.model.19.m.2.conv1.conv.weight",
+            "state.model.25.cv3.conv.weight",
+            "state.model.14.cv2.bn.weight",
+            "state.model.19.cv3.conv.weight",
+            "state.model.7.blocks.1.branch2a.norm.weight",
+            "state.model.19.cv3.bn.weight",
+            "state.model.6.blocks.0.branch2a.norm.weight",
+            "state.model.14.cv3.conv.weight",
+            "state.model.5.blocks.1.branch2a.norm.weight",
+            "state.model.6.blocks.1.branch2a.conv.weight",
+            "state.model.17.bn.weight",
+            "state.model.19.m.1.conv2.bn.weight"
+          ]
+        }
+      },
+      "new_DPR_gradients": {
+        "state.model.5.blocks.1.branch2b.dpr_hd": {
+          "equal": false,
+          "raw_allclose": false,
+          "finite": true,
+          "max_abs": 8.7738037109375e-05,
+          "relative_L2": 0.0017742308016880375,
+          "exceeded_fraction": 0.328125
+        },
+        "state.model.5.blocks.1.branch2b.dpr_vd": {
+          "equal": false,
+          "raw_allclose": false,
+          "finite": true,
+          "max_abs": 0.00011444091796875,
+          "relative_L2": 0.0019260528382312957,
+          "exceeded_fraction": 0.2916666666666667
+        },
+        "state.model.5.blocks.1.branch2b.dpr_cd": {
+          "equal": false,
+          "raw_allclose": false,
+          "finite": true,
+          "max_abs": 9.918212890625e-05,
+          "relative_L2": 0.0019058340907672426,
+          "exceeded_fraction": 0.2309027777777778
+        },
+        "state.model.5.blocks.1.branch2b.dpr_ad": {
+          "equal": false,
+          "raw_allclose": false,
+          "finite": true,
+          "max_abs": 7.62939453125e-05,
+          "relative_L2": 0.0018889255947163429,
+          "exceeded_fraction": 0.21006944444444445
+        }
+      },
+      "analytic": [
+        {
+          "status": "PASSED",
+          "comparisons": {
+            "dpr_cd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_hd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_vd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_ad": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            }
+          },
+          "kernel_gradient_equals_W": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "local_mapping": {
+            "status": "PASSED",
+            "comparisons": {
+              "dpr_cd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_hd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_vd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_ad": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              }
+            },
+            "stage": "pre-clip gradients; scaled values divided once by the same recorded scale"
+          },
+          "frozen_local_replay": {
+            "dpr_cd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_hd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_vd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_ad": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            }
+          },
+          "local_output": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "scale": 4096.0,
+          "amp": true,
+          "capture_stage": "same backward, before native unscale and clip; arithmetic division only, no second unscale_"
+        },
+        {
+          "status": "PASSED",
+          "comparisons": {
+            "dpr_cd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_hd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_vd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_ad": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            }
+          },
+          "kernel_gradient_equals_W": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "local_mapping": {
+            "status": "PASSED",
+            "comparisons": {
+              "dpr_cd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_hd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_vd": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              },
+              "dpr_ad": {
+                "raw_allclose": true,
+                "max_abs": 0.0,
+                "relative_L2": 0.0,
+                "exceed_fraction": 0.0,
+                "finite": true,
+                "atol": 2e-05,
+                "rtol": 0.0002,
+                "statistics_version": "allclose_right_reference_v2"
+              }
+            },
+            "stage": "pre-clip gradients; scaled values divided once by the same recorded scale"
+          },
+          "frozen_local_replay": {
+            "dpr_cd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_hd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_vd": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            },
+            "dpr_ad": {
+              "raw_allclose": true,
+              "max_abs": 0.0,
+              "relative_L2": 0.0,
+              "exceed_fraction": 0.0,
+              "finite": true,
+              "atol": 2e-05,
+              "rtol": 0.0002,
+              "statistics_version": "allclose_right_reference_v2"
+            }
+          },
+          "local_output": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "scale": 4096.0,
+          "amp": true,
+          "capture_stage": "same backward, before native unscale and clip; arithmetic division only, no second unscale_"
+        }
+      ],
+      "delta": {
+        "status": "PASSED",
+        "comparisons": {
+          "dpr_cd": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "dpr_hd": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "dpr_vd": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          },
+          "dpr_ad": {
+            "raw_allclose": true,
+            "max_abs": 0.0,
+            "relative_L2": 0.0,
+            "exceed_fraction": 0.0,
+            "finite": true,
+            "atol": 2e-05,
+            "rtol": 0.0002,
+            "statistics_version": "allclose_right_reference_v2"
+          }
+        },
+        "stage": "pre-clip gradients; scaled values divided once by the same recorded scale"
+      },
+      "long_term_trajectory_equivalence": "NOT_CLAIMED"
+    }
+  },
+  "local_regressions": {
+    "unit_03": "PASSED",
+    "module_03_thop2018": "PASSED",
+    "module_03_thop216": "PASSED",
+    "init_dpr_v1": "PASSED",
+    "init_cbr_lif_dpr_v1": "PASSED",
+    "scope_checks": "PASSED",
+    "cli_checks": "PASSED",
+    "report_validator_checks": "PASSED"
+  },
+  "timeout_test": {
+    "report_kind": "dpr_failure_diagnostic_supervisor_v1",
+    "admission_eligible": false,
+    "worker_exit": 124,
+    "timeout_seconds": 10,
+    "timed_out": true,
+    "formal_training": "NOT_STARTED",
+    "final_test": "NOT_RUN",
+    "capacity": "NOT_RUN",
+    "output": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-dpr-v1\\outputs\\dpr\\failure_fix_20260919\\timeout_01",
+    "status": "TIMEOUT",
+    "collection_status": "PENDING",
+    "missing": [
+      "diagnostic.json"
+    ]
+  }
+}

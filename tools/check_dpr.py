@@ -41,7 +41,7 @@ CFG = ROOT / "ultralytics-main/ultralytics/cfg/models/rt-detr"
 
 
 def source_identity():
-    paths = [ROOT / "tools/check_dpr.py", ROOT / "ultralytics-main/ultralytics/nn/modules/dpr.py",
+    paths = [ROOT / "tools/check_dpr.py", ROOT / "tools/dpr_diagnostics.py", ROOT / "ultralytics-main/ultralytics/nn/modules/dpr.py",
              ROOT / "ultralytics-main/ultralytics/nn/modules/__init__.py", ROOT / "ultralytics-main/ultralytics/nn/tasks.py",
              ROOT / "ultralytics-main/ultralytics/utils/torch_utils.py"]
     paths += [CFG / name for row in VARIANTS.values() for name in row[:2]]
@@ -54,7 +54,8 @@ def validate_math_report(report, variant):
     def need(condition, message):
         if not condition:
             raise RuntimeError("DPR mathematical evidence rejected: " + message)
-    need(report.get("report_kind") == "dpr_mathematical_structural_v1", "wrong report kind")
+    need(report.get("report_kind") == "dpr_mathematical_structural_v2" and
+         report.get("statistics_version") == "allclose_right_reference_v2", "wrong report kind/statistics version")
     need(report.get("status") in {"PASSED","PRECISION_NOTE"}, "incomplete report")
     need(report.get("source_identity") == source_identity(), "mathematical source/config identity changed")
     math = report.get("checks",{}).get("cpu_fp64_math",{})
@@ -110,6 +111,8 @@ def validate_math_report(report, variant):
     backend = lifecycle["checks"]["autobackend_saved_best"]
     need(backend.get("deployed") is True and backend.get("norm_retained") is True and
          backend.get("comparison",{}).get("raw_allclose") is True, "AutoBackend evidence incomplete")
+    from dpr_diagnostics import validate_backend_record
+    validate_backend_record(backend, FP32_ATOL, FP32_RTOL)
     flops = checks.get("gflops",{})
     need(flops.get("parent_unfused",0) > 0 and flops.get("candidate_corrected") == flops.get("parent_unfused") and
          flops.get("standard_deploy") == flops.get("parent_native_fused") and
@@ -124,8 +127,9 @@ def comparison(a, b, atol=FP32_ATOL, rtol=FP32_RTOL):
     return {"raw_allclose": bool(finite and torch.allclose(a, b, atol=atol, rtol=rtol)),
             "max_abs": float(d.max()) if d.numel() else 0.,
             "relative_L2": float(d.norm() / a.norm().clamp_min(1e-30)),
-            "exceed_fraction": float((d > atol + rtol * a.abs()).float().mean()),
-            "finite": finite, "atol": atol, "rtol": rtol}
+            "exceed_fraction": float((d > atol + rtol * b.abs()).float().mean()) if d.numel() else 0.,
+            "finite": finite, "atol": atol, "rtol": rtol,
+            "statistics_version": "allclose_right_reference_v2"}
 
 
 def _reference_kernels(module):
@@ -193,30 +197,9 @@ def mathematics():
 
 
 def _capture(model, image, fixed_indices=None):
-    """Capture continuous paths; remove every temporary closure hook before returning."""
-    values, handles = {}, []
-    layers = {"target": model.get_submodule(TARGET), "P3": model.model[5], "P4": model.model[6],
-              "P5": model.model[7], "encoder_features": model.model[-1].enc_output,
-              "candidate_scores": model.model[-1].enc_score_head}
-    for name, layer in layers.items():
-        handles.append(layer.register_forward_hook(lambda m, a, o, key=name: values.__setitem__(key, o.detach().clone())))
-    native_topk = torch.topk
-    def fixed_topk(input, k, *args, **kwargs):
-        dim = kwargs.get("dim", args[0] if args else -1)
-        if fixed_indices is not None and dim == 1 and k == model.model[-1].num_queries and input.ndim == 2:
-            indices = fixed_indices.to(input.device)
-            return torch.return_types.topk((input.gather(1, indices), indices))
-        return native_topk(input, k, *args, **kwargs)
-    try:
-        with torch.no_grad(), patch("torch.topk", fixed_topk):
-            output = model(image)
-            values["output"] = (output[0] if isinstance(output, (tuple,list)) else output).detach().clone()
-        values["candidate_indices"] = native_topk(values["candidate_scores"].max(-1).values,
-                                                   model.model[-1].num_queries, dim=1).indices
-    finally:
-        for handle in handles:
-            handle.remove()
-    return values
+    """Capture actual decoder indices with instance-scoped observation/replay."""
+    from dpr_diagnostics import capture_trace
+    return capture_trace(model, image, fixed_indices=fixed_indices, detailed=False)[0]
 
 
 def _compare_capture(before, after, model=None, image=None, atol=FP32_ATOL, rtol=FP32_RTOL):
@@ -303,16 +286,9 @@ def audit_learned_model(model, image):
         folded.fuse(verbose=False)
         checks["native_fuse_again"] = _compare_capture(fused_capture, _capture(folded,image))
         # Actual saved-file backend path, including load_checkpoint and native fuse.
-        backend = AutoBackend(model=str(tmp / "best.pt"), device=device, fp16=dtype == torch.float16, fuse=True, verbose=False)
-        backend.eval()
-        with torch.no_grad():
-            backend_output = backend(image)
-        backend_output = backend_output[0] if isinstance(backend_output, (tuple,list)) else backend_output
-        output_comparison = comparison(fused_capture["output"], backend_output)
-        assert backend.model.get_submodule(TARGET).deployed
-        checks["autobackend_saved_best"] = {"status": "PASSED" if output_comparison["raw_allclose"] else "FAILED",
-                                             "comparison": output_comparison, "deployed": True,
-                                             "norm_retained": isinstance(backend.model.get_submodule(TARGET).norm, torch.nn.BatchNorm2d)}
+        from dpr_diagnostics import backend_audit
+        checks["autobackend_saved_best"] = backend_audit(tmp / "best.pt", model, image, fused_capture,
+                                                        half=dtype == torch.float16, legacy_model=folded)
         torch.save(folded, tmp / "native_fused.pt")
         native_reload = torch.load(tmp / "native_fused.pt", map_location=device, weights_only=False)
         native_reload.fuse(verbose=False)
@@ -352,15 +328,8 @@ def audit_cuda_half(model, image):
         restored = torch.load(tmp/"deploy_half.pt",map_location=image.device,weights_only=False)
         checks["half_deploy_reload"] = _compare_capture(deployed_capture,_capture(restored,image_half),atol=HALF_ATOL,rtol=HALF_RTOL)
         torch.save({"model":model,"ema":None,"epoch":0,"train_args":{"task":"detect"}},tmp/"best.pt")
-        backend = AutoBackend(model=str(tmp/"best.pt"),device=image.device,fp16=True,fuse=True,verbose=False)
-        backend.eval()
-        with torch.no_grad():
-            output = backend(image_half)
-        output = output[0] if isinstance(output,(tuple,list)) else output
-        diff = comparison(deployed_capture["output"],output,HALF_ATOL,HALF_RTOL)
-        checks["autobackend_half"] = {"status":"PASSED" if diff["raw_allclose"] else "FAILED", "comparison":diff,
-                                       "deployed":backend.model.get_submodule(TARGET).deployed,
-                                       "dtype":str(next(backend.model.parameters()).dtype)}
+        from dpr_diagnostics import backend_audit
+        checks["autobackend_half"] = backend_audit(tmp/"best.pt", model, image_half, deployed_capture, half=True, legacy_model=deployed)
     return {"status":"FAILED" if any(v["status"] == "FAILED" for v in checks.values()) else (
         "PRECISION_NOTE" if any(v["status"] == "PRECISION_NOTE" for v in checks.values()) else "PASSED"),
         "device":str(image.device),"dtype":"float16","atol":HALF_ATOL,"rtol":HALF_RTOL,"checks":checks,
@@ -559,7 +528,7 @@ def main():
     if args.output.exists():
         raise SystemExit("Refusing to overwrite an existing check report")
     torch.set_num_threads(args.threads)
-    report = {"report_kind":"dpr_mathematical_structural_v1","status":"RUNNING",
+    report = {"report_kind":"dpr_mathematical_structural_v2","statistics_version":"allclose_right_reference_v2","status":"RUNNING",
               "torch_version":torch.__version__,"source_root":str(ROOT),"source_identity":source_identity(),"checks":{},
               "real_detection_loss":"PENDING_SEPARATE_PREFLIGHT","cuda_lifecycle":"PENDING_SEPARATE_PREFLIGHT",
               "capacity_B16_640_AMP":"PENDING_SEPARATE_PREFLIGHT","formal_training":"NOT_STARTED","final_test":"NOT_RUN"}

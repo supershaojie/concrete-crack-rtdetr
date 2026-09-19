@@ -740,7 +740,8 @@ def run(args):
     args.output = (args.output or paths(args.variant)["meta"] / ("preflight_" + timestamp())).resolve()
     args.output.mkdir(parents=True, exist_ok=False)
     torch.set_num_threads(args.threads)
-    report = dict(contract=CONTRACT, report_kind="full_preflight_engineering", status="PENDING", variant=args.variant,
+    report = dict(contract=CONTRACT, report_kind="full_preflight_engineering", report_schema="dpr_full_preflight_v2",
+                  statistics_version="allclose_right_reference_v2", status="PENDING", variant=args.variant,
                   formal_training="NOT_STARTED", final_test="NOT_RUN", checks={}, output=str(args.output),
                   environment=environment(), tolerances=dict(atol=ATOL, rtol=RTOL))
     started = time.perf_counter()

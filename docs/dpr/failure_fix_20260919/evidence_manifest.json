@@ -1,0 +1,303 @@
+{
+  "schema": "dpr_failure_fix_evidence_v1",
+  "original_server_sha": "2f4319281cac92a1e56663c3c4a48ba7bafc6ccb",
+  "files": {
+    "attachment_audit.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\attachment_audit.json",
+      "stored_bytes": 16141,
+      "stored_sha256": "410e5d17f69b3ad193af6a2066a9e5f5b5873d851970cb52369b61e66ba7aa7c",
+      "raw_bytes": 161157,
+      "raw_sha256": "37c95bbd0c60431d8f5dedf951964b93ed215f816b097383d6353d2b06e9bab1",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "cli_checks.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\cli_checks.json",
+      "stored_bytes": 1894,
+      "stored_sha256": "540d9e4b9a065a8c0efc98f76674eb0ba50e90c9c216a43936eccbc6015c29b8",
+      "raw_bytes": 7185,
+      "raw_sha256": "a3941bcd018ed90c9fc51e623c55f0183bd83191d8781214d45c5c4ea1dc07fb",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "diagnose_01_console.log.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\diagnose_01_console.log",
+      "stored_bytes": 1169,
+      "stored_sha256": "e7c13c8ba5b02c55abffeda0e2e11e45bc0585421c10c9094e88fe7bf3182e7e",
+      "raw_bytes": 3993,
+      "raw_sha256": "995e9d2b65b62eba4ed2cbfe103288e3e81fe9b0a816e05a08c8182e8224ecf5",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "diagnose_02_console.log.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\diagnose_02_console.log",
+      "stored_bytes": 1207,
+      "stored_sha256": "4594b14a371dd9eac99714e28effad4db4e1ddcca54df28e3267366c088e8046",
+      "raw_bytes": 4072,
+      "raw_sha256": "1d1a9de7e6ec1e5ad01cca2fd8d974b57970ee91166b4f890ddf95c7f36b7899",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "diagnose_03_console.log.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\diagnose_03_console.log",
+      "stored_bytes": 1207,
+      "stored_sha256": "99900d69939a633e3afad9ca63784a2f2e520435d6ed909f4181cae8caf93423",
+      "raw_bytes": 4072,
+      "raw_sha256": "7c850a2fba4400bbeaab23e3cb9c4d6a2bc5750a39369159a883ca96429b8f3b",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "init_cbr_lif_dpr_v1.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\init_cbr_lif_dpr_v1.json",
+      "stored_bytes": 46152,
+      "stored_sha256": "8bd38933f40c0fb48de1b4eb377f700bf3f1f40dcc7d1b0e3def6dc1549cd9ee",
+      "raw_bytes": 538754,
+      "raw_sha256": "363b8f344d5249c06f11431c172357c308e1db01186ddac3898c49f5f048bfa0",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "init_cbr_lif_dpr_v1.log.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\init_cbr_lif_dpr_v1.log",
+      "stored_bytes": 1048,
+      "stored_sha256": "0b0b7e889def5677f3ca5cdb02bbcbcdc89fd8ea3fc359e424b7f2160d560938",
+      "raw_bytes": 2743,
+      "raw_sha256": "ec0091551716f918500a77a9f7feb0e05eac9e7a15709585871cb34d83703d0a",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "init_dpr_v1.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\init_dpr_v1.json",
+      "stored_bytes": 36901,
+      "stored_sha256": "ee343039537437b5484ee3d735a99b8105dc2f77b600629f3f36308786e6f24f",
+      "raw_bytes": 407971,
+      "raw_sha256": "7ebee5c6133f6857e8a28d86d2b99baf355a40e00031abc193334ee6c9314fc7",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "init_dpr_v1.log.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\init_dpr_v1.log",
+      "stored_bytes": 1040,
+      "stored_sha256": "87a8612c4ba1097fdbe2becc4622c28c6beb8fd44b9b20ab0cfb88c6323798f1",
+      "raw_bytes": 2519,
+      "raw_sha256": "a278f70877c9f49aa9d80f5e616c46396d2613a98cc99ed324a949e49df12431",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "module_01.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\module_01.json",
+      "stored_bytes": 60317,
+      "stored_sha256": "15111d7e1459bcc40089154537abf5b7f2efe8974c3d49d80683f3b6b846295b",
+      "raw_bytes": 1145810,
+      "raw_sha256": "36e9976c1142164bc8b15ed232af459d85ca75d480c22d5b89e0edec683ad75d",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "module_01.log.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\module_01.log",
+      "stored_bytes": 634,
+      "stored_sha256": "40997a347ecc4dcad9d33f366924b0e12489127d72ac9d43b9e08b4be8dcb03f",
+      "raw_bytes": 1814,
+      "raw_sha256": "8b4604b700f59dba243ac3a33f27a3b00da402438cd5e3703d03721af9a3ef45",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "module_02_thop2018.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\module_02_thop2018.json",
+      "stored_bytes": 84496,
+      "stored_sha256": "078f7312ef6addcd8ddacb69bcb031b57ac5a69218a7f6ba508bf197730ae8fb",
+      "raw_bytes": 1624501,
+      "raw_sha256": "9b99e10d2786dcc3045d55aaf8198146a34f09c96f6b5a5eb98277c95f178161",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "module_02_thop2018.log.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\module_02_thop2018.log",
+      "stored_bytes": 655,
+      "stored_sha256": "fcf5bf56f112f5cd3587a1a436c37d31281dd5c4c65e928f9aee3f6d6747a622",
+      "raw_bytes": 1831,
+      "raw_sha256": "e3ac07fb1689bb35c8c007e10b9775b3731c80338427c1fa80b55dff2aacffdd",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "module_02_thop216.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\module_02_thop216.json",
+      "stored_bytes": 84370,
+      "stored_sha256": "27e04e0b119747453e75fcac27c49ac9488e644195b34e8d8e2743680d1de842",
+      "raw_bytes": 1624030,
+      "raw_sha256": "d692d561d2a0a1804c6dfa496958ff0134af2c46e4615b063fb3f22e435b3d99",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "module_02_thop216.log.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\module_02_thop216.log",
+      "stored_bytes": 625,
+      "stored_sha256": "c86f605c6754257909a841dce4a13fece9656b9fa3a3b7bbe39986e1ff0eae93",
+      "raw_bytes": 1828,
+      "raw_sha256": "21268827cee487f3cfcc1a572d1adf150f997bc459b278dac65b1006e9f86955",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "module_03_thop2018.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\module_03_thop2018.json",
+      "stored_bytes": 84521,
+      "stored_sha256": "6195545da6471de11a8d128e47d26f1a535e86512026ca7be0879fb2cd126d31",
+      "raw_bytes": 1624856,
+      "raw_sha256": "bd981f252f0f707c26e91f9b0489a9085a54a94e5d4fdf706b6948e69ef3b3b1",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "module_03_thop2018.log.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\module_03_thop2018.log",
+      "stored_bytes": 639,
+      "stored_sha256": "5b00bb495eb060141682095893db324d2c577ac6c97e397c3d43059ded1442ad",
+      "raw_bytes": 1823,
+      "raw_sha256": "8be335db7f44ce7dc0ee9567c417075b7b4a9c796ba973719d0ca2f4338b1ea0",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "module_03_thop216.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\module_03_thop216.json",
+      "stored_bytes": 84530,
+      "stored_sha256": "e543c317c7b216be7ab5ca2df9e7448e62c437ec97c61a42f3f9330180a94384",
+      "raw_bytes": 1624862,
+      "raw_sha256": "5bb9392336dd318c0a1eab5dbc60ca5c43cd6838b85e924b7217a486ceb6da7d",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "module_03_thop216.log.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\module_03_thop216.log",
+      "stored_bytes": 625,
+      "stored_sha256": "6a8fee9f6b61c7636dda76b94800466984536a9ce1b5b31c0535061cd63877bd",
+      "raw_bytes": 1828,
+      "raw_sha256": "1e012453c438c42d19192892616ecdc49175363b4da4798eadbbc1bf4aac4e29",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "report_validator_checks.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\report_validator_checks.json",
+      "stored_bytes": 143,
+      "stored_sha256": "869d3d3d9693cb130437afc852c183a828294d06981f7bdd84d26dde6e7f2f4c",
+      "raw_bytes": 273,
+      "raw_sha256": "22143baee8bb62e30b2643aee19dc872f15544d0ef9cf0dc2eec74f84d60dc01",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "scope_checks.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\scope_checks.json",
+      "stored_bytes": 1088,
+      "stored_sha256": "bbeadb0026135f84330a9eb41745153180befe1451be76b984467c100d11f2ac",
+      "raw_bytes": 2627,
+      "raw_sha256": "08461b97c707db1d9eb5fe719a5cca84a7c2e616efbe20cf38129f124c73d5c9",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "timeout_01_console.log.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\timeout_01_console.log",
+      "stored_bytes": 755,
+      "stored_sha256": "9cd65128b551de53671f6fa0c6cd4f3048f83ed9325588e79e13d47c9adf4c89",
+      "raw_bytes": 1948,
+      "raw_sha256": "7ca57d12404bf5a27f78e777c37cd59b1feccfbf73331b358620a26e28e476bc",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "unit_01.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\unit_01.json",
+      "stored_bytes": 27552,
+      "stored_sha256": "f14eaf5f92958a55402bce3e82c43d7d7291e3ff2ff97548a718dda29780bbc2",
+      "raw_bytes": 485401,
+      "raw_sha256": "d1809c8e622623ec66fcf9cb38de8c23c7c00a3fc92605b81cdecefd8f737e5e",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "unit_01.log.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\unit_01.log",
+      "stored_bytes": 229,
+      "stored_sha256": "5ae1a4b24c2d50ccf9d87cb958833658371c02c5e51cfbc77bf8fd5a1c558f77",
+      "raw_bytes": 252,
+      "raw_sha256": "e2f1c7842a6d4051205d1e7e02814a4cd4f9ec9e6c462ce505d9428b7b2b17b7",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "unit_02.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\unit_02.json",
+      "stored_bytes": 38839,
+      "stored_sha256": "70e97fdba7fc02b409b9b6008ace2b17dd5f8958871fdd59e03f34fed6cd9e11",
+      "raw_bytes": 677811,
+      "raw_sha256": "b898a88f86223d0738f3a3a339e9474c2e5e4a71cfd4652bf10bdb461b52458d",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "unit_02.log.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\unit_02.log",
+      "stored_bytes": 229,
+      "stored_sha256": "c0eea2f71d678617c1be898bb8e8d6804e418764143666e5df5ec99deebdfc98",
+      "raw_bytes": 252,
+      "raw_sha256": "fe564187bd84af2ac2484f66b6822a6958e0199c6417063291880744386368fd",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "unit_03.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\unit_03.json",
+      "stored_bytes": 38926,
+      "stored_sha256": "1ef1f868c61836e61f0792a0ef559048552701f8fdf10cf3f6ef3320c7e928d9",
+      "raw_bytes": 678189,
+      "raw_sha256": "43891b90a81f0127246b6c5765aa3bdf1ec7b16a6fc2d780d8a69314c30faf16",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "unit_03.log.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\unit_03.log",
+      "stored_bytes": 230,
+      "stored_sha256": "f9139122f6b19ff1c20d0a8e6575328c41d3a56c14ead1a2bc38828952085a6c",
+      "raw_bytes": 252,
+      "raw_sha256": "d51b909624f50c9a79b8f304a4fa1ebc4bf05d57ca4f1d68735e4141670d0fb5",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "diagnose_01.tar.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\diagnose_01\\diagnostic_light.tar.gz",
+      "stored_bytes": 506896,
+      "stored_sha256": "c284b5d5ac409b66c935cd3d6b08e2dab2f9d8774c00de81befef154b5bcf251",
+      "raw_bytes": 506896,
+      "raw_sha256": "c284b5d5ac409b66c935cd3d6b08e2dab2f9d8774c00de81befef154b5bcf251",
+      "encoding": "original-bytes"
+    },
+    "diagnose_01_package_manifest.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\diagnose_01\\package_manifest.json",
+      "stored_bytes": 709,
+      "stored_sha256": "f39a19b98e0f3214951b3fe87bf6b2a8843b960e6d953f5bebb4fe72da6f44ca",
+      "raw_bytes": 1526,
+      "raw_sha256": "d8483128147669eb1cbcd516068b16ebd8b5dfb96addcbfc3f8c7a25cf36cb6e",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "diagnose_02.tar.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\diagnose_02\\diagnostic_light.tar.gz",
+      "stored_bytes": 755682,
+      "stored_sha256": "8d569119fd9130d8aadf8ff58cead1c992a7584133ad0474bab61cb26d99f510",
+      "raw_bytes": 755682,
+      "raw_sha256": "8d569119fd9130d8aadf8ff58cead1c992a7584133ad0474bab61cb26d99f510",
+      "encoding": "original-bytes"
+    },
+    "diagnose_02_package_manifest.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\diagnose_02\\package_manifest.json",
+      "stored_bytes": 709,
+      "stored_sha256": "f0c0e946bd2c0effaf2517b1bc544e108650948634de471786912fd197590a61",
+      "raw_bytes": 1527,
+      "raw_sha256": "6d6d3f7d58838aa9867d14736548b3347560fd19de252d9a8f2a937aafa42d95",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "diagnose_03.tar.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\diagnose_03\\diagnostic_light.tar.gz",
+      "stored_bytes": 751246,
+      "stored_sha256": "bce6fef49cc0b81de8300b37928362aa775051bb797b2964ffed4f0dc8ccc544",
+      "raw_bytes": 751246,
+      "raw_sha256": "bce6fef49cc0b81de8300b37928362aa775051bb797b2964ffed4f0dc8ccc544",
+      "encoding": "original-bytes"
+    },
+    "diagnose_03_package_manifest.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\diagnose_03\\package_manifest.json",
+      "stored_bytes": 707,
+      "stored_sha256": "88a9019012a70a687e265340b85244018575771b981d01ca8125978aff2582ea",
+      "raw_bytes": 1527,
+      "raw_sha256": "540c95d522deecaa6146d35b40624f8ba43dcea8901e69e4eb53704ca3d283ad",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "timeout_01.tar.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\timeout_01\\diagnostic_light.tar.gz",
+      "stored_bytes": 43348,
+      "stored_sha256": "8dd974721718f5de6dca7755ad624fe1596d4db7b26f9813ad86a5ab69eaf193",
+      "raw_bytes": 43348,
+      "raw_sha256": "8dd974721718f5de6dca7755ad624fe1596d4db7b26f9813ad86a5ab69eaf193",
+      "encoding": "original-bytes"
+    },
+    "timeout_01_package_manifest.json.gz": {
+      "source": "outputs\\dpr\\failure_fix_20260919\\timeout_01\\package_manifest.json",
+      "stored_bytes": 657,
+      "stored_sha256": "5245f4a1ff4918258284f392d966a32d3d9679bf7e2c672cdc4c150582375dc5",
+      "raw_bytes": 1383,
+      "raw_sha256": "4222812a1c4d151872b3f152749299803a62fe139768cd9ee7cbd74aac1c5b78",
+      "encoding": "gzip-of-original-bytes"
+    },
+    "server_failure_original.tar.gz": {
+      "source": "D:\\rtdetr\u8dd1\u7ed3\u679c\\DPR\\DPR_FAILURE_DIAG_20260919T085337Z_891729.tar.gz",
+      "stored_bytes": 542754,
+      "stored_sha256": "09df0e5cab2fecc8ce3c341ed758696ed927ced1c555a41e9179fb9c34b38aeb",
+      "raw_bytes": 542754,
+      "raw_sha256": "09df0e5cab2fecc8ce3c341ed758696ed927ced1c555a41e9179fb9c34b38aeb",
+      "encoding": "original-bytes"
+    }
+  },
+  "total_stored_bytes": 3218870
+}

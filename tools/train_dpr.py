@@ -166,6 +166,11 @@ def strict_gate(variant, source, initialized, data, report_path):
     def inference_leaf(entry, label, half=False):
         require(isinstance(entry, dict) and entry.get("status") in accepted, "Inference leaf incomplete: " + label)
         atol, rtol = (HALF_ATOL, HALF_RTOL) if half else (FP32_ATOL, FP32_RTOL)
+        # Backend raw equality is a hard gate even if a report also has details.
+        if label.endswith(("autobackend_saved_best", "autobackend_half")):
+            from dpr_diagnostics import validate_backend_record
+            validate_backend_record(entry, atol, rtol)
+            return
         if "details" in entry:
             rows = entry["details"]
             for name in ("target", "P3", "P4", "P5", "encoder_features", "candidate_scores"):
@@ -194,6 +199,8 @@ def strict_gate(variant, source, initialized, data, report_path):
     report = load_json(report_path)
     require(report.get("contract") == CONTRACT and report.get("report_kind") == "full_preflight_engineering",
             "Only this complete DPR preflight contract is eligible")
+    require(report.get("report_schema") == "dpr_full_preflight_v2" and
+            report.get("statistics_version") == "allclose_right_reference_v2", "Stale preflight evidence format")
     require(report.get("variant") == variant, "Wrong preflight variant")
     require(report.get("status") in accepted, "Preflight contains failed or pending checks")
     env = environment()

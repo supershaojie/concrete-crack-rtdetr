@@ -12,12 +12,14 @@ case "$VARIANT" in cbr_lif_dpr_v1|dpr_v1) ;; *) echo "Unknown DPR_VARIANT: $VARI
 if [ "$ACTION" = help ] || [ "$ACTION" = --help ] || [ "$ACTION" = -h ]; then
   cat <<'HELP'
 Usage: bash tools/dpr_server.sh ACTION [tool arguments]
-Actions: environment | init | init-preflight | plan | start | resume | val | test | pack
+Actions: environment | init | diagnose | init-preflight | plan | start | resume | val | test | pack
 Set DPR_VARIANT=cbr_lif_dpr_v1 (default) or dpr_v1.
 Set DPR_MAIN only to an explicitly verified equivalent main repository/data root.
 init-preflight performs initialization, CPU mathematical/structure checks,
 CPU/CUDA lifecycle checks, and native B16/640/AMP capacity (<=16 batches).
 It never starts formal training, evaluation, or the other variant automatically.
+diagnose collects bounded failure attribution only (default timeout 900 seconds),
+without capacity or formal admission; optional --scope inference|gradients|all.
 resume requires --checkpoint PATH; val/test require --weights PATH (test also
 requires --val-report PATH). pack forwards --run-dir/--output/--metadata.
 HELP
@@ -47,6 +49,20 @@ case "$ACTION" in
     ;;
   plan)
     python tools/train_dpr.py plan --variant "$VARIANT" --source "$SOURCE" --initialized "$INITIALIZED" --data "$DATA" "$@"
+    ;;
+  diagnose)
+    LOG="$META/diagnose_$(date -u +%Y%m%dT%H%M%S)_$$.log"
+    set +e
+    python tools/diagnose_dpr.py --variant "$VARIANT" --source "$SOURCE" --initialized "$INITIALIZED" --data "$DATA" "$@" \
+      2>&1 | tee "$LOG"
+    PIPE_CODES=("${PIPESTATUS[@]}")
+    COMMAND_RC=${PIPE_CODES[0]}
+    TEE_RC=${PIPE_CODES[1]}
+    RC=$COMMAND_RC
+    if [ "$RC" -eq 0 ]; then RC=$TEE_RC; fi
+    set -e
+    printf '{"command_exit":%s,"tee_exit":%s,"effective_exit":%s}\n' "$COMMAND_RC" "$TEE_RC" "$RC" > "$LOG.exit_status.json"
+    exit "$RC"
     ;;
   init|init-preflight)
     if [ "$#" -ne 0 ]; then echo "$ACTION takes no extra arguments; preserves the bounded contract." >&2; exit 2; fi
