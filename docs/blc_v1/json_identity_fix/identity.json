@@ -1,0 +1,130 @@
+{
+  "status": "PASSED",
+  "historical_commit": "010038a1115cc757d2aba6fad480e73e0a36b820",
+  "scope": "Local real inventory/weight hashes and synthetic gate fixtures; no model forward, training or evaluation",
+  "server_init_preflight": "PENDING",
+  "server_main_preflight": "PENDING",
+  "data": {
+    "inventory": {
+      "train": {
+        "images": 6048,
+        "boxes": 45573,
+        "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+        "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"
+      },
+      "val": {
+        "images": 1728,
+        "boxes": 12840,
+        "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+        "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+      },
+      "test": {
+        "images": 864,
+        "boxes": 6663,
+        "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+        "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"
+      }
+    },
+    "data_yaml": {
+      "path": "D:/MyProjects/Crack_RTDETR/datasets/crack_det",
+      "train": "images/train",
+      "val": "images/val",
+      "test": "images/test",
+      "names": {
+        "0": "crack"
+      }
+    },
+    "resolved_root": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det",
+    "data_sha256": "5738ceac3926404a2e4d10a448f6f3d92d654e9d533a4ba614c8d16f126fa9bb"
+  },
+  "code_sha256": "01d940fab1a95a553d6f19808b9012257bbe0d322d188ce186dfc61905c151e4",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-blc-v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-blc-v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "010038a1115cc757d2aba6fad480e73e0a36b820",
+    "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-blc-v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    }
+  },
+  "weight_hashes": {
+    "cbr_lif_blc_v1": {
+      "init_sha256": "b9f1b0d33492d5e1a3fa312b6612eff5019bdf5f513f5a0ad774fdc0b56ced05",
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e"
+    },
+    "blc_v1": {
+      "init_sha256": "b41daaab1ebcf169e47d8d25b59d90feba606dea1606222948cd6a8a89be8702",
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e"
+    }
+  },
+  "roundtrip": {
+    "cbr_lif_blc_v1": {
+      "variant": true,
+      "code": true,
+      "init_sha256": true,
+      "source_sha256": true,
+      "data": true,
+      "recipe": true,
+      "runtime": true
+    },
+    "blc_v1": {
+      "variant": true,
+      "code": true,
+      "init_sha256": true,
+      "source_sha256": true,
+      "data": true,
+      "recipe": true,
+      "runtime": true
+    }
+  },
+  "historical_roundtrip": {
+    "equal": false,
+    "before_key_type": "int",
+    "after_key_type": "str"
+  },
+  "evidence_gate": {
+    "unchanged": "accepted",
+    "historical_integer_key": "Stale init-preflight evidence: data",
+    "image_list": "Stale init-preflight evidence: data",
+    "label_hash": "Stale init-preflight evidence: data",
+    "class_name": "Stale init-preflight evidence: data",
+    "train_path": "Stale init-preflight evidence: data",
+    "val_path": "Stale init-preflight evidence: data",
+    "test_path": "Stale init-preflight evidence: data",
+    "resolved_root": "Stale init-preflight evidence: data",
+    "yaml_hash": "Stale init-preflight evidence: data",
+    "equivalent_inventory_moved_root": "Stale init-preflight evidence: data",
+    "comment_only_yaml": "Stale init-preflight evidence: data"
+  },
+  "strict_validation": {
+    "names": "Data split/classes changed",
+    "train": "Data split/classes changed",
+    "val": "Data split/classes changed",
+    "test": "Data split/classes changed",
+    "input_class_key_still_strict": "Data split/classes changed",
+    "train.images": "Image lists/label hashes differ from the successful parent; counts alone are insufficient",
+    "train.boxes": "Image lists/label hashes differ from the successful parent; counts alone are insufficient",
+    "train.split_paths_sha256": "Image lists/label hashes differ from the successful parent; counts alone are insufficient",
+    "train.label_inventory_sha256": "Image lists/label hashes differ from the successful parent; counts alone are insufficient",
+    "val.images": "Image lists/label hashes differ from the successful parent; counts alone are insufficient",
+    "val.boxes": "Image lists/label hashes differ from the successful parent; counts alone are insufficient",
+    "val.split_paths_sha256": "Image lists/label hashes differ from the successful parent; counts alone are insufficient",
+    "val.label_inventory_sha256": "Image lists/label hashes differ from the successful parent; counts alone are insufficient",
+    "test.images": "Image lists/label hashes differ from the successful parent; counts alone are insufficient",
+    "test.boxes": "Image lists/label hashes differ from the successful parent; counts alone are insufficient",
+    "test.split_paths_sha256": "Image lists/label hashes differ from the successful parent; counts alone are insufficient",
+    "test.label_inventory_sha256": "Image lists/label hashes differ from the successful parent; counts alone are insufficient"
+  }
+}

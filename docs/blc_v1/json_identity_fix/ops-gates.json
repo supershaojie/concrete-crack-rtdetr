@@ -1,0 +1,27 @@
+{
+  "status": "PASSED",
+  "scope": "isolated evidence-gate fixtures, no training",
+  "cases": {
+    "valid": "accepted",
+    "FAILED": "rejected",
+    "PENDING": "rejected",
+    "stale_variant": "rejected",
+    "stale_code": "rejected",
+    "stale_init_sha256": "rejected",
+    "stale_source_sha256": "rejected",
+    "stale_data": "rejected",
+    "stale_recipe": "rejected",
+    "environment_python": "rejected",
+    "environment_torch": "rejected",
+    "environment_cuda": "rejected",
+    "environment_gpu": "rejected",
+    "environment_ultralytics": "rejected",
+    "capacity_batch": "rejected",
+    "capacity_imgsz": "rejected",
+    "capacity_AMP": "rejected",
+    "capacity_effective_updates": "rejected",
+    "lifecycle": "rejected",
+    "native_half_ema_epoch_val": "rejected",
+    "native_resume": "rejected"
+  }
+}

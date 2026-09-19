@@ -206,7 +206,10 @@ def dataset_identity(data):
     actual = dataset_inventory(Path(resolved["path"]))
     expected = json.loads((ROOT / "docs/blc_v1/parent_dataset_inventory.json").read_text(encoding="utf-8"))
     require(actual == expected, "Image lists/label hashes differ from the successful parent; counts alone are insufficient")
-    return dict(inventory=actual, data_yaml=spec, resolved_root=str(resolved["path"]), data_sha256=sha256(data))
+    identity = dict(inventory=actual, data_yaml=spec, resolved_root=str(resolved["path"]), data_sha256=sha256(data))
+    # Evidence is persisted as JSON, whose object keys are always strings.
+    # Canonicalize only after the original split/class and full inventory checks.
+    return json.loads(json.dumps(identity, ensure_ascii=False, allow_nan=False))
 
 
 def evidence_context(variant, data=True):

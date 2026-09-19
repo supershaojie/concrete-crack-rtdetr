@@ -1,0 +1,76 @@
+{
+  "status": "PASSED",
+  "scope": "Isolated Git fixtures; Linux server execution PENDING",
+  "template_sha256": "caa5416770eb657b422c9282b2e68b8a3f60889e8ef898d478a1f01b73c9021f",
+  "cases": {
+    "success": {
+      "exit_code": 0,
+      "accepted": true,
+      "main_unchanged": true,
+      "preserved_files": [
+        "weights/cbr_lif_blc_v1_controlled_init.pt",
+        "weights/blc_v1_controlled_init.pt",
+        "outputs/blc_v1/init-preflight-old/report.json",
+        "notes.txt"
+      ]
+    },
+    "success_rerun": {
+      "exit_code": 0,
+      "accepted": true,
+      "main_unchanged": true,
+      "preserved_files": [
+        "weights/cbr_lif_blc_v1_controlled_init.pt",
+        "weights/blc_v1_controlled_init.pt",
+        "outputs/blc_v1/init-preflight-old/report.json",
+        "notes.txt"
+      ]
+    },
+    "dirty": {
+      "exit_code": 1,
+      "accepted": false,
+      "main_unchanged": true,
+      "preserved_files": [
+        "weights/cbr_lif_blc_v1_controlled_init.pt",
+        "weights/blc_v1_controlled_init.pt",
+        "outputs/blc_v1/init-preflight-old/report.json",
+        "notes.txt",
+        "source.py"
+      ]
+    },
+    "unexpected_head": {
+      "exit_code": 1,
+      "accepted": false,
+      "main_unchanged": true,
+      "preserved_files": [
+        "weights/cbr_lif_blc_v1_controlled_init.pt",
+        "weights/blc_v1_controlled_init.pt",
+        "outputs/blc_v1/init-preflight-old/report.json",
+        "notes.txt"
+      ]
+    },
+    "untracked_collision": {
+      "exit_code": 1,
+      "accepted": false,
+      "main_unchanged": true,
+      "preserved_files": [
+        "weights/cbr_lif_blc_v1_controlled_init.pt",
+        "weights/blc_v1_controlled_init.pt",
+        "outputs/blc_v1/init-preflight-old/report.json",
+        "notes.txt",
+        "collision.txt"
+      ]
+    },
+    "ignored_collision": {
+      "exit_code": 1,
+      "accepted": false,
+      "main_unchanged": true,
+      "preserved_files": [
+        "weights/cbr_lif_blc_v1_controlled_init.pt",
+        "weights/blc_v1_controlled_init.pt",
+        "outputs/blc_v1/init-preflight-old/report.json",
+        "notes.txt",
+        "incoming/ignored.txt"
+      ]
+    }
+  }
+}
