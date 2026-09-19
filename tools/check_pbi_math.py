@@ -2,7 +2,9 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 from copy import deepcopy
+import hashlib
 import json
 from pathlib import Path
 import traceback
@@ -16,12 +18,171 @@ from ultralytics.nn.modules import Conv, PBI, PBIConv
 from ultralytics.utils.torch_utils import fuse_conv_and_bn
 
 ATOL, RTOL = 2e-5, 2e-4
+MATH_EVIDENCE_VERSION = 'pbi_math_precision_v2'
+FUSION_EVIDENCE_VERSION = 'pbi_fusion_precision_v1'
+FUSION_PRECISION_POLICY = 'native_diagnostic_strict_fp32_reference_v1'
+
+
+def math_source_identity():
+    """Bind the evidence to the actual audit, validator and unchanged operators."""
+    root = Path(__file__).resolve().parents[1]
+    names = ('tools/check_pbi_math.py', 'tools/train_pbi.py',
+             'ultralytics-main/ultralytics/nn/modules/pbi.py',
+             'ultralytics-main/ultralytics/nn/modules/conv.py')
+    return {name: hashlib.sha256((root/name).read_bytes().replace(b'\r\n', b'\n')).hexdigest()
+            for name in names}
+
+
+def precision_settings():
+    return dict(matmul_allow_tf32=bool(torch.backends.cuda.matmul.allow_tf32),
+                cudnn_allow_tf32=bool(torch.backends.cudnn.allow_tf32),
+                float32_matmul_precision=torch.get_float32_matmul_precision())
+
+
+@contextmanager
+def strict_fp32_reference(record):
+    """Only the wrapper reference forward pair; restore coupled settings even on failure."""
+    before = precision_settings()
+    record.update(before=before, restored=False, exited_via_exception=False)
+    try:
+        torch.set_float32_matmul_precision('highest')
+        torch.backends.cuda.matmul.allow_tf32 = False
+        torch.backends.cudnn.allow_tf32 = False
+        record['active'] = precision_settings()
+        yield
+    except BaseException:
+        record['exited_via_exception'] = True
+        raise
+    finally:
+        # Setting allow_tf32=True can turn 'medium' into 'high'. Restore the
+        # coupled precision selector last, then verify every captured setting.
+        torch.backends.cuda.matmul.allow_tf32 = before['matmul_allow_tf32']
+        torch.backends.cudnn.allow_tf32 = before['cudnn_allow_tf32']
+        torch.set_float32_matmul_precision(before['float32_matmul_precision'])
+        record['after'] = precision_settings()
+        record['restored'] = record['after'] == before
+        require(record['restored'], 'PRECISION_RESTORE: wrapper reference changed caller settings')
+
+
+class FusionAuditError(RuntimeError):
+    """Keep the complete measured evidence when a hard fusion condition fails."""
+    def __init__(self, reason, evidence):
+        super().__init__(reason + ': PBI wrapper fusion audit failed; see nonzero_wrapper_fusion evidence')
+        self.reason, self.evidence = reason, evidence
 
 
 def metric(a, b):
     a,b=a.detach().float(),b.detach().float()
+    finite = bool(torch.isfinite(a).all() and torch.isfinite(b).all())
+    difference = (a-b).abs()
+    valid = difference[torch.isfinite(difference)]
     return dict(raw_allclose=bool(torch.allclose(a,b,atol=ATOL,rtol=RTOL)),
-                max_abs=float((a-b).abs().max()),finite=bool(torch.isfinite(a).all() and torch.isfinite(b).all()))
+                max_abs=float(difference.max()) if finite else None, finite=finite,
+                finite_max_abs=float(valid.max()) if valid.numel() else None,
+                nonfinite_a=int((~torch.isfinite(a)).sum()),nonfinite_b=int((~torch.isfinite(b)).sum()))
+
+
+def _fusion_capture(wrapped, fused, image):
+    """Observe each real forward, with all hooks removed before returning/raising."""
+    states = {label: {k: tensor_sha256(v) for k,v in model.state_dict().items()}
+              for label,model in (('unfused',wrapped),('fused',fused))}
+    pbi_states = {label: {k: tensor_sha256(v) for k,v in model.pbi.state_dict().items()}
+                  for label,model in (('unfused',wrapped),('fused',fused))}
+    row = dict(precision=precision_settings(),input_sha256=tensor_sha256(image),
+               wrapper_state_sha256=states, pbi_calls={'unfused':0,'fused':0},
+               pbi_state_sha256=pbi_states,pbi_state_equal=pbi_states['unfused']==pbi_states['fused'],
+               before_pbi=None,after_pbi=None,errors=[])
+    taps, handles = {}, []
+    def attach(label, model):
+        def projection(_module, _args, value):
+            taps[label+'_before'] = value.detach().clone()
+        def branch(_module, _args, _value):
+            row['pbi_calls'][label] += 1
+        handles.append(model.act.register_forward_hook(projection))
+        handles.append(model.pbi.register_forward_hook(branch))
+    try:
+        attach('unfused',wrapped); attach('fused',fused)
+        with torch.no_grad():
+            outputs = {'unfused':wrapped(image), 'fused':fused(image)}
+        row['before_pbi'] = metric(taps['unfused_before'], taps['fused_before'])
+        row['after_pbi'] = metric(outputs['unfused'],outputs['fused'])
+        row['finite'] = row['before_pbi']['finite'] and row['after_pbi']['finite']
+        row['residual_abs_max'] = {
+            label: float((out-taps[label+'_before']).abs().max())
+            if bool(torch.isfinite(out).all() and torch.isfinite(taps[label+'_before']).all()) else None
+            for label,out in outputs.items()}
+    except Exception as exc:
+        row['errors'].append(dict(reason='EXECUTION_ERROR',detail=repr(exc)))
+        row['finite'] = None
+        row['capture_missing'] = [key for key in ('unfused_before','fused_before') if key not in taps]
+    finally:
+        for handle in handles:
+            handle.remove()
+    if row['pbi_calls'] != {'unfused':1,'fused':1}:
+        row['errors'].append(dict(reason='PBI_CALL_COUNT',detail=row['pbi_calls']))
+    if row['finite'] is False:
+        row['errors'].append(dict(reason='NONFINITE',detail='Input projection or wrapper output is nonfinite'))
+    if not row['pbi_state_equal']:
+        row['errors'].append(dict(reason='PBI_STATE',detail='PBI parameters differ after fusion'))
+    if row['finite'] and any(v <= 0 for v in row['residual_abs_max'].values()):
+        row['errors'].append(dict(reason='ZERO_RESIDUAL',detail=row['residual_abs_max']))
+    row['raw_allclose'] = all((row.get(key) or {}).get('raw_allclose') is True for key in ('before_pbi','after_pbi'))
+    row['status'] = 'FAILED' if row['errors'] else 'PASSED' if row['raw_allclose'] else 'PRECISION_NOTE'
+    return row
+
+
+def wrapper_fusion_audit(wrapped, image, fused=None):
+    """Native diagnostic and strict reference share input and source/PBI weights.
+
+    Each uses the identical Conv/BN fusion flow, including its matrix multiply,
+    under its recorded precision. The optional fused object is for fault probes.
+    """
+    before = precision_settings()
+    report = dict(evidence_version=FUSION_EVIDENCE_VERSION, precision_policy=FUSION_PRECISION_POLICY,
+                  scope='nonzero_wrapper_fusion_only', tolerance=dict(atol=ATOL,rtol=RTOL),
+                  settings_before=before, status='FAILED', precision_context={},
+                  fusion_flow='deepcopy_fuse_conv_and_bn_forward_fuse' if fused is None else 'injected_test_fixture',
+                  device=image.device.type, device_index=image.device.index,
+                  input_shape=list(image.shape), input_dtype=str(image.dtype))
+    def prepare():
+        if fused is not None:
+            return fused
+        result=deepcopy(wrapped)
+        result.conv=fuse_conv_and_bn(result.conv,result.bn)
+        delattr(result,'bn')
+        result.forward=result.forward_fuse
+        return result
+    try:
+        report['native'] = _fusion_capture(wrapped,prepare(),image)
+        with strict_fp32_reference(report['precision_context']):
+            report['strict_fp32'] = _fusion_capture(wrapped,prepare(),image)
+            native, strict = report['native'],report['strict_fp32']
+            report['same_input_and_weights'] = (native['input_sha256'] == strict['input_sha256'] and
+                native['wrapper_state_sha256']['unfused'] == strict['wrapper_state_sha256']['unfused'] and
+                native['pbi_state_sha256'] == strict['pbi_state_sha256'])
+            if not report['same_input_and_weights']:
+                raise FusionAuditError('PBI_STATE',report)
+            for row in (native,strict):
+                if row['errors']:
+                    raise FusionAuditError(row['errors'][0]['reason'],report)
+            if not strict['raw_allclose']:
+                strict['status']='FAILED'
+                strict['errors'].append(dict(reason='TOLERANCE',detail='Strict FP32 pre/post-PBI comparison exceeds unchanged tolerance'))
+                raise FusionAuditError('TOLERANCE',report)
+        report['status']='PASSED'  # Explicit policy pass, not a native allclose claim.
+        report['native_precision_status']=native['status']
+        return report
+    except FusionAuditError:
+        raise
+    except Exception as exc:
+        report['execution_error']=repr(exc)
+        raise FusionAuditError('EXECUTION_ERROR',report) from exc
+    finally:
+        report['settings_after']=precision_settings()
+        report['settings_restored']=report['settings_after']==before
+        if not report['settings_restored']:
+            report['status']='FAILED'
+            raise FusionAuditError('PRECISION_RESTORE',report)
 
 
 def explicit(x, weights, amp=False):
@@ -58,7 +219,9 @@ def rng_check():
                 independent_input_projections=True,no_storage_sharing=True,new_buffers=[])
 
 
-def formula_check(device):
+def formula_check(device, report=None):
+    report = {} if report is None else report
+    report.update(device=device,status='FAILED')
     module=PBI().to(device)
     require(sum(p.numel() for p in module.parameters())==24576,'Parameter count')
     rows=[]
@@ -94,20 +257,16 @@ def formula_check(device):
         opt.step(); steps.append(dict(loss=float(loss.detach()),gradient_norms=norms))
     wrapped=PBIConv(128,256,1,1,None,1,1,False,32).eval().to(device)
     wrapped.pbi.load_state_dict(module.state_dict(),strict=True)
-    fused=deepcopy(wrapped)
-    fused.conv=fuse_conv_and_bn(fused.conv,fused.bn);delattr(fused,'bn');fused.forward=fused.forward_fuse
-    calls=[]
-    hook=fused.pbi.register_forward_hook(lambda *_:calls.append(1))
+    image=torch.randn(2,128,9,11,device=device)
+    report.update(new_trainable_parameters=24576,shapes=rows,
+                  nonzero_formula=output,nonzero_gradients=grads,
+                  nonzero_residual_max=float((y-x).abs().max().detach()),gradient_steps=steps)
     try:
-        image=torch.randn(2,128,9,11,device=device)
-        with torch.no_grad():
-            fusion=metric(wrapped(image),fused(image))
-        require(fusion['raw_allclose'] and fusion['finite'] and len(calls)==1,'Fused wrapper lost PBI')
-    finally:
-        hook.remove()
-    report=dict(device=device,status='PASSED',new_trainable_parameters=24576,shapes=rows,
-                nonzero_formula=output,nonzero_gradients=grads,nonzero_residual_max=float((y-x).abs().max().detach()),
-                gradient_steps=steps,nonzero_wrapper_fusion={**fusion,'pbi_calls':len(calls)})
+        report['nonzero_wrapper_fusion']=wrapper_fusion_audit(wrapped,image)
+    except FusionAuditError as exc:
+        report['nonzero_wrapper_fusion']=exc.evidence
+        report['failure_reason']=exc.reason
+        raise
     if device=='cuda':
         half=deepcopy(module).half(); hx=x.detach().half()
         with torch.no_grad():
@@ -131,6 +290,7 @@ def formula_check(device):
             require(changed,'Native GradScaler skipped mathematical update')
             updates.append(dict(loss=float(loss.detach()),scale_before=scale,scale_after=scaler.get_scale(),effective_update=changed))
         report['native_amp_optimizer_steps']=updates
+    report['status']='PASSED'
     return report
 
 
@@ -197,7 +357,12 @@ def main():
     parser.add_argument('--device',choices=('all','cpu','cuda'),default='all')
     args=parser.parse_args();require(not args.output.exists(),'Preserve existing report')
     torch.set_num_threads(4)
+    from train_pbi import code_identity, git_head
+    initial_code, initial_head = code_identity(), git_head()
     report=dict(status='FAILED',report_kind='pbi_math_audit',contract_version='pbi_acceptance_v1',
+                math_evidence_version=MATH_EVIDENCE_VERSION,precision_policy=FUSION_PRECISION_POLICY,
+                audit_source=math_source_identity(),code_identity=initial_code,git_head=initial_head,
+                precision_before=precision_settings(),
                 tolerance=dict(atol=ATOL,rtol=RTOL),runtime=runtime(),formal_training='NOT_STARTED',final_test='NOT_RUN')
     try:
         with torch.random.fork_rng(devices=list(range(torch.cuda.device_count()))):
@@ -208,15 +373,26 @@ def main():
             for device in devices:
                 if device=='cuda' and not torch.cuda.is_available():
                     report['devices'].append(dict(device='cuda',status='PENDING',reason='CUDA unavailable'))
-                else:report['devices'].append(formula_check(device))
+                else:
+                    device_report={}
+                    report['devices'].append(device_report)
+                    formula_check(device,device_report)
             report['structure_and_counts']=full_structure()
         report['status']='PASSED' if all(d['status']=='PASSED' for d in report['devices']) else 'PENDING'
+        report['native_fusion_status']='PRECISION_NOTE' if any(
+            d.get('nonzero_wrapper_fusion',{}).get('native_precision_status')=='PRECISION_NOTE'
+            for d in report['devices']) else report['status']
     except Exception as exc:
         report['error']=str(exc);report['traceback']=traceback.format_exc();raise
     finally:
-        from train_pbi import code_identity
-        report['code_identity']=code_identity()
+        report['precision_after']=precision_settings()
+        report['precision_restored']=report['precision_before']==report['precision_after']
+        report['code_identity_unchanged_during_run']=(code_identity()==initial_code and git_head()==initial_head)
+        if not report['precision_restored'] or not report['code_identity_unchanged_during_run']:
+            report['status']='FAILED'
+            report['identity_error']='Audit changed precision settings, or source/HEAD changed during execution'
         write_json(args.output,report)
+    require(report['status']=='PASSED','Mathematical audit incomplete or identity/precision restoration failed')
     print(json.dumps(dict(status=report['status'],output=str(args.output.resolve()))))
 
 

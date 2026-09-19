@@ -226,7 +226,82 @@ def _controlled_pass(report, variant):
         require(rebuilt.get(key) == [], "Native nc1 state mismatch: " + key)
 
 
+def _fusion_math_pass(fusion, expected_precision, device):
+    from check_pbi_math import FUSION_EVIDENCE_VERSION, FUSION_PRECISION_POLICY
+    strict_precision = dict(matmul_allow_tf32=False, cudnn_allow_tf32=False,
+                            float32_matmul_precision="highest")
+    require(fusion.get("status") == "PASSED" and
+            fusion.get("evidence_version") == FUSION_EVIDENCE_VERSION and
+            fusion.get("precision_policy") == FUSION_PRECISION_POLICY and
+            fusion.get("scope") == "nonzero_wrapper_fusion_only" and
+            fusion.get("fusion_flow") == "deepcopy_fuse_conv_and_bn_forward_fuse" and
+            fusion.get("tolerance") == {"atol": 2e-5, "rtol": 2e-4}, "Old/missing fusion precision policy")
+    require(fusion.get("device") == device and fusion.get("input_shape") == [2, 128, 9, 11] and
+            fusion.get("input_dtype") == "torch.float32", "Fusion input/device identity changed")
+    context = fusion.get("precision_context", {})
+    require(context.get("before") == context.get("after") == fusion.get("settings_before") ==
+            fusion.get("settings_after") == expected_precision and context.get("active") == strict_precision and
+            context.get("restored") is True and context.get("exited_via_exception") is False and
+            fusion.get("settings_restored") is True, "Fusion precision restoration missing/failed")
+
+    def hashes(value):
+        return isinstance(value, dict) and bool(value) and all(isinstance(v, str) and len(v) == 64 and
+               all(c in "0123456789abcdef" for c in v) for v in value.values())
+
+    native, strict = fusion.get("native", {}), fusion.get("strict_fp32", {})
+    for label, row, precision in (("native", native, expected_precision), ("strict_fp32", strict, strict_precision)):
+        require(row.get("precision") == precision and row.get("errors") == [], "Fusion runtime/error: " + label)
+        require(row.get("pbi_calls") == {"unfused": 1, "fused": 1}, "Fusion PBI_CALL_COUNT: " + label)
+        require(row.get("finite") is True, "Fusion NONFINITE: " + label)
+        residuals = row.get("residual_abs_max", {})
+        require(set(residuals) == {"unfused", "fused"} and all(_finite(v) and v > 0 for v in residuals.values()),
+                "Fusion nonzero branch missing: " + label)
+        states, pbi = row.get("wrapper_state_sha256", {}), row.get("pbi_state_sha256", {})
+        require(set(states) == set(pbi) == {"unfused", "fused"} and
+                all(hashes(v) for v in list(states.values()) + list(pbi.values())) and
+                set(pbi["unfused"]) == {"W1.weight", "W2.weight", "Wo.weight"} and
+                pbi["unfused"] == pbi["fused"] and row.get("pbi_state_equal") is True,
+                "Fusion PBI_STATE: " + label)
+        for side in ("unfused", "fused"):
+            require(all(states[side].get("pbi." + key) == value for key, value in pbi[side].items()),
+                    "Inconsistent wrapper/PBI hashes: " + label)
+        require(hashes({"input": row.get("input_sha256")}), "Missing fusion input hash")
+        for stage in ("before_pbi", "after_pbi"):
+            measured = row.get(stage, {})
+            require(isinstance(measured.get("raw_allclose"), bool) and measured.get("finite") is True and
+                    _finite(measured.get("max_abs")) and measured["max_abs"] >= 0 and
+                    measured.get("finite_max_abs") == measured["max_abs"] and
+                    measured.get("nonfinite_a") == measured.get("nonfinite_b") == 0,
+                    "Fusion staged numerical evidence missing/nonfinite: " + label + "." + stage)
+        close = row["before_pbi"]["raw_allclose"] and row["after_pbi"]["raw_allclose"]
+        require(row.get("raw_allclose") is close, "Fusion raw comparison summary mismatch: " + label)
+        require(row.get("status") == ("PASSED" if close else "PRECISION_NOTE"),
+                "Native precision discrepancy cannot be relabeled PASSED: " + label)
+        if label == "strict_fp32":
+            require(close, "Fusion TOLERANCE: strict FP32 reference failed")
+    require(fusion.get("same_input_and_weights") is True and
+            native["input_sha256"] == strict["input_sha256"] and
+            native["wrapper_state_sha256"]["unfused"] == strict["wrapper_state_sha256"]["unfused"] and
+            native["pbi_state_sha256"] == strict["pbi_state_sha256"], "Fusion input/source/PBI weights differ")
+    require(fusion.get("native_precision_status") == native["status"], "Native fusion status lost")
+    return native["status"]
+
+
 def _math_pass(report):
+    from check_pbi_math import MATH_EVIDENCE_VERSION, FUSION_PRECISION_POLICY, math_source_identity
+    require(report.get("report_kind") == "pbi_math_audit" and report.get("contract_version") == "pbi_acceptance_v1" and
+            report.get("status") == "PASSED" and not report.get("error"), "Math audit incomplete/wrong kind")
+    require(report.get("math_evidence_version") == MATH_EVIDENCE_VERSION and
+            report.get("precision_policy") == FUSION_PRECISION_POLICY, "Old/missing math precision evidence version")
+    require(report.get("audit_source") == math_source_identity() and report.get("code_identity") == code_identity() and
+            report.get("code_identity_unchanged_during_run") is True, "Math report audit source mismatch")
+    precision = report.get("precision_before", {})
+    require(set(precision) == {"matmul_allow_tf32", "cudnn_allow_tf32", "float32_matmul_precision"} and
+            type(precision["matmul_allow_tf32"]) is bool and type(precision["cudnn_allow_tf32"]) is bool and
+            precision["float32_matmul_precision"] in {"highest", "high", "medium"} and
+            precision["matmul_allow_tf32"] == (precision["float32_matmul_precision"] != "highest") and
+            report.get("precision_after") == precision and report.get("precision_restored") is True,
+            "Math precision settings/restoration missing")
     require(report.get("tolerance") == {"atol": 2e-5, "rtol": 2e-4}, "Math tolerance changed")
     rng = report.get("rng_and_initialization", {})
     require(rng.get("status") == "PASSED" and rng.get("new_buffers") == [], "PBI RNG/state audit incomplete")
@@ -241,6 +316,7 @@ def _math_pass(report):
     rows = report.get("devices", [])
     require(len(rows) == 2 and {d.get("device") for d in rows} == {"cpu", "cuda"}, "Math CPU/CUDA coverage missing")
     required = {"W1.weight", "W2.weight", "Wo.weight"}
+    native_statuses = []
     for device in rows:
         require(device.get("status") == "PASSED" and device.get("new_trainable_parameters") == 24576,
                 "Math device PENDING/FAILED")
@@ -254,8 +330,7 @@ def _math_pass(report):
             compared(row, "gradient " + key)
         require(_finite(device.get("nonzero_residual_max")) and device["nonzero_residual_max"] > 0,
                 "Nonzero PBI branch evidence missing")
-        compared(device.get("nonzero_wrapper_fusion"), "learned wrapper fusion")
-        require(device["nonzero_wrapper_fusion"].get("pbi_calls") == 1, "Fused PBI missing/duplicated")
+        native_statuses.append(_fusion_math_pass(device.get("nonzero_wrapper_fusion", {}), precision, device["device"]))
         steps = device.get("gradient_steps", [])
         require(len(steps) == 2, "Missing two-step PBI startup")
         for index, step in enumerate(steps):
@@ -271,6 +346,8 @@ def _math_pass(report):
             require(len(steps) == 2 and all(s.get("effective_update") is True and _finite(s.get("loss")) and
                     s.get("scale_after", 0) >= s.get("scale_before", 1) > 0 for s in steps),
                     "Native GradScaler effective mathematical updates missing")
+    require(report.get("native_fusion_status") == ("PRECISION_NOTE" if "PRECISION_NOTE" in native_statuses else "PASSED"),
+            "Native fusion precision status does not match raw evidence")
     structure = report.get("structure_and_counts", {})
     require(structure.get("status") == "PASSED" and structure.get("variant_initial_values_exact") is True and
             structure.get("cross_variant_no_storage_sharing") is True, "Two-variant initialization proof missing")

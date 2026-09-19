@@ -274,6 +274,9 @@ def prerequisite_records(args):
         if key == "initialization":
             require(data.get("variant") == args.variant and data.get("output_sha256") == sha256(args.initialized),
                     "Initialization prerequisite variant/checkpoint differs")
+        else:
+            from train_pbi import _math_pass
+            _math_pass(data)
         records[key] = dict(path=str(path), sha256=sha256(path))
     return records
 

@@ -1,0 +1,71 @@
+{
+  "evidence_scope": "LOCAL_ONLY_NOT_SERVER_PERMISSION",
+  "server": "PENDING",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN",
+  "files": [
+    {
+      "file": "math_all_final.json.gz",
+      "source": "outputs\\pbi\\tf32_fix_20260919\\math_all_final.json",
+      "status": "PASSED",
+      "raw_bytes": 141222,
+      "raw_sha256": "63736eabc42c53ad97e488e220cae7cc080b13832bc007d888d1b3a24c2b1ba8",
+      "gzip_bytes": 22732,
+      "gzip_sha256": "29457aece36877f51be171d07ca6dd9fd421adbbddaa377a6f9fc2293f56c694"
+    },
+    {
+      "file": "precision_regression_final.json.gz",
+      "source": "outputs\\pbi\\tf32_fix_20260919\\precision_regression_final.json",
+      "status": "PASSED",
+      "raw_bytes": 171143,
+      "raw_sha256": "906a58542ae18babb12b6bb6b0ab680fc3ea39b84e3f2692e57bd3a7b195e41c",
+      "gzip_bytes": 18922,
+      "gzip_sha256": "acd29c8d7cce0626250abc7fd6448fce02ea450bb417c80d16c06e095db3c2c4"
+    },
+    {
+      "file": "omitted_pbi_math_FAILED.json.gz",
+      "source": "outputs\\pbi\\tf32_fix_20260919\\precision_regression_final_cli_failure\\omitted_pbi_math_FAILED.json",
+      "status": "FAILED",
+      "raw_bytes": 44298,
+      "raw_sha256": "15d996ea0e814240c01f0ef69513c63bbbecf65a9b3ee3b161fcacb86f00d15e",
+      "gzip_bytes": 13687,
+      "gzip_sha256": "9da99cf20db3475f4f6bcf677a7714a9ac57a8c1918c31d0a51308db70c4dd76"
+    },
+    {
+      "file": "admission_faults_v2.json.gz",
+      "source": "outputs\\pbi\\tf32_fix_20260919\\admission_faults_v2.json",
+      "status": "PASSED",
+      "raw_bytes": 3064,
+      "raw_sha256": "cc65b5a1695208fdf80008045ff84ab9b4a69849c823d7b9e836f64c3def7615",
+      "gzip_bytes": 780,
+      "gzip_sha256": "cf8e2bb3400f0ba0b05183f27999857be49cc44d01a2c664c77b531beceac47e"
+    },
+    {
+      "file": "gate_schema_fixture_final.json.gz",
+      "source": "outputs\\pbi\\tf32_fix_20260919\\gate_schema_fixture_final.json",
+      "status": "PASSED",
+      "raw_bytes": 3108,
+      "raw_sha256": "b8624adf5351ff547e917d46e5b5eb1296c211c109a9f7c8b5539ee183b948c6",
+      "gzip_bytes": 1135,
+      "gzip_sha256": "efe1cce845274facd57f386c60aba45a02e03813b0fdc86c1f30a859dc963ff2"
+    },
+    {
+      "file": "scope_preservation.json.gz",
+      "source": "outputs\\pbi\\tf32_fix_20260919\\scope_preservation.json",
+      "status": "PASSED",
+      "raw_bytes": 116101,
+      "raw_sha256": "3c02c89c6eac950dd0039166fb4be854a744b3769008288a282fbde99f656a40",
+      "gzip_bytes": 43377,
+      "gzip_sha256": "efdcc802043d0aa78cf6b9996c5006dd41687710a90400280c610176a639e04e"
+    },
+    {
+      "file": "supplementary_scope.json.gz",
+      "source": "outputs\\pbi\\tf32_fix_20260919\\supplementary_scope.json",
+      "status": "PASSED",
+      "raw_bytes": 454,
+      "raw_sha256": "d3a7bab321a84fc8104af029c355b2e41e49e0c5abf78c7c21e2e70ac977799e",
+      "gzip_bytes": 311,
+      "gzip_sha256": "6516b1c7704cefb2a4898c7c01ee311c54c2f916f2009041528cc917c88381e7"
+    }
+  ]
+}
