@@ -1,0 +1,50 @@
+{
+  "status": "PASSED",
+  "report_kind": "TEST_FIXTURE_NOT_PERMISSION",
+  "cases": [
+    {
+      "case": "full_schema_real_leaves_synthetic_capacity",
+      "status": "PASSED",
+      "fixture_result": "PRECISION_NOTE"
+    },
+    {
+      "case": "missing native rebuild",
+      "status": "PASSED",
+      "rejection": "Native nc1 reconstruction audit missing"
+    },
+    {
+      "case": "lost fused branch",
+      "status": "PASSED",
+      "rejection": "Fusion evidence missing: cpu_fp32"
+    },
+    {
+      "case": "missing continuous PBI output",
+      "status": "PASSED",
+      "rejection": "Comparison failed/missing: cpu_fp32.fusion.pbi_output"
+    },
+    {
+      "case": "missing same-gradient replay",
+      "status": "PASSED",
+      "rejection": "Restore/trajectory evidence blocked: cuda_native_amp ['restoration.same_gradient_replay: missing or unequal names/groups/hyperparameters/dtypes/scaler/epoch metadata', 'restoration.same_gradient_replay: missing tensor inventory', 'restoration.same_gradient_replay.inventory: tensor inventory differs', 'restoration.same_gradient_replay.storage: missing independence evidence or shared mutable tensor storage', 'restoration.same_gradient_replay: native scaler mode was not preserved', 'restoration.same_gradient_replay.first: disabled scaler or skipped native update', 'restoration.same_gradient_replay.first: invalid native scaler transition', 'restoration.same_gradient_replay.first: replay bypassed the native optimizer/scaler path', 'restoration.same_gradient_replay.second: disabled scaler or skipped native update', 'restoration.same_gradient_replay.second: invalid native scaler transition', 'restoration.same_gradient_replay.second: replay bypassed the native optimizer/scaler path', 'restoration.overflow_fixture: native enabled-AMP overflow/skip evidence missing', 'restoration.overflow_fixture.storage: missing independence evidence or shared mutable tensor storage', 'restoration.overflow_fixture.complete_state: missing complete comparison', 'restoration.overflow_fixture.complete_state: incomplete two-parameter toy state', 'restoration.overflow_fixture: overflow must skip optimizer, back off scaler, and retain native EMA update behavior']"
+    },
+    {
+      "case": "missing half formula",
+      "status": "PASSED",
+      "rejection": "Half explicit PBI formula/state evidence missing"
+    }
+  ],
+  "source_reports": {
+    "outputs\\pbi\\cbr_lif_pbi_v1\\local_engineering_20260919_01\\checks.json": "f657b836ce57c3dffb4bdbc9eed97eb40cb75ece3a88a800217b8ddf44ccfba9",
+    "outputs\\pbi\\cbr_lif_pbi_v1\\initialization_dispatch.json": "bef8f101ded610f8ede373aff4b6eba58527ec9b679e4d17b6c8971388ab8edc",
+    "outputs\\pbi\\math_all.json": "9f961605281284905c55d40e9d61556d498719953529ed4bf05d1fdada246480"
+  },
+  "synthetic": [
+    "capacity",
+    "runtime/environment acceptance",
+    "freshness identities",
+    "derived fixture summaries"
+  ],
+  "original_reports_unmodified": true,
+  "formal_start_authorized": false,
+  "server_capacity": "PENDING"
+}

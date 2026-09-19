@@ -1,0 +1,21 @@
+{
+  "scope": "User-confirmed historical independent parent evaluation; not a PBI run or a new evaluation",
+  "policy": "corrected_sorted_conf_mask_v1",
+  "best_sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa",
+  "test_metrics_member_sha256": "51f9e6c0d225a545c6913783e872fc906580287bea9d01994ce6913c9ad8edaa",
+  "val": {
+    "images": 1728, "GT": 12840,
+    "precision": 0.8655727028797452, "recall": 0.835202492211838,
+    "AP50": 0.8956724997170779, "AP75": 0.5453045665315482,
+    "mAP50_95": 0.5245427221919051
+  },
+  "test": {
+    "images": 864, "GT": 6663,
+    "precision": 0.8602393656297294, "recall": 0.8353594476962329,
+    "AP50": 0.8919968337794693, "AP75": 0.5400236205750717,
+    "mAP50_95": 0.5220090191444802
+  },
+  "PBI_accuracy_benefit": "UNVERIFIED",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN"
+}

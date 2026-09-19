@@ -1,0 +1,46 @@
+{
+  "base_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "instructions": {
+    "path": "D:\\rtdetr跑结果\\PBI\\PBI_Codex_Prompt.md",
+    "sha256": "66a25b9ea2b122b05225d7cb3d82cd08b0aba8013e30bd1bc02ed4d7cf989c6c"
+  },
+  "source": {
+    "path": "D:\\rtdetr跑结果\\c2 200e在线\\c2_rtdetr_r18_lite_e200_b16_onlineaug_20260830_215053\\weights\\rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "trained_parent_used": false
+  },
+  "reference": {
+    "status": "PASSED",
+    "archive": "D:\\7.1 rtdetr改\\魔鬼面具_RTDETR\\RTDETR-20260623.zip",
+    "sha256": "b91dbaf5f74e35ff23079fe0854140e7fd82207c21455b564abc594636aba2cc",
+    "member": "RTDETR-main/ultralytics/nn/backbone/starnet.py",
+    "member_sha256": "54b1217d4c1c19078ad79cf99c9f79bd9778ad8938d8e690296752abf5bc1539",
+    "read_lines": [
+      1,
+      54
+    ],
+    "extracted_matches_archive": true,
+    "executed": false,
+    "third_party_code_copied": false,
+    "author": "Xu Ma",
+    "header": "Created Mar/29/2024",
+    "license": "No license declaration in the read starnet.py member; prompt is not a license grant.",
+    "paper": "https://arxiv.org/abs/2403.19967",
+    "paper_title": "Rewrite the Stars",
+    "relation": "Background inspiration only: elementwise multiplication. PBI is independently implemented from the mathematical contract, not an equivalent StarNet Block."
+  },
+  "parent_recipe": {
+    "path": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\training\\args.yaml",
+    "sha256": "31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b",
+    "fields": 109,
+    "appendix_equal": true
+  },
+  "parent_inventory": {
+    "path": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\metadata\\launch\\dataset_inventory.json",
+    "sha256": "8567e1b4d1aae5f168fb18b633ed4357c7f0aba56c0041a6570647fb542d0446"
+  },
+  "inherited_tool_adaptation_reference": "784fb5baf748cf108c3f930ac27a8bcb6f46d39b (tools only; no prior experiment evidence accepted)",
+  "server_login": false,
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN"
+}

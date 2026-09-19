@@ -1,0 +1,104 @@
+{
+  "status": "PASSED",
+  "report_kind": "admission_fault_injection_only",
+  "cases": [
+    {
+      "case": "missing prerequisite",
+      "status": "PASSED",
+      "rejected": "Missing/changed bound prerequisite: initialization"
+    },
+    {
+      "case": "partial report",
+      "status": "PASSED",
+      "rejected": "Wrong/old report kind or acceptance contract: full_preflight_engineering"
+    },
+    {
+      "case": "old contract",
+      "status": "PASSED",
+      "rejected": "Wrong/old report kind or acceptance contract: full_preflight_engineering"
+    },
+    {
+      "case": "pending report",
+      "status": "PASSED",
+      "rejected": "Incomplete report: native_capacity"
+    },
+    {
+      "case": "false pass with pending",
+      "status": "PASSED",
+      "rejected": "Incomplete report: full_preflight_engineering"
+    },
+    {
+      "case": "stale source",
+      "status": "PASSED",
+      "rejected": "Code/config differs from tested tree: full_preflight_engineering"
+    },
+    {
+      "case": "wrong runtime",
+      "status": "PASSED",
+      "rejected": "Report must run in actual training environment: native_capacity.torch"
+    },
+    {
+      "case": "wrong HEAD",
+      "status": "PASSED",
+      "rejected": "Preflight full HEAD differs"
+    },
+    {
+      "case": "wrong server target",
+      "status": "PASSED",
+      "rejected": "Specified server environment not verified"
+    },
+    {
+      "case": "wrong variant",
+      "status": "PASSED",
+      "rejected": "Capacity init/variant/status changed"
+    },
+    {
+      "case": "wrong initialization",
+      "status": "PASSED",
+      "rejected": "Engineering initialization/variant changed"
+    },
+    {
+      "case": "wrong data",
+      "status": "PASSED",
+      "rejected": "Actual data path/label identity changed"
+    },
+    {
+      "case": "engineering data mismatch",
+      "status": "PASSED",
+      "rejected": "Full engineering/capacity dataset differs: val.images"
+    },
+    {
+      "case": "reduced batch",
+      "status": "PASSED",
+      "rejected": "Missing B16/640 native AMP capacity evidence"
+    },
+    {
+      "case": "disabled AMP",
+      "status": "PASSED",
+      "rejected": "Missing B16/640 native AMP capacity evidence"
+    },
+    {
+      "case": "changed recipe",
+      "status": "PASSED",
+      "rejected": "Capacity recipe changed: epochs"
+    },
+    {
+      "case": "missing optimizer parameter",
+      "status": "PASSED",
+      "rejected": "Capacity optimizer coverage missing"
+    },
+    {
+      "case": "counted calls not updates",
+      "status": "PASSED",
+      "rejected": "Capacity update evidence missing"
+    },
+    {
+      "case": "missing PBI gradients",
+      "status": "PASSED",
+      "rejected": "Capacity PBI gradient startup missing: model.17.pbi.W1.weight"
+    }
+  ],
+  "engineering_pass_evidence": false,
+  "formal_start_authorized": false,
+  "statement": "Synthetic adversarial fixtures test rejection only; they are not model/GPU evidence."
+}

@@ -110,9 +110,12 @@ from .transformer import (
 )
 
 from .lif_down import LIFDown
+from .pbi import PBI, PBIConv
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
 
 __all__ = (
+    "PBI",
+    "PBIConv",
     "LIFDown",
     "CrackBoundaryRefinement",
     "RTDETRDecoderCBR",

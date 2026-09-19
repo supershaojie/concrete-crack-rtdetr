@@ -1,0 +1,18 @@
+{
+  "status": "PASSED",
+  "syntax_files": 16,
+  "recipe_fields_each": 109,
+  "evaluator_pure_logic": {
+    "sorted_conf_mask": true,
+    "tied_threshold_group": true,
+    "attainable_recall": true,
+    "empty_null": true
+  },
+  "standalone_conda_activation": {
+    "status": "PASSED",
+    "scope": "local existing Windows Conda; nounset restored",
+    "server": "PENDING"
+  },
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN"
+}
