@@ -1,0 +1,42 @@
+{
+  "files": {
+    "worker.log": {
+      "bytes": 3730,
+      "sha256": "13c2dff998f997f9ea92878ebab62386d07dce294a4361b1db0e727c23be5785"
+    },
+    "diagnostic.json": {
+      "bytes": 10590744,
+      "sha256": "5f69fcc7be8029f44fd10413dda921a2c7fb670ecf0f5a305425dc694ee2bfb6"
+    },
+    "exit_status.json": {
+      "bytes": 444,
+      "sha256": "e28d7626736eaf80501d8c53e47208aa18b96c8e19d417f823919e1c2aac00c3"
+    },
+    "source/diagnose_dpr.py": {
+      "bytes": 16367,
+      "sha256": "008db43f62a70e86e1c4c266248e41291965b9f7780ae89f4e91a769482115e0"
+    },
+    "source/dpr_diagnostics.py": {
+      "bytes": 24867,
+      "sha256": "5dc0bbb49be84af06a3c326233eb2a2bbeea68ace760d692d14df6a3dbc82b7b"
+    },
+    "source/check_dpr.py": {
+      "bytes": 35258,
+      "sha256": "79a4a79d3a567495ba68ada2a993f12b61ec9309f01855c72d8884c2ca282541"
+    },
+    "source/preflight_dpr.py": {
+      "bytes": 46250,
+      "sha256": "7056bb35e4a8b0dfead7b33f2520a6912ad99e9ab7b405f1b7f682815c4db26f"
+    },
+    "source/train_dpr.py": {
+      "bytes": 29809,
+      "sha256": "fd7e98cbe1557dc160bbb37c2a65103edcdfbaef6a0ad18bf755d4570b85ba8f"
+    },
+    "source/dpr_server.sh": {
+      "bytes": 6382,
+      "sha256": "c05cb49eca33aa361e5a732bc3ee059644004c825b8e92520e3ba5e63a2b22c5"
+    }
+  },
+  "archive_sha256": "52e7e2e38b07dd19a253c5ac219dd0e1afe03626f67dd60c4c402d7203cc3ccb",
+  "omitted": "All .pt weights, raw replay tensors, source datasets; retained paths/hashes in diagnostic.json"
+}

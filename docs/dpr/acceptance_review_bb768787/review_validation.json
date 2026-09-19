@@ -1,0 +1,43 @@
+{
+  "scope": "document/attachment/source review only; no PyTorch/GPU execution",
+  "diagnosed_head": "bb7687874a13782a768335adc60a38d00f150706",
+  "checks": {
+    "raw_counts_names_and_actual_pure_classifier": "PASSED",
+    "three_backend_passes_select_model_not_ema": "PASSED",
+    "all_preserved_archive_and_derived_evidence_hashes": "PASSED",
+    "optional_metadata_command_bash_python_syntax_no_model_execution": "PASSED_NOT_EXECUTED",
+    "production_gates_recipe_and_historical_reports_unchanged": "PASSED",
+    "source_precision_review": "PASSED_STATIC_REVIEW_ONLY"
+  },
+  "status": "PASSED",
+  "protected_source_sha256": {
+    "tools/preflight_dpr.py": "7056bb35e4a8b0dfead7b33f2520a6912ad99e9ab7b405f1b7f682815c4db26f",
+    "tools/train_dpr.py": "fd7e98cbe1557dc160bbb37c2a65103edcdfbaef6a0ad18bf755d4570b85ba8f",
+    "tools/check_dpr.py": "79a4a79d3a567495ba68ada2a993f12b61ec9309f01855c72d8884c2ca282541",
+    "tools/dpr_checkpoint.py": "221bfd0c6ac680d515650eb256aa9f5377d5b4d1cfc2a3307851fd175fa72261",
+    "tools/eval_dpr.py": "b95da6f613c1cdd97baee4f6d964f0a829c2d1f32d0206c22821ebd7cb428601",
+    "tools/diagnose_dpr.py": "008db43f62a70e86e1c4c266248e41291965b9f7780ae89f4e91a769482115e0",
+    "tools/dpr_diagnostics.py": "5dc0bbb49be84af06a3c326233eb2a2bbeea68ace760d692d14df6a3dbc82b7b",
+    "ultralytics-main/ultralytics/nn/modules/dpr.py": "819ae2dd9e2e491316045a65d555c625cb77e136d91443f86ab1b67f4760b6d1",
+    "ultralytics-main/ultralytics/nn/modules/cbr.py": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+    "ultralytics-main/ultralytics/nn/modules/lif_down.py": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+    "docs/dpr/parent_args.yaml": "31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b"
+  },
+  "not_run": [
+    "PyTorch/GPU diagnostics",
+    "same-version full matrix",
+    "capacity",
+    "checkpoint A",
+    "native epoch validator",
+    "B6 full update replay",
+    "B7 post-update function check",
+    "start",
+    "resume",
+    "val",
+    "test",
+    "server metadata command",
+    "server login/sync"
+  ],
+  "current_admission": "BLOCKED",
+  "proposal": "NOT_APPROVED_NOT_IMPLEMENTED"
+}

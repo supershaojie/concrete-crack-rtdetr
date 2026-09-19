@@ -1,0 +1,41 @@
+{
+  "schema": "dpr_acceptance_review_evidence_v1",
+  "diagnosed_commit": "bb7687874a13782a768335adc60a38d00f150706",
+  "files": {
+    "diagnostic_light.original.tar.gz": {
+      "bytes": 777989,
+      "sha256": "52e7e2e38b07dd19a253c5ac219dd0e1afe03626f67dd60c4c402d7203cc3ccb",
+      "original_bytes": 777989,
+      "original_sha256": "52e7e2e38b07dd19a253c5ac219dd0e1afe03626f67dd60c4c402d7203cc3ccb",
+      "encoding": "original-bytes"
+    },
+    "package_manifest.original.json": {
+      "bytes": 1485,
+      "sha256": "63a8c7f54a8f63c099c7367bb61f461f98fb8ae8e6ce3c17b98d721afbc2c6bd",
+      "original_bytes": 1485,
+      "original_sha256": "63a8c7f54a8f63c099c7367bb61f461f98fb8ae8e6ce3c17b98d721afbc2c6bd",
+      "encoding": "original-bytes"
+    },
+    "attachment_audit.json": {
+      "bytes": 5145,
+      "sha256": "a4c3f95a740743bfb8484a79c8f3515c425c0fe63b256b4d855968e9990af090",
+      "original_bytes": 5145,
+      "original_sha256": "a4c3f95a740743bfb8484a79c8f3515c425c0fe63b256b4d855968e9990af090",
+      "encoding": "original-bytes"
+    },
+    "reviewed_metrics.json.gz": {
+      "bytes": 93947,
+      "sha256": "e818b049c94b0aa379fed6d93ccf786101d265af7b52bf9a099299190fa04720",
+      "original_bytes": 1125656,
+      "original_sha256": "65da2de5ad6470451e1bb1cc8a7bddbdac19feda0536a69d56e0993e2715d3f5",
+      "encoding": "gzip-original-bytes"
+    },
+    "parent_precision_sources.json": {
+      "bytes": 2131,
+      "sha256": "84a916ee6310dd6e34ba01bec93e0f169406afc7cbd909b5c25e6a1e9378c4cf",
+      "original_bytes": 2131,
+      "original_sha256": "84a916ee6310dd6e34ba01bec93e0f169406afc7cbd909b5c25e6a1e9378c4cf",
+      "encoding": "original-bytes"
+    }
+  }
+}

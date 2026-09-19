@@ -1,0 +1,57 @@
+{
+  "ultralytics-main/ultralytics/engine/trainer.py": {
+    "unchanged_from_parent": true,
+    "sha256": "18125ba895b64961cf0f7db29214aca27392176e65d72a9166fa818f00a1033a"
+  },
+  "ultralytics-main/ultralytics/engine/validator.py": {
+    "unchanged_from_parent": true,
+    "sha256": "6c631ccca6c1d5d93ab6464746bf2905bd70ac8279db11897f78d5dce84d5dcd"
+  },
+  "ultralytics-main/ultralytics/engine/model.py": {
+    "unchanged_from_parent": true,
+    "sha256": "45af5b44eb627e9f15e621509c8f4aad5213c28591deba8d279681af0bd83ae1"
+  },
+  "ultralytics-main/ultralytics/nn/autobackend.py": {
+    "unchanged_from_parent": true,
+    "sha256": "39dcad3238d4cb98382f1fb2ac366b2d06cf03ae982d24a4f4c500205449c197"
+  },
+  "ultralytics-main/ultralytics/utils/torch_utils.py": {
+    "unchanged_from_parent": false,
+    "sha256": "e1c8c6da24344418f5592fb463937567deee48d51f0c8168052f75c2899416a7",
+    "precision_functions_unchanged_from_parent": {
+      "autocast": true,
+      "ModelEMA": true,
+      "strip_optimizer": true
+    }
+  },
+  "ultralytics-main/ultralytics/models/rtdetr/train.py": {
+    "unchanged_from_parent": true,
+    "sha256": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48"
+  },
+  "ultralytics-main/ultralytics/models/rtdetr/val.py": {
+    "unchanged_from_parent": true,
+    "sha256": "f7974365832f0eb2e146571a591150f268d42ecb89e12e96f2518d4251a63a6a"
+  },
+  "ultralytics-main/ultralytics/models/yolo/detect/val.py": {
+    "unchanged_from_parent": true,
+    "sha256": "4163436cf686582bc87970be0b889eef42bfd7a217c00a363cc99ce63c61bbb8"
+  },
+  "tools/train_c19_lif_v1.py": {
+    "unchanged_from_parent": true,
+    "sha256": "84759327c483aca917772b6e14f976fed841c5763220f14029fd4389950084f6"
+  },
+  "tools/c19_lif_v1_precision.py": {
+    "unchanged_from_parent": true,
+    "sha256": "4462d72cf1f9efc9d06e28e2d54cad3720798810940f5c1cce89ff744d76b874"
+  },
+  "ultralytics-main/ultralytics/nn/tasks.py": {
+    "precision_functions_unchanged_from_parent": {
+      "load_checkpoint": true
+    }
+  },
+  "tools/c19_lif_v1_results.py": {
+    "precision_functions_unchanged_from_parent": {
+      "evaluate": true
+    }
+  }
+}

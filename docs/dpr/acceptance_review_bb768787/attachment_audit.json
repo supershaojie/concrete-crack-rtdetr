@@ -1,0 +1,148 @@
+{
+  "archive": "D:\\rtdetr跑结果\\DPR\\diagnostic_light.tar.gz",
+  "bytes": 777989,
+  "sha256": "52e7e2e38b07dd19a253c5ac219dd0e1afe03626f67dd60c4c402d7203cc3ccb",
+  "manifest_sha256": "63a8c7f54a8f63c099c7367bb61f461f98fb8ae8e6ce3c17b98d721afbc2c6bd",
+  "files": {
+    "worker.log": {
+      "bytes": 3730,
+      "sha256": "13c2dff998f997f9ea92878ebab62386d07dce294a4361b1db0e727c23be5785",
+      "verified": true
+    },
+    "diagnostic.json": {
+      "bytes": 10590744,
+      "sha256": "5f69fcc7be8029f44fd10413dda921a2c7fb670ecf0f5a305425dc694ee2bfb6",
+      "verified": true
+    },
+    "exit_status.json": {
+      "bytes": 444,
+      "sha256": "e28d7626736eaf80501d8c53e47208aa18b96c8e19d417f823919e1c2aac00c3",
+      "verified": true
+    },
+    "source/diagnose_dpr.py": {
+      "bytes": 16367,
+      "sha256": "008db43f62a70e86e1c4c266248e41291965b9f7780ae89f4e91a769482115e0",
+      "verified": true
+    },
+    "source/dpr_diagnostics.py": {
+      "bytes": 24867,
+      "sha256": "5dc0bbb49be84af06a3c326233eb2a2bbeea68ace760d692d14df6a3dbc82b7b",
+      "verified": true
+    },
+    "source/check_dpr.py": {
+      "bytes": 35258,
+      "sha256": "79a4a79d3a567495ba68ada2a993f12b61ec9309f01855c72d8884c2ca282541",
+      "verified": true
+    },
+    "source/preflight_dpr.py": {
+      "bytes": 46250,
+      "sha256": "7056bb35e4a8b0dfead7b33f2520a6912ad99e9ab7b405f1b7f682815c4db26f",
+      "verified": true
+    },
+    "source/train_dpr.py": {
+      "bytes": 29809,
+      "sha256": "fd7e98cbe1557dc160bbb37c2a65103edcdfbaef6a0ad18bf755d4570b85ba8f",
+      "verified": true
+    },
+    "source/dpr_server.sh": {
+      "bytes": 6382,
+      "sha256": "c05cb49eca33aa361e5a732bc3ee059644004c825b8e92520e3ba5e63a2b22c5",
+      "verified": true
+    }
+  },
+  "sources": {
+    "tools/diagnose_dpr.py": {
+      "report_sha256": "008db43f62a70e86e1c4c266248e41291965b9f7780ae89f4e91a769482115e0",
+      "committed_and_working_equal": true
+    },
+    "tools/dpr_diagnostics.py": {
+      "report_sha256": "5dc0bbb49be84af06a3c326233eb2a2bbeea68ace760d692d14df6a3dbc82b7b",
+      "committed_and_working_equal": true
+    },
+    "tools/check_dpr.py": {
+      "report_sha256": "79a4a79d3a567495ba68ada2a993f12b61ec9309f01855c72d8884c2ca282541",
+      "committed_and_working_equal": true
+    },
+    "tools/preflight_dpr.py": {
+      "report_sha256": "7056bb35e4a8b0dfead7b33f2520a6912ad99e9ab7b405f1b7f682815c4db26f",
+      "committed_and_working_equal": true
+    },
+    "tools/train_dpr.py": {
+      "report_sha256": "fd7e98cbe1557dc160bbb37c2a65103edcdfbaef6a0ad18bf755d4570b85ba8f",
+      "committed_and_working_equal": true
+    },
+    "tools/dpr_server.sh": {
+      "report_sha256": "c05cb49eca33aa361e5a732bc3ee059644004c825b8e92520e3ba5e63a2b22c5",
+      "committed_and_working_equal": true
+    }
+  },
+  "supervisor": {
+    "report_kind": "dpr_failure_diagnostic_supervisor_v1",
+    "admission_eligible": false,
+    "worker_exit": 3,
+    "timeout_seconds": 900,
+    "timed_out": false,
+    "formal_training": "NOT_STARTED",
+    "final_test": "NOT_RUN",
+    "capacity": "NOT_RUN",
+    "output": "/root/autodl-tmp/projects/Crack_RTDETR-dpr-v1/outputs/dpr/cbr_lif_dpr_v1/diagnose_20260919T102122_041914Z",
+    "status": "BLOCKED",
+    "collection_status": "COMPLETED",
+    "missing": []
+  },
+  "status": "PASSED",
+  "diagnosis": {
+    "status": "BLOCKED",
+    "collection_status": "COMPLETED",
+    "elapsed_seconds": 79.16909088939428,
+    "source_stable": true,
+    "batch": {
+      "batch": 2,
+      "imgsz": 160,
+      "real_GT": 6,
+      "samples": [
+        {
+          "image": "crack_000001_brightness_contrast_strong.jpg",
+          "image_sha256": "f52412b0f7d6158df8c1e064cfc126a5ee447e7463dd663649f3ee5afd40d053",
+          "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+          "instances": 3
+        },
+        {
+          "image": "crack_000001_clahe_gamma_strong.jpg",
+          "image_sha256": "b597504f8cb893227a8bca17099be73259fc0ce94fadb8bd3e00ca5dce7c9f34",
+          "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+          "instances": 3
+        }
+      ],
+      "scope": "same bounded real-GT/DN diagnostic as original lifecycle, not B16 capacity"
+    },
+    "profiler": {
+      "version": "2.1.6",
+      "mode": "accumulate_children",
+      "nested_probe_ops": 18.0,
+      "parent_probe_ops": 7,
+      "child_probe_ops": 11
+    },
+    "checkpoint_A": "NOT_RERUN_DIAGNOSTIC",
+    "capacity": "NOT_RUN_DIAGNOSTIC",
+    "formal_training": "NOT_STARTED",
+    "final_test": "NOT_RUN",
+    "raw_blockers": [
+      "cuda_fp32/B",
+      "cuda_fp32/original_half_checks",
+      "cuda_native_amp/B"
+    ]
+  },
+  "environment": {
+    "python": "3.10.13",
+    "torch": "2.1.2+cu121",
+    "cuda": "12.1",
+    "cuda_available": true,
+    "ultralytics": "/root/autodl-tmp/projects/Crack_RTDETR-dpr-v1/ultralytics-main/ultralytics/__init__.py",
+    "platform": "Linux",
+    "executable": "/root/miniconda3/envs/rtdetr/bin/python",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "server_environment": true
+  },
+  "raw_tensor_artifacts": "NOT_IN_ATTACHMENT_NOT_READ_LOCALLY"
+}
