@@ -2,7 +2,7 @@
 # Every invocation activates the existing environment and asserts import identity.
 set -Eeuo pipefail
 if [[ "${1:-}" == "--help" || $# -eq 0 ]]; then
-  echo 'Usage: bash tools/blc_server.sh environment|init|init-preflight|preflight|plan|start|resume|val|test|pack [--both]'
+  echo 'Usage: bash tools/blc_server.sh environment|init|init-preflight|preflight|reassess|admission|plan|start|resume|val|test|pack [--both] [--from-report PATH]'
   echo 'BLC_VARIANT=cbr_lif_blc_v1 (default) or blc_v1. Only start/resume train.'
   exit 0
 fi

@@ -18,6 +18,7 @@ import traceback
 import torch
 from blc_common import *
 from blc_probe_io import temporary_probe, retained_size, compact_audit
+from blc_admission import evaluate as admission_evaluate, read_report, reassess, require_admission
 
 
 def environment(strict=False):
@@ -88,6 +89,8 @@ def init_preflight(variant):
 
 
 def require_evidence(variant, phase):
+    if phase == "preflight":
+        return require_admission(variant)
     current = evidence_context(variant)
     files = sorted(paths(variant)["evidence"].glob(phase+"-*/report.json"))
     require(files, f"PENDING: run {phase} for {variant}")
@@ -98,12 +101,6 @@ def require_evidence(variant, phase):
         require(recorded.get(key) == current[key], f"Stale {phase} evidence: {key}")
     for key in ("python", "torch", "cuda", "gpu", "ultralytics"):
         require(recorded.get("runtime", {}).get(key) == current["runtime"][key], f"{phase} environment changed: {key}")
-    if phase == "preflight":
-        require(report["capacity"]["status"] == "PASSED" and report["capacity"]["batch"] == 16
-                and report["capacity"]["imgsz"] == 640 and report["capacity"]["AMP"] is True
-                and report["capacity"]["effective_updates"] >= 2, "Missing capacity evidence")
-        require(report["lifecycle"]["status"] == report["native_half_ema_epoch_val"]["status"] == report["native_resume"]["status"] == "PASSED",
-                "Missing lifecycle/half EMA/native resume evidence")
     return str(files[-1])
 
 
@@ -111,12 +108,11 @@ def preflight(variant):
     from blc_preflight import capacity
     environment(strict=True)
     # Both configurations must have current source/structure/Trainer evidence.
-    for other in VARIANTS:
-        require_evidence(other, "init-preflight")
+    init_reports = {other: read_report(require_evidence(other, "init-preflight")) for other in VARIANTS}
     p = paths(variant)
     folder = p["evidence"]/("preflight-"+stamp())
     folder.mkdir(parents=True, exist_ok=False)
-    report = dict(status="FAILED", phase="preflight", variant=variant, stage="native_amp_resources",
+    report = dict(status="PENDING", phase="preflight", variant=variant, stage="native_amp_resources",
                   capacity=dict(status="NOT_RUN"), lifecycle=dict(status="NOT_RUN"),
                   native_half_ema_epoch_val=dict(status="NOT_RUN"), native_resume=dict(status="NOT_RUN"))
     created_resources = []
@@ -141,8 +137,6 @@ def preflight(variant):
             resources.append(dict(path=str(dest), sha256=sha256(dest), bytes=dest.stat().st_size,
                                   temporary=dest in created_resources, purpose="unchanged native AMP check"))
         capacity(variant, folder, report)
-        report["status"] = "PASSED" if all(report[key]["status"] == "PASSED" for key in
-            ("capacity", "lifecycle", "native_half_ema_epoch_val", "native_resume")) else "PENDING"
     except BaseException as error:
         report.update(error=repr(error), traceback=traceback.format_exc())
         raise
@@ -162,11 +156,14 @@ def preflight(variant):
             resource["cleaned"] = resource["temporary"] and not Path(resource["path"]).exists()
         report["new_retained_bytes_before_report"] = retained_size(p["evidence"]) - retained_before
         report["retention_target_bytes"] = 10 * 1024 * 1024
+        report.update(admission_evaluate(report, init_reports))
+        report["status"] = report["training_admission"]["status"]
         write_json(folder/"report.json", report)
         print(folder/"report.json", report["status"], flush=True)
         print("New retained bytes (including report; log may still grow):", retained_size(p["evidence"]) - retained_before, flush=True)
     if report["status"] != "PASSED":
-        raise SystemExit("PENDING: capacity finished but lifecycle precision evidence requires review; start remains blocked")
+        raise SystemExit("Training admission blocked; inspect report.training_admission.errors")
+    reassess(variant, folder/"report.json")
 
 
 @contextmanager
@@ -188,7 +185,6 @@ def start_or_resume(variant, resume=False, ablation_after_review=False):
     environment(strict=True)
     require(not subprocess.check_output(["git", "status", "--porcelain", "--untracked-files=no"], cwd=ROOT, text=True).strip(),
             "Tracked implementation changed; commit/revalidate before training")
-    require_evidence(variant, "init-preflight")
     # The single-module ablation is explicitly held until main benefit is reviewed.
     if variant == "blc_v1":
         require(ablation_after_review, "Single BLC ablation requires explicit --ablation-after-review after reviewing main-val benefit")
@@ -286,11 +282,13 @@ def pack(variant):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=["environment", "init", "init-preflight", "preflight", "plan", "start", "resume", "val", "test", "pack"])
+    parser.add_argument("action", choices=["environment", "init", "init-preflight", "preflight", "plan", "start", "resume", "val", "test", "pack", "reassess", "admission"])
     parser.add_argument("--variant", choices=VARIANTS, default=os.environ.get("BLC_VARIANT", "cbr_lif_blc_v1"))
     parser.add_argument("--both", action="store_true", help="init/init-preflight only; never starts ablation")
     parser.add_argument("--ablation-after-review", action="store_true", help="Explicit later single-module start, after main-val benefit review")
+    parser.add_argument("--from-report", type=Path, help="Existing preflight JSON; reassess only")
     args = parser.parse_args()
+    require((args.from_report is not None) == (args.action == "reassess"), "--from-report is required only for reassess")
     torch.set_num_threads(4)
     require(not args.both or args.action in ("init", "init-preflight"), "--both applies only to initialization")
     for variant in VARIANTS if args.both else [args.variant]:
@@ -302,6 +300,10 @@ def main():
             init_preflight(variant)
         elif args.action == "preflight":
             preflight(variant)
+        elif args.action == "reassess":
+            reassess(variant, args.from_report)
+        elif args.action == "admission":
+            require_admission(variant)
         elif args.action == "plan":
             config, diff = recipe(variant)
             print(json.dumps(dict(variant=variant, recipe=config, parent_diff=diff,

@@ -1,0 +1,29 @@
+{
+  "contract": "blc_training_admission_v2",
+  "source_revision": "0d2335122a09203dfa2ebf4b469a68eede27cd61",
+  "scope": "Metadata rule tests and source review only; synthetic FIXTUREs are not server evidence",
+  "quick_tests": {
+    "command": "python tools/check_blc_admission.py",
+    "status": "PASSED",
+    "test_methods": 10,
+    "finite_fusion_difference_preserves_pending": "PASSED",
+    "missing_updates_validation_resume_branch": "REJECTED",
+    "same_file_failure_nan_inf_missing_diagnostics": "REJECTED",
+    "context_raw_hash_and_summary_mutation": "REJECTED",
+    "unknown_revision_or_computation_changes": "REJECTED",
+    "exclusive_reassessment_and_start_gate": "PASSED",
+    "existing_local_init_schema_and_three_source_trees": "PASSED"
+  },
+  "python_syntax": "PASSED",
+  "cli_help": "PASSED",
+  "git_diff_check": "PASSED",
+  "server_reassessment": "PENDING",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN",
+  "new_gpu_training_batches": 0,
+  "new_model_checkpoints": 0,
+  "controlled_init_sha256": {
+    "cbr_lif_blc_v1": "b9f1b0d33492d5e1a3fa312b6612eff5019bdf5f513f5a0ad774fdc0b56ced05",
+    "blc_v1": "b41daaab1ebcf169e47d8d25b59d90feba606dea1606222948cd6a8a89be8702"
+  }
+}
