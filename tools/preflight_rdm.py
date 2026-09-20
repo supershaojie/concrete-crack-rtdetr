@@ -4,6 +4,7 @@ from __future__ import annotations
 from copy import deepcopy
 from contextlib import contextmanager
 import gc
+import math
 import os
 from pathlib import Path
 import tempfile
@@ -111,6 +112,111 @@ def shutdown_loaders(trainer):
             iterator._shutdown_workers()
 
 
+def classify_amp_attempt(attempt):
+    """Classify observed native behavior, never infer a skip from Wo alone."""
+    require(attempt["forward_finite"] and attempt["loss_finite"] and attempt["loss_items_finite"],
+            "Nonfinite or unobserved current forward/loss")
+    require(attempt["parameters_finite_before"] and attempt["parameters_finite_after"], "Nonfinite model parameters")
+    gradients = attempt["gradients"]
+    require(set(gradients) == NEW and all(not g["is_none"] for g in gradients.values()), "Missing RDM gradient evidence")
+    before, after = attempt["scale_before"], attempt["scale_after"]
+    require(all(v is not None and math.isfinite(v) and v > 0 for v in (before, after)), "Invalid native AMP scale")
+    calls = attempt["optimizer_step_calls_delta"]
+    require(calls in (0, 1), "Unexpected optimizer.step call count")
+    if not attempt["all_scaled_gradients_finite"]:
+        require(attempt["amp_enabled"] and calls == 0 and after < before and
+                after == before * attempt["backoff_factor"], "Nonfinite scaled gradients without confirmed native AMP backoff")
+        require(attempt["Wo_max_change"] == 0 and attempt["optimizer_step_before"] == attempt["optimizer_step_after"],
+                "State changed despite confirmed optimizer skip")
+        return "AMP_BACKOFF", False
+    require(calls == 1 and after >= before, "Finite gradients but optimizer/scale evidence contradicts normal step")
+    require(all(g["finite"] for g in gradients.values()) and attempt["Wo_applied_gradient_finite"] is True,
+            "Invalid applied RDM gradient")
+    effective = (attempt["Wo_max_change"] > 0 and attempt["Wo_applied_gradient_nonzero"] is True and
+                 attempt["optimizer_step_after"] > attempt["optimizer_step_before"])
+    return ("EFFECTIVE_UPDATE" if effective else "NO_EFFECTIVE_UPDATE"), effective
+
+
+@contextmanager
+def observe_amp_attempt(trainer, row):
+    """Observe one unchanged native optimizer_step; retain only small scalar evidence."""
+    attempt = dict(batch=row["batches"], accumulate=trainer.accumulate, gradient_stage="AMP_SCALED_BEFORE_NATIVE_UNSCALE",
+                   classification="RUNNING", effective=False, skipped=None, optimizer_step_calls_before=0,
+                   optimizer_step_calls_after=0, optimizer_step_calls_delta=0,
+                   Wo_applied_gradient_finite=None, Wo_applied_gradient_nonzero=None)
+    row["steps"].append(attempt)  # Survives prechecks and native exceptions in the final JSON.
+    handle = None
+    try:
+        params = dict(trainer.model.named_parameters())
+        wo = params["model.5.rdm.Wo.weight"]
+        old = wo.detach().clone()
+        scale = trainer.scaler.get_scale()
+        present = {n: p.grad for n, p in params.items() if p.grad is not None}
+        bad = [n for n, g in present.items() if not bool(torch.isfinite(g).all())]
+        gradients = {}
+        for n in sorted(NEW):
+            grad = params[n].grad
+            is_finite = grad is not None and bool(torch.isfinite(grad).all())
+            gradients[n] = dict(is_none=grad is None, finite=is_finite,
+                                nonzero=grad is not None and bool(torch.count_nonzero(grad)),
+                                max_abs_scaled=float(grad.abs().max()) if is_finite else None)
+        forward = row.get("current_forward", {})
+        loss_finite = finite(trainer.loss)
+        attempt.update(forward_finite=forward.get("batch") == row["batches"] and forward.get("rdm") is True and forward.get("decoder") is True,
+                       loss_finite=loss_finite, loss=float(trainer.loss.detach()) if loss_finite else None,
+                       loss_items_finite=finite(trainer.loss_items), parameters_finite_before=all(finite(p) for p in params.values()),
+                       scale_before=scale, scale_after=None, amp_enabled=bool(trainer.amp and trainer.scaler.is_enabled()),
+                       backoff_factor=trainer.scaler.get_backoff_factor(), all_scaled_gradients_finite=not bad,
+                       gradient_parameter_items=len(params), none_gradient_parameter_items=len(params)-len(present),
+                       nonfinite_scaled_gradient_parameter_items=len(bad), nonfinite_scaled_gradient_names=bad[:20],
+                       gradients=gradients, optimizer_step_before=float(trainer.optimizer.state.get(wo, {}).get("step", 0)))
+        row["consecutive_nonfinite_steps"] = row["consecutive_nonfinite_steps"] + 1 if bad else 0
+        require(attempt["forward_finite"] and loss_finite and attempt["loss_items_finite"], "Nonfinite or unobserved current forward/loss")
+        require(attempt["parameters_finite_before"], "Nonfinite model parameters before native step")
+        require(all(not g["is_none"] for g in gradients.values()), "Missing RDM gradient evidence")
+        # Standard (non-fused) AdamW on torch2.1.2 uses GradScaler's _maybe_opt_step.
+        # The public pre-hook fires only if the whole optimizer.step is invoked.
+        require(not getattr(trainer.optimizer, "_step_supports_amp_scaling", False), "Unsupported optimizer custom AMP step semantics")
+        def called(optimizer, args, kwargs):
+            attempt["optimizer_step_calls_after"] += 1
+            attempt["Wo_applied_gradient_finite"] = wo.grad is not None and finite(wo.grad)
+            attempt["Wo_applied_gradient_nonzero"] = wo.grad is not None and bool(torch.count_nonzero(wo.grad))
+        handle = trainer.optimizer.register_step_pre_hook(called)
+        try:
+            yield  # Exactly one super().optimizer_step(): no extra unscale/backward/update.
+        finally:
+            handle.remove()
+            handle = None
+            change = (wo.detach() - old).abs().max()
+            attempt.update(scale_after=trainer.scaler.get_scale(), parameters_finite_after=all(finite(p) for p in params.values()),
+                           optimizer_step_calls_delta=attempt["optimizer_step_calls_after"]-attempt["optimizer_step_calls_before"],
+                           optimizer_step_after=float(trainer.optimizer.state.get(wo, {}).get("step", 0)),
+                           Wo_max_change=float(change) if finite(change) else None)
+            attempt["skipped"] = attempt["optimizer_step_calls_delta"] == 0
+        classification, effective = classify_amp_attempt(attempt)
+        attempt.update(classification=classification, effective=effective)
+        row["scaler_skips"] += int(classification == "AMP_BACKOFF")
+        row["effective_updates"] += int(effective)
+        if effective:
+            for n, g in gradients.items():
+                row["upstream_active"][n] = row["upstream_active"].get(n, False) or g["nonzero"]
+    except BaseException as error:
+        attempt.update(classification="FAILED", error=repr(error))
+        raise
+    finally:
+        if handle is not None:
+            handle.remove()
+
+
+def check_training_progress(row, total_batches, update_target, batch_limit):
+    """Keep successful-update requirements and the original actual-batch budget."""
+    if row["effective_updates"] >= update_target and all(row["upstream_active"].get(n, False) for n in NEW):
+        row["status"] = "PASSED"
+        raise BoundedStop()
+    if row["batches"] >= batch_limit or total_batches >= 16:
+        raise BudgetPending("Effective updates/branch gradients not reached within fixed batch budget")
+
+
 def bounded_training(args, variant, report, stage, update_target, batch_limit, persist, checkpoint=None):
     row = report[stage] = dict(status="RUNNING", batches=0, effective_updates=0, scaler_skips=0, steps=[], upstream_active={},
                               rdm_calls=0, dn_batches=0, consecutive_nonfinite_steps=0)
@@ -119,33 +225,8 @@ def bounded_training(args, variant, report, stage, update_target, batch_limit, p
 
     class ProbeTrainer(RDMTrainer):
         def optimizer_step(self):
-            params = dict(self.model.named_parameters())
-            wo = params["model.5.rdm.Wo.weight"]
-            old = wo.detach().clone()
-            before_step = float(self.optimizer.state.get(wo, {}).get("step", 0))
-            scale = self.scaler.get_scale()
-            all_gradients_finite = all(p.grad is None or torch.isfinite(p.grad).all() for p in params.values())
-            gradients = {n: dict(finite=p.grad is not None and bool(torch.isfinite(p.grad).all()),
-                                  nonzero=p.grad is not None and bool(torch.count_nonzero(p.grad)),
-                                  max_abs_unscaled=float(p.grad.abs().max()/scale) if p.grad is not None and torch.isfinite(p.grad).all() else None)
-                         for n, p in params.items() if n in NEW}
-            super().optimizer_step()  # Native unscale, clip, scaler step/update, zero_grad, EMA.
-            after_step = float(self.optimizer.state.get(wo, {}).get("step", 0))
-            skipped = after_step == before_step
-            delta = float((wo.detach()-old).abs().max())
-            effective = not skipped and delta > 0 and gradients["model.5.rdm.Wo.weight"]["finite"] and gradients["model.5.rdm.Wo.weight"]["nonzero"]
-            require(torch.isfinite(wo).all(), "Nonfinite updated Wo")
-            row["scaler_skips"] += int(skipped)
-            row["consecutive_nonfinite_steps"] = row["consecutive_nonfinite_steps"] + 1 if not all_gradients_finite else 0
-            row["effective_updates"] += int(effective)
-            if effective:
-                require(all(g["finite"] for g in gradients.values()), "Nonfinite effective RDM gradient")
-                for n, g in gradients.items():
-                    row["upstream_active"][n] = row["upstream_active"].get(n, False) or g["nonzero"]
-            row["steps"].append(dict(batch=row["batches"], accumulate=self.accumulate, optimizer_step_before=before_step,
-                                     optimizer_step_after=after_step, scale_before=scale, scale_after=self.scaler.get_scale(),
-                                     skipped=skipped, effective=effective, Wo_max_change=delta, gradients=gradients))
-            require(row["consecutive_nonfinite_steps"] < 3, "Three consecutive nonfinite optimizer attempts; no retry or AMP fallback")
+            with observe_amp_attempt(self, row):
+                super().optimizer_step()  # Native unscale, clip, scaler step/update, zero_grad, EMA.
 
         def preprocess_batch(self, batch):
             batch = super().preprocess_batch(batch)
@@ -170,11 +251,13 @@ def bounded_training(args, variant, report, stage, update_target, batch_limit, p
         row["native_amp"] = True
         row["native_DN"] = t.model.model[26].num_denoising
         def rdm_executed(m, a, out):
-            require(finite(out), "Nonfinite native AMP RDM output")
+            row["current_forward"]["rdm"] = finite(out)
+            require(row["current_forward"]["rdm"], "Nonfinite native AMP RDM output")
             row["rdm_calls"] += 1
         def dn_executed(m, a, out):
+            row["current_forward"]["decoder"] = finite(out)
             require(m.training and out[4] is not None and out[4]["dn_num_split"][0] > 0, "Real native DN not exercised")
-            require(finite(out), "Nonfinite native decoder output")
+            require(row["current_forward"]["decoder"], "Nonfinite native decoder output")
             row["dn_batches"] += 1
         handles.extend([t.model.model[5].rdm.register_forward_hook(rdm_executed), t.model.model[26].register_forward_hook(dn_executed)])
         if checkpoint is not None:
@@ -194,6 +277,7 @@ def bounded_training(args, variant, report, stage, update_target, batch_limit, p
             raise BudgetPending("Training batch budget exhausted")
         row["batches"] += 1
         report["training_batches"] += 1
+        row["current_forward"] = dict(batch=row["batches"], rdm=None, decoder=None)
         persist(stage + ".batch")
 
     def after_batch(t):
@@ -201,11 +285,7 @@ def bounded_training(args, variant, report, stage, update_target, batch_limit, p
         require(row["rdm_calls"] == row["dn_batches"] == row["batches"], "Missing/duplicated RDM or DN execution")
         row["last_loss"] = float(t.loss.detach())
         persist(stage + ".batch_completed")
-        if row["effective_updates"] >= update_target and all(row["upstream_active"].get(n, False) for n in NEW):
-            row["status"] = "PASSED"
-            raise BoundedStop()
-        if row["batches"] >= batch_limit or report["training_batches"] >= 16:
-            raise BudgetPending("Effective updates/branch gradients not reached within fixed batch budget")
+        check_training_progress(row, report["training_batches"], update_target, batch_limit)
 
     trainer.add_callback("on_pretrain_routine_end", setup)
     trainer.add_callback("on_train_batch_start", before_batch)

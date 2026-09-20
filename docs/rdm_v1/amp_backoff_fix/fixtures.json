@@ -1,0 +1,433 @@
+{
+  "status": "PASSED",
+  "scope": "CPU fixture, simulated scaler decisions + real tiny AdamW step hooks; NOT server AMP validation",
+  "three_backoffs_then_updates": [
+    {
+      "batch": 1,
+      "accumulate": 1,
+      "gradient_stage": "AMP_SCALED_BEFORE_NATIVE_UNSCALE",
+      "classification": "AMP_BACKOFF",
+      "effective": false,
+      "skipped": true,
+      "optimizer_step_calls_before": 0,
+      "optimizer_step_calls_after": 0,
+      "optimizer_step_calls_delta": 0,
+      "Wo_applied_gradient_finite": null,
+      "Wo_applied_gradient_nonzero": null,
+      "forward_finite": true,
+      "loss_finite": true,
+      "loss": 37.82495880126953,
+      "loss_items_finite": true,
+      "parameters_finite_before": true,
+      "scale_before": 65536.0,
+      "scale_after": 32768.0,
+      "amp_enabled": true,
+      "backoff_factor": 0.5,
+      "all_scaled_gradients_finite": false,
+      "gradient_parameter_items": 9,
+      "none_gradient_parameter_items": 1,
+      "nonfinite_scaled_gradient_parameter_items": 1,
+      "nonfinite_scaled_gradient_names": [
+        "fixture.overflow"
+      ],
+      "gradients": {
+        "model.5.rdm.Dc.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 65536.0
+        },
+        "model.5.rdm.Dl.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 65536.0
+        },
+        "model.5.rdm.Pc.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 65536.0
+        },
+        "model.5.rdm.Wd.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 65536.0
+        },
+        "model.5.rdm.Wg.bias": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 65536.0
+        },
+        "model.5.rdm.Wg.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 65536.0
+        },
+        "model.5.rdm.Wo.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 65536.0
+        }
+      },
+      "optimizer_step_before": 0.0,
+      "parameters_finite_after": true,
+      "optimizer_step_after": 0.0,
+      "Wo_max_change": 0.0
+    },
+    {
+      "batch": 2,
+      "accumulate": 1,
+      "gradient_stage": "AMP_SCALED_BEFORE_NATIVE_UNSCALE",
+      "classification": "AMP_BACKOFF",
+      "effective": false,
+      "skipped": true,
+      "optimizer_step_calls_before": 0,
+      "optimizer_step_calls_after": 0,
+      "optimizer_step_calls_delta": 0,
+      "Wo_applied_gradient_finite": null,
+      "Wo_applied_gradient_nonzero": null,
+      "forward_finite": true,
+      "loss_finite": true,
+      "loss": 37.82495880126953,
+      "loss_items_finite": true,
+      "parameters_finite_before": true,
+      "scale_before": 32768.0,
+      "scale_after": 16384.0,
+      "amp_enabled": true,
+      "backoff_factor": 0.5,
+      "all_scaled_gradients_finite": false,
+      "gradient_parameter_items": 9,
+      "none_gradient_parameter_items": 1,
+      "nonfinite_scaled_gradient_parameter_items": 1,
+      "nonfinite_scaled_gradient_names": [
+        "fixture.overflow"
+      ],
+      "gradients": {
+        "model.5.rdm.Dc.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 32768.0
+        },
+        "model.5.rdm.Dl.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 32768.0
+        },
+        "model.5.rdm.Pc.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 32768.0
+        },
+        "model.5.rdm.Wd.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 32768.0
+        },
+        "model.5.rdm.Wg.bias": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 32768.0
+        },
+        "model.5.rdm.Wg.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 32768.0
+        },
+        "model.5.rdm.Wo.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 32768.0
+        }
+      },
+      "optimizer_step_before": 0.0,
+      "parameters_finite_after": true,
+      "optimizer_step_after": 0.0,
+      "Wo_max_change": 0.0
+    },
+    {
+      "batch": 3,
+      "accumulate": 1,
+      "gradient_stage": "AMP_SCALED_BEFORE_NATIVE_UNSCALE",
+      "classification": "AMP_BACKOFF",
+      "effective": false,
+      "skipped": true,
+      "optimizer_step_calls_before": 0,
+      "optimizer_step_calls_after": 0,
+      "optimizer_step_calls_delta": 0,
+      "Wo_applied_gradient_finite": null,
+      "Wo_applied_gradient_nonzero": null,
+      "forward_finite": true,
+      "loss_finite": true,
+      "loss": 37.82495880126953,
+      "loss_items_finite": true,
+      "parameters_finite_before": true,
+      "scale_before": 16384.0,
+      "scale_after": 8192.0,
+      "amp_enabled": true,
+      "backoff_factor": 0.5,
+      "all_scaled_gradients_finite": false,
+      "gradient_parameter_items": 9,
+      "none_gradient_parameter_items": 1,
+      "nonfinite_scaled_gradient_parameter_items": 1,
+      "nonfinite_scaled_gradient_names": [
+        "fixture.overflow"
+      ],
+      "gradients": {
+        "model.5.rdm.Dc.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 16384.0
+        },
+        "model.5.rdm.Dl.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 16384.0
+        },
+        "model.5.rdm.Pc.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 16384.0
+        },
+        "model.5.rdm.Wd.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 16384.0
+        },
+        "model.5.rdm.Wg.bias": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 16384.0
+        },
+        "model.5.rdm.Wg.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 16384.0
+        },
+        "model.5.rdm.Wo.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 16384.0
+        }
+      },
+      "optimizer_step_before": 0.0,
+      "parameters_finite_after": true,
+      "optimizer_step_after": 0.0,
+      "Wo_max_change": 0.0
+    },
+    {
+      "batch": 4,
+      "accumulate": 1,
+      "gradient_stage": "AMP_SCALED_BEFORE_NATIVE_UNSCALE",
+      "classification": "EFFECTIVE_UPDATE",
+      "effective": true,
+      "skipped": false,
+      "optimizer_step_calls_before": 0,
+      "optimizer_step_calls_after": 1,
+      "optimizer_step_calls_delta": 1,
+      "Wo_applied_gradient_finite": true,
+      "Wo_applied_gradient_nonzero": true,
+      "forward_finite": true,
+      "loss_finite": true,
+      "loss": 37.82495880126953,
+      "loss_items_finite": true,
+      "parameters_finite_before": true,
+      "scale_before": 8192.0,
+      "scale_after": 8192.0,
+      "amp_enabled": true,
+      "backoff_factor": 0.5,
+      "all_scaled_gradients_finite": true,
+      "gradient_parameter_items": 9,
+      "none_gradient_parameter_items": 1,
+      "nonfinite_scaled_gradient_parameter_items": 0,
+      "nonfinite_scaled_gradient_names": [],
+      "gradients": {
+        "model.5.rdm.Dc.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 8192.0
+        },
+        "model.5.rdm.Dl.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 8192.0
+        },
+        "model.5.rdm.Pc.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 8192.0
+        },
+        "model.5.rdm.Wd.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 8192.0
+        },
+        "model.5.rdm.Wg.bias": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 8192.0
+        },
+        "model.5.rdm.Wg.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 8192.0
+        },
+        "model.5.rdm.Wo.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 8192.0
+        }
+      },
+      "optimizer_step_before": 0.0,
+      "parameters_finite_after": true,
+      "optimizer_step_after": 1.0,
+      "Wo_max_change": 0.0009999999310821295
+    },
+    {
+      "batch": 5,
+      "accumulate": 1,
+      "gradient_stage": "AMP_SCALED_BEFORE_NATIVE_UNSCALE",
+      "classification": "EFFECTIVE_UPDATE",
+      "effective": true,
+      "skipped": false,
+      "optimizer_step_calls_before": 0,
+      "optimizer_step_calls_after": 1,
+      "optimizer_step_calls_delta": 1,
+      "Wo_applied_gradient_finite": true,
+      "Wo_applied_gradient_nonzero": true,
+      "forward_finite": true,
+      "loss_finite": true,
+      "loss": 37.82495880126953,
+      "loss_items_finite": true,
+      "parameters_finite_before": true,
+      "scale_before": 8192.0,
+      "scale_after": 8192.0,
+      "amp_enabled": true,
+      "backoff_factor": 0.5,
+      "all_scaled_gradients_finite": true,
+      "gradient_parameter_items": 9,
+      "none_gradient_parameter_items": 1,
+      "nonfinite_scaled_gradient_parameter_items": 0,
+      "nonfinite_scaled_gradient_names": [],
+      "gradients": {
+        "model.5.rdm.Dc.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 8192.0
+        },
+        "model.5.rdm.Dl.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 8192.0
+        },
+        "model.5.rdm.Pc.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 8192.0
+        },
+        "model.5.rdm.Wd.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 8192.0
+        },
+        "model.5.rdm.Wg.bias": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 8192.0
+        },
+        "model.5.rdm.Wg.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 8192.0
+        },
+        "model.5.rdm.Wo.weight": {
+          "is_none": false,
+          "finite": true,
+          "nonzero": true,
+          "max_abs_scaled": 8192.0
+        }
+      },
+      "optimizer_step_before": 1.0,
+      "parameters_finite_after": true,
+      "optimizer_step_after": 2.0,
+      "Wo_max_change": 0.000999990152195096
+    }
+  ],
+  "failures_rejected": {
+    "current_loss_nan": true,
+    "loss_items_inf": true,
+    "current_output_nonfinite": true,
+    "previous_batch_output_only": true,
+    "missing_output_evidence": true,
+    "parameter_nonfinite": true,
+    "missing_RDM_gradient": true,
+    "skip_without_backoff": true,
+    "apply_nonfinite": true,
+    "raise": true,
+    "missing_step_call_evidence": true,
+    "step_called_despite_overflow": true,
+    "wrong_backoff_factor": true,
+    "missing_one_of_seven_gradient_records": true,
+    "no_overflow_but_skip": true,
+    "nonfinite_parameters_after": true
+  },
+  "budgets": {
+    "start": {
+      "status": "PENDING",
+      "actual_batches": 8,
+      "total_batches": 8,
+      "effective_updates": 0,
+      "start_blocked": true
+    },
+    "resume": {
+      "status": "PENDING",
+      "actual_batches": 8,
+      "total_batches": 16,
+      "effective_updates": 0,
+      "start_blocked": true
+    }
+  },
+  "optimizer_hooks_removed": true,
+  "formal_RDMTrainer_unchanged": true,
+  "protected_model_recipe_files_unchanged": true,
+  "existing_init_sha256": "5dac7ce5dae8ad6f94890c9d5f70efa9e37d4fac855dae0d2fe5d25bc070a443",
+  "changed_source_lf_sha256": "3fed16ab231a51627eac2ab4f059b19048af197010c04970ed76f6c3ad0af8df",
+  "server_preflight": "PENDING",
+  "formal_training": "NOT_STARTED",
+  "full_val": "NOT_RUN",
+  "final_test": "NOT_RUN",
+  "checkpoints_created": 0,
+  "old_reports_modified": false,
+  "torch": "2.7.1+cu118"
+}

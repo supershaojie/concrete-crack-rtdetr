@@ -80,10 +80,14 @@ warmup5、cos_lr、AMP、原在线增强、EMA/梯度累计/loss/matcher/DN/原 
 
 服务器 `preflight` 默认主组合：首次最多 8 batch，至少 2 次 Wo 实际变化且梯度有限的原生 optimizer 更新；
 随后原生保存、同一 half 保存源核验、原生 resume 至少 1 次有效更新，总计最多 16 batch（含 scaler 跳步）。
-Wo 有效更新后检查上游梯度，验证真实 DN 和 RDM 调用。连续 3 次非有限优化尝试标 FAILED；
+Wo 有效更新后检查上游梯度，验证真实 DN 和 RDM 调用。有限前向/loss/参数且由完整 optimizer.step 调用证据确认的
+原生 AMP 溢出跳步及 scale 回退记为 AMP_BACKOFF，在既有预算内继续，不计有效更新；
 预算不足标 PENDING，不自动扩预算、降 batch、重试、关闭 AMP。
 随后只做一次原生 half EMA 真 val batch（母版原生 val loader 为 B32）、各一次 CUDA FP32/half AutoBackend B1/640。
 原生自动完整 val/final_eval 被预检的有界退出截断。不会自动 start、消融或 test。
+
+AMP 提前中止修复及小型 fixture 见 `amp_backoff_fix/README.md`。
+本目录原有报告保留其原始身份和状态，不能作为修复后的服务器通过证据；修复后需要一次新的有界预检。
 
 全部测试专用 checkpoint、optimizer/EMA 文件和运行目录放入有归属的 TemporaryDirectory；
 正常、异常和可捕获中断清理，报告写在外部。不保留大型 tensor 或整仓副本。
