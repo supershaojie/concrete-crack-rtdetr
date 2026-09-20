@@ -5,10 +5,17 @@ import math
 from pathlib import Path
 import re
 
-CONTRACT = "blc_training_admission_v2"
+CONTRACT = "blc_training_admission_v3_amp_backoff"
 VARIANTS = ("cbr_lif_blc_v1", "blc_v1")
 KEYS = {"model.5.blc." + name for name in ("Wd.weight", "Wg.weight", "Wg.bias", "Wo.weight")}
 OBSERVED = ("PASSED", "PRECISION_NOTE", "PENDING")
+# Fixed producer 0d233512: engine/trainer.py constructs
+# torch.cuda.amp.GradScaler(enabled=self.amp), with no configuration overrides.
+# Verified upstream: pytorch/pytorch v2.1.2 torch/cuda/amp/grad_scaler.py
+# __init__ and aten/src/ATen/native/cuda/AmpKernels.cu amp_update_scale_cuda_kernel.
+# These are source-derived defaults, not values inferred from a server screenshot.
+NATIVE_SCALER = dict(torch="2.1.2+cu121", init_scale=65536.0, backoff_factor=0.5,
+                     growth_factor=2.0, growth_interval=2000)
 
 
 def read_report(path):
@@ -122,39 +129,108 @@ class Checks:
         self.audit(api.get("audit", {}), p + ".actual_train_api.audit", True)
         self.need(api.get("audit", {}).get("ALLOWED_CLASS_ADAPTATION") == [], p + ": nc1 reconstruction changed classes")
 
-    def updates(self, row, path, minimum):
+    def updates(self, row, path, minimum, initial_state):
+        """Interpret recorded attempts; never run/replay an optimizer or scaler."""
+        phase_errors = len(self.errors)
         self.need(row.get("status") == "PASSED", path + ".status")
         batches, steps = row.get("batches", []), row.get("steps", [])
+        self.need(isinstance(batches, list) and isinstance(steps, list), path + ": batch/step lists missing")
+        batches = batches if isinstance(batches, list) else []
+        steps = steps if isinstance(steps, list) else []
         self.need(bool(batches) and row.get("attempted_batches") == len(batches), path + ": attempted/completed batches")
+        valid_batches = []
         for i, batch in enumerate(batches):
-            self.need(finite(batch.get("loss")) and finite(batch.get("gt")) and batch["gt"] > 0,
+            valid = (isinstance(batch, dict) and finite(batch.get("loss"))
+                     and type(batch.get("gt")) is int and batch["gt"] > 0)
+            self.need(valid,
                       f"{path}.batches[{i}]: finite loss/real GT")
-        effective, upstream, previous = 0, False, None
+            if path == "capacity":
+                numbered = isinstance(batch, dict) and batch.get("batch") == i + 1
+                self.need(numbered, f"{path}.batches[{i}]: original batch numbering")
+                valid = valid and numbered
+            valid_batches.append(valid)
+        self.need(initial_state is not None, path + ": initial optimizer/scaler state is unproven")
+        state = deepcopy(initial_state)
+        effective, upstream, previous_batch = 0, False, 0
+        attempts = []
         for i, step in enumerate(steps):
             p = f"{path}.steps[{i}]"
+            start_errors = len(self.errors)
+            if not isinstance(step, dict):
+                self.need(False, p + ": missing attempt object")
+                attempts.append(dict(classification="INVALID", errors=self.errors[start_errors:]))
+                state = None
+                continue
             norms, delta = step.get("new_gradient_norms", {}), step.get("parameter_delta", {})
+            self.need(isinstance(norms, dict) and isinstance(delta, dict), p + ": BLC norm/delta mappings missing")
+            norms = norms if isinstance(norms, dict) else {}
+            delta = delta if isinstance(delta, dict) else {}
             self.need(set(norms) == KEYS and set(delta) == KEYS, p + ": BLC parameter inventory")
             self.need(all(finite(v) and v >= 0 for v in norms.values())
                       and all(finite(v) and v >= 0 for v in delta.values()), p + ": finite gradients/deltas")
-            self.need(step.get("all_gradients_finite") is True, p + ": gradients finite")
-            for key in ("scale_before", "scale_after", "optimizer_state_step", "batch"):
+            for key in ("scale_before", "scale_after"):
                 self.need(finite(step.get(key)) and step[key] > 0, p + "." + key)
+            optimizer_step = step.get("optimizer_state_step")
+            self.need(finite(optimizer_step) and optimizer_step >= 0 and int(optimizer_step) == optimizer_step,
+                      p + ": optimizer_state_step must be finite nonnegative integer")
             index = step.get("batch")
-            self.need(type(index) is int and 1 <= index <= len(batches), p + ": batch within budget")
-            self.need(type(step.get("effective_update")) is bool and type(step.get("scaler_skipped")) is bool,
-                      p + ": native step flags")
-            if step.get("effective_update") is True:
-                effective += 1
-                self.need(step.get("scaler_skipped") is False and finite(delta.get("model.5.blc.Wo.weight"))
-                          and delta["model.5.blc.Wo.weight"] > 0, p + ": effective Wo update")
-                value = step.get("optimizer_state_step")
-                self.need(previous is None or finite(value) and value > previous, p + ": native optimizer step advanced")
-                upstream |= set(norms) == KEYS and all(finite(v) and v > 0 for v in norms.values())
-            previous = step.get("optimizer_state_step")
+            valid_index = type(index) is int and previous_batch < index <= len(batches)
+            self.need(valid_index, p + ": batch index must increase and be within completed batches")
+            self.need(valid_index and valid_batches[index - 1], p + ": corresponding finite-loss/valid-GT batch missing")
+            for key in ("all_gradients_finite", "scaler_skipped", "effective_update"):
+                self.need(type(step.get(key)) is bool, p + "." + key + ": explicit boolean required")
+            self.need(state is not None, p + ": preceding optimizer/scaler state unproven")
+            entry = dict(batch=index, classification="INVALID", scale_before=step.get("scale_before"),
+                         scale_after=step.get("scale_after"), optimizer_state_step=optimizer_step,
+                         recorded_effective_update=step.get("effective_update"),
+                         expected_previous_optimizer_state_step=state["optimizer_state_step"] if state else None,
+                         expected_scale_before=state["scale"] if state else None)
+            kind, next_state = "INVALID", None
+            if len(self.errors) == start_errors:
+                self.need(step["scale_before"] == state["scale"], p + ": scale_before breaks previous/restored state")
+                if step["all_gradients_finite"] is False and step["scaler_skipped"] is True and step["effective_update"] is False:
+                    self.need(step["scale_after"] == state["scale"] * NATIVE_SCALER["backoff_factor"],
+                              p + ": AMP skip must use the verified native backoff ratio")
+                    self.need(optimizer_step == state["optimizer_state_step"], p + ": AMP skip advanced optimizer step")
+                    self.need(all(v == 0 for v in delta.values()), p + ": AMP skip changed a BLC parameter")
+                    kind = "AMP_BACKOFF"
+                    next_state = dict(optimizer_state_step=optimizer_step, scale=step["scale_after"], growth_tracker=0)
+                elif step["all_gradients_finite"] is True and step["scaler_skipped"] is False:
+                    self.need(optimizer_step == state["optimizer_state_step"] + 1,
+                              p + ": native optimizer step must advance once from previous/restored state")
+                    tracker = state["growth_tracker"] + 1
+                    grow = tracker == NATIVE_SCALER["growth_interval"]
+                    self.need(step["scale_after"] == state["scale"] * (NATIVE_SCALER["growth_factor"] if grow else 1),
+                              p + ": applied step has inconsistent native scale")
+                    wo_changed = delta["model.5.blc.Wo.weight"] > 0
+                    self.need(step["effective_update"] is wo_changed, p + ": effective_update contradicts actual Wo delta")
+                    kind = "EFFECTIVE_UPDATE" if wo_changed else "APPLIED_NO_WO_CHANGE"
+                    next_state = dict(optimizer_state_step=optimizer_step, scale=step["scale_after"],
+                                      growth_tracker=0 if grow else tracker)
+                else:
+                    self.need(False, p + ": nonfinite/skip/effective flags contradict native execution")
+            if len(self.errors) == start_errors:
+                entry["classification"] = kind
+                state = next_state
+                if kind == "EFFECTIVE_UPDATE":
+                    effective += 1
+                    upstream |= all(v > 0 for v in norms.values())
+            else:
+                state = None  # Do not invent a resume origin after an invalid/missing observation.
+            entry["errors"] = self.errors[start_errors:]
+            attempts.append(entry)
+            if type(index) is int:
+                previous_batch = index
         self.need(effective >= minimum and row.get("effective_updates") == effective, path + ": insufficient/inconsistent effective updates")
         if minimum == 2:
             self.need(upstream, path + ": original finite nonzero upstream gradient rule")
-        return len(batches)
+        summary = dict(initial_state=deepcopy(initial_state), attempts=attempts, effective_updates=effective,
+                       reported_effective_updates=row.get("effective_updates"),
+                       amp_backoff_count=sum(r["classification"] == "AMP_BACKOFF" for r in attempts),
+                       applied_no_wo_change_count=sum(r["classification"] == "APPLIED_NO_WO_CHANGE" for r in attempts),
+                       final_state=state if len(self.errors) == phase_errors else None,
+                       scope="Derived classifications/state from original attempts and source defaults; not new observations")
+        return len(batches), summary
 
 
 def evaluate(report, init_reports, identity_errors=()):
@@ -171,11 +247,20 @@ def evaluate(report, init_reports, identity_errors=()):
     capacity = report.get("capacity", {})
     checks.need(capacity.get("batch") == 16 and capacity.get("imgsz") == 640 and capacity.get("AMP") is True,
                 "capacity: original B16/640/native AMP")
-    count = checks.updates(capacity, "capacity", 2)
-    for batch in capacity.get("batches", []):
-        checks.need(batch.get("amp") is True, "capacity: batch AMP evidence")
+    checks.need(report.get("context", {}).get("runtime", {}).get("torch") == NATIVE_SCALER["torch"],
+                "AMP evidence must use the source-verified torch 2.1.2+cu121 scaler configuration")
+    # Fresh AdamW starts without state; the protected producer takes max(..., default=0).
+    count, capacity_attempts = checks.updates(capacity, "capacity", 2,
+        dict(optimizer_state_step=0, scale=NATIVE_SCALER["init_scale"], growth_tracker=0))
+    for batch in capacity.get("batches", []) if isinstance(capacity.get("batches"), list) else []:
+        checks.need(isinstance(batch, dict) and batch.get("amp") is True, "capacity: batch AMP evidence")
     resume = report.get("native_resume", {})
-    count += checks.updates(resume, "native_resume", 1)
+    restored = resume.get("restored_state", {})
+    resume_origin = capacity_attempts["final_state"] if all(
+        restored.get(key) is True for key in ("epoch", "optimizer_moments_steps", "scaler", "ema", "updates")
+    ) and restored.get("shared_storage") is False else None
+    resumed_count, resume_attempts = checks.updates(resume, "native_resume", 1, resume_origin)
+    count += resumed_count
     checks.need(0 < count <= 16 and report.get("total_attempted_training_batches") == count
                 and report.get("batch_budget") == 16 and report.get("validation_batch_budget") == 1,
                 "preflight: combined 16 training/1 validation batch budget")
@@ -240,6 +325,8 @@ def evaluate(report, init_reports, identity_errors=()):
                          "PRECISION_NOTE" if "PRECISION_NOTE" in statuses else "PASSED")
     return dict(contract=CONTRACT,
                 training_admission=dict(status="FAILED" if checks.errors else "PASSED", errors=checks.errors,
+                    native_scaler_contract=deepcopy(NATIVE_SCALER),
+                    optimizer_attempts=dict(capacity=capacity_attempts, native_resume=resume_attempts),
                     scope="Evidence permits a native training experiment only; no accuracy/convergence claim"),
                 fusion_diagnostic=dict(status=diagnostic_status, modes=diagnostic,
                     fixed_indices_diagnostic_only=True, scope="Original fusion observations; not fusion equivalence approval"))
@@ -247,6 +334,16 @@ def evaluate(report, init_reports, identity_errors=()):
 
 def print_result(path, result):
     print("Admission report:", path, flush=True)
+    for phase, summary in result["training_admission"]["optimizer_attempts"].items():
+        for i, row in enumerate(summary["attempts"]):
+            print(f"{phase}.steps[{i}] batch={row.get('batch')} {row['classification']} "
+                  f"scale={row.get('scale_before')} -> {row.get('scale_after')} "
+                  f"optimizer_state_step={row.get('optimizer_state_step')} "
+                  f"previous_step={row.get('expected_previous_optimizer_state_step')}", flush=True)
+        print(f"{phase}: AMP_BACKOFF={summary['amp_backoff_count']} "
+              f"APPLIED_NO_WO_CHANGE={summary['applied_no_wo_change_count']} "
+              f"effective_updates={summary['effective_updates']} "
+              f"reported_effective_updates={summary['reported_effective_updates']}", flush=True)
     print("training_admission=" + result["training_admission"]["status"] +
           "; fusion_diagnostic=" + result["fusion_diagnostic"]["status"], flush=True)
     print(result["training_admission"]["scope"], flush=True)

@@ -1,4 +1,4 @@
-"""One-revision evidence migration. No model execution or checkpoint deserialization."""
+"""Pinned two-segment admission migration; no model or checkpoint execution."""
 import ast
 from copy import deepcopy
 from functools import lru_cache
@@ -10,6 +10,7 @@ import subprocess
 from blc_admission import VARIANTS, read_report
 
 SOURCE = "0d2335122a09203dfa2ebf4b469a68eede27cd61"
+DEPLOYED_ADMISSION = "3906d10280a2f1236ea54a6cef9fb8853ea1f85c"
 INIT_SOURCES = (SOURCE, "343df78240277301a03fa520a532312008bf6850",
                 "010038a1115cc757d2aba6fad480e73e0a36b820")
 ALLOWED_FILES = {
@@ -17,6 +18,11 @@ ALLOWED_FILES = {
     "tools/blc_server.py", "tools/blc_server.sh",
     "docs/blc_v1/training_admission_v2/README.md",
     "docs/blc_v1/training_admission_v2/validation.json",
+}
+AMP_FIX_FILES = {
+    "tools/blc_admission.py", "tools/blc_admission_identity.py", "tools/check_blc_admission.py",
+    "docs/blc_v1/admission_amp_skip_fix/README.md",
+    "docs/blc_v1/admission_amp_skip_fix/validation.json",
 }
 # Exact allowed entry-point edits. The remainder of the server AST must match SOURCE.
 # This also protects start/resume computation, init, pack, and val/test dispatch.
@@ -118,37 +124,57 @@ def syntax(source):
     return ast.dump(ast.parse(source), include_attributes=False)
 
 
-def scope_check(before, after, changed):
-    need(set(changed) <= ALLOWED_FILES, "Unknown changed files: " + repr(sorted(set(changed) - ALLOWED_FILES)))
+def scope_check(before, after, changed, allowed=ALLOWED_FILES):
+    need(set(changed) <= allowed, "Unknown changed files: " + repr(sorted(set(changed) - allowed)))
     need(syntax(after["tools/blc_server.py"]) == syntax(expected_server(before["tools/blc_server.py"].decode())),
          "Server changes exceed the exact admission/CLI edits; computation protected")
     expected_shell = before["tools/blc_server.sh"].decode().replace(SHELL_OLD, SHELL_NEW)
     need(after["tools/blc_server.sh"].decode() == expected_shell, "Shell execution changed beyond usage text")
     for name in set(before) | set(after):
-        if name not in ALLOWED_FILES:
+        if name not in allowed:
             need(before.get(name) == after.get(name), "Protected source changed: " + name)
+
+
+def amp_fix_scope_check(before, after, changed):
+    need(set(changed) <= AMP_FIX_FILES, "Unknown AMP-fix changed files: " + repr(sorted(set(changed) - AMP_FIX_FILES)))
+    for name in set(before) | set(after):
+        if name not in AMP_FIX_FILES:
+            need(before.get(name) == after.get(name), "AMP fix changed protected source: " + name)
+
+
+def changed_files(root, before_revision, after_revision):
+    files = []
+    for name in git(root, "diff", "--name-only", before_revision, after_revision).decode().splitlines():
+        # Include docs in the scoped commit proof, even though they are not runtime inputs.
+        old = git(root, "ls-tree", before_revision, "--", name)
+        new = git(root, "ls-tree", after_revision, "--", name)
+        files.append(dict(path=name,
+            before_lf_sha256=sha(git(root, "show", before_revision + ":" + name).replace(b"\r\n", b"\n")) if old else None,
+            after_lf_sha256=sha(git(root, "show", after_revision + ":" + name).replace(b"\r\n", b"\n")) if new else None))
+    return files
 
 
 def current_proof(root, current):
     head = git(root, "rev-parse", "HEAD").decode().strip()
-    parents = git(root, "rev-list", "--parents", "-n", "1", head).decode().split()
-    need(parents == [head, SOURCE], "Migration is limited to the single admission revision directly after " + SOURCE)
+    chain = ((SOURCE, DEPLOYED_ADMISSION), (DEPLOYED_ADMISSION, head))
+    need(head not in (SOURCE, DEPLOYED_ADMISSION), "AMP admission fix requires its new committed revision")
+    for parent, child in chain:
+        parents = git(root, "rev-list", "--parents", "-n", "1", child).decode().split()
+        need(parents == [child, parent], "Migration is limited to the exact SOURCE -> 3906d102 -> AMP-fix chain")
     need(not git(root, "status", "--porcelain", "--untracked-files=no").strip(), "Tracked changes: commit/review first")
-    before, after = tree(str(root), SOURCE), tree(str(root), head)
+    before, deployed, after = (tree(str(root), revision) for revision in (SOURCE, DEPLOYED_ADMISSION, head))
     need(current["code"] == manifest(after), "Current LF-normalized code manifest differs from committed source")
-    changed = git(root, "diff", "--name-only", SOURCE, head).decode().splitlines()
-    scope_check(before, after, changed)
-    files = []
-    for name in changed:
-        # Include docs in the scoped commit proof, even though they are not runtime inputs.
-        old = git(root, "ls-tree", SOURCE, "--", name)
-        new = git(root, "ls-tree", head, "--", name)
-        files.append(dict(path=name,
-            before_lf_sha256=sha(git(root, "show", SOURCE + ":" + name).replace(b"\r\n", b"\n")) if old else None,
-            after_lf_sha256=sha(git(root, "show", head + ":" + name).replace(b"\r\n", b"\n")) if new else None))
+    segments = [dict(from_revision=parent, to_revision=child, actual_changed_files=changed_files(root, parent, child))
+                for parent, child in chain]
+    scope_check(before, deployed, [r["path"] for r in segments[0]["actual_changed_files"]])
+    amp_fix_scope_check(deployed, after, [r["path"] for r in segments[1]["actual_changed_files"]])
+    files = changed_files(root, SOURCE, head)
+    # Retain the original entry-point AST proof as well as the narrower repair diff.
+    scope_check(before, after, [r["path"] for r in files], ALLOWED_FILES | AMP_FIX_FILES)
     return dict(source_revision=SOURCE, current_revision=head, actual_changed_files=files,
+                migration_chain=segments,
                 source_code_sha256=manifest(before)["sha256"], current_code_sha256=current["code"]["sha256"],
-                scope="Exact admission/CLI patch plus named new admission/tests/docs; all computation inputs unchanged")
+                scope="Two explicit parent edges and scoped diffs; original entry AST and all computation inputs protected")
 
 
 def named_nodes(raw, names):
@@ -199,7 +225,8 @@ def context_relation(recorded, current):
 
 def evidence_proof(root, report, current, kind):
     recorded = report.get("context", {})
-    candidates = (SOURCE, current["runtime"]["commit"]) if kind == "preflight" else (*INIT_SOURCES, current["runtime"]["commit"])
+    candidates = ((SOURCE, DEPLOYED_ADMISSION, current["runtime"]["commit"]) if kind == "preflight"
+                  else (*INIT_SOURCES, DEPLOYED_ADMISSION, current["runtime"]["commit"]))
     revision = next((rev for rev in dict.fromkeys(candidates)
                      if recorded.get("code") == manifest(tree(str(root), rev))), None)
     need(revision is not None, kind + ": context.code.files/aggregate does not match any supported source tree")

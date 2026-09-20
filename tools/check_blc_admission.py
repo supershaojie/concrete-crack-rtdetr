@@ -1,5 +1,6 @@
 """Fast synthetic FIXTURE tests only. Never evidence of server admission."""
 from copy import deepcopy
+import ast
 import io
 import json
 import os
@@ -27,9 +28,10 @@ def fixture():
     """Invented metadata for contract tests; no outputs from a model."""
     branch = dict(calls=1, completed=True, increment_norms=[.01])
     def step(i):
-        return dict(batch=i, scale_before=1024., scale_after=1024., optimizer_state_step=float(i),
+        return dict(batch=i, scale_before=65536., scale_after=65536., optimizer_state_step=float(i),
                     scaler_skipped=False, effective_update=True, all_gradients_finite=True,
-                    new_gradient_norms={k: .1 for k in admission.KEYS}, parameter_delta={k: .01 for k in admission.KEYS})
+                    new_gradient_norms={k: .1 if i > 1 or "Wo." in k else 0. for k in admission.KEYS},
+                    parameter_delta={k: .01 if i > 1 or "Wo." in k else 0. for k in admission.KEYS})
     inits = {}
     audit = dict(NEW_BUFFER=[], MISSING=[], UNEXPECTED=[], SHAPE_MISMATCH=[], NEW_TRAINABLE=sorted(admission.KEYS),
                  COMMON=dict(count=552, unequal_count=0, unequal_samples=[], inventory_sha256=HASH),
@@ -54,12 +56,15 @@ def fixture():
                         features={str(k): difference(k != "scores") for k in (5, 6, 7, "scores")},
                         fixed_indices_diagnostic_only=difference(), forward_count=3,
                         differing_candidate_positions=136, same_candidate_set=False, indices_sha256=[HASH, HASH]))
+    resumed_step = step(3)
+    resumed_step["batch"] = 1
     report = dict(fixture=True, status="PENDING", phase="preflight", variant=admission.VARIANTS[0], stage="complete",
+        context=dict(runtime=dict(torch="2.1.2+cu121")),
         formal_init_untouched=True, batch_budget=16, validation_batch_budget=1, total_attempted_training_batches=3,
         capacity=dict(status="PASSED", batch=16, imgsz=640, AMP=True, attempted_batches=2, effective_updates=2,
-                      batches=[dict(loss=2., gt=5, amp=True)] * 2, steps=[step(1), step(2)]),
+                      batches=[dict(batch=i, loss=2., gt=5, amp=True) for i in (1, 2)], steps=[step(1), step(2)]),
         native_resume=dict(status="PASSED", attempted_batches=1, effective_updates=1, epoch=1,
-                           batches=[dict(loss=1., gt=3)], steps=[step(1)],
+                           batches=[dict(loss=1., gt=3)], steps=[resumed_step],
                            restored_state=dict(epoch=True, optimizer_moments_steps=True, scaler=True, ema=True,
                                                updates=True, shared_storage=False)),
         bounded_checkpoint=dict(epoch=0, incomplete_epoch=True, native_resume_next_epoch=1, sha256=HASH),
@@ -72,7 +77,204 @@ def fixture():
     return report, inits
 
 
+def amp_backoff_fixture():
+    """SYNTHETIC: three overflow skips, two real updates, then a restored update."""
+    report, inits = fixture()
+    capacity = report["capacity"]
+    skips = []
+    scale = admission.NATIVE_SCALER["init_scale"]
+    for batch in (1, 2, 3):
+        skips.append(dict(batch=batch, scale_before=scale, scale_after=scale * .5, optimizer_state_step=0.,
+                          scaler_skipped=True, effective_update=False, all_gradients_finite=False,
+                          new_gradient_norms={k: .1 if "Wo." in k else 0. for k in admission.KEYS},
+                          parameter_delta={k: 0. for k in admission.KEYS}))
+        scale *= .5
+    for i, step in enumerate(capacity["steps"], 4):
+        step.update(batch=i, scale_before=scale, scale_after=scale)
+    capacity.update(steps=skips + capacity["steps"], attempted_batches=5,
+                    batches=[dict(batch=i, loss=2., gt=5, amp=True) for i in range(1, 6)])
+    report["native_resume"]["steps"][0].update(scale_before=scale, scale_after=scale)
+    report["total_attempted_training_batches"] = 6
+    report["lifecycle"]["native_storage"]["updates"] = 5  # Native EMA ticks also on scaler skips.
+    return report, inits
+
+
 class AdmissionTests(unittest.TestCase):
+    def test_three_backoffs_then_updates_and_restore(self):
+        raw, inits = amp_backoff_fixture()
+        before = deepcopy(raw)
+        deployed = types.ModuleType("deployed_admission_FIXTURE_only")
+        old_source = identity.tree(str(ROOT), identity.DEPLOYED_ADMISSION)["tools/blc_admission.py"]
+        exec(compile(old_source, "3906d102:tools/blc_admission.py", "exec"), deployed.__dict__)
+        old_result = deployed.evaluate(raw, inits)["training_admission"]
+        self.assertEqual(old_result["status"], "FAILED")
+        self.assertEqual(old_result["errors"], [message for i in range(3) for message in (
+            f"capacity.steps[{i}]: gradients finite", f"capacity.steps[{i}].optimizer_state_step")])
+        result = admission.evaluate(raw, inits)
+        self.assertEqual(result["training_admission"]["errors"], [])
+        self.assertEqual(result["training_admission"]["status"], "PASSED")
+        self.assertEqual(result["fusion_diagnostic"]["status"], "PENDING")
+        phases = result["training_admission"]["optimizer_attempts"]
+        self.assertEqual([x["classification"] for x in phases["capacity"]["attempts"]],
+                         ["AMP_BACKOFF"] * 3 + ["EFFECTIVE_UPDATE"] * 2)
+        self.assertEqual(phases["capacity"]["amp_backoff_count"], 3)
+        self.assertEqual(phases["capacity"]["effective_updates"], 2)
+        self.assertEqual(phases["native_resume"]["effective_updates"], 1)
+        self.assertEqual(phases["native_resume"]["initial_state"], phases["capacity"]["final_state"])
+        self.assertEqual(phases["native_resume"]["attempts"][0]["expected_previous_optimizer_state_step"], 2.)
+        captured = io.StringIO()
+        with redirect_stdout(captured):
+            admission.print_result("SYNTHETIC FIXTURE", result)
+        self.assertIn("scale=65536.0 -> 32768.0 optimizer_state_step=0.0", captured.getvalue())
+        self.assertIn("training_admission=PASSED; fusion_diagnostic=PENDING", captured.getvalue())
+        self.assertEqual(raw, before)
+
+    def test_backoff_forever_is_insufficient(self):
+        raw, inits = amp_backoff_fixture()
+        raw["capacity"].update(steps=raw["capacity"]["steps"][:3], batches=raw["capacity"]["batches"][:3],
+                               attempted_batches=3, effective_updates=0)
+        raw["total_attempted_training_batches"] = 4
+        result = admission.evaluate(raw, inits)["training_admission"]
+        self.assertEqual(result["status"], "FAILED")
+        self.assertTrue(any("insufficient" in e for e in result["errors"]))
+        self.assertEqual(result["optimizer_attempts"]["capacity"]["amp_backoff_count"], 3)
+
+    def test_skip_contradictions_and_missing_fields(self):
+        changes = [
+            ("optimizer_state_step", 1.), ("scale_after", 100.), ("scale_before", 100.),
+            ("scaler_skipped", False), ("effective_update", True), ("all_gradients_finite", True),
+            ("batch", 0), ("batch", 6),
+            ("parameter_delta", {k: .1 for k in admission.KEYS}),
+            ("new_gradient_norms", {k: float("inf") for k in admission.KEYS}),
+        ]
+        for key, value in changes:
+            with self.subTest(key=key, value=value):
+                raw, inits = amp_backoff_fixture()
+                raw["capacity"]["steps"][0][key] = value
+                result = admission.evaluate(raw, inits)["training_admission"]
+                self.assertEqual(result["status"], "FAILED")
+                self.assertEqual(result["optimizer_attempts"]["capacity"]["attempts"][0]["classification"], "INVALID")
+        original, _ = amp_backoff_fixture()
+        for key in original["capacity"]["steps"][0]:
+            with self.subTest(missing=key):
+                raw, inits = amp_backoff_fixture()
+                del raw["capacity"]["steps"][0][key]
+                self.assertEqual(admission.evaluate(raw, inits)["training_admission"]["status"], "FAILED")
+        raw, inits = amp_backoff_fixture()
+        del raw["capacity"]["steps"][0]["parameter_delta"]["model.5.blc.Wg.bias"]
+        self.assertEqual(admission.evaluate(raw, inits)["training_admission"]["status"], "FAILED")
+
+    def test_batch_loss_and_attempt_chronology(self):
+        for mutation in ("loss_nan", "loss_inf_string", "gt_missing", "duplicate_batch", "out_of_order", "broken_scale"):
+            with self.subTest(mutation=mutation):
+                raw, inits = amp_backoff_fixture()
+                if mutation == "loss_nan":
+                    raw["capacity"]["batches"][0]["loss"] = float("nan")
+                elif mutation == "loss_inf_string":
+                    raw["capacity"]["batches"][0]["loss"] = "inf"
+                elif mutation == "gt_missing":
+                    del raw["capacity"]["batches"][0]["gt"]
+                elif mutation in ("duplicate_batch", "out_of_order"):
+                    raw["capacity"]["steps"][1]["batch"] = 1 if mutation == "duplicate_batch" else 0
+                else:
+                    raw["capacity"]["steps"][1].update(scale_before=65536., scale_after=32768.)
+                self.assertEqual(admission.evaluate(raw, inits)["training_admission"]["status"], "FAILED")
+
+    def test_applied_update_flags_and_nonfinite_rejection(self):
+        for mutation in ("nonfinite_updated", "skip_with_finite", "wo_zero", "false_effective",
+                         "step_static", "step_jump", "backoff_on_success", "wrong_torch"):
+            with self.subTest(mutation=mutation):
+                raw, inits = amp_backoff_fixture()
+                step = raw["capacity"]["steps"][3]
+                if mutation == "nonfinite_updated":
+                    step["all_gradients_finite"] = False
+                elif mutation == "skip_with_finite":
+                    step["scaler_skipped"] = True
+                elif mutation == "wo_zero":
+                    step["parameter_delta"]["model.5.blc.Wo.weight"] = 0
+                elif mutation == "false_effective":
+                    step["effective_update"] = False
+                elif mutation == "step_static":
+                    step["optimizer_state_step"] = 0
+                elif mutation == "step_jump":
+                    step["optimizer_state_step"] = 2
+                elif mutation == "backoff_on_success":
+                    step["scale_after"] = step["scale_before"] * .5
+                else:
+                    raw["context"]["runtime"]["torch"] = "UNKNOWN"
+                self.assertEqual(admission.evaluate(raw, inits)["training_admission"]["status"], "FAILED")
+
+    def test_applied_without_wo_increment_is_not_backoff_or_effective(self):
+        raw, inits = fixture()
+        capacity = raw["capacity"]
+        ineffective = deepcopy(capacity["steps"][0])
+        ineffective.update(effective_update=False, parameter_delta={k: 0. for k in admission.KEYS})
+        for step in capacity["steps"]:
+            step["batch"] += 1
+            step["optimizer_state_step"] += 1
+        capacity.update(steps=[ineffective] + capacity["steps"], attempted_batches=3,
+                        batches=[dict(batch=i, loss=2., gt=5, amp=True) for i in range(1, 4)])
+        raw["native_resume"]["steps"][0]["optimizer_state_step"] = 4.
+        raw["total_attempted_training_batches"] = 4
+        raw["lifecycle"]["native_storage"]["updates"] = 3
+        result = admission.evaluate(raw, inits)["training_admission"]
+        self.assertEqual(result["errors"], [])
+        self.assertEqual(result["optimizer_attempts"]["capacity"]["applied_no_wo_change_count"], 1)
+        self.assertEqual(result["optimizer_attempts"]["capacity"]["effective_updates"], 2)
+
+    def test_resume_origin_and_resume_backoff(self):
+        for mutation in ("zero_origin", "old_step", "reset_scale", "unproven_scaler", "unproven_optimizer"):
+            with self.subTest(mutation=mutation):
+                raw, inits = amp_backoff_fixture()
+                resume = raw["native_resume"]
+                if mutation in ("zero_origin", "old_step"):
+                    resume["steps"][0]["optimizer_state_step"] = 1. if mutation == "zero_origin" else 2.
+                elif mutation == "reset_scale":
+                    resume["steps"][0].update(scale_before=65536., scale_after=65536.)
+                else:
+                    resume["restored_state"]["scaler" if mutation == "unproven_scaler" else "optimizer_moments_steps"] = False
+                self.assertEqual(admission.evaluate(raw, inits)["training_admission"]["status"], "FAILED")
+        raw, inits = amp_backoff_fixture()
+        skip = deepcopy(raw["capacity"]["steps"][2])
+        skip.update(batch=1, optimizer_state_step=2., scale_before=8192., scale_after=4096.)
+        resumed = raw["native_resume"]
+        resumed["steps"][0].update(batch=2, scale_before=4096., scale_after=4096.)
+        resumed.update(steps=[skip] + resumed["steps"], attempted_batches=2,
+                       batches=[dict(loss=1., gt=3)] * 2)
+        raw["total_attempted_training_batches"] = 7
+        result = admission.evaluate(raw, inits)["training_admission"]
+        self.assertEqual(result["errors"], [])
+        self.assertEqual(result["optimizer_attempts"]["native_resume"]["amp_backoff_count"], 1)
+
+    def test_source_scaler_configuration_and_scoped_history(self):
+        source = identity.tree(str(ROOT), identity.SOURCE)
+        trainer = ast.parse(source["ultralytics-main/ultralytics/engine/trainer.py"])
+        calls = [n for n in ast.walk(trainer) if isinstance(n, ast.Call)
+                 and ast.unparse(n.func) == "torch.cuda.amp.GradScaler"]
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(calls[0].args, [])
+        self.assertEqual([(kw.arg, ast.unparse(kw.value)) for kw in calls[0].keywords], [("enabled", "self.amp")])
+        updates = [n for n in ast.walk(trainer) if isinstance(n, ast.Call) and ast.unparse(n.func) == "self.scaler.update"]
+        self.assertTrue(updates)
+        self.assertTrue(all(not c.args and not c.keywords for c in updates))
+        deployed = identity.tree(str(ROOT), identity.DEPLOYED_ADMISSION)
+        changed = [r["path"] for r in identity.changed_files(ROOT, identity.SOURCE, identity.DEPLOYED_ADMISSION)]
+        identity.scope_check(source, deployed, changed)
+        current = dict(deployed)
+        for name in identity.AMP_FIX_FILES:
+            path = ROOT / name
+            if path.is_file() and identity.tracked_code(name):
+                current[name] = path.read_bytes().replace(b"\r\n", b"\n")
+        identity.amp_fix_scope_check(deployed, current, identity.AMP_FIX_FILES)
+        identity.scope_check(source, current, identity.ALLOWED_FILES | identity.AMP_FIX_FILES,
+                             identity.ALLOWED_FILES | identity.AMP_FIX_FILES)
+        with self.assertRaisesRegex(ValueError, "Unknown AMP-fix"):
+            identity.amp_fix_scope_check(deployed, current, {"tools/blc_preflight.py"})
+        corrupted = dict(current)
+        corrupted["ultralytics-main/ultralytics/engine/trainer.py"] += b"\n# FIXTURE outside scope\n"
+        with self.assertRaisesRegex(ValueError, "protected source"):
+            identity.amp_fix_scope_check(deployed, corrupted, identity.AMP_FIX_FILES)
+
     def test_finite_fusion_difference_admits_without_relabeling(self):
         raw, inits = fixture()
         before = deepcopy(raw)
@@ -213,16 +415,20 @@ class AdmissionTests(unittest.TestCase):
             if args[0] == "rev-parse":
                 return b"FIXTURE_HEAD\n"
             if args[0] == "rev-list":
+                if args[-1] == identity.DEPLOYED_ADMISSION:
+                    return (identity.DEPLOYED_ADMISSION + " " + identity.SOURCE + "\n").encode()
                 return b"FIXTURE_HEAD UNKNOWN_FUTURE_PARENT\n"
             self.fail("Unexpected Git call")
         with patch.object(identity, "git", side_effect=response):
-            with self.assertRaisesRegex(ValueError, "single admission revision"):
+            with self.assertRaisesRegex(ValueError, "exact SOURCE"):
                 identity.current_proof(ROOT, {"fixture": True})
         def source_parent(root, *args, **kwargs):
             if args[0] == "rev-parse":
                 return b"FIXTURE_HEAD\n"
             if args[0] == "rev-list":
-                return ("FIXTURE_HEAD " + identity.SOURCE + "\n").encode()
+                child = args[-1]
+                parent = identity.SOURCE if child == identity.DEPLOYED_ADMISSION else identity.DEPLOYED_ADMISSION
+                return (child + " " + parent + "\n").encode()
             if args[0] == "status":
                 return b""
             self.fail("Unexpected Git call")

@@ -1,0 +1,43 @@
+{
+  "contract": "blc_training_admission_v3_amp_backoff",
+  "production_source": "0d2335122a09203dfa2ebf4b469a68eede27cd61",
+  "deployed_parent": "3906d10280a2f1236ea54a6cef9fb8853ea1f85c",
+  "evidence_scope": "Local synthetic metadata FIXTUREs and source inspection; not real server reassessment",
+  "quick_tests": {
+    "command": "python tools/check_blc_admission.py",
+    "test_methods": 18,
+    "status": "PASSED",
+    "deployed_evaluator_regression": "Reproduces exactly the six gradient/step rejection messages on a synthetic fixture",
+    "three_backoffs_two_updates_one_resume": "PASSED",
+    "fusion_diagnostic_pending_preserved": "PASSED",
+    "backoff_only_insufficient_updates": "REJECTED",
+    "backoff_changed_parameters_or_advanced_step": "REJECTED",
+    "missing_fields_nonfinite_loss_and_nonfinite_blc_norm": "REJECTED",
+    "nonfinite_gradients_with_applied_update": "REJECTED",
+    "effective_flag_delta_scale_or_batch_contradictions": "REJECTED",
+    "resume_step_or_scale_origin_mismatch": "REJECTED",
+    "valid_resumed_backoff": "PASSED",
+    "applied_without_wo_change_not_counted_effective": "PASSED",
+    "original_context_raw_hash_and_fusion_gates": "PASSED",
+    "unknown_parent_or_production_code_changes": "REJECTED"
+  },
+  "native_scaler_configuration": {
+    "torch": "2.1.2+cu121",
+    "init_scale": 65536.0,
+    "backoff_factor": 0.5,
+    "growth_factor": 2.0,
+    "growth_interval": 2000,
+    "basis": "Fixed producer GradScaler(enabled=self.amp), no scale overrides; verified PyTorch v2.1.2 constructor and CUDA update implementation"
+  },
+  "python_syntax": "PASSED",
+  "git_diff_check": "PASSED",
+  "post_commit_chain_check": "Required after the ordinary commit; recorded separately in outputs delivery audit",
+  "server_original_json": "NOT_AVAILABLE_LOCALLY",
+  "server_reassessment": "PENDING",
+  "formal_training": "NOT_STARTED",
+  "final_test": "NOT_RUN",
+  "new_training_batches": 0,
+  "new_validation_batches": 0,
+  "new_checkpoints": 0,
+  "retained_file_target_bytes": 1048576
+}
