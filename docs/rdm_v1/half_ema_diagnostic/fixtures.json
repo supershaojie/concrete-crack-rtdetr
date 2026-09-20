@@ -1,0 +1,249 @@
+{
+  "status": "PASSED",
+  "scope": "tiny CPU fixture only, NOT real server half EMA validation",
+  "cases": {
+    "y": {
+      "nonfinite_paths": [
+        "y"
+      ],
+      "original_error": "Nonfinite native half EMA prediction",
+      "hooks_removed": true
+    },
+    "raw": {
+      "nonfinite_paths": [
+        "raw.enc_scores"
+      ],
+      "original_error": "Nonfinite native half EMA prediction",
+      "hooks_removed": true
+    },
+    "conversion": {
+      "ema_before_half": {
+        "finite": true,
+        "parameters": {
+          "tensor_items": 1,
+          "nonfinite_items": 0,
+          "nonfinite_names": [],
+          "details": [],
+          "integer_items": 0,
+          "fp16_range_exceeded_items": 1,
+          "fp16_range_exceeded_names": [
+            "weight"
+          ],
+          "dtypes": {
+            "torch.float32": 1
+          },
+          "finite": true
+        },
+        "buffers": {
+          "tensor_items": 2,
+          "nonfinite_items": 0,
+          "nonfinite_names": [],
+          "details": [],
+          "integer_items": 1,
+          "fp16_range_exceeded_items": 1,
+          "fp16_range_exceeded_names": [
+            "running"
+          ],
+          "dtypes": {
+            "torch.float32": 1,
+            "torch.int64": 1
+          },
+          "finite": true
+        }
+      },
+      "ema_after_native_half": {
+        "finite": false,
+        "parameters": {
+          "tensor_items": 1,
+          "nonfinite_items": 1,
+          "nonfinite_names": [
+            "weight"
+          ],
+          "details": [
+            {
+              "path": "weight",
+              "shape": [
+                1
+              ],
+              "dtype": "torch.float16",
+              "numel": 1,
+              "nan": 0,
+              "posinf": 1,
+              "neginf": 0,
+              "finite": false,
+              "finite_max_abs": null
+            }
+          ],
+          "integer_items": 0,
+          "fp16_range_exceeded_items": 0,
+          "fp16_range_exceeded_names": [],
+          "dtypes": {
+            "torch.float16": 1
+          },
+          "finite": false
+        },
+        "buffers": {
+          "tensor_items": 2,
+          "nonfinite_items": 1,
+          "nonfinite_names": [
+            "running"
+          ],
+          "details": [
+            {
+              "path": "running",
+              "shape": [
+                1
+              ],
+              "dtype": "torch.float16",
+              "numel": 1,
+              "nan": 0,
+              "posinf": 1,
+              "neginf": 0,
+              "finite": false,
+              "finite_max_abs": null
+            }
+          ],
+          "integer_items": 1,
+          "fp16_range_exceeded_items": 0,
+          "fp16_range_exceeded_names": [],
+          "dtypes": {
+            "torch.float16": 1,
+            "torch.int64": 1
+          },
+          "finite": false
+        },
+        "new_nonfinite_items": 2,
+        "new_nonfinite_names": [
+          "parameters.weight",
+          "buffers.running"
+        ],
+        "model_training": false,
+        "validator_training": true,
+        "validator_half": true
+      }
+    },
+    "preexisting_nonfinite_buffer": true,
+    "finite_input_bad_output": {
+      "sequence": 5,
+      "module": "overflow",
+      "module_type": "Overflow",
+      "side": "output",
+      "input_finite": true,
+      "enclosing_module": "<root>",
+      "nonfinite_tensor_items": 1,
+      "tensors": [
+        {
+          "path": "output",
+          "shape": [
+            2,
+            3,
+            2,
+            2
+          ],
+          "dtype": "torch.float16",
+          "numel": 24,
+          "nan": 0,
+          "posinf": 24,
+          "neginf": 0,
+          "finite": false,
+          "finite_max_abs": null
+        }
+      ],
+      "preceding_finite": [
+        {
+          "sequence": 2,
+          "module": "first",
+          "module_type": "Identity",
+          "side": "input",
+          "input_finite": true,
+          "enclosing_module": "<root>",
+          "finite": true,
+          "tensor_items": 1,
+          "tensors": [
+            {
+              "path": "input.args[0]",
+              "shape": [
+                2,
+                3,
+                2,
+                2
+              ],
+              "dtype": "torch.float16"
+            }
+          ]
+        },
+        {
+          "sequence": 3,
+          "module": "first",
+          "module_type": "Identity",
+          "side": "output",
+          "input_finite": true,
+          "enclosing_module": "<root>",
+          "finite": true,
+          "tensor_items": 1,
+          "tensors": [
+            {
+              "path": "output",
+              "shape": [
+                2,
+                3,
+                2,
+                2
+              ],
+              "dtype": "torch.float16"
+            }
+          ]
+        },
+        {
+          "sequence": 4,
+          "module": "overflow",
+          "module_type": "Overflow",
+          "side": "input",
+          "input_finite": true,
+          "enclosing_module": "<root>",
+          "finite": true,
+          "tensor_items": 1,
+          "tensors": [
+            {
+              "path": "input.args[0]",
+              "shape": [
+                2,
+                3,
+                2,
+                2
+              ],
+              "dtype": "torch.float16"
+            }
+          ]
+        }
+      ],
+      "root_cause": "UNDETERMINED"
+    },
+    "native_exception_cleanup": true,
+    "diagnostic_error_preserves_native_error": true,
+    "missing_diagnostics_blocks_pass": true,
+    "finite_result_unchanged": true,
+    "standard_json_nonfinite_counts": {
+      "path": "fixture",
+      "shape": [
+        3
+      ],
+      "dtype": "torch.float32",
+      "numel": 3,
+      "nan": 1,
+      "posinf": 1,
+      "neginf": 1,
+      "finite": false,
+      "finite_max_abs": null
+    },
+    "semantic_mask_and_event_cap": true,
+    "anchor_cache_semantics_only": true
+  },
+  "production_and_amp_budget_unchanged": true,
+  "existing_local_init_sha256": "5dac7ce5dae8ad6f94890c9d5f70efa9e37d4fac855dae0d2fe5d25bc070a443",
+  "server_validation": "PENDING",
+  "numerical_failure": "NOT_FIXED; NEEDS_SERVER_DIAGNOSTIC",
+  "formal_training": "NOT_STARTED",
+  "torch": "2.7.1+cu118",
+  "checkpoints_created": 0
+}

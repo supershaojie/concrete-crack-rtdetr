@@ -87,6 +87,7 @@ Wo 有效更新后检查上游梯度，验证真实 DN 和 RDM 调用。有限�
 原生自动完整 val/final_eval 被预检的有界退出截断。不会自动 start、消融或 test。
 
 AMP 提前中止修复及小型 fixture 见 `amp_backoff_fix/README.md`。
+后续原生 half EMA 非有限返回值的单批诊断见 `half_ema_diagnostic/README.md`；当前为诊断增强，数值问题尚未修复，服务器待执行。
 本目录原有报告保留其原始身份和状态，不能作为修复后的服务器通过证据；修复后需要一次新的有界预检。
 
 全部测试专用 checkpoint、optimizer/EMA 文件和运行目录放入有归属的 TemporaryDirectory；

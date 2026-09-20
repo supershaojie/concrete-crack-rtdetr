@@ -1,0 +1,55 @@
+{
+  "scope": "changed source, fixtures and docs only; excludes pre-existing weights/results and transient pycache",
+  "baseline": "f01878ebd944c793257f058031fe13d71ee2fc46",
+  "files": [
+    {
+      "path": "tools/preflight_rdm.py",
+      "bytes": 26315,
+      "baseline_git_blob_bytes": 25676,
+      "new_file": false
+    },
+    {
+      "path": "tools/rdm_half_diagnostic.py",
+      "bytes": 14269,
+      "baseline_git_blob_bytes": 0,
+      "new_file": true
+    },
+    {
+      "path": "tools/check_rdm_half_diagnostic.py",
+      "bytes": 9779,
+      "baseline_git_blob_bytes": 0,
+      "new_file": true
+    },
+    {
+      "path": "docs/rdm_v1/README.md",
+      "bytes": 10288,
+      "baseline_git_blob_bytes": 10122,
+      "new_file": false
+    },
+    {
+      "path": "docs/rdm_v1/half_ema_diagnostic/README.md",
+      "bytes": 5951,
+      "baseline_git_blob_bytes": 0,
+      "new_file": true
+    },
+    {
+      "path": "docs/rdm_v1/half_ema_diagnostic/fixtures.json",
+      "bytes": 6530,
+      "baseline_git_blob_bytes": 0,
+      "new_file": true
+    },
+    {
+      "path": "docs/rdm_v1/half_ema_diagnostic/storage.json",
+      "bytes": 1454,
+      "baseline_git_blob_bytes": 0,
+      "new_file": true
+    }
+  ],
+  "target_limit_bytes": 10485760,
+  "checkpoints_created": 0,
+  "server_output_increment_bytes": null,
+  "server_validation": "PENDING",
+  "retained_total_bytes": 74586,
+  "new_file_bytes": 37983,
+  "net_added_bytes_vs_git_blob": 38788
+}

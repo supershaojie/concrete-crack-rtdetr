@@ -17,6 +17,7 @@ from rdm_common import (ROOT, MAIN, NEW, require, paths, recipe, runtime, identi
 from ultralytics.models.rtdetr.train import RTDETRTrainer
 from ultralytics.nn.autobackend import AutoBackend
 from ultralytics.nn.tasks import load_checkpoint
+from rdm_half_diagnostic import HalfEMADiagnostic
 
 
 class RDMTrainer(RTDETRTrainer):
@@ -389,16 +390,24 @@ def server_preflight(variant, destination):
             def val_batch(v):
                 val_row["batches"] += 1
                 require(val_row["batches"] <= 1 and v.training and v.args.half, "Expected one native half EMA validation batch")
-            handle = second.ema.ema.model[5].rdm.register_forward_hook(val_rdm)
             def val_output(m, a, out):
                 require(finite(out), "Nonfinite native half EMA prediction")
                 val_row["prediction_shape"] = list(out[0].shape)
-            output_handle = second.ema.ema.register_forward_hook(val_output)
             second.validator.dataloader = OneBatch(second.test_loader)
-            second.validator.add_callback("on_val_batch_end", val_batch)
-            values = RTDETRTrainer.validate(second)
-            handle.remove()
-            output_handle.remove()
+            with HalfEMADiagnostic(second.ema.ema, second.validator, val_row,
+                                   amp=second.amp, ema_updates=second.ema.updates):
+                # Diagnostic hooks run first, preserving y/raw evidence before the original assertions.
+                val_handles = []
+                try:
+                    val_handles.append(second.ema.ema.model[5].rdm.register_forward_hook(val_rdm))
+                    val_handles.append(second.ema.ema.register_forward_hook(val_output))
+                    second.validator.add_callback("on_val_batch_end", val_batch)
+                    values = RTDETRTrainer.validate(second)
+                finally:
+                    for handle in val_handles:
+                        handle.remove()
+                    if val_batch in second.validator.callbacks["on_val_batch_end"]:
+                        second.validator.callbacks["on_val_batch_end"].remove(val_batch)
             require(val_row["batches"] == 1 and val_row["rdm_calls"] == 1 and all(__import__("math").isfinite(v) for v in values[0].values()), "Native half EMA val failed")
             val_row.update(status="PASSED", finite=True, scope="one real val batch; metrics are not full validation results")
             shutdown_loaders(second)
