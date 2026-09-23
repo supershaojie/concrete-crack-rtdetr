@@ -1,0 +1,158 @@
+{
+  "scope": "Local validation of scoped FP32 fusion precision; server B16/640 capacity NOT_RUN",
+  "runtime": {
+    "python": "3.9.25",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "commit": "b19e58c3e2461d9606423656376662442c727593",
+    "threads": 4,
+    "deterministic": true,
+    "matmul_tf32": false,
+    "cudnn_tf32": false,
+    "cudnn_benchmark": false
+  },
+  "scope_cases": {
+    "status": "PASS",
+    "count": 24,
+    "all_restored": true,
+    "matmul_modes": [
+      "high",
+      "highest",
+      "medium"
+    ],
+    "outer_autocast_enabled_cases": 12,
+    "exception_cases": 12
+  },
+  "preflight_boundary": {
+    "status": "PASS",
+    "capacity_scope": "stub + CUDA 8x8 AMP forward/backward; B16/640 NOT_RUN",
+    "old_failure_bytes_preserved": true,
+    "capacity_blocked_on_restore_failure": true
+  },
+  "real_model": {
+    "status": "PASS",
+    "max_abs_error": 7.450580596923828e-08,
+    "tolerance": {
+      "atol": 3e-05,
+      "rtol": 3e-05
+    },
+    "precision_scope": {
+      "before": {
+        "cudnn_tf32": true,
+        "matmul_tf32": false,
+        "float32_matmul_precision": "highest",
+        "cuda_autocast": false,
+        "cpu_autocast": false,
+        "cuda_autocast_dtype": "torch.float16",
+        "cpu_autocast_dtype": "torch.bfloat16",
+        "autocast_cache_enabled": true,
+        "nvidia_tf32_override": null
+      },
+      "inside": {
+        "cudnn_tf32": false,
+        "matmul_tf32": false,
+        "float32_matmul_precision": "highest",
+        "cuda_autocast": false,
+        "cpu_autocast": false,
+        "cuda_autocast_dtype": "torch.float16",
+        "cpu_autocast_dtype": "torch.bfloat16",
+        "autocast_cache_enabled": true,
+        "nvidia_tf32_override": null
+      },
+      "after": {
+        "cudnn_tf32": true,
+        "matmul_tf32": false,
+        "float32_matmul_precision": "highest",
+        "cuda_autocast": false,
+        "cpu_autocast": false,
+        "cuda_autocast_dtype": "torch.float16",
+        "cpu_autocast_dtype": "torch.bfloat16",
+        "autocast_cache_enabled": true,
+        "nvidia_tf32_override": null
+      },
+      "restored": true
+    },
+    "inside_score_head": {
+      "unfused": {
+        "cuda_autocast": false,
+        "cpu_autocast": false,
+        "input_dtype": "torch.float32",
+        "input_device": "cuda:0",
+        "weight_dtype": "torch.float32",
+        "training": false
+      },
+      "fused": {
+        "cuda_autocast": false,
+        "cpu_autocast": false,
+        "input_dtype": "torch.float32",
+        "input_device": "cuda:0",
+        "weight_dtype": "torch.float32",
+        "training": false
+      }
+    },
+    "fused_training_modules": [],
+    "selection_kind": "IDENTICAL",
+    "continuous_failed_counts": {
+      "pre_selection": 0,
+      "candidate_id_alignment": 0,
+      "fixed_ids_A": 0,
+      "fixed_ids_B": 0,
+      "common_head_outputs": 0,
+      "common_candidate_inputs": 0
+    },
+    "mother_exact": true
+  },
+  "fault_injection": {
+    "status": "PASS (original assertion rejected corruption)",
+    "original_status": "FAIL",
+    "max_abs_error": 0.020596489310264587,
+    "precision_scope": {
+      "before": {
+        "cudnn_tf32": true,
+        "matmul_tf32": false,
+        "float32_matmul_precision": "highest",
+        "cuda_autocast": false,
+        "cpu_autocast": false,
+        "cuda_autocast_dtype": "torch.float16",
+        "cpu_autocast_dtype": "torch.bfloat16",
+        "autocast_cache_enabled": true,
+        "nvidia_tf32_override": null
+      },
+      "inside": {
+        "cudnn_tf32": false,
+        "matmul_tf32": false,
+        "float32_matmul_precision": "highest",
+        "cuda_autocast": false,
+        "cpu_autocast": false,
+        "cuda_autocast_dtype": "torch.float16",
+        "cpu_autocast_dtype": "torch.bfloat16",
+        "autocast_cache_enabled": true,
+        "nvidia_tf32_override": null
+      },
+      "after": {
+        "cudnn_tf32": true,
+        "matmul_tf32": false,
+        "float32_matmul_precision": "highest",
+        "cuda_autocast": false,
+        "cpu_autocast": false,
+        "cuda_autocast_dtype": "torch.float16",
+        "cpu_autocast_dtype": "torch.bfloat16",
+        "autocast_cache_enabled": true,
+        "nvidia_tf32_override": null
+      },
+      "restored": true
+    }
+  },
+  "server_evidence": {
+    "source": "User-provided control experiment and screenshot; not run by local agent",
+    "override": "NVIDIA_TF32_OVERRIDE=0 for one diagnostic process",
+    "shown_changed_positions": 0,
+    "score_disturbance_e_approx": 5.96e-07,
+    "continuous_failures_empty": true,
+    "mother_exact": true
+  },
+  "formal_training": "NOT_RUN",
+  "ROR": "NOT_MODIFIED"
+}

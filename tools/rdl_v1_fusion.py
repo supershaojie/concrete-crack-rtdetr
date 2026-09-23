@@ -1,4 +1,4 @@
-"""Bounded evidence for the RDL EMA fusion check; never changes its acceptance.
+"""Bounded evidence for the RDL EMA fusion check; preserves its original assertion.
 
 The original ordered FP32 assertion remains authoritative. Probe hooks, fixed
 queries and historical methods are confined to disposable diagnostic copies.
@@ -6,9 +6,12 @@ queries and historical methods are confined to disposable diagnostic copies.
 from __future__ import annotations
 
 import ast
+from contextlib import contextmanager
 from copy import deepcopy
 from datetime import datetime, timezone
 import hashlib
+import json
+import os
 from pathlib import Path
 import platform
 import subprocess
@@ -24,6 +27,39 @@ from c19_lif_v1_probe import capture
 
 BASE = "a0459d6a652cb702699087c88fa39a3e4c4087ec"
 TOL = dict(atol=3e-5, rtol=3e-5)
+
+
+def precision_settings():
+    """Settings touched by the strict scope, plus dtype/cache/environment evidence."""
+    return dict(cudnn_tf32=torch.backends.cudnn.allow_tf32,
+                matmul_tf32=torch.backends.cuda.matmul.allow_tf32,
+                float32_matmul_precision=torch.get_float32_matmul_precision(),
+                cuda_autocast=torch.is_autocast_enabled(), cpu_autocast=torch.is_autocast_cpu_enabled(),
+                cuda_autocast_dtype=str(torch.get_autocast_gpu_dtype()),
+                cpu_autocast_dtype=str(torch.get_autocast_cpu_dtype()),
+                autocast_cache_enabled=torch.is_autocast_cache_enabled(),
+                nvidia_tf32_override=os.environ.get("NVIDIA_TF32_OVERRIDE"))
+
+
+@contextmanager
+def strict_fusion_precision(evidence):
+    """Only the engineering comparison uses full FP32; always restore the caller."""
+    before = evidence["before"] = precision_settings()
+    try:
+        torch.backends.cudnn.allow_tf32 = False
+        torch.backends.cuda.matmul.allow_tf32 = False
+        with torch.autocast("cuda", enabled=False), torch.autocast("cpu", enabled=False):
+            evidence["inside"] = precision_settings()
+            yield
+    finally:
+        torch.backends.cudnn.allow_tf32 = before["cudnn_tf32"]
+        torch.backends.cuda.matmul.allow_tf32 = before["matmul_tf32"]
+        # allow_tf32=True alone maps a caller's "medium" precision to "high".
+        # Restore the exact original precision as well as the Boolean flags.
+        torch.set_float32_matmul_precision(before["float32_matmul_precision"])
+        evidence["after"] = precision_settings()
+        evidence["restored"] = evidence["after"] == before
+        require(evidence["restored"], "Strict fusion precision settings were not restored")
 
 
 def git(*args):
@@ -114,7 +150,7 @@ def diagnose(unfused_cpu, image_cpu, before_cpu, after_cpu, rng, report, folder,
                                stage=stage, device=device, precision="fp32", keys=keys, collect=True)
     image = image_cpu.to(device)
     unfused = unfused_cpu.to(device)
-    fused = deepcopy(unfused).fuse(verbose=False)
+    fused = deepcopy(unfused).fuse(verbose=False).eval()
     def run(model, name, ids=None, common=None):
         restore_rng(rng)
         handle = None
@@ -178,7 +214,7 @@ def diagnose(unfused_cpu, image_cpu, before_cpu, after_cpu, rng, report, folder,
             if hasattr(parent, name):
                 delattr(parent, name)
         _, ma = run(parent, "mother_a")
-        parent.fuse(verbose=False)
+        parent.fuse(verbose=False).eval()
         _, mb = run(parent, "mother_b")
         report["mother_vs_rdl"] = dict(unfused=compare(a, ma, "mother_unfused", exact=True),
                                        fused=compare(b, mb, "mother_fused", exact=True))
@@ -188,7 +224,7 @@ def diagnose(unfused_cpu, image_cpu, before_cpu, after_cpu, rng, report, folder,
         mother_exact = all(passed(v) for v in report["mother_vs_rdl"].values())
         continuous = all(passed(report[k]) for k in ("pre_selection", "fixed_ids_A", "fixed_ids_B", "common_head_inputs", "common_head_outputs", "common_candidate_inputs"))
         if report["original_assertion"]["allclose_failed_count"] == 0:
-            report["finding"] = "NOT_REPRODUCED"
+            report["finding"] = "STRICT_FP32_CHECK_PASSED"
         elif not faithful:
             report["finding"] = "REPLAY_DIFFERS_FROM_ORIGINAL_REQUIRES_REVIEW"
         elif mother_exact and continuous and report["selection"]["kind"] == "PERMUTATION" and passed(report["candidate_id_alignment"]):
@@ -209,12 +245,22 @@ def diagnose(unfused_cpu, image_cpu, before_cpu, after_cpu, rng, report, folder,
 
 
 def check_ema_fusion(ema, batch, folder=None, source_sha256=None):
-    """Original validation/fusion sequence, with automatic failure evidence.
+    """Strict FP32 comparison on a disposable copy; preserve caller precision."""
+    report = dict(precision_scope={})
+    try:
+        with strict_fusion_precision(report["precision_scope"]):
+            return _check_ema_fusion(deepcopy(ema).float().eval(), batch, report, folder, source_sha256)
+    finally:
+        # The inner trace is written before context exit; append actual restoration
+        # evidence even when the original assertion or a probe raised an exception.
+        if report.get("evidence_directory"):
+            atomic_json(Path(report["evidence_directory"])/"fusion.json", report)
+        print("RDL fusion precision: " + json.dumps(report["precision_scope"]), flush=True)
 
-    Supplying folder enables a full trace even on PASS. No AMP context is entered
-    or disabled here. The earlier lifecycle AMP forward has already exited.
-    """
-    report = dict(schema="rdl_fusion_diagnostic_v1", tolerance=TOL, acceptance="ORIGINAL_ORDERED_ASSERTION",
+
+def _check_ema_fusion(ema, batch, report, folder, source_sha256):
+    """Original assertion and candidate diagnostics, inside the strict scope."""
+    report.update(schema="rdl_fusion_diagnostic_v2", tolerance=TOL, acceptance="ORIGINAL_ORDERED_ASSERTION",
                   controlled_source_sha256=source_sha256,
                   runtime=dict(python=platform.python_version(), torch=str(torch.__version__), cuda=torch.version.cuda,
                     executable=sys.executable, gpu=torch.cuda.get_device_name(batch["img"].device) if batch["img"].is_cuda else None,
@@ -223,6 +269,9 @@ def check_ema_fusion(ema, batch, folder=None, source_sha256=None):
                     matmul_tf32=torch.backends.cuda.matmul.allow_tf32, cudnn_tf32=torch.backends.cudnn.allow_tf32,
                     cudnn_benchmark=torch.backends.cudnn.benchmark), formal_training="NOT_RUN")
     image = batch["img"]
+    require(image.dtype == torch.float32 and all(p.dtype == torch.float32 and p.device == image.device
+            for p in ema.parameters()), "Strict fusion requires FP32 model/input on the same device")
+    require(not any(m.training for m in ema.modules()), "Strict fusion requires eval")
     state_before = state_hash(ema)
     input_before = tensor_hash(image)
     report["before_predict"] = dict(precision=precision(ema, image), cache=cache(ema), state_sha256=state_before)
@@ -257,7 +306,8 @@ def check_ema_fusion(ema, batch, folder=None, source_sha256=None):
         require(report["unfused_snapshot_state_exact"], "Diagnostic snapshot changed model weights")
         rng = rng_state()
         report["before_fuse"] = dict(precision=precision(ema, image), cache=cache(ema))
-        ema.fuse(verbose=False)
+        ema.fuse(verbose=False).eval()
+        require(not any(m.training for m in ema.modules()), "Fused check copy must remain eval")
         report["after_fuse"] = dict(precision=precision(ema, image), cache=cache(ema))
         fused = predict_observed("fused")[0]
         report["after_predict"] = dict(precision=precision(ema, image), cache=cache(ema))
@@ -276,6 +326,7 @@ def check_ema_fusion(ema, batch, folder=None, source_sha256=None):
             folder = Path(folder) if folder is not None else ROOT/"outputs/rdl_v1"/(
                 "fusion_failure_" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
             folder.mkdir(parents=True, exist_ok=False)
+            report["evidence_directory"] = str(folder.resolve())
             atomic_json(folder/"fusion.json", report)
             torch.save(dict(model=unfused, image=image.cpu().clone(), before=before.cpu(), after=fused.cpu(), rng=rng), folder/"fixture.pt")
             try:

@@ -47,7 +47,7 @@ e 是当前 epoch 开始前已完成的 epoch 数：e=0..5 权重为0；e=6 为0
 
 ## 分阶段服务器操作
 
-已有服务器 worktree 在 `fe89760` 的融合失败：先按 [融合诊断说明](FUSION_DIAGNOSTIC.md) 更新并做一次有界取证。该失败尚未在本地复现，不把本地 PASS 当作服务器修复完成。
+服务器 TF32 对照后，严格融合检查采用临时 FP32 精度作用域；退出后恢复原配置再做正式 AMP 容量检查。更新及验证见 [精度修复说明](FUSION_PRECISION_FIX.md)。[此前默认设置的失败诊断](FUSION_DIAGNOSTIC.md) 作为历史证据保留。
 
 服务器主项目固定 `/root/autodl-tmp/projects/Crack_RTDETR`；新工作树固定 `/root/autodl-tmp/projects/Crack_RTDETR-rdl_v1`。环境路径 `/root/miniconda3/envs/rtdetr/bin/python` 已从成功母版 `metadata/launch/plan.json` 核验；shell每次显式激活并检查，Python服务器操作要求3.10.13/torch2.1.2+cu121，不自动升级。
 

@@ -291,7 +291,8 @@ def model_checks(source, device, fusion_dir=None):
                 zero_weight_update_max_abs=maximum, zero_weight_device="cpu", original_losses="exact equality", diagnostics_prediction="exact equality",
                 gradient_norms=grads, native_amp=amp_report, native_save_reload_resume_e=20,
                 inference_shape=[2,300,5], EMA_validation="L0 only", fusion_tolerance="atol=rtol=3e-5",
-                fusion_original_status=fusion["original_status"], fusion_max_abs=fusion["original_assertion"]["max_abs_error"])
+                fusion_original_status=fusion["original_status"], fusion_max_abs=fusion["original_assertion"]["max_abs_error"],
+                fusion_precision=fusion["precision_scope"])
 
 
 def run_checks(source=None, device="cpu"):

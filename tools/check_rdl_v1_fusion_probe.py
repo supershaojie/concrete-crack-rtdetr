@@ -9,7 +9,7 @@ import torch
 from init_c19_lif_v1 import require
 from ultralytics.nn.tasks import BaseModel
 from ultralytics.utils.patches import torch_load
-from rdl_v1_fusion import check_ema_fusion, restore_rng
+from rdl_v1_fusion import check_ema_fusion, precision_settings, restore_rng, state_hash
 
 
 def run(fixture, folder, device):
@@ -19,6 +19,8 @@ def run(fixture, folder, device):
                  bboxes=torch.tensor([[.4,.4,.2,.1],[.6,.6,.3,.2],[.2,.7,.1,.25]], device=device),
                  cls=torch.zeros(3,1,device=device), batch_idx=torch.tensor([0,1,1],device=device))
     restore_rng(saved["rng"])
+    initial_precision = precision_settings()
+    initial_state = state_hash(model)
     native_fuse = BaseModel.fuse
     def corrupted_fuse(self, *args, **kwargs):
         result = native_fuse(self, *args, **kwargs)
@@ -37,6 +39,9 @@ def run(fixture, folder, device):
     require(report["original_status"] == "FAIL" and report["original_assertion"]["allclose_failed_count"] > 0,
             "Corrupted fusion was not rejected")
     require(report["diagnostic_status"] == "COMPLETE", "Failure evidence incomplete")
+    require(report["precision_scope"]["restored"] and precision_settings() == initial_precision,
+            "Assertion failure leaked strict precision settings")
+    require(state_hash(model) == initial_state and hasattr(model.model[20], "bn"), "Check mutated caller model")
     require(all((folder/name).is_file() for name in ("fixture.pt", "records.pt")), "Failure fixture lost")
     require(any(v.get("status") for v in report["common_head_outputs"].values()),
             "Common-input replay failed to expose corrupted CBR")

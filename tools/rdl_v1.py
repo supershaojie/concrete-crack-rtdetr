@@ -126,6 +126,8 @@ def prepared(server=False):
 
 def capacity(p):
     """Exactly one isolated B16/640 native AMP forward/backward, no optimizer update."""
+    from rdl_v1_fusion import precision_settings
+    precision_before_amp = precision_settings()
     trainer=RDLTrainer.__new__(RDLTrainer);trainer.data=dict(nc=1,channels=3);trainer.resume=False
     init=RTDETR(p['init']).model
     model=trainer.get_model(init.yaml,init,False).cuda().train();model.nc=1;model.rdl_epoch=20
@@ -135,7 +137,11 @@ def capacity(p):
     # Reuse the mother's bounded-check scale; formal Trainer default is unchanged.
     scaler=torch.cuda.amp.GradScaler(init_scale=128.)
     optimizer=trainer.build_optimizer(model,name="AdamW",lr=.0005,momentum=.937,decay=.0001)
-    with torch.cuda.amp.autocast():loss,_=model.loss(batch)
+    with torch.cuda.amp.autocast():
+        precision_inside_amp = precision_settings()
+        loss,_=model.loss(batch)
+    precision_after_amp = precision_settings()
+    require(precision_after_amp == precision_before_amp, "Capacity AMP settings were not restored")
     scaler.scale(loss).backward();scaler.unscale_(optimizer)
     require(torch.isfinite(loss) and all(torch.isfinite(v.grad).all() for v in model.parameters() if v.grad is not None),
             "B16 native AMP nonfinite")
@@ -143,7 +149,9 @@ def capacity(p):
     torch.cuda.synchronize()
     result=dict(status="PASS",batch=16,imgsz=640,amp=True,optimizer_update=False,diagnostic_scaler_init=128.,loss=float(loss),
                 max_allocated=torch.cuda.max_memory_allocated(),max_reserved=torch.cuda.max_memory_reserved(),
-                free_before=free_before,total=total,samples=records,rdl=model.criterion.last_stats)
+                free_before=free_before,total=total,samples=records,rdl=model.criterion.last_stats,
+                precision_before_amp=precision_before_amp,precision_inside_amp=precision_inside_amp,
+                precision_after_amp=precision_after_amp)
     del model,init,trainer,batch,optimizer,loss;torch.cuda.empty_cache()
     return result
 
@@ -151,8 +159,14 @@ def capacity(p):
 def preflight(args):
     from check_rdl_v1 import run_checks
     from check_rdl_v1_ops import run as check_operations
+    from rdl_v1_fusion import precision_settings
     p=prepared(server=not args.local)
     report=dict(status="FAIL",runtime=runtime(server=not args.local),prepared_sha256=sha256(OUT/"prepared.json"),local=args.local)
+    report_path=OUT/('preflight_local.json' if args.local else 'preflight.json')
+    if report_path.exists():
+        previous=OUT/(report_path.stem+'_history_'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S_%f')+'.json')
+        shutil.copy2(report_path,previous)
+        report['previous_report']=dict(path=str(previous),sha256=sha256(previous))
     try:
         report['checks']=run_checks(Path(p['source']),args.device)
         require(all(r['status']=='PASS' for r in report['checks'].values()),"Required engineering checks did not pass")
@@ -161,12 +175,16 @@ def preflight(args):
             report['capacity']=dict(status="SKIPPED",reason="Formal server B16/640/native AMP capacity remains required")
         else:
             require(args.device=='cuda:0',"Formal native AMP preflight must use original device 0")
+            fusion_precision=report['checks']['real_model']['fusion_precision']
+            report['precision_before_capacity']=precision_settings()
+            require(fusion_precision['restored'] and report['precision_before_capacity']==fusion_precision['before'],
+                    "Capacity must run with the restored pre-fusion precision settings")
             report['capacity']=capacity(p)
         report['status']='LOCAL_PASS' if args.local else 'PASS'
     except BaseException as error:
         report['error']=repr(error);raise
     finally:
-        write_json(OUT/('preflight_local.json' if args.local else 'preflight.json'),report)
+        write_json(report_path,report)
 
 
 def gate():

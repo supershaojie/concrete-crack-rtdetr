@@ -27,7 +27,7 @@ if not path.is_file():
     sys.exit(0)
 r=json.loads(path.read_text())
 keys=('runtime','controlled_source_sha256','original_status','original_assertion','finding','diagnostic_status',
-      'diagnostic_error','validation_invariants','unfused_snapshot_state_exact','fusion_invariants','reproduce_original','inside_score_head')
+      'diagnostic_error','validation_invariants','unfused_snapshot_state_exact','fusion_invariants','reproduce_original','inside_score_head','precision_scope')
 summary={k:r.get(k) for k in keys}
 summary['precision']={k:r[k]['precision'] for k in ('before_predict','before_fuse','after_fuse','after_predict')}
 summary['selection_kind']=r.get('selection',{}).get('kind')
