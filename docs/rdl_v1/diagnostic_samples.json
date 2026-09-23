@@ -1,0 +1,2566 @@
+{
+  "train": [
+    {
+      "image": "images/train/crack_001251_brightness_contrast_strong.jpg",
+      "image_sha256": "f57a75013aca780e9b7d2f791a84eee54764503fa559596fc234007196ac5be5",
+      "label_sha256": "248e1eaeb2eed8da063bd5e333bff961ef459d9b8ab255b45e0ac9ea420d99c5",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 13
+    },
+    {
+      "image": "images/train/crack_000217_brightness_contrast_strong.jpg",
+      "image_sha256": "07addd0dba67ed63263198c3265e8ce83aaeb52f02d8e28ff59ff0fc85553702",
+      "label_sha256": "0d48e6b5d10efd11cab642c47194b8de47e88eedd2d121ee797000aeecfbaf18",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000046_brightness_contrast_strong.jpg",
+      "image_sha256": "483c1df91ec04bdf8cda375e8c5711e350a3470154a6146814d78f323e357e68",
+      "label_sha256": "4907a9c6b33fd6dc6ddd4d0dd32421108dabbf455738690fe5fc1179f55387e1",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000534_hflip.jpg",
+      "image_sha256": "da4af77b3d73dcfb6894182206a6e368a29ce3f1dc820bb56cc20fb3fe8c63ca",
+      "label_sha256": "1118e51d28526860e0a3108a8d09ab905c566ee806ee44165ee902116803582e",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000474_hflip.jpg",
+      "image_sha256": "371abd4e6e5dc0d3006fb5c9c1de6407d1790deacb3370b6094a368f218143f1",
+      "label_sha256": "1b2738796ebbb9bea59f627d9e5a7feed513bcd64bacb21088dcc4dcdbf88de9",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000431_brightness_contrast_strong.jpg",
+      "image_sha256": "c847e89c582389b1c7c652fbc083378279f2fed4b6de090bcc47f2d2719af7ce",
+      "label_sha256": "db7ceb06ef304d55a63b14d63193e0b0b8602cace125bff30fae0b2092652ce9",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 6
+    },
+    {
+      "image": "images/train/crack_000269_clahe_gamma_strong.jpg",
+      "image_sha256": "35733e7389b549a68b4be9837d2dd729da78c15777fd1a0c2a163c47fab82fbb",
+      "label_sha256": "f7618bd2105f853e4f2fb8b021df33c5a4b93467bd61f37837a903e171f1d54a",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_001437_hflip.jpg",
+      "image_sha256": "5ea9b53872a78a121846f86c4c088770815c0ad8a74ed011cccfc002ffa33e5d",
+      "label_sha256": "34052bbdf431710ae9730dd00168366f31c25f91188dea66dbb6a5070feb0e25",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 9
+    },
+    {
+      "image": "images/train/crack_000198_brightness_contrast_strong.jpg",
+      "image_sha256": "b78e518b2a38f9d3ebff8d238e29d44162609133c64ff05f6de23c6f7f8ff953",
+      "label_sha256": "9a3ae657d6e6c39613fcd79e74b2bba6b60b08b7a01d045ec3513bc05fc579ad",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 2
+    },
+    {
+      "image": "images/train/crack_001320_noise_blur_strong.jpg",
+      "image_sha256": "8019bab3585eae7699d01569f15c973b66f6930bcbec55774e9f9f20d05c35b5",
+      "label_sha256": "d13b79cea9f405bd10e44cb96bea137d84a9ae5423ce2457c1b452ec6c20c6f1",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 17
+    },
+    {
+      "image": "images/train/crack_001068_original.jpg",
+      "image_sha256": "e9296eea93c41ee6c0b738897f62e4f66a843ac83dc1dda97953ed053458efb3",
+      "label_sha256": "f52d2b3eac88b16f34a88310cb0ed331932e7d8e580267f4ac64c2f999561db2",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 11
+    },
+    {
+      "image": "images/train/crack_000165_vflip.jpg",
+      "image_sha256": "76f35c545ac5da0eb1633ce7b403fd2c59c70f73134b0e5ffa30f323574f7bdf",
+      "label_sha256": "036a288c35d4e6c353b5e7222c64540563d9fa4e0e7011c34e06189d41a7da31",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_001156_clahe_gamma_strong.jpg",
+      "image_sha256": "f22e85f84373b6dd5e9a71f6bcc42de9b9907c8d409748619d644f5e603367c9",
+      "label_sha256": "cb5ac4934df7db919de51bd8c51bd113041113d4b804bdcf01fabae189441abf",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/train/crack_000825_brightness_contrast_strong.jpg",
+      "image_sha256": "19147e5a8b2f18351453ef3815a651034f35f3a11875a3e898d2d61b5155533a",
+      "label_sha256": "2aea2e439dc7596dcf35c38937d64ceaff10750bb1ad2d53dab0b51c59a77209",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000058_vflip.jpg",
+      "image_sha256": "c84487bd1d998bd82b8865cd946e61a75bf236f1aff6f0d111b7241d90ad5d19",
+      "label_sha256": "7e3933c2dc8a37764f150bf2cc56b6369588e3a79ce5d8caa457c1a324068453",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 2
+    },
+    {
+      "image": "images/train/crack_000055_brightness_contrast_strong.jpg",
+      "image_sha256": "eb8bb8784cd67bce1a909f16d6e316991ef8d40a0ab48ac44e70ee66e5831576",
+      "label_sha256": "6edceebed378b372a983e332fe8eff24f20ace01fc1ef7a54f7e69e3bfcaaad5",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 8
+    },
+    {
+      "image": "images/train/crack_000180_original.jpg",
+      "image_sha256": "a990bf5e4fd514982636a65c42ec055d7cea06e2dbf8c1e7f74c909c04ab4871",
+      "label_sha256": "c3b6a308caa9e8c922bd9000df890d307f09544d483988ca210f0d527f37bbcb",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 6
+    },
+    {
+      "image": "images/train/crack_000420_original.jpg",
+      "image_sha256": "e7622c87f69353bc12eec46487996e23f8abc11e18a5ba734f2740af6f695de1",
+      "label_sha256": "e8208c49508ab18bd88a61a34d2f263290a2a995eb55931a26ec0b5e06c4d088",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000450_clahe_gamma_strong.jpg",
+      "image_sha256": "30a3907da192e531992203bb7f95c97ddcc162349f4be0de5f27d605bf40d15d",
+      "label_sha256": "9c509103e74d7b6f52ce3fb3c9b80d22a3f2f416ef95b03c3591dd13d26c117a",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000991_original.jpg",
+      "image_sha256": "a5ac2e7330df0ecd40f4b135d3f7a8b7fd1b5f5715772b99763561891cf1a3dd",
+      "label_sha256": "9a82ba50f743dc48a9c1c324f4b5f4c5af45b5fdb8627715823fcbdbb92a758e",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 11
+    },
+    {
+      "image": "images/train/crack_001179_brightness_contrast_strong.jpg",
+      "image_sha256": "8c59799c95c1d9ee178282b4a523eb28a4670644bc219c684e1175a64957f9ea",
+      "label_sha256": "923c34f95d830461b585d608ecb489194643b55f8bbad6420ed54d02ae3360cd",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 11
+    },
+    {
+      "image": "images/train/crack_000048_hflip.jpg",
+      "image_sha256": "1efa70f0001e1ad8d4ab64cec35ec6cc2a25bf2b8107a3a364f2764dae07063a",
+      "label_sha256": "7763bc003e2f585462a29cabc391f89afccb46ade65bb11173e60642d028300b",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_001098_vflip.jpg",
+      "image_sha256": "bb9fd27170348606eb635cc4d45eea460efafd8f8a423c37077635fae5e529e2",
+      "label_sha256": "c54b17115cce95cac72e3140f5ea9cf73837411d6678313b78735230fe02a978",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 18
+    },
+    {
+      "image": "images/train/crack_000382_hflip.jpg",
+      "image_sha256": "2cccb1a7917a8498fae8f5e6e03fb14afa6707ad31afa5327152b2a0120b1542",
+      "label_sha256": "4c21d7a0d68881d7f378b602aeace4ac5e2d5deed0f99e29070d1446209a37cd",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_001398_hflip.jpg",
+      "image_sha256": "40d7de5c19a506d66f85e952489d3568e9bebca77f59d49063648a634de712aa",
+      "label_sha256": "75ac683a936c866ddc3c9c04cc37a40ee6d5c043629b92f4bf1c83dc40439c06",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 16
+    },
+    {
+      "image": "images/train/crack_001269_brightness_contrast_strong.jpg",
+      "image_sha256": "34312137b9ff9be0f701e5a08822f95f05ea79ea4cd805c464bb09ca388efd0b",
+      "label_sha256": "a9153a99ac4c6f96a1be403c4d0d54575cea2e924452c357c77a0512ff6d2f68",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 10
+    },
+    {
+      "image": "images/train/crack_001368_noise_blur_strong.jpg",
+      "image_sha256": "91038aa122a03135ab17f037bd3553ca63a63c0a7767537affbf9eb91ee33d90",
+      "label_sha256": "da17a027524f739682c9436e5fe0fd49237b5a21b921744fe93cc5c05223f5ca",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 14
+    },
+    {
+      "image": "images/train/crack_001068_clahe_gamma_strong.jpg",
+      "image_sha256": "27143376ebe66439ae239032211c1f79b29af23bd7071562089b9a1fd8b7bdae",
+      "label_sha256": "f52d2b3eac88b16f34a88310cb0ed331932e7d8e580267f4ac64c2f999561db2",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 11
+    },
+    {
+      "image": "images/train/crack_000820_hflip.jpg",
+      "image_sha256": "39e446313aae3674326b483c73374545cb7fa0b56c6f80fa293af593ba52b8a0",
+      "label_sha256": "076dbbc245c41e7a1400911fd6ec354cce7be46af02b1d6c39ac4cbd8e0d758e",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/train/crack_000425_brightness_contrast_strong.jpg",
+      "image_sha256": "5796b8d6ace17edd17c7eca7035dcfb56139d52da31cafb4793031320175d3d6",
+      "label_sha256": "092491c24eb9f10f439ea8f76f6c7685e716e0eedf4b7eebe08dcd69e8bcc685",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000880_hflip.jpg",
+      "image_sha256": "628f5a080440f094a9dc9aca2fd6131a52a18ca1abf9294acbc6a651f00ce15b",
+      "label_sha256": "6a1c790115bf42b1a3af2e5f7d0d59ebf16dc7adb4427baab6ad4b853f54e7bd",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 6
+    },
+    {
+      "image": "images/train/crack_001152_original.jpg",
+      "image_sha256": "eef85619d77e2b27ac2912b4e838ac4d760bb8737ebd50cce7b8ee81de48a560",
+      "label_sha256": "a2c98cc5491edf3615638211160e643d00001fee27e234d8ce6e926a1e3790eb",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 10
+    },
+    {
+      "image": "images/train/crack_000539_clahe_gamma_strong.jpg",
+      "image_sha256": "cfba9dbe0f1caea3f7f52fef52133a7d554d0891bd7498160005b5b13a617aea",
+      "label_sha256": "cf6d1518d84e05bce00ab68f097800c5e86c9481ed40bebaf931eb6265e2281c",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000012_hflip.jpg",
+      "image_sha256": "3571844cb8697c34d8b7c3752033ed39b46dff75cd1d87d389797355a6b43601",
+      "label_sha256": "a19bff8d89c541df5ca0c50c7bd940bc8e116f3eac40e47f8ab5535f6f62c5b4",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000305_vflip.jpg",
+      "image_sha256": "770718a509205430664ae540e6a6766746552e92ceffa6dcc8707448283e72ae",
+      "label_sha256": "591b8683103c3706b9d371a4b282e49de16e4c11e83c98054b281b409bdd0850",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 9
+    },
+    {
+      "image": "images/train/crack_001360_clahe_gamma_strong.jpg",
+      "image_sha256": "5fc872d309688d6f832991a8a401ecc80ef8229ad3999d46634583552b7a497d",
+      "label_sha256": "6ebedbdd7075a88d2cff3e085cdc96f5652ea4271be89cb3f20fef5547c3d8ba",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 16
+    },
+    {
+      "image": "images/train/crack_000826_clahe_gamma_strong.jpg",
+      "image_sha256": "a6469fc6b43ae7b4f264279fc74694db3c8ea2336e476c3bc3bd4fcf5a8d2813",
+      "label_sha256": "ec8a8c075ccf2c0537ac504680dc0956aea8a0b2e59632589cbd7820af8bd334",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 9
+    },
+    {
+      "image": "images/train/crack_000665_brightness_contrast_strong.jpg",
+      "image_sha256": "62017ab6ad0e734e4d5367ad9b1147f20f3197e6eaea389fb018ec66bf866088",
+      "label_sha256": "4870884f1b48b221f245f054d1c15fc26dd13f5d187d34c532e8ea6df135a933",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000538_noise_blur_strong.jpg",
+      "image_sha256": "e66b8abd518585430c2d38d0d7b2a300a99aa504fb75ce53bcaaa1192670cee6",
+      "label_sha256": "e03e2e1f87ff25e712ed3d4dbaaa0f798ce973af4eaff9d881c3fad3f5482ecc",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000298_clahe_gamma_strong.jpg",
+      "image_sha256": "5278292028b64b51e21ec6c35f6e797049fcf9099bec0416daedf2b94aa5a857",
+      "label_sha256": "849f5116e5c9d5f99768e2a3cf8b289c6800fa01e4ab33687853ce94b52dbfd7",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/train/crack_000414_original.jpg",
+      "image_sha256": "477aa7584f9197610ce5141154791370fd4d69b9db3663e621ad324cd340632b",
+      "label_sha256": "334980ad19eea2ada683ca107858728b78149b1358c09a42512f71fbdfdf613e",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/train/crack_000657_original.jpg",
+      "image_sha256": "9410ca6cac8f86065d8142befe2fd6e7d4302a8e7ff9ded9ddef16ce4eec1b9a",
+      "label_sha256": "a84aeb1e683814701194c99d10d4ffb491295db44a2535ea352a0bf7a2a1acce",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/train/crack_000197_noise_blur_strong.jpg",
+      "image_sha256": "586a31a0ae20ce9e3f90f550c38cf091b4cc8db85bf4d1e6fec6b25368eb5d97",
+      "label_sha256": "f54c21e74876729be90204f6693aae31a054c9b1c7b601ace81cc76b07572fd2",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000178_vflip.jpg",
+      "image_sha256": "e0f25ea8f794a03a2a02274e723157642c659e248c8e68fa87897163db1886f9",
+      "label_sha256": "1aa75a62e5dacf5066c481b7be1ddeab141f799d7763880b0625723eb6b92fd6",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000742_original.jpg",
+      "image_sha256": "6b2aaf76ffff31df21d68c56ac0848142573c500ac08687d5aeefc3ac071c27b",
+      "label_sha256": "b12e0c8b45b4c72f85da96d39509d74e931c71edafdbdb2c01484c6dee7bfcc7",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 7
+    },
+    {
+      "image": "images/train/crack_000185_vflip.jpg",
+      "image_sha256": "0497635d23a24779874c782877b26a03d505ec8c3f68742d927d117d1df0b44f",
+      "label_sha256": "18056c425d1b5de4adfb043ab8ff7d59879a916c0d379a0e29fc96634351ff68",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000702_brightness_contrast_strong.jpg",
+      "image_sha256": "cdf6ebb743ec6af63bafc838484dd864e7275a1f9601a73f49731b42378c708f",
+      "label_sha256": "1889bd035aa735934b2010069e181fc70979d00abe8617d7ea110e850e74c75e",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 7
+    },
+    {
+      "image": "images/train/crack_000672_noise_blur_strong.jpg",
+      "image_sha256": "2e3321d439706b1009c107b508843e2cf34e9658892f7bc1512fd1042b6caa2d",
+      "label_sha256": "d4bd9689c976963cff5523ec7fdfd498228a6832a16c01aff0529cdd2251755b",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_001182_noise_blur_strong.jpg",
+      "image_sha256": "2f5484041960030d25f28bd9bcba5fbd6e94d9f5d61bf554b1ad53972bb6d5e3",
+      "label_sha256": "7fca92227e7a6be16d20580bac53a6a7931c22b63a6efe211305d07e18331a5e",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 9
+    },
+    {
+      "image": "images/train/crack_000513_clahe_gamma_strong.jpg",
+      "image_sha256": "3bdd439d5f338c5529f0a4f64f8e1f21fe9c4278406e849aa8ce06827ccb02d7",
+      "label_sha256": "470d2b68ef66bd3db4c4f0eb8ad47f71b234ab26472e9ebc34438825bed411a1",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000081_hflip.jpg",
+      "image_sha256": "05dc61eb8607f1fc2a982deeea377e5ae65045405303e1c8e40675099978458d",
+      "label_sha256": "84942ca8feaf11bf95f6baca2b0204d3397005540a5927f1d47a9ed5bb3f1497",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_001424_brightness_contrast_strong.jpg",
+      "image_sha256": "ea812691cbfc3398936fb2563791964596b49d591741f896c9aba5f285d386f0",
+      "label_sha256": "269aaa9a8a0c76f47e16700cbaba9b3514de1db64c4a4b4dd42326d5c8b2abd8",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 9
+    },
+    {
+      "image": "images/train/crack_000901_original.jpg",
+      "image_sha256": "7a5eff640ed8551851a2dcb7e47c19b3851fb30ab9e7a85a609b8cbd4f854e0c",
+      "label_sha256": "cd9275f67d56d96238fba7899ff8edda73da03cb7dee3844b09dc8fc999a5979",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/train/crack_001052_clahe_gamma_strong.jpg",
+      "image_sha256": "40882fd27d04f81927ae9258cf93ad71e6351d214013da91582e28ca0236bb1b",
+      "label_sha256": "58495276ce283e531e717051826e77ac3f9350f80a9e5604cfeb8ca9ba38b9b0",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/train/crack_000242_noise_blur_strong.jpg",
+      "image_sha256": "4ef6345863e776a7cbacf6751ab8727ceb060807147b8472acdf3245eb88e4af",
+      "label_sha256": "2c13209371751825d7a83b291952580bca05e35f911b35e55c7d85a9bbf29eba",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000740_brightness_contrast_strong.jpg",
+      "image_sha256": "69b42804b18eaf23958d940508b7ba61665e12581b2dd74134c2c648bfd83c0d",
+      "label_sha256": "05e5173962ebde99eaefb848f0bc4799cbd5c539a7962b454604665d66b60922",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000150_noise_blur_strong.jpg",
+      "image_sha256": "f94fe2828178c8173b5e581003c480c7b30ebd9705a83f747c6dc4df15e4f0bb",
+      "label_sha256": "7d6e9a4612a69ca166425b7a7eebb13000b8050800cd680e4b4760df19e6454f",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_001081_brightness_contrast_strong.jpg",
+      "image_sha256": "bf80e9c8f65f13a6550ceedc21415b9209f6239e5cdcaedd919cfeeadee37fe1",
+      "label_sha256": "4c44c00216a38f35b40a552866822faa5284148e434fa687e4b18be20a68f6a9",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 10
+    },
+    {
+      "image": "images/train/crack_000567_vflip.jpg",
+      "image_sha256": "5e189b61c8f4e9a4a44a7e21438a063895dd1e705b747e153af950cbfb2f2583",
+      "label_sha256": "e06223bf25d3b81ff19af11b3cc0a5f704a3c5dd2db3aa76849b24407ddeb4c8",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_001230_hflip.jpg",
+      "image_sha256": "d8830d28fab782a741eb9598ebdf1655b9248b7574fcd1768b66aaef86ad4903",
+      "label_sha256": "fc18aa52279b5427b6d43b97fcc3d94c126f98fdbe13c2ab99b7362a87b3e621",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 9
+    },
+    {
+      "image": "images/train/crack_001211_hflip.jpg",
+      "image_sha256": "efb6034df67eecff84e7a41667d29c9a80b7111d8fa00ed72918ec0556683380",
+      "label_sha256": "90f9dbce131aa47065e00a1e3da10eaa389abc4bdd59582a34b987781ec821cd",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 16
+    },
+    {
+      "image": "images/train/crack_000706_vflip.jpg",
+      "image_sha256": "c65488918c1afc82a935d7cbad977ca1441405e00d8d0c38119ef487a0b6e1e0",
+      "label_sha256": "5e96c2ff6ae4820dce493d7e0d84b3b0527a185ae95a47df3ae4015f776b22bf",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 11
+    },
+    {
+      "image": "images/train/crack_001129_hflip.jpg",
+      "image_sha256": "a0446cd7f23b24b22136ff358d1dc2f30c148250ec49db55987cc8785c3784e1",
+      "label_sha256": "7e280f6854d97eb0355c125dd6d286706f26cd90fcdb8383765680022aa38bba",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 11
+    },
+    {
+      "image": "images/train/crack_000368_original.jpg",
+      "image_sha256": "07956a7ab5828f6d3f9a64814a0795527d5e3935d9671ecd0a09b11c97ef55db",
+      "label_sha256": "8e68a17e43759a35b198ff0b14d2b2cc2db5eb7b869e76eb12285a5a572a7bf7",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 7
+    },
+    {
+      "image": "images/train/crack_001374_vflip.jpg",
+      "image_sha256": "b5b96610e7c4b7e8c1801e4e04a95941db453cbfba3750423588ddc973bcdd63",
+      "label_sha256": "aa33f9b990b572cca45c9144035bb68ddd9dba274109adb7e3dc45cbd9d4a94c",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 16
+    },
+    {
+      "image": "images/train/crack_000132_original.jpg",
+      "image_sha256": "06ea83e925984abde778d6353a35b01cb7e119c7bba20032cf13da47a19f8d2f",
+      "label_sha256": "530f724ae919d3cdc4509759f2ecaaedba7e12b892f4ab05a4571d8c577e22af",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000085_vflip.jpg",
+      "image_sha256": "4f7e38a4e6ffb231e60a1e3fc0873ee038b8abc7413dff0f58e8fffee2d0479c",
+      "label_sha256": "14cb55b32e1f4fdb451bc551a794093640b9b104214f1ba8ce305a58a44f944c",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_001290_original.jpg",
+      "image_sha256": "ea64ced31846580c46b94083cf96beef9fead5b668d2fb1c920c056a5eeea439",
+      "label_sha256": "335c57a4a57deb00ef2494f002a2bbc5f25dfaf6af32499e965bb59ed740a5ec",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 19
+    },
+    {
+      "image": "images/train/crack_000440_clahe_gamma_strong.jpg",
+      "image_sha256": "f4ef44e9d374de2d670602a4d89eda0340aaba47e0615325451a6dda95115a46",
+      "label_sha256": "6fbb0c7550a93f449567222508b5bbd8743db26b1ec1d1941be45399f0e63e0d",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000561_hflip.jpg",
+      "image_sha256": "372dd2dae519f4a15944c530796d96c1e4805122621a869dadc4735dae9dc4fc",
+      "label_sha256": "e7a9f3e78da3ccf9131995ae77548d3884d44f7e867f5c07d01448c94a76b405",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000152_brightness_contrast_strong.jpg",
+      "image_sha256": "9d2df8c147017832d0925ca55c960789239c3b46d979de5b3d502f375aad612d",
+      "label_sha256": "cf52898a4b289e808863d4a19e69520626f40845e5173583d5bbc98e30509302",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000450_original.jpg",
+      "image_sha256": "e7beddf2204db9049e5fdb0734fd29b4a0af65de7d337200169814340ddb6d6a",
+      "label_sha256": "9c509103e74d7b6f52ce3fb3c9b80d22a3f2f416ef95b03c3591dd13d26c117a",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000195_brightness_contrast_strong.jpg",
+      "image_sha256": "ef2692c32d77829b606278fb173a56118facadc61344404a5f0ac9a91defd39d",
+      "label_sha256": "5d368a1609e37edc69d5b9aad7ff5c2728dfecde0c05edbea9d4c9b7f16f978a",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000743_brightness_contrast_strong.jpg",
+      "image_sha256": "51ed4f23ac50d778f0a09567ea319c3a00adf1f23d595356bd469ef7949c97ca",
+      "label_sha256": "15462ae6b9731e5c8915f7a3be0c86854b09e0e3d9380bd9d10401281c817b23",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000538_original.jpg",
+      "image_sha256": "121f3c74c27150f19986aca2c0050c82bf62ed22874f69cf36dbe97bac83655e",
+      "label_sha256": "e03e2e1f87ff25e712ed3d4dbaaa0f798ce973af4eaff9d881c3fad3f5482ecc",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000890_clahe_gamma_strong.jpg",
+      "image_sha256": "a132b253ab092f96d438af202ccd418f132291af17d856a28c5fb68b8c0d0b55",
+      "label_sha256": "eb846c9d72ea8c5b0572251a4da020e0440112ba892a0333dcbde51d1f1b8a6e",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 9
+    },
+    {
+      "image": "images/train/crack_001243_original.jpg",
+      "image_sha256": "14378fb8b5dbc255f5240316024a31aa91f6875b6db28b59f951a2a05cac0b0c",
+      "label_sha256": "0d854202db4eb258afcf220548d530691660e951e132ab62560da61cf23dda43",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/train/crack_000712_hflip.jpg",
+      "image_sha256": "e90b5fb14052a89c42e683dfd3f76209018da6504c1cc0b8a12e84935a8b5580",
+      "label_sha256": "335757d3c59181a23f70d8f8d1498f578d84c57f5b2ccc962db6a932dce1e120",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/train/crack_000311_vflip.jpg",
+      "image_sha256": "59fce76bc7cb0cd9fa36b0c252f4b3c828ca048b6f0d8628a8c09ec1155bb9ae",
+      "label_sha256": "cf84812f9bc494b4f0da8f642020589634193644430cef71501eca032367295f",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000723_original.jpg",
+      "image_sha256": "80ef10ce710fab994a4a08cfebe86f630e87bbc1882eae2105e4f63d2fa90060",
+      "label_sha256": "637037d480ad9e44421566aa58e6501e988f94b0e7d42902161dbec530d6c1ae",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 8
+    },
+    {
+      "image": "images/train/crack_000695_vflip.jpg",
+      "image_sha256": "5cba2e6e7a08cc99759f2714c75fce9aed4bdea74f4b19fb9dfc7fffbb2df538",
+      "label_sha256": "5eb70b6a10fa96e9e07dc1eb08a4bbf5c519ac265d9b1db1dd46ca29ce17f30f",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000403_clahe_gamma_strong.jpg",
+      "image_sha256": "d5cadb0665d2ba5b24ec453b42ed282bc2dd6bdc7de2a134ea3a41cdf2778a66",
+      "label_sha256": "a9b43cd9e58ea752c5b91fab8912b1c26ce07a3abc3c3d402f3f0c6cb1138b88",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 7
+    },
+    {
+      "image": "images/train/crack_001309_hflip.jpg",
+      "image_sha256": "f95e4252ab26a31c73f0efe63da1b7a3e8e23dc518513c674fc648ba1b4cbe90",
+      "label_sha256": "2360bd8a8cedc6b4c5bd2c221be32508908ad99c5fa3b8b51722d0b262c5a051",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 14
+    },
+    {
+      "image": "images/train/crack_000517_noise_blur_strong.jpg",
+      "image_sha256": "56da9a9586ca89ed79cf70a534b43012815f698bf66e4f1ecde5a9009db8667d",
+      "label_sha256": "6213597610d4235dc040b88060da7c69550b7ce7262f5f8441bfd33dacf76db6",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_001370_brightness_contrast_strong.jpg",
+      "image_sha256": "e154489d14213198dc69c5b664e7ac73ea1f5694292e515b1e556d2741cab112",
+      "label_sha256": "56d07b684d08b5f022a19b23df4d429b1e14b3b127dcbfc405e4cd589d6f8934",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 13
+    },
+    {
+      "image": "images/train/crack_001333_brightness_contrast_strong.jpg",
+      "image_sha256": "9cd3344c731a8de7a0995a1b62bb232921ede45ff650d659113e54186ce08b4e",
+      "label_sha256": "36a9438593a0568992427dfd459d5a52c9b4869b4ed54daf71de1e1b7674e718",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 17
+    },
+    {
+      "image": "images/train/crack_001266_hflip.jpg",
+      "image_sha256": "f9c25e8b506d21bfc82d899a5258edd9e7f148d4a2a960a0ee9d9c158b04a151",
+      "label_sha256": "b5f4675d5cb80f0bce494f2225657a71e133988cb19eb0e253ae319bc94af3c0",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 11
+    },
+    {
+      "image": "images/train/crack_000136_brightness_contrast_strong.jpg",
+      "image_sha256": "a22680b52e23186b0b614e455fc62aad60d2a7d77f3563d5c1055dc3a738a05c",
+      "label_sha256": "e4a8b9159169468d40939ddf7494b1e149cb698a3219d566fceba8818c272f3f",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_001193_clahe_gamma_strong.jpg",
+      "image_sha256": "1a13172cb9698850ce113d35fff62d9a32292866d81333f21a8420f15f80d5c0",
+      "label_sha256": "210026e2d467769fe56e65414c430f048427e97107263362b5009a83ff9c2e81",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 8
+    },
+    {
+      "image": "images/train/crack_001242_hflip.jpg",
+      "image_sha256": "d39fa0d0bfa4c1a293d98b83bae60c52d6d741c99ff141a7b39a3226bc6e3418",
+      "label_sha256": "2993291ead6a2ce0a1cd3fee5d70c794247d9473a2f0b73b0bb74914172c9239",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/train/crack_000328_original.jpg",
+      "image_sha256": "61bc8f63b5714771d5eb45ff202e50941aba43cf84b3d12d6189ffad2fbcc4b3",
+      "label_sha256": "9237da5189c543f629febed436d56c540a3697d7587336e0f4ddc20f77e0967e",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_001047_vflip.jpg",
+      "image_sha256": "8d7e6cad1687bf4e4eb6e83d8f4a849a05c63d4679cd59577b83fafcf1b95771",
+      "label_sha256": "97ff1b09d5ea66d0b405e836befb2a2b4290fb0a528f30c4c018b747889b69cc",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/train/crack_001423_clahe_gamma_strong.jpg",
+      "image_sha256": "5afee32a962eafb51aa2a1c2eb2a11f717ef176cfd9db53d0531f80467167d8d",
+      "label_sha256": "851f9cf34e5c28b9d254a8c7d4feec1563adad78acb5b98f0ebbb1e0cf7302ba",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 8
+    },
+    {
+      "image": "images/train/crack_000474_clahe_gamma_strong.jpg",
+      "image_sha256": "1eeb57947cd9cd9fa5e8d6f5b2d44edda460b5b11f631e46b525ea5d3f105f7b",
+      "label_sha256": "f0dc7c229f0143ce64897190b220339e2a3fcba7c39be633f4c543d0922adee1",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000313_brightness_contrast_strong.jpg",
+      "image_sha256": "182a763fe83c403a9577503c84220151ad46e31d415e89352eea31bd9d797c4c",
+      "label_sha256": "ca32f176a55b0aa94fb1dcd241a838efc21a9527686a85cec570e3d0d607073f",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000908_hflip.jpg",
+      "image_sha256": "195887078863d110f49906f3da2b320819e4f244efc1f29194bb181adb23807f",
+      "label_sha256": "4f2d6d0a7ffe8e5e61bf2b64eda349a33e478f48cd24176322f2640bffe3f0da",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 7
+    },
+    {
+      "image": "images/train/crack_000741_noise_blur_strong.jpg",
+      "image_sha256": "1bddf570141517dc0c4265606ce2dd6c1a625562c81cb42f26bf9d8219bf9172",
+      "label_sha256": "9f24a20e8d247e03e3cf753cc0c750d0e37cc4a2730f8ecb83fdc5daa0a5bd22",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000524_brightness_contrast_strong.jpg",
+      "image_sha256": "05d38a7f48e922304d4167771f60dcb25d15d3282e8aea3ef8a818bdf3529af0",
+      "label_sha256": "060ff6aaea05b17df78198c97526c83a0b886ec4bf4f821ca2effc11866546d8",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_001252_brightness_contrast_strong.jpg",
+      "image_sha256": "ab4a7f1177350a1e85f8b2ba9f64ca30446748ac09a0e5a9610a1ed1e1bf6c31",
+      "label_sha256": "2f796452da75d3b889e357c2a298995f5e0e2d9eaf588f94a104faeea1ef38f8",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 14
+    },
+    {
+      "image": "images/train/crack_001341_vflip.jpg",
+      "image_sha256": "2d191ad0663278f3a3de50e81507571ccf2808fe34595b0fda4a91b04694ff93",
+      "label_sha256": "117acbf4b093364dc8bf83cde3eb221ce2eabe86b5e3522019b4364e96694978",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 15
+    },
+    {
+      "image": "images/train/crack_001090_hflip.jpg",
+      "image_sha256": "d5c740032ff5d46325b1a07a3f6430944a2113e17a09e16952165505a9b7b85d",
+      "label_sha256": "d81394de7c08f1fc1d863802f68cf61496c9bf69ef4d66319e760e3d35224854",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 13
+    },
+    {
+      "image": "images/train/crack_000422_noise_blur_strong.jpg",
+      "image_sha256": "0a5ca2c7f59f8d1e712f5ea1ce93d1f4b29ca4936ab1289553f3885b0214125a",
+      "label_sha256": "225c8b90d00c7bd8ca7beb62949ba2aba971e5a6ea979e894d807b9097395a99",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_001334_vflip.jpg",
+      "image_sha256": "ac7312dfb2bd6115bf3182caf1920f05ca85dfad83728b4d68eebdfea592f1e5",
+      "label_sha256": "8393aa13c09f39471c451759a852f010372978f28b9e134fb63f7a6cf4f01d87",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 15
+    },
+    {
+      "image": "images/train/crack_000633_brightness_contrast_strong.jpg",
+      "image_sha256": "f58286ae92205a6dfd5beb5f7f51861dc09b47a49a0a5256a39f72f29e42b648",
+      "label_sha256": "97f5ca0edcc0cbd2546da990e596e9ac4425c9ce100d6ce9007fe275f5934cee",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000106_clahe_gamma_strong.jpg",
+      "image_sha256": "a9260b678c45d5d15b9c7f2854c0581df593ef33024895be5c0b6c9dff757b0f",
+      "label_sha256": "524cb623662f59a425505e4b5bb9fae3e433052052611025e019d8858e21f797",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000443_clahe_gamma_strong.jpg",
+      "image_sha256": "7b25bd0654a19ee9fecc4aa5e150059c918f5d3392eef5fa63c8ac41b55445ea",
+      "label_sha256": "963f7966e220f01885df07ceab12e92c33878629b42b58852d5f797b6a64d24f",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/train/crack_000059_clahe_gamma_strong.jpg",
+      "image_sha256": "20cc08e1b0fce3eefe6cffb58810cfe2ddcc3945a82d164c53e6b5113904702f",
+      "label_sha256": "3e516a98aa5c8c4b386b6a901176741a995d4bbf2650d0d5bcd26a4920675b0c",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000615_noise_blur_strong.jpg",
+      "image_sha256": "2be457921f1138b5795a9aabea993f10532f4b805ebb975b188ca05bdf922d0c",
+      "label_sha256": "b37d56f0b8695fd97381d64097c023ca98adfd5c696b012a76a4b17011acd0d0",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000785_brightness_contrast_strong.jpg",
+      "image_sha256": "491cfe5a3b4db5a053ff9429a3239f33ff6a73a082fd37f5d397f886cc399eaa",
+      "label_sha256": "bcb0a72c56eafca8555a27a4fe94529a4c4a792e12f02606dcee3e71549efe03",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 6
+    },
+    {
+      "image": "images/train/crack_000518_vflip.jpg",
+      "image_sha256": "27da6c97e710b87176b7c2e405d1dd461fde8772f44fce7ef0a23867580442be",
+      "label_sha256": "215753f2cf4b87b75aac04a92f17b036ffdcaf7d1ec93d75b7bb926b11fe9152",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000127_brightness_contrast_strong.jpg",
+      "image_sha256": "a5e68c72840da5eda2dd5f29f78dd02db246b4d957ff20a8838ed89ec616b730",
+      "label_sha256": "818af0403156dd68f986789efb268fcdf37b2c67a7190bcdf6b8c74479cc37db",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_000406_hflip.jpg",
+      "image_sha256": "c783c2ef5989bcc7ed30defc43a80148ac57f14071d9254ef971f51ee9c60f7c",
+      "label_sha256": "86603cf93e2932bc7c05c7449c03a53bd28329cd8e8ac76b4894eac1bc312d53",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/train/crack_001110_hflip.jpg",
+      "image_sha256": "e5120f9e9c2c1755428cc49ae1fe0f8857fa3cd3c7c287b3f80badbb51c71437",
+      "label_sha256": "d77c9d644d9d166248fe634bacb93994234965cb0ad45c2c4d447a070f9e08a8",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 9
+    },
+    {
+      "image": "images/train/crack_001401_original.jpg",
+      "image_sha256": "2dc145aa7424d8ccc826ee925ee1f0769db374299ed11a8216d7d7af0c081b10",
+      "label_sha256": "6ead68d8afee059572992106f28b5c8a43013d7589367d6e5f90b89ba83b3fce",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 15
+    },
+    {
+      "image": "images/train/crack_000612_original.jpg",
+      "image_sha256": "8f1c28b56c05afeb3d83cb9aed5ca1c6e7186f84820939737497f048e8efabf5",
+      "label_sha256": "8a258013a2d3c5e848ffe477dc6e5369aae77eff6621c5be49a027587b47b39a",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000409_noise_blur_strong.jpg",
+      "image_sha256": "52db4fad053e0b943aa1b4dad3d8844a0665490433e3f822f21ba1b1868bbe4d",
+      "label_sha256": "978ae4d447f18301ac2984f992338cc37f384d8e4de54f526b17b2d63fe2ce16",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/train/crack_001279_original.jpg",
+      "image_sha256": "a63c1527c2878a31e00c5a0d5fb5cfb9cce8626b527f2841171281d596c98ce5",
+      "label_sha256": "d05fcc05426c107e7c8c1fd41446ecb4e899a58ad93a4387e8960206a0ee314d",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 17
+    },
+    {
+      "image": "images/train/crack_000980_brightness_contrast_strong.jpg",
+      "image_sha256": "5bf213da0e231c727b06e3980c1036335e67660dd5606ed90542f8b8ecec21c6",
+      "label_sha256": "60f0b24557feb62364734608c148fb04f9a60d3783587cd567f6288b93d94abf",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 15
+    },
+    {
+      "image": "images/train/crack_000774_brightness_contrast_strong.jpg",
+      "image_sha256": "dd1b6bd0989c9b972e46baf3ed8a033430c1529a17c2d941f9a353c4669135f0",
+      "label_sha256": "09e3ea16f1cefe2c2a7fc8acaaf9ab70b8d4a68dc0f47d54e9c9968ad00d1089",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 2
+    },
+    {
+      "image": "images/train/crack_001257_clahe_gamma_strong.jpg",
+      "image_sha256": "fe360f51cc03f02d32aa10ceaffd66589d8c31f085b30dd20b8e2868c4ef6c96",
+      "label_sha256": "a733782565d1985ad569fa4b2adc98c8fc779759e18e2bd3ff648cd3ebba3635",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 17
+    },
+    {
+      "image": "images/train/crack_000900_original.jpg",
+      "image_sha256": "151b2b03cfea3dc9d7c55a8acd2278813c9db9c14bd44ca444812d84dff87324",
+      "label_sha256": "8368050823bb6237ddaa7d45e03b6d1dd0c8ba613fe263b593250591fc4c6bdb",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/train/crack_000275_original.jpg",
+      "image_sha256": "4e2830f4bb3ff017df18e9b98c0af6ce1199cc6af916bc74cf841094eb67d6cf",
+      "label_sha256": "04d61f776d4b48a9a45c9ed88847bcd68fdf30f85f97845235611b6eb8067f0b",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000513_vflip.jpg",
+      "image_sha256": "db3f6e226a0822d0a4e475e79158e3af141147ca9f0108cfff3f5748404f5b8d",
+      "label_sha256": "47b2625a8386419daed4d5f94b288ddd28b6ce27974e37fea272e4cbce04c9dc",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/train/crack_000477_hflip.jpg",
+      "image_sha256": "cc49947efa72b6a139954bfdde5d1dd039be6a485fbf0d81cc24ed2bb1bcac87",
+      "label_sha256": "dcb958a1474db98d6ed250913df8768090ec90cb2b60eeac5a281bc24fbeac96",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/train/crack_001099_clahe_gamma_strong.jpg",
+      "image_sha256": "65c5a31c6e94f49639a3a40ec5e45e9e7ca1019b18a83c730804772121161139",
+      "label_sha256": "d5ec4236c70f16cd7def3b66f5b9e1fa6129ca793bac60b9df24b0133b033e7e",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 14
+    },
+    {
+      "image": "images/train/crack_001057_clahe_gamma_strong.jpg",
+      "image_sha256": "eb57f8bdd2e75a709cb4c9c1c2a238a9f8703fc4fd4705c0abe5321015af3c29",
+      "label_sha256": "5309667a13ac76f0ea078a91660566677f50b58aedcb26d277730b91de21a102",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 11
+    },
+    {
+      "image": "images/train/crack_000509_vflip.jpg",
+      "image_sha256": "952157e0ecfe8f3d31dfd0ad57c67f9668c7c424e7086aba46ae889fb6facb91",
+      "label_sha256": "a3d4f91722ae4d362015f1db5f89205cd9803aef443e6070161870b6c5d96160",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/train/crack_001143_original.jpg",
+      "image_sha256": "001481affc9eee34252d8d65260acff2ed615e713023c0b4415a06e3036aa4a2",
+      "label_sha256": "8f953a699cfe5564208c8ec71585572db14a5a0b5440f82688e642c23071701e",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 14
+    }
+  ],
+  "val": [
+    {
+      "image": "images/val/crack_001074_vflip.jpg",
+      "image_sha256": "9578cf73e2d4d1ee4d437973cf84811a4532b6009aa6b4dce97ffbb634f8d9bb",
+      "label_sha256": "af944a0e4855925b36fb90dd528f2fdfeec0fa1958c49170f884a4575918700f",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 8
+    },
+    {
+      "image": "images/val/crack_000194_vflip.jpg",
+      "image_sha256": "b417804a8f2bc5023d693e04818ddf89e802aee35fe1d7d9e5a1a6e00535529c",
+      "label_sha256": "6ead610a383bca512f595df91a274c1747a046142d1eb3ee3c685feb7b747224",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000051_brightness_contrast_strong.jpg",
+      "image_sha256": "9a979dead982b219b939cd1ae250e46937da93f35edf95db6216c41e1cc9ae89",
+      "label_sha256": "e8cc59274b0665518dbb471e4f07dd24c43080d6a40cfdf76e4f99a58fc6df6e",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_001249_noise_blur_strong.jpg",
+      "image_sha256": "f7f99609b2808c6fc34c26311c2272f4ff5c00aa3fb4789d29ce39a74e62e9e2",
+      "label_sha256": "9b0b7a134ffa4e5fa3e048a7390ecb1816ff6a14f4ddc86b64c054114548e659",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/val/crack_000466_clahe_gamma_strong.jpg",
+      "image_sha256": "511e33be5d89fef919c64bb6a03773691a69ef721bf8472ddf1cb680c8087779",
+      "label_sha256": "4a1435d4ab85345bace61a9b366c2b3c7db27655aa223d8f88f9d869a67a9ef1",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000420_vflip.jpg",
+      "image_sha256": "df78c2355e8977589c8f7662e3fbd059454d625995f1416d5753af90d4e5718f",
+      "label_sha256": "2ac2f6e799f9d1e0fd8401c195a38f3be48f3cd3e958679501ca3c764c3e20f9",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000382_clahe_gamma_strong.jpg",
+      "image_sha256": "6ebc10ec5e552451dadb1bb36400cea5999948855e48c007275fd0271d1104d6",
+      "label_sha256": "75b3d5d147596fbe1010e1ec97520bc1ab0f4763a9d3204008f9f14eef3c2695",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000241_hflip.jpg",
+      "image_sha256": "e9292722cd9a16c5c588ee78c30f5bc50a0b58030e7efbf3edb947a7f6efbe6d",
+      "label_sha256": "4bede12c97db9ff63895dd927118f49f091241ab3f7223b295e051ce096ecb75",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_001241_hflip.jpg",
+      "image_sha256": "0d25424f6901a09dfa34a7a2e7317130a3ab2647a5208feb61af051a4d40d336",
+      "label_sha256": "2304c21c20afb898ae1b457093b75675df8a61eb49acbe58f003a637bc8dc894",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/val/crack_000180_hflip.jpg",
+      "image_sha256": "66729763eed5261a630e9f46aa32464c0a2579798379e4502085403d69239619",
+      "label_sha256": "05bcc397150484195bee1805e8a6b7cc40e972ace4fb75f8bfeaee7fe1237a3c",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 6
+    },
+    {
+      "image": "images/val/crack_001135_clahe_gamma_strong.jpg",
+      "image_sha256": "37a7e884f9cd5d6b8267c0bf4e6fab7cadca8527e2fe767d56f8b60036838259",
+      "label_sha256": "757c372f05b23f8405339f2d882cdb51f904f88d268f66ad7f11fcdec655d59e",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 15
+    },
+    {
+      "image": "images/val/crack_001248_noise_blur_strong.jpg",
+      "image_sha256": "cb797b1bddb3c447378691ef3983a74b546fa37f22e7f051b050ead235afa7f2",
+      "label_sha256": "df91b7211c6c1e52c091b1bcee1ec6b487864a3c191c014d38a29d80fb473057",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 6
+    },
+    {
+      "image": "images/val/crack_000911_hflip.jpg",
+      "image_sha256": "216c606e30b980dffaeec01ea822ade11ecd129a52394141d61e21bb802bb452",
+      "label_sha256": "1761c37cd4c5a1911af75a278ea4e61909f3d59c7cd78af27b99c7bc7d4f5dca",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/val/crack_000157_vflip.jpg",
+      "image_sha256": "705cba79878301c04a7599b22ddbd64d7d7a3b564bae2a0a803cb32bccba0527",
+      "label_sha256": "56146ea2fef437ca39e1c1da1a91291af2a0fa93ad51847f9925067172522bb4",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000989_hflip.jpg",
+      "image_sha256": "4665d5cafd24d05bc30c504e3159bf9be1799c53f9c781e2f7455d3a71190048",
+      "label_sha256": "aa9f729d31e8cf8ce69cd69c8b395352ea0b43cfa25d70c9bff4b529afffb669",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/val/crack_000713_hflip.jpg",
+      "image_sha256": "5b085545bb75c3ccae410964310344698ae6ac1843acc8ffe1b3811f94307c37",
+      "label_sha256": "2d950794a05388c0348711a229944d2f7875674c394d2c2b526193f663606f7b",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 6
+    },
+    {
+      "image": "images/val/crack_000065_noise_blur_strong.jpg",
+      "image_sha256": "38568bad9e35133baa8c71e5001f9eb0eb10999bf21f33abf24aa88dd266b052",
+      "label_sha256": "6521ce1c2832284e713268e75bfcf8cb13c393f47de1c221554859110aaeb830",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000060_noise_blur_strong.jpg",
+      "image_sha256": "22290e9a27831fa1a5d463e2cd67b1d680b9551fbe48a07512a1036ed0437fff",
+      "label_sha256": "81e77c4f685efc122a5395379f71a7d414ea379cc3cc12a5344c454816a50b1c",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000166_noise_blur_strong.jpg",
+      "image_sha256": "359500c2ea357ef4d30ce9d6bec9a432cab71d029b33238de57af3df0e79fb7e",
+      "label_sha256": "960728e135e776a42f859e1ba8832f281480ff70dcbf0ac8dfe40e7e45de287a",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000377_original.jpg",
+      "image_sha256": "2164eb98a00e0c9d8e56585ffc799170e8b8ddfcb4782284651227e1663d1416",
+      "label_sha256": "ae20256a6d8095aeba32f7d0833f9aa35c99e9f0c899319396735d678d5a08f5",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000401_noise_blur_strong.jpg",
+      "image_sha256": "d7890ff723e023b370bc6c9a65f36061540fb2769d1146a6a12f31ba950253df",
+      "label_sha256": "d00f79ecad085796556b802d5f203f90abd5cfe5b874a31d93ee9bab9dc7db00",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000850_noise_blur_strong.jpg",
+      "image_sha256": "def2e25fd1ce4591143daa77fc8c28e44519748b3efa5fb4fda996955b35d909",
+      "label_sha256": "ef9e8a52ca5c184c4bb0691c713e6acb4d4d6a960b1b673582ccb503855e91cb",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/val/crack_001014_hflip.jpg",
+      "image_sha256": "fd54fec235aa9a7b16ed0bb2034f400ab56e65722ec4db0db6019bf0586d9c33",
+      "label_sha256": "ab429f7eb60c914eafed79ab73861481f8974da134980aa6dbf2c624e34a4a51",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 14
+    },
+    {
+      "image": "images/val/crack_000054_clahe_gamma_strong.jpg",
+      "image_sha256": "bbabcb153e387df7bb48ffad7b5ae476c66beb9921ac62bae17fe5de5422acf3",
+      "label_sha256": "25e2b2900e5fb23fa4570ff9d98d8858b24659b29fd855ea1c9dc6c8d5b6e501",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000938_clahe_gamma_strong.jpg",
+      "image_sha256": "3637c3dde68d16c47a9728abcab878dead7eeb9f1c52bcc5330a344f75d409e6",
+      "label_sha256": "b92d0f2315690915672ccd7c3ed33adf2b93de6d3f6e0746ce105a04773ba39d",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 10
+    },
+    {
+      "image": "images/val/crack_000345_noise_blur_strong.jpg",
+      "image_sha256": "fd35f67a885161b2f79c3e798bfdff99697fae39c601ee3162a0116f3ba50052",
+      "label_sha256": "0c731f747438a2daad847a25d497d5e12f7e1d0b4ccc248a67b732d8f14fc359",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 6
+    },
+    {
+      "image": "images/val/crack_001199_noise_blur_strong.jpg",
+      "image_sha256": "e95b9fd355345f8900e67cf2f2d39b06dba356f24f6c322affeaa4e068694357",
+      "label_sha256": "9bfd5fdc127a6e41f89705f395cced04ec4196da0692137de25dc9249048b7e5",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 13
+    },
+    {
+      "image": "images/val/crack_001090_original.jpg",
+      "image_sha256": "24d14e44d2a5ba9b3f81197124fd3ea3ef9ee05d58fd766add868ecb11cbc630",
+      "label_sha256": "c84ba71d447ae546e1ca7e344f30e70cd7d8a934bed686501afd3674f73f95cd",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 13
+    },
+    {
+      "image": "images/val/crack_001174_vflip.jpg",
+      "image_sha256": "21396c748bbe2e7126c4c5c93991eec45840ff89aaf92c2d325fcca3c75113cb",
+      "label_sha256": "8a5bdf505c8214937fdc0c727ff5697652277e270e715889a0018b86fdb9dc2a",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 15
+    },
+    {
+      "image": "images/val/crack_000708_vflip.jpg",
+      "image_sha256": "65bfbbae0e63aee28d654370a64e56bc2bbe3f1b415ced894994c484c0aef48e",
+      "label_sha256": "96bda900748781edae4147d1128355efb137c46d5d019eb2d60532135dbdb95c",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 10
+    },
+    {
+      "image": "images/val/crack_000379_noise_blur_strong.jpg",
+      "image_sha256": "56cebca77a813d84720e0f2ac6c0681f07348fd10a56c665724c0f86e2288476",
+      "label_sha256": "855e82c33e9d381e3e8554d50a10a0860e70c0c2379b3f3029962d6310abd2f3",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000759_brightness_contrast_strong.jpg",
+      "image_sha256": "de9fa1536175bd64c79ef7c3e692cd3e2e3243c6ae90887405b8a990b0ff4d03",
+      "label_sha256": "ca6cfdd427745536d83c7cb33a5db791c8c0fb6dae9f068f171468f7acd35bce",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000986_clahe_gamma_strong.jpg",
+      "image_sha256": "da4f720673ad087e93465c6e5a1eea350dbafcd39a520cdaa3fe7dc08fa63752",
+      "label_sha256": "a20b908cdb1852c8cfc7e0651c73e0fdf8714b4d1da6a54bf0958c3733dd2a30",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/val/crack_000472_original.jpg",
+      "image_sha256": "3bd091709ba0c31ed5b512384511761b2633219a5147f0a6ddef10683a1f83c2",
+      "label_sha256": "1bc6196a325e35f1bfea0e270809fe3cea0552c20c06e1a3f0d4f8c77d6e06a6",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_001384_noise_blur_strong.jpg",
+      "image_sha256": "60aec9462c6904e3d87ae6a474155c64a76d31d43bed64b15e26c17db981ccc2",
+      "label_sha256": "43a47f7b8174b6d37776b217a290695856af794b97c9f09b5974ac57a50eb6c8",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 18
+    },
+    {
+      "image": "images/val/crack_000016_brightness_contrast_strong.jpg",
+      "image_sha256": "3c60f2c9ad9bc5dffa30123aafb480bd8d6843775609e6aefeee3c2a5a49e5ea",
+      "label_sha256": "6745d713d450d1ea92b7c4a0d14c18b4b8049817e1c420f9fb89a90f794330b1",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 6
+    },
+    {
+      "image": "images/val/crack_001291_original.jpg",
+      "image_sha256": "7a6bc48240335cadfc05c7eb05cfe0dccf4e5286473f17fe288843828cc07fb4",
+      "label_sha256": "9132d734932ddaebb206d0eb038ebe0645e3c069b23b38908da3a156adc13317",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 16
+    },
+    {
+      "image": "images/val/crack_001379_brightness_contrast_strong.jpg",
+      "image_sha256": "83106f4ddb6e1b8b7017a1f362fe545b44505eddcb206bbf32a0fe06ab287441",
+      "label_sha256": "59041a7add071f6174b2f93716a4dcdf71528ef77213cf7bee99d400a668708f",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 19
+    },
+    {
+      "image": "images/val/crack_000284_original.jpg",
+      "image_sha256": "cb3eea5cbb1898ae0391a5c52ce14d81e00e96d7664fa60e715ee92f48612dfc",
+      "label_sha256": "34f508acdbf2b272c3a6504b3bdac9eaeaf973287b25b115b65ea4184581f960",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/val/crack_001169_original.jpg",
+      "image_sha256": "3861d2bf89540c8f07977ab570410ec894a581faea199dc36add55d3506e472a",
+      "label_sha256": "44386b087f2d44dd69188a285a40b943b05f4b1a80c1c0c01618f8a4738dd351",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 15
+    },
+    {
+      "image": "images/val/crack_000714_clahe_gamma_strong.jpg",
+      "image_sha256": "904077ff5105f637c42ccfd27d7f4943ffa94f8e49d2259195ff51ffb521f18f",
+      "label_sha256": "88bc3eac005c66d8ed89d862cfd6be893269b71a294faa42d8f6d6681093e7d5",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 10
+    },
+    {
+      "image": "images/val/crack_000584_noise_blur_strong.jpg",
+      "image_sha256": "11168985821c5397f06ef767697a85c3b22ca65f1f02c8cc82e822284967e857",
+      "label_sha256": "aca814dc3c74c375465da1e6a0b1072041e7bc7dac3eb3036f0bf89924c9a54a",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000276_original.jpg",
+      "image_sha256": "93e5a7cbc86de5098525d91ebe3b1362e53731c18eb28e8dbc0c14ce37589cac",
+      "label_sha256": "1d2a4e2256a79eb05d750c2d279792cb092cbbc50b1ff6f87cf244821cdc5379",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000373_noise_blur_strong.jpg",
+      "image_sha256": "40f36d5cfa4af5117b0259cf4748e0c500af5d54ae7889f10d5a86a8b7c2e7f0",
+      "label_sha256": "9bfe7133274ba2f7ab8044f70669fabb89dfa475518f0c88a1665123b4906c65",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_001295_hflip.jpg",
+      "image_sha256": "e1ecdcaeec095a1cbee3802b0f46f5569f77bf0a2d77dfc2aa88cea95205d335",
+      "label_sha256": "21bb5843ca637e7937cd49e9b2b06b0e547417c53f69b3a7ee6d5a03ca702259",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 15
+    },
+    {
+      "image": "images/val/crack_000579_hflip.jpg",
+      "image_sha256": "c30fad41e5ee2cebeaba32f8f4faa59c4c4f0bb3818b2786d44db73d46f75af5",
+      "label_sha256": "225d52d2727896313054ac95bb391ffb1668bae14595ba35ad9b821bc49f79e6",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/val/crack_000165_original.jpg",
+      "image_sha256": "2773c66ea6d88ffa2ff01c5a6fcd926d64162d94f2de47534d7a8cb5d9878d9d",
+      "label_sha256": "da50c8eae3a2440b7cdcb16fef94ff97fcb78d9b8aec34482fc737cc7e0a17ed",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000641_vflip.jpg",
+      "image_sha256": "5c8435b4602e0c96e54a9f433d4b25fd90deeeb50ded6b4514f45361452a3fb3",
+      "label_sha256": "236a10e24ee754e27138eea475ea90acc9d8fe9d055fb69dc90c320793b078c1",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000172_vflip.jpg",
+      "image_sha256": "8be6bc30ada86030e438ca39fb31c2f313264cef17e1d1a1e8b41680f79daa6e",
+      "label_sha256": "33d45c90ba354ad883683349870e97ff6df4bce0fcf0fc27ec04adc3a2363f6d",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/val/crack_000609_original.jpg",
+      "image_sha256": "186a492e298fe700209a75d15473b693453e4ce4f656f02fc1112959e7e1bb63",
+      "label_sha256": "bfb6ff064948e9e3762345484c3bcca598b7879243945ac4e0555a1d449791b8",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000588_hflip.jpg",
+      "image_sha256": "b72d7bca03fa016054738f3c85743ef302c18339c201126e2050b470b19d84ea",
+      "label_sha256": "8ccce575b012311ef2c6fefecdc97a9fee407345ccb3bb7b2ccf1414b449812b",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_001017_noise_blur_strong.jpg",
+      "image_sha256": "3229d2611741fac2b8f2104f816839e9df9f9c19e3973c175c13be32319af953",
+      "label_sha256": "f3bd614dd27e60604bfd1a5fbdff7a7bbcf6d149d59b161107f0e6de0c6b8b34",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 14
+    },
+    {
+      "image": "images/val/crack_000450_noise_blur_strong.jpg",
+      "image_sha256": "f08cdde769d2688b86951419a2f438ed0e4dbbad14e9fc703a49c857ac553183",
+      "label_sha256": "9c509103e74d7b6f52ce3fb3c9b80d22a3f2f416ef95b03c3591dd13d26c117a",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_001380_vflip.jpg",
+      "image_sha256": "af1393d5b3aadd7d758f28f416ab06a808cdfc3e0eb2201de4db96c351b36f4b",
+      "label_sha256": "e0b3abd9d32344b3c60b9dfea97f386b9a7ae14809bc4c8e11edd5d89a408172",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 14
+    },
+    {
+      "image": "images/val/crack_000086_brightness_contrast_strong.jpg",
+      "image_sha256": "b8b0428e20b665b97ad8ec5ef7e72c4189202cc431a1f7ef40421f6b2883004c",
+      "label_sha256": "0935dacefaa8c5938fef19b08c84b81abf5fa3f0a9afc18b7936bc7639850465",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_001228_hflip.jpg",
+      "image_sha256": "245bf9b630d40f6223e658af441214cbca13ae2e66d213bd25e31685f4a7b26b",
+      "label_sha256": "ca247d8186097eb00d602f3802bbc0ae131849290f335bf44c14e9304d54df48",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/val/crack_000771_vflip.jpg",
+      "image_sha256": "993b68adc8712f69b690d47f169686731100ef9cc5744125511571c4293638b6",
+      "label_sha256": "477f0e0e83ca6a6d25a480c57862cfee24b09ab93bbfcff4c28cf12c4b175fdb",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/val/crack_000900_noise_blur_strong.jpg",
+      "image_sha256": "1140173d3a78ac037c7044f361167546365c1f59098d93319ecac9b0d285799a",
+      "label_sha256": "8368050823bb6237ddaa7d45e03b6d1dd0c8ba613fe263b593250591fc4c6bdb",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/val/crack_000211_vflip.jpg",
+      "image_sha256": "7299499c5fccac183712ff1a4c61773ee3e382a35b793a5c2787af645716f6e9",
+      "label_sha256": "e4da0beb0cc713b5ccd5d94eba7c2692245dd292a8af03fbeb339d70d7285018",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000639_brightness_contrast_strong.jpg",
+      "image_sha256": "cedad6184d78cdcda8abb1021bd1ba032108258434b2d73e96c5d45afd17a0ee",
+      "label_sha256": "576ea3d2fb498c5f832ed112ec116fc4bb0080d079725a0738450c70a0109a89",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000143_original.jpg",
+      "image_sha256": "d167f70680207fcc5b4dae668a96df0a2baa58e322acf470101ee89ff53acad1",
+      "label_sha256": "a021b40fb6b3b81425d8da3691c519f63ebca682edc857d730f07b75107d130b",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000922_hflip.jpg",
+      "image_sha256": "c257b4f7ee757f8cbe34cb42448584312634bc3b11a46ea55a083304dfc88aff",
+      "label_sha256": "850654726ecce8970b2656c642e7283d778e6980ee7e5fa0b61f91c71217dd99",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/val/crack_000504_clahe_gamma_strong.jpg",
+      "image_sha256": "b898d339297d8d5e65f7bb8c7351c30bcec2a06568a9dabee5baa3486a58257a",
+      "label_sha256": "6919a90c1226f4985a2a877ef2bdd7b776d047dfa2e5f815f1b00d3cdcdcad8c",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_001418_original.jpg",
+      "image_sha256": "f6703971b40292eb14d832c8d30df7a9e135d2b6a7c5ea2bbd7459e4b58b5bc1",
+      "label_sha256": "8ab8163b70e53aca9bd163f0b63b54750ed2543d9b76926f4f3c85a43afb7e37",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 9
+    },
+    {
+      "image": "images/val/crack_001048_original.jpg",
+      "image_sha256": "75c536ddac420caecd59490b294ccc73c2947c17e89a4d85affea3ff90e7b603",
+      "label_sha256": "c389e253dcce522385e8906e15b0dff293e053d0a416b5b75df78e8367ce14a3",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 10
+    },
+    {
+      "image": "images/val/crack_001037_vflip.jpg",
+      "image_sha256": "ef280348428e8d233a19a838930c452761b135abb376117482300274f8dff04c",
+      "label_sha256": "53253350040577eed6caa062acedc43619fed8ba78ee9309a39a04d7d9a093e1",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 10
+    },
+    {
+      "image": "images/val/crack_000614_hflip.jpg",
+      "image_sha256": "28d78b4ea54102d3aafbae50dd5a2bec3b4a82f9bce968940c9b49945a46d072",
+      "label_sha256": "8393500ed1fd65f692376c6cfcd6b86faf7a2f0c029c84f411a276c8e016b399",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000962_brightness_contrast_strong.jpg",
+      "image_sha256": "604b344ed49acc183154e5fd24632952645acee2e01b73e8d9ba781590f780a9",
+      "label_sha256": "716128eca80bb161b57469f63f96549c4e036585f33711a6ff378e7ee9ef918f",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 13
+    },
+    {
+      "image": "images/val/crack_000333_original.jpg",
+      "image_sha256": "983c88b7028e6648c7990a235a056942ae5d9a03068f0d1af507aa408e795ce0",
+      "label_sha256": "2fa2d2bf90092170e61e63e07787acf6f26d7b3ff97ba5f07ea9cbdd91d0ea10",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 2
+    },
+    {
+      "image": "images/val/crack_001177_noise_blur_strong.jpg",
+      "image_sha256": "0caa002738f53c3715ec76f045dd945798cd326d7c2e6f51e74ed097ada90845",
+      "label_sha256": "a12ffa1366f7398c84fb3d9c07ab40e8c3b4a25c763b15ca9a59c4f441bc665d",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 11
+    },
+    {
+      "image": "images/val/crack_000128_clahe_gamma_strong.jpg",
+      "image_sha256": "a75db604c6bf7ac4904572dbe10efa1cb0077d00677f338cb0870ee35f0c5312",
+      "label_sha256": "aebb26f46a0502fcea7140d8d4b9ddcd9b5c583e941f8379fb0d36efbcfd54ea",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 8
+    },
+    {
+      "image": "images/val/crack_000088_original.jpg",
+      "image_sha256": "a547f3d8baa4b76fcf8c37aa6eab4951da4697dd8ce9a0b47f77169e1dae8694",
+      "label_sha256": "fe4a6a5de0033600683442379409ed7d2ad5d1f1aadd89d174e818fb96ce86f1",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_001110_original.jpg",
+      "image_sha256": "40211d73299c232f12caf54c9a7a7fa14ac34951119c9d0253d60614db5a8fe8",
+      "label_sha256": "ce39ec1f392ec021d6da9eb4634c8723bab59447a454339f2f831f766577c067",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 9
+    },
+    {
+      "image": "images/val/crack_000391_original.jpg",
+      "image_sha256": "31df4a24f166b33aec9b14f8b46e7f7a80d72518359dbfedb3fb1b3fd0fdbe34",
+      "label_sha256": "78db1b30c5dc530a19f72b4948765f8f4f98c72a6aa1acb4a0606460fa57ca74",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_001317_hflip.jpg",
+      "image_sha256": "676b0535bbe47a3f8a6ebe0fd0f1db07e7b6c3aa0ea6b3fb9285e652494d84ea",
+      "label_sha256": "5dd94083636d2c9b41391b0b334f73f9ecbe27601a9e09d3a61134deca3d09eb",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 18
+    },
+    {
+      "image": "images/val/crack_000495_noise_blur_strong.jpg",
+      "image_sha256": "01ff8296a14a9e6fad74ed34e6a8ec221393a14f5f4c74d03dca860cf9c8ae82",
+      "label_sha256": "db6492d6de7d9c0d816815082b47192660c34105ec065c6ca653a99949c9b170",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000146_noise_blur_strong.jpg",
+      "image_sha256": "0952c1ade3ea01bd6bdbb5832df1b297a4888b8e6a41abff66354ad4fd23aef2",
+      "label_sha256": "9a32cf96e2dced800a76466f4a987426316d2c377e0463b2b7ebdb09262ff2ec",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/val/crack_000178_hflip.jpg",
+      "image_sha256": "093d8cd2150f7c32e39535036358fdb8632dfb7d39fcc3ba62b2109d4fe029b2",
+      "label_sha256": "b5de7b510d4edc86d0dd2d47c8f177331f769fb62da51d6e8b99c2ec03f79526",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000761_original.jpg",
+      "image_sha256": "c9566aad8b9d6685620a3135e86fe0710588790b6188310f2f5c62b2001ef61a",
+      "label_sha256": "9c85c40c2803f8d3cf209bae5e7398bd5075c5542bc1a34f8f45f470179ac2ad",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 8
+    },
+    {
+      "image": "images/val/crack_001062_vflip.jpg",
+      "image_sha256": "41ab5dcc4515e9a07d2711ee6beff8df4cf56500e884fe468bca272f10c5456a",
+      "label_sha256": "2b1c7b1ba949077a8462fe76c331f610d61fa21c2917133a20535d652b1f75b2",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 7
+    },
+    {
+      "image": "images/val/crack_001425_clahe_gamma_strong.jpg",
+      "image_sha256": "fd12159a587a9dfa319f8a3971d4ccf07655382992b94906acf7f51095d9c2a4",
+      "label_sha256": "d6236f01a64fc0ff0c475da363ff0f5c427d176461c9e9dbd88924acfd8ad8ec",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 10
+    },
+    {
+      "image": "images/val/crack_000620_clahe_gamma_strong.jpg",
+      "image_sha256": "581fe7fcac9eede1da9700b63bf15e7848930db120d8ccb05bb00c5a912a4033",
+      "label_sha256": "65c4a1ba4dea6a0387d2be0e9a5eee1f33c34d8e4827c73f8fd65bfe6417a086",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000293_brightness_contrast_strong.jpg",
+      "image_sha256": "c70957f4674f74a329bc71ad6d295a495e76037aba36dfb449d202cfa331cd22",
+      "label_sha256": "07a6842b4473ac113248b5acbe4d9b972a587d54c2185a5d55dfcf513fe8a3e5",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000624_vflip.jpg",
+      "image_sha256": "1afa5d4fd1dcb3f3c9d015af974dbf681c88a994cecbbaa49869d5be11b889cc",
+      "label_sha256": "12524ad41776e0304166b22377f4b1ba1b1859b121a240ce42089e20837b972b",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000604_noise_blur_strong.jpg",
+      "image_sha256": "3df8ced5ddc091ef662298f16da55d48bd539003427723af36bb2fc5c00a3b80",
+      "label_sha256": "9d9f8a7a303525acd1c6f40933438ef406f3920a4b74e9b8d39c6c19b75ecde4",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000365_noise_blur_strong.jpg",
+      "image_sha256": "49dd4dfcaaba40505d3874c19cc4e3913e1b86b198264c7f5ee46681d43794ce",
+      "label_sha256": "0c5d728a77d0e8462a40ad8b2d510b0c7280cac84ab4176d94c4194d182f02fa",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 6
+    },
+    {
+      "image": "images/val/crack_001126_hflip.jpg",
+      "image_sha256": "a64b56b05e11a4f011ca87dd1f6db2bcc3c82a9f499da39672024402dca25556",
+      "label_sha256": "6beb439d540f8fa0c5c98b3c490c2ae23cf6b6709f363efba7aa0fddc7943f13",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 11
+    },
+    {
+      "image": "images/val/crack_000452_original.jpg",
+      "image_sha256": "4655d640a0e5051891cf32bea7462cb615271b0ee2f150e7dc2b9c53d872c5c4",
+      "label_sha256": "db0ee6a94ffbcef8286371e300eec7c968f9d7ca4d6341c45242d0c4b7f4b55a",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/val/crack_001175_brightness_contrast_strong.jpg",
+      "image_sha256": "8e4267faf7ce157f7eb9b40b296e9eebd3f0efe2d57d57f165d5922262e86ac1",
+      "label_sha256": "03e57d334f7033f786c94f1c563c02f6c09b73e196f9588860a5b6198906da42",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 14
+    },
+    {
+      "image": "images/val/crack_001145_original.jpg",
+      "image_sha256": "a7502b34e77082ae26c6826afa12dee77a9ea66f5019c21549a8e4a671f6d257",
+      "label_sha256": "11271cb4271b00aae4a038ba77cd31b2c2dac67115b7b186fa46f3bb1e5a0cfe",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 13
+    },
+    {
+      "image": "images/val/crack_001089_brightness_contrast_strong.jpg",
+      "image_sha256": "779fb68920ca7c8bbc6fd65603ff2dab6335690608df8792ab01be70d08c4c66",
+      "label_sha256": "f735277590978b7002fcee6d8a0c6de7bc2d70131c8fa8f72c57a02c94779caf",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 10
+    },
+    {
+      "image": "images/val/crack_000133_noise_blur_strong.jpg",
+      "image_sha256": "d2dc78d67b1a1cbf12ea9bc306226b4e256228e53dc221fdc7636e2419533b48",
+      "label_sha256": "b74a033b566ece0bc2f5bf2388cfe7b264ac3153ffeed12e48613cb60a6fc080",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_001022_brightness_contrast_strong.jpg",
+      "image_sha256": "1ab4666f8dc8b6af7d79b50407b605a558811de80cabc8f92c8b9ccd1afc84c9",
+      "label_sha256": "2e552e22da8854f34bfbe8f94bc5463bcffcfcf7452eeb0bf1f35d47d8b7507f",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 14
+    },
+    {
+      "image": "images/val/crack_001062_original.jpg",
+      "image_sha256": "33d3e2ed5ad1c60e357c61f88cd2c50b520222301567fd5c6f7dcded22ce7b2b",
+      "label_sha256": "671a8dfceebb84075755dd56e88ba199131674f1f44ee68ab47c1c3869f00e58",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 7
+    },
+    {
+      "image": "images/val/crack_000303_noise_blur_strong.jpg",
+      "image_sha256": "6f8c37b51d922f36fa2dd00c89fdb76cdda9e7255cc4e5204c92934e940eb6b4",
+      "label_sha256": "7dc1bcbc102909182398597b42262cd04baacc121036f38909b07144bb1bbcc9",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000897_noise_blur_strong.jpg",
+      "image_sha256": "d2eab018fc52e748b27dc18bd9eba6feaad5b4f0b06f792b6aca138c715ab121",
+      "label_sha256": "e647537aa2dcb9c3376346f72700df82cf6e8c6d7deef29118b33bfc2acc0f2a",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/val/crack_001228_clahe_gamma_strong.jpg",
+      "image_sha256": "fb46386aa460c088502be3a23d2ff54b581dfc50d7b19555ca2997141342dd11",
+      "label_sha256": "293772a7d9ede8e8ae2bb9e9f479aa2924ec622ab6cee4fe522e09d0cc2e9a16",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/val/crack_000293_clahe_gamma_strong.jpg",
+      "image_sha256": "c7bb8170312f49e882eb6e0cbbf2e260e414c0beb5262b32ba6fc7dd128bf6c3",
+      "label_sha256": "07a6842b4473ac113248b5acbe4d9b972a587d54c2185a5d55dfcf513fe8a3e5",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000779_brightness_contrast_strong.jpg",
+      "image_sha256": "2ac9fdbb505c97533f8c7a8a9a9bbb174dcebda8d53e304df0321cb2ff51519f",
+      "label_sha256": "e2f24b60ca2bee6d8c00b94eb725777801d349d27d4761a3b4a5def117902260",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 7
+    },
+    {
+      "image": "images/val/crack_000640_vflip.jpg",
+      "image_sha256": "6e5c0756027228193f8f6c886b7520b6b9839c027e5373274c691398ee88424a",
+      "label_sha256": "3d72222d66589e2efaf22777f93ec6ede2f5f6d6f0e09e32148f0bd12c88eb26",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000459_noise_blur_strong.jpg",
+      "image_sha256": "6a6b8f18a9993a441d2a64d3a76f3ae5a844299beb9d874173555f95c58cb961",
+      "label_sha256": "b4a790cdf4984ea516a1f8e8d18529d379daf039e8769c9108a2ac935a7301db",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/val/crack_001075_clahe_gamma_strong.jpg",
+      "image_sha256": "f71b51b5a7665e7851419b3f14e0805af395e8530054bdf5829e055f39043ea0",
+      "label_sha256": "8c11d66775ac9efcc62c771637a232b7d4359fb404183e419ac90639ebbf9047",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 14
+    },
+    {
+      "image": "images/val/crack_001154_vflip.jpg",
+      "image_sha256": "f8c4847a85651f10038509ac50b7b0ecf6266526adff39eb48c648521c1b883a",
+      "label_sha256": "1c3ad00b96663aef3b3993b666c09a237841741c569b3e67f348c5774ae3ef55",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/val/crack_000930_brightness_contrast_strong.jpg",
+      "image_sha256": "b04c5f8a75ae42326f3b3161c6a6a30e3436b94e84a140c8c937c9cbbc303578",
+      "label_sha256": "3a6f24cc15d43b16494c3f1f6dd8e316381cfa212884a51f3089dcf2d5c4affe",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 8
+    },
+    {
+      "image": "images/val/crack_000378_noise_blur_strong.jpg",
+      "image_sha256": "c95c92993c306f460ea7ec979de3c3c03b026ca9ce07644a5895538b3eb69e57",
+      "label_sha256": "ef01d9282b97b18262459927939aff9b96c62bde6043837f2d8f6c2537808353",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 7
+    },
+    {
+      "image": "images/val/crack_001147_original.jpg",
+      "image_sha256": "f1229d939b997f2601841d0b52c3d09f1e9d8e74ea85856acda7619e9c97eac9",
+      "label_sha256": "e2eafedc981f501d14f2d398b51983cda678ebeab8eae58fd17e1392f8ec8e95",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/val/crack_000558_hflip.jpg",
+      "image_sha256": "f48d569847273a584f9f4d7a59e0c21b737d236dd1e9f81416e2fe3cf173f8d3",
+      "label_sha256": "5f167a5a414b212b5e930f518d623ea3198f28183ed791aed549458a642f5146",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_001439_noise_blur_strong.jpg",
+      "image_sha256": "410e0c9026fe0f9344163fadb4201133e1e03dfc4298f6bb978951f70ad810cd",
+      "label_sha256": "084fa7f48b457b640c9488bc063278664f152225de0cf537661042ab9a91942b",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 13
+    },
+    {
+      "image": "images/val/crack_001302_original.jpg",
+      "image_sha256": "c535efdda9a24d1d1181a21a0fd58f150b35db59dbe6ba67a3d97fbdf34c7d58",
+      "label_sha256": "0b977d42f7bd97acbbcfe7a775a89b66ee2068de1e5b614d01920c1d82632603",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 11
+    },
+    {
+      "image": "images/val/crack_001322_vflip.jpg",
+      "image_sha256": "1fec0a14a3f0e0af27d63f0e60e5be0dbdb9b3b03625e564ee249fa5ae5b8a9e",
+      "label_sha256": "91dfd1ca8db9e2acde063d31ce93b4a021c19221f6b564f312679d06d38810fb",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 11
+    },
+    {
+      "image": "images/val/crack_000108_original.jpg",
+      "image_sha256": "0e9f574d919380f0c289665cac897693a986421d12ef687efc60ed9ab6dd102d",
+      "label_sha256": "52bd2d54c27bc0b429d3cf5a48cc5998aca1d5a14da0be163f6b7fe0b9f4bde7",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000394_clahe_gamma_strong.jpg",
+      "image_sha256": "c046597880fc69b79d99fa8374653f28fc4bd6335454da8649149a94e4c777bb",
+      "label_sha256": "9bde4eb939188a511689d96a6cd6abb72f5a3d626a29b08700efefa1bd5692e8",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_001401_noise_blur_strong.jpg",
+      "image_sha256": "57c374d4bbd52108528cac921bf9020b030df0ee11a15f94eaf092a212a46c01",
+      "label_sha256": "6ead68d8afee059572992106f28b5c8a43013d7589367d6e5f90b89ba83b3fce",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 15
+    },
+    {
+      "image": "images/val/crack_001374_brightness_contrast_strong.jpg",
+      "image_sha256": "d38d57a8a7f5d8e5f7f4d7a3bb48bf87713e9e7015c08a16e0147b314944cd0a",
+      "label_sha256": "82e2547b8229e5f74fabb583e57cca7e3e7c4dc9c873e8659a01728f7b3991ab",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 16
+    },
+    {
+      "image": "images/val/crack_000544_brightness_contrast_strong.jpg",
+      "image_sha256": "5f2a0d65d04516e7a79b21e72d28c4b94e9044ebba8531c7209361b77405264d",
+      "label_sha256": "d4117c208d563cb9e99bc897e6b1661764af564a59e783b758d335c2ace563d2",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000669_noise_blur_strong.jpg",
+      "image_sha256": "398b4b2dea7d64397bc96769f5b8936d9347f36a9498ccc513c464eb34779271",
+      "label_sha256": "fd2c345576dc688ade00135fb628ee518bf2e3f4707e959ed14415f09f37a0e5",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000454_vflip.jpg",
+      "image_sha256": "adca8ce74815d0dff2e829d517de87ff5087bf5a993ebaee220d28e3125ee792",
+      "label_sha256": "ff99eba34d3f0b6eaf8b5aec5371c6fb0b5b6f9d37fcece6f1263245b35411b1",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000124_hflip.jpg",
+      "image_sha256": "6c1fa2c01d45d17a8704994bb35014eff459b53f1c90ea5977355eebc12bb7e0",
+      "label_sha256": "eb2c7eb24ec7d42c7ca89e0ddc957fe770924577b9022d87dee504f8daa02174",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 5
+    },
+    {
+      "image": "images/val/crack_000367_hflip.jpg",
+      "image_sha256": "a67561cdd3146990625e5da42b3ee23d595220f79db48d7ba5822e5ad07f41cf",
+      "label_sha256": "be7e23fbef0908069ebfb769aa617335c20d97c067da2810d56cde51e460bacc",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_000946_original.jpg",
+      "image_sha256": "6f214b1c406a4fbbbe0fad6629bdd1b920a986fa4e71bb7cd027b07980d0fc4d",
+      "label_sha256": "4e5c70509e284a604bfb853fc37e946c24d2dad76cc3bbe981c9bd37e0fda3cc",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 13
+    },
+    {
+      "image": "images/val/crack_001202_noise_blur_strong.jpg",
+      "image_sha256": "4796a7989adadfd51f3f393937749358adb87ac2e4b33d094c846fcc343244c4",
+      "label_sha256": "14d3d47dac7dc30169f59c7115656191475951a6c4224223905fd8428a94a3c8",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/val/crack_000543_original.jpg",
+      "image_sha256": "000f3365ebd4e7f188ccf64ade3b61900e11a2c3f0cd920e3da549b90b06f518",
+      "label_sha256": "27488900d37d29fe9ddf189842f91a4b54fb4bea661476c9171b10cb8949e35c",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 3
+    },
+    {
+      "image": "images/val/crack_000369_original.jpg",
+      "image_sha256": "824c56f617d2aee2dfd0bf97be89835249524ab64620bb9c9f3438308f96f91f",
+      "label_sha256": "ae1601c1813db2f3bfeba10252a23d5f17cc278e4544d75e384f7d76fb379695",
+      "original_hw": [
+        3072,
+        4096
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/val/crack_001099_noise_blur_strong.jpg",
+      "image_sha256": "10ae2a50a6965c16c00300e2faab4904ab682ddf73324f6ac551f9462eef988e",
+      "label_sha256": "d5ec4236c70f16cd7def3b66f5b9e1fa6129ca793bac60b9df24b0133b033e7e",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 14
+    },
+    {
+      "image": "images/val/crack_000841_vflip.jpg",
+      "image_sha256": "e556dd8265087c0bfbd40e477b920880f45a9d0c4c154c85cadf03bac23e9254",
+      "label_sha256": "4173ab82b3e6f568a791401e6051e6ee142e7f9710b9321c1bb11e98179cdcf2",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 9
+    },
+    {
+      "image": "images/val/crack_000662_clahe_gamma_strong.jpg",
+      "image_sha256": "c579db33343745b20af3b1264480519ec0917a9e971f32b6f0e06583bfc6a7c4",
+      "label_sha256": "f6963ad2a5be50aabfa6dd2023044a3de232a6d73136c5968c469da24aeb812e",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 4
+    },
+    {
+      "image": "images/val/crack_001079_noise_blur_strong.jpg",
+      "image_sha256": "8a66f1b0067fcaf54170382c6a4f620aea8f8002c6f2b699b046abd6506fbe89",
+      "label_sha256": "17f85122c86f72fdef5363f2d3cf0cd13c1c6194403060b92dbfa6de6e7987db",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 12
+    },
+    {
+      "image": "images/val/crack_000771_noise_blur_strong.jpg",
+      "image_sha256": "9ec15a4fcb46d487987563d2573e2053cb6f5a81c60ef568244c6724979af5a6",
+      "label_sha256": "ca0c7110bf1e280d3a87ddd81c5a5caa7f0cb5856fa8c5da14cb0826b9110d65",
+      "original_hw": [
+        4096,
+        3072
+      ],
+      "instances": 5
+    }
+  ]
+}

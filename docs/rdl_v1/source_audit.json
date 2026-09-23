@@ -1,0 +1,89 @@
+{
+  "mother": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "branch": "exp-rtdetr-r18-lite-rdl-v1",
+  "git_head_during_tests": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "source": {
+    "ultralytics-main/ultralytics/nn/modules/cbr.py": {
+      "unchanged": true,
+      "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+    },
+    "ultralytics-main/ultralytics/nn/modules/lif_down.py": {
+      "unchanged": true,
+      "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+    },
+    "ultralytics-main/ultralytics/nn/modules/head.py": {
+      "unchanged": true,
+      "lf_sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc"
+    },
+    "ultralytics-main/ultralytics/nn/modules/transformer.py": {
+      "unchanged": true,
+      "lf_sha256": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602"
+    },
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-lif-down.yaml": {
+      "unchanged": true,
+      "lf_sha256": "14192de425c6b3718af8a9dc42373db25a0ea725bf608f270e7241b8a66d603a"
+    },
+    "ultralytics-main/ultralytics/models/utils/ops.py": {
+      "unchanged": true,
+      "lf_sha256": "7d520895c245adafb06b07c6b330dabbd6a36a69cd0fe742cd71f2797f474dde"
+    },
+    "ultralytics-main/ultralytics/models/rtdetr/train.py": {
+      "unchanged": true,
+      "lf_sha256": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48"
+    },
+    "ultralytics-main/ultralytics/models/rtdetr/val.py": {
+      "unchanged": true,
+      "lf_sha256": "f7974365832f0eb2e146571a591150f268d42ecb89e12e96f2518d4251a63a6a"
+    },
+    "tools/init_c19_lif_v1.py": {
+      "unchanged": true,
+      "lf_sha256": "846f6656c603506304428bb9401ba1309ef8febab5833e88bb18083d9b048af1"
+    },
+    "tools/init_lif_down.py": {
+      "unchanged": true,
+      "lf_sha256": "ad8528792f4ed735069122a23df250576a4e03021f3160443c4a765395b4c955"
+    },
+    "ultralytics-main/ultralytics/models/utils/loss.py": {
+      "lf_sha256": "dd2cb335a36f73924995bcad03277415cf3b3362c924030db8a1682f06e13c72",
+      "mother_lf_sha256": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75"
+    },
+    "ultralytics-main/ultralytics/nn/tasks.py": {
+      "lf_sha256": "b150805d1774378425670400fc2624f4e6f470addc78bba5cb57101a050086a9",
+      "mother_lf_sha256": "c5a19e3eaf10acf2a5aa6a53e4a3f9afd01d7b79e4f9a41744af9755d6ebcbd8"
+    },
+    "tools/c19_lif_v1_results.py": {
+      "lf_sha256": "8317693a731f291f7b72df702e1204cd5c8acaf3c6762cb600722bd5c1050471",
+      "mother_lf_sha256": "135e78cfe7bc9a155b0f804763df21a079ec919a50f906d11ce1419053b7c8c3"
+    },
+    "tools/check_rdl_v1.py": {
+      "lf_sha256": "da223910f2268b805014aef3a8c1ccc1003a384235e61636ee55154a4ca99812"
+    },
+    "tools/check_rdl_v1_ops.py": {
+      "lf_sha256": "ea9f29f5d22893f072c6587fbaf656221f4714bd3fc96150be11d4bb6db235ab"
+    },
+    "tools/diagnose_rdl_v1.py": {
+      "lf_sha256": "b62b2c810ce0eea25765b3b766e66f8a532763f8b25e6617089058c05098be53"
+    },
+    "tools/rdl_v1.py": {
+      "lf_sha256": "c66860e89a1b502094d8dfa9f2bac8a7369f834c0eae2d0fc4273209c31bbe54"
+    },
+    "tools/rdl_v1.sh": {
+      "lf_sha256": "80112718ce7cfc4e87539e2c0ea1cc800e90df3432981a2dbd4b8fdbfc99afea"
+    },
+    "tools/rdl_v1_training.py": {
+      "lf_sha256": "53759d217cbd5b071be673ca7e6dc04a6ee42bda01bf49e9789912625f826c04"
+    },
+    "tools/sync_rdl_v1.sh": {
+      "lf_sha256": "fb88517cfb95ba4c51b02eab500704820972b36ce7e7edf80c57bf0eee0f98d8"
+    },
+    "ultralytics-main/ultralytics/models/utils/rdl.py": {
+      "lf_sha256": "42555020d0a10969680bb5844baa6f1da8ac142dc685039ce774616125af7519"
+    }
+  },
+  "specification_sha256": "09ec9c51a0b540dc2fa8694daa9ecbd3371ce918da5ec47e3f8137141bdc93c9",
+  "AGENTS": "No applicable AGENTS.md in ancestors or worktree",
+  "migration": "Research_Account_Handover_20260918 not located in checked local candidate directories; optional attachment not required for implementation",
+  "dataset_reference_origin": "D:/rtdetr跑结果/C19＋LIF：原 CBR＋LIF-Down v1/metadata/launch/dataset_inventory.json",
+  "server_python_evidence": "successful mother metadata/launch/plan.json: runtime.executable=/root/miniconda3/envs/rtdetr/bin/python",
+  "source_status": "Implementation and bounded local checks complete; server capacity/formal training/independent RDL val/test not executed"
+}

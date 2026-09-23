@@ -1,0 +1,69 @@
+{
+  "status": "OBSERVED",
+  "RDL_enabled": false,
+  "native_losses": [
+    80.0660400390625,
+    80.0660400390625
+  ],
+  "loss_exact": true,
+  "native_repeat_gradient_max_abs": 0.00061798095703125,
+  "native_repeat_update_top10": [
+    {
+      "name": "model.5.blocks.1.branch2b.conv.weight",
+      "max_abs": 0.00021503493189811707
+    },
+    {
+      "name": "model.14.m.0.conv1.conv.weight",
+      "max_abs": 0.0001443633809685707
+    },
+    {
+      "name": "model.7.blocks.1.branch2b.conv.weight",
+      "max_abs": 0.00012068112846463919
+    },
+    {
+      "name": "model.6.blocks.1.branch2b.conv.weight",
+      "max_abs": 9.93087887763977e-05
+    },
+    {
+      "name": "model.14.m.2.conv1.conv.weight",
+      "max_abs": 9.825825691223145e-05
+    },
+    {
+      "name": "model.19.m.1.conv1.conv.weight",
+      "max_abs": 8.575804531574249e-05
+    },
+    {
+      "name": "model.7.blocks.0.short.conv.conv.weight",
+      "max_abs": 7.9398974776268e-05
+    },
+    {
+      "name": "model.19.m.0.conv1.conv.weight",
+      "max_abs": 7.165549322962761e-05
+    },
+    {
+      "name": "model.7.blocks.0.branch2a.conv.weight",
+      "max_abs": 6.682425737380981e-05
+    },
+    {
+      "name": "model.7.blocks.1.branch2a.conv.weight",
+      "max_abs": 6.586126983165741e-05
+    }
+  ],
+  "default_amp_scale": 65536.0,
+  "amp_loss": 43.20314025878906,
+  "amp_loss_finite": true,
+  "nonfinite_scaled_gradient_parameters": 329,
+  "first_nonfinite_parameters": [
+    "model.0.conv.weight",
+    "model.0.norm.weight",
+    "model.0.norm.bias",
+    "model.1.conv.weight",
+    "model.1.norm.weight",
+    "model.1.norm.bias",
+    "model.2.conv.weight",
+    "model.2.norm.weight",
+    "model.2.norm.bias",
+    "model.4.blocks.0.short.conv.weight"
+  ],
+  "conclusion": "Native CUDA backward is not bitwise reproducible; default initial scaling can overflow. Exact optimizer equivalence is tested on CPU. Bounded AMP uses mother check scale=128; formal scaler unchanged."
+}

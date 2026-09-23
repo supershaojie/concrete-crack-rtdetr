@@ -377,7 +377,8 @@ class DETRLoss(nn.Module):
         gt_cls, gt_bboxes, gt_groups = batch["cls"], batch["bboxes"], batch["gt_groups"]
 
         total_loss = self._get_loss(
-            pred_bboxes[-1], pred_scores[-1], gt_bboxes, gt_cls, gt_groups, postfix=postfix, match_indices=match_indices
+            pred_bboxes[-1], pred_scores[-1], gt_bboxes, gt_cls, gt_groups, postfix=postfix,
+            match_indices=kwargs.get("final_match_indices", match_indices)
         )
 
         if self.aux_loss:
@@ -404,6 +405,7 @@ class RTDETRDetectionLoss(DETRLoss):
         dn_bboxes: torch.Tensor | None = None,
         dn_scores: torch.Tensor | None = None,
         dn_meta: dict[str, Any] | None = None,
+        final_match_indices: list[tuple] | None = None,
     ) -> dict[str, torch.Tensor]:
         """Forward pass to compute detection loss with optional denoising loss.
 
@@ -418,7 +420,8 @@ class RTDETRDetectionLoss(DETRLoss):
             (dict[str, torch.Tensor]): Dictionary containing total loss and denoising loss if applicable.
         """
         pred_bboxes, pred_scores = preds
-        total_loss = super().forward(pred_bboxes, pred_scores, batch)
+        # Final-only indices must never change the original auxiliary/DN assignment strategy.
+        total_loss = super().forward(pred_bboxes, pred_scores, batch, final_match_indices=final_match_indices)
 
         # Check for denoising metadata to compute denoising training loss
         if dn_meta is not None:

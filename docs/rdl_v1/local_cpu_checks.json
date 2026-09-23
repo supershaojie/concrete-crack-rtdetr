@@ -1,0 +1,100 @@
+{
+  "mathematics": {
+    "status": "PASS",
+    "side_sign_cases": 16,
+    "finite_difference": "fixed detached labels, atol=2e-5 rtol=3e-4"
+  },
+  "indices_and_L0": {
+    "status": "PASS",
+    "cases": [
+      {
+        "groups": [
+          1,
+          2
+        ],
+        "DN": false,
+        "matches": 3,
+        "matcher_calls": 4
+      },
+      {
+        "groups": [
+          1,
+          2
+        ],
+        "DN": true,
+        "matches": 3,
+        "matcher_calls": 4
+      },
+      {
+        "groups": [
+          0,
+          0
+        ],
+        "DN": false,
+        "matches": 0,
+        "matcher_calls": 4
+      },
+      {
+        "groups": [
+          0,
+          0
+        ],
+        "DN": true,
+        "matches": 0,
+        "matcher_calls": 4
+      },
+      {
+        "groups": [
+          0,
+          1
+        ],
+        "DN": false,
+        "matches": 1,
+        "matcher_calls": 4
+      },
+      {
+        "groups": [
+          0,
+          1
+        ],
+        "DN": true,
+        "matches": 1,
+        "matcher_calls": 4
+      }
+    ],
+    "original_losses": "exactly equal to pinned criterion"
+  },
+  "real_model": {
+    "status": "PASS",
+    "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "parameters": 20149765,
+    "added_parameters": 0,
+    "adaptation_keys": 9,
+    "input_hw": [
+      160,
+      192
+    ],
+    "batch": 2,
+    "device": "cpu",
+    "zero_weight_update_max_abs": 0.0,
+    "original_losses": "exact equality",
+    "diagnostics_prediction": "exact equality",
+    "gradient_norms": {
+      "model.20.O_proj.weight": 0.8493295311927795,
+      "model.26.cbr.offset_out.weight": 0.21314068138599396,
+      "model.26.cbr.offset_out.bias": 0.13666430115699768
+    },
+    "native_amp": {
+      "status": "SKIPPED",
+      "reason": "CPU selected"
+    },
+    "native_save_reload_resume_e": 20,
+    "inference_shape": [
+      2,
+      300,
+      5
+    ],
+    "EMA_validation": "L0 only",
+    "fusion_tolerance": "atol=rtol=3e-5"
+  }
+}

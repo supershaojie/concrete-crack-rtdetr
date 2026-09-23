@@ -143,6 +143,11 @@ def evaluate(weights, data, split, output, device="0", val_report=None, evidence
                       ap_iou_thresholds=[round(.5 + i * .05, 2) for i in range(10)], ap_by_class=ap.tolist(),
                       ap_class_index=np.asarray(metrics.box.ap_class_index).tolist(), speed_ms_per_image=metrics.speed,
                       predictions_gt_sha256=sha256(stream_path), export_complete=True, **counts)
+        # Preserve the exact original AP/P/R calculation; expose its actual operating point.
+        from ultralytics.utils.metrics import smooth
+        working_index = int(smooth(np.asarray(metrics.box.f1_curve).mean(0), 0.1).argmax())
+        report["precision_recall_confidence"] = float(metrics.box.px[working_index])
+        report["precision_recall_index"] = working_index
     except BaseException as error:
         report.update(error=repr(error), **counts)
         raise

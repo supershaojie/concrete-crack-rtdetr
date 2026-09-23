@@ -767,6 +767,10 @@ class RTDETRDetectionModel(DetectionModel):
 
     def init_criterion(self):
         """Initialize the loss criterion for the RTDETRDetectionModel."""
+        if hasattr(self, "rdl_config"):
+            from ultralytics.models.utils.rdl import RDLDetectionLoss
+
+            return RDLDetectionLoss(nc=self.nc, use_vfl=True, config=self.rdl_config)
         from ultralytics.models.utils.loss import RTDETRDetectionLoss
 
         return RTDETRDetectionLoss(nc=self.nc, use_vfl=True)
@@ -797,27 +801,41 @@ class RTDETRDetectionModel(DetectionModel):
             "gt_groups": gt_groups,
         }
 
+        rdl_enabled = hasattr(self, "rdl_config") and self.training
+        details = None
+        if rdl_enabled:
+            self.criterion.set_epoch(self.rdl_epoch)
+        active_rdl = rdl_enabled and self.criterion.weight > 0
         if preds is None:
-            preds = self.predict(img, batch=targets)
+            if active_rdl:
+                preds, details = self.predict(img, batch=targets, return_cbr_details=True)
+            else:
+                preds = self.predict(img, batch=targets)
         dec_bboxes, dec_scores, enc_bboxes, enc_scores, dn_meta = preds if self.training else preds[1]
         if dn_meta is None:
             dn_bboxes, dn_scores = None, None
         else:
             dn_bboxes, dec_bboxes = torch.split(dec_bboxes, dn_meta["dn_num_split"], dim=2)
             dn_scores, dec_scores = torch.split(dec_scores, dn_meta["dn_num_split"], dim=2)
+            if details is not None:
+                details = {k: torch.split(v, dn_meta["dn_num_split"], dim=1)[1] for k, v in details.items()}
 
         dec_bboxes = torch.cat([enc_bboxes.unsqueeze(0), dec_bboxes])  # (7, bs, 300, 4)
         dec_scores = torch.cat([enc_scores.unsqueeze(0), dec_scores])
 
+        extra = dict(details=details, image_hw=img.shape[-2:], enabled=rdl_enabled) if hasattr(self, "rdl_config") else {}
         loss = self.criterion(
-            (dec_bboxes, dec_scores), targets, dn_bboxes=dn_bboxes, dn_scores=dn_scores, dn_meta=dn_meta
+            (dec_bboxes, dec_scores), targets, dn_bboxes=dn_bboxes, dn_scores=dn_scores, dn_meta=dn_meta, **extra
         )
         # NOTE: There are like 12 losses in RTDETR, backward with all losses but only show the main three losses.
-        return sum(loss.values()), torch.as_tensor(
+        total = sum(loss.values())
+        if hasattr(self, "rdl_config") and not torch.isfinite(total):
+            raise FloatingPointError("RDL run: nonfinite total loss before backward; no replacement or automatic recovery")
+        return total, torch.as_tensor(
             [loss[k].detach() for k in ["loss_giou", "loss_class", "loss_bbox"]], device=img.device
         )
 
-    def predict(self, x, profile=False, visualize=False, batch=None, augment=False, embed=None):
+    def predict(self, x, profile=False, visualize=False, batch=None, augment=False, embed=None, return_cbr_details=False):
         """Perform a forward pass through the model.
 
         Args:
@@ -848,6 +866,8 @@ class RTDETRDetectionModel(DetectionModel):
                 if m.i == max_idx:
                     return torch.unbind(torch.cat(embeddings, 1), dim=0)
         head = self.model[-1]
+        if return_cbr_details:
+            return head.forward_with_diagnostics([y[j] for j in head.f], batch)
         x = head([y[j] for j in head.f], batch)  # head inference
         return x
 

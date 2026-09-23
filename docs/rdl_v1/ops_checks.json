@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "checks": {
+    "changed_asset_rejected": "PASS",
+    "incomplete_preflight_rejected": "PASS",
+    "foreign_and_stripped_resume_rejected": "PASS",
+    "corrected_sorted_mask": "PASS",
+    "native_validator_with_RDL_metadata": "PASS (CPU B2/160 synthetic execution only)"
+  }
+}
