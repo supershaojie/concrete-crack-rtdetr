@@ -49,6 +49,8 @@ e 是当前 epoch 开始前已完成的 epoch 数：e=0..5 权重为0；e=6 为0
 
 服务器 TF32 对照后，严格融合检查采用临时 FP32 精度作用域；退出后恢复原配置再做正式 AMP 容量检查。更新及验证见 [精度修复说明](FUSION_PRECISION_FIX.md)。[此前默认设置的失败诊断](FUSION_DIAGNOSTIC.md) 作为历史证据保留。
 
+后续 ddd2b49 的完整服务器证据确认纯候选排列误判，现将原逐行状态与最终 ID 验收分开。当前交付及分段现场重放/预检命令见 [候选排列验收修复](FUSION_PERMUTATION_FIX.md)。旧失败记录保持原值。
+
 服务器主项目固定 `/root/autodl-tmp/projects/Crack_RTDETR`；新工作树固定 `/root/autodl-tmp/projects/Crack_RTDETR-rdl_v1`。环境路径 `/root/miniconda3/envs/rtdetr/bin/python` 已从成功母版 `metadata/launch/plan.json` 核验；shell每次显式激活并检查，Python服务器操作要求3.10.13/torch2.1.2+cu121，不自动升级。
 
 交付最终回复给出已填实的完整commit和sync命令。`sync_rdl_v1.sh 完整SHA` 核验origin和远端branch tip后创建独立detached worktree；主项目和其他实验HEAD不变。已有目录必须匹配同一个SHA，否则停止，避免覆盖旧执行证据。

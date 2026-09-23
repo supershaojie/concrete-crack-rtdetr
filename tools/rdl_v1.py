@@ -170,6 +170,8 @@ def preflight(args):
     try:
         report['checks']=run_checks(Path(p['source']),args.device)
         require(all(r['status']=='PASS' for r in report['checks'].values()),"Required engineering checks did not pass")
+        require(report['checks']['real_model']['fusion_acceptance']['accepted'] is True,
+                "Independent fusion acceptance did not pass")
         report['operations']=check_operations()
         if args.local:
             report['capacity']=dict(status="SKIPPED",reason="Formal server B16/640/native AMP capacity remains required")

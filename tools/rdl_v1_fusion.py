@@ -1,7 +1,7 @@
 """Bounded evidence for the RDL EMA fusion check; preserves its original assertion.
 
-The original ordered FP32 assertion remains authoritative. Probe hooks, fixed
-queries and historical methods are confined to disposable diagnostic copies.
+The original ordered FP32 assertion is preserved as evidence. Only a fully
+verified candidate-ID permutation can pass independent fusion acceptance.
 """
 from __future__ import annotations
 
@@ -244,12 +244,23 @@ def diagnose(unfused_cpu, image_cpu, before_cpu, after_cpu, rng, report, folder,
         restore_rng(rng)
 
 
-def check_ema_fusion(ema, batch, folder=None, source_sha256=None):
+def check_ema_fusion(ema, batch, folder=None, source_sha256=None, reference=None):
     """Strict FP32 comparison on a disposable copy; preserve caller precision."""
     report = dict(precision_scope={})
     try:
         with strict_fusion_precision(report["precision_scope"]):
-            return _check_ema_fusion(deepcopy(ema).float().eval(), batch, report, folder, source_sha256)
+            _, ordered_error = _check_ema_fusion(deepcopy(ema).float().eval(), batch, report, folder, source_sha256, reference)
+        # Acceptance is evaluated only AFTER actual precision restoration.
+        from rdl_v1_fusion_acceptance import review_fusion
+        report["fusion_acceptance"] = review_fusion(report)
+        if not report["fusion_acceptance"]["accepted"]:
+            if ordered_error is not None:
+                raise ordered_error
+            raise RuntimeError(report["fusion_acceptance"]["reason"])
+        return report
+    except BaseException as error:
+        report.setdefault("fusion_acceptance", dict(accepted=False, status="FAIL", reason=repr(error)))
+        raise
     finally:
         # The inner trace is written before context exit; append actual restoration
         # evidence even when the original assertion or a probe raised an exception.
@@ -258,14 +269,16 @@ def check_ema_fusion(ema, batch, folder=None, source_sha256=None):
         print("RDL fusion precision: " + json.dumps(report["precision_scope"]), flush=True)
 
 
-def _check_ema_fusion(ema, batch, report, folder, source_sha256):
+def _check_ema_fusion(ema, batch, report, folder, source_sha256, reference):
     """Original assertion and candidate diagnostics, inside the strict scope."""
-    report.update(schema="rdl_fusion_diagnostic_v2", tolerance=TOL, acceptance="ORIGINAL_ORDERED_ASSERTION",
+    report.update(schema="rdl_fusion_diagnostic_v2", tolerance=TOL, acceptance="ORDERED_OR_VERIFIED_CANDIDATE_ID_PERMUTATION",
                   controlled_source_sha256=source_sha256,
                   runtime=dict(python=platform.python_version(), torch=str(torch.__version__), cuda=torch.version.cuda,
                     executable=sys.executable, gpu=torch.cuda.get_device_name(batch["img"].device) if batch["img"].is_cuda else None,
                     commit=git("rev-parse", "HEAD").decode().strip(), threads=torch.get_num_threads(),
                     deterministic=torch.are_deterministic_algorithms_enabled(),
+                    cudnn_deterministic=torch.backends.cudnn.deterministic,
+                    cublas_workspace_config=os.environ.get("CUBLAS_WORKSPACE_CONFIG"),
                     matmul_tf32=torch.backends.cuda.matmul.allow_tf32, cudnn_tf32=torch.backends.cudnn.allow_tf32,
                     cudnn_benchmark=torch.backends.cudnn.benchmark), formal_training="NOT_RUN")
     image = batch["img"]
@@ -322,6 +335,11 @@ def _check_ema_fusion(ema, batch, report, folder, source_sha256):
         except Exception as caught:
             error = caught
         report["original_status"] = "FAIL" if error else "PASS"
+        if error is not None:
+            report["original_error"] = repr(error)
+        if reference is not None:
+            report["saved_fixture_replay"] = dict(before=metric(reference["before"], before.cpu(), "before", 0, 0),
+                                                  after=metric(reference["after"], fused.cpu(), "after", 0, 0))
         if error is not None or folder is not None:
             folder = Path(folder) if folder is not None else ROOT/"outputs/rdl_v1"/(
                 "fusion_failure_" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
@@ -336,6 +354,4 @@ def _check_ema_fusion(ema, batch, report, folder, source_sha256):
                     raise
             finally:
                 print("RDL fusion evidence: " + str(folder/"fusion.json"), flush=True)
-        if error is not None:
-            raise error
-    return report
+    return report, error

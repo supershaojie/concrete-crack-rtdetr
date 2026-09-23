@@ -1,0 +1,579 @@
+{
+  "server_report_review": {
+    "mode": "SAVED_EVIDENCE_REVIEW_ONLY",
+    "original_report_sha256": "34f39f3ff6cd6c2f4046ec3c419f567c0f328cbccaa01da68af07359ce26a117",
+    "original_status": "FAIL",
+    "fusion_acceptance": {
+      "accepted": true,
+      "status": "PASS_CANDIDATE_PERMUTATION",
+      "policy": "rdl_fusion_id_v1"
+    }
+  },
+  "server_original_ordered": {
+    "status": "FAILED_REAL_NUMERICAL_MISMATCH",
+    "key": "ordered_output",
+    "stage": "ordered_output",
+    "device": "cuda:0",
+    "precision": "fp32",
+    "shape": [
+      2,
+      300,
+      5
+    ],
+    "dtype_a": "torch.float32",
+    "dtype_b": "torch.float32",
+    "atol": 3e-05,
+    "rtol": 3e-05,
+    "candidate_ids_available": false,
+    "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+    "max_abs_error": 0.2499469816684723,
+    "max_rel_error": 0.6792247657833487,
+    "allclose_failed_count": 4,
+    "masked_nonfinite_count": 0,
+    "index": [
+      1,
+      115,
+      0
+    ],
+    "a": 0.36798861622810364,
+    "b": 0.6179355978965759,
+    "reference_denominator": 0.6179355978965759,
+    "reason": "Original allclose tolerance exceeded"
+  },
+  "candidate_permutation": {
+    "image_0_changed_positions": 0,
+    "image_1_changed_positions": 2,
+    "positions": [
+      115,
+      116
+    ],
+    "before_ids": [
+      532,
+      535
+    ],
+    "after_ids": [
+      535,
+      532
+    ],
+    "aligned_boxes_max_abs": 1.7881393432617188e-07,
+    "aligned_scores_max_abs": 9.5367431640625e-07
+  },
+  "targeted_tests": {
+    "status": "PASS",
+    "server_report_sha256": "34f39f3ff6cd6c2f4046ec3c419f567c0f328cbccaa01da68af07359ce26a117",
+    "cases": 44,
+    "checks": [
+      {
+        "name": "actual_server_permutation",
+        "result": {
+          "accepted": true,
+          "status": "PASS_CANDIDATE_PERMUTATION",
+          "policy": "rdl_fusion_id_v1"
+        }
+      },
+      {
+        "name": "finding_string_is_not_authority",
+        "result": {
+          "accepted": true,
+          "status": "PASS_CANDIDATE_PERMUTATION",
+          "policy": "rdl_fusion_id_v1"
+        }
+      },
+      {
+        "name": "candidate_set_drift",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Only a same-set permutation may bypass ordered failure"
+        }
+      },
+      {
+        "name": "duplicate_ids",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Duplicate candidate ID"
+        }
+      },
+      {
+        "name": "wrong_query_count",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Candidate/score shape mismatch"
+        }
+      },
+      {
+        "name": "gather_not_verified",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Actual gather not verified: natural_b"
+        }
+      },
+      {
+        "name": "wrong_replay_ids",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Candidate identity differs: fixed_A_b"
+        }
+      },
+      {
+        "name": "aligned_true_error",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Comparison exceeded tolerance: boxes"
+        }
+      },
+      {
+        "name": "nan_aligned_output",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Nonfinite report value"
+        }
+      },
+      {
+        "name": "nan_logits",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Nonfinite report value"
+        }
+      },
+      {
+        "name": "inf_aligned_output",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Nonfinite report value"
+        }
+      },
+      {
+        "name": "inf_logits",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Nonfinite report value"
+        }
+      },
+      {
+        "name": "nonfinite_tensor_mask",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Nonfinite tensor: boxes"
+        }
+      },
+      {
+        "name": "empty_pre_selection",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Incomplete comparison group: pre_selection"
+        }
+      },
+      {
+        "name": "missing_tensor_pre_selection",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Incomplete comparison group: pre_selection"
+        }
+      },
+      {
+        "name": "empty_candidate_id_alignment",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Incomplete comparison group: candidate_id_alignment"
+        }
+      },
+      {
+        "name": "missing_tensor_candidate_id_alignment",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Incomplete comparison group: candidate_id_alignment"
+        }
+      },
+      {
+        "name": "empty_fixed_ids_A",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "'candidate_indices'"
+        }
+      },
+      {
+        "name": "missing_tensor_fixed_ids_A",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "'lif_input'"
+        }
+      },
+      {
+        "name": "empty_fixed_ids_B",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Incomplete comparison group: fixed_ids_B"
+        }
+      },
+      {
+        "name": "missing_tensor_fixed_ids_B",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Incomplete comparison group: fixed_ids_B"
+        }
+      },
+      {
+        "name": "empty_common_head_inputs",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Incomplete comparison group: common_head_inputs"
+        }
+      },
+      {
+        "name": "missing_tensor_common_head_inputs",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Incomplete comparison group: common_head_inputs"
+        }
+      },
+      {
+        "name": "empty_common_head_outputs",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Incomplete comparison group: common_head_outputs"
+        }
+      },
+      {
+        "name": "missing_tensor_common_head_outputs",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Incomplete comparison group: common_head_outputs"
+        }
+      },
+      {
+        "name": "empty_common_candidate_inputs",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Incomplete comparison group: common_candidate_inputs"
+        }
+      },
+      {
+        "name": "missing_tensor_common_candidate_inputs",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Incomplete comparison group: common_candidate_inputs"
+        }
+      },
+      {
+        "name": "empty_reproduce_original",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Incomplete comparison group: reproduce_original"
+        }
+      },
+      {
+        "name": "missing_tensor_reproduce_original",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Incomplete comparison group: reproduce_original"
+        }
+      },
+      {
+        "name": "missing_mother_vs_rdl",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "'mother_vs_rdl'"
+        }
+      },
+      {
+        "name": "missing_mother_source",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "'mother_source'"
+        }
+      },
+      {
+        "name": "missing_precision_scope",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "'precision_scope'"
+        }
+      },
+      {
+        "name": "missing_validation_invariants",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "'validation_invariants'"
+        }
+      },
+      {
+        "name": "missing_fusion_invariants",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "'fusion_invariants'"
+        }
+      },
+      {
+        "name": "missing_traces",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "'traces'"
+        }
+      },
+      {
+        "name": "missing_tensor_finite_proof",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "'masked_nonfinite_count'"
+        }
+      },
+      {
+        "name": "missing_error_statistic",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "'max_rel_error'"
+        }
+      },
+      {
+        "name": "replay_not_exact",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Non-exact identity: before"
+        }
+      },
+      {
+        "name": "mother_not_exact",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Non-exact identity: boxes"
+        }
+      },
+      {
+        "name": "lif_changed",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "LIF/fusion invariant failed"
+        }
+      },
+      {
+        "name": "input_changed",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Invariant failed: input_unchanged_after_fuse"
+        }
+      },
+      {
+        "name": "restore_failed",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Precision not restored"
+        }
+      },
+      {
+        "name": "restore_values_differ",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Precision not restored"
+        }
+      },
+      {
+        "name": "widened_tolerance",
+        "result": {
+          "accepted": false,
+          "status": "FAIL",
+          "policy": "rdl_fusion_id_v1",
+          "reason": "Changed tolerance: boxes"
+        }
+      }
+    ],
+    "caller_original_FAIL_final_PASS": true,
+    "tensor_tests": "PASS: actual tensor ID permutation; real error and NaN rejected",
+    "original_evidence_unchanged": true
+  },
+  "local_fixture_replay": {
+    "status": "PASS",
+    "original_report_sha256": "ca8774829f3053c28f80d2a1d04bfd2b18b247b6b2f30b679c9df4a0103b6f65",
+    "fixture_sha256": "89112ae97dd6f5176a4471af5b9e564918b41e11c8b09c11f58f595bf18bbfe4",
+    "original_report": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-rdl_v1\\outputs\\rdl_v1\\strict_precision_cuda\\fusion.json",
+    "fixture": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-rdl_v1\\outputs\\rdl_v1\\strict_precision_cuda\\fixture.pt",
+    "lifecycle": "NOT_RERUN",
+    "original_status": "PASS",
+    "fusion_acceptance": {
+      "accepted": true,
+      "status": "PASS_ORDERED",
+      "policy": "rdl_fusion_id_v1"
+    },
+    "precision_scope": {
+      "before": {
+        "cudnn_tf32": true,
+        "matmul_tf32": false,
+        "float32_matmul_precision": "highest",
+        "cuda_autocast": false,
+        "cpu_autocast": false,
+        "cuda_autocast_dtype": "torch.float16",
+        "cpu_autocast_dtype": "torch.bfloat16",
+        "autocast_cache_enabled": true,
+        "nvidia_tf32_override": null
+      },
+      "inside": {
+        "cudnn_tf32": false,
+        "matmul_tf32": false,
+        "float32_matmul_precision": "highest",
+        "cuda_autocast": false,
+        "cpu_autocast": false,
+        "cuda_autocast_dtype": "torch.float16",
+        "cpu_autocast_dtype": "torch.bfloat16",
+        "autocast_cache_enabled": true,
+        "nvidia_tf32_override": null
+      },
+      "after": {
+        "cudnn_tf32": true,
+        "matmul_tf32": false,
+        "float32_matmul_precision": "highest",
+        "cuda_autocast": false,
+        "cpu_autocast": false,
+        "cuda_autocast_dtype": "torch.float16",
+        "cpu_autocast_dtype": "torch.bfloat16",
+        "autocast_cache_enabled": true,
+        "nvidia_tf32_override": null
+      },
+      "restored": true
+    },
+    "saved_fixture_replay": {
+      "before": {
+        "key": "before",
+        "stage": "before",
+        "device": "cpu",
+        "precision": "fp32",
+        "shape": [
+          2,
+          300,
+          5
+        ],
+        "dtype_a": "torch.float32",
+        "dtype_b": "torch.float32",
+        "atol": 0,
+        "rtol": 0,
+        "candidate_ids_available": false,
+        "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "allclose_failed_count": 0,
+        "masked_nonfinite_count": 0
+      },
+      "after": {
+        "key": "after",
+        "stage": "after",
+        "device": "cpu",
+        "precision": "fp32",
+        "shape": [
+          2,
+          300,
+          5
+        ],
+        "dtype_a": "torch.float32",
+        "dtype_b": "torch.float32",
+        "atol": 0,
+        "rtol": 0,
+        "candidate_ids_available": false,
+        "relative_reference": "b (fused/comparison target); denominator=max(abs(b),1e-12)",
+        "max_abs_error": 0.0,
+        "max_rel_error": 0.0,
+        "allclose_failed_count": 0,
+        "masked_nonfinite_count": 0
+      }
+    }
+  },
+  "real_fault_injection": {
+    "original_status": "FAIL",
+    "fusion_acceptance": {
+      "accepted": false,
+      "status": "FAIL",
+      "policy": "rdl_fusion_id_v1",
+      "reason": "Only a same-set permutation may bypass ordered failure"
+    },
+    "precision_restored": true
+  },
+  "preflight_boundary": {
+    "status": "PASS",
+    "capacity_scope": "stub + CUDA 8x8 AMP forward/backward; B16/640 NOT_RUN",
+    "old_failure_bytes_preserved": true,
+    "capacity_blocked_on_restore_failure": true,
+    "capacity_blocked_on_fusion_rejection": true
+  },
+  "server_capacity": "PENDING_USER_EXECUTION",
+  "formal_training": "NOT_RUN",
+  "ROR": "NOT_MODIFIED"
+}

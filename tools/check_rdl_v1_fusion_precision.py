@@ -80,7 +80,7 @@ def preflight_boundary():
         write_json(root/"prepared.json", {})
         failed_bytes = b'{"status":"FAIL","error":"original default-TF32 evidence"}\n'
         (root/"preflight.json").write_bytes(failed_bytes)
-        result = dict(real_model=dict(status="PASS", fusion_precision=scope))
+        result = dict(real_model=dict(status="PASS", fusion_precision=scope, fusion_acceptance=dict(accepted=True)))
         with patch.object(cli, "OUT", root), patch.object(cli, "prepared", return_value=dict(source="fixture.pt")), \
              patch.object(cli, "runtime", return_value={}), patch.object(check_rdl_v1, "run_checks", return_value=result), \
              patch.object(check_rdl_v1_ops, "run", return_value=dict(status="PASS")), patch.object(cli, "capacity", side_effect=capacity_probe):
@@ -99,8 +99,18 @@ def preflight_boundary():
             else:
                 raise AssertionError("Preflight accepted failed precision restoration")
             require(len(calls) == 1 and cli.read(root/"preflight.json")["status"] == "FAIL", "Capacity ran after restoration failure")
+            result["real_model"]["fusion_precision"] = scope
+            result["real_model"]["fusion_acceptance"] = dict(accepted=False)
+            try:
+                cli.preflight(SimpleNamespace(local=False, device="cuda:0"))
+            except RuntimeError as error:
+                require("fusion acceptance" in str(error), "Unexpected fusion acceptance rejection")
+            else:
+                raise AssertionError("Preflight ignored independent fusion rejection")
+            require(len(calls) == 1, "Capacity ran after fusion rejection")
     return dict(status="PASS", capacity_scope="stub + CUDA 8x8 AMP forward/backward; B16/640 NOT_RUN",
-                old_failure_bytes_preserved=True, capacity_blocked_on_restore_failure=True)
+                old_failure_bytes_preserved=True, capacity_blocked_on_restore_failure=True,
+                capacity_blocked_on_fusion_rejection=True)
 
 
 if __name__ == "__main__":

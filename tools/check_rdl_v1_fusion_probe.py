@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 import torch
 
-from init_c19_lif_v1 import require
+from init_c19_lif_v1 import require, SOURCE_SHA256
 from ultralytics.nn.tasks import BaseModel
 from ultralytics.utils.patches import torch_load
 from rdl_v1_fusion import check_ema_fusion, precision_settings, restore_rng, state_hash
@@ -30,7 +30,7 @@ def run(fixture, folder, device):
         return result
     with patch.object(BaseModel, "fuse", corrupted_fuse):
         try:
-            check_ema_fusion(model, batch, folder)
+            check_ema_fusion(model, batch, folder, source_sha256=SOURCE_SHA256)
         except AssertionError:
             pass
         else:

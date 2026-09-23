@@ -292,6 +292,7 @@ def model_checks(source, device, fusion_dir=None):
                 gradient_norms=grads, native_amp=amp_report, native_save_reload_resume_e=20,
                 inference_shape=[2,300,5], EMA_validation="L0 only", fusion_tolerance="atol=rtol=3e-5",
                 fusion_original_status=fusion["original_status"], fusion_max_abs=fusion["original_assertion"]["max_abs_error"],
+                fusion_acceptance=fusion["fusion_acceptance"],
                 fusion_precision=fusion["precision_scope"])
 
 
