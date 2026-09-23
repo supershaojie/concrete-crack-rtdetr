@@ -168,7 +168,7 @@ def split_prediction(raw, details=None):
     return (torch.cat((eb[None], b)), torch.cat((es[None], s))), db, ds, dn, details
 
 
-def model_checks(source, device):
+def model_checks(source, device, fusion_dir=None):
     torch.set_num_threads(4)
     from ultralytics.utils.torch_utils import init_seeds
     init_seeds(42, deterministic=True)  # same deterministic/warn-only policy as the real Trainer
@@ -284,21 +284,14 @@ def model_checks(source, device):
         del restored_loss,ckpt,resume
     # Native EMA inference + validation loss with precomputed preds must not need a second forward.
     ema=trainer.ema.ema.float().eval()
-    with torch.no_grad():
-        pred=ema.predict(batch["img"])
-        require(pred[0].shape==(2,300,5),"Inference contract")
-        val_loss,display=ema.loss(batch,preds=pred)
-        require(torch.isfinite(val_loss) and len(display)==3,"Validation loss")
-        if hasattr(ema,"criterion"): require(ema.criterion.last_stats["validation_L0_only"],"Validation requested RDL")
-        before=pred[0].clone(); ema.fuse(verbose=False)
-        fused=ema.predict(batch["img"])[0]
-        close(before,fused,atol=3e-5,rtol=3e-5)
-        require(hasattr(ema.model[20],"bn"),"LIF fusion guard")
+    from rdl_v1_fusion import check_ema_fusion
+    fusion = check_ema_fusion(ema, batch, folder=fusion_dir, source_sha256=init_audit["source_sha256"])
     return dict(status="PASS", source_sha256=init_audit["source_sha256"], parameters=20149765,
                 added_parameters=0, adaptation_keys=9, input_hw=[160,192], batch=2, device=device,
                 zero_weight_update_max_abs=maximum, zero_weight_device="cpu", original_losses="exact equality", diagnostics_prediction="exact equality",
                 gradient_norms=grads, native_amp=amp_report, native_save_reload_resume_e=20,
-                inference_shape=[2,300,5], EMA_validation="L0 only", fusion_tolerance="atol=rtol=3e-5")
+                inference_shape=[2,300,5], EMA_validation="L0 only", fusion_tolerance="atol=rtol=3e-5",
+                fusion_original_status=fusion["original_status"], fusion_max_abs=fusion["original_assertion"]["max_abs_error"])
 
 
 def run_checks(source=None, device="cpu"):
@@ -356,7 +349,20 @@ if __name__=="__main__":
     parser.add_argument("--source",type=Path);parser.add_argument("--device",default="cpu")
     parser.add_argument("--output",type=Path,default=ROOT/"outputs/rdl_v1/checks.json")
     parser.add_argument('--native-cuda-repeat',action='store_true',help='仅隔离诊断原生CUDA非确定性和默认GradScaler；不启用RDL')
+    parser.add_argument('--fusion-diagnostic',type=Path,help='仅重建原 real_model 生命周期现场并诊断融合；目录必须不存在，不执行数学/运营/容量/长训检查')
     args=parser.parse_args()
+    if args.fusion_diagnostic:
+        require(not args.native_cuda_repeat, "Choose only one diagnostic")
+        require(not args.fusion_diagnostic.exists(), "Use a new diagnostic directory; preserve old evidence")
+        require(args.source is not None and args.source.is_file(), "Verified unified source required")
+        try:
+            result=model_checks(args.source,args.device,fusion_dir=args.fusion_diagnostic)
+        except Exception as error:
+            import traceback
+            traceback.print_exc()
+            result=dict(status="FAIL",error=repr(error))
+        write_json(args.fusion_diagnostic.parent/(args.fusion_diagnostic.name+"_result.json"),result)
+        sys.exit(0 if result["status"]=="PASS" else 1)
     if args.native_cuda_repeat:
         write_json(args.output,native_cuda_repeat(args.source));sys.exit(0)
     results=run_checks(args.source,args.device);write_json(args.output,results)
