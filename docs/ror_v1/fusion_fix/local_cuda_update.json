@@ -1,0 +1,192 @@
+{
+  "status": "REVIEW_REQUIRED",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-ror_v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-ror_v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "378c6772ac7d884c3909b4a61e266e4d5d49f066",
+    "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-ror_v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    }
+  },
+  "backend": {
+    "matmul_tf32": false,
+    "cudnn_tf32": true,
+    "matmul_precision": "highest",
+    "cudnn_enabled": true,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": true,
+    "cudnn_version": 90100,
+    "deterministic": true,
+    "deterministic_warn_only": true,
+    "threads": 4,
+    "autocast_cuda": false,
+    "environment": {
+      "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+      "NVIDIA_TF32_OVERRIDE": null,
+      "TORCH_ALLOW_TF32_CUBLAS_OVERRIDE": null
+    }
+  },
+  "source_report": "outputs/ror_v1/fusion_fix_cuda/diagnostic.json:cuda_direct_update",
+  "integration": {
+    "status": "REVIEW_REQUIRED",
+    "device": "cuda:0",
+    "phase": "complete",
+    "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "parameters": 20149765,
+    "added_parameters": 0,
+    "state_keys": 552,
+    "class_adaptation": [
+      {
+        "name": "model.26.dec_score_head.0.bias",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.dec_score_head.0.weight",
+        "source_shape": [
+          80,
+          256
+        ],
+        "target_shape": [
+          1,
+          256
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.dec_score_head.1.bias",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.dec_score_head.1.weight",
+        "source_shape": [
+          80,
+          256
+        ],
+        "target_shape": [
+          1,
+          256
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.dec_score_head.2.bias",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.dec_score_head.2.weight",
+        "source_shape": [
+          80,
+          256
+        ],
+        "target_shape": [
+          1,
+          256
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.denoising_class_embed.weight",
+        "source_shape": [
+          80,
+          256
+        ],
+        "target_shape": [
+          1,
+          256
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.enc_score_head.bias",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.enc_score_head.weight",
+        "source_shape": [
+          80,
+          256
+        ],
+        "target_shape": [
+          1,
+          256
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      }
+    ],
+    "diagnostics_predictions": "bitwise exact",
+    "active_L0": "bitwise exact",
+    "DN": true,
+    "gradient_max_abs": 0.000244140625,
+    "native_repeat_gradient_max_abs": 0.0002994537353515625,
+    "gradient_variation_report": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-ror_v1\\outputs\\ror_v1\\checks\\cuda_backward_variation.json",
+    "zero_weight_update_max_abs": 0.0002355724573135376,
+    "cuda_direct_step_variation_check": false,
+    "cuda_step_variation_report": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-ror_v1\\outputs\\ror_v1\\checks\\cuda_step_variation.json",
+    "changed_states_after_step": 539,
+    "gradient_comparison": "CPU exact; CUDA per-parameter max(2e-7,4*native repeat)",
+    "optimizer_update_tolerances": "CPU exact; CUDA per-state max(2e-7,4*native repeat)",
+    "cuda_step_reference": "PASS: each actual clipped-gradient first AdamW update, atol=2e-7,rtol=2e-6",
+    "scope": "zero-weight forward/backward and independent optimizer step only; no fusion/AMP/resume/long training"
+  },
+  "failed_states": {
+    "model.12.conv.weight": {
+      "ror_vs_parent_max_abs": 5.3998082876205444e-06,
+      "native_repeat_max_abs": 6.910413503646851e-07,
+      "bound": 2.7641654014587402e-06
+    },
+    "model.14.m.1.conv1.conv.weight": {
+      "ror_vs_parent_max_abs": 6.254762411117554e-05,
+      "native_repeat_max_abs": 1.1898286174982786e-05,
+      "bound": 4.7593144699931145e-05
+    },
+    "model.19.m.1.conv1.conv.weight": {
+      "ror_vs_parent_max_abs": 2.699531614780426e-05,
+      "native_repeat_max_abs": 5.689449608325958e-06,
+      "bound": 2.2757798433303833e-05
+    },
+    "model.22.m.0.conv2.conv.weight": {
+      "ror_vs_parent_max_abs": 2.0712614059448242e-06,
+      "native_repeat_max_abs": 2.4959444999694824e-07,
+      "bound": 9.98377799987793e-07
+    }
+  },
+  "scope": "Independent update test completed after diagnostic mode assertion failures; does not depend on fusion acceptance",
+  "formal_training": "NOT_RUN"
+}

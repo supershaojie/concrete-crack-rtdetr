@@ -203,7 +203,7 @@ def restore_rng(state):
     if 'numpy' in state:np.random.set_state(state['numpy'])
 
 
-def fusion_protocol(unfused,fused,image,folder,device,precision='fp32',parent_factory=None,parent_source=None,fixture_reference=None):
+def fusion_protocol(unfused,fused,image,folder,device,precision='fp32',parent_factory=None,parent_source=None,fixture_reference=None,save_failure_tensors=True):
     from c19_lif_v1_probe import capture
     from c19_lif_v1_cutoff import VERSION,review_evidence,fusion_accepted
     folder=Path(folder);folder.mkdir(parents=True,exist_ok=False)
@@ -318,7 +318,7 @@ def fusion_protocol(unfused,fused,image,folder,device,precision='fp32',parent_fa
         restore_rng(state)
         # Full tensors are local failure evidence, never part of LIGHT uploads.
         try:
-            if not fusion_accepted(report):
+            if not fusion_accepted(report) and save_failure_tensors:
                 if not fixture_reference:
                     fixture=folder/'fixture.pt'
                     torch.save(dict(image=image.detach().cpu(),unfused={k:v.detach().cpu() for k,v in unfused.state_dict().items()},
@@ -326,7 +326,7 @@ def fusion_protocol(unfused,fused,image,folder,device,precision='fp32',parent_fa
                     report['fixture']=dict(path=str(fixture),sha256=digest(fixture))
                 evidence=folder/'records.pt';torch.save(records,evidence)
                 report['records']=dict(path=str(evidence),sha256=digest(evidence),upload='EXCLUDED; use LIGHT JSON only')
-            else:report['records']=dict(status='COMPACT_JSON_ONLY',reason='Successful diagnostic; no redundant full model/tensor copies')
+            else:report['records']=dict(status='COMPACT_JSON_ONLY',reason='Success or caller requested JSON-only failure evidence',failure_tensors_enabled=save_failure_tensors)
         except BaseException as error:
             report.update(status='FAILED_INCOMPLETE_DIAGNOSTIC',acceptance='BLOCKED',evidence_error=repr(error))
             persist();raise

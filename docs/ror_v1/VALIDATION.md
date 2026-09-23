@@ -1,5 +1,7 @@
 # ROR v1 实际检查与待办
 
+后续服务器融合失败的检查修复、独立 CUDA 更新复测和一次有界重跑命令见 [FUSION_FIX.md](FUSION_FIX.md)。以下保留首次交付的历史结果；不能据本地融合 PASS 推断 RTX4090 现场通过。
+
 本地执行目录：`D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-ror_v1`。
 解释器：`D:/miniconda3/envs/rtdetr/python.exe`；Python3.9.25 / torch2.7.1+cu118；RTX2060。
 导入仓库内自定义 Ultralytics。运行时母版 HEAD 为 `a0459d6a652cb702699087c88fa39a3e4c4087ec`，实现尚未提交；`source_audit.json` 记录具体实现内容哈希，最终交付 SHA 另存外部记录。没有安装/升级环境，没有找到适用 AGENTS.md；有限范围内未定位独立迁移包，已直接使用成功母版完整本地归档。

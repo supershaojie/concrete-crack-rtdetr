@@ -9,6 +9,7 @@ from pathlib import Path
 import subprocess
 import types
 from datetime import datetime, timezone
+import traceback
 
 import torch
 from init_c19_lif_v1 import (ROOT, controlled_models, build_training_model, verify_model,
@@ -120,7 +121,14 @@ def split_predictions(result, details=None):
     return (torch.cat([enc_b[None],boxes]),torch.cat([enc_s[None],scores])),dict(dn_bboxes=db,dn_scores=ds,dn_meta=meta),details
 
 
-def integration(source, device="cpu"):
+def integration(source, device="cpu", report=None, persist=lambda: None, stop_after_update=False, evidence_dir=None):
+    # Caller owns this dictionary, so an exception cannot discard completed checks.
+    report = {} if report is None else report
+    evidence_dir = Path(evidence_dir) if evidence_dir is not None else ROOT/'outputs/ror_v1/checks'
+    def progress(phase, **values):
+        report.update(values, phase=phase)
+        persist()
+    progress('initialization', status='RUNNING', device=device)
     torch.manual_seed(42)
     _,init,init_report=controlled_models(source)
     model,adapt=build_training_model(init.yaml,init,dict(nc=1,channels=3))
@@ -137,6 +145,8 @@ def integration(source, device="cpu"):
                bboxes=torch.tensor([[.25,.25,.2,.1],[.6,.6,.3,.2],[.7,.2,.1,.25],[.5,.5,.3,.3]],device=device),
                cls=torch.zeros(4,1,device=device),batch_idx=torch.tensor([0,0,0,1],device=device))
     targets=targets_of(batch)
+    progress('forward_and_L0', source_sha256=sha256(source), parameters=20149765,
+             added_parameters=0, state_keys=len(model.state_dict()), class_adaptation=adapt['ALLOWED_CLASS_ADAPTATION'])
     model.to(device).train(); baseline.to(device).train()
     rng=torch.get_rng_state();cuda_rng=torch.cuda.get_rng_state_all() if torch.cuda.is_available() else []
     def restore():
@@ -157,6 +167,7 @@ def integration(source, device="cpu"):
         idx=model.criterion.matcher(bb[0][-1],bb[1][-1],targets['bboxes'],targets['cls'],[3,1])
         require(set(idx[0][1].tolist())=={0,1,2} and idx[1][1].tolist()==[3],"GT offset")
     model.criterion.set_epoch(0)
+    progress('zero_weight_backward', diagnostics_predictions='bitwise exact', active_L0='bitwise exact', DN=True)
     # BN counters also had identical diagnostic forwards; compare actual independent optimizer updates.
     helper=RTDETRTrainer.__new__(RTDETRTrainer)
     optim_a=helper.build_optimizer(baseline,name='AdamW',lr=.0005,momentum=.937,decay=.0001)
@@ -192,7 +203,9 @@ def integration(source, device="cpu"):
                 gradient_rows[name]['bound']=max(2e-7,4*repeat_delta)
                 param.grad=original_grads[name]
         for name,buffer in baseline.named_buffers():buffer.copy_(original_buffers[name])
-        write_json(ROOT/'outputs/ror_v1/checks/cuda_backward_variation.json',gradient_rows)
+        write_json(evidence_dir/'cuda_backward_variation.json',gradient_rows)
+        progress('gradient_comparison', gradient_max_abs=gradient_error, native_repeat_gradient_max_abs=native_repeat_error,
+                 gradient_variation_report=str(evidence_dir/'cuda_backward_variation.json'))
         require(all(row['ror_vs_parent_max_abs']<=row['bound'] for row in gradient_rows.values()),
                 'ROR gradient difference exceeds per-parameter native CUDA backward variability; see variation report')
     torch.nn.utils.clip_grad_norm_(baseline.parameters(),10.);torch.nn.utils.clip_grad_norm_(model.parameters(),10.)
@@ -210,6 +223,11 @@ def integration(source, device="cpu"):
         max_update_error=max(max_update_error,delta)
         changed+=int(not torch.equal(value,before[key]))
     if step_rows:
+        write_json(evidence_dir/'cuda_step_variation.json',step_rows)
+        progress('adam_reference', zero_weight_update_max_abs=max_update_error,
+                 cuda_direct_step_variation_check=all(row['ror_vs_parent_max_abs']<=row['bound'] for row in step_rows.values()),
+                 cuda_step_variation_report=str(evidence_dir/'cuda_step_variation.json'),
+                 cuda_direct_step_failed_states=[key for key,row in step_rows.items() if row['ror_vs_parent_max_abs']>row['bound']])
         # The first Adam step is sensitive to gradients near eps=1e-8. Verify both
         # independent updates against the analytic native AdamW first-step formula,
         # instead of enlarging all weight tolerances to hide a sign change near zero.
@@ -221,8 +239,18 @@ def integration(source, device="cpu"):
                     name=names[id(param)];g=param.grad
                     expected=before[name]*(1-group['lr']*group['weight_decay'])-group['lr']*g/(g.abs()+group['eps'])
                     close(param,expected,atol=2e-7,rtol=2e-6)
-        write_json(ROOT/'outputs/ror_v1/checks/cuda_step_variation.json',step_rows)
     require(changed>0,"No effective optimizer update")
+    progress('optimizer_complete', changed_states_after_step=changed, zero_weight_update_max_abs=max_update_error,
+             gradient_max_abs=gradient_error, native_repeat_gradient_max_abs=native_repeat_error,
+             gradient_comparison='CPU exact; CUDA per-parameter max(2e-7,4*native repeat)',
+             optimizer_update_tolerances='CPU exact; CUDA per-state max(2e-7,4*native repeat)',
+             cuda_direct_step_variation_check=all(row['ror_vs_parent_max_abs']<=row['bound'] for row in step_rows.values()) if step_rows else None,
+             cuda_step_reference='PASS: each actual clipped-gradient first AdamW update, atol=2e-7,rtol=2e-6' if step_rows else None)
+    if stop_after_update:
+        progress('complete', status='REVIEW_REQUIRED' if report['cuda_direct_step_variation_check'] is False else 'PASS',
+                 scope='zero-weight forward/backward and independent optimizer step only; no fusion/AMP/resume/long training')
+        return report
+    progress('empty_single_GT')
     # No-DN and no-GT path, then ordinary inference and supplied-prediction validation loss.
     model.zero_grad(set_to_none=True);model.criterion.set_epoch(20);model.model[-1].num_denoising=0
     for count in (0,1):
@@ -233,6 +261,9 @@ def integration(source, device="cpu"):
         out=model.predict(batch['img']);require(out[0].shape==(2,300,5),"Normal inference return")
         val,shown=model.loss(batch,preds=out);require(torch.isfinite(val) and shown.numel()==3,"Validation L0")
     # Actual Trainer.get_model and native resume state restoration (no full training).
+    progress('resume', no_DN=True, empty_GT=True, single_GT=True, validation='L0 only')
+    from ror_v1_fusion_diagnostic import state_hash, checked_fuse
+    before_resume = state_hash(model.state_dict())
     dummy=RORTrainer.__new__(RORTrainer);dummy.resume=False;dummy.data=dict(nc=1,channels=3)
     dummy.ror_plan=dict(identity=model.ror_v1);dummy.ror_output=ROOT/'outputs/ror_v1/checks'
     torch.manual_seed(42);rebuilt=dummy.get_model(init.yaml,init,False)
@@ -246,14 +277,19 @@ def integration(source, device="cpu"):
     dummy.resume_training(restored)
     require(dummy.start_epoch==7 and rebuilt.criterion.ror_weight==.1*2/15,"Resume restarted warmup")
     dummy.epoch=20;epoch_start(dummy);require(dummy.model.criterion.ror_weight==dummy.ema.ema.criterion.ror_weight==.1,"Epoch callback/EMA")
+    require(state_hash(model.state_dict())==before_resume, 'Resume test mutated fusion source')
     from c19_lif_v1_diagnostic import fusion_protocol
     from c19_lif_v1_cutoff import fusion_accepted
-    model.float().eval();fused=deepcopy(model).fuse(verbose=False)
+    model.float().eval();fused,fusion_state=checked_fuse(model)
     fusion_folder=ROOT/'outputs/ror_v1/checks'/('fusion_'+device.replace(':','_')+'_'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%f'))
-    fusion=fusion_protocol(model,fused,batch['img'],fusion_folder,
-                           torch.device(device).type,'fp32')
+    progress('fusion', resume_e=7, schedule_at_20=.1, resume_source_unchanged=True,
+             fusion_state=fusion_state, fusion_report=str(fusion_folder/'fuse_diagnostic.json'))
+    require(batch['img'].dtype==torch.float32, 'Expected FP32 fusion input')
+    with torch.autocast(device_type=torch.device(device).type,enabled=False):
+        fusion=fusion_protocol(model,fused,batch['img'],fusion_folder,
+                               torch.device(device).type,'fp32',save_failure_tensors=False)
     require(fusion_accepted(fusion),"Fusion candidate-identity audit failed")
-    return dict(status='PASS',device=device,source_sha256=sha256(source),parameters=20149765,
+    report.update(status='PASS',phase='complete',device=device,source_sha256=sha256(source),parameters=20149765,
                 added_parameters=0,state_keys=len(before),class_adaptation=adapt['ALLOWED_CLASS_ADAPTATION'],
                 changed_states_after_step=changed,zero_weight_update_max_abs=max_update_error,
                 gradient_max_abs=gradient_error,native_repeat_gradient_max_abs=native_repeat_error,
@@ -265,6 +301,8 @@ def integration(source, device="cpu"):
                 empty_GT=True,single_GT=True,validation='L0 only',resume_e=7,schedule_at_20=.1,
                 fused_parameters=sum(p.numel() for p in fused.parameters()),fusion_status=fusion['status'],
                 fusion_tolerances=fusion['tolerances'],fusion_report=str(fusion_folder/'fuse_diagnostic.json'))
+    persist()
+    return report
 
 
 def criterion_fixture():
@@ -346,16 +384,33 @@ def amp_smoke(source):
                 EMA_native_half_validation=observed,validation_loss=output,formal_training='NOT_RUN')
 
 
-def run(source=None, device='cpu'):
+def run(source=None, device='cpu', report=None, report_path=None):
+    report = {} if report is None else report
+    path = ROOT/'outputs/ror_v1'/('checks_progress_'+device.replace(':','_')+'.json')
+    def persist():
+        from c19_lif_v1_diagnostic import atomic_json
+        atomic_json(path, report)
+        if report_path is not None: atomic_json(report_path, report)
     torch.set_num_threads(4)
     from ultralytics.utils.torch_utils import init_seeds
     init_seeds(42,deterministic=True)
-    report=dict(runtime=runtime(),math=math_checks(device),criterion=criterion_fixture())
-    report['integration']=integration(source,device) if source and Path(source).is_file() else dict(status='SKIPPED',reason='PENDING_ASSET: unified source')
-    write_json(ROOT/'outputs/ror_v1'/('checks_progress_'+device.replace(':','_')+'.json'),report)
-    if device!='cpu' and source and Path(source).is_file():
-        import gc
-        gc.collect();torch.cuda.empty_cache();report['native_AMP']=amp_smoke(source)
+    report.update(status='RUNNING', runtime=runtime())
+    try:
+        report['math']=math_checks(device);persist()
+        report['criterion']=criterion_fixture();persist()
+        report['integration']={}
+        if source and Path(source).is_file(): integration(source,device,report['integration'],persist)
+        else: report['integration'].update(status='SKIPPED',reason='PENDING_ASSET: unified source')
+        persist()
+        if device!='cpu' and source and Path(source).is_file():
+            import gc
+            gc.collect();torch.cuda.empty_cache();report['native_AMP']=amp_smoke(source)
+        report['status']='REVIEW_REQUIRED' if report['integration'].get('cuda_direct_step_variation_check') is False else 'PASS'
+    except BaseException as error:
+        report.update(status='FAIL',error=repr(error),failure=getattr(error,'detail',None),traceback=traceback.format_exc())
+        if report.get('integration',{}).get('status')=='RUNNING':report['integration']['status']='FAIL'
+        raise
+    finally: persist()
     return report
 
 
@@ -364,8 +419,6 @@ if __name__=='__main__':
     parser.add_argument('--source',type=Path);parser.add_argument('--device',default='cpu')
     parser.add_argument('--report',type=Path,default=ROOT/'outputs/ror_v1/checks.json')
     args=parser.parse_args()
-    try: result=run(args.source,args.device)
-    except BaseException as error:
-        write_json(args.report,dict(status='FAIL',error=repr(error)));raise
+    result=run(args.source,args.device,report_path=args.report)
     result['status']='REVIEW_REQUIRED' if result.get('integration',{}).get('cuda_direct_step_variation_check') is False else 'PASS'
     write_json(args.report,result);print(result)

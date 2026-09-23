@@ -189,8 +189,10 @@ def preflight(args):
     report=dict(status='FAIL',identity=plan['identity'],runtime=environment(server=True))
     try:
         from check_ror_v1 import run
-        report['cpu_checks']=run(p['source'],'cpu')
-        report['checks']=run(p['source'],'cuda:0')
+        report['cpu_checks']={}
+        run(p['source'],'cpu',report=report['cpu_checks'])
+        report['checks']={}
+        run(p['source'],'cuda:0',report=report['checks'])
         report['amp_resources']=amp_assets(p)
         from ultralytics.utils.checks import check_amp
         initial=RTDETR(str(p['init'])).model.cuda()
