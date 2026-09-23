@@ -1,0 +1,93 @@
+{
+  "report_sha256": "ca4c75ca13f6f7986bfada667c475f35bc9bc3855d988f4364ed43bb428a39f6",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-ror_v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-ror_v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "f15be2dfe39f18a5ec012a0e378e4c56042ba645",
+    "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-ror_v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    }
+  },
+  "backend": {
+    "matmul_tf32": false,
+    "cudnn_tf32": true,
+    "matmul_precision": "highest",
+    "cudnn_enabled": true,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": true,
+    "cudnn_version": 90100,
+    "deterministic": true,
+    "deterministic_warn_only": true,
+    "threads": 4,
+    "autocast_cuda": false,
+    "environment": {
+      "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+      "NVIDIA_TF32_OVERRIDE": null,
+      "TORCH_ALLOW_TF32_CUBLAS_OVERRIDE": null
+    }
+  },
+  "status": "REVIEW_REQUIRED",
+  "zero_path_audit": {
+    "prediction_hashes": true,
+    "matcher_hashes": true,
+    "loss_terms": true,
+    "loss": true,
+    "shown": true,
+    "graph": true,
+    "pre_backward_rng": true,
+    "forward_buffers": true,
+    "gradient_none": true,
+    "no_ror_or_diagnostic_calls": true,
+    "status": "PASS"
+  },
+  "same_gradient_optimizer": {
+    "status": "PASS",
+    "scope": "Optimizer wiring only; cannot pass independent-backward equivalence",
+    "clipped_gradients_exact": true,
+    "optimizer_states_exact": true,
+    "parameters_exact": true,
+    "parameter_max_abs": 0.0
+  },
+  "historical_failed_parameters": [
+    "model.14.cv2.bn.weight",
+    "model.20.bn.weight",
+    "model.25.cv1.bn.weight",
+    "model.25.m.0.conv2.conv.weight",
+    "model.25.m.2.conv2.conv.weight",
+    "model.26.input_proj.0.0.weight",
+    "model.6.blocks.1.branch2b.norm.bias",
+    "model.7.blocks.0.branch2a.norm.bias",
+    "model.8.bn.bias",
+    "model.9.fc1.bias"
+  ],
+  "current_exceeded": [
+    "model.22.m.1.conv1.bn.weight",
+    "model.25.cv3.bn.bias"
+  ],
+  "newly_failed": [
+    "model.22.m.1.conv1.bn.weight",
+    "model.25.cv3.bn.bias"
+  ],
+  "varying_mother_gradient_parameters": 226,
+  "all_six_reset_identities_equal": true,
+  "all_six_analytic_first_steps_passed": true,
+  "graph_nodes": 1790,
+  "samples_total": 32,
+  "cross_sign_flip_samples": 0,
+  "mother_repeat_sign_flip_samples": 0,
+  "conclusion": "No production zero-weight wiring defect found. Native CUDA backward variability observed. The server ten-parameter sign-flip attribution remains unproven; thresholds and gates unchanged.",
+  "limitation": "Local RTX2060/PyTorch2.7.1 differs from server RTX4090/PyTorch2.1.2. Frozen server bounds used descriptively, not as a cross-platform certification."
+}

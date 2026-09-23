@@ -1,0 +1,27 @@
+{
+  "archive_sha256": "19b7d167a1e6811acb4db02e8f4ada6ffd9adb9fdd3bbb93aa5199505372dd4c",
+  "original_path": "D:\\rtdetr跑结果\\ROR损失函数\\ror_latest_diagnostic.zip",
+  "members": {
+    "outputs/ror_v1/fusion_control_20260923T182603223456/diagnostic.json": {
+      "bytes": 122691,
+      "sha256": "6b560fc42fd8dda4ba05bccdc32eb2ebe579f0295e89f2a31da36141829f90c4"
+    },
+    "outputs/ror_v1/fusion_control_20260923T182603223456/update/cuda_backward_variation.json": {
+      "bytes": 57320,
+      "sha256": "a582debb3f6ee7575240ea140e73fea9385a4d13584530e51316e14922cd6a02"
+    },
+    "outputs/ror_v1/fusion_control_20260923T182603223456/update/cuda_step_variation.json": {
+      "bytes": 86318,
+      "sha256": "8c507cd9f003723daf040ac00bfe4fc11494ea2dc1555232f7e46e71ac0de019"
+    },
+    "tools/check_ror_v1.py": {
+      "bytes": 28356,
+      "sha256": "02912a9b6ee49f3e24e00a3b20213cdfc6336ddd3b212b27f208b32a54de965d"
+    },
+    "tools/ror_v1_fusion_diagnostic.py": {
+      "bytes": 18584,
+      "sha256": "0cc59d9c91b339267b8af3b2e69ac3288832bc4305ded79a5e2da664791ebf19"
+    }
+  },
+  "handling": "Original bytes preserved. Only JSON read; bundled Python files not executed."
+}
