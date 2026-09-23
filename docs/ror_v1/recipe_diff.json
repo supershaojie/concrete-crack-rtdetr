@@ -1,0 +1,765 @@
+[
+  {
+    "field": "task",
+    "parent": "detect",
+    "ror": "detect",
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "mode",
+    "parent": "train",
+    "ror": "train",
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "model",
+    "parent": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "ror": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-ror_v1\\weights\\ror_v1_controlled_init.pt",
+    "changed": true,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "data",
+    "parent": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "ror": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-ror_v1\\outputs\\ror_v1\\local_data.yaml",
+    "changed": true,
+    "reason": "verified same data, absolute path relocation"
+  },
+  {
+    "field": "epochs",
+    "parent": 200,
+    "ror": 200,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "time",
+    "parent": null,
+    "ror": null,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "patience",
+    "parent": 50,
+    "ror": 50,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "batch",
+    "parent": 16,
+    "ror": 16,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "imgsz",
+    "parent": 640,
+    "ror": 640,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "save",
+    "parent": true,
+    "ror": true,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "save_period",
+    "parent": -1,
+    "ror": -1,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "cache",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "device",
+    "parent": "0",
+    "ror": "0",
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "workers",
+    "parent": 8,
+    "ror": 8,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "project",
+    "parent": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "ror": "D:\\MyProjects\\Crack_RTDETR\\runs\\c_series",
+    "changed": true,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "name",
+    "parent": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "ror": "ror_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+    "changed": true,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "exist_ok",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "pretrained",
+    "parent": true,
+    "ror": true,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "optimizer",
+    "parent": "AdamW",
+    "ror": "AdamW",
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "verbose",
+    "parent": true,
+    "ror": true,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "seed",
+    "parent": 42,
+    "ror": 42,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "deterministic",
+    "parent": true,
+    "ror": true,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "single_cls",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "rect",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "cos_lr",
+    "parent": true,
+    "ror": true,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "close_mosaic",
+    "parent": 10,
+    "ror": 10,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "resume",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "amp",
+    "parent": true,
+    "ror": true,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "fraction",
+    "parent": 1.0,
+    "ror": 1.0,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "profile",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "freeze",
+    "parent": null,
+    "ror": null,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "multi_scale",
+    "parent": 0.0,
+    "ror": 0.0,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "compile",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "overlap_mask",
+    "parent": true,
+    "ror": true,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "mask_ratio",
+    "parent": 4,
+    "ror": 4,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "dropout",
+    "parent": 0.0,
+    "ror": 0.0,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "val",
+    "parent": true,
+    "ror": true,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "split",
+    "parent": "val",
+    "ror": "val",
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "save_json",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "conf",
+    "parent": null,
+    "ror": null,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "iou",
+    "parent": 0.7,
+    "ror": 0.7,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "max_det",
+    "parent": 300,
+    "ror": 300,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "half",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "dnn",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "plots",
+    "parent": true,
+    "ror": true,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "end2end",
+    "parent": null,
+    "ror": null,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "source",
+    "parent": null,
+    "ror": null,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "vid_stride",
+    "parent": 1,
+    "ror": 1,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "stream_buffer",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "visualize",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "augment",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "agnostic_nms",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "classes",
+    "parent": null,
+    "ror": null,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "retina_masks",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "embed",
+    "parent": null,
+    "ror": null,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "show",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "save_frames",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "save_txt",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "save_conf",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "save_crop",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "show_labels",
+    "parent": true,
+    "ror": true,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "show_conf",
+    "parent": true,
+    "ror": true,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "show_boxes",
+    "parent": true,
+    "ror": true,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "line_width",
+    "parent": null,
+    "ror": null,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "format",
+    "parent": "torchscript",
+    "ror": "torchscript",
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "keras",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "optimize",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "int8",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "dynamic",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "simplify",
+    "parent": true,
+    "ror": true,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "opset",
+    "parent": null,
+    "ror": null,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "workspace",
+    "parent": null,
+    "ror": null,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "nms",
+    "parent": false,
+    "ror": false,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "lr0",
+    "parent": 0.0005,
+    "ror": 0.0005,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "lrf",
+    "parent": 0.01,
+    "ror": 0.01,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "momentum",
+    "parent": 0.937,
+    "ror": 0.937,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "weight_decay",
+    "parent": 0.0001,
+    "ror": 0.0001,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "warmup_epochs",
+    "parent": 5,
+    "ror": 5,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "warmup_momentum",
+    "parent": 0.8,
+    "ror": 0.8,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "warmup_bias_lr",
+    "parent": 0.1,
+    "ror": 0.1,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "box",
+    "parent": 7.5,
+    "ror": 7.5,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "cls",
+    "parent": 0.5,
+    "ror": 0.5,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "dfl",
+    "parent": 1.5,
+    "ror": 1.5,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "pose",
+    "parent": 12.0,
+    "ror": 12.0,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "kobj",
+    "parent": 1.0,
+    "ror": 1.0,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "rle",
+    "parent": 1.0,
+    "ror": 1.0,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "angle",
+    "parent": 1.0,
+    "ror": 1.0,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "nbs",
+    "parent": 64,
+    "ror": 64,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "hsv_h",
+    "parent": 0.015,
+    "ror": 0.015,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "hsv_s",
+    "parent": 0.5,
+    "ror": 0.5,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "hsv_v",
+    "parent": 0.35,
+    "ror": 0.35,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "degrees",
+    "parent": 5,
+    "ror": 5,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "translate",
+    "parent": 0.1,
+    "ror": 0.1,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "scale",
+    "parent": 0.4,
+    "ror": 0.4,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "shear",
+    "parent": 1.5,
+    "ror": 1.5,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "perspective",
+    "parent": 0.0002,
+    "ror": 0.0002,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "flipud",
+    "parent": 0.2,
+    "ror": 0.2,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "fliplr",
+    "parent": 0.5,
+    "ror": 0.5,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "bgr",
+    "parent": 0.0,
+    "ror": 0.0,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "mosaic",
+    "parent": 0.8,
+    "ror": 0.8,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "mixup",
+    "parent": 0.05,
+    "ror": 0.05,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "cutmix",
+    "parent": 0,
+    "ror": 0,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "copy_paste",
+    "parent": 0,
+    "ror": 0,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "copy_paste_mode",
+    "parent": "flip",
+    "ror": "flip",
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "auto_augment",
+    "parent": null,
+    "ror": null,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "erasing",
+    "parent": 0,
+    "ror": 0,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "cfg",
+    "parent": null,
+    "ror": null,
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "tracker",
+    "parent": "botsort.yaml",
+    "ror": "botsort.yaml",
+    "changed": false,
+    "reason": "experiment model/output identity"
+  },
+  {
+    "field": "save_dir",
+    "parent": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "ror": "D:\\MyProjects\\Crack_RTDETR\\runs\\c_series\\ror_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+    "changed": true,
+    "reason": "experiment model/output identity"
+  }
+]

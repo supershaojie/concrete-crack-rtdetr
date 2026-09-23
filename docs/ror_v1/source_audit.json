@@ -1,0 +1,104 @@
+{
+  "parent": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "scope": "precommit implementation, final SHA stored externally",
+  "files": [
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/cbr.py",
+      "parent_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "current_lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "unchanged": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/lif_down.py",
+      "parent_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "current_lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "unchanged": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/transformer.py",
+      "parent_sha256": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602",
+      "current_lf_sha256": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602",
+      "unchanged": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/tasks.py",
+      "parent_sha256": "c5a19e3eaf10acf2a5aa6a53e4a3f9afd01d7b79e4f9a41744af9755d6ebcbd8",
+      "current_lf_sha256": "f454586672323955fae25d5306f898fd4d431c3d04425deff9a93d90ce669f03",
+      "unchanged": false
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/utils/loss.py",
+      "parent_sha256": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75",
+      "current_lf_sha256": "5e2f77c8e59ddb4d7c018d7c4e9273238af0575dd1f5d658e02e2818e11f4718",
+      "unchanged": false
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/utils/ops.py",
+      "parent_sha256": "7d520895c245adafb06b07c6b330dabbd6a36a69cd0fe742cd71f2797f474dde",
+      "current_lf_sha256": "7d520895c245adafb06b07c6b330dabbd6a36a69cd0fe742cd71f2797f474dde",
+      "unchanged": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/rtdetr/train.py",
+      "parent_sha256": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+      "current_lf_sha256": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+      "unchanged": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/rtdetr/val.py",
+      "parent_sha256": "f7974365832f0eb2e146571a591150f268d42ecb89e12e96f2518d4251a63a6a",
+      "current_lf_sha256": "f7974365832f0eb2e146571a591150f268d42ecb89e12e96f2518d4251a63a6a",
+      "unchanged": true
+    },
+    {
+      "path": "tools/init_c19_lif_v1.py",
+      "parent_sha256": "846f6656c603506304428bb9401ba1309ef8febab5833e88bb18083d9b048af1",
+      "current_lf_sha256": "846f6656c603506304428bb9401ba1309ef8febab5833e88bb18083d9b048af1",
+      "unchanged": true
+    },
+    {
+      "path": "tools/init_lif_down.py",
+      "parent_sha256": "ad8528792f4ed735069122a23df250576a4e03021f3160443c4a765395b4c955",
+      "current_lf_sha256": "ad8528792f4ed735069122a23df250576a4e03021f3160443c4a765395b4c955",
+      "unchanged": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-lif-down.yaml",
+      "parent_sha256": "14192de425c6b3718af8a9dc42373db25a0ea725bf608f270e7241b8a66d603a",
+      "current_lf_sha256": "14192de425c6b3718af8a9dc42373db25a0ea725bf608f270e7241b8a66d603a",
+      "unchanged": true
+    }
+  ],
+  "new_files": [
+    {
+      "path": "tools/autodl_ror_v1.sh",
+      "lf_sha256": "e40dbd718eb2075e7f445cc8f58fdf177086511b048e630987917fba40ee7d93"
+    },
+    {
+      "path": "tools/check_ror_v1.py",
+      "lf_sha256": "126e335f6c9b42d56fa2db3b7a59b36bba46b128114785cdc66dc1d00f9c595e"
+    },
+    {
+      "path": "tools/ror_v1.py",
+      "lf_sha256": "4263e7bb8518cc86769a9aa15c99bd52f490addc39dc37d92efefe1afd5f6086"
+    },
+    {
+      "path": "tools/ror_v1_diagnose.py",
+      "lf_sha256": "084f9901a00cb9e0a67ef8583dd1818390e287149a0df7992c5b5f1e53384c19"
+    },
+    {
+      "path": "tools/ror_v1_training.py",
+      "lf_sha256": "e7c147b8a68fd3ee2f7294a645ad3210386a8149ded14b3c1a8306c154bad531"
+    },
+    {
+      "path": "tools/sync_ror_v1.sh",
+      "lf_sha256": "28f336291b2e99b81b0794eb2cfbf74c30f4bc850c6664209b44d1f41375760e"
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/utils/ror.py",
+      "lf_sha256": "1aee075cd6d19bfc28b4b549d3a8af7b5b8904eb1cc0130c97f4e837f4ae9cd5"
+    }
+  ],
+  "actual_parent_loss_file": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\c19-lif-v1\\ultralytics-main\\ultralytics\\models\\utils\\loss.py",
+  "actual_parent_loss_lf_sha256": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75"
+}

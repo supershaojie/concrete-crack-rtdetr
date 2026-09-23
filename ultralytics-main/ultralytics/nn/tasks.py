@@ -797,27 +797,39 @@ class RTDETRDetectionModel(DetectionModel):
             "gt_groups": gt_groups,
         }
 
+        # ROR opts in only for an active training loss and passes this call's state explicitly.
+        # Validation with supplied predictions uses L0 without a second forward.
+        ror_active = self.training and getattr(self.criterion, "ror_weight", 0.0) > 0
+        details = None
         if preds is None:
-            preds = self.predict(img, batch=targets)
+            if ror_active:
+                preds, details = self.predict(img, batch=targets, return_cbr_details=True)
+            else:
+                preds = self.predict(img, batch=targets)
+        elif ror_active:
+            raise RuntimeError("Active ROR training requires same-forward CBR details; supplied preds have none")
         dec_bboxes, dec_scores, enc_bboxes, enc_scores, dn_meta = preds if self.training else preds[1]
         if dn_meta is None:
             dn_bboxes, dn_scores = None, None
         else:
             dn_bboxes, dec_bboxes = torch.split(dec_bboxes, dn_meta["dn_num_split"], dim=2)
             dn_scores, dec_scores = torch.split(dec_scores, dn_meta["dn_num_split"], dim=2)
+            if details is not None:
+                details = {k: torch.split(v, dn_meta["dn_num_split"], dim=1)[1] for k, v in details.items()}
 
         dec_bboxes = torch.cat([enc_bboxes.unsqueeze(0), dec_bboxes])  # (7, bs, 300, 4)
         dec_scores = torch.cat([enc_scores.unsqueeze(0), dec_scores])
 
+        extra = {"ror_enabled": True, "ror_details": details} if ror_active else {}
         loss = self.criterion(
-            (dec_bboxes, dec_scores), targets, dn_bboxes=dn_bboxes, dn_scores=dn_scores, dn_meta=dn_meta
+            (dec_bboxes, dec_scores), targets, dn_bboxes=dn_bboxes, dn_scores=dn_scores, dn_meta=dn_meta, **extra
         )
         # NOTE: There are like 12 losses in RTDETR, backward with all losses but only show the main three losses.
         return sum(loss.values()), torch.as_tensor(
             [loss[k].detach() for k in ["loss_giou", "loss_class", "loss_bbox"]], device=img.device
         )
 
-    def predict(self, x, profile=False, visualize=False, batch=None, augment=False, embed=None):
+    def predict(self, x, profile=False, visualize=False, batch=None, augment=False, embed=None, return_cbr_details=False):
         """Perform a forward pass through the model.
 
         Args:
@@ -848,6 +860,12 @@ class RTDETRDetectionModel(DetectionModel):
                 if m.i == max_idx:
                     return torch.unbind(torch.cat(embeddings, 1), dim=0)
         head = self.model[-1]
+        if return_cbr_details:
+            if embed is not None and embed != {-1}:
+                raise ValueError("CBR diagnostics cannot be combined with embedding extraction")
+            if not hasattr(head, "forward_with_diagnostics"):
+                raise RuntimeError("CBR diagnostics require the original CBR head")
+            return head.forward_with_diagnostics([y[j] for j in head.f], batch)
         x = head([y[j] for j in head.f], batch)  # head inference
         return x
 

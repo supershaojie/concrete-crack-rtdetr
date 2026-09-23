@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "batch": 2,
+  "imgsz": 160,
+  "optimizer_update": true,
+  "loss": 90.1432113647461,
+  "native_scaler_steps": [
+    {
+      "before": 65536.0,
+      "after": 32768.0,
+      "finite_gradients": false
+    },
+    {
+      "before": 32768.0,
+      "after": 16384.0,
+      "finite_gradients": false
+    },
+    {
+      "before": 16384.0,
+      "after": 8192.0,
+      "finite_gradients": false
+    },
+    {
+      "before": 8192.0,
+      "after": 4096.0,
+      "finite_gradients": false
+    },
+    {
+      "before": 4096.0,
+      "after": 2048.0,
+      "finite_gradients": false
+    },
+    {
+      "before": 2048.0,
+      "after": 2048.0,
+      "finite_gradients": true
+    }
+  ],
+  "EMA_native_half_validation": {
+    "half": true,
+    "model_dtype": "torch.float16"
+  },
+  "validation_loss": {
+    "val/0": 1.00322,
+    "val/1": 1.55132,
+    "val/2": 1.01768
+  },
+  "formal_training": "NOT_RUN"
+}

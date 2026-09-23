@@ -1,0 +1,177 @@
+{
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-ror_v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-ror_v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-ror_v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    }
+  },
+  "math": {
+    "status": "PASS",
+    "device": "cpu",
+    "example_loss": 0.06433845311403275,
+    "example_grad": [
+      -0.0899999737739563,
+      0.0899999737739563
+    ],
+    "independent_reference": true,
+    "box_direct_gradient": null,
+    "fp32_atol": 1e-07,
+    "fp32_rtol": 1e-06
+  },
+  "criterion": {
+    "status": "PASS",
+    "final_match_calls": 1,
+    "aux_match_calls": 3,
+    "weighted": 0.006433836650103331
+  },
+  "integration": {
+    "status": "PASS",
+    "device": "cpu",
+    "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "parameters": 20149765,
+    "added_parameters": 0,
+    "state_keys": 552,
+    "class_adaptation": [
+      {
+        "name": "model.26.dec_score_head.0.bias",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.dec_score_head.0.weight",
+        "source_shape": [
+          80,
+          256
+        ],
+        "target_shape": [
+          1,
+          256
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.dec_score_head.1.bias",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.dec_score_head.1.weight",
+        "source_shape": [
+          80,
+          256
+        ],
+        "target_shape": [
+          1,
+          256
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.dec_score_head.2.bias",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.dec_score_head.2.weight",
+        "source_shape": [
+          80,
+          256
+        ],
+        "target_shape": [
+          1,
+          256
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.denoising_class_embed.weight",
+        "source_shape": [
+          80,
+          256
+        ],
+        "target_shape": [
+          1,
+          256
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.enc_score_head.bias",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      },
+      {
+        "name": "model.26.enc_score_head.weight",
+        "source_shape": [
+          80,
+          256
+        ],
+        "target_shape": [
+          1,
+          256
+        ],
+        "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+      }
+    ],
+    "changed_states_after_step": 539,
+    "zero_weight_update_max_abs": 0.0,
+    "gradient_max_abs": 0.0,
+    "native_repeat_gradient_max_abs": 0.0,
+    "gradient_comparison": "CPU exact; CUDA per-parameter max(2e-7, 4*native repeated-backward max_abs), forward/loss exact",
+    "optimizer_update_tolerances": "CPU exact; CUDA per-state max(2e-7,4*native repeated-step max_abs)",
+    "cuda_direct_step_variation_check": null,
+    "cuda_step_reference": null,
+    "diagnostics_predictions": "bitwise exact",
+    "active_L0": "bitwise exact",
+    "DN": true,
+    "no_DN": true,
+    "empty_GT": true,
+    "single_GT": true,
+    "validation": "L0 only",
+    "resume_e": 7,
+    "schedule_at_20": 0.1,
+    "fused_parameters": 19944965,
+    "fusion_status": "PASS_WITH_CANDIDATE_PERMUTATION",
+    "fusion_tolerances": {
+      "atol": 2e-05,
+      "rtol": 0.0002
+    },
+    "fusion_report": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-ror_v1\\outputs\\ror_v1\\checks\\fusion_cpu_20260923T171838489073\\fuse_diagnostic.json"
+  },
+  "status": "PASS"
+}

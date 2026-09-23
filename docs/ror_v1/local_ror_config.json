@@ -1,0 +1,9 @@
+{
+  "version": "ror_v1",
+  "coefficient": 0.1,
+  "delta": 0.02,
+  "clip": 0.0001,
+  "margin_cap": 2.0,
+  "warmup_start": 5,
+  "warmup_span": 15
+}
