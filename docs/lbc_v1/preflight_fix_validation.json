@@ -1,0 +1,433 @@
+{
+  "status": "PASSED",
+  "created": "2026-09-24T07:27:43.720427+00:00",
+  "tests_run": 6,
+  "skipped": 0,
+  "failures": [],
+  "server_validation": "服务器待验证",
+  "formal_training": "NOT_RUN",
+  "scope": "Targeted synthetic regression fixtures; no RTX4090/B16/640 capacity result",
+  "source_sha256_lf": {
+    "lbc_v1.py": "ef46409994963ff1b76a6adc478a5a18c271c11f71be534451bc632b62f94fe9",
+    "lbc_v1_training.py": "ea352a44e9d3fcbcb717bb18f7fe24efa0a0d860af90c8488a13b6c6e97f64f6",
+    "lbc_v1_preflight.py": "4abdbce5f86d5e75b893c6db7a67cde537e0184449f0a0bb8980b0bb64f6647a",
+    "lbc_v1_precision.py": "e620b00ce2ee859362483d87e1e0d8a8ed7cb0169ba2050d78e2c4f2e75e3142",
+    "lbc_v1_reporting.py": "74a7ca28afa380f36e3d407294b1a781656433c633587fe96e15767a2448bfbc",
+    "lbc_v1_diagnostics.py": "12403f14c43c245216297c2978b0acff1d99bf9132193055cdc8e725704c55ad",
+    "lbc_v1_preflight_checks.py": "525ad870269a4e78ecef01c5ce8328ec9a6018964d6381aba28da2a4edda28f4"
+  },
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "torch": "2.7.1+cu118",
+    "gpu": "NVIDIA GeForce RTX 2060"
+  },
+  "evidence": {
+    "bounded_failure_fixture": {
+      "status": "FAILED",
+      "error": "RuntimeError('Capacity check incomplete: effective update or head/backbone update missing')",
+      "microbatches": 16,
+      "effective_updates": 0,
+      "overflow_skips": 4,
+      "attempts": [
+        {
+          "index": 0,
+          "completed": true,
+          "microbatch_index": 43,
+          "accumulation_target": 4,
+          "accumulated_microbatches": 4,
+          "scale_before": 128.0,
+          "observation": "after native unscale_, before either clip",
+          "original_gradients": {
+            "finite": false,
+            "tensors_with_grad": 1,
+            "missing_grad_parameters": [],
+            "nonfinite_parameters": [
+              "model.5.blocks.0.branch2a.conv.weight"
+            ],
+            "l2_norm_fp64": {
+              "__nonfinite_float__": "+Inf"
+            }
+          },
+          "head_gradients": {
+            "finite": false,
+            "tensors_with_grad": 2,
+            "missing_grad_parameters": [],
+            "nonfinite_parameters": [
+              "lbc_head.prototype",
+              "lbc_head.proj.weight"
+            ],
+            "l2_norm_fp64": {
+              "__nonfinite_float__": "+Inf"
+            }
+          },
+          "backbone_parameter": "model.5.blocks.0.branch2a.conv.weight",
+          "scale_after": 64.0,
+          "effective_update": false,
+          "overflow_skip": true,
+          "effective_updates": 0,
+          "overflow_skips": 1,
+          "consecutive_overflow_skips": 1,
+          "clip_pre_norms": {
+            "original": {
+              "__nonfinite_float__": "+Inf"
+            },
+            "head": {
+              "__nonfinite_float__": "+Inf"
+            },
+            "threshold": 10.0
+          },
+          "parameters_finite": true,
+          "nonfinite_parameters": [],
+          "changed_observed_parameters": [],
+          "head_updated": false,
+          "backbone_updated": false,
+          "accumulated_microbatches_after": 0
+        },
+        {
+          "index": 1,
+          "completed": true,
+          "microbatch_index": 47,
+          "accumulation_target": 4,
+          "accumulated_microbatches": 4,
+          "scale_before": 64.0,
+          "observation": "after native unscale_, before either clip",
+          "original_gradients": {
+            "finite": false,
+            "tensors_with_grad": 1,
+            "missing_grad_parameters": [],
+            "nonfinite_parameters": [
+              "model.5.blocks.0.branch2a.conv.weight"
+            ],
+            "l2_norm_fp64": {
+              "__nonfinite_float__": "+Inf"
+            }
+          },
+          "head_gradients": {
+            "finite": false,
+            "tensors_with_grad": 2,
+            "missing_grad_parameters": [],
+            "nonfinite_parameters": [
+              "lbc_head.prototype",
+              "lbc_head.proj.weight"
+            ],
+            "l2_norm_fp64": {
+              "__nonfinite_float__": "+Inf"
+            }
+          },
+          "backbone_parameter": "model.5.blocks.0.branch2a.conv.weight",
+          "scale_after": 32.0,
+          "effective_update": false,
+          "overflow_skip": true,
+          "effective_updates": 0,
+          "overflow_skips": 2,
+          "consecutive_overflow_skips": 2,
+          "clip_pre_norms": {
+            "original": {
+              "__nonfinite_float__": "+Inf"
+            },
+            "head": {
+              "__nonfinite_float__": "+Inf"
+            },
+            "threshold": 10.0
+          },
+          "parameters_finite": true,
+          "nonfinite_parameters": [],
+          "changed_observed_parameters": [],
+          "head_updated": false,
+          "backbone_updated": false,
+          "accumulated_microbatches_after": 0
+        },
+        {
+          "index": 2,
+          "completed": true,
+          "microbatch_index": 51,
+          "accumulation_target": 4,
+          "accumulated_microbatches": 4,
+          "scale_before": 32.0,
+          "observation": "after native unscale_, before either clip",
+          "original_gradients": {
+            "finite": false,
+            "tensors_with_grad": 1,
+            "missing_grad_parameters": [],
+            "nonfinite_parameters": [
+              "model.5.blocks.0.branch2a.conv.weight"
+            ],
+            "l2_norm_fp64": {
+              "__nonfinite_float__": "+Inf"
+            }
+          },
+          "head_gradients": {
+            "finite": false,
+            "tensors_with_grad": 2,
+            "missing_grad_parameters": [],
+            "nonfinite_parameters": [
+              "lbc_head.prototype",
+              "lbc_head.proj.weight"
+            ],
+            "l2_norm_fp64": {
+              "__nonfinite_float__": "+Inf"
+            }
+          },
+          "backbone_parameter": "model.5.blocks.0.branch2a.conv.weight",
+          "scale_after": 16.0,
+          "effective_update": false,
+          "overflow_skip": true,
+          "effective_updates": 0,
+          "overflow_skips": 3,
+          "consecutive_overflow_skips": 3,
+          "clip_pre_norms": {
+            "original": {
+              "__nonfinite_float__": "+Inf"
+            },
+            "head": {
+              "__nonfinite_float__": "+Inf"
+            },
+            "threshold": 10.0
+          },
+          "parameters_finite": true,
+          "nonfinite_parameters": [],
+          "changed_observed_parameters": [],
+          "head_updated": false,
+          "backbone_updated": false,
+          "accumulated_microbatches_after": 0
+        },
+        {
+          "index": 3,
+          "completed": true,
+          "microbatch_index": 55,
+          "accumulation_target": 4,
+          "accumulated_microbatches": 4,
+          "scale_before": 16.0,
+          "observation": "after native unscale_, before either clip",
+          "original_gradients": {
+            "finite": false,
+            "tensors_with_grad": 1,
+            "missing_grad_parameters": [],
+            "nonfinite_parameters": [
+              "model.5.blocks.0.branch2a.conv.weight"
+            ],
+            "l2_norm_fp64": {
+              "__nonfinite_float__": "+Inf"
+            }
+          },
+          "head_gradients": {
+            "finite": false,
+            "tensors_with_grad": 2,
+            "missing_grad_parameters": [],
+            "nonfinite_parameters": [
+              "lbc_head.prototype",
+              "lbc_head.proj.weight"
+            ],
+            "l2_norm_fp64": {
+              "__nonfinite_float__": "+Inf"
+            }
+          },
+          "backbone_parameter": "model.5.blocks.0.branch2a.conv.weight",
+          "scale_after": 8.0,
+          "effective_update": false,
+          "overflow_skip": true,
+          "effective_updates": 0,
+          "overflow_skips": 4,
+          "consecutive_overflow_skips": 4,
+          "clip_pre_norms": {
+            "original": {
+              "__nonfinite_float__": "+Inf"
+            },
+            "head": {
+              "__nonfinite_float__": "+Inf"
+            },
+            "threshold": 10.0
+          },
+          "parameters_finite": true,
+          "nonfinite_parameters": [],
+          "changed_observed_parameters": [],
+          "head_updated": false,
+          "backbone_updated": false,
+          "accumulated_microbatches_after": 0
+        }
+      ]
+    },
+    "scaler_isolation": {
+      "default": {
+        "scale": 65536.0,
+        "growth_factor": 2.0,
+        "backoff_factor": 0.5,
+        "growth_interval": 2000,
+        "_growth_tracker": 0
+      },
+      "diagnostic": {
+        "scope": "isolated capacity diagnostic only; never formal training or resume",
+        "native_default_init_scale": 65536.0,
+        "original_scale": 65536.0,
+        "original_state": {
+          "scale": 65536.0,
+          "growth_factor": 2.0,
+          "backoff_factor": 0.5,
+          "growth_interval": 2000,
+          "_growth_tracker": 0
+        },
+        "diagnostic_init_scale": 128.0,
+        "active_initial_scale": 128.0,
+        "enabled": true,
+        "native_dynamic_scaling": true,
+        "reinitializations": 1
+      },
+      "checkpoint_restored_exactly": {
+        "scale": 64.0,
+        "growth_factor": 2.0,
+        "backoff_factor": 0.5,
+        "growth_interval": 2000,
+        "_growth_tracker": 1
+      }
+    },
+    "native_cuda_updates": [
+      {
+        "index": 0,
+        "completed": true,
+        "microbatch_index": 3,
+        "accumulation_target": 4,
+        "accumulated_microbatches": 4,
+        "scale_before": 128.0,
+        "observation": "after native unscale_, before either clip",
+        "original_gradients": {
+          "finite": true,
+          "tensors_with_grad": 1,
+          "missing_grad_parameters": [],
+          "nonfinite_parameters": [],
+          "l2_norm_fp64": 0.6607906891330659
+        },
+        "head_gradients": {
+          "finite": false,
+          "tensors_with_grad": 2,
+          "missing_grad_parameters": [],
+          "nonfinite_parameters": [
+            "lbc_head.prototype"
+          ],
+          "l2_norm_fp64": {
+            "__nonfinite_float__": "+Inf"
+          }
+        },
+        "backbone_parameter": "model.5.blocks.0.branch2a.conv.weight",
+        "scale_after": 64.0,
+        "effective_update": false,
+        "overflow_skip": true,
+        "effective_updates": 0,
+        "overflow_skips": 1,
+        "consecutive_overflow_skips": 1,
+        "clip_pre_norms": {
+          "original": 0.6607906818389893,
+          "head": {
+            "__nonfinite_float__": "+Inf"
+          },
+          "threshold": 10.0
+        },
+        "parameters_finite": true,
+        "nonfinite_parameters": [],
+        "changed_observed_parameters": [],
+        "head_updated": false,
+        "backbone_updated": false,
+        "accumulated_microbatches_after": 0
+      },
+      {
+        "index": 1,
+        "completed": true,
+        "microbatch_index": 7,
+        "accumulation_target": 4,
+        "accumulated_microbatches": 4,
+        "scale_before": 64.0,
+        "observation": "after native unscale_, before either clip",
+        "original_gradients": {
+          "finite": true,
+          "tensors_with_grad": 1,
+          "missing_grad_parameters": [],
+          "nonfinite_parameters": [],
+          "l2_norm_fp64": 0.6572088331716938
+        },
+        "head_gradients": {
+          "finite": true,
+          "tensors_with_grad": 2,
+          "missing_grad_parameters": [],
+          "nonfinite_parameters": [],
+          "l2_norm_fp64": 1.0801537882699481
+        },
+        "backbone_parameter": "model.5.blocks.0.branch2a.conv.weight",
+        "scale_after": 64.0,
+        "effective_update": true,
+        "overflow_skip": false,
+        "effective_updates": 1,
+        "overflow_skips": 1,
+        "consecutive_overflow_skips": 0,
+        "clip_pre_norms": {
+          "original": 0.6572088599205017,
+          "head": 1.0801539421081543,
+          "threshold": 10.0
+        },
+        "parameters_finite": true,
+        "nonfinite_parameters": [],
+        "changed_observed_parameters": [
+          "lbc_head.proj.weight",
+          "lbc_head.prototype",
+          "model.5.blocks.0.branch2a.conv.weight"
+        ],
+        "head_updated": true,
+        "backbone_updated": true,
+        "accumulated_microbatches_after": 0
+      },
+      {
+        "index": 2,
+        "completed": true,
+        "microbatch_index": 11,
+        "accumulation_target": 4,
+        "accumulated_microbatches": 4,
+        "scale_before": 64.0,
+        "observation": "after native unscale_, before either clip",
+        "original_gradients": {
+          "finite": true,
+          "tensors_with_grad": 1,
+          "missing_grad_parameters": [],
+          "nonfinite_parameters": [],
+          "l2_norm_fp64": 0.7269554555060279
+        },
+        "head_gradients": {
+          "finite": true,
+          "tensors_with_grad": 2,
+          "missing_grad_parameters": [],
+          "nonfinite_parameters": [],
+          "l2_norm_fp64": 1.2612303932921154
+        },
+        "backbone_parameter": "model.5.blocks.0.branch2a.conv.weight",
+        "scale_after": 64.0,
+        "effective_update": true,
+        "overflow_skip": false,
+        "effective_updates": 2,
+        "overflow_skips": 1,
+        "consecutive_overflow_skips": 0,
+        "clip_pre_norms": {
+          "original": 0.7269554138183594,
+          "head": 1.26123046875,
+          "threshold": 10.0
+        },
+        "parameters_finite": true,
+        "nonfinite_parameters": [],
+        "changed_observed_parameters": [
+          "lbc_head.proj.weight",
+          "lbc_head.prototype",
+          "model.5.blocks.0.branch2a.conv.weight"
+        ],
+        "head_updated": true,
+        "backbone_updated": true,
+        "accumulated_microbatches_after": 0
+      }
+    ]
+  },
+  "nonfinite_fields": [
+    {
+      "path": "/evidence/native_cuda_updates/0/head_gradients/l2_norm_fp64",
+      "value": "+Inf"
+    },
+    {
+      "path": "/evidence/native_cuda_updates/0/clip_pre_norms/head",
+      "value": "+Inf"
+    }
+  ]
+}

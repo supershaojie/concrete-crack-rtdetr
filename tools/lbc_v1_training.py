@@ -3,7 +3,6 @@ from __future__ import annotations
 
 from copy import deepcopy
 from datetime import datetime, timezone
-import json
 from pathlib import Path
 import random
 import numpy as np
@@ -18,6 +17,7 @@ from ultralytics.models.rtdetr.lbc import LBCDetectionModel, LBC_CONFIG, HEAD_KE
 from ultralytics.nn.tasks import RTDETRDetectionModel
 from ultralytics.utils.patches import torch_load
 from ultralytics.utils.torch_utils import unwrap_model
+from lbc_v1_reporting import append_jsonl
 
 
 def copy_decoder_cache(source, target):
@@ -158,6 +158,9 @@ class LBCTrainer(RTDETRTrainer):
         self.scaler.unscale_(self.optimizer)
         original = [p for n, p in model.named_parameters() if n not in HEAD_KEYS]
         head = list(model.lbc_head.parameters())
+        diagnostic = getattr(self, 'lbc_update_diagnostics', None)
+        if diagnostic is not None:
+            diagnostic.before_clip(self, model, HEAD_KEYS)
         n0 = torch.nn.utils.clip_grad_norm_(original, max_norm=10.0)
         nh = torch.nn.utils.clip_grad_norm_(head, max_norm=10.0)
         old_scale = self.scaler.get_scale()
@@ -167,6 +170,8 @@ class LBCTrainer(RTDETRTrainer):
         self.lbc_effective_updates += int(not skipped)
         self.lbc_overflow_skips += int(skipped)
         self.lbc_consecutive_skips = self.lbc_consecutive_skips + 1 if skipped else 0
+        if diagnostic is not None:
+            diagnostic.after_step(self, model, n0, nh, skipped)
         # None preserves AdamW's skip semantics on an entirely unsupervised window.
         self.optimizer.zero_grad(set_to_none=True)
         if self.ema:
@@ -292,9 +297,7 @@ def epoch_end(trainer):
     report['clip_last'] = getattr(trainer, 'lbc_clip', None)
     if trainer.lbc_output:
         path = Path(trainer.lbc_output)/'epochs.jsonl'
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with path.open('a', encoding='utf-8') as stream:
-            stream.write(json.dumps(report, allow_nan=False) + '\n')
+        append_jsonl(path, report)
 
 
 def deploy(checkpoint, destination):

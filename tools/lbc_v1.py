@@ -17,8 +17,8 @@ import sys
 import tarfile
 import time
 
-from init_c19_lif_v1 import ROOT, SOURCE_SHA256, runtime, require, sha256, write_json
-from c19_lif_v1_diagnostic import atomic_json as write_json
+from init_c19_lif_v1 import ROOT, SOURCE_SHA256, runtime, require, sha256
+from lbc_v1_reporting import write_json, finalize_json
 from lbc_v1_training import initialize, LBC_CONFIG, LBCTrainer, validate_checkpoint, deploy
 from ultralytics.utils import YAML
 from ultralytics.utils.patches import torch_load
@@ -179,14 +179,17 @@ def preflight(local=False):
                 else:proc.terminate()
                 proc.wait(timeout=30)
                 raise RuntimeError('900-second capacity limit reached; inspect partial report/log')
+        if (folder/'capacity/bounded.json').exists():
+            report['capacity']=read(folder/'capacity/bounded.json')
         require(code==0,f'Capacity check failed ({code}); see {folder}/capacity.log')
-        report['capacity']=read(folder/'capacity/bounded.json')
+        require(report['capacity']['status']==('PASSED_LOCAL_SMALL_ONLY' if local else 'PASSED'),
+                'Capacity child did not report a complete pass')
         report['status']='PASSED_LOCAL_SMALL_ONLY' if local else 'PASSED'
     except BaseException as error:
         report['error']=repr(error)
         raise
     finally:
-        write_json(OUT/'preflight.json',report)
+        finalize_json(OUT/'preflight.json',report)
         print(f"Preflight {report['status']}: {OUT/'preflight.json'}")
 
 
@@ -269,7 +272,7 @@ def worker(log,resume=False):
         report.update(status='FAILED',error=repr(error))
         raise
     finally:
-        report.update(exit_code=code,end=stamp());write_json(state,report)
+        report.update(exit_code=code,end=stamp());finalize_json(state,report)
 
 
 def status():

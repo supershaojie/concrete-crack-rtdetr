@@ -3,7 +3,8 @@ from contextlib import contextmanager
 from copy import deepcopy
 import os
 import torch
-from init_c19_lif_v1 import require, write_json
+from init_c19_lif_v1 import require
+from lbc_v1_reporting import write_json, finalize_json
 
 
 def precision_settings():
@@ -69,4 +70,4 @@ def check_fusion(model, image, folder):
             report['fused_parameters']=sum(p.numel() for p in b.parameters())
         return report
     finally:
-        write_json(folder/'fusion.json',report)
+        finalize_json(folder/'fusion.json',report)

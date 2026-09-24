@@ -1,14 +1,15 @@
 """Two real augmented train mini-batches; bounded isolated native optimizer updates."""
 from __future__ import annotations
 from copy import deepcopy
-from datetime import datetime, timezone
 from pathlib import Path
 import time
+import traceback
 import torch
 from PIL import Image, ImageDraw
-from lbc_v1_training import LBCTrainer, native_copy, epoch_start, batch_end
-from init_c19_lif_v1 import require, write_json
-from c19_lif_v1_diagnostic import atomic_json as write_json
+from lbc_v1_training import LBCTrainer, native_copy, epoch_start
+from init_c19_lif_v1 import require
+from lbc_v1_reporting import write_json, finalize_json
+from lbc_v1_diagnostics import configure_capacity_scaler, UpdateDiagnostics, require_valid_attempts
 from ultralytics.models.rtdetr.lbc import regions
 from ultralytics.utils.torch_utils import autocast
 
@@ -48,15 +49,24 @@ def bounded_check(args, folder, server=True):
     started=time.monotonic()
     report=dict(status='FAILED',scope='isolated diagnostic; never used as formal initialization',
                 formal_training='NOT_RUN',server_capacity=server,batch=settings['batch'],imgsz=settings['imgsz'],
-                max_microbatches=16,max_seconds=900,epoch_condition=20,source_train_batches=2,reused_batches=True)
+                max_microbatches=16,max_seconds=900,max_effective_updates=2,epoch_condition=20,
+                source_train_batches=2,reused_batches=True,microbatches=0,effective_updates=0,overflow_skips=0)
     if server:
         require(torch.cuda.is_available(),'Server CUDA required')
         torch.cuda.reset_peak_memory_stats()
     trainer=None
+    observations=UpdateDiagnostics()
+    report['update_attempts']=observations.attempts
+    coverage=[];rows=[]
+    report.update(losses=rows,coverage=coverage)
     try:
         trainer=LBCTrainer(overrides=settings)
         trainer._setup_train()
         require(trainer.amp is bool(settings['amp']), 'Native AMP check changed the requested precision')
+        report['scaler_configuration']=configure_capacity_scaler(trainer)
+        trainer.lbc_update_diagnostics=observations
+        report.update(amp=trainer.amp,accumulation=trainer.accumulate,nbs=trainer.args.nbs,
+                      optimizer_groups=trainer.lbc_optimizer_groups,trainer_rebuild=trainer.lbc_model_audit)
         trainer.epoch=20;trainer.start_epoch=20
         trainer._lbc_ni=20*len(trainer.train_loader)-1
         trainer._lbc_last_opt_step=trainer._lbc_ni
@@ -70,25 +80,28 @@ def bounded_check(args, folder, server=True):
         backbone_before=backbone.detach().clone()
         iterator=iter(trainer.train_loader)
         raw_batches=[next(iterator),next(iterator)]
-        coverage=[];rows=[]
         for i in range(16):
             if time.monotonic()-started>=900:break
+            report['microbatches']=i+1
             with autocast(trainer.amp):
                 batch=trainer.preprocess_batch(deepcopy(raw_batches[i%2]))
                 loss,trainer.loss_items=trainer.model(batch)
                 trainer.loss=loss.sum()  # native single-device wrapper; no extra batch factor
+            report['actual_shape']=list(batch['img'].shape)
+            row=dict(index=i,loss=float(trainer.loss.detach()),**trainer.model.lbc_last)
+            row.pop('selected_points',None);rows.append(row)
             require(torch.isfinite(trainer.loss).all(), 'Nonfinite preflight loss')
             trainer.scaler.scale(trainer.loss).backward()
             if i<2:
                 coverage.append(visualize(batch,trainer.model.lbc_last,folder/f'train_batch_{i}',limit=8))
-            row=dict(index=i,loss=float(trainer.loss.detach()),**trainer.model.lbc_last)
-            row.pop('selected_points',None);rows.append(row)
             if trainer._lbc_ni-trainer._lbc_last_opt_step>=trainer.accumulate:
                 trainer.optimizer_step()
+                require_valid_attempts(observations.attempts)
             report.update(microbatches=i+1,effective_updates=trainer.lbc_effective_updates,
                           overflow_skips=trainer.lbc_overflow_skips,losses=rows)
             write_json(folder/'bounded_progress.json',report)
             if trainer.lbc_effective_updates>=2:break
+        require(time.monotonic()-started<900, '900-second capacity limit reached')
         report.update(microbatches=len(rows),amp=trainer.amp,actual_shape=list(batch['img'].shape),
             losses=rows,coverage=coverage,effective_updates=trainer.lbc_effective_updates,
             overflow_skips=trainer.lbc_overflow_skips,optimizer_groups=trainer.lbc_optimizer_groups,
@@ -100,6 +113,7 @@ def bounded_check(args, folder, server=True):
         report['mechanism_coverage']='INSUFFICIENT' if pairs==0 or report['pair_coverage']<.1 else 'OBSERVED_ON_TWO_BATCHES'
         require(1<=trainer.lbc_effective_updates<=2 and report['head_updated'] and report['backbone_updated'],
                 'Capacity check incomplete: effective update or head/backbone update missing')
+        require_valid_attempts(observations.attempts)
         require(report['mechanism_coverage']!='INSUFFICIENT','Mechanism coverage insufficient; inspect visual evidence')
         # Check a real, updated native scaler state, including the growth tracker.
         state=trainer.scaler.state_dict()
@@ -113,14 +127,20 @@ def bounded_check(args, folder, server=True):
         from lbc_v1_precision import check_fusion
         report['fusion']=check_fusion(native_copy(trainer.ema.ema.cpu().float()).to(batch['img'].device),
                                      batch['img'][:2].float(),folder/'fusion')
+        require(time.monotonic()-started<900, '900-second capacity limit reached')
         report['status']='PASSED' if server else 'PASSED_LOCAL_SMALL_ONLY'
         return report
     except BaseException as error:
         report['error']=repr(error)
+        report['traceback']=traceback.format_exc()
         raise
     finally:
         report['seconds']=time.monotonic()-started
         if server:
             report['peak_allocated_bytes']=torch.cuda.max_memory_allocated()
             report['peak_reserved_bytes']=torch.cuda.max_memory_reserved()
-        write_json(folder/'bounded.json',report)
+        if trainer is not None:
+            report.update(effective_updates=trainer.lbc_effective_updates,overflow_skips=trainer.lbc_overflow_skips,
+                          clip=getattr(trainer,'lbc_clip',None))
+        finalize_json(folder/'bounded.json',report)
+        finalize_json(folder/'bounded_progress.json',report)
