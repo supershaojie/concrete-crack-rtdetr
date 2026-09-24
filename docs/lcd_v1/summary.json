@@ -1,0 +1,74 @@
+{
+  "status": "LOCAL_BOUNDED_CHECKS_PASSED",
+  "source_signature": "708e4d7f92fb597b8a842a64b95a9d5038fc66081b69bf9af466e541ed4b9cbf",
+  "parameters": 20159333,
+  "new_parameters": 9568,
+  "common_states_equal": 552,
+  "added_keys": 6,
+  "class_adaptations": 9,
+  "cpu_updates": 2,
+  "cuda_updates": 2,
+  "cuda_amp_skips": 4,
+  "cuda_peak_allocated": 667348992,
+  "cuda_peak_reserved": 721420288,
+  "local_batch_shape": [
+    2,
+    3,
+    160,
+    160
+  ],
+  "fusion_cpu": "PASS_CANDIDATE_PERMUTATION",
+  "fusion_cuda": "PASS_CANDIDATE_PERMUTATION",
+  "historical_unseeded_fusion_failure": "PRESERVED; not accepted; near-tied candidate set can drift",
+  "native_full_loss_keys": [
+    "loss_bbox",
+    "loss_bbox_aux",
+    "loss_bbox_aux_dn",
+    "loss_bbox_dn",
+    "loss_class",
+    "loss_class_aux",
+    "loss_class_aux_dn",
+    "loss_class_dn",
+    "loss_giou",
+    "loss_giou_aux",
+    "loss_giou_aux_dn",
+    "loss_giou_dn"
+  ],
+  "lifecycle": {
+    "status": "PASSED",
+    "fresh_process": true,
+    "model_ema_optimizer_scheduler_scaler": true,
+    "pending_scaled_gradients": true,
+    "next_epoch": 2,
+    "last_opt_step": 752,
+    "label_free_eval": true,
+    "nonzero_LCD_restored": true
+  },
+  "server_preflight": "PENDING",
+  "formal_training": "NOT_STARTED",
+  "full_val_test": "NOT_RUN",
+  "onnx_tensorrt": "NOT_VERIFIED",
+  "torchscript": {
+    "status": "PASSED",
+    "shape": [
+      1,
+      300,
+      5
+    ],
+    "scope": "full model, fixed B1/160; dynamic/full640 export unverified"
+  },
+  "latency": {
+    "ms": {
+      "pair": 148.13448000000022,
+      "lcd": 139.41389999999956
+    },
+    "device": "cpu",
+    "batch": 1,
+    "imgsz": 160,
+    "warmup": 2,
+    "repeats": 5,
+    "paper_comparison": false
+  },
+  "final_source_signature": "05c58642e9fe0cb7e74b554aafd083b30e4942edbcde006435b94eda2cf15027",
+  "post_numerical_check_change": "Only status() adds tmux session and CSV-tail reporting; separately exercised in status_checks.json."
+}

@@ -367,7 +367,7 @@ class BaseTrainer:
 
         nb = len(self.train_loader)  # number of batches
         nw = max(round(self.args.warmup_epochs * nb), 100) if self.args.warmup_epochs > 0 else -1  # warmup iterations
-        last_opt_step = -1
+        last_opt_step = getattr(self, "_lcd_last_opt_step", -1)
         self.epoch_time = None
         self.epoch_time_start = time.time()
         self.train_time_start = time.time()
@@ -464,6 +464,8 @@ class BaseTrainer:
                 if ni - last_opt_step >= self.accumulate:
                     self.optimizer_step()
                     last_opt_step = ni
+                    if hasattr(self, "_lcd_last_opt_step"):
+                        self._lcd_last_opt_step = ni
 
                     # Timed stopping
                     if self.args.time:

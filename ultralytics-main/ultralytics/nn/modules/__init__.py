@@ -200,3 +200,5 @@ __all__ = (
     "YOLOESegment26",
     "v10Detect",
 )
+
+from .lcd import BlocksLCD, LCD

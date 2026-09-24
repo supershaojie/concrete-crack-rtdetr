@@ -59,7 +59,7 @@ def image_record(pred, gt, dataset_root, conf):
                 ground_truth=[dict(class_id=int(c), bbox=b) for b, c in zip(gt_boxes.tolist(), gt["cls"].detach().cpu())])
 
 
-def evaluate(weights, data, split, output, device="0", val_report=None, evidence_scope="full_split"):
+def evaluate(weights, data, split, output, device="0", val_report=None, evidence_scope="full_split", model_verifier=verify_model, metric_summary=None):
     weights, data, output = Path(weights).resolve(), Path(data).resolve(), Path(output).resolve()
     require(split in ("val", "test"), "Expected val/test")
     require(weights.is_file() and data.is_file(), "Missing checkpoint/data config")
@@ -88,7 +88,7 @@ def evaluate(weights, data, split, output, device="0", val_report=None, evidence
     stream_path = output / "predictions_gt.jsonl.gz"
     try:
         model = RTDETR(str(weights))
-        verify_model(model.model)
+        model_verifier(model.model)
         require(model.model.model[-1].nc == 1, "Evaluation requires nc=1")
         report["parameters_unfused"] = sum(p.numel() for p in model.model.parameters())
         with gzip.open(stream_path, "xt", encoding="utf-8") as stream:
@@ -143,6 +143,8 @@ def evaluate(weights, data, split, output, device="0", val_report=None, evidence
                       ap_iou_thresholds=[round(.5 + i * .05, 2) for i in range(10)], ap_by_class=ap.tolist(),
                       ap_class_index=np.asarray(metrics.box.ap_class_index).tolist(), speed_ms_per_image=metrics.speed,
                       predictions_gt_sha256=sha256(stream_path), export_complete=True, **counts)
+        if metric_summary is not None:
+            report.update(metric_summary(metrics))
     except BaseException as error:
         report.update(error=repr(error), **counts)
         raise

@@ -1,0 +1,19 @@
+{
+  "status": "PASSED",
+  "fixture": {
+    "status": "NOT_DISPATCHED",
+    "session": "lcd-v1-training",
+    "session_active": false,
+    "processes": [],
+    "children": [],
+    "log": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-lcd_v1\\outputs\\lcd_v1\\status-rvys5w40\\missing.log",
+    "exit": null,
+    "shell_exit": null,
+    "results_csv_tail": "1,2\n2,1",
+    "results_csv": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-lcd_v1\\outputs\\lcd_v1\\status-rvys5w40\\run\\results.csv",
+    "best_exists": false,
+    "last_exists": false
+  },
+  "formal_training": "NOT_STARTED",
+  "source_signature": "05c58642e9fe0cb7e74b554aafd083b30e4942edbcde006435b94eda2cf15027"
+}

@@ -1,0 +1,45 @@
+{
+  "torchscript": {
+    "status": "PASSED",
+    "shape": [
+      1,
+      300,
+      5
+    ],
+    "scope": "full model, fixed B1/160; dynamic/full640 export unverified"
+  },
+  "precision": {
+    "before": {
+      "cudnn_tf32": true,
+      "matmul_tf32": false,
+      "float32_matmul_precision": "highest",
+      "cuda_autocast": false,
+      "cpu_autocast": false
+    },
+    "inside": {
+      "cudnn_tf32": false,
+      "matmul_tf32": false,
+      "float32_matmul_precision": "highest",
+      "cuda_autocast": false,
+      "cpu_autocast": false
+    },
+    "after": {
+      "cudnn_tf32": true,
+      "matmul_tf32": false,
+      "float32_matmul_precision": "highest",
+      "cuda_autocast": false,
+      "cpu_autocast": false
+    },
+    "restored": true
+  },
+  "autobackend_fused_half": {
+    "status": "PASSED",
+    "shape": [
+      1,
+      300,
+      5
+    ],
+    "lif_bn": true,
+    "lcd_type": "LCD"
+  }
+}

@@ -1,0 +1,765 @@
+[
+  {
+    "field": "task",
+    "mother": "detect",
+    "lcd": "detect",
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "mode",
+    "mother": "train",
+    "lcd": "train",
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "model",
+    "mother": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/weights/c19_lif_v1_controlled_init.pt",
+    "lcd": "/root/autodl-tmp/projects/Crack_RTDETR-lcd_v1/outputs/lcd_v1/lcd_v1_controlled_init.pt",
+    "changed": true,
+    "types_equal": true
+  },
+  {
+    "field": "data",
+    "mother": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "lcd": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "epochs",
+    "mother": 200,
+    "lcd": 200,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "time",
+    "mother": null,
+    "lcd": null,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "patience",
+    "mother": 50,
+    "lcd": 50,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "batch",
+    "mother": 16,
+    "lcd": 16,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "imgsz",
+    "mother": 640,
+    "lcd": 640,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "save",
+    "mother": true,
+    "lcd": true,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "save_period",
+    "mother": -1,
+    "lcd": -1,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "cache",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "device",
+    "mother": "0",
+    "lcd": "0",
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "workers",
+    "mother": 8,
+    "lcd": 8,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "project",
+    "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "lcd": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "name",
+    "mother": "c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+    "lcd": "lcd_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+    "changed": true,
+    "types_equal": true
+  },
+  {
+    "field": "exist_ok",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "pretrained",
+    "mother": true,
+    "lcd": true,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "optimizer",
+    "mother": "AdamW",
+    "lcd": "AdamW",
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "verbose",
+    "mother": true,
+    "lcd": true,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "seed",
+    "mother": 42,
+    "lcd": 42,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "deterministic",
+    "mother": true,
+    "lcd": true,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "single_cls",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "rect",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "cos_lr",
+    "mother": true,
+    "lcd": true,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "close_mosaic",
+    "mother": 10,
+    "lcd": 10,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "resume",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "amp",
+    "mother": true,
+    "lcd": true,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "fraction",
+    "mother": 1.0,
+    "lcd": 1.0,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "profile",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "freeze",
+    "mother": null,
+    "lcd": null,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "multi_scale",
+    "mother": 0.0,
+    "lcd": 0.0,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "compile",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "overlap_mask",
+    "mother": true,
+    "lcd": true,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "mask_ratio",
+    "mother": 4,
+    "lcd": 4,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "dropout",
+    "mother": 0.0,
+    "lcd": 0.0,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "val",
+    "mother": true,
+    "lcd": true,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "split",
+    "mother": "val",
+    "lcd": "val",
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "save_json",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "conf",
+    "mother": null,
+    "lcd": null,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "iou",
+    "mother": 0.7,
+    "lcd": 0.7,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "max_det",
+    "mother": 300,
+    "lcd": 300,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "half",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "dnn",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "plots",
+    "mother": true,
+    "lcd": true,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "end2end",
+    "mother": null,
+    "lcd": null,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "source",
+    "mother": null,
+    "lcd": null,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "vid_stride",
+    "mother": 1,
+    "lcd": 1,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "stream_buffer",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "visualize",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "augment",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "agnostic_nms",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "classes",
+    "mother": null,
+    "lcd": null,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "retina_masks",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "embed",
+    "mother": null,
+    "lcd": null,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "show",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "save_frames",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "save_txt",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "save_conf",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "save_crop",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "show_labels",
+    "mother": true,
+    "lcd": true,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "show_conf",
+    "mother": true,
+    "lcd": true,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "show_boxes",
+    "mother": true,
+    "lcd": true,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "line_width",
+    "mother": null,
+    "lcd": null,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "format",
+    "mother": "torchscript",
+    "lcd": "torchscript",
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "keras",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "optimize",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "int8",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "dynamic",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "simplify",
+    "mother": true,
+    "lcd": true,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "opset",
+    "mother": null,
+    "lcd": null,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "workspace",
+    "mother": null,
+    "lcd": null,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "nms",
+    "mother": false,
+    "lcd": false,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "lr0",
+    "mother": 0.0005,
+    "lcd": 0.0005,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "lrf",
+    "mother": 0.01,
+    "lcd": 0.01,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "momentum",
+    "mother": 0.937,
+    "lcd": 0.937,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "weight_decay",
+    "mother": 0.0001,
+    "lcd": 0.0001,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "warmup_epochs",
+    "mother": 5,
+    "lcd": 5,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "warmup_momentum",
+    "mother": 0.8,
+    "lcd": 0.8,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "warmup_bias_lr",
+    "mother": 0.1,
+    "lcd": 0.1,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "box",
+    "mother": 7.5,
+    "lcd": 7.5,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "cls",
+    "mother": 0.5,
+    "lcd": 0.5,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "dfl",
+    "mother": 1.5,
+    "lcd": 1.5,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "pose",
+    "mother": 12.0,
+    "lcd": 12.0,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "kobj",
+    "mother": 1.0,
+    "lcd": 1.0,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "rle",
+    "mother": 1.0,
+    "lcd": 1.0,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "angle",
+    "mother": 1.0,
+    "lcd": 1.0,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "nbs",
+    "mother": 64,
+    "lcd": 64,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "hsv_h",
+    "mother": 0.015,
+    "lcd": 0.015,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "hsv_s",
+    "mother": 0.5,
+    "lcd": 0.5,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "hsv_v",
+    "mother": 0.35,
+    "lcd": 0.35,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "degrees",
+    "mother": 5,
+    "lcd": 5,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "translate",
+    "mother": 0.1,
+    "lcd": 0.1,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "scale",
+    "mother": 0.4,
+    "lcd": 0.4,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "shear",
+    "mother": 1.5,
+    "lcd": 1.5,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "perspective",
+    "mother": 0.0002,
+    "lcd": 0.0002,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "flipud",
+    "mother": 0.2,
+    "lcd": 0.2,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "fliplr",
+    "mother": 0.5,
+    "lcd": 0.5,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "bgr",
+    "mother": 0.0,
+    "lcd": 0.0,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "mosaic",
+    "mother": 0.8,
+    "lcd": 0.8,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "mixup",
+    "mother": 0.05,
+    "lcd": 0.05,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "cutmix",
+    "mother": 0,
+    "lcd": 0,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "copy_paste",
+    "mother": 0,
+    "lcd": 0,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "copy_paste_mode",
+    "mother": "flip",
+    "lcd": "flip",
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "auto_augment",
+    "mother": null,
+    "lcd": null,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "erasing",
+    "mother": 0,
+    "lcd": 0,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "cfg",
+    "mother": null,
+    "lcd": null,
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "tracker",
+    "mother": "botsort.yaml",
+    "lcd": "botsort.yaml",
+    "changed": false,
+    "types_equal": true
+  },
+  {
+    "field": "save_dir",
+    "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+    "lcd": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/lcd_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+    "changed": true,
+    "types_equal": true
+  }
+]

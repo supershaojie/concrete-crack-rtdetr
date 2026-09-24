@@ -1,0 +1,21 @@
+{
+  "version": "LCD_v1",
+  "channels": 128,
+  "rank": 32,
+  "seed": 424002,
+  "layer": 5,
+  "ln_eps": 1e-06,
+  "ln_affine": true,
+  "conv_bias": false,
+  "shared_kernel": true,
+  "dilations": [
+    1,
+    2
+  ],
+  "padding": [
+    1,
+    2
+  ],
+  "output_init": "zeros",
+  "extra_loss": null
+}

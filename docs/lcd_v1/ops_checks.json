@@ -1,0 +1,14 @@
+{
+  "sync_first_create": true,
+  "sync_forward_update": true,
+  "tracked_edits_rejected": true,
+  "ignored_collision_rejected": true,
+  "rewind_rejected": true,
+  "main_head_and_untracked_preserved": true,
+  "stale_or_incomplete_preflight_rejected": true,
+  "dispatch_command_checked": true,
+  "unresolved_dispatch_lock_rejected": true,
+  "formal_training": "NOT_STARTED",
+  "tmux": "MOCKED locally; real session start pending server",
+  "status": "PASSED"
+}

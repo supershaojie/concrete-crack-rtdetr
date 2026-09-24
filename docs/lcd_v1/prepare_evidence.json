@@ -1,0 +1,79 @@
+{
+  "status": "PASSED",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-lcd_v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-lcd_v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-lcd_v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    },
+    "criterion": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-lcd_v1\\ultralytics-main\\ultralytics\\models\\utils\\loss.py",
+    "research": {
+      "version": "LCD_v1",
+      "channels": 128,
+      "rank": 32,
+      "seed": 424002,
+      "layer": 5,
+      "ln_eps": 1e-06,
+      "ln_affine": true,
+      "conv_bias": false,
+      "shared_kernel": true,
+      "dilations": [
+        1,
+        2
+      ],
+      "padding": [
+        1,
+        2
+      ],
+      "output_init": "zeros",
+      "extra_loss": null
+    }
+  },
+  "identity": {
+    "source": "708e4d7f92fb597b8a842a64b95a9d5038fc66081b69bf9af466e541ed4b9cbf",
+    "init": "6121c50eaa9bb487d017c0d174f6285383a26a193c1b2f1c8f5fe443692cdbd4",
+    "recipe": "6d7dcc2dfee7ddb73f946614a862a45faa3c726a0d8a648a18a066dd637093fb",
+    "data": "5738ceac3926404a2e4d10a448f6f3d92d654e9d533a4ba614c8d16f126fa9bb",
+    "inventory": "8567e1b4d1aae5f168fb18b633ed4357c7f0aba56c0041a6570647fb542d0446",
+    "research": {
+      "version": "LCD_v1",
+      "channels": 128,
+      "rank": 32,
+      "seed": 424002,
+      "layer": 5,
+      "ln_eps": 1e-06,
+      "ln_affine": true,
+      "conv_bias": false,
+      "shared_kernel": true,
+      "dilations": [
+        1,
+        2
+      ],
+      "padding": [
+        1,
+        2
+      ],
+      "output_init": "zeros",
+      "extra_loss": null
+    }
+  },
+  "source": "D:\\MyProjects\\Crack_RTDETR\\weights\\rtdetr_r18_lite_imagenet_backbone_init.pt",
+  "data_root": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det",
+  "local_only": true,
+  "formal_training": "NOT_STARTED",
+  "data_limit": "已有增强同源图跨 split；本任务沿用物理 split，不重新划分"
+}

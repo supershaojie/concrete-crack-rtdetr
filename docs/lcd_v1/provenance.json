@@ -1,0 +1,58 @@
+{
+  "base": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "source_signature": "708e4d7f92fb597b8a842a64b95a9d5038fc66081b69bf9af466e541ed4b9cbf",
+  "protected": {
+    "ultralytics-main/ultralytics/nn/modules/lif_down.py": {
+      "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+      "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "unchanged_from_mother": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/cbr.py": {
+      "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+      "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "unchanged_from_mother": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/block.py": {
+      "raw_sha256": "6d0ede6e9c8861c940745d0e63103a8bc71fa00b5319d12b3e2013be54baae51",
+      "lf_sha256": "7ee11e94e88c89abc1a6cce14b99e41fe6f1d2d6a8bb031bd4d45184609ca882",
+      "unchanged_from_mother": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/head.py": {
+      "raw_sha256": "f96f372951fbea16ff4f5ce974a1f934f1f51d27a3866c50f296771d8dd4ef98",
+      "lf_sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+      "unchanged_from_mother": true
+    },
+    "ultralytics-main/ultralytics/nn/modules/transformer.py": {
+      "raw_sha256": "453bf72ed98bd86815ecfd97169637c40db1dbb58916f462ba213e905b96b777",
+      "lf_sha256": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602",
+      "unchanged_from_mother": true
+    },
+    "ultralytics-main/ultralytics/models/utils/loss.py": {
+      "raw_sha256": "db5c644d54350eacc6b8a5dbe3f5fd9b38b99383413f055a782194f859df14a8",
+      "lf_sha256": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75",
+      "unchanged_from_mother": true
+    },
+    "ultralytics-main/ultralytics/models/utils/ops.py": {
+      "raw_sha256": "99b11ae1cb287cf39a872f952cce9b5784635255cb1c5af50ac872fa8cb182ba",
+      "lf_sha256": "7d520895c245adafb06b07c6b330dabbd6a36a69cd0fe742cd71f2797f474dde",
+      "unchanged_from_mother": true
+    },
+    "ultralytics-main/ultralytics/models/rtdetr/train.py": {
+      "raw_sha256": "91f9148261328acdddb551ad04ab7acd462b56ed9dade690a7008d42ea9798ad",
+      "lf_sha256": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+      "unchanged_from_mother": true
+    },
+    "ultralytics-main/ultralytics/models/rtdetr/val.py": {
+      "raw_sha256": "5f7eb3025f37a46903e103ba0c82bac1cf9fdebdd9f1590c748a90666a355106",
+      "lf_sha256": "f7974365832f0eb2e146571a591150f268d42ecb89e12e96f2518d4251a63a6a",
+      "unchanged_from_mother": true
+    }
+  },
+  "instruction_sha256": "379aacdb38a3f8b03bb5aca2ece03d233ac5264c78f28c5af7d5311a146560ce",
+  "data_reference": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\metadata\\launch\\dataset_inventory.json",
+  "mother_recipe_reference": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\metadata\\launch\\actual_train_args.yaml",
+  "foreign_experiment_code_imported": false,
+  "precision_reference": "91abf119f92a0b930fee933f30a2e6950143f023 strict precision scope only",
+  "final_source_signature": "05c58642e9fe0cb7e74b554aafd083b30e4942edbcde006435b94eda2cf15027",
+  "source_change_after_numerical_checks": "status() session/CSV-tail reporting only, separately tested"
+}
