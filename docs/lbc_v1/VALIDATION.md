@@ -20,6 +20,7 @@ EMA、epoch 边界 scheduler/scaler/optimizer/未清窗口恢复，恢复 e=20�
 
 Git sync 离线临时仓库验证：首次创建、同 SHA 重入、干净前进更新通过；tracked 修改、冲突 untracked、冲突 ignored、
 过期 SHA 均拒绝且文件/HEAD 保留；旧报告备份和主工作区保持已检查。shell 入口通过 bash -n。
+LIGHT 打包与逐项 SHA256 回读校验已通过，体积小于 8MB；补丁按原始字节保存以兼容 Windows 中文内容。
 
 测试过程发现并修复：CPU 多线程 embedding 归约不保证逐位一致，确定性对照改用单线程；部署原 decoder 缓存必须保留；
 部署两侧 requires_grad 状态统一到推理状态，避免 attention 执行路径差别。未复制梯度/参数伪造原路径通过。

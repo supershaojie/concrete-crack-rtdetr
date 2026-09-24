@@ -40,7 +40,7 @@ def stamp():
 
 
 def git(*args):
-    return subprocess.check_output(['git','-c',f'safe.directory={ROOT.as_posix()}',*args],cwd=ROOT,text=True).strip()
+    return subprocess.check_output(['git','-c',f'safe.directory={ROOT.as_posix()}',*args],cwd=ROOT,encoding='utf-8').strip()
 
 
 def archive_report(path):
@@ -353,7 +353,8 @@ def pack():
     if csv.exists():inputs['training/results.csv']=csv.read_bytes()
     for log in sorted(OUT.glob('console_*.log'))[-2:]:
         inputs['log_tail/'+log.name]='\n'.join(log.read_text(errors='replace').splitlines()[-150:]).encode()
-    inputs['source.patch']=git('diff',BASE,'HEAD').encode()
+    inputs['source.patch']=subprocess.check_output(
+        ['git','-c',f'safe.directory={ROOT.as_posix()}','diff','--binary',BASE,'HEAD'],cwd=ROOT)
     inputs['identity.json']=json.dumps(metadata,indent=2).encode()
     manifest={name:dict(bytes=len(data),sha256=hashlib.sha256(data).hexdigest()) for name,data in inputs.items()}
     inputs['MANIFEST.json']=json.dumps(manifest,indent=2).encode()

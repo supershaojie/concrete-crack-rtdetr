@@ -12,8 +12,8 @@
     "lf_sha256": "b54a9bd588f7a9ec708668e7f3c964d8e13b60d229eac62332c1ac17974d4310"
   },
   "tools/lbc_v1.py": {
-    "raw_sha256": "cc34134fe172582ec85d6d786e5ca65ce8b7980611ecec62b6aaf0fcc1f7c6f5",
-    "lf_sha256": "cc34134fe172582ec85d6d786e5ca65ce8b7980611ecec62b6aaf0fcc1f7c6f5"
+    "raw_sha256": "027a5d600ad26674c4b0fafc5e07cc910697a31da0139d687a49b9bfcc4a1928",
+    "lf_sha256": "027a5d600ad26674c4b0fafc5e07cc910697a31da0139d687a49b9bfcc4a1928"
   },
   "tools/lbc_v1.sh": {
     "raw_sha256": "0af0a4920b31b992aebc38b19957ab3a5edaceb561b67e1b124171b059da1747",
