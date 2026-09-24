@@ -301,6 +301,7 @@
       "repeated_completed_test_reuses_identity": true,
       "changed_test_weight_rejected": true,
       "stale_exit_not_reused": true,
+      "LIGHT_excludes_weights": true,
       "live_server_tmux": "PENDING"
     },
     "train_augmentation": {
@@ -374,6 +375,30 @@
         "matched_fraction": 1.0
       },
       "interpretation": "box responsibility points, not crack pixel labels"
+    },
+    "offline_sync": {
+      "status": "PASS",
+      "scope": "offline shared Git fixture, interpreter and fetch transport bindings substituted",
+      "tested_sha": "9c66d58b6d73d840fcb5ef9482d68946b3643a68",
+      "official_delivery_record": true,
+      "clean_resync": true,
+      "main_head_preserved": true,
+      "tracked_edits_preserved": true,
+      "active_PDS_rejected": true,
+      "LBC_session_ignored": true,
+      "complete_SHA_required": true,
+      "old_metadata_archived": true,
+      "no_real_remote_access": true
+    },
+    "actual_prepare_and_pack_fixture": {
+      "status": "PASS",
+      "scope": "real entry points in isolated local linked worktree; no training",
+      "tested_sha": "9c66d58b6d73d840fcb5ef9482d68946b3643a68",
+      "controlled_init_sha256": "e79f03c77d0adde9aed96ea1eec77416298544be04f5ddb5829198346548d455",
+      "public_states": 552,
+      "train_parameters": 20160586,
+      "LIGHT_bytes": 145779,
+      "LIGHT_no_weights": true
     }
   },
   "server_B16_640": "PENDING",

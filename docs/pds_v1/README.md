@@ -138,6 +138,9 @@ pack默认LIGHT，只有身份、配置、差异、报告和日志摘要，无�
 
 含交付完整SHA的独立可复制服务器命令在最终交付的 `server_commands.md`。
 服务器B16容量、Linux tmux和正式训练为PENDING，本地PASS不能替代。
+正式sync脚本已在隔离Git夹具中实际运行：生成交付记录、原metadata归档、保留主HEAD和已跟踪修改、
+拒绝活跃PDS而忽略LBC会话均通过；只替换解释器绑定和离线fetch运输。
+同一夹具中实际prepare和LIGHT pack通过，真实初值与配置已生成，包内没有权重。
 
 ## 证据与研究边界
 

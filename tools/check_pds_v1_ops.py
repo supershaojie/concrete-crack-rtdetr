@@ -84,11 +84,18 @@ def run(output):
             exit_info=read_json(out/"shell_exit_probe.json")
             assert exit_info["python_exit"]==7 and exit_info["tee_exit"]==0
             assert "PDS_PIPELINE_VISIBLE" in log.read_text()
+            with patch.object(ops,"verify_delivery"),patch.object(ops,"status",return_value={"phase":"NOT_STARTED"}):
+                packed=ops.pack()
+            import tarfile
+            with tarfile.open(packed["path"]) as archive:
+                names=archive.getnames()
+            assert "training/results.csv" not in names  # earlier renamed to results.old
+            assert not any(n.endswith(".pt") for n in names)
     result=dict(status="PASS",all_public_commands_parse=True,bash_syntax=True,
                 tee_visible_output_and_python_exit_preserved=True,strict_nonfinite_JSON=True,
                 setup_only_archive_preserves_old_run=True,checkpoint_and_results_protected=True,
                 repeated_completed_test_reuses_identity=True,changed_test_weight_rejected=True,
-                stale_exit_not_reused=True,live_server_tmux="PENDING")
+                stale_exit_not_reused=True,LIGHT_excludes_weights=True,live_server_tmux="PENDING")
     write_json(output/"ops.json",result)
     return result
 

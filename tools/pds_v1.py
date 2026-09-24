@@ -303,6 +303,10 @@ def pack():
         tar.add(folder/"identity.json",arcname="identity.json")
         for p in manifest:
             tar.add(p,arcname="reports/"+p.relative_to(OUT).as_posix())
+        for name in ("args.yaml", "results.csv", "pds_setup.json", "pds_optimizer_latest.json"):
+            p=RUN/name
+            if p.is_file() and p.stat().st_size <= 2_000_000:
+                tar.add(p,arcname="training/"+name)
         for p in sorted((ROOT/"docs/pds_v1").glob("*")):
             if p.is_file() and p.stat().st_size<2_000_000:
                 tar.add(p,arcname="docs/"+p.name)
