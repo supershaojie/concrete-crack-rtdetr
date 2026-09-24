@@ -1,0 +1,385 @@
+{
+  "status": "LOCAL_CHECKS_PASS",
+  "base_head_during_checks": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "note": "Checks ran against the implementation working tree, before delivery commit; no server run",
+  "reports": {
+    "CPU": {
+      "runtime": {
+        "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+        "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+        "torch": "2.7.1+cu118",
+        "cuda": "11.8",
+        "gpu": null,
+        "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-pds_v1\\ultralytics-main\\ultralytics\\__init__.py",
+        "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+        "criterion": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-pds_v1\\ultralytics-main\\ultralytics\\models\\utils\\loss.py",
+        "base": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+        "branch": "exp-rtdetr-r18-lite-pds-v1",
+        "module_hashes": {
+          "lif_down": {
+            "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+            "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+          },
+          "cbr": {
+            "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+            "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+          }
+        },
+        "clip_max_norm": 10.0,
+        "cuda_available": false
+      },
+      "server_B16_640": "PENDING",
+      "formal_training_started": false,
+      "mechanism": {
+        "status": "PASS",
+        "phase_non_square": true,
+        "fine_grid_640": [
+          160,
+          160
+        ],
+        "parameter_count": 10821,
+        "keys": 11,
+        "independent_scalar_loss": [
+          0.7167887946812422,
+          0.41216666375597316,
+          0.403709380137661
+        ],
+        "fixtures": [
+          "two_images",
+          "empty",
+          "thin_fallback",
+          "overlap_conflict",
+          "unequal_nj",
+          "zero_iou",
+          "clipping",
+          "invalid_skips",
+          "cap128",
+          "format_rejection"
+        ]
+      },
+      "model": {
+        "status": "PASS",
+        "device": "cpu",
+        "public_states": 552,
+        "parameters": 20160586,
+        "r0_equivalent": true,
+        "aux_gradient_route": {
+          "P2": {
+            "tensors": 15,
+            "norm": 0.3812874825788304,
+            "finite": true
+          },
+          "P3_backbone": {
+            "tensors": 15,
+            "norm": 0.4047184846178076,
+            "finite": true
+          },
+          "AIFI": {
+            "tensors": 12,
+            "norm": 0.03445838580223143,
+            "finite": true
+          },
+          "Neck_P3": {
+            "tensors": 27,
+            "norm": 0.21603773819412564,
+            "finite": true
+          },
+          "LIF": {
+            "tensors": 0,
+            "norm": 0.0,
+            "finite": true
+          },
+          "PAN": {
+            "tensors": 0,
+            "norm": 0.0,
+            "finite": true
+          },
+          "decoder": {
+            "tensors": 0,
+            "norm": 0.0,
+            "finite": true
+          }
+        },
+        "total_gradient_route": true,
+        "true_optimizer_updates": 2,
+        "aux_and_p2_weights_changed": true,
+        "accumulated_gradient_retained": true,
+        "eval_calls": 0,
+        "deploy_exact": true,
+        "independent_process_load": true
+      },
+      "status": "PASS"
+    },
+    "local_CUDA": {
+      "runtime": {
+        "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+        "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+        "torch": "2.7.1+cu118",
+        "cuda": "11.8",
+        "gpu": "NVIDIA GeForce RTX 2060",
+        "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-pds_v1\\ultralytics-main\\ultralytics\\__init__.py",
+        "lif_down_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-pds_v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+        "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+        "cbr_module": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-pds_v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+        "module_hashes": {
+          "lif_down": {
+            "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+            "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+          },
+          "cbr": {
+            "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+            "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+          }
+        },
+        "criterion": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-pds_v1\\ultralytics-main\\ultralytics\\models\\utils\\loss.py",
+        "base": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+        "branch": "exp-rtdetr-r18-lite-pds-v1",
+        "clip_max_norm": 10.0,
+        "cuda_available": true,
+        "gpu_total_bytes": 6442123264,
+        "cudnn": 90100
+      },
+      "server_B16_640": "PENDING",
+      "formal_training_started": false,
+      "mechanism": {
+        "status": "PASS",
+        "phase_non_square": true,
+        "fine_grid_640": [
+          160,
+          160
+        ],
+        "parameter_count": 10821,
+        "keys": 11,
+        "independent_scalar_loss": [
+          0.7167887946812422,
+          0.41216666375597316,
+          0.403709380137661
+        ],
+        "fixtures": [
+          "two_images",
+          "empty",
+          "thin_fallback",
+          "overlap_conflict",
+          "unequal_nj",
+          "zero_iou",
+          "clipping",
+          "invalid_skips",
+          "cap128",
+          "format_rejection"
+        ]
+      },
+      "model": {
+        "status": "PASS",
+        "device": "cuda:0",
+        "public_states": 552,
+        "parameters": 20160586,
+        "r0_equivalent": true,
+        "aux_gradient_route": {
+          "P2": {
+            "tensors": 15,
+            "norm": 0.3812567035024825,
+            "finite": true
+          },
+          "P3_backbone": {
+            "tensors": 15,
+            "norm": 0.4047188645250023,
+            "finite": true
+          },
+          "AIFI": {
+            "tensors": 12,
+            "norm": 0.03445842142617682,
+            "finite": true
+          },
+          "Neck_P3": {
+            "tensors": 27,
+            "norm": 0.21603844708049472,
+            "finite": true
+          },
+          "LIF": {
+            "tensors": 0,
+            "norm": 0.0,
+            "finite": true
+          },
+          "PAN": {
+            "tensors": 0,
+            "norm": 0.0,
+            "finite": true
+          },
+          "decoder": {
+            "tensors": 0,
+            "norm": 0.0,
+            "finite": true
+          }
+        },
+        "total_gradient_route": true,
+        "true_optimizer_updates": 2,
+        "aux_and_p2_weights_changed": true,
+        "accumulated_gradient_retained": true,
+        "eval_calls": 0,
+        "deploy_exact": true,
+        "independent_process_load": true
+      },
+      "status": "PASS"
+    },
+    "lifecycle": {
+      "status": "PASS",
+      "scope": "bounded CPU train-derived fixture; not official validation/test",
+      "resume": {
+        "status": "PASS",
+        "epoch": 7,
+        "ramp": 0.13333333333333333,
+        "optimizer_state_exact": true,
+        "scaler_scheduler_stopper_exact": true,
+        "raw_model_ema_exact": true,
+        "pending_gradients_exact": true,
+        "continued_real_update": true
+      },
+      "native_get_model": true,
+      "ema_has_all_auxiliary_keys": true,
+      "r0_head_unchanged_no_adamw_state": true,
+      "per_epoch_validator_head_calls": 0,
+      "independent_fixture_val_test": "PASS",
+      "actual_test_images_used": 0,
+      "deploy_source": "ema",
+      "deploy_exact": true,
+      "incomplete_resume_rejected": true
+    },
+    "AMP_B2_160": {
+      "status": "PASS",
+      "scope": "local B2/160 only; server B16/640 PENDING",
+      "diagnostic_only_scale": 128,
+      "native_check_amp": true,
+      "pds_precision": {
+        "input_dtypes": [
+          "torch.float16",
+          "torch.float16"
+        ],
+        "output_dtypes": [
+          "torch.float32",
+          "torch.float32"
+        ]
+      },
+      "effective_updates": 1,
+      "optimizer_diagnostics": [
+        {
+          "epoch": 20,
+          "scale_before": 128.0,
+          "gradients": {
+            "public": {
+              "tensors": 345,
+              "finite": true,
+              "nonfinite_names": [],
+              "norm": 245.83041380359688
+            },
+            "head": {
+              "tensors": 11,
+              "finite": true,
+              "nonfinite_names": [],
+              "norm": 0.5341277732926494
+            },
+            "global_norm": 245.83099406569116,
+            "clip_max_norm": 10.0
+          },
+          "scale_after": 128.0,
+          "effective": true,
+          "effective_steps": 1
+        }
+      ],
+      "native_FP16_validator_pds_calls": 0,
+      "AutoBackend_fused_half_pds_calls": 0,
+      "LIF_BN_retained": true,
+      "deploy_from_half_roundtrip_exact": true
+    },
+    "operations": {
+      "status": "PASS",
+      "all_public_commands_parse": true,
+      "bash_syntax": true,
+      "tee_visible_output_and_python_exit_preserved": true,
+      "strict_nonfinite_JSON": true,
+      "setup_only_archive_preserves_old_run": true,
+      "checkpoint_and_results_protected": true,
+      "repeated_completed_test_reuses_identity": true,
+      "changed_test_weight_rejected": true,
+      "stale_exit_not_reused": true,
+      "live_server_tmux": "PENDING"
+    },
+    "train_augmentation": {
+      "status": "PASS",
+      "scope": "two real augmented train mini-batches, B2/320 local coverage only",
+      "images": [
+        {
+          "image": "outputs\\pds_v1\\coverage_local\\train_aug_00.jpg",
+          "gt": 4,
+          "invalid_gt": 0,
+          "matched_gt": 4,
+          "unmatched_gt": 0,
+          "positives": 16,
+          "fallback": 0,
+          "inside_covered_gt": 4,
+          "candidates": 292,
+          "contested_points": 0,
+          "negatives": 5938,
+          "ignored": 446
+        },
+        {
+          "image": "outputs\\pds_v1\\coverage_local\\train_aug_01.jpg",
+          "gt": 6,
+          "invalid_gt": 0,
+          "matched_gt": 6,
+          "unmatched_gt": 0,
+          "positives": 24,
+          "fallback": 0,
+          "inside_covered_gt": 6,
+          "candidates": 467,
+          "contested_points": 1,
+          "negatives": 5716,
+          "ignored": 660
+        },
+        {
+          "image": "outputs\\pds_v1\\coverage_local\\train_aug_02.jpg",
+          "gt": 7,
+          "invalid_gt": 0,
+          "matched_gt": 7,
+          "unmatched_gt": 0,
+          "positives": 28,
+          "fallback": 0,
+          "inside_covered_gt": 7,
+          "candidates": 667,
+          "contested_points": 6,
+          "negatives": 5035,
+          "ignored": 1337
+        },
+        {
+          "image": "outputs\\pds_v1\\coverage_local\\train_aug_03.jpg",
+          "gt": 6,
+          "invalid_gt": 0,
+          "matched_gt": 6,
+          "unmatched_gt": 0,
+          "positives": 24,
+          "fallback": 0,
+          "inside_covered_gt": 6,
+          "candidates": 630,
+          "contested_points": 0,
+          "negatives": 4929,
+          "ignored": 1447
+        }
+      ],
+      "totals": {
+        "gt": 23,
+        "matched_gt": 23,
+        "unmatched_gt": 0,
+        "fallback": 0,
+        "positives": 92,
+        "contested_points": 7,
+        "matched_fraction": 1.0
+      },
+      "interpretation": "box responsibility points, not crack pixel labels"
+    }
+  },
+  "server_B16_640": "PENDING",
+  "server_tmux": "PENDING",
+  "formal_training": "NOT_STARTED",
+  "real_independent_val": "NOT_RUN",
+  "real_final_test": "NOT_RUN",
+  "PDS_performance": null
+}

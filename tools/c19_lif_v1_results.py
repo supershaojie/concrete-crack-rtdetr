@@ -59,14 +59,14 @@ def image_record(pred, gt, dataset_root, conf):
                 ground_truth=[dict(class_id=int(c), bbox=b) for b, c in zip(gt_boxes.tolist(), gt["cls"].detach().cpu())])
 
 
-def evaluate(weights, data, split, output, device="0", val_report=None, evidence_scope="full_split"):
+def evaluate(weights, data, split, output, device="0", val_report=None, evidence_scope="full_split", runtime_info=None):
     weights, data, output = Path(weights).resolve(), Path(data).resolve(), Path(output).resolve()
     require(split in ("val", "test"), "Expected val/test")
     require(weights.is_file() and data.is_file(), "Missing checkpoint/data config")
     require(not output.exists(), f"Preserve previous evaluation: {output}")
     settings = dict(EVAL, data=str(data), split=split, device=device, plots=True, save_json=False, save_txt=False,
                     project=str(output), name="plots", exist_ok=False)
-    digest, data_digest, info = sha256(weights), sha256(data), runtime()
+    digest, data_digest, info = sha256(weights), sha256(data), runtime_info if runtime_info is not None else runtime()
     if split == "test":
         require(val_report and Path(val_report).is_file(), "Test requires completed val of the selected checkpoint")
         prior = json.loads(Path(val_report).read_text(encoding="utf-8"))

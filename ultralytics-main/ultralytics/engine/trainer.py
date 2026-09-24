@@ -367,7 +367,8 @@ class BaseTrainer:
 
         nb = len(self.train_loader)  # number of batches
         nw = max(round(self.args.warmup_epochs * nb), 100) if self.args.warmup_epochs > 0 else -1  # warmup iterations
-        last_opt_step = -1
+        last_opt_step = getattr(self, "_resume_last_opt_step", -1)
+        self._last_opt_step = last_opt_step
         self.epoch_time = None
         self.epoch_time_start = time.time()
         self.train_time_start = time.time()
@@ -383,6 +384,8 @@ class BaseTrainer:
             self.plot_idx.extend([base_idx, base_idx + 1, base_idx + 2])
         epoch = self.start_epoch
         self.optimizer.zero_grad()  # zero any resumed gradients to ensure stability on train start
+        if hasattr(self, "_restore_pending_gradients"):
+            self._restore_pending_gradients()  # opt-in epoch-boundary resume; native path unchanged
         self._oom_retries = 0  # OOM auto-reduce counter for first epoch
         while True:
             self.epoch = epoch
@@ -464,6 +467,7 @@ class BaseTrainer:
                 if ni - last_opt_step >= self.accumulate:
                     self.optimizer_step()
                     last_opt_step = ni
+                    self._last_opt_step = ni
 
                     # Timed stopping
                     if self.args.time:

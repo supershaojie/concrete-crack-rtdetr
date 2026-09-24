@@ -1,0 +1,64 @@
+{
+  "base": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "branch": "exp-rtdetr-r18-lite-pds-v1",
+  "modules": {
+    "lif_down": {
+      "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+      "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+    },
+    "cbr": {
+      "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+      "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+    }
+  },
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "specification_sha256": "e700b7afe5455b77f742deb0d7d4b0f86b56210afebc226571946f29ba41d75b",
+  "reference_zip": "not obtained; independent implementation from contract",
+  "files": {
+    "tools/check_pds_v1.py": "ac76c6a3cf33f0f1dfa5c613b9e2e42bf129742ed3f792311a19bca118c86d6a",
+    "tools/check_pds_v1_amp.py": "f5f8a5eab5f902f53563abad7ee64e73d32019b99bc0f721e1a179fb53427e06",
+    "tools/check_pds_v1_lifecycle.py": "ac04b8ca71d1249cafe4c12c26656503d9b1f222b72c89e05b36747a073b464a",
+    "tools/check_pds_v1_ops.py": "9bc398af72392744f0011551c02e0c4eecfb8a05be4a8a1489d09a429cf23d72",
+    "tools/pds_v1.py": "ae4420dbc4e98c2d1e87afa38fc3eb58faaed291f6c160901b07b9b68caed5dc",
+    "tools/pds_v1_common.py": "3d1ac59754def84f4bc7d7fd828424b11047d6c2e995595e8cef6cd5c881d0a6",
+    "tools/pds_v1_deploy.py": "3eaf6da2c42bb1955524c8420dbb3d0a644590210d2047fd129407ed103819c1",
+    "tools/pds_v1_prepare.py": "35e9a8e9bf489fb273a2f93ee8b8b342dfef697c6dbe03be206469fa2eec47cc",
+    "tools/pds_v1_probe.py": "33e6509115567ea267ef0bc0eccabf4562855bc791caaa5d4c98fde9f653075f",
+    "tools/pds_v1_trainer.py": "af8edf9f1bad4518c4a2eebd9b5cd7325bf7669d49cf974d8cf253c9b2742bdb",
+    "tools/pds_v1.sh": "3baf31725ef8602545c525015b5cc88950dcd9502b3318f1ba972f10497a5035",
+    "tools/sync_pds_v1.sh": "70c9c3a4b17bd421f02a818171f35c209076f5b4b9ff952ce410ef8b31c53d6e",
+    "tools/c19_lif_v1_results.py": "464b3584a59b35b36f2d70874c86d721edca2309934ddb06a0dea646949b6eef",
+    "ultralytics-main/ultralytics/nn/modules/pds.py": "fb92db32f61bdf5b59d145793a19884d623229dee93d1bb78b4a7eb42c85a7a0",
+    "ultralytics-main/ultralytics/models/rtdetr/pds.py": "010fa242937d2c65090a2210501300d9a18dc0b1ffdd51d02e5509a51d8c12b3",
+    "ultralytics-main/ultralytics/engine/trainer.py": "8f51a317a3f81e70c7b6ac6e229f7086dfee290ee15107d436a00daba8195f2a",
+    "ultralytics-main/ultralytics/nn/autobackend.py": "16a727f82186ca99f39061e267863a198f35c80f0777be68f6f13835a9501ef4"
+  },
+  "assets": {
+    "bus.jpg": "c02019c4979c191eb739ddd944445ef408dad5679acab6fd520ef9d434bfbc63",
+    "yolo26n.pt": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef"
+  },
+  "local_data_identity": {
+    "config_sha256": "5738ceac3926404a2e4d10a448f6f3d92d654e9d533a4ba614c8d16f126fa9bb",
+    "inventory": {
+      "train": {
+        "images": 6048,
+        "boxes": 45573,
+        "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+        "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"
+      },
+      "val": {
+        "images": 1728,
+        "boxes": 12840,
+        "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+        "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+      },
+      "test": {
+        "images": 864,
+        "boxes": 6663,
+        "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+        "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"
+      }
+    },
+    "image_file_metadata": "aeca5df629c73e370adedaf2fdcd6d841f47560226339f2f64acbf1e39983d4e"
+  }
+}
