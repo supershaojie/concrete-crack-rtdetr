@@ -1,0 +1,656 @@
+[
+  {
+    "field": "agnostic_nms",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "amp",
+    "baseline": true,
+    "LBC": true,
+    "changed": false
+  },
+  {
+    "field": "angle",
+    "baseline": 1.0,
+    "LBC": 1.0,
+    "changed": false
+  },
+  {
+    "field": "augment",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "auto_augment",
+    "baseline": null,
+    "LBC": null,
+    "changed": false
+  },
+  {
+    "field": "batch",
+    "baseline": 16,
+    "LBC": 16,
+    "changed": false
+  },
+  {
+    "field": "bgr",
+    "baseline": 0.0,
+    "LBC": 0.0,
+    "changed": false
+  },
+  {
+    "field": "box",
+    "baseline": 7.5,
+    "LBC": 7.5,
+    "changed": false
+  },
+  {
+    "field": "cache",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "cfg",
+    "baseline": null,
+    "LBC": null,
+    "changed": false
+  },
+  {
+    "field": "classes",
+    "baseline": null,
+    "LBC": null,
+    "changed": false
+  },
+  {
+    "field": "close_mosaic",
+    "baseline": 10,
+    "LBC": 10,
+    "changed": false
+  },
+  {
+    "field": "cls",
+    "baseline": 0.5,
+    "LBC": 0.5,
+    "changed": false
+  },
+  {
+    "field": "compile",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "conf",
+    "baseline": null,
+    "LBC": null,
+    "changed": false
+  },
+  {
+    "field": "copy_paste",
+    "baseline": 0,
+    "LBC": 0,
+    "changed": false
+  },
+  {
+    "field": "copy_paste_mode",
+    "baseline": "flip",
+    "LBC": "flip",
+    "changed": false
+  },
+  {
+    "field": "cos_lr",
+    "baseline": true,
+    "LBC": true,
+    "changed": false
+  },
+  {
+    "field": "cutmix",
+    "baseline": 0,
+    "LBC": 0,
+    "changed": false
+  },
+  {
+    "field": "data",
+    "baseline": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "LBC": "/root/autodl-tmp/projects/Crack_RTDETR-lbc_v1/outputs/lbc_v1/data.yaml",
+    "changed": true
+  },
+  {
+    "field": "degrees",
+    "baseline": 5,
+    "LBC": 5,
+    "changed": false
+  },
+  {
+    "field": "deterministic",
+    "baseline": true,
+    "LBC": true,
+    "changed": false
+  },
+  {
+    "field": "device",
+    "baseline": "0",
+    "LBC": "0",
+    "changed": false
+  },
+  {
+    "field": "dfl",
+    "baseline": 1.5,
+    "LBC": 1.5,
+    "changed": false
+  },
+  {
+    "field": "dnn",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "dropout",
+    "baseline": 0.0,
+    "LBC": 0.0,
+    "changed": false
+  },
+  {
+    "field": "dynamic",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "embed",
+    "baseline": null,
+    "LBC": null,
+    "changed": false
+  },
+  {
+    "field": "end2end",
+    "baseline": null,
+    "LBC": null,
+    "changed": false
+  },
+  {
+    "field": "epochs",
+    "baseline": 200,
+    "LBC": 200,
+    "changed": false
+  },
+  {
+    "field": "erasing",
+    "baseline": 0,
+    "LBC": 0,
+    "changed": false
+  },
+  {
+    "field": "exist_ok",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "fliplr",
+    "baseline": 0.5,
+    "LBC": 0.5,
+    "changed": false
+  },
+  {
+    "field": "flipud",
+    "baseline": 0.2,
+    "LBC": 0.2,
+    "changed": false
+  },
+  {
+    "field": "format",
+    "baseline": "torchscript",
+    "LBC": "torchscript",
+    "changed": false
+  },
+  {
+    "field": "fraction",
+    "baseline": 1.0,
+    "LBC": 1.0,
+    "changed": false
+  },
+  {
+    "field": "freeze",
+    "baseline": null,
+    "LBC": null,
+    "changed": false
+  },
+  {
+    "field": "half",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "hsv_h",
+    "baseline": 0.015,
+    "LBC": 0.015,
+    "changed": false
+  },
+  {
+    "field": "hsv_s",
+    "baseline": 0.5,
+    "LBC": 0.5,
+    "changed": false
+  },
+  {
+    "field": "hsv_v",
+    "baseline": 0.35,
+    "LBC": 0.35,
+    "changed": false
+  },
+  {
+    "field": "imgsz",
+    "baseline": 640,
+    "LBC": 640,
+    "changed": false
+  },
+  {
+    "field": "int8",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "iou",
+    "baseline": 0.7,
+    "LBC": 0.7,
+    "changed": false
+  },
+  {
+    "field": "keras",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "kobj",
+    "baseline": 1.0,
+    "LBC": 1.0,
+    "changed": false
+  },
+  {
+    "field": "line_width",
+    "baseline": null,
+    "LBC": null,
+    "changed": false
+  },
+  {
+    "field": "lr0",
+    "baseline": 0.0005,
+    "LBC": 0.0005,
+    "changed": false
+  },
+  {
+    "field": "lrf",
+    "baseline": 0.01,
+    "LBC": 0.01,
+    "changed": false
+  },
+  {
+    "field": "mask_ratio",
+    "baseline": 4,
+    "LBC": 4,
+    "changed": false
+  },
+  {
+    "field": "max_det",
+    "baseline": 300,
+    "LBC": 300,
+    "changed": false
+  },
+  {
+    "field": "mixup",
+    "baseline": 0.05,
+    "LBC": 0.05,
+    "changed": false
+  },
+  {
+    "field": "mode",
+    "baseline": "train",
+    "LBC": "train",
+    "changed": false
+  },
+  {
+    "field": "model",
+    "baseline": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+    "LBC": "/root/autodl-tmp/projects/Crack_RTDETR-lbc_v1/weights/lbc_v1_controlled_init.pt",
+    "changed": true
+  },
+  {
+    "field": "momentum",
+    "baseline": 0.937,
+    "LBC": 0.937,
+    "changed": false
+  },
+  {
+    "field": "mosaic",
+    "baseline": 0.8,
+    "LBC": 0.8,
+    "changed": false
+  },
+  {
+    "field": "multi_scale",
+    "baseline": 0.0,
+    "LBC": 0.0,
+    "changed": false
+  },
+  {
+    "field": "name",
+    "baseline": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "LBC": "lbc_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+    "changed": true
+  },
+  {
+    "field": "nbs",
+    "baseline": 64,
+    "LBC": 64,
+    "changed": false
+  },
+  {
+    "field": "nms",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "opset",
+    "baseline": null,
+    "LBC": null,
+    "changed": false
+  },
+  {
+    "field": "optimize",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "optimizer",
+    "baseline": "AdamW",
+    "LBC": "AdamW",
+    "changed": false
+  },
+  {
+    "field": "overlap_mask",
+    "baseline": true,
+    "LBC": true,
+    "changed": false
+  },
+  {
+    "field": "patience",
+    "baseline": 50,
+    "LBC": 50,
+    "changed": false
+  },
+  {
+    "field": "perspective",
+    "baseline": 0.0002,
+    "LBC": 0.0002,
+    "changed": false
+  },
+  {
+    "field": "plots",
+    "baseline": true,
+    "LBC": true,
+    "changed": false
+  },
+  {
+    "field": "pose",
+    "baseline": 12.0,
+    "LBC": 12.0,
+    "changed": false
+  },
+  {
+    "field": "pretrained",
+    "baseline": true,
+    "LBC": true,
+    "changed": false
+  },
+  {
+    "field": "profile",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "project",
+    "baseline": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "LBC": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "changed": false
+  },
+  {
+    "field": "rect",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "resume",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "retina_masks",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "rle",
+    "baseline": 1.0,
+    "LBC": 1.0,
+    "changed": false
+  },
+  {
+    "field": "save",
+    "baseline": true,
+    "LBC": true,
+    "changed": false
+  },
+  {
+    "field": "save_conf",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "save_crop",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "save_dir",
+    "baseline": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+    "LBC": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/lbc_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+    "changed": true
+  },
+  {
+    "field": "save_frames",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "save_json",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "save_period",
+    "baseline": -1,
+    "LBC": -1,
+    "changed": false
+  },
+  {
+    "field": "save_txt",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "scale",
+    "baseline": 0.4,
+    "LBC": 0.4,
+    "changed": false
+  },
+  {
+    "field": "seed",
+    "baseline": 42,
+    "LBC": 42,
+    "changed": false
+  },
+  {
+    "field": "shear",
+    "baseline": 1.5,
+    "LBC": 1.5,
+    "changed": false
+  },
+  {
+    "field": "show",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "show_boxes",
+    "baseline": true,
+    "LBC": true,
+    "changed": false
+  },
+  {
+    "field": "show_conf",
+    "baseline": true,
+    "LBC": true,
+    "changed": false
+  },
+  {
+    "field": "show_labels",
+    "baseline": true,
+    "LBC": true,
+    "changed": false
+  },
+  {
+    "field": "simplify",
+    "baseline": true,
+    "LBC": true,
+    "changed": false
+  },
+  {
+    "field": "single_cls",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "source",
+    "baseline": null,
+    "LBC": null,
+    "changed": false
+  },
+  {
+    "field": "split",
+    "baseline": "val",
+    "LBC": "val",
+    "changed": false
+  },
+  {
+    "field": "stream_buffer",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "task",
+    "baseline": "detect",
+    "LBC": "detect",
+    "changed": false
+  },
+  {
+    "field": "time",
+    "baseline": null,
+    "LBC": null,
+    "changed": false
+  },
+  {
+    "field": "tracker",
+    "baseline": "botsort.yaml",
+    "LBC": "botsort.yaml",
+    "changed": false
+  },
+  {
+    "field": "translate",
+    "baseline": 0.1,
+    "LBC": 0.1,
+    "changed": false
+  },
+  {
+    "field": "val",
+    "baseline": true,
+    "LBC": true,
+    "changed": false
+  },
+  {
+    "field": "verbose",
+    "baseline": true,
+    "LBC": true,
+    "changed": false
+  },
+  {
+    "field": "vid_stride",
+    "baseline": 1,
+    "LBC": 1,
+    "changed": false
+  },
+  {
+    "field": "visualize",
+    "baseline": false,
+    "LBC": false,
+    "changed": false
+  },
+  {
+    "field": "warmup_bias_lr",
+    "baseline": 0.1,
+    "LBC": 0.1,
+    "changed": false
+  },
+  {
+    "field": "warmup_epochs",
+    "baseline": 5,
+    "LBC": 5,
+    "changed": false
+  },
+  {
+    "field": "warmup_momentum",
+    "baseline": 0.8,
+    "LBC": 0.8,
+    "changed": false
+  },
+  {
+    "field": "weight_decay",
+    "baseline": 0.0001,
+    "LBC": 0.0001,
+    "changed": false
+  },
+  {
+    "field": "workers",
+    "baseline": 8,
+    "LBC": 8,
+    "changed": false
+  },
+  {
+    "field": "workspace",
+    "baseline": null,
+    "LBC": null,
+    "changed": false
+  }
+]

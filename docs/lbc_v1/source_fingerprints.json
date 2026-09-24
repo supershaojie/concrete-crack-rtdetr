@@ -1,0 +1,50 @@
+{
+  "tools/c19_lif_v1_results.py": {
+    "raw_sha256": "99085027d4fa024c435ca092e44e7aa8bb9828fd131f0c75c41837a1143ab1e8",
+    "lf_sha256": "c56dd4e27a3444ae6337d7a95ddd0a8a157191c8783b145cf0e1ea06f46f1480"
+  },
+  "tools/check_lbc_v1_contracts.py": {
+    "raw_sha256": "6c8dc5edb6f61c41dd1239e66f8b03e3a4535a726ebb0bab534cc8d73bacf4f0",
+    "lf_sha256": "6c8dc5edb6f61c41dd1239e66f8b03e3a4535a726ebb0bab534cc8d73bacf4f0"
+  },
+  "tools/check_lbc_v1_ops.py": {
+    "raw_sha256": "b54a9bd588f7a9ec708668e7f3c964d8e13b60d229eac62332c1ac17974d4310",
+    "lf_sha256": "b54a9bd588f7a9ec708668e7f3c964d8e13b60d229eac62332c1ac17974d4310"
+  },
+  "tools/lbc_v1.py": {
+    "raw_sha256": "cc34134fe172582ec85d6d786e5ca65ce8b7980611ecec62b6aaf0fcc1f7c6f5",
+    "lf_sha256": "cc34134fe172582ec85d6d786e5ca65ce8b7980611ecec62b6aaf0fcc1f7c6f5"
+  },
+  "tools/lbc_v1.sh": {
+    "raw_sha256": "0af0a4920b31b992aebc38b19957ab3a5edaceb561b67e1b124171b059da1747",
+    "lf_sha256": "0af0a4920b31b992aebc38b19957ab3a5edaceb561b67e1b124171b059da1747"
+  },
+  "tools/lbc_v1_checks.py": {
+    "raw_sha256": "95f933366a72b4bfbb3b9b6ea8fedb8fdf09189003ba3b0d4c2a9c3865f3ae81",
+    "lf_sha256": "95f933366a72b4bfbb3b9b6ea8fedb8fdf09189003ba3b0d4c2a9c3865f3ae81"
+  },
+  "tools/lbc_v1_precision.py": {
+    "raw_sha256": "dbdee244617d88d16b7c7b06adb3c7a7dee5a555cc0ea34219bc53af8f1609c7",
+    "lf_sha256": "dbdee244617d88d16b7c7b06adb3c7a7dee5a555cc0ea34219bc53af8f1609c7"
+  },
+  "tools/lbc_v1_preflight.py": {
+    "raw_sha256": "04a76380f8c9ba04e0dbd0991de6820ffc432170fe0c31dcc6426e2c1bfce1ff",
+    "lf_sha256": "04a76380f8c9ba04e0dbd0991de6820ffc432170fe0c31dcc6426e2c1bfce1ff"
+  },
+  "tools/lbc_v1_training.py": {
+    "raw_sha256": "d5d38a6fb264c2fd057dd90d1ae070a2dd7ef4ebea365370c45779c026f03b0e",
+    "lf_sha256": "d5d38a6fb264c2fd057dd90d1ae070a2dd7ef4ebea365370c45779c026f03b0e"
+  },
+  "tools/sync_lbc_v1.sh": {
+    "raw_sha256": "66c5fd753dc8450d43548fb47bf2569955dce3f5e71cc20821240d162c675fa9",
+    "lf_sha256": "66c5fd753dc8450d43548fb47bf2569955dce3f5e71cc20821240d162c675fa9"
+  },
+  "ultralytics-main/ultralytics/engine/trainer.py": {
+    "raw_sha256": "bda43f64ee3ed1dd48543016991f101d28a88776ced968f31a118327dd8bfcea",
+    "lf_sha256": "3564e42656fea65607abd8ca40eb1cd448f9312f3466352fac37f674370ef6ca"
+  },
+  "ultralytics-main/ultralytics/models/rtdetr/lbc.py": {
+    "raw_sha256": "867b57cb6c4e92a1a07ee8540dcdc830470428237493d16cfb4130520de8df75",
+    "lf_sha256": "867b57cb6c4e92a1a07ee8540dcdc830470428237493d16cfb4130520de8df75"
+  }
+}

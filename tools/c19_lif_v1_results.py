@@ -59,7 +59,7 @@ def image_record(pred, gt, dataset_root, conf):
                 ground_truth=[dict(class_id=int(c), bbox=b) for b, c in zip(gt_boxes.tolist(), gt["cls"].detach().cpu())])
 
 
-def evaluate(weights, data, split, output, device="0", val_report=None, evidence_scope="full_split"):
+def evaluate(weights, data, split, output, device="0", val_report=None, evidence_scope="full_split", extra_metrics=None):
     weights, data, output = Path(weights).resolve(), Path(data).resolve(), Path(output).resolve()
     require(split in ("val", "test"), "Expected val/test")
     require(weights.is_file() and data.is_file(), "Missing checkpoint/data config")
@@ -143,6 +143,8 @@ def evaluate(weights, data, split, output, device="0", val_report=None, evidence
                       ap_iou_thresholds=[round(.5 + i * .05, 2) for i in range(10)], ap_by_class=ap.tolist(),
                       ap_class_index=np.asarray(metrics.box.ap_class_index).tolist(), speed_ms_per_image=metrics.speed,
                       predictions_gt_sha256=sha256(stream_path), export_complete=True, **counts)
+        if extra_metrics is not None:
+            report['supplementary'] = extra_metrics(metrics)
     except BaseException as error:
         report.update(error=repr(error), **counts)
         raise

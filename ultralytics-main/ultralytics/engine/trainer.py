@@ -367,7 +367,7 @@ class BaseTrainer:
 
         nb = len(self.train_loader)  # number of batches
         nw = max(round(self.args.warmup_epochs * nb), 100) if self.args.warmup_epochs > 0 else -1  # warmup iterations
-        last_opt_step = -1
+        last_opt_step = self.initial_optimizer_step_index()
         self.epoch_time = None
         self.epoch_time_start = time.time()
         self.train_time_start = time.time()
@@ -382,7 +382,7 @@ class BaseTrainer:
             base_idx = (self.epochs - self.args.close_mosaic) * nb
             self.plot_idx.extend([base_idx, base_idx + 1, base_idx + 2])
         epoch = self.start_epoch
-        self.optimizer.zero_grad()  # zero any resumed gradients to ensure stability on train start
+        self.initialize_train_gradients()
         self._oom_retries = 0  # OOM auto-reduce counter for first epoch
         while True:
             self.epoch = epoch
@@ -620,6 +620,14 @@ class BaseTrainer:
         for n, m in self.model.named_modules():
             if any(filter(lambda f: f in n, self.freeze_layer_names)) and isinstance(m, nn.BatchNorm2d):
                 m.eval()
+
+    def initial_optimizer_step_index(self):
+        """Native default; experiments may restore an epoch-boundary accumulation window."""
+        return -1
+
+    def initialize_train_gradients(self):
+        """Native default: clear gradients when entering the training loop."""
+        self.optimizer.zero_grad()
 
     def save_model(self):
         """Save model training checkpoints with additional metadata."""

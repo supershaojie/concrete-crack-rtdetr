@@ -1,0 +1,15 @@
+version: lbc_v1
+feature_layer: 5
+channels: 128
+rank: 32
+seed: 424001
+eps: 1.0e-06
+margin: 0.2
+temperature: 0.2
+beta: 0.25
+weight: 0.05
+delay: 5
+ramp: 15
+candidates: 128
+topk: 4
+min_background: 16
