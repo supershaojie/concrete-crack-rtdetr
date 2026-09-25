@@ -1,0 +1,72 @@
+{
+  "status": "PASS",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bmc_v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "version": "8.4.21",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "modules": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    },
+    "model_class": "ultralytics.models.utils.bmc.BMCDetectionModel",
+    "criterion_class": "ultralytics.models.utils.bmc.BMCLoss",
+    "bmc_source": {
+      "tools/bmc_v1.py": "68bf9d01eb6b376c5e4abe261a4ae3243e8705c5748787128c68c8bfbb1ee629",
+      "tools/bmc_v1_common.py": "dbdd4c9b4ed14454be2fd316d869e42dae419aac6803370adb17d38336b66f56",
+      "tools/bmc_v1_diagnostics.py": "1a6e83244a1a1d93a868a11586d3b14974070943cd31df8a982ab2558fada5b5",
+      "tools/bmc_v1_results.py": "a61bbe1db675b1153399e9685e2d8752062bc21ca702389f869e0392efbfbbc4",
+      "tools/bmc_v1_training.py": "10ce75a829ec054e59814ee7414a6484d7a18378c954b406813c0ca48b85bf88",
+      "tools/check_bmc_v1.py": "ce41c33ab6e5d3a0720a873faa4d2d930684f9a91190127b1fef81facac441ae",
+      "tools/check_bmc_v1_lifecycle.py": "804ff618f7fc17756ca03e0a9162256926f2ee9b3ad4fe0d523644da292e6132",
+      "tools/check_bmc_v1_ops.py": "136d418f4c63f97801523668036f8dc017bba0ce782d98f0d3f14dfea2548577",
+      "ultralytics-main/ultralytics/models/utils/bmc.py": "020000021da8bfb3ac9f44c12c31987fb5388f311157e776b674917ac8a3f9ca",
+      "ultralytics-main/ultralytics/models/utils/ops.py": "50aea53f5d0278eaee794e0bd16ae39aab1470ba96a213f9432842d08f9020bb"
+    },
+    "dependencies": {
+      "numpy": "2.0.2",
+      "scipy": "1.13.1",
+      "torchvision": "0.22.1+cu118",
+      "PyYAML": "6.0.3",
+      "opencv-python": "4.13.0.92"
+    }
+  },
+  "fixture_scope": "local parser/shell fixtures; server tmux/fetch remain user-run",
+  "parser_actions": {
+    "prepare": "prepare",
+    "preflight": "preflight",
+    "probe": "probe",
+    "start": "start",
+    "status": "status",
+    "resume": "resume",
+    "val": "val",
+    "test": "test",
+    "pack": "pack"
+  },
+  "shell_python_failure_preserved": {
+    "python_exit": 7,
+    "tee_exit": 0,
+    "visible_output": true
+  },
+  "strict_nonfinite_json": true,
+  "sync_fixture": {
+    "code": 1,
+    "stdout": "",
+    "stderr": "Existing BMC worktree has changes; preserved\n",
+    "trace": "-C D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-bmc_v1/outputs/bmc_v1/ops_b55fu9f8 remote get-url origin\n-C D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-bmc_v1/outputs/bmc_v1/ops_b55fu9f8 fetch --no-tags origin exp-rtdetr-r18-lite-bmc-v1\n-C D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-bmc_v1/outputs/bmc_v1/ops_b55fu9f8 rev-parse FETCH_HEAD\n-C D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-bmc_v1/outputs/bmc_v1/ops_b55fu9f8 merge-base --is-ancestor a0459d6a652cb702699087c88fa39a3e4c4087ec 0000000000000000000000000000000000000000\n-C D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-bmc_v1/outputs/bmc_v1/ops_b55fu9f8/dirty-worktree rev-parse --path-format=absolute --git-common-dir\n-C D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-bmc_v1/outputs/bmc_v1/ops_b55fu9f8 rev-parse --path-format=absolute --git-common-dir\n-C D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-bmc_v1/outputs/bmc_v1/ops_b55fu9f8/dirty-worktree status --porcelain\n"
+  },
+  "sync_dirty_guard": true,
+  "corrected_sorted_mask": true,
+  "disabled_warmup_nulls": true,
+  "original_local_report_sha256": "a974734b984c682546982d0289de3f28a00929dfc985d04c1c945f6b8def564d"
+}

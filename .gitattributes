@@ -1,1 +1,4 @@
 *.sh text eol=lf
+configs/bmc_v1.yaml text eol=lf
+docs/bmc_v1/*.yaml text eol=lf
+docs/bmc_v1/*.json text eol=lf

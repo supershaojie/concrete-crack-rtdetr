@@ -1,0 +1,532 @@
+{
+  "status": "PASS",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bmc_v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "version": "8.4.21",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "modules": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    },
+    "model_class": "ultralytics.models.utils.bmc.BMCDetectionModel",
+    "criterion_class": "ultralytics.models.utils.bmc.BMCLoss",
+    "bmc_source": {
+      "tools/bmc_v1.py": "715ca7039066b5a7860f16cc7a549fe623e090955ed431859afb5aeb37a04a89",
+      "tools/bmc_v1_common.py": "dbdd4c9b4ed14454be2fd316d869e42dae419aac6803370adb17d38336b66f56",
+      "tools/bmc_v1_diagnostics.py": "20615d4481f0d60ddee72b211ace547f7e9a6311b5f487893f3fede6a6300507",
+      "tools/bmc_v1_results.py": "a61bbe1db675b1153399e9685e2d8752062bc21ca702389f869e0392efbfbbc4",
+      "tools/bmc_v1_training.py": "d80f88634a0f4a9d551ed20abc087576b704b7bce5ad7a4b9655333fc150aba0",
+      "tools/check_bmc_v1.py": "ce41c33ab6e5d3a0720a873faa4d2d930684f9a91190127b1fef81facac441ae",
+      "tools/check_bmc_v1_lifecycle.py": "af1a0e7ceb071c8a2310482240072b59d8116d85ab3ecb711c19707013157708",
+      "tools/check_bmc_v1_ops.py": "88883ecd0bf7435f8b4c773ecca5fa6f82eb700e8ebbb5cf385ac032bcf7718a",
+      "ultralytics-main/ultralytics/models/utils/bmc.py": "020000021da8bfb3ac9f44c12c31987fb5388f311157e776b674917ac8a3f9ca",
+      "ultralytics-main/ultralytics/models/utils/ops.py": "50aea53f5d0278eaee794e0bd16ae39aab1470ba96a213f9432842d08f9020bb"
+    },
+    "dependencies": {
+      "numpy": "2.0.2",
+      "scipy": "1.13.1",
+      "torchvision": "0.22.1+cu118",
+      "PyYAML": "6.0.3",
+      "opencv-python": "4.13.0.92"
+    }
+  },
+  "device": "cuda:0",
+  "algorithm": {
+    "status": "PASS",
+    "cases": [
+      {
+        "name": "same",
+        "assignment": [
+          0,
+          1
+        ],
+        "stats": {
+          "images": [
+            {
+              "image": 0,
+              "gt_offset": 0,
+              "matched": 2,
+              "disagreement": 0,
+              "changed": 0,
+              "components": 2,
+              "changed_components": 0,
+              "background_to_positive": 0,
+              "target_swap": 0,
+              "fallback_g_gt_q": 0,
+              "ratios": [
+                0.0,
+                0.0
+              ],
+              "events": []
+            }
+          ],
+          "consensus_seconds": 0.0020797000000003507
+        }
+      },
+      {
+        "name": "near_cycle",
+        "assignment": [
+          1,
+          0
+        ],
+        "stats": {
+          "images": [
+            {
+              "image": 0,
+              "gt_offset": 0,
+              "matched": 2,
+              "disagreement": 2,
+              "changed": 2,
+              "components": 1,
+              "changed_components": 1,
+              "background_to_positive": 0,
+              "target_swap": 2,
+              "fallback_g_gt_q": 0,
+              "ratios": [
+                0.00020003001554869115,
+                0.00020003001554869115
+              ],
+              "events": [
+                {
+                  "size": 2,
+                  "accepted": true,
+                  "gt": [
+                    0,
+                    1
+                  ],
+                  "a2": [
+                    0,
+                    1
+                  ],
+                  "a3": [
+                    1,
+                    0
+                  ],
+                  "delta": [
+                    0.0010000000474974513,
+                    0.0010000000474974513
+                  ],
+                  "scale": [
+                    4.9992499351501465,
+                    4.9992499351501465
+                  ],
+                  "max_ratio": 0.00020003001554869115
+                }
+              ]
+            }
+          ],
+          "consensus_seconds": 0.002304399999999873
+        }
+      },
+      {
+        "name": "over_budget_cycle",
+        "assignment": [
+          0,
+          1
+        ],
+        "stats": {
+          "images": [
+            {
+              "image": 0,
+              "gt_offset": 0,
+              "matched": 2,
+              "disagreement": 2,
+              "changed": 0,
+              "components": 1,
+              "changed_components": 0,
+              "background_to_positive": 0,
+              "target_swap": 0,
+              "fallback_g_gt_q": 0,
+              "ratios": [
+                0.5714285969734192,
+                0.00020003001554869115
+              ],
+              "events": [
+                {
+                  "size": 2,
+                  "accepted": false,
+                  "gt": [
+                    0,
+                    1
+                  ],
+                  "a2": [
+                    0,
+                    1
+                  ],
+                  "a3": [
+                    1,
+                    0
+                  ],
+                  "delta": [
+                    2.0,
+                    0.0010000000474974513
+                  ],
+                  "scale": [
+                    3.5,
+                    4.9992499351501465
+                  ],
+                  "max_ratio": 0.5714285969734192
+                }
+              ]
+            }
+          ],
+          "consensus_seconds": 0.001945899999999945
+        }
+      },
+      {
+        "name": "alternating_path",
+        "assignment": [
+          1,
+          2
+        ],
+        "stats": {
+          "images": [
+            {
+              "image": 0,
+              "gt_offset": 0,
+              "matched": 2,
+              "disagreement": 2,
+              "changed": 2,
+              "components": 1,
+              "changed_components": 1,
+              "background_to_positive": 1,
+              "target_swap": 1,
+              "fallback_g_gt_q": 0,
+              "ratios": [
+                0.00017393573943991214,
+                0.0003637355985119939
+              ],
+              "events": [
+                {
+                  "size": 2,
+                  "accepted": true,
+                  "gt": [
+                    0,
+                    1
+                  ],
+                  "a2": [
+                    0,
+                    1
+                  ],
+                  "a3": [
+                    1,
+                    2
+                  ],
+                  "delta": [
+                    0.0010000000474974513,
+                    0.0010000000474974513
+                  ],
+                  "scale": [
+                    5.7492499351501465,
+                    2.7492499351501465
+                  ],
+                  "max_ratio": 0.0003637355985119939
+                }
+              ]
+            }
+          ],
+          "consensus_seconds": 0.0014535000000002185
+        }
+      },
+      {
+        "name": "partial_components",
+        "assignment": [
+          1,
+          2
+        ],
+        "stats": {
+          "images": [
+            {
+              "image": 0,
+              "gt_offset": 0,
+              "matched": 2,
+              "disagreement": 2,
+              "changed": 1,
+              "components": 2,
+              "changed_components": 1,
+              "background_to_positive": 1,
+              "target_swap": 0,
+              "fallback_g_gt_q": 0,
+              "ratios": [
+                0.00012501172022894025,
+                0.3076923191547394
+              ],
+              "events": [
+                {
+                  "size": 1,
+                  "accepted": true,
+                  "gt": [
+                    0
+                  ],
+                  "a2": [
+                    0
+                  ],
+                  "a3": [
+                    1
+                  ],
+                  "delta": [
+                    0.0010000000474974513
+                  ],
+                  "scale": [
+                    7.9992499351501465
+                  ],
+                  "max_ratio": 0.00012501172022894025
+                },
+                {
+                  "size": 1,
+                  "accepted": false,
+                  "gt": [
+                    1
+                  ],
+                  "a2": [
+                    2
+                  ],
+                  "a3": [
+                    3
+                  ],
+                  "delta": [
+                    2.0
+                  ],
+                  "scale": [
+                    6.5
+                  ],
+                  "max_ratio": 0.3076923191547394
+                }
+              ]
+            }
+          ],
+          "consensus_seconds": 0.001938700000000182
+        }
+      },
+      {
+        "name": "negative",
+        "assignment": [
+          1,
+          0
+        ],
+        "stats": {
+          "images": [
+            {
+              "image": 0,
+              "gt_offset": 0,
+              "matched": 2,
+              "disagreement": 2,
+              "changed": 2,
+              "components": 1,
+              "changed_components": 1,
+              "background_to_positive": 0,
+              "target_swap": 2,
+              "fallback_g_gt_q": 0,
+              "ratios": [
+                0.00020001550728920847,
+                0.00020001550728920847
+              ],
+              "events": [
+                {
+                  "size": 2,
+                  "accepted": true,
+                  "gt": [
+                    0,
+                    1
+                  ],
+                  "a2": [
+                    0,
+                    1
+                  ],
+                  "a3": [
+                    1,
+                    0
+                  ],
+                  "delta": [
+                    0.0009999275207519531,
+                    0.0009999275207519531
+                  ],
+                  "scale": [
+                    4.9992499351501465,
+                    4.9992499351501465
+                  ],
+                  "max_ratio": 0.00020001550728920847
+                }
+              ]
+            }
+          ],
+          "consensus_seconds": 0.001549100000000081
+        }
+      },
+      {
+        "name": "iqr_zero",
+        "assignment": [
+          1,
+          0
+        ],
+        "stats": {
+          "images": [
+            {
+              "image": 0,
+              "gt_offset": 0,
+              "matched": 2,
+              "disagreement": 2,
+              "changed": 2,
+              "components": 1,
+              "changed_components": 1,
+              "background_to_positive": 0,
+              "target_swap": 2,
+              "fallback_g_gt_q": 0,
+              "ratios": [
+                0.0,
+                0.0
+              ],
+              "events": [
+                {
+                  "size": 2,
+                  "accepted": true,
+                  "gt": [
+                    0,
+                    1
+                  ],
+                  "a2": [
+                    0,
+                    1
+                  ],
+                  "a3": [
+                    1,
+                    0
+                  ],
+                  "delta": [
+                    0.0,
+                    0.0
+                  ],
+                  "scale": [
+                    0.0010000000474974513,
+                    0.0010000000474974513
+                  ],
+                  "max_ratio": 0.0
+                }
+              ]
+            }
+          ],
+          "consensus_seconds": 0.0014871000000002965
+        }
+      },
+      {
+        "name": "negative_delta",
+        "assignment": [
+          1,
+          0
+        ],
+        "stats": {
+          "images": [
+            {
+              "image": 0,
+              "gt_offset": 0,
+              "matched": 2,
+              "disagreement": 2,
+              "changed": 2,
+              "components": 1,
+              "changed_components": 1,
+              "background_to_positive": 0,
+              "target_swap": 2,
+              "fallback_g_gt_q": 0,
+              "ratios": [
+                -0.001999000320211053,
+                0.001999000320211053
+              ],
+              "events": [
+                {
+                  "size": 2,
+                  "accepted": true,
+                  "gt": [
+                    0,
+                    1
+                  ],
+                  "a2": [
+                    0,
+                    1
+                  ],
+                  "a3": [
+                    1,
+                    0
+                  ],
+                  "delta": [
+                    -0.009999999776482582,
+                    0.009999999776482582
+                  ],
+                  "scale": [
+                    5.002500057220459,
+                    5.002500057220459
+                  ],
+                  "max_ratio": 0.001999000320211053
+                }
+              ]
+            }
+          ],
+          "consensus_seconds": 0.0014630999999996064
+        }
+      }
+    ],
+    "empty": true,
+    "g_gt_q": true,
+    "batch_isolation": true,
+    "zero_budget_active": true
+  },
+  "loss": {
+    "status": "PASS",
+    "changed_gt": 2,
+    "only_slot_2": true,
+    "dn_unchanged": true,
+    "disabled_exact_loss_and_grad": true,
+    "cost_detached": true,
+    "scipy_exact_cost": true,
+    "epoch19_disabled_epoch20_enabled": true
+  },
+  "model": {
+    "status": "PASS",
+    "scope": "B2/160 interface, not B16/640 capacity",
+    "inventory": {
+      "states": 552,
+      "parameters": 20149765,
+      "new_parameters": 0,
+      "all_equal": true,
+      "per_key_values": "trainer_initialization.json (all 552 keys)"
+    },
+    "model_type": "BMCDetectionModel",
+    "criterion_type": "BMCLoss",
+    "disabled_full_forward_loss_exact": true,
+    "gradient_atol": 2e-06,
+    "gradient_rtol": 2e-05,
+    "gradient_rule": "per-tensor infinity-norm bound: max_abs_diff <= atol + rtol * reference_max_abs (CUDA grid_sample atomic sums)",
+    "maximum_scaled_gradient_error": 1.5309610170367014e-05,
+    "maximum_gradient_difference": 0.000453948974609375,
+    "real_gradients": {
+      "model.0.conv.weight": {
+        "finite": true,
+        "norm": 222.8457794189453
+      },
+      "model.20.O_proj.weight": {
+        "finite": true,
+        "norm": 2.2251367568969727
+      },
+      "model.26.dec_bbox_head.1.layers.2.weight": {
+        "finite": true,
+        "norm": 11.297893524169922
+      },
+      "model.26.cbr.offset_out.weight": {
+        "finite": true,
+        "norm": 0.22794651985168457
+      }
+    },
+    "nontrivial_lif_cbr_eval_predict_isolation": true
+  },
+  "original_local_report_sha256": "2ed43ef554297f97f236756e18e17d256deec0c26c7b70bd90359a06d92926d3"
+}

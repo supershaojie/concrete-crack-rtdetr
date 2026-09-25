@@ -1,0 +1,14 @@
+{
+  "model": [
+    "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/weights/c19_lif_v1_controlled_init.pt",
+    "/root/autodl-tmp/projects/Crack_RTDETR-bmc_v1/weights/bmc_v1_controlled_init.pt"
+  ],
+  "name": [
+    "c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+    "bmc_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug"
+  ],
+  "save_dir": [
+    "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+    "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/bmc_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug"
+  ]
+}

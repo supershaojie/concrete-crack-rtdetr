@@ -1,0 +1,11 @@
+{
+  "base_sha": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "authority": "User-local successful C19＋LIF archive: training/args.yaml, training/weights/best.pt, metadata/launch/dataset_inventory.json and source_record.json",
+  "best_sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa",
+  "public_untrained_source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "historical_python": "3.10.13",
+  "historical_torch": "2.1.2+cu121",
+  "historical_gpu": "NVIDIA GeForce RTX 4090",
+  "verified_local_dataset_content_sha256": "707962458f5a275571a3096b2829ae1040e3654b40f13568176a07ecdadec046",
+  "image_identity_note": "New full image-byte manifest on the existing local crack_det, after exact historical path/label identity check; server relocation must reproduce this content digest. No dataset files are included."
+}

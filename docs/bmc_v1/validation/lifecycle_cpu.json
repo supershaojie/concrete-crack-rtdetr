@@ -1,0 +1,62 @@
+{
+  "status": "PASS",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bmc_v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "version": "8.4.21",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "modules": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    },
+    "dependencies": {
+      "numpy": "2.0.2",
+      "scipy": "1.13.1",
+      "torchvision": "0.22.1+cu118",
+      "PyYAML": "6.0.3",
+      "opencv-python": "4.13.0.92"
+    }
+  },
+  "scope": "B2/160 disposable actual Trainer; not formal capacity",
+  "device": "cpu",
+  "resume_cases": [
+    {
+      "checkpoint_epoch": 19,
+      "next_epoch": 20,
+      "optimizer_values_checked": 1035,
+      "scaler_restored": false,
+      "scaler_disabled_cpu": true,
+      "scaler_state": {},
+      "ema_exact": true,
+      "bmc_active": true
+    },
+    {
+      "checkpoint_epoch": 57,
+      "next_epoch": 58,
+      "optimizer_values_checked": 1035,
+      "scaler_restored": false,
+      "scaler_disabled_cpu": true,
+      "scaler_state": {},
+      "ema_exact": true,
+      "bmc_active": true
+    }
+  ],
+  "actual_trainer_constructed": true,
+  "epoch_validator_sentinel": true,
+  "independent_validator_sentinel": true,
+  "predict_sentinel": true,
+  "synthetic_epoch_metadata": true,
+  "diagnostic_only_scale": null,
+  "original_optimizer_scaler_ema_methods": true,
+  "original_local_report_sha256": "86a899c73be53e29c57bc8c0dfb1a3a581360e2816e2763360eb8ac10db62041"
+}

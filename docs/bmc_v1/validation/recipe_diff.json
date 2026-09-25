@@ -1,0 +1,32 @@
+{
+  "fields": 109,
+  "rows": {
+    "model": {
+      "before": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/weights/c19_lif_v1_controlled_init.pt",
+      "after": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bmc_v1\\weights\\bmc_v1_controlled_init.pt",
+      "reason": "experiment identity"
+    },
+    "data": {
+      "before": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+      "after": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\crack.yaml",
+      "reason": "explicit path relocation, matched mother data manifest"
+    },
+    "project": {
+      "before": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+      "after": "D:\\MyProjects\\Crack_RTDETR\\runs\\c_series",
+      "reason": "explicit path relocation, matched mother data manifest"
+    },
+    "name": {
+      "before": "c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "after": "bmc_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "reason": "experiment identity"
+    },
+    "save_dir": {
+      "before": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "after": "D:\\MyProjects\\Crack_RTDETR\\runs\\c_series\\bmc_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "reason": "experiment identity"
+    }
+  },
+  "parent_file": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\training\\args.yaml",
+  "parent_sha256": "31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b"
+}

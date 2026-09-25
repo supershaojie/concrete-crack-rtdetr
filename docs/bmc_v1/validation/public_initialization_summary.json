@@ -1,0 +1,10 @@
+{
+  "source": "D:\\MyProjects\\Crack_RTDETR\\weights\\rtdetr_r18_lite_imagenet_backbone_init.pt",
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "source_nc": 80,
+  "target_nc": 80,
+  "seed": 42,
+  "output_sha256": "c0a25256f3f0928529b811af1c86a662db36b484a1f4971bf6a56bdeec94efdb",
+  "reload_exact": true,
+  "status": "passed"
+}

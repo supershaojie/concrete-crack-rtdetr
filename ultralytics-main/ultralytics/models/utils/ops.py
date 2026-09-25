@@ -85,7 +85,9 @@ class HungarianMatcher(nn.Module):
         gt_groups: list[int],
         masks: torch.Tensor | None = None,
         gt_mask: list[torch.Tensor] | None = None,
-    ) -> list[tuple[torch.Tensor, torch.Tensor]]:
+        *,
+        return_costs: bool = False,
+    ) -> list[tuple[torch.Tensor, torch.Tensor]] | tuple[list[tuple[torch.Tensor, torch.Tensor]], list[torch.Tensor]]:
         """Compute optimal assignment between predictions and ground truth using Hungarian algorithm.
 
         This method calculates matching costs based on classification scores, bounding box coordinates, and optionally
@@ -100,6 +102,8 @@ class HungarianMatcher(nn.Module):
             gt_groups (list[int]): Number of ground truth boxes for each image in the batch.
             masks (torch.Tensor, optional): Predicted masks with shape (batch_size, num_queries, height, width).
             gt_mask (list[torch.Tensor], optional): Ground truth masks, each with shape (num_masks, Height, Width).
+            return_costs (bool): Return indices plus the exact per-image CPU matrices given to SciPy.
+                This opt-in audit rejects nonfinite costs; the default numeric/return path is unchanged.
 
         Returns:
             (list[tuple[torch.Tensor, torch.Tensor]]): A list of size batch_size, each element is a tuple (index_i,
@@ -110,7 +114,8 @@ class HungarianMatcher(nn.Module):
         bs, nq, nc = pred_scores.shape
 
         if sum(gt_groups) == 0:
-            return [(torch.tensor([], dtype=torch.long), torch.tensor([], dtype=torch.long)) for _ in range(bs)]
+            indices = [(torch.tensor([], dtype=torch.long), torch.tensor([], dtype=torch.long)) for _ in range(bs)]
+            return (indices, [torch.empty(nq, 0) for _ in range(bs)]) if return_costs else indices
 
         # Flatten to compute cost matrices in batch format
         pred_scores = pred_scores.detach().view(-1, nc)
@@ -143,16 +148,27 @@ class HungarianMatcher(nn.Module):
         if self.with_mask:
             C += self._cost_mask(bs, gt_groups, masks, gt_mask)
 
-        # Set invalid values (NaNs and infinities) to 0
-        C[C.isnan() | C.isinf()] = 0.0
+        # Opt-in experiment interface: preserve the exact cost/precision sent to SciPy.
+        # The legacy default remains unchanged. Never sanitize an audited BMC cost.
+        # Set invalid values (NaNs and infinities) to 0 (original default behavior)
+        if not return_costs:
+            C[C.isnan() | C.isinf()] = 0.0
 
         C = C.view(bs, nq, -1).cpu()
+        if return_costs and not torch.isfinite(C).all():
+            bad = (~torch.isfinite(C)).nonzero()[:8].tolist()
+            raise ValueError(f"Nonfinite Hungarian cost: shape={tuple(C.shape)}, dtype={C.dtype}, "
+                             f"gt_groups={gt_groups}, first_bad={bad}")
         indices = [linear_sum_assignment(c[i]) for i, c in enumerate(C.split(gt_groups, -1))]
+        costs = [c[i].detach() for i, c in enumerate(C.split(gt_groups, -1))] if return_costs else None
         gt_groups = torch.as_tensor([0, *gt_groups[:-1]]).cumsum_(0)  # (idx for queries, idx for gt)
-        return [
+        result = [
             (torch.tensor(i, dtype=torch.long), torch.tensor(j, dtype=torch.long) + gt_groups[k])
             for k, (i, j) in enumerate(indices)
         ]
+        if return_costs:
+            return result, costs
+        return result
 
     # This function is for future RT-DETR Segment models
     # def _cost_mask(self, bs, num_gts, masks=None, gt_mask=None):

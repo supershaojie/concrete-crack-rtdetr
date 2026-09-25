@@ -1,0 +1,8 @@
+method: bmc_v1
+enabled: true
+target_decoder_layer: 2
+target_loss_slot: 2
+source: final_cbr_native_assignment
+budget_iqr_fraction: 0.02
+iqr_floor: 0.001
+warmup_epochs: 20
