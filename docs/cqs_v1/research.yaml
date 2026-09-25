@@ -1,0 +1,12 @@
+method: cqs_v1
+enabled: true
+num_queries: 300
+candidate_pool: 600
+core_queries: 240
+complement_queries: 60
+beta: 0.5
+iou_power: 2
+positive_cosine_power: 2
+feature_norm_eps: 1.0e-12
+iou_union_eps: 1.0e-12
+selection_precision: float32

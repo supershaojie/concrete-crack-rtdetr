@@ -1,0 +1,2987 @@
+{
+  "status": "COMPLETED",
+  "scope": "read-only train candidate coverage, not Recall/AP",
+  "parent_best": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\training\\weights\\best.pt",
+  "formal_training": "NOT_RUN",
+  "test": "NOT_RUN",
+  "config": {
+    "method": "cqs_v1",
+    "enabled": true,
+    "num_queries": 300,
+    "candidate_pool": 600,
+    "core_queries": 240,
+    "complement_queries": 60,
+    "beta": 0.5,
+    "iou_power": 2,
+    "positive_cosine_power": 2,
+    "feature_norm_eps": 1e-12,
+    "iou_union_eps": 1e-12,
+    "selection_precision": "float32"
+  },
+  "runtime": {
+    "python": "3.9.25",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-cqs_v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "ultralytics_version": "8.4.21",
+    "source_sha": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "base_sha": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "model_type": "RTDETRDetectionModel",
+    "head_type": "RTDETRDecoderCBRCQS",
+    "criterion_type": "RTDETRDetectionLoss",
+    "gpu_memory_bytes": 6442123264,
+    "driver": "555.99",
+    "numpy": "2.0.2",
+    "scipy": "1.13.1",
+    "cv2": "4.13.0",
+    "torchvision": "0.22.1+cu118"
+  },
+  "parent_best_sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa",
+  "images": 64,
+  "ground_truth": 174,
+  "preprocessing": "fixed sorted train list; RGB stretch640 cv2.INTER_LINEAR /255; no random augmentation",
+  "coverage": {
+    "0.3": {
+      "native300": {
+        "candidate_coverage": 1.0,
+        "newly_covered": 0,
+        "lost_coverage": 0
+      },
+      "cqs300": {
+        "candidate_coverage": 1.0,
+        "newly_covered": 0,
+        "lost_coverage": 0
+      },
+      "pool600": {
+        "candidate_coverage": 1.0,
+        "newly_covered": 0,
+        "lost_coverage": 0
+      }
+    },
+    "0.5": {
+      "native300": {
+        "candidate_coverage": 0.9942528735632183,
+        "newly_covered": 0,
+        "lost_coverage": 0
+      },
+      "cqs300": {
+        "candidate_coverage": 0.9942528735632183,
+        "newly_covered": 0,
+        "lost_coverage": 0
+      },
+      "pool600": {
+        "candidate_coverage": 0.9942528735632183,
+        "newly_covered": 0,
+        "lost_coverage": 0
+      }
+    },
+    "0.7": {
+      "native300": {
+        "candidate_coverage": 0.8160919540229885,
+        "newly_covered": 0,
+        "lost_coverage": 0
+      },
+      "cqs300": {
+        "candidate_coverage": 0.8160919540229885,
+        "newly_covered": 0,
+        "lost_coverage": 0
+      },
+      "pool600": {
+        "candidate_coverage": 0.8275862068965517,
+        "newly_covered": 2,
+        "lost_coverage": 0
+      }
+    }
+  },
+  "mean_best_IoU": {
+    "native300": 0.8057709024555382,
+    "cqs300": 0.805925870421289,
+    "pool600": 0.8074385732754894
+  },
+  "extra_count_mean": 16.890625,
+  "interpretation": "This opportunity diagnostic does not support the mechanism; fixed 240/60, pool600 and beta0.5 unchanged",
+  "files": [
+    {
+      "image": "images/train/crack_000001_brightness_contrast_strong.jpg",
+      "image_sha256": "f52412b0f7d6158df8c1e064cfc126a5ee447e7463dd663649f3ee5afd40d053",
+      "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 17.0,
+        "extra_min": 17.0,
+        "extra_max": 17.0,
+        "native_overlap_mean": 0.9433333277702332,
+        "discount_min": 0.6970287561416626,
+        "discount_mean": 0.883804440498352,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          1,
+          3,
+          7,
+          10,
+          11,
+          14,
+          14
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7199,
+            7995,
+            7242,
+            7799,
+            8267,
+            6708,
+            7360,
+            6421
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000001_clahe_gamma_strong.jpg",
+      "image_sha256": "b597504f8cb893227a8bca17099be73259fc0ce94fadb8bd3e00ca5dce7c9f34",
+      "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 9.0,
+        "extra_min": 9.0,
+        "extra_max": 9.0,
+        "native_overlap_mean": 0.9700000286102295,
+        "discount_min": 0.746828019618988,
+        "discount_mean": 0.8958161473274231,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          3,
+          13,
+          17,
+          10,
+          16
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7641,
+            7896,
+            7224,
+            6520,
+            7941,
+            7161,
+            7918,
+            8036
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000001_hflip.jpg",
+      "image_sha256": "3fa5f21f25af654368a3b78eb40bbc0cd6b863c21bd65ef48d442ef3a7135dfc",
+      "label_sha256": "f030619c297fa011407b673da42dd01a317e8e803e24e0597abab4b9db958301",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 12.0,
+        "extra_min": 12.0,
+        "extra_max": 12.0,
+        "native_overlap_mean": 0.9600000381469727,
+        "discount_min": 0.6982439756393433,
+        "discount_mean": 0.873199462890625,
+        "discount_max": 0.9999948740005493,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          1,
+          2,
+          10,
+          8,
+          18,
+          9,
+          12
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7002,
+            7949,
+            6748,
+            7160,
+            8022,
+            6747,
+            8384,
+            7317
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000001_noise_blur_strong.jpg",
+      "image_sha256": "0fd51ea323bcf061b3f8ff828c65f737cf66ca783f5b48e1e3dd3d3ff5c7a16a",
+      "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 15.0,
+        "extra_min": 15.0,
+        "extra_max": 15.0,
+        "native_overlap_mean": 0.9500000476837158,
+        "discount_min": 0.6812127828598022,
+        "discount_mean": 0.8928144574165344,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          1,
+          2,
+          4,
+          9,
+          12,
+          15,
+          17
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6528,
+            7986,
+            8020,
+            6423,
+            8392,
+            7400,
+            8109,
+            8075
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000001_original.jpg",
+      "image_sha256": "4ecb61e6b9ff09f8be6d574ad747a3bc4b183c900057765f4d7a81d1cfb8e31f",
+      "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 19.0,
+        "extra_min": 19.0,
+        "extra_max": 19.0,
+        "native_overlap_mean": 0.9366666674613953,
+        "discount_min": 0.723173201084137,
+        "discount_mean": 0.9080045819282532,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          4,
+          4,
+          4,
+          14,
+          12,
+          22
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            1703,
+            8076,
+            8392,
+            8223,
+            8020,
+            7360,
+            8058,
+            7400
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000001_vflip.jpg",
+      "image_sha256": "1db1f1e8f11a8f4745718cd64b3896dd9a666c54b90707cc8ef7fb8e3ac0ba4a",
+      "label_sha256": "adc6fec9ab70c1dea16b2be8f1d5f4ceb57fea39b008f2d7c6ca1adb4496b6ad",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 12.0,
+        "extra_min": 12.0,
+        "extra_max": 12.0,
+        "native_overlap_mean": 0.9600000381469727,
+        "discount_min": 0.7254754304885864,
+        "discount_mean": 0.8918550610542297,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          4,
+          13,
+          14,
+          13,
+          15
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            8028,
+            7136,
+            8160,
+            8392,
+            8362,
+            7986,
+            7996,
+            6532
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000002_clahe_gamma_strong.jpg",
+      "image_sha256": "7487056da4da9e541c983c64a1836c9e23e40e9bb651979bf097aa6bc9354895",
+      "label_sha256": "4d78ebcbb39048f99833ba0191a8138366eafaaad82045fc519cf50d642bde6f",
+      "gt": 1,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 15.0,
+        "extra_min": 15.0,
+        "extra_max": 15.0,
+        "native_overlap_mean": 0.9500000476837158,
+        "discount_min": 0.6517648696899414,
+        "discount_mean": 0.8720427751541138,
+        "discount_max": 0.999492883682251,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          3,
+          2,
+          9,
+          8,
+          10,
+          15,
+          13
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            8377,
+            8014,
+            7985,
+            6404,
+            7923,
+            6640,
+            6639,
+            7117
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000002_hflip.jpg",
+      "image_sha256": "bf784d6e3d352a7a01a486ce97806040745f83532e7a78b48ecee456f13dca7b",
+      "label_sha256": "4ba9247f050c933d9f62c5a8a304e9ea961599bbcfe5ae2d49e4fd45e3f04a64",
+      "gt": 1,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 14.0,
+        "extra_min": 14.0,
+        "extra_max": 14.0,
+        "native_overlap_mean": 0.9533333778381348,
+        "discount_min": 0.6493815779685974,
+        "discount_mean": 0.8865242004394531,
+        "discount_max": 0.9996846914291382,
+        "discount_histogram": [
+          0,
+          0,
+          1,
+          1,
+          4,
+          4,
+          8,
+          13,
+          9,
+          20
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6428,
+            8079,
+            7346,
+            8253,
+            6840,
+            6640,
+            8297,
+            7972
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000002_original.jpg",
+      "image_sha256": "0857116b4e0fb503f879cd105d35abecf3d29cf29dd47cec4763c9ffa6f87b79",
+      "label_sha256": "4d78ebcbb39048f99833ba0191a8138366eafaaad82045fc519cf50d642bde6f",
+      "gt": 1,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 20.0,
+        "extra_min": 20.0,
+        "extra_max": 20.0,
+        "native_overlap_mean": 0.9333333373069763,
+        "discount_min": 0.6763685941696167,
+        "discount_mean": 0.8719763159751892,
+        "discount_max": 0.9999983906745911,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          5,
+          3,
+          6,
+          10,
+          5,
+          16,
+          15
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7517,
+            7971,
+            8283,
+            6558,
+            6428,
+            8361,
+            6407,
+            4061
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000002_vflip.jpg",
+      "image_sha256": "f7db6d73bf9fbeb874d8debde9ff3d257c9186f0cd6a06ffd1c50d1d7dfe71ef",
+      "label_sha256": "84a18a9d8ff9ed4c6dacf42a0ce91c503f698873f8b92b27ac267e2785ded5ce",
+      "gt": 1,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 20.0,
+        "extra_min": 20.0,
+        "extra_max": 20.0,
+        "native_overlap_mean": 0.9333333373069763,
+        "discount_min": 0.6568334102630615,
+        "discount_mean": 0.8688516616821289,
+        "discount_max": 0.9999809861183167,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          2,
+          5,
+          5,
+          12,
+          13,
+          11,
+          12
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            8177,
+            7992,
+            6515,
+            6680,
+            8361,
+            7242,
+            6725,
+            2209
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000003_clahe_gamma_strong.jpg",
+      "image_sha256": "6e1c4c0dbc9461356d240a82a23ad16aad61ec2e1115df58f0874808119ad212",
+      "label_sha256": "643b00e3139c400405a1a6b6a36b9a2b000cff060fa2f3acd320fbd8bc02e947",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 15.0,
+        "extra_min": 15.0,
+        "extra_max": 15.0,
+        "native_overlap_mean": 0.9500000476837158,
+        "discount_min": 0.6930394768714905,
+        "discount_mean": 0.8925899267196655,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          1,
+          3,
+          5,
+          7,
+          15,
+          12,
+          17
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7858,
+            8370,
+            7637,
+            6999,
+            7323,
+            7644,
+            7078,
+            7477
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000003_hflip.jpg",
+      "image_sha256": "babe17496ec461bc97e23f214001dc4bc2e36a1d6bfed1be626cbb6fff7a97f1",
+      "label_sha256": "da8d92eacf49e6f105bc0947b8c15b0ad517655cd9739a3b6243bae791545aa0",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 20.0,
+        "extra_min": 20.0,
+        "extra_max": 20.0,
+        "native_overlap_mean": 0.9333333373069763,
+        "discount_min": 0.7000728845596313,
+        "discount_mean": 0.8864005208015442,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          3,
+          12,
+          12,
+          19
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7881,
+            6505,
+            8361,
+            8219,
+            6498,
+            8249,
+            6451,
+            5641
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000003_noise_blur_strong.jpg",
+      "image_sha256": "9c4c2be0bbde8d01a47304da96c0c1bb10d36bad582838e97a36cb129c4be6de",
+      "label_sha256": "643b00e3139c400405a1a6b6a36b9a2b000cff060fa2f3acd320fbd8bc02e947",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 17.0,
+        "extra_min": 17.0,
+        "extra_max": 17.0,
+        "native_overlap_mean": 0.9433333277702332,
+        "discount_min": 0.7435925006866455,
+        "discount_mean": 0.8993297815322876,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          3,
+          4,
+          10,
+          14,
+          8,
+          21
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            8399,
+            8357,
+            7619,
+            7838,
+            8359,
+            6430,
+            5798,
+            7967
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000003_original.jpg",
+      "image_sha256": "3e1912ab0d373da1e11d42433223ffdfc446b0f8f389345068b8578d75a7d8d8",
+      "label_sha256": "643b00e3139c400405a1a6b6a36b9a2b000cff060fa2f3acd320fbd8bc02e947",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 18.0,
+        "extra_min": 18.0,
+        "extra_max": 18.0,
+        "native_overlap_mean": 0.9399999976158142,
+        "discount_min": 0.7355154752731323,
+        "discount_mean": 0.8861127495765686,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          2,
+          9,
+          10,
+          7,
+          17,
+          15
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            8003,
+            7449,
+            7879,
+            6474,
+            6680,
+            6449,
+            7277,
+            8001
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000003_vflip.jpg",
+      "image_sha256": "ce758bc407a3634467a506bf90fb2f97992ec97e24e01a1286b28e201471f916",
+      "label_sha256": "65dba5a583c5d157b5af6a82466b2fec5bda0b3b2f4d6b0973bfe8d251bb3a42",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 17.0,
+        "extra_min": 17.0,
+        "extra_max": 17.0,
+        "native_overlap_mean": 0.9433333277702332,
+        "discount_min": 0.6814496517181396,
+        "discount_mean": 0.8904836177825928,
+        "discount_max": 0.9996140599250793,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          6,
+          9,
+          12,
+          16,
+          15
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6448,
+            8299,
+            7799,
+            7322,
+            6498,
+            7362,
+            6459,
+            6464
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000004_brightness_contrast_strong.jpg",
+      "image_sha256": "e2e88d94d4598694ee5e17e76385e6aa05e1783241fb3ac3bc95bf79fe8923d1",
+      "label_sha256": "2ff7c65b22ffe126dc4bc0135e6005b24964f12d82f7deb05ef2706ffd82d6e0",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 17.0,
+        "extra_min": 17.0,
+        "extra_max": 17.0,
+        "native_overlap_mean": 0.9433333277702332,
+        "discount_min": 0.6148744821548462,
+        "discount_mean": 0.8316614627838135,
+        "discount_max": 0.9999381303787231,
+        "discount_histogram": [
+          0,
+          0,
+          4,
+          6,
+          6,
+          8,
+          9,
+          6,
+          10,
+          11
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7200,
+            4235,
+            6424,
+            4154,
+            6459,
+            8014,
+            6517,
+            6197
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000004_clahe_gamma_strong.jpg",
+      "image_sha256": "99352277d9cf0f9eaefc2704f265f9e4028ff15a847ad3730cc4208c9a1e5f3c",
+      "label_sha256": "2ff7c65b22ffe126dc4bc0135e6005b24964f12d82f7deb05ef2706ffd82d6e0",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 15.0,
+        "extra_min": 15.0,
+        "extra_max": 15.0,
+        "native_overlap_mean": 0.9500000476837158,
+        "discount_min": 0.6367262601852417,
+        "discount_mean": 0.8717725276947021,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          2,
+          0,
+          6,
+          6,
+          6,
+          14,
+          9,
+          17
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6430,
+            7680,
+            6958,
+            7837,
+            6421,
+            7965,
+            7401,
+            7966
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000004_hflip.jpg",
+      "image_sha256": "1b64087eadaf871f9cd302231b65ec692eb7a5515b70575c555d75088e7d039d",
+      "label_sha256": "59d36a17c2a15b71787478d61019a42bf1dddefae7bcab849fcca9414b0872a4",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 18.0,
+        "extra_min": 18.0,
+        "extra_max": 18.0,
+        "native_overlap_mean": 0.9399999976158142,
+        "discount_min": 0.6353702545166016,
+        "discount_mean": 0.8797935247421265,
+        "discount_max": 0.9999980926513672,
+        "discount_histogram": [
+          0,
+          0,
+          2,
+          1,
+          4,
+          7,
+          6,
+          9,
+          12,
+          19
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6838,
+            7399,
+            6482,
+            4952,
+            7991,
+            6639,
+            8321,
+            4791
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000004_original.jpg",
+      "image_sha256": "23d39960526f7f466a3be6d64a4ca4c6ef870cbb5183b13c37e0a1bf367c94f9",
+      "label_sha256": "2ff7c65b22ffe126dc4bc0135e6005b24964f12d82f7deb05ef2706ffd82d6e0",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 14.0,
+        "extra_min": 14.0,
+        "extra_max": 14.0,
+        "native_overlap_mean": 0.9533333778381348,
+        "discount_min": 0.6136389970779419,
+        "discount_mean": 0.8244421482086182,
+        "discount_max": 0.9999892711639404,
+        "discount_histogram": [
+          0,
+          0,
+          4,
+          6,
+          7,
+          9,
+          6,
+          9,
+          8,
+          11
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7968,
+            7200,
+            6424,
+            8287,
+            8343,
+            7839,
+            7040,
+            8179
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000005_brightness_contrast_strong.jpg",
+      "image_sha256": "f2ecf409ac176786ae9db6597844dea8af0ec67ac7dc6fa31d134fb424efbc6a",
+      "label_sha256": "6fee7ba4c829d3b79e15ec252f645b15f75f60bebbad882483ce12d45e0ac996",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 17.0,
+        "extra_min": 17.0,
+        "extra_max": 17.0,
+        "native_overlap_mean": 0.9433333277702332,
+        "discount_min": 0.6671427488327026,
+        "discount_mean": 0.8676919341087341,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          1,
+          2,
+          11,
+          14,
+          10,
+          11,
+          11
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7551,
+            8389,
+            7403,
+            7995,
+            8120,
+            7078,
+            8230,
+            7064
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000005_clahe_gamma_strong.jpg",
+      "image_sha256": "df316d92502eb3cf21e743387fa12a3464a5d0004c06842f63db797ba7806eff",
+      "label_sha256": "6fee7ba4c829d3b79e15ec252f645b15f75f60bebbad882483ce12d45e0ac996",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 17.0,
+        "extra_min": 17.0,
+        "extra_max": 17.0,
+        "native_overlap_mean": 0.9433333277702332,
+        "discount_min": 0.7544742822647095,
+        "discount_mean": 0.900496780872345,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          13,
+          11,
+          15,
+          17
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7198,
+            7190,
+            8369,
+            7835,
+            6878,
+            6958,
+            7969,
+            8361
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000005_hflip.jpg",
+      "image_sha256": "902b9b44839d28287d6e39850065a2478b44f47836a07ebc247aba1a685446a6",
+      "label_sha256": "4fdb728ea5468282dc2cd329ee0f8ddde981f97fb72753de0d77460505bc9828",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 18.0,
+        "extra_min": 18.0,
+        "extra_max": 18.0,
+        "native_overlap_mean": 0.9399999976158142,
+        "discount_min": 0.6481938362121582,
+        "discount_mean": 0.8652862310409546,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          1,
+          5,
+          4,
+          8,
+          6,
+          10,
+          9,
+          17
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7309,
+            7966,
+            7079,
+            7949,
+            6859,
+            8041,
+            3818,
+            6426
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000005_original.jpg",
+      "image_sha256": "63eefd6d42f2a263229847903b78964d8c6581dcf8d6008d06fb969cb7b49867",
+      "label_sha256": "6fee7ba4c829d3b79e15ec252f645b15f75f60bebbad882483ce12d45e0ac996",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 21.0,
+        "extra_min": 21.0,
+        "extra_max": 21.0,
+        "native_overlap_mean": 0.9300000071525574,
+        "discount_min": 0.6437937021255493,
+        "discount_mean": 0.8632429838180542,
+        "discount_max": 0.9999966025352478,
+        "discount_histogram": [
+          0,
+          0,
+          1,
+          3,
+          4,
+          6,
+          14,
+          9,
+          8,
+          15
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6919,
+            6420,
+            6521,
+            7358,
+            6920,
+            7942,
+            8239,
+            8228
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000005_vflip.jpg",
+      "image_sha256": "4fbca07ffa9c04c81fc628c796713b7d27ee16a52d59ece9a3c2f3ce853c00f1",
+      "label_sha256": "e79b30c0f42192ec77afdd3a4124c1bcc90171c23e8105eb157b11ca4831cea7",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 22.0,
+        "extra_min": 22.0,
+        "extra_max": 22.0,
+        "native_overlap_mean": 0.9266666769981384,
+        "discount_min": 0.6605595350265503,
+        "discount_mean": 0.8645372986793518,
+        "discount_max": 0.9999924898147583,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          4,
+          5,
+          7,
+          10,
+          8,
+          11,
+          15
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6434,
+            8016,
+            8361,
+            6451,
+            6470,
+            7994,
+            6421,
+            7198
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000006_brightness_contrast_strong.jpg",
+      "image_sha256": "a8f02290785d2387aa0e13ea32acf0c744225051dc068ee012c06f1a7e7c7841",
+      "label_sha256": "579f3b5aa0e7095070f82f70bc1814d5b1d2d53466981e56d7c82fbf0e0cf92f",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 21.0,
+        "extra_min": 21.0,
+        "extra_max": 21.0,
+        "native_overlap_mean": 0.9300000071525574,
+        "discount_min": 0.7183014154434204,
+        "discount_mean": 0.8811343908309937,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          2,
+          8,
+          14,
+          9,
+          14,
+          13
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            8383,
+            6621,
+            6957,
+            8079,
+            6760,
+            7554,
+            8360,
+            7354
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000006_clahe_gamma_strong.jpg",
+      "image_sha256": "ca47fd4ca2c165ff6d97865f2240ac1a51874daa4bc87c7ad4c18837bbae9f79",
+      "label_sha256": "579f3b5aa0e7095070f82f70bc1814d5b1d2d53466981e56d7c82fbf0e0cf92f",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 15.0,
+        "extra_min": 15.0,
+        "extra_max": 15.0,
+        "native_overlap_mean": 0.9500000476837158,
+        "discount_min": 0.762190580368042,
+        "discount_mean": 0.9143140316009521,
+        "discount_max": 0.9997707605361938,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          7,
+          13,
+          18,
+          20
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6763,
+            7478,
+            7904,
+            8039,
+            7641,
+            7314,
+            7069,
+            7278
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000006_hflip.jpg",
+      "image_sha256": "f6b7f4856a807a4b1ba25f671b9eba43111fc7876a009a264375dca1cc7f1fbb",
+      "label_sha256": "d44a436975a73c48ffaf7bf29e60f22536a97132f7791773c11ee0c204a41dee",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 18.0,
+        "extra_min": 18.0,
+        "extra_max": 18.0,
+        "native_overlap_mean": 0.9399999976158142,
+        "discount_min": 0.7014578580856323,
+        "discount_mean": 0.8931964039802551,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          4,
+          4,
+          12,
+          10,
+          10,
+          20
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            8339,
+            6998,
+            7438,
+            7578,
+            7174,
+            7886,
+            6517,
+            7923
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000006_noise_blur_strong.jpg",
+      "image_sha256": "e9db34bb242e32d2a73d2873a3498fec31bea81592f0a11e56d72a9f2b134250",
+      "label_sha256": "579f3b5aa0e7095070f82f70bc1814d5b1d2d53466981e56d7c82fbf0e0cf92f",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 16.0,
+        "extra_min": 16.0,
+        "extra_max": 16.0,
+        "native_overlap_mean": 0.9466667175292969,
+        "discount_min": 0.7108600735664368,
+        "discount_mean": 0.8959743976593018,
+        "discount_max": 0.9999909996986389,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          4,
+          4,
+          7,
+          12,
+          16,
+          17
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            8038,
+            7684,
+            6961,
+            7079,
+            7932,
+            7520,
+            370,
+            6639
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000006_original.jpg",
+      "image_sha256": "34ad9b61a3a9fb9fc9e25d282af7ac94338c7c7d9e49ecce61f448992bff92bd",
+      "label_sha256": "579f3b5aa0e7095070f82f70bc1814d5b1d2d53466981e56d7c82fbf0e0cf92f",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 17.0,
+        "extra_min": 17.0,
+        "extra_max": 17.0,
+        "native_overlap_mean": 0.9433333277702332,
+        "discount_min": 0.7475833892822266,
+        "discount_mean": 0.8906210660934448,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          6,
+          17,
+          6,
+          14,
+          16
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7104,
+            7594,
+            6782,
+            7778,
+            7037,
+            7932,
+            8393,
+            8038
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000007_brightness_contrast_strong.jpg",
+      "image_sha256": "4607032f7edc9c4d047ea289ef02e5d38126fff377c528c0fa3e67c6c0782389",
+      "label_sha256": "c7271e4bca48f207501b3522766fc0dcbcc8fd31923e74c677aef38246c2e912",
+      "gt": 4,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 15.0,
+        "extra_min": 15.0,
+        "extra_max": 15.0,
+        "native_overlap_mean": 0.9500000476837158,
+        "discount_min": 0.747544527053833,
+        "discount_mean": 0.9158839583396912,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          7,
+          14,
+          13,
+          24
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            8399,
+            7007,
+            7217,
+            8352,
+            6960,
+            7827,
+            8207,
+            7924
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000007_clahe_gamma_strong.jpg",
+      "image_sha256": "32a9c42ed335dee3cd5defc1ef8882ef62001a7c1b6ef963deb1757c9f2fa6a8",
+      "label_sha256": "c7271e4bca48f207501b3522766fc0dcbcc8fd31923e74c677aef38246c2e912",
+      "gt": 4,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 19.0,
+        "extra_min": 19.0,
+        "extra_max": 19.0,
+        "native_overlap_mean": 0.9366666674613953,
+        "discount_min": 0.7571675181388855,
+        "discount_mean": 0.9010180830955505,
+        "discount_max": 0.9999881386756897,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          17,
+          11,
+          18
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7869,
+            6520,
+            7360,
+            8339,
+            8317,
+            7482,
+            7579,
+            6419
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000007_hflip.jpg",
+      "image_sha256": "03080fc5c9e15ad31331084df32f3cc620175089758c1b2b2e986f1bb568e97f",
+      "label_sha256": "ef72611b4117cf0ffb1b4f13d71e9cb7dd33818f8f0a7259074ec889c37fcb04",
+      "gt": 4,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 16.0,
+        "extra_min": 16.0,
+        "extra_max": 16.0,
+        "native_overlap_mean": 0.9466667175292969,
+        "discount_min": 0.7020785212516785,
+        "discount_mean": 0.9152694344520569,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          3,
+          1,
+          7,
+          14,
+          10,
+          25
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6614,
+            8389,
+            8382,
+            8323,
+            7562,
+            6881,
+            6721,
+            6420
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000007_noise_blur_strong.jpg",
+      "image_sha256": "fa2ae4571e56b05c4ea619b383de3744caf9532b5f9a9bd6e8068ff636040174",
+      "label_sha256": "c7271e4bca48f207501b3522766fc0dcbcc8fd31923e74c677aef38246c2e912",
+      "gt": 4,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 12.0,
+        "extra_min": 12.0,
+        "extra_max": 12.0,
+        "native_overlap_mean": 0.9600000381469727,
+        "discount_min": 0.7807396650314331,
+        "discount_mean": 0.9308173656463623,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          5,
+          8,
+          12,
+          31
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            8320,
+            7801,
+            8207,
+            7599,
+            8370,
+            8263,
+            7145,
+            7990
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000007_original.jpg",
+      "image_sha256": "483c03a36aef34c2f6638c533ce8b83595062a2edbdc7c9ede68f2382ac7e0d6",
+      "label_sha256": "c7271e4bca48f207501b3522766fc0dcbcc8fd31923e74c677aef38246c2e912",
+      "gt": 4,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 16.0,
+        "extra_min": 16.0,
+        "extra_max": 16.0,
+        "native_overlap_mean": 0.9466667175292969,
+        "discount_min": 0.7656883001327515,
+        "discount_mean": 0.9151871204376221,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          7,
+          16,
+          10,
+          23
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6959,
+            6878,
+            8228,
+            8360,
+            6489,
+            7882,
+            8355,
+            6517
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000007_vflip.jpg",
+      "image_sha256": "9290da2b7f4a4029305b12c8b2ef01c2ac63443c1cc30a15222f81385c7842eb",
+      "label_sha256": "12205eedfbb223a60e077bc558ffd33895dc04723f2cf85637bf5c8116c1355d",
+      "gt": 4,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 15.0,
+        "extra_min": 15.0,
+        "extra_max": 15.0,
+        "native_overlap_mean": 0.9500000476837158,
+        "discount_min": 0.7393090128898621,
+        "discount_mean": 0.9268813729286194,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          6,
+          13,
+          15,
+          25
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            8187,
+            7640,
+            6918,
+            8096,
+            6560,
+            8180,
+            7825,
+            7340
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000008_brightness_contrast_strong.jpg",
+      "image_sha256": "fd14e6434b0826a4344cc818b0aabc1b72a831798db65dc1c9482296c3d138e5",
+      "label_sha256": "9d899ed647886fff94342c50342029a051114413c226943645827d60e60ea948",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 18.0,
+        "extra_min": 18.0,
+        "extra_max": 18.0,
+        "native_overlap_mean": 0.9399999976158142,
+        "discount_min": 0.735839307308197,
+        "discount_mean": 0.8928160071372986,
+        "discount_max": 0.9999759793281555,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          9,
+          7,
+          10,
+          20,
+          13
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7127,
+            8335,
+            6981,
+            6417,
+            8004,
+            8132,
+            8060,
+            7199
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000008_hflip.jpg",
+      "image_sha256": "c3a40207a0f06c71e98cddaf2db2e80143496e8c4042e4d382ae3d9aaf34c46d",
+      "label_sha256": "9d5e4d6151851bfb2455c4aa37ffbf5b1394f161e2ca9ea5f6105767b7c4ad10",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 22.0,
+        "extra_min": 22.0,
+        "extra_max": 22.0,
+        "native_overlap_mean": 0.9266666769981384,
+        "discount_min": 0.6832789182662964,
+        "discount_mean": 0.8955780863761902,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          2,
+          1,
+          6,
+          8,
+          10,
+          12,
+          21
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            5260,
+            6959,
+            7638,
+            8011,
+            7965,
+            5510,
+            5507,
+            7894
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000008_noise_blur_strong.jpg",
+      "image_sha256": "66098ec3f875c55a9a302ed459078f878ac338b82079e7b77d623d6838b7568a",
+      "label_sha256": "9d899ed647886fff94342c50342029a051114413c226943645827d60e60ea948",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 18.0,
+        "extra_min": 18.0,
+        "extra_max": 18.0,
+        "native_overlap_mean": 0.9399999976158142,
+        "discount_min": 0.7248811721801758,
+        "discount_mean": 0.89681077003479,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          6,
+          11,
+          11,
+          13,
+          18
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7638,
+            6942,
+            6434,
+            8148,
+            6444,
+            8260,
+            7473,
+            7986
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000008_original.jpg",
+      "image_sha256": "ad1dcc8b631674b3e98026dfb58b443de9baf844746d5998fd94936d85560ad2",
+      "label_sha256": "9d899ed647886fff94342c50342029a051114413c226943645827d60e60ea948",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 17.0,
+        "extra_min": 17.0,
+        "extra_max": 17.0,
+        "native_overlap_mean": 0.9433333277702332,
+        "discount_min": 0.7522132992744446,
+        "discount_mean": 0.8940564393997192,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          7,
+          11,
+          15,
+          9,
+          18
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7988,
+            8306,
+            7160,
+            7942,
+            6960,
+            6932,
+            6798,
+            6435
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000008_vflip.jpg",
+      "image_sha256": "d752d35c08bce6b5fff312eff922d07c2a18be8208f3ed5b9e629fcd278049d7",
+      "label_sha256": "a160ce4306e520d8de0ff556695b5c3970d16556e3218cf21cf8dfb2b8b3e5ca",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 18.0,
+        "extra_min": 18.0,
+        "extra_max": 18.0,
+        "native_overlap_mean": 0.9399999976158142,
+        "discount_min": 0.6615887880325317,
+        "discount_mean": 0.8867744207382202,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          2,
+          3,
+          4,
+          11,
+          10,
+          14,
+          16
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7169,
+            6407,
+            6880,
+            6428,
+            6694,
+            1030,
+            1142,
+            6499
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000009_clahe_gamma_strong.jpg",
+      "image_sha256": "99ac24c9ad52a4fcb30b1f58442e1c7a6d6fe4c73a5dc92e0685242aa98f5f24",
+      "label_sha256": "ee240a0b60a71a0ff78e3bfb66e4422ee1414b1449d9af9c48cd42af9461f761",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 18.0,
+        "extra_min": 18.0,
+        "extra_max": 18.0,
+        "native_overlap_mean": 0.9399999976158142,
+        "discount_min": 0.6814729571342468,
+        "discount_mean": 0.8606873750686646,
+        "discount_max": 0.9999796152114868,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          2,
+          3,
+          7,
+          14,
+          16,
+          11,
+          7
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7716,
+            6486,
+            2518,
+            6961,
+            8171,
+            7988,
+            8080,
+            7858
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000009_noise_blur_strong.jpg",
+      "image_sha256": "c12c1095ede6cefff0b20ae0ac20574b5628948fda65879e6b2fd1ffc08e939b",
+      "label_sha256": "ee240a0b60a71a0ff78e3bfb66e4422ee1414b1449d9af9c48cd42af9461f761",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 18.0,
+        "extra_min": 18.0,
+        "extra_max": 18.0,
+        "native_overlap_mean": 0.9399999976158142,
+        "discount_min": 0.6629237532615662,
+        "discount_mean": 0.8741554617881775,
+        "discount_max": 0.9999946355819702,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          4,
+          5,
+          6,
+          6,
+          10,
+          13,
+          16
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6541,
+            6599,
+            8377,
+            7414,
+            7080,
+            7376,
+            521,
+            6430
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000009_original.jpg",
+      "image_sha256": "b8f900dc74e700017d6535b2472bb6b2cd490b64f2377eaaa5f61b39db13a2ad",
+      "label_sha256": "ee240a0b60a71a0ff78e3bfb66e4422ee1414b1449d9af9c48cd42af9461f761",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 23.0,
+        "extra_min": 23.0,
+        "extra_max": 23.0,
+        "native_overlap_mean": 0.9233333468437195,
+        "discount_min": 0.6891217231750488,
+        "discount_mean": 0.8750353455543518,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          1,
+          3,
+          6,
+          15,
+          12,
+          9,
+          14
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7058,
+            7519,
+            8372,
+            8319,
+            8150,
+            6821,
+            6448,
+            7600
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000010_brightness_contrast_strong.jpg",
+      "image_sha256": "6aa096b2b50f32944bc48012b7b8244bc71cbd0c0361dfcbd467e06505bba68d",
+      "label_sha256": "1c2882b13d83759c9fbe8823a71bb997f7bf172bfb51c1346be56e7f6f0233c8",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 17.0,
+        "extra_min": 17.0,
+        "extra_max": 17.0,
+        "native_overlap_mean": 0.9433333277702332,
+        "discount_min": 0.7462623119354248,
+        "discount_mean": 0.9165872931480408,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          4,
+          15,
+          18,
+          21
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7915,
+            8005,
+            6405,
+            7951,
+            8001,
+            7351,
+            7396,
+            8016
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000010_clahe_gamma_strong.jpg",
+      "image_sha256": "3fc550c4cbbdfcafc917497b9a23c4f4ae25f1e0b7acb8d3e892825b1f440166",
+      "label_sha256": "1c2882b13d83759c9fbe8823a71bb997f7bf172bfb51c1346be56e7f6f0233c8",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 14.0,
+        "extra_min": 14.0,
+        "extra_max": 14.0,
+        "native_overlap_mean": 0.9533333778381348,
+        "discount_min": 0.7760075330734253,
+        "discount_mean": 0.914787232875824,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          6,
+          16,
+          13,
+          22
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7441,
+            7877,
+            6918,
+            6406,
+            6465,
+            7001,
+            7753,
+            8238
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000010_hflip.jpg",
+      "image_sha256": "900270d0240fc302fde47e6283e09432aca8037ffbab87748d78f85d7c2655e5",
+      "label_sha256": "7dc049443099ff4c921822b77c1e4e2bdc452639329a9bbd15ce7b92e871da90",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 15.0,
+        "extra_min": 15.0,
+        "extra_max": 15.0,
+        "native_overlap_mean": 0.9500000476837158,
+        "discount_min": 0.7324997186660767,
+        "discount_mean": 0.887895941734314,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          3,
+          6,
+          7,
+          17,
+          14,
+          13
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7599,
+            6458,
+            8302,
+            7973,
+            8004,
+            7992,
+            6407,
+            7038
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000010_noise_blur_strong.jpg",
+      "image_sha256": "15088032ac35f9b40c20b9a68a2960df2d0f8130e9078f6f362d6be75ef8e255",
+      "label_sha256": "1c2882b13d83759c9fbe8823a71bb997f7bf172bfb51c1346be56e7f6f0233c8",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 15.0,
+        "extra_min": 15.0,
+        "extra_max": 15.0,
+        "native_overlap_mean": 0.9500000476837158,
+        "discount_min": 0.7362514734268188,
+        "discount_mean": 0.8863003253936768,
+        "discount_max": 0.9999901056289673,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          8,
+          8,
+          17,
+          16,
+          10
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6881,
+            7280,
+            8394,
+            7203,
+            8379,
+            8318,
+            8383,
+            6760
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000010_vflip.jpg",
+      "image_sha256": "e68f22323a611ae21a24b6ae223d03b00c5af753eacab15ee02d619e2131eafa",
+      "label_sha256": "74300091c1853eec503d9819fa52b750ab7209935ce9ffbbdd3f65a01ad3e77d",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 17.0,
+        "extra_min": 17.0,
+        "extra_max": 17.0,
+        "native_overlap_mean": 0.9433333277702332,
+        "discount_min": 0.6811546087265015,
+        "discount_mean": 0.8908836841583252,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          1,
+          2,
+          2,
+          12,
+          16,
+          11,
+          16
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            8180,
+            7982,
+            8384,
+            6522,
+            7199,
+            7640,
+            6404,
+            7642
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000011_brightness_contrast_strong.jpg",
+      "image_sha256": "45f0dfe87a505fa836053f539d356219717a345ce1854116a2f6dbfca09552df",
+      "label_sha256": "73dbdef28ac30767fe30642d1eeb68169072b3354e51a70b4b632c177b3b8df1",
+      "gt": 4,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 24.0,
+        "extra_min": 24.0,
+        "extra_max": 24.0,
+        "native_overlap_mean": 0.9200000166893005,
+        "discount_min": 0.7283680438995361,
+        "discount_mean": 0.9045392274856567,
+        "discount_max": 0.9999992251396179,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          5,
+          1,
+          11,
+          11,
+          7,
+          25
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7398,
+            7965,
+            7651,
+            6639,
+            7578,
+            8259,
+            4973,
+            8384
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000011_clahe_gamma_strong.jpg",
+      "image_sha256": "0ae96ea148c38cf0209d1fc5c4080f5e3d58dd0d89ac9afc706cc4dabd713b50",
+      "label_sha256": "73dbdef28ac30767fe30642d1eeb68169072b3354e51a70b4b632c177b3b8df1",
+      "gt": 4,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 18.0,
+        "extra_min": 18.0,
+        "extra_max": 18.0,
+        "native_overlap_mean": 0.9399999976158142,
+        "discount_min": 0.734237551689148,
+        "discount_mean": 0.9062272310256958,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          2,
+          1,
+          12,
+          15,
+          9,
+          21
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6756,
+            8299,
+            7522,
+            7715,
+            7002,
+            7339,
+            7812,
+            7939
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000011_original.jpg",
+      "image_sha256": "dc430eaf0bf66a77516618ec1ed140a8ac6de797bc8184044669be2833952ae4",
+      "label_sha256": "73dbdef28ac30767fe30642d1eeb68169072b3354e51a70b4b632c177b3b8df1",
+      "gt": 4,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 26.0,
+        "extra_min": 26.0,
+        "extra_max": 26.0,
+        "native_overlap_mean": 0.9133333563804626,
+        "discount_min": 0.7546939849853516,
+        "discount_mean": 0.9061593413352966,
+        "discount_max": 0.9999983906745911,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          11,
+          15,
+          9,
+          21
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6444,
+            8122,
+            8397,
+            6999,
+            4770,
+            6422,
+            7636,
+            8021
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000011_vflip.jpg",
+      "image_sha256": "ce37d6d1467824da4e7390c350310cf90c0f423f0e549bab1cb6b2e0becdd10f",
+      "label_sha256": "da12b1c5fbf475bfe4e7e8742bfe88eccd954ba21e6e93f542497c2cff41c443",
+      "gt": 4,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 18.0,
+        "extra_min": 18.0,
+        "extra_max": 18.0,
+        "native_overlap_mean": 0.9399999976158142,
+        "discount_min": 0.7287427186965942,
+        "discount_mean": 0.899131178855896,
+        "discount_max": 0.9998111724853516,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          8,
+          8,
+          10,
+          16,
+          17
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6919,
+            7599,
+            6822,
+            1996,
+            6793,
+            6418,
+            7077,
+            8132
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000012_clahe_gamma_strong.jpg",
+      "image_sha256": "bc2525c606324aa44859c9aff31fa6ce77ca5b98e418a26896ac78ba4cc06a92",
+      "label_sha256": "4136b95a98fcdf6c0d6bd9ea6caa5226ae6a90a14a55e3ee5a345e35db2d209e",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 11.0,
+        "extra_min": 11.0,
+        "extra_max": 11.0,
+        "native_overlap_mean": 0.9633333683013916,
+        "discount_min": 0.750835657119751,
+        "discount_mean": 0.9170067310333252,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          5,
+          3,
+          14,
+          16,
+          22
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7840,
+            7322,
+            1182,
+            8318,
+            7892,
+            6791,
+            8021,
+            6416
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000012_hflip.jpg",
+      "image_sha256": "3571844cb8697c34d8b7c3752033ed39b46dff75cd1d87d389797355a6b43601",
+      "label_sha256": "a19bff8d89c541df5ca0c50c7bd940bc8e116f3eac40e47f8ab5535f6f62c5b4",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 19.0,
+        "extra_min": 19.0,
+        "extra_max": 19.0,
+        "native_overlap_mean": 0.9366666674613953,
+        "discount_min": 0.7414078712463379,
+        "discount_mean": 0.8884375691413879,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          2,
+          3,
+          15,
+          13,
+          12,
+          15
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7561,
+            8178,
+            8340,
+            6431,
+            6613,
+            6959,
+            8179,
+            7796
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000012_noise_blur_strong.jpg",
+      "image_sha256": "8aede0948470d4f51d4b00a43788b1342753c321972b325dead2b909804a74f0",
+      "label_sha256": "4136b95a98fcdf6c0d6bd9ea6caa5226ae6a90a14a55e3ee5a345e35db2d209e",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 20.0,
+        "extra_min": 20.0,
+        "extra_max": 20.0,
+        "native_overlap_mean": 0.9333333373069763,
+        "discount_min": 0.672690749168396,
+        "discount_mean": 0.898280918598175,
+        "discount_max": 0.9998570084571838,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          3,
+          11,
+          11,
+          13,
+          20
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7350,
+            7322,
+            6677,
+            7761,
+            6684,
+            7991,
+            7964,
+            8099
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000012_original.jpg",
+      "image_sha256": "f73b664d5e06a9082a1d66accfe1a496a2469b5aae2ba3b0a3f1c761b895322f",
+      "label_sha256": "4136b95a98fcdf6c0d6bd9ea6caa5226ae6a90a14a55e3ee5a345e35db2d209e",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 18.0,
+        "extra_min": 18.0,
+        "extra_max": 18.0,
+        "native_overlap_mean": 0.9399999976158142,
+        "discount_min": 0.7484176158905029,
+        "discount_mean": 0.9059618711471558,
+        "discount_max": 0.9986969232559204,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          4,
+          9,
+          13,
+          13,
+          20
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6678,
+            8182,
+            8395,
+            7002,
+            6449,
+            6794,
+            8339,
+            6466
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000012_vflip.jpg",
+      "image_sha256": "47e0539bb42bf4c5f869c5339e0801a1d38e2c50d773dfa8b43279dc7a3f181c",
+      "label_sha256": "84d655fabe6b3ac10e6bb28ebeedda8f5ba41d0b2cfcdc1143b8605493d1162c",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 15.0,
+        "extra_min": 15.0,
+        "extra_max": 15.0,
+        "native_overlap_mean": 0.9500000476837158,
+        "discount_min": 0.7355399131774902,
+        "discount_mean": 0.9008501768112183,
+        "discount_max": 0.9999656677246094,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          2,
+          5,
+          9,
+          9,
+          18,
+          17
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            8096,
+            6482,
+            8299,
+            6598,
+            7070,
+            7200,
+            6925,
+            7398
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000013_brightness_contrast_strong.jpg",
+      "image_sha256": "d795f172500806881f49c282915debf6ea1a559166ab956803aea46d5a1ea5c2",
+      "label_sha256": "a4e3753a064007b132507c5bd0765778bfad682a1159731eaeba4460ce0568d3",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 16.0,
+        "extra_min": 16.0,
+        "extra_max": 16.0,
+        "native_overlap_mean": 0.9466667175292969,
+        "discount_min": 0.6435672044754028,
+        "discount_mean": 0.873301088809967,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          1,
+          5,
+          5,
+          4,
+          8,
+          7,
+          9,
+          21
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7991,
+            8120,
+            7947,
+            7784,
+            8386,
+            8370,
+            7063,
+            8004
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000013_clahe_gamma_strong.jpg",
+      "image_sha256": "31afbb7fa1494d749a35f85c0e42df2f0751ca119db044edf5a2b98b9dd506fb",
+      "label_sha256": "a4e3753a064007b132507c5bd0765778bfad682a1159731eaeba4460ce0568d3",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 11.0,
+        "extra_min": 11.0,
+        "extra_max": 11.0,
+        "native_overlap_mean": 0.9633333683013916,
+        "discount_min": 0.7202678322792053,
+        "discount_mean": 0.885159432888031,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          0,
+          4,
+          2,
+          13,
+          17,
+          11,
+          13
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            8240,
+            6721,
+            7594,
+            6766,
+            8130,
+            7758,
+            8005,
+            7464
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000013_hflip.jpg",
+      "image_sha256": "8d41a0bb732be42805785d998a131732714a150d8ba7321804f536b96e1986e9",
+      "label_sha256": "cb75319cfaf8ecb6126398f752242e2d8fe18f92b5789551ebc3d4ecb1b3bc90",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 15.0,
+        "extra_min": 15.0,
+        "extra_max": 15.0,
+        "native_overlap_mean": 0.9500000476837158,
+        "discount_min": 0.6455622315406799,
+        "discount_mean": 0.8539736270904541,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          1,
+          6,
+          5,
+          8,
+          6,
+          9,
+          13,
+          12
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6539,
+            7162,
+            8200,
+            6976,
+            6110,
+            8240,
+            8180,
+            6410
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000013_noise_blur_strong.jpg",
+      "image_sha256": "d2cc9dda17da47396b5f36ceee2b41df59a8310966ea78ca1108f7f6494441b3",
+      "label_sha256": "a4e3753a064007b132507c5bd0765778bfad682a1159731eaeba4460ce0568d3",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 16.0,
+        "extra_min": 16.0,
+        "extra_max": 16.0,
+        "native_overlap_mean": 0.9466667175292969,
+        "discount_min": 0.6466635465621948,
+        "discount_mean": 0.871921181678772,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          2,
+          2,
+          4,
+          5,
+          11,
+          6,
+          14,
+          16
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            8028,
+            6943,
+            6521,
+            8172,
+            7464,
+            7784,
+            7947,
+            8133
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000013_vflip.jpg",
+      "image_sha256": "16ebd7f3e6b6588465b86dfcbcac060048df586785677735acba25d1eb55d67f",
+      "label_sha256": "8e166b1ed8ba726c555388701dfd2b9d1c09c79f52d1e350fda1a1728f6c2ae9",
+      "gt": 2,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 15.0,
+        "extra_min": 15.0,
+        "extra_max": 15.0,
+        "native_overlap_mean": 0.9500000476837158,
+        "discount_min": 0.6709789633750916,
+        "discount_mean": 0.8529266715049744,
+        "discount_max": 0.99984210729599,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          6,
+          5,
+          7,
+          12,
+          8,
+          8,
+          14
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7185,
+            8030,
+            6418,
+            6492,
+            6490,
+            3967,
+            7987,
+            7077
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000014_brightness_contrast_strong.jpg",
+      "image_sha256": "2055c347de46819e6b38e6eeaab61a1a02f1ba89d6bf81875c75e32fad51e9dd",
+      "label_sha256": "11593ae15b23111b40e1c58505e61d062e4db7124de83a348fe969c74aa5dcf1",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 16.0,
+        "extra_min": 16.0,
+        "extra_max": 16.0,
+        "native_overlap_mean": 0.9466667175292969,
+        "discount_min": 0.6556913256645203,
+        "discount_mean": 0.8686445951461792,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          5,
+          3,
+          8,
+          8,
+          10,
+          9,
+          17
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            7847,
+            7975,
+            7353,
+            7969,
+            8257,
+            3412,
+            7964,
+            6517
+          ]
+        ]
+      }
+    },
+    {
+      "image": "images/train/crack_000014_clahe_gamma_strong.jpg",
+      "image_sha256": "3df1a9cae1a2e8337e1dabf9044e7474daa41ce7a642d1a16e01827218d256a6",
+      "label_sha256": "11593ae15b23111b40e1c58505e61d062e4db7124de83a348fe969c74aa5dcf1",
+      "gt": 3,
+      "selection": {
+        "pool_size": 600,
+        "core_queries": 240,
+        "complement_queries": 60,
+        "images": 1,
+        "extra_mean": 14.0,
+        "extra_min": 14.0,
+        "extra_max": 14.0,
+        "native_overlap_mean": 0.9533333778381348,
+        "discount_min": 0.6860599517822266,
+        "discount_mean": 0.8748486042022705,
+        "discount_max": 1.0,
+        "discount_histogram": [
+          0,
+          0,
+          0,
+          4,
+          4,
+          4,
+          10,
+          14,
+          6,
+          18
+        ],
+        "duplicate_indices": 0,
+        "nonfinite": 0,
+        "representative_indices": [
+          [
+            6517,
+            7439,
+            6406,
+            7965,
+            7581,
+            8318,
+            7937,
+            7319
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -68,6 +68,7 @@ from ultralytics.nn.modules import (
     ResNetLayer,
     RTDETRDecoder,
     RTDETRDecoderCBR,
+    RTDETRDecoderCBRCQS,
     SCDown,
     Segment,
     Segment26,
@@ -1713,7 +1714,7 @@ def parse_model(d, ch, verbose=True):
             args.append([ch[x] for x in f])
         elif m is ImagePoolingAttn:
             args.insert(1, [ch[x] for x in f])  # channels as second arg
-        elif m in {RTDETRDecoder, RTDETRDecoderCBR}:  # special case, channels arg must be passed in index 1
+        elif m in {RTDETRDecoder, RTDETRDecoderCBR, RTDETRDecoderCBRCQS}:  # channels in index 1
             args.insert(1, [ch[x] for x in f])
         elif m is CBLinear:
             c2 = args[0]
