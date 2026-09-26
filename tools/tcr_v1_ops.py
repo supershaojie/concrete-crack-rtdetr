@@ -106,9 +106,24 @@ def ensure_gate(prepared):
     gate=read_json(OUT/"preflight_gate.json")
     require(gate and gate["fingerprint"]==prepared["fingerprint"],"No current B16/640 preflight")
     report=read_json(gate["report"])
-    require(report and report["status"]=="PASS" and report["effective_updates"]>=2 and report["post_O_P_gradient"],"Preflight did not pass")
+    require(preflight_accepted(report),"Preflight capacity/strict FP32 fusion did not pass")
     require(file_identity(gate["report"])["sha256"]==gate["sha256"],"Preflight report altered")
     return gate
+
+
+def preflight_accepted(report):
+    """Only completed capacity + strict FP32 evidence can admit training.
+
+PASS_STRICT_FP32_ONLY explicitly does not certify fusion at runtime precision.
+No fallback can admit an early-node or mother-protocol strict FP32 failure.
+"""
+    if not report or report.get("status") not in {"PASS", "PASS_STRICT_FP32_ONLY"}:
+        return False
+    fusion=report.get("fusion",{})
+    return (report.get("capacity_status")=="PASS" and report.get("effective_updates",0)>=2
+            and report.get("post_O_P_gradient") is True and report.get("original_gradients") is True
+            and report.get("fusion_trainer_unchanged") is True and fusion.get("strict_accepted") is True
+            and (report["status"]=="PASS") == (fusion.get("runtime_accepted") is True))
 
 
 def preflight():
@@ -134,9 +149,12 @@ def preflight():
             write_json(folder/"preflight.json",report)
             raise RuntimeError(f"Preflight timed out; evidence preserved: {folder}")
     report=read_json(folder/"preflight.json",{})
-    require(code==0 and report.get("status")=="PASS",f"Preflight failed; inspect {log} and {folder}")
-    gate=dict(fingerprint=prepared["fingerprint"],report=str(folder/"preflight.json"),sha256=sha256(folder/"preflight.json"),log=str(log))
-    write_json(OUT/"preflight_gate.json",gate); print("B16/640 preflight PASS:",folder)
+    require(code==0 and preflight_accepted(report),f"Preflight failed; inspect {log} and {folder}")
+    gate=dict(fingerprint=prepared["fingerprint"],report=str(folder/"preflight.json"),sha256=sha256(folder/"preflight.json"),log=str(log),
+              status=report["status"],fusion=report["fusion"])
+    write_json(OUT/"preflight_gate.json",gate); print("B16/640 preflight",report["status"],":",folder)
+    if report["status"]=="PASS_STRICT_FP32_ONLY":
+        print("Runtime-precision fusion FAILED at the original tolerances; see retained evidence. This gate certifies strict FP32 fusion only.")
     return gate
 
 

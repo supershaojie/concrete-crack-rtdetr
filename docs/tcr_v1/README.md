@@ -35,7 +35,11 @@ cbr.py      d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787
 
 CPU 合成数据夹具还执行了真实 Trainer setup、一次更新、原生 checkpoint 保存、原生 resume 恢复 optimizer/scaler/EMA/epoch、每轮 validator、独立 validator 和无标签 predict。夹具指标不是裂缝实验 AP。非零 TCR 完整模型的静态 FP32 TorchScript 导出/重载已验证；其余导出格式及 dynamic/half/int8/nms/optimize 导出明确报错。PyTorch 2.1 服务器执行情况需以服务器预检为准。
 
-融合比较复用母版 `c19_lif_v1_diagnostic.fusion_protocol` 和 `fusion_accepted`，记录 encoder 候选身份、对齐比较和固定 query 回放。近似同分候选可在融合后换行，不能直接把未对齐的 300 行输出当作融合算子误差。正式推理不改 topk，也没有全局关闭 fuse。公共梯度采用报告中明确的 FP32 容差；CUDA grid_sample 的非确定性警告仍如实保留，不承诺逐位复现。
+融合比较复用母版 `c19_lif_v1_diagnostic.fusion_protocol` 和 `fusion_accepted`，记录 encoder 候选身份、对齐比较和固定 query 回放。近似同分候选可在融合后换行，不能直接把未对齐的 300 行输出当作融合算子误差。`lif_input` 位于候选选择之前，其超差必须先追踪上游，不能用候选换行解释。正式推理不改 topk，也没有全局关闭 fuse。公共梯度采用报告中明确的 FP32 容差；CUDA grid_sample 的非确定性警告仍如实保留，不承诺逐位复现。
+
+服务器融合精度修复见 [fusion_precision_fix.md](fusion_precision_fix.md)。预检在局部严格 FP32 作用域内创建融合模型并比较，关闭 matmul/cuDNN TF32 和实际 autocast，退出或异常时恢复。另以同一输入、权重、RNG 执行原运行精度对照；原容差保持 `atol=2e-5, rtol=2e-4`。新顺序追踪覆盖原骨干、节点 17 原 Conv 输出、TCR/P/O、节点 19、`lif_input` 及后续 neck。原 LIF/CBR、TCR 公式和正式配方未改。
+
+预检 `PASS` 要求严格及原运行精度比较均通过；`PASS_STRICT_FP32_ONLY` 仅确认有界训练容量和严格 FP32 融合门槛，原运行精度的失败仍保留为失败，并在终端和报告中明确显示。任一严格 FP32 算子/候选门槛失败均阻止启动。这个状态不证明运行精度下的融合一致性，也不证明服务器尚未执行的新版预检已经通过。
 
 本机数据身份核对为 train 6048/45573 GT、val 1728/12840 GT、test 864/6663 GT。这里只读取 test 路径和标签以核对划分身份，没有 test 推理。独立只读 probe 预先冻结字典序前 64 张 train 图、640、无增强，加载已训练母版公共权重，P 为 v1 随机初值、O=0。八组均出现正负响应，BN/参数未更新。随机投影 probe 只确认特征响应，不证明学到方向或涨点。
 
@@ -60,6 +64,7 @@ CPU 合成数据夹具还执行了真实 Trainer setup、一次更新、原生 c
 | pack | 仅打包已有证据，缺项标记 NOT_RUN；不触发训练/评估 |
 | archive-failed-start | 仅 args/空 CSV/无 checkpoint、无活跃进程的 setup 失败目录可重命名归档；另行 start |
 | commands | 根据当前真实完整 HEAD 生成独立可复制的服务器命令文档 |
+| diagnose-fusion --fixture PATH | 只读载入旧失败的 fixture.pt；新目录中比较严格 FP32、原运行精度及历史融合权重，不训练、不改旧证据 |
 
 预检缓存基于相关源码、研究配置、109 项训练配置、初值/公共源、数据和环境身份，报告时间戳不参与。数据每次核对标签内容 SHA256、相对路径清单和图像 size/mtime；没有跨路径迁移。正式训练每 100 个 micro-batch 采样八组非零/正负计数、RMS、残差比及 P/O 权重和梯度，按 epoch 汇总，保留分母和采样数；持续零残差会记录事件。
 

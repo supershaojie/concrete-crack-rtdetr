@@ -8,7 +8,8 @@ from tcr_v1_core import *
 def main():
     os.chdir(ROOT)  # Absolute entry works independently of the caller's directory.
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action",choices=("prepare","preflight","probe","start","status","resume","val","test","pack","archive-failed-start","commands","_worker","_exit","_preflight"))
+    parser.add_argument("action",choices=("prepare","preflight","probe","start","status","resume","val","test","pack","archive-failed-start","commands","diagnose-fusion","_worker","_exit","_preflight"))
+    parser.add_argument("--fixture",type=Path)
     parser.add_argument("--weights",type=Path)
     parser.add_argument("--dataset",type=Path)
     parser.add_argument("--output",type=Path)
@@ -50,6 +51,19 @@ def main():
         result=run(args.folder)
     elif args.action=="commands":
         result=commands()
+    elif args.action=="diagnose-fusion":
+        from tcr_v1_fusion import replay
+        import uuid
+        require(args.fixture and args.fixture.is_file(),"Missing saved failure fixture.pt")
+        output=args.output or OUT/"fusion_replays"/(datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")+"_"+uuid.uuid4().hex[:8])
+        device="cuda:"+args.device if args.device.isdigit() else args.device
+        result=replay(args.fixture,output,device)
+        print("Fusion replay evidence:",output)
+        require(result["strict_accepted"],"Strict FP32 replay failed; evidence preserved")
+        result=dict(status=result["status"],strict_accepted=result["strict_accepted"],runtime_accepted=result["runtime_accepted"],
+                    historical_weights_strict=result["historical_weights_strict"]["status"],
+                    historical_weights_runtime=result["historical_weights_runtime"]["status"],
+                    evidence=str(output/"precision_diagnostic.json"),server_preflight="PENDING")
     if result is not None:
         print(json.dumps(clean_json(result),ensure_ascii=False,indent=2,allow_nan=False))
 
@@ -61,6 +75,8 @@ def commands():
     prefix=f"env PYTHONPATH={server}/ultralytics-main PYTHONUNBUFFERED=1 YOLO_AUTOINSTALL=false {python} -u {server}/tools/tcr_v1.py"
     text=f"# TCR v1 server commands\n\nPinned full SHA: `{sha}`. Each block is independent.\n\n"
     text+=f"## Sync\n\n```bash\ncurl -fL --retry 3 https://raw.githubusercontent.com/supershaojie/concrete-crack-rtdetr/{sha}/tools/sync_tcr_v1.sh -o /tmp/sync_tcr_v1_{sha}.sh && bash /tmp/sync_tcr_v1_{sha}.sh {sha}\n```\n\n"
+    text+="New preflights/replays use fresh evidence directories. Preserve the old failed preflight. Server B16/640 remains PENDING until actually rerun.\n\n"
+    text+=f"## Read-only replay of the reported fusion failure (no training)\n\n```bash\n{prefix} diagnose-fusion --fixture {server}/outputs/tcr_v1/preflights/20260926T103719Z_33b1932d/fusion/fixture.pt --device 0\n```\n\n"
     for action in ("prepare","preflight","probe","start","status","resume","val","test","pack"):
         text+=f"## {action}\n\n```bash\n{prefix} {action}\n```\n\n"
     text+="## tmux\n\n```bash\ntmux attach -t tcr-v1-training\n```\n\nDetach: Ctrl+B, then D.\n\n"

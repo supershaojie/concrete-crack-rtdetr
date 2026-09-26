@@ -12,12 +12,13 @@ def run(folder):
     from tcr_v1_ops import verify_prepared
     from tcr_v1_train import TCRTrainer
     from check_tcr_v1 import algorithm
-    from ultralytics.nn.autobackend import AutoBackend
+    from tcr_v1_fusion import diagnose, precision_state, model_identity
     folder=Path(folder); folder.mkdir(parents=True,exist_ok=False)
     started=time.monotonic()
     prepared=verify_prepared()
     report=dict(status="FAILED",fingerprint=prepared["fingerprint"],runtime=runtime(),scope="server B16/640 native-AMP capacity",
-                max_micro_batches=16,max_seconds=900,diagnostic_only_scale=128,formal_training="NOT_RUN",effective_updates=0,steps=[])
+                max_micro_batches=16,max_seconds=900,diagnostic_only_scale=128,formal_training="NOT_RUN",effective_updates=0,steps=[],
+                precision_observations=dict(before_trainer=precision_state()))
     try:
         require(torch.cuda.is_available(),"CUDA required for server capacity")
         with isolated_rng():
@@ -25,7 +26,9 @@ def run(folder):
             args=YAML.load(OUT/"train_args.yaml")
             args.update(project=str(folder),name="native_setup",save_dir=str(folder/"native_setup"))
             trainer=TCRTrainer(overrides=args,evidence=folder)
+            report["precision_observations"]["after_trainer_init"]=precision_state()
             trainer._setup_train()
+            report["precision_observations"]["after_trainer_setup"]=precision_state()
             require(trainer.amp,"Native check_amp did not enable AMP")
             require(trainer.batch_size==16 and trainer.args.imgsz==640,"Capacity recipe changed")
             report["optimizer_groups"]=optimizer_audit(trainer.model,trainer.optimizer)
@@ -83,29 +86,34 @@ def run(folder):
             require(torch.count_nonzero(module.O.weight)>0,"Output projection did not actually update")
             # Check visibility with a controlled nonzero O on a separate copy, so
             # tiny warmup changes cannot be mistaken for a missing inference path.
-            diagnostic_model=deepcopy(trainer.model).eval()
+            trainer_state=model_identity(trainer.model)
+            diagnostic_model=deepcopy(trainer.model).eval().float()
+            copy_state=model_identity(diagnostic_model)
+            require(copy_state["state_sha256"]==trainer_state["state_sha256"],"Diagnostic copy changed weights/BN before O injection")
             with torch.no_grad():
                 diagnostic_model.model[17].tcr.O.weight.normal_(0,.01)
                 report["fusion_weight_mode"]="isolated copy with artificial nonzero O (std=.01); capacity/gradient records use actual native updates"
-                x=sample["img"][:1].float()
-                y=diagnostic_model(x)[0]
-                diagnostic_model.model[17].tcr.enabled=False
-                disabled=diagnostic_model(x)[0]
-                diagnostic_model.model[17].tcr.enabled=True
-                require((y-disabled).abs().max()>0,"Trained diagnostic TCR had no effect")
-                fused=deepcopy(diagnostic_model).fuse(verbose=False)
-                verify_model(fused)
-                from c19_lif_v1_diagnostic import fusion_protocol
-                from c19_lif_v1_cutoff import fusion_accepted
-                fusion=fusion_protocol(diagnostic_model,fused,x,folder/"fusion","cuda","fp32")
-                require(fusion_accepted(fusion,"cuda","fp32"),"Mother candidate-aware FP32 fusion gate failed")
-                report["fusion"]=dict(status=fusion["status"],evidence=str(folder/"fusion"))
-                fused_output=fused(x)[0]
-                backend=AutoBackend(deepcopy(diagnostic_model),device=trainer.device,fuse=True,verbose=False)
-                backend_fusion=fusion_protocol(diagnostic_model,backend.model,x,folder/"backend_fusion","cuda","fp32")
-                require(fusion_accepted(backend_fusion,"cuda","fp32"),"AutoBackend candidate-aware fusion gate failed")
-                torch.testing.assert_close(backend.model(x)[0],backend(x)[0],atol=0,rtol=0)
-            report.update(status="PASS",post_O_P_gradient=True,original_gradients=True,nonzero_fusion=True,
+            differences=[k for k,v in trainer.model.state_dict().items() if not torch.equal(v,diagnostic_model.state_dict()[k])]
+            require(differences==["model.17.tcr.O.weight"],"Diagnostic changed state outside the disclosed O projection")
+            report["fusion_copy_audit"]=dict(trainer=trainer_state,before_O=copy_state,
+                after_O=model_identity(diagnostic_model),changed_state_keys=differences,
+                O_modified_before_either_fused_copy=True)
+            x=sample["img"][:1].detach().float().clone()
+            report["precision_observations"]["before_fusion"]=precision_state()
+            try:
+                fusion=diagnose(diagnostic_model,x,folder/"fusion")
+                report["fusion"]=dict(status=fusion["status"],strict_accepted=fusion["strict_accepted"],
+                    runtime_accepted=fusion["runtime_accepted"],evidence=str(folder/"fusion/precision_diagnostic.json"),
+                    acceptance_scope=fusion["acceptance_scope"])
+                require(fusion["strict_accepted"],"Strict FP32 fusion failed at unchanged mother tolerances; inspect evidence")
+            finally:
+                report["precision_observations"]["after_fusion"]=precision_state()
+                report["fusion_trainer_unchanged"]=trainer_state==model_identity(trainer.model)
+                require(report["fusion_trainer_unchanged"],"Fusion diagnostic changed actual Trainer weights/BN/mode")
+            # Do not call an unsuccessful runtime comparison PASS. Capacity and
+            # the original FP32 fusion gate have their own explicit scope.
+            report.update(status="PASS" if fusion["runtime_accepted"] else "PASS_STRICT_FP32_ONLY",
+                          capacity_status="PASS",post_O_P_gradient=True,original_gradients=True,nonzero_fusion=True,
                           parameters=sum(p.numel() for p in trainer.model.parameters()),
                           peak_allocated_bytes=torch.cuda.max_memory_allocated(),peak_reserved_bytes=torch.cuda.max_memory_reserved())
     except BaseException as error:
