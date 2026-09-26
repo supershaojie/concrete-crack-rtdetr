@@ -1,0 +1,224 @@
+{
+  "status": "COMPLETED",
+  "key": "4618e8385bec9264b6fae49dcc19b2d5121b0a4edaa99683bf65a33919e457d9",
+  "scope": "FULL_VAL",
+  "note": "Candidate coverage/max-IoU proxy are not Recall/AP or an AP upper bound",
+  "environment": {
+    "python": "3.9.25",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "total_gpu_memory": 6442123264,
+    "ultralytics_version": "8.4.21",
+    "ultralytics_file": "D:\\MyProjects\\Crack_RTDETR-peq_v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "model_type": "ultralytics.models.rtdetr.peq_model.PEQDetectionModel",
+    "criterion_type": "ultralytics.models.utils.peq_loss.PEQDetectionLoss",
+    "platform": "Windows-10-10.0.19045-SP0"
+  },
+  "feature_shapes_first_batch": [
+    [
+      2,
+      256,
+      80,
+      80
+    ],
+    [
+      2,
+      256,
+      40,
+      40
+    ],
+    [
+      2,
+      256,
+      20,
+      20
+    ]
+  ],
+  "images": 1728,
+  "queries": 518400,
+  "ground_truth": 12840,
+  "coverage_thresholds": [
+    0.5,
+    0.75,
+    0.9
+  ],
+  "gt_with_candidate": [
+    12629,
+    9242,
+    2483
+  ],
+  "candidate_coverage": [
+    0.9835669781931464,
+    0.7197819314641745,
+    0.19338006230529595
+  ],
+  "accurate_candidate_best_rank_outside_top_gt_count": [
+    1610,
+    1649,
+    421
+  ],
+  "compared_high_low_pairs": 3390944,
+  "inverted_pairs": 807866,
+  "tied_pairs": 1,
+  "inversion_rate": 0.23824221219813715,
+  "raw_score_proxy_pearson": 0.551838656503925,
+  "mean_max_iou_change": -0.0005328280009371717,
+  "mean_cxcywh_displacement_norm": 0.007012357311668219,
+  "score_bins": [
+    {
+      "low": 0.0,
+      "high": 0.1,
+      "queries": 457089,
+      "mean_max_iou": 0.0798735584796709,
+      "quality_positive_counts": [
+        12788,
+        3585,
+        406
+      ]
+    },
+    {
+      "low": 0.1,
+      "high": 0.2,
+      "queries": 30668,
+      "mean_max_iou": 0.13782624513015249,
+      "quality_positive_counts": [
+        1079,
+        184,
+        22
+      ]
+    },
+    {
+      "low": 0.2,
+      "high": 0.3,
+      "queries": 9483,
+      "mean_max_iou": 0.20247340430081676,
+      "quality_positive_counts": [
+        774,
+        179,
+        26
+      ]
+    },
+    {
+      "low": 0.3,
+      "high": 0.4,
+      "queries": 4253,
+      "mean_max_iou": 0.2649094042134239,
+      "quality_positive_counts": [
+        644,
+        178,
+        30
+      ]
+    },
+    {
+      "low": 0.4,
+      "high": 0.5,
+      "queries": 2554,
+      "mean_max_iou": 0.3353067750101468,
+      "quality_positive_counts": [
+        641,
+        220,
+        35
+      ]
+    },
+    {
+      "low": 0.5,
+      "high": 0.6,
+      "queries": 1875,
+      "mean_max_iou": 0.4358353660908838,
+      "quality_positive_counts": [
+        770,
+        309,
+        41
+      ]
+    },
+    {
+      "low": 0.6,
+      "high": 0.7,
+      "queries": 2089,
+      "mean_max_iou": 0.5438626566867252,
+      "quality_positive_counts": [
+        1219,
+        553,
+        96
+      ]
+    },
+    {
+      "low": 0.7,
+      "high": 0.8,
+      "queries": 3968,
+      "mean_max_iou": 0.6749871804579837,
+      "quality_positive_counts": [
+        3369,
+        1638,
+        221
+      ]
+    },
+    {
+      "low": 0.8,
+      "high": 0.9,
+      "queries": 5753,
+      "mean_max_iou": 0.8178308217611578,
+      "quality_positive_counts": [
+        5582,
+        4664,
+        1328
+      ]
+    },
+    {
+      "low": 0.9,
+      "high": 1.0,
+      "queries": 668,
+      "mean_max_iou": 0.9011724576532484,
+      "quality_positive_counts": [
+        665,
+        657,
+        420
+      ]
+    }
+  ],
+  "opportunity": "Ranking opportunity detected; training still required",
+  "opportunity_rule": "Descriptive only: coverage@.75 >= .50 AND inversion rate >= .01; no hyperparameter search",
+  "bn_unchanged": true,
+  "weights_unchanged": true,
+  "seconds": 289.625,
+  "stream": {
+    "path": "D:\\MyProjects\\Crack_RTDETR-peq_v1\\outputs\\peq_v1\\probe\\4618e8385bec9264b6fa\\predictions_gt.jsonl.gz",
+    "status": "PRESENT",
+    "bytes": 37917472,
+    "sha256": "a061213ecbefa48013984adfa36ca394465560c425fee0ee3291be11f786eadf"
+  },
+  "full_report": {
+    "path": "D:\\MyProjects\\Crack_RTDETR-peq_v1\\outputs\\peq_v1\\probe\\4618e8385bec9264b6fa\\metrics.json",
+    "status": "PRESENT",
+    "bytes": 229680,
+    "sha256": "663c0eb2351e78717cd9dcd82452d80cc8e3803a495358964b61564b9eaf10d5"
+  },
+  "contract_summary": {
+    "weights": {
+      "path": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\training\\weights\\best.pt",
+      "status": "PRESENT",
+      "bytes": 40694607,
+      "sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa"
+    },
+    "source": "fa6e0a17b70c567da7f8e9806be70442945f22d2033e1ac18ff9db878a3b0051",
+    "settings": {
+      "precision": "FP32",
+      "imgsz": 640,
+      "augment": false,
+      "all_queries": 300,
+      "batch": 2,
+      "limit": null,
+      "split": "val"
+    }
+  },
+  "dataset_val": {
+    "images": 1728,
+    "ground_truth": 12840,
+    "paths_sha256": "0f3b403a678816cb792eb648e6cabc4645ad348ffe5ef01a579f9c54fc1bdf20",
+    "labels_sha256": "1397eb393bb3b52b32b5d265c83e4199779044f77adb2c25f4563c0665e80784",
+    "images_sha256": "4a8ffefff09a3f4012a362c57ec60b41d08147129503304dc81157c0cbc636b1"
+  }
+}

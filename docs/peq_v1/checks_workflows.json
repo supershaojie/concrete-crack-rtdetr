@@ -1,0 +1,112 @@
+{
+  "status": "PASS",
+  "scope": "WORKFLOW_FIXTURES_NOT_FORMAL_EVAL",
+  "checks": {
+    "synthetic_only": true,
+    "same_boxes": true,
+    "independent_query_orders": {
+      "raw": [
+        1,
+        0
+      ],
+      "peq": [
+        0,
+        1
+      ]
+    },
+    "metric_fixture": {
+      "raw": {
+        "mAP50_95": 0.49749999999999994,
+        "AP50": 0.4975,
+        "AP75": 0.4975,
+        "AP_by_threshold": [
+          0.4975,
+          0.4975,
+          0.4975,
+          0.4975,
+          0.4975,
+          0.4975,
+          0.4975,
+          0.4975,
+          0.4975,
+          0.4975
+        ],
+        "iou_thresholds": [
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6666666666666666,
+        "confidence_at_max_f1": 0.0,
+        "precision_recall_rule": "Each score mode: own max smoothed mean F1 at IoU .50; smoothing .1, 1000 confidence grid",
+        "fitness": 0.49749999999999994
+      },
+      "peq": {
+        "mAP50_95": 0.9949999999999999,
+        "AP50": 0.995,
+        "AP75": 0.995,
+        "AP_by_threshold": [
+          0.995,
+          0.995,
+          0.995,
+          0.995,
+          0.995,
+          0.995,
+          0.995,
+          0.995,
+          0.995,
+          0.995
+        ],
+        "iou_thresholds": [
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6666666666666666,
+        "confidence_at_max_f1": 0.4694694694694695,
+        "precision_recall_rule": "Each score mode: own max smoothed mean F1 at IoU .50; smoothing .1, 1000 confidence grid",
+        "fitness": 0.9949999999999999
+      }
+    },
+    "completed_test_retry_reused": true,
+    "changed_test_identity_rejected": true,
+    "archive_manifest": {
+      "status": "PASS",
+      "members": 3
+    },
+    "server_command_blocks": 13,
+    "bash_syntax": "PASS"
+  },
+  "environment": {
+    "python": "3.9.25",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "total_gpu_memory": 6442123264,
+    "ultralytics_version": "8.4.21",
+    "ultralytics_file": "D:\\MyProjects\\Crack_RTDETR-peq_v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "model_type": "ultralytics.models.rtdetr.peq_model.PEQDetectionModel",
+    "criterion_type": "ultralytics.models.utils.peq_loss.PEQDetectionLoss",
+    "platform": "Windows-10-10.0.19045-SP0"
+  }
+}

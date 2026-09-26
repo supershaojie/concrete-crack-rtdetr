@@ -53,6 +53,13 @@ class RTDETR(Model):
         Returns:
             (dict): A dictionary mapping task names to Ultralytics task classes for the RT-DETR model.
         """
+        from ultralytics.nn.modules.peq import RTDETRDecoderCBRPEQ
+        head = self.model.model[-1] if hasattr(self.model, "model") else None
+        if isinstance(head, RTDETRDecoderCBRPEQ) or "peq-v1" in str(self.cfg):
+            from .peq_model import PEQDetectionModel
+            from .peq_train import PEQTrainer, PEQValidator
+            return {"detect": {"predictor": RTDETRPredictor, "validator": PEQValidator,
+                               "trainer": PEQTrainer, "model": PEQDetectionModel}}
         return {
             "detect": {
                 "predictor": RTDETRPredictor,

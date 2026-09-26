@@ -1,0 +1,195 @@
+{
+  "base": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "branch": "exp-rtdetr-r18-lite-peq-v1",
+  "local_engineering": "PASS",
+  "scope": "Local bounded engineering checks, read-only mother val probe and metadata; no server login or formal experiment",
+  "environment": {
+    "python": "3.9.25",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "total_gpu_memory": 6442123264,
+    "ultralytics_version": "8.4.21",
+    "ultralytics_file": "D:\\MyProjects\\Crack_RTDETR-peq_v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "model_type": "ultralytics.models.rtdetr.peq_model.PEQDetectionModel",
+    "criterion_type": "ultralytics.models.utils.peq_loss.PEQDetectionLoss",
+    "platform": "Windows-10-10.0.19045-SP0"
+  },
+  "source_sha256": "5e8764d18bb5a38ff9a17b28f018a167b454f8379e27eef859a61856146cadc9",
+  "module_hashes": {
+    "lif_down": {
+      "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+      "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+    },
+    "cbr": {
+      "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+      "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+    }
+  },
+  "parameters_nc1": 20167759,
+  "peq_parameters": 17994,
+  "checks": {
+    "checks_cpu.json": {
+      "status": "PASS",
+      "report": {
+        "path": "D:\\MyProjects\\Crack_RTDETR-peq_v1\\outputs\\peq_v1\\checks_cpu.json",
+        "status": "PRESENT",
+        "bytes": 6722,
+        "sha256": "c01f4c4258a7ec89d0688e56b57b8b6b7d0d684fdfbb81dbe8ff87f6960dfb08"
+      },
+      "tested_source_sha256": "69a99d89b49ee599f114ca4d265f34af4e8d45c3e82c8e9ff123081e660712a6",
+      "groups": [
+        "sampling_targets",
+        "branch_learning",
+        "native_and_gradients",
+        "status",
+        "dynamic_dn_amp",
+        "lifecycle"
+      ]
+    },
+    "checks_cuda.json": {
+      "status": "PASS",
+      "report": {
+        "path": "D:\\MyProjects\\Crack_RTDETR-peq_v1\\outputs\\peq_v1\\checks_cuda.json",
+        "status": "PRESENT",
+        "bytes": 93102,
+        "sha256": "e78a06cdc64326af59df8ed3c06ea5e880f250368d953fc25615605bc8474a31"
+      },
+      "tested_source_sha256": "69a99d89b49ee599f114ca4d265f34af4e8d45c3e82c8e9ff123081e660712a6",
+      "groups": [
+        "sampling_targets",
+        "branch_learning",
+        "native_and_gradients",
+        "status",
+        "dynamic_dn_amp",
+        "lifecycle"
+      ]
+    },
+    "checks_workflows.json": {
+      "status": "PASS",
+      "report": {
+        "path": "D:\\MyProjects\\Crack_RTDETR-peq_v1\\outputs\\peq_v1\\checks_workflows.json",
+        "status": "PRESENT",
+        "bytes": 2740,
+        "sha256": "c8f77cc9b0a4afdde9fb9b87fa4835e73f007aca2edbc0cb2061be9e5fae873b"
+      },
+      "tested_source_sha256": null,
+      "groups": [
+        "synthetic_only",
+        "same_boxes",
+        "independent_query_orders",
+        "metric_fixture",
+        "completed_test_retry_reused",
+        "changed_test_identity_rejected",
+        "archive_manifest",
+        "server_command_blocks",
+        "bash_syntax"
+      ]
+    }
+  },
+  "initialization": {
+    "path": "D:\\MyProjects\\Crack_RTDETR-peq_v1\\outputs\\peq_v1\\initialization.json",
+    "status": "PRESENT",
+    "bytes": 231993,
+    "sha256": "b4b7e51a1965f5db1a5cc3f9f8c49bb78dd60cce7d6adea4336af5320fcfc290"
+  },
+  "data": {
+    "train": {
+      "images": 6048,
+      "ground_truth": 45573,
+      "paths_sha256": "8c65578ac362a6e7cc4da9fd1b2d22ba9338c2907e77441facfb6fefda9ba1e0",
+      "labels_sha256": "66ea2c534858cacb8ad0c6518f610061a7a95ce29aec63be830187e6ff68549f",
+      "images_sha256": "48953837b4942064ef7a0a1573ea74e29c7f384cbdffde5a6aac5c808e215633"
+    },
+    "val": {
+      "images": 1728,
+      "ground_truth": 12840,
+      "paths_sha256": "0f3b403a678816cb792eb648e6cabc4645ad348ffe5ef01a579f9c54fc1bdf20",
+      "labels_sha256": "1397eb393bb3b52b32b5d265c83e4199779044f77adb2c25f4563c0665e80784",
+      "images_sha256": "4a8ffefff09a3f4012a362c57ec60b41d08147129503304dc81157c0cbc636b1"
+    },
+    "test": {
+      "images": 864,
+      "ground_truth": 6663,
+      "paths_sha256": "3b056a3ac57e5514b21676cc347ca37ae0edad849908af530d8c1c19d84e7083",
+      "labels_sha256": "74c3185a4f272ed0477d899fac2ddc2e8050dde8c953f427611213deddb31c73",
+      "images_sha256": "93cc33094b53553a2eceda1b8925cbc7716cbcf8efd99d7beb41e1c769cd934b"
+    }
+  },
+  "args": {
+    "fields": 109,
+    "changed": [
+      "model",
+      "name",
+      "save_dir"
+    ],
+    "all_other_fields_equal": true
+  },
+  "mother_probe": {
+    "status": "COMPLETED",
+    "images": 1728,
+    "queries": 518400,
+    "ground_truth": 12840,
+    "report": {
+      "path": "D:\\MyProjects\\Crack_RTDETR-peq_v1\\docs\\peq_v1\\probe_summary.json",
+      "status": "PRESENT",
+      "bytes": 5335,
+      "sha256": "16d4d5a66e6093de1b71d31206d9c7c07049fa3acb86258e2db7141c45a49b48"
+    },
+    "candidate_coverage": [
+      0.9835669781931464,
+      0.7197819314641745,
+      0.19338006230529595
+    ],
+    "inversion_rate": 0.23824221219813715,
+    "feature_shapes": [
+      [
+        2,
+        256,
+        80,
+        80
+      ],
+      [
+        2,
+        256,
+        40,
+        40
+      ],
+      [
+        2,
+        256,
+        20,
+        20
+      ]
+    ],
+    "weights_unchanged": true,
+    "bn_unchanged": true
+  },
+  "server_B16_640_preflight": "PENDING",
+  "formal_training": "NOT_RUN",
+  "formal_peq_val": "NOT_RUN",
+  "formal_test": "NOT_RUN",
+  "actual_server_torch21": "PENDING",
+  "native_amp_check": "PASS on local CUDA via actual Trainer check_amp",
+  "workflow_changes_after_model_checks": "Only evaluation cache, delivery/prepare/pack tools and workflow fixtures changed; detector/criterion/Trainer code unchanged. Original report source IDs retained.",
+  "scope_notes": [
+    "CUDA backward atomic accumulation is compared with native/native repeat noise; direct detach route is checked separately.",
+    "Initial stricter floating-point/fusion fixture attempts and their failures are retained in outputs/peq_v1/check_history.",
+    "Real source checkpoint used for controlled initialization; mother best used only for read-only val probe.",
+    "Known same-source augmented data cross splits; same-protocol comparison only.",
+    "RFAConv module package absent; fixed specified 9-point formula independently implemented.",
+    "Eager PyTorch .pt/AutoBackend only; PEQ export explicitly rejected.",
+    "Server Linux tmux dispatch, B16 capacity and torch2.1 execution remain untested locally."
+  ],
+  "original_parameter_and_state_paths_retained": true,
+  "git_operations": "Independent worktree; ordinary commit/push separately recorded in delivery",
+  "status": {
+    "phase": "NOT_STARTED",
+    "active": false,
+    "log_tail": [],
+    "children": [],
+    "run": "D:\\MyProjects\\Crack_RTDETR\\runs\\c_series\\peq_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug"
+  }
+}

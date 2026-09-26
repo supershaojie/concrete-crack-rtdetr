@@ -1,0 +1,225 @@
+{
+  "status": "PASS",
+  "scope": "LOCAL_INTERFACE_CHECK",
+  "device": "cpu",
+  "environment": {
+    "python": "3.9.25",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "total_gpu_memory": 6442123264,
+    "ultralytics_version": "8.4.21",
+    "ultralytics_file": "D:\\MyProjects\\Crack_RTDETR-peq_v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "model_type": "ultralytics.models.rtdetr.peq_model.PEQDetectionModel",
+    "criterion_type": "ultralytics.models.utils.peq_loss.PEQDetectionLoss",
+    "platform": "Windows-10-10.0.19045-SP0"
+  },
+  "source": "69a99d89b49ee599f114ca4d265f34af4e8d45c3e82c8e9ff123081e660712a6",
+  "module_hashes": {
+    "lif_down": {
+      "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+      "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+    },
+    "cbr": {
+      "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+      "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+    }
+  },
+  "checks": {
+    "sampling_targets": {
+      "status": "PASS",
+      "seconds": 0.031000000000858563,
+      "evidence": {
+        "manual_points": 54,
+        "non_square": [
+          4,
+          7
+        ],
+        "multiple_images": 2,
+        "oob_points": 13,
+        "assigned_gt_not_max_iou": true,
+        "empty_group_normalization": true,
+        "threshold_equality": true,
+        "dynamic_dn_splits": [
+          0,
+          4,
+          202,
+          604
+        ],
+        "nonfinite_fails": true
+      }
+    },
+    "branch_learning": {
+      "status": "PASS",
+      "seconds": 0.030999999999039574,
+      "evidence": {
+        "steps": [
+          {
+            "p3_proj.weight": 0.0,
+            "query_proj.weight": 0.0,
+            "pool_hidden.weight": 0.0,
+            "pool_hidden.bias": 0.0,
+            "pool_score.weight": 0.0,
+            "fusion.weight": 0.0,
+            "fusion.bias": 0.0,
+            "output.weight": 0.33903437852859497,
+            "output.bias": 0.15822012722492218
+          },
+          {
+            "p3_proj.weight": 0.023141322657465935,
+            "query_proj.weight": 0.022475523874163628,
+            "pool_hidden.weight": 2.650064561748877e-05,
+            "pool_hidden.bias": 3.5695734368346166e-06,
+            "pool_score.weight": 3.1696108635514975e-05,
+            "fusion.weight": 0.1279432773590088,
+            "fusion.bias": 0.011165311560034752,
+            "output.weight": 0.3272475600242615,
+            "output.bias": 0.1540062576532364
+          }
+        ],
+        "amp_or_fp32_finite": true
+      }
+    },
+    "native_and_gradients": {
+      "status": "PASS",
+      "seconds": 3.70299999999952,
+      "evidence": {
+        "native_components": {
+          "loss_class": 26.55716323852539,
+          "loss_bbox": 1.7500001192092896,
+          "loss_giou": 1.6042866706848145,
+          "loss_class_aux": 82.3047866821289,
+          "loss_bbox_aux": 5.75,
+          "loss_giou_aux": 5.010160446166992,
+          "loss_class_dn": 0.449889600276947,
+          "loss_bbox_dn": 1.1859012842178345,
+          "loss_giou_dn": 1.325968623161316,
+          "loss_class_aux_dn": 1.3133294582366943,
+          "loss_bbox_aux_dn": 2.371802568435669,
+          "loss_giou_aux_dn": 2.651937246322632
+        },
+        "exact_native_components": true,
+        "final_encoder_aux_matcher_calls": 4,
+        "native_uncut_gradient_max_difference": 4.6566128730773926e-09,
+        "native_repeat_max_difference": 5.587935447692871e-09,
+        "cuda_vector_rtol": 2e-05,
+        "cuda_gradient_comparisons": {},
+        "cuda_absolute_per_element_floor": 1e-06,
+        "isolated_quality_backward": true,
+        "partitioned_clipping_equal": true,
+        "dn_split": [
+          200,
+          300
+        ],
+        "g_greater_q": true
+      }
+    },
+    "status": {
+      "status": "PASS",
+      "seconds": 0.0,
+      "evidence": {
+        "fixtures": [
+          "NOT_STARTED",
+          "RUNNING",
+          "COMPLETED",
+          "FAILED",
+          "STALE_EXIT",
+          "TEE_FAILURE"
+        ],
+        "duplicate_dispatch_safe": true,
+        "nonfinite_json_null_and_flag": true
+      }
+    },
+    "dynamic_dn_amp": {
+      "status": "PASS",
+      "seconds": 3.063000000000102,
+      "evidence": {
+        "dynamic_dn": [
+          {
+            "gt": 0,
+            "dn_split": null,
+            "ordinary_quality_shape": [
+              2,
+              300,
+              10
+            ]
+          },
+          {
+            "gt": 1,
+            "dn_split": [
+              200,
+              300
+            ],
+            "ordinary_quality_shape": [
+              2,
+              300,
+              10
+            ]
+          },
+          {
+            "gt": 7,
+            "dn_split": [
+              196,
+              300
+            ],
+            "ordinary_quality_shape": [
+              2,
+              300,
+              10
+            ]
+          },
+          {
+            "gt": 301,
+            "dn_split": [
+              602,
+              300
+            ],
+            "ordinary_quality_shape": [
+              2,
+              300,
+              10
+            ]
+          }
+        ],
+        "disabled_native_loss_exact": true
+      }
+    },
+    "lifecycle": {
+      "status": "PASS",
+      "seconds": 26.15600000000086,
+      "evidence": {
+        "fixture_source": {
+          "path": "D:\\MyProjects\\Crack_RTDETR-peq_v1\\weights\\peq_v1_controlled_init.pt",
+          "status": "PRESENT",
+          "bytes": 81595093,
+          "sha256": "24c3fb6f6c5da291b4f4d7fb12ce51506f12501ac8a8e7661c151ad2203d8355"
+        },
+        "nonzero_peq": true,
+        "nonzero_cbr": true,
+        "disabled_exact": true,
+        "raw_logits_and_boxes_exact": true,
+        "autobackend_fuse_max_difference": 2.384185791015625e-07,
+        "fusion_reordered_queries": 0,
+        "fusion_identical_candidate_sets": true,
+        "ema": true,
+        "native_save_load": true,
+        "actual_setup_model": true,
+        "full_trainer_constructor_setup": true,
+        "actual_optimizer_step": true,
+        "native_amp_check_messages": [],
+        "native_resume_epoch": 2,
+        "scaler_restored": true,
+        "optimizer_state_restored": true,
+        "actual_predict": true,
+        "actual_validator": true,
+        "native_eval_loader_exact": true,
+        "corrected_mask_exact": true,
+        "export_explicitly_rejected": true
+      }
+    }
+  },
+  "started": "2026-09-26T08:51:24.486878+00:00",
+  "finished": "2026-09-26T08:51:57.695720+00:00"
+}

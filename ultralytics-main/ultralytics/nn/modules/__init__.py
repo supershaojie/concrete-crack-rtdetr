@@ -111,11 +111,14 @@ from .transformer import (
 
 from .lif_down import LIFDown
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
+from .peq import PrecisionEvidenceQuality, RTDETRDecoderCBRPEQ
 
 __all__ = (
     "LIFDown",
     "CrackBoundaryRefinement",
     "RTDETRDecoderCBR",
+    "RTDETRDecoderCBRPEQ",
+    "PrecisionEvidenceQuality",
     "AIFI",
     "C1",
     "C2",

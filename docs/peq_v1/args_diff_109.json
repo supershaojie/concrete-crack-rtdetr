@@ -1,0 +1,765 @@
+[
+  {
+    "field": "task",
+    "mother": "detect",
+    "peq": "detect",
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "mode",
+    "mother": "train",
+    "peq": "train",
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "model",
+    "mother": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/weights/c19_lif_v1_controlled_init.pt",
+    "peq": "/root/autodl-tmp/projects/Crack_RTDETR-peq_v1/weights/peq_v1_controlled_init.pt",
+    "changed": true,
+    "reason": "experiment identity"
+  },
+  {
+    "field": "data",
+    "mother": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "peq": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "epochs",
+    "mother": 200,
+    "peq": 200,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "time",
+    "mother": null,
+    "peq": null,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "patience",
+    "mother": 50,
+    "peq": 50,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "batch",
+    "mother": 16,
+    "peq": 16,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "imgsz",
+    "mother": 640,
+    "peq": 640,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "save",
+    "mother": true,
+    "peq": true,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "save_period",
+    "mother": -1,
+    "peq": -1,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "cache",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "device",
+    "mother": "0",
+    "peq": "0",
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "workers",
+    "mother": 8,
+    "peq": 8,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "project",
+    "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "peq": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "name",
+    "mother": "c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+    "peq": "peq_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+    "changed": true,
+    "reason": "experiment identity"
+  },
+  {
+    "field": "exist_ok",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "pretrained",
+    "mother": true,
+    "peq": true,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "optimizer",
+    "mother": "AdamW",
+    "peq": "AdamW",
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "verbose",
+    "mother": true,
+    "peq": true,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "seed",
+    "mother": 42,
+    "peq": 42,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "deterministic",
+    "mother": true,
+    "peq": true,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "single_cls",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "rect",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "cos_lr",
+    "mother": true,
+    "peq": true,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "close_mosaic",
+    "mother": 10,
+    "peq": 10,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "resume",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "amp",
+    "mother": true,
+    "peq": true,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "fraction",
+    "mother": 1.0,
+    "peq": 1.0,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "profile",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "freeze",
+    "mother": null,
+    "peq": null,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "multi_scale",
+    "mother": 0.0,
+    "peq": 0.0,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "compile",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "overlap_mask",
+    "mother": true,
+    "peq": true,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "mask_ratio",
+    "mother": 4,
+    "peq": 4,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "dropout",
+    "mother": 0.0,
+    "peq": 0.0,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "val",
+    "mother": true,
+    "peq": true,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "split",
+    "mother": "val",
+    "peq": "val",
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "save_json",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "conf",
+    "mother": null,
+    "peq": null,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "iou",
+    "mother": 0.7,
+    "peq": 0.7,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "max_det",
+    "mother": 300,
+    "peq": 300,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "half",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "dnn",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "plots",
+    "mother": true,
+    "peq": true,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "end2end",
+    "mother": null,
+    "peq": null,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "source",
+    "mother": null,
+    "peq": null,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "vid_stride",
+    "mother": 1,
+    "peq": 1,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "stream_buffer",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "visualize",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "augment",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "agnostic_nms",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "classes",
+    "mother": null,
+    "peq": null,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "retina_masks",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "embed",
+    "mother": null,
+    "peq": null,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "show",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "save_frames",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "save_txt",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "save_conf",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "save_crop",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "show_labels",
+    "mother": true,
+    "peq": true,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "show_conf",
+    "mother": true,
+    "peq": true,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "show_boxes",
+    "mother": true,
+    "peq": true,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "line_width",
+    "mother": null,
+    "peq": null,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "format",
+    "mother": "torchscript",
+    "peq": "torchscript",
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "keras",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "optimize",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "int8",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "dynamic",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "simplify",
+    "mother": true,
+    "peq": true,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "opset",
+    "mother": null,
+    "peq": null,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "workspace",
+    "mother": null,
+    "peq": null,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "nms",
+    "mother": false,
+    "peq": false,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "lr0",
+    "mother": 0.0005,
+    "peq": 0.0005,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "lrf",
+    "mother": 0.01,
+    "peq": 0.01,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "momentum",
+    "mother": 0.937,
+    "peq": 0.937,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "weight_decay",
+    "mother": 0.0001,
+    "peq": 0.0001,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "warmup_epochs",
+    "mother": 5,
+    "peq": 5,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "warmup_momentum",
+    "mother": 0.8,
+    "peq": 0.8,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "warmup_bias_lr",
+    "mother": 0.1,
+    "peq": 0.1,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "box",
+    "mother": 7.5,
+    "peq": 7.5,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "cls",
+    "mother": 0.5,
+    "peq": 0.5,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "dfl",
+    "mother": 1.5,
+    "peq": 1.5,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "pose",
+    "mother": 12.0,
+    "peq": 12.0,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "kobj",
+    "mother": 1.0,
+    "peq": 1.0,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "rle",
+    "mother": 1.0,
+    "peq": 1.0,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "angle",
+    "mother": 1.0,
+    "peq": 1.0,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "nbs",
+    "mother": 64,
+    "peq": 64,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "hsv_h",
+    "mother": 0.015,
+    "peq": 0.015,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "hsv_s",
+    "mother": 0.5,
+    "peq": 0.5,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "hsv_v",
+    "mother": 0.35,
+    "peq": 0.35,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "degrees",
+    "mother": 5,
+    "peq": 5,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "translate",
+    "mother": 0.1,
+    "peq": 0.1,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "scale",
+    "mother": 0.4,
+    "peq": 0.4,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "shear",
+    "mother": 1.5,
+    "peq": 1.5,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "perspective",
+    "mother": 0.0002,
+    "peq": 0.0002,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "flipud",
+    "mother": 0.2,
+    "peq": 0.2,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "fliplr",
+    "mother": 0.5,
+    "peq": 0.5,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "bgr",
+    "mother": 0.0,
+    "peq": 0.0,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "mosaic",
+    "mother": 0.8,
+    "peq": 0.8,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "mixup",
+    "mother": 0.05,
+    "peq": 0.05,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "cutmix",
+    "mother": 0,
+    "peq": 0,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "copy_paste",
+    "mother": 0,
+    "peq": 0,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "copy_paste_mode",
+    "mother": "flip",
+    "peq": "flip",
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "auto_augment",
+    "mother": null,
+    "peq": null,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "erasing",
+    "mother": 0,
+    "peq": 0,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "cfg",
+    "mother": null,
+    "peq": null,
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "tracker",
+    "mother": "botsort.yaml",
+    "peq": "botsort.yaml",
+    "changed": false,
+    "reason": null
+  },
+  {
+    "field": "save_dir",
+    "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+    "peq": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/peq_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+    "changed": true,
+    "reason": "experiment identity"
+  }
+]
