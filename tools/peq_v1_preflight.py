@@ -22,6 +22,12 @@ def preflight(retry=False):
     previous=read_json(OUT/"preflight.json")
     if not retry and previous and previous["status"]=="PASS" and previous["identity_key"]==prepared["identity_key"]:
         return previous
+    if previous:
+        previous_path=OUT/"preflight.json"
+        history=OUT/"preflight_history"/("preflight_"+sha256(previous_path)+".json")
+        history.parent.mkdir(parents=True,exist_ok=True)
+        if not history.exists():
+            history.write_bytes(previous_path.read_bytes())
     attempt=OUT/"preflight"/datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%f")
     attempt.mkdir(parents=True)
     report_path=attempt/"report.json"

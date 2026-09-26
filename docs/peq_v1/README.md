@@ -119,3 +119,26 @@ FileZilla 目录：`/root/autodl-tmp/projects/Crack_RTDETR-peq_v1/outputs/peq_v1
 提供的 PEQ 目录未发现 RFAConv.py 模块包；按合同固定公式独立实现9点共享加权聚合，没有搬入完整 RFAConv 特征展开。
 
 TQC/RSC 的框演化信息、ROR 的训练期排序约束、CQS 的 decoder 候选作用与本实验信息流不同；这些区别仍需实验支持。可能失败原因包括准确候选不足、query 已含全部有效信息、border 重复采样、新评分变差。PEQ 不能生成缺失的准确框。历史母版 val52.4543%、test52.2009%仅作历史参照，本次新实验指标尚不存在。
+
+## 梯度一致性检查修复
+
+用户报告的失败来自提交 `ed8f88e82c9d84f2e21d3ccd3c7d07bc2a81ec5b` 的接口小测，发生在 B16/640 更新循环之前。该模型唯一含 864 个元素的原参数为 `model.0.conv.weight`，形状 [32,3,3,3]；原日志没有参数名，此定位依据该提交的实际参数清单。两条路径分别是同一次 forward 的 L_native 和 L_native+L_Q，各自对原参数组 max_norm=10 后比较。effective_updates=0 在这里表示尚未进入有效更新检查，不能据此认定 optimizer 故障。
+
+旧参考最初执行了 clone，但随后 dummy.grad=value 让裁剪原地改写了保存的参考，未独立保留 raw/clipped 两份证据；未记录裁剪后的 native/native 自身重复对照，也未给失败参数名称和实际精度设置。原两条路径共享同次 forward，不能把问题解释成“只设相同 seed 却使用不同输入”。本地 RTX2060 未复现服务器 4090 的裁剪后超差，因此尚不能断言服务器根因就是 TF32。旧实现存在的记录、参考生命周期和诊断精度控制缺口已修复。
+
+新实现位于 `tools/peq_v1_gradient_audit.py`，由原 native_and_gradients 入口调用：
+
+- 四条反传路径：原 criterion native reference、同一损失自身重复、PEQ criterion 的 native 部分、PEQ native+quality。只做一次模型 forward，逐项核对12项原 loss、4次 matcher 输入及返回索引（含 final）。
+- 每条路径前清空 .grad，记录参数、BN/全部 buffer、输入、模式、Python/NumPy/CPU/全部 CUDA RNG、实际 DN embed/reference/attention mask/dn_meta 的指纹，反传及裁剪后再次核对。BN 仅在唯一 forward 中更新。
+- raw/clipped 各自 detach().clone()，检查存储地址与指纹，后续裁剪、zero_grad 和重复反传不能改写参考。两边均使用同样的实际原参数集合裁剪，不再通过 dummy.grad 别名改写参考。
+- 单独 L_Q 对全部345个原参数的 grad 必须为 None，对原始 F/q/b0/b1/z 的 autograd.grad 也必须为 None；以非零 PEQ 输出层验证全部9个新参数具有有效梯度。原分支学习检查仍验证零初始化第一步和真实更新后的上游梯度。
+- 先记录 ambient FP32（保留当前 TF32 设置）的自身/混合对照，再运行局部关闭 matmul/cuDNN TF32 和 autocast 的 FP32 对照。实际开关、matmul precision、autocast dtype、cuDNN/deterministic 状态均入报告，成功或异常都恢复；正式训练设置不变。
+- **未放宽容差**：未裁剪 CUDA 沿用旧 native/native 噪声与向量界，裁剪后仍固定 atol=2e-5、rtol=3e-4，所有原参数均检查。受控 FP32 任一路径失败就失败；ambient 混合路径失败但 native 自身通过也仍失败。只有 ambient 自身也不满足原界、受控 FP32 全部通过且隔离证明通过，才能记录为数值敏感；ambient 的失败仍原样保存，不标成 ambient PASS。
+
+[验证摘要](gradient_fix_validation.json) 含具体误差、裁剪系数、状态恢复和完整报告哈希。压缩的 CPU/CUDA 完整报告保留逐参数 raw/clipped 对照；原始报告及失败尝试留在 outputs/peq_v1/gradient_checks/，新尝试使用独立时间戳目录。preflight 重跑前另将旧总结按内容哈希保存在 preflight_history/，原 preflight 尝试目录保留。
+
+本地 Python3.9.25/torch2.7.1+cu118/RTX2060：CPU、CUDA ambient/受控精度检查通过，preflight 所用接口检查（未重跑不相关生命周期项）也通过，含 DN/AMP 和分支学习。额外负对照确认具名裁剪错误和人为注入的 L_Q→F 梯度会被拒绝；在非默认 matmul precision、已开启 autocast 内抛异常，也能恢复全部精度/随机状态。这些不是服务器 B16/640 容量证据。服务器 Python3.10.13/torch2.1.2+cu121/RTX4090 预检明确 **PENDING**，未启动正式训练。
+
+PyTorch 2.1.2 的[数值精度说明](https://github.com/pytorch/pytorch/blob/v2.1.2/docs/source/notes/numerical_accuracy.rst)说明运算次序与平台可能影响浮点结果，TF32 可降低有效精度；[grid_sample 源码文档](https://github.com/pytorch/pytorch/blob/v2.1.2/torch/nn/functional.py)说明 CUDA 反传可能非确定。这只是设置重复对照的依据，不能替代本实验服务器证据，也未沿用其他候选的故障结论。
+
+同步新 SHA 后重新 prepare，使源码身份更新，再 preflight。完整命令在 outputs/peq_v1/server_commands.md。如需先独立收集 B2/160 梯度证据，可使用同一绝对 Python/PYTHONPATH 执行 tools/peq_v1_gradient_audit.py --device cuda:0；该命令不是 B16/640 PASS，不训练正式 run。

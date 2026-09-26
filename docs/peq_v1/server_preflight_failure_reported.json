@@ -1,0 +1,29 @@
+{
+  "provenance": "User-reported server failure, not a local reproduction",
+  "commit": "ed8f88e82c9d84f2e21d3ccd3c7d07bc2a81ec5b",
+  "environment": {
+    "python": "3.10.13",
+    "torch": "2.1.2+cu121",
+    "gpu": "RTX4090"
+  },
+  "location": "tools/check_peq_v1.py native_and_gradients line189",
+  "comparison": "clip(L_native original group,10) vs clip(L_native+L_Q original group,10)",
+  "mismatched_elements": 571,
+  "total_elements": 864,
+  "max_abs_difference": 0.00024188682436943054,
+  "max_relative_difference": 0.3561672886634445,
+  "status": "FAILED",
+  "effective_updates": 0,
+  "timeout": false,
+  "parameter_identification": {
+    "name": "model.0.conv.weight",
+    "shape": [
+      32,
+      3,
+      3,
+      3
+    ],
+    "basis": "Unique original parameter with 864 elements in the specified model"
+  },
+  "actual_server_precision_flags": null
+}

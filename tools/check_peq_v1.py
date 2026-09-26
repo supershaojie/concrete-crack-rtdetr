@@ -133,96 +133,11 @@ def batch_fixture(device):
                 cls=torch.zeros(2,1,device=device),batch_idx=torch.zeros(2,device=device,dtype=torch.long))
 
 
-def native_and_gradients(device):
-    model=build(1).to(device).train()
-    batch=batch_fixture(device)
-    losses=model.loss_components(batch)
-    native=sum(v for k,v in losses.items() if k!="loss_peq")
-    qloss=losses["loss_peq"]
-    native.backward(retain_graph=True)
-    gradients={n:None if p.grad is None else p.grad.clone() for n,p in model.named_parameters() if ".peq." not in n}
-    require(all(p.grad is None for n,p in model.named_parameters() if ".peq." in n),"Native loss trains PEQ")
-    model.zero_grad(set_to_none=True)
-    native.backward(retain_graph=True)
-    repeat_noise={n:float((p.grad-gradients[n]).abs().max()) for n,p in model.named_parameters()
-                  if n in gradients and gradients[n] is not None}
-    repeat_l2={n:float((p.grad-gradients[n]).float().norm()) for n,p in model.named_parameters()
-               if n in gradients and gradients[n] is not None}
-    gradient_comparisons={}
-    model.zero_grad(set_to_none=True)
-    qloss.backward(retain_graph=True)
-    require(all(p.grad is None for n,p in model.named_parameters() if ".peq." not in n),"PEQ loss trains detector")
-    model.zero_grad(set_to_none=True)
-    (native+qloss).backward()
-    max_diff=0.
-    for n,p in model.named_parameters():
-        if ".peq." in n:
-            continue
-        ref=gradients[n]
-        require((ref is None)==(p.grad is None),f"Original gradient route changed: {n}")
-        if ref is not None:
-            if device.type=="cpu":
-                close(p.grad,ref,atol=2e-6,rtol=2e-5)
-            else:
-                # CUDA grid_sample backward uses atomic accumulation. Compare its
-                # native/native repeat noise AND a tight relative vector bound.
-                error=float((p.grad-ref).float().norm())
-                reference_norm=float(ref.float().norm())
-                bound=max(4*repeat_l2[n],1e-6*ref.numel()**.5+2e-5*reference_norm)
-                gradient_comparisons[n]=dict(native_repeat_l2=repeat_l2[n],native_plus_peq_l2=error,
-                                            reference_l2=reference_norm,bound=bound)
-                require(error<=bound,f"CUDA original gradient changed beyond native noise: {n}: {error}, {bound}")
-                tolerance=max(2e-5,4*repeat_noise[n],2e-5*float(ref.abs().max()))
-                close(p.grad,ref,atol=tolerance,rtol=3e-4)
-            max_diff=max(max_diff,float((p.grad-ref).abs().max()))
-    original,added=parameter_partition(model)
-    references=[]
-    for value in gradients.values():
-        if value is not None:
-            dummy=torch.zeros_like(value,requires_grad=True)
-            dummy.grad=value
-            references.append(dummy)
-    torch.nn.utils.clip_grad_norm_(references,10)
-    torch.nn.utils.clip_grad_norm_(original,10);torch.nn.utils.clip_grad_norm_(added,10)
-    for n,p in model.named_parameters():
-        if n in gradients and gradients[n] is not None:
-            close(p.grad,gradients[n],atol=2e-5,rtol=3e-4)
-    model.zero_grad(set_to_none=True)
-    # Compare every native component/matcher call on the SAME raw forward.
-    targets=dict(cls=batch["cls"].long().flatten(),bboxes=batch["bboxes"],batch_idx=batch["batch_idx"],gt_groups=[2,0])
-    raw=model.predict(batch["img"],batch=targets)
-    dboxes,dscores,eboxes,escores,dn,payload=raw
-    dnbox,dboxes=torch.split(dboxes,dn["dn_num_split"],dim=2)
-    dnscore,dscores=torch.split(dscores,dn["dn_num_split"],dim=2)
-    preds=(torch.cat((eboxes[None],dboxes)),torch.cat((escores[None],dscores)))
-    c0=RTDETRDetectionLoss(nc=1,use_vfl=True);c1=PEQDetectionLoss(nc=1,use_vfl=True)
-    calls=[[],[]]
-    class Recorder(torch.nn.Module):
-        def __init__(self,inner,output):
-            super().__init__();self.inner=inner;self.output=output
-        def forward(self,boxes,scores,*args,**kwargs):
-            self.output.append((boxes.detach().clone(),scores.detach().clone()))
-            return self.inner(boxes,scores,*args,**kwargs)
-    c0.matcher=Recorder(c0.matcher,calls[0]);c1.matcher=Recorder(c1.matcher,calls[1])
-    a=c0(preds,targets,dnbox,dnscore,dn)
-    b=c1(preds,targets,dnbox,dnscore,dn,payload)
-    require(list(b)==list(a)+["loss_peq"],"Changed native summation/insertion order")
-    for key in a:
-        close(a[key],b[key],atol=0,rtol=0)
-    require(len(calls[0])==len(calls[1])==4,"Final/encoder/aux matcher call count changed")
-    for ref,actual in zip(calls[0],calls[1]):
-        close(ref[0],actual[0],atol=0,rtol=0);close(ref[1],actual[1],atol=0,rtol=0)
-    # G>Q is checked through the real Hungarian matcher and global offsets.
-    gt=torch.rand(7,4,device=device)*.5+.2
-    assignment=c1.matcher.inner(torch.rand(2,3,4,device=device)*.5+.2,torch.zeros(2,3,1,device=device),
-                                gt,torch.zeros(7,dtype=torch.long,device=device),[5,2])
-    _,mask=quality_targets(torch.ones(2,3,4,device=device)*.5,gt,assignment,[5,2])
-    require(int(mask.sum())==5,"G>Q matching/target count")
-    return dict(native_components={k:float(v.detach()) for k,v in a.items()},exact_native_components=True,
-                final_encoder_aux_matcher_calls=len(calls[0]),native_uncut_gradient_max_difference=max_diff,
-                native_repeat_max_difference=max(repeat_noise.values()),cuda_vector_rtol=2e-5,
-                cuda_gradient_comparisons=gradient_comparisons,cuda_absolute_per_element_floor=1e-6,
-                isolated_quality_backward=True,partitioned_clipping_equal=True,dn_split=dn["dn_num_split"],g_greater_q=True)
+def native_and_gradients(device, evidence_dir=None):
+    from peq_v1_gradient_audit import audit_gradients
+    return audit_gradients(device, evidence_dir)
+
+
 def dynamic_dn_and_amp(device):
     model=build(1).to(device).train()
     records=[]
@@ -460,7 +375,7 @@ def run_checks(device="cpu", lifecycle_check=True, output=None):
                 from check_peq_v1_workflows import workflow_checks
                 groups=[("workflows",workflow_checks),("sampling_targets",lambda:sampling_and_targets(device)),
                         ("branch_learning",lambda:branch_learning(device)),
-                        ("native_and_gradients",lambda:native_and_gradients(device)),
+                        ("native_and_gradients",lambda:native_and_gradients(device,output.parent)),
                         ("status",status_checks),
                         ("dynamic_dn_amp",lambda:dynamic_dn_and_amp(device))]
                 if lifecycle_check:
