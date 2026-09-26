@@ -68,6 +68,13 @@ cbr.py       d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787
 
 [dataset_identity.json](dataset_identity.json) 记录本地同源数据的配置、逐图清单、图像内容与标签聚合哈希：train6048/45573 GT，val1728/12840，test864/6663。此步骤只核验文件身份，未做 test 推理。服务器 prepare 在实际路径重新计算全部内容身份；路径迁移与字段差异分别记录。已知同源增强图跨 split，结论仅适用于同协议比较，不作为独立原图泛化或多种子显著性证据。
 
+
+### prepare 配置比较修复
+
+首版 prepare 将 YAML 的整数类别键 `0` 与审计 JSON 的字符串键 `"0"` 直接比较，导致相同类别配置误报。已用实际 `dataset_identity.json` 与母版 `c2_data.yaml` 复现：排除允许迁移的顶层 `path` 后，仅 `names` 存在表示差异，train/val/test 值完全一致。现在双方先转换为一致 JSON 表示，再逐字段严格比较；真实类别、划分、新增/缺失或其他字段变化会显示字段及 server/audited 两侧值，规范化后重名键会明确拒绝。
+
+全部数据数量、路径清单、图像及标签哈希断言保持原样，数据集和审计基准未修改。定向检查包含 4 个通过场景和 13 个拒绝场景，并接入既有 preflight 工作流检查；详见 [prepare_fix_validation.json](prepare_fix_validation.json)。这是本地配置比较回归验证，服务器完整 prepare/preflight 仍需同步修复后重跑，未启动正式训练。
+
 ## 已执行验证与机会诊断
 
 [validation.json](validation.json) 汇总真实执行范围；[checks_cpu.json](checks_cpu.json)、[checks_cuda.json](checks_cuda.json) 保存逐项证据，包含：

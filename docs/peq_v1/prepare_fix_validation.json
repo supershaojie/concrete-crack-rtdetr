@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "raw_non_path_differences": [
+    "names"
+  ],
+  "server_names": "{0: 'crack'}",
+  "audited_names": "{'0': 'crack'}",
+  "representation_only": true,
+  "positive_cases": [
+    "actual_mother_yaml_vs_audit_json",
+    "only_top_level_path_migration",
+    "mapping_order_ignored",
+    "unchanged_additional_fields"
+  ],
+  "rejected_cases": [
+    {
+      "case": "changed_names_0",
+      "error": "Data path migration changed semantics: names: server={\"0\": \"other_crack\"}; audited={\"0\": \"crack\"}"
+    },
+    {
+      "case": "changed_names_1",
+      "error": "Data path migration changed semantics: names: server={\"1\": \"crack\"}; audited={\"0\": \"crack\"}"
+    },
+    {
+      "case": "changed_names_2",
+      "error": "Data path migration changed semantics: names: server=[\"crack\"]; audited={\"0\": \"crack\"}"
+    },
+    {
+      "case": "changed_train_3",
+      "error": "Data path migration changed semantics: train: server=\"images/other_train\"; audited=\"images/train\""
+    },
+    {
+      "case": "changed_val_4",
+      "error": "Data path migration changed semantics: val: server=\"images/other_val\"; audited=\"images/val\""
+    },
+    {
+      "case": "changed_test_5",
+      "error": "Data path migration changed semantics: test: server=\"images/other_test\"; audited=\"images/test\""
+    },
+    {
+      "case": "changed_extra_setting_6",
+      "error": "Data path migration changed semantics: extra_setting: server=true; audited=<missing>"
+    },
+    {
+      "case": "missing_val",
+      "error": "Data path migration changed semantics: val: server=<missing>; audited=\"images/val\""
+    },
+    {
+      "case": "changed_options_8",
+      "error": "Data path migration changed semantics: options: server={\"enabled\": false, \"path\": \"nested_original\"}; audited={\"enabled\": true, \"path\": \"nested_original\"}"
+    },
+    {
+      "case": "changed_options_9",
+      "error": "Data path migration changed semantics: options: server={\"enabled\": true, \"path\": \"nested_changed\"}; audited={\"enabled\": true, \"path\": \"nested_original\"}"
+    },
+    {
+      "case": "changed_nc_10",
+      "error": "Data path migration changed semantics: nc: server=true; audited=1"
+    },
+    {
+      "case": "changed_nc_11",
+      "error": "Data path migration changed semantics: nc: server=1.0; audited=1"
+    },
+    {
+      "case": "duplicate_normalized_class_key",
+      "error": "Duplicate JSON field after data config normalization: '0'"
+    }
+  ],
+  "baseline_sha256": "8984f31cf8faef6cbf3288a79694019a8e937b4721300df6f4686cc4d5835e8e",
+  "audit_baseline_unchanged": true,
+  "scope": "Config comparison only; no dataset mutation, full prepare or training",
+  "fixes_commit": "cd1d56f2cfcd3a46fd4eaaf551816c30df1f78f4",
+  "data_hash_check_loops_ast_unchanged": true,
+  "model_loss_hyperparameters_unchanged": true,
+  "existing_workflows": "PASS",
+  "python39_syntax": "PASS",
+  "server_prepare": "PENDING_RERUN_ON_SERVER",
+  "formal_training_started": false
+}

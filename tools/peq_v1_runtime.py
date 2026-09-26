@@ -127,6 +127,34 @@ def recipe():
     return actual,rows
 
 
+def verify_data_config_semantics(current, audited):
+    """Compare every non-path field in the same JSON representation."""
+    def unique_fields(pairs):
+        result={}
+        for key,value in pairs:
+            require(key not in result,f"Duplicate JSON field after data config normalization: {key!r}")
+            result[key]=value
+        return result
+
+    def normalize(config):
+        # JSON audit keys are strings, while YAML class IDs can be integers.
+        return json.loads(json.dumps({k:v for k,v in config.items() if k!="path"},
+                                     ensure_ascii=False,allow_nan=False),object_pairs_hook=unique_fields)
+
+    current,audited=normalize(current),normalize(audited)
+    missing=object()
+    def representation(value):
+        return "<missing>" if value is missing else json.dumps(value,sort_keys=True,ensure_ascii=False,allow_nan=False)
+
+    differences=[]
+    for field in sorted(set(current)|set(audited)):
+        left=representation(current.get(field,missing))
+        right=representation(audited.get(field,missing))
+        if left!=right:
+            differences.append(f"{field}: server={left}; audited={right}")
+    require(not differences,"Data path migration changed semantics: "+" | ".join(differences))
+
+
 def prepared_identity(data):
     return dict(source_sha256=source_identity()["sha256"],source_weight=identity(SOURCE),initialization=identity(INIT),
                 research=identity(ROOT/"docs/peq_v1/research.yaml"),args=identity(OUT/"train_args.yaml"),
@@ -168,8 +196,7 @@ def prepare():
             require(current["data"]["splits"][split][key]==audited["splits"][split][key],
                     f"Server data differs from audited mother content: {split}/{key}")
     current_cfg=YAML.load(data)
-    require({k:v for k,v in current_cfg.items() if k!="path"}==
-            {k:v for k,v in audited["config_semantics"].items() if k!="path"},"Data path migration changed semantics")
+    verify_data_config_semantics(current_cfg,audited["config_semantics"])
     write_json(OUT/"data_path_migration.json",dict(status="PASS",local_config=audited["config"],server_config=current["data"]["config"],
                local_root=audited["root"],server_root=current["data"]["root"],all_split_contents_equal=True))
     result=dict(status="PASS",identity=current,identity_key=digest_json(current),created=utc(),

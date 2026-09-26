@@ -13,6 +13,8 @@ from ultralytics.models.rtdetr.peq_train import PEQValidator
 
 
 def workflow_checks():
+    from check_peq_v1_prepare import config_semantics_checks
+    config_check=config_semantics_checks()
     with tempfile.TemporaryDirectory(prefix="peq_workflows_",dir=str(OUT)) as temporary:
         folder=Path(temporary)
         y=torch.zeros(1,300,5)
@@ -70,7 +72,7 @@ def workflow_checks():
             require("PYTHONPATH=" in block and "PYTHONUNBUFFERED=1" in block and
                     "YOLO_AUTOINSTALL=false" in block and "/root/miniconda3/envs/rtdetr/bin/python" in block,
                     "Action block depends on another block's environment")
-        return dict(synthetic_only=True,same_boxes=True,independent_query_orders=orders,
+        return dict(prepare_config=config_check,synthetic_only=True,same_boxes=True,independent_query_orders=orders,
                     metric_fixture=metrics,completed_test_retry_reused=True,changed_test_identity_rejected=True,
                     archive_manifest=packed["verification"],server_command_blocks=len(blocks),bash_syntax="PASS")
 
