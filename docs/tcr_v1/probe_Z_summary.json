@@ -1,0 +1,9 @@
+{
+  "images": 64,
+  "elements": 6553600,
+  "nonzero": 6553600,
+  "positive": 2681718,
+  "negative": 3871882,
+  "z_rms_mean": 1.1160046197474003,
+  "purpose": "Random P / zero O response sanity check, not learned performance"
+}

@@ -1,0 +1,95 @@
+{
+  "status": "PASS",
+  "scope": "train-only, random P, zero O; not learned effectiveness or AP",
+  "sampling_rule": "lexicographic relative train-image paths, first at most 64; frozen before inference",
+  "weights": {
+    "path": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\training\\weights\\best.pt",
+    "bytes": 40694607,
+    "sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa"
+  },
+  "limit": 64,
+  "batch": 1,
+  "imgsz": 640,
+  "augment": false,
+  "images": 64,
+  "nonzero_elements": 26180036,
+  "finite": true,
+  "bn_unchanged": true,
+  "optimized": false,
+  "weights_sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa",
+  "manifest_sha256": "f24d87128c0b191670cf3d631509ecdc3bb52b945092852ec0025ba70b0d1009",
+  "group_summary": [
+    {
+      "direction": 0,
+      "side_step": 1,
+      "elements": 5308416,
+      "nonzero": 2940751,
+      "positive": 1470935,
+      "negative": 1469816,
+      "sum_squares": 135795.08520507812
+    },
+    {
+      "direction": 0,
+      "side_step": 2,
+      "elements": 5308416,
+      "nonzero": 3466422,
+      "positive": 1733969,
+      "negative": 1732453,
+      "sum_squares": 343966.4992675781
+    },
+    {
+      "direction": 45,
+      "side_step": 1,
+      "elements": 5308416,
+      "nonzero": 3234148,
+      "positive": 1618099,
+      "negative": 1616049,
+      "sum_squares": 151469.9833984375
+    },
+    {
+      "direction": 45,
+      "side_step": 2,
+      "elements": 5308416,
+      "nonzero": 3482901,
+      "positive": 1740028,
+      "negative": 1742873,
+      "sum_squares": 247908.08154296875
+    },
+    {
+      "direction": 90,
+      "side_step": 1,
+      "elements": 5308416,
+      "nonzero": 2878895,
+      "positive": 1439201,
+      "negative": 1439694,
+      "sum_squares": 116162.59509277344
+    },
+    {
+      "direction": 90,
+      "side_step": 2,
+      "elements": 5308416,
+      "nonzero": 3445475,
+      "positive": 1720810,
+      "negative": 1724665,
+      "sum_squares": 303800.3142089844
+    },
+    {
+      "direction": 135,
+      "side_step": 1,
+      "elements": 5308416,
+      "nonzero": 3262979,
+      "positive": 1632881,
+      "negative": 1630098,
+      "sum_squares": 160183.0128173828
+    },
+    {
+      "direction": 135,
+      "side_step": 2,
+      "elements": 5308416,
+      "nonzero": 3468465,
+      "positive": 1733240,
+      "negative": 1735225,
+      "sum_squares": 241201.82958984375
+    }
+  ]
+}

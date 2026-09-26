@@ -1,0 +1,52 @@
+{
+  "algorithm": {
+    "status": "PASS",
+    "max_reference_error": 0.0,
+    "examples": {
+      "0": {
+        "center_bright": 1.0,
+        "center_dark": -1.0,
+        "aligned_step_zero": true
+      },
+      "1": {
+        "center_bright": 1.0,
+        "center_dark": -1.0,
+        "aligned_step_zero": true
+      },
+      "2": {
+        "center_bright": 1.0,
+        "center_dark": -1.0,
+        "aligned_step_zero": true
+      },
+      "3": {
+        "center_bright": 1.0,
+        "center_dark": -1.0,
+        "aligned_step_zero": true
+      },
+      "thick": {
+        "rms": 0.0,
+        "interpretation": "diagnostic only; no universal suppression claim"
+      },
+      "curved": {
+        "rms": 0.09070604294538498,
+        "interpretation": "diagnostic only; no universal suppression claim"
+      },
+      "fork": {
+        "rms": 0.1035907119512558,
+        "interpretation": "diagnostic only; no universal suppression claim"
+      }
+    },
+    "first_gradient": {
+      "O": 0.007032112684100866,
+      "P": 0.0
+    },
+    "later_gradient": {
+      "P": 4.6527602535206825e-06,
+      "O": 0.007031918503344059,
+      "input": 0.005941629875451326
+    }
+  },
+  "logging_fractions": "PASS",
+  "native_amp_skip_rejected": "PASS",
+  "native_amp_pass_observed": "PASS"
+}

@@ -109,10 +109,13 @@ from .transformer import (
     TransformerLayer,
 )
 
+from .tcr import ConvTCR, TCR
 from .lif_down import LIFDown
 from .cbr import CrackBoundaryRefinement, RTDETRDecoderCBR
 
 __all__ = (
+    "ConvTCR",
+    "TCR",
     "LIFDown",
     "CrackBoundaryRefinement",
     "RTDETRDecoderCBR",

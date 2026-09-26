@@ -1,0 +1,25 @@
+method: tcr_v1
+enabled: true
+input_channels: 256
+reduced_channels: 16
+strip_offsets: [-2, -1, 0, 1, 2]
+side_steps: [1, 2]
+directions_tangent_xy: [[1, 0], [1, 1], [0, 1], [-1, 1]]
+directions_normal_xy: [[0, 1], [-1, 1], [-1, 0], [-1, -1]]
+direction_order_degrees: [0, 45, 90, 135]
+concat_order: direction_then_side_step_then_channel
+boundary_margin: 4
+projection_bias: false
+extra_norm_or_activation: false
+node: 17
+input_node: 5
+added_parameters: 36864
+sampling_interval_micro_batches: 100
+geometry_buckets:
+  coordinate_space: 640_stretched_input_pixels
+  short_side_edges: [0, 8, 16, 32, 64, .inf]
+  area_edges: [0, 256, 1024, 4096, 16384, .inf]
+  aspect_ratio_edges: [1, 2, 4, 8, 16, .inf]
+  diagnostic_score: 0.25
+  diagnostic_iou: [0.5, 0.75]
+  warning: box geometry is not crack thickness or branching annotation

@@ -1,0 +1,177 @@
+{
+  "base": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "files": [
+    {
+      "path": "ultralytics-main/ultralytics/nn/tasks.py",
+      "base_lf_sha256": "c5a19e3eaf10acf2a5aa6a53e4a3f9afd01d7b79e4f9a41744af9755d6ebcbd8",
+      "current_lf_sha256": "573ac07aa56700036d5bf43480093303360335d9ac73fec11708b75e9917f8c1",
+      "unchanged": false,
+      "change": "ConvTCR import/base_modules registration only"
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/head.py",
+      "base_lf_sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+      "current_lf_sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+      "unchanged": true,
+      "change": null
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/transformer.py",
+      "base_lf_sha256": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602",
+      "current_lf_sha256": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602",
+      "unchanged": true,
+      "change": null
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/cbr.py",
+      "base_lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "current_lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "unchanged": true,
+      "change": null
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/lif_down.py",
+      "base_lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "current_lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "unchanged": true,
+      "change": null
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/utils/ops.py",
+      "base_lf_sha256": "7d520895c245adafb06b07c6b330dabbd6a36a69cd0fe742cd71f2797f474dde",
+      "current_lf_sha256": "7d520895c245adafb06b07c6b330dabbd6a36a69cd0fe742cd71f2797f474dde",
+      "unchanged": true,
+      "change": null
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/utils/loss.py",
+      "base_lf_sha256": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75",
+      "current_lf_sha256": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75",
+      "unchanged": true,
+      "change": null
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/rtdetr/train.py",
+      "base_lf_sha256": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+      "current_lf_sha256": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+      "unchanged": true,
+      "change": null
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/rtdetr/val.py",
+      "base_lf_sha256": "f7974365832f0eb2e146571a591150f268d42ecb89e12e96f2518d4251a63a6a",
+      "current_lf_sha256": "f7974365832f0eb2e146571a591150f268d42ecb89e12e96f2518d4251a63a6a",
+      "unchanged": true,
+      "change": null
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/rtdetr/predict.py",
+      "base_lf_sha256": "62feb49e9484c340d36fa429cca64b98caa5380cd5fe9e458cfc6d62565164f9",
+      "current_lf_sha256": "62feb49e9484c340d36fa429cca64b98caa5380cd5fe9e458cfc6d62565164f9",
+      "unchanged": true,
+      "change": null
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/autobackend.py",
+      "base_lf_sha256": "39dcad3238d4cb98382f1fb2ac366b2d06cf03ae982d24a4f4c500205449c197",
+      "current_lf_sha256": "39dcad3238d4cb98382f1fb2ac366b2d06cf03ae982d24a4f4c500205449c197",
+      "unchanged": true,
+      "change": null
+    },
+    {
+      "path": "ultralytics-main/ultralytics/engine/trainer.py",
+      "base_lf_sha256": "18125ba895b64961cf0f7db29214aca27392176e65d72a9166fa818f00a1033a",
+      "current_lf_sha256": "18125ba895b64961cf0f7db29214aca27392176e65d72a9166fa818f00a1033a",
+      "unchanged": true,
+      "change": null
+    },
+    {
+      "path": "ultralytics-main/ultralytics/engine/validator.py",
+      "base_lf_sha256": "6c631ccca6c1d5d93ab6464746bf2905bd70ac8279db11897f78d5dce84d5dcd",
+      "current_lf_sha256": "6c631ccca6c1d5d93ab6464746bf2905bd70ac8279db11897f78d5dce84d5dcd",
+      "unchanged": true,
+      "change": null
+    },
+    {
+      "path": "ultralytics-main/ultralytics/utils/torch_utils.py",
+      "base_lf_sha256": "cda1bf8718c24b4882e885114a16a1434b68e8ccea67d56b8155f7c81934aef8",
+      "current_lf_sha256": "cda1bf8718c24b4882e885114a16a1434b68e8ccea67d56b8155f7c81934aef8",
+      "unchanged": true,
+      "change": null
+    },
+    {
+      "path": "ultralytics-main/ultralytics/utils/checks.py",
+      "base_lf_sha256": "f60b554d633f9466c9fa2fdd44c5ec38cd59e7c5ab72bf150295079f53e16182",
+      "current_lf_sha256": "f60b554d633f9466c9fa2fdd44c5ec38cd59e7c5ab72bf150295079f53e16182",
+      "unchanged": true,
+      "change": null
+    }
+  ],
+  "topology": {
+    "node": 17,
+    "from_node": 5,
+    "head_nodes": [
+      19,
+      22,
+      25
+    ],
+    "added_parameters": 36864,
+    "parameters": 20186629,
+    "states": 554
+  },
+  "criterion": "RTDETRDetectionLoss",
+  "loss_gain": {
+    "class": 1,
+    "bbox": 5,
+    "giou": 2,
+    "no_object": 0.1,
+    "mask": 1,
+    "dice": 1
+  },
+  "matcher_cost": {
+    "class": 2,
+    "bbox": 5,
+    "giou": 2
+  },
+  "original_hashes": {
+    "lif_down": {
+      "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+      "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+    },
+    "cbr": {
+      "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+      "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+    }
+  },
+  "native_get_model": {
+    "native_get_model": true,
+    "resume": false,
+    "common_exact": true,
+    "allowed_class_adaptation": [
+      "model.26.dec_score_head.0.bias",
+      "model.26.dec_score_head.0.weight",
+      "model.26.dec_score_head.1.bias",
+      "model.26.dec_score_head.1.weight",
+      "model.26.dec_score_head.2.bias",
+      "model.26.dec_score_head.2.weight",
+      "model.26.denoising_class_embed.weight",
+      "model.26.enc_score_head.bias",
+      "model.26.enc_score_head.weight"
+    ],
+    "common_states": 552,
+    "new_keys": [
+      "model.17.tcr.O.weight",
+      "model.17.tcr.P.weight"
+    ],
+    "missing": [],
+    "unexpected": []
+  },
+  "authority_difference": {
+    "model": [
+      "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1/weights/c19_lif_v1_controlled_init.pt",
+      "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/weights/c19_lif_v1_controlled_init.pt"
+    ]
+  },
+  "source_contract_path": "D:/rtdetr跑结果/TCR/TCR_Codex_完整执行提示词_v1.md",
+  "source_contract_sha256": "5f9a2f4c95b46acff24b263f24edf33652027a7ba7ca65289c5eb496c31f2ae4"
+}

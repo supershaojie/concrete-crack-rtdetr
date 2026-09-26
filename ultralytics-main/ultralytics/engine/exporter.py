@@ -330,6 +330,10 @@ class Exporter:
         """
         t = time.time()
         fmt = self.args.format.lower()  # to lowercase
+        from ultralytics.nn.modules.tcr import ConvTCR
+        if any(isinstance(m, ConvTCR) for m in model.modules()):
+            if fmt != "torchscript" or any((self.args.dynamic, self.args.half, self.args.int8, self.args.nms, self.args.optimize)):
+                raise NotImplementedError("TCR v1 supports static FP32 TorchScript export only; other backends are unvalidated")
         if fmt in {"tensorrt", "trt"}:  # 'engine' aliases
             fmt = "engine"
         if fmt in {"mlmodel", "mlpackage", "mlprogram", "apple", "ios", "coreml"}:  # 'coreml' aliases

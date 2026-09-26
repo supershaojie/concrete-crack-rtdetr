@@ -1,0 +1,150 @@
+{
+  "base": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "branch": "exp-rtdetr-r18-lite-tcr-v1",
+  "worktree": "D:\\MyProjects\\Crack_RTDETR-tcr_v1",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_bytes": 6442123264,
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR-tcr_v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "version": "8.4.21",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "original_modules": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    }
+  },
+  "local_cpu": "PASS",
+  "local_cuda_amp_half": "PASS",
+  "native_lifecycle": "PASS",
+  "static_fp32_torchscript": "PASS",
+  "operational_fixtures": "PASS",
+  "controlled_initialization": {
+    "path": "D:\\MyProjects\\Crack_RTDETR-tcr_v1\\weights\\tcr_v1_controlled_init.pt",
+    "bytes": 81525029,
+    "sha256": "b63cf9b3d921ca407cd8f9e0c18f78a3abdb90a9894a729cb50384a74c6ec7bf"
+  },
+  "probe": {
+    "status": "PASS",
+    "scope": "train-only, random P, zero O; not learned effectiveness or AP",
+    "sampling_rule": "lexicographic relative train-image paths, first at most 64; frozen before inference",
+    "weights": {
+      "path": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\training\\weights\\best.pt",
+      "bytes": 40694607,
+      "sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa"
+    },
+    "limit": 64,
+    "batch": 1,
+    "imgsz": 640,
+    "augment": false,
+    "images": 64,
+    "nonzero_elements": 26180036,
+    "finite": true,
+    "bn_unchanged": true,
+    "optimized": false,
+    "weights_sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa",
+    "manifest_sha256": "f24d87128c0b191670cf3d631509ecdc3bb52b945092852ec0025ba70b0d1009",
+    "group_summary": [
+      {
+        "direction": 0,
+        "side_step": 1,
+        "elements": 5308416,
+        "nonzero": 2940751,
+        "positive": 1470935,
+        "negative": 1469816,
+        "sum_squares": 135795.08520507812
+      },
+      {
+        "direction": 0,
+        "side_step": 2,
+        "elements": 5308416,
+        "nonzero": 3466422,
+        "positive": 1733969,
+        "negative": 1732453,
+        "sum_squares": 343966.4992675781
+      },
+      {
+        "direction": 45,
+        "side_step": 1,
+        "elements": 5308416,
+        "nonzero": 3234148,
+        "positive": 1618099,
+        "negative": 1616049,
+        "sum_squares": 151469.9833984375
+      },
+      {
+        "direction": 45,
+        "side_step": 2,
+        "elements": 5308416,
+        "nonzero": 3482901,
+        "positive": 1740028,
+        "negative": 1742873,
+        "sum_squares": 247908.08154296875
+      },
+      {
+        "direction": 90,
+        "side_step": 1,
+        "elements": 5308416,
+        "nonzero": 2878895,
+        "positive": 1439201,
+        "negative": 1439694,
+        "sum_squares": 116162.59509277344
+      },
+      {
+        "direction": 90,
+        "side_step": 2,
+        "elements": 5308416,
+        "nonzero": 3445475,
+        "positive": 1720810,
+        "negative": 1724665,
+        "sum_squares": 303800.3142089844
+      },
+      {
+        "direction": 135,
+        "side_step": 1,
+        "elements": 5308416,
+        "nonzero": 3262979,
+        "positive": 1632881,
+        "negative": 1630098,
+        "sum_squares": 160183.0128173828
+      },
+      {
+        "direction": 135,
+        "side_step": 2,
+        "elements": 5308416,
+        "nonzero": 3468465,
+        "positive": 1733240,
+        "negative": 1735225,
+        "sum_squares": 241201.82958984375
+      }
+    ]
+  },
+  "server_B16_640_preflight": "PENDING",
+  "formal_200_epoch_training": "NOT_RUN",
+  "independent_val": "NOT_RUN",
+  "test": "NOT_RUN",
+  "last_best": "NOT_CREATED",
+  "performance_improvement": "UNKNOWN",
+  "source_contents": "ba356d9ea2476a2369eb586cc83e0d40a7736ab540b8e0ab4e427084828eb8b9",
+  "development_reports_note": "Each detailed report retains the HEAD and exact source content inventory seen at execution. Final delivery SHA is written after commit to ignored outputs; no self-containing SHA.",
+  "gradient_note": "Native deterministic=True enables warn_only; PyTorch reports grid_sample backward cannot be bitwise deterministic.",
+  "original_module_hashes": {
+    "lif_down": {
+      "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+      "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+    },
+    "cbr": {
+      "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+      "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+    }
+  }
+}
