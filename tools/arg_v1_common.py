@@ -85,11 +85,21 @@ def data_config():
     return path
 
 
+def data_identity_config(data):
+    """Copy config with JSON-stable class IDs; never merge colliding IDs."""
+    names = {}
+    for class_id, name in data["names"].items():
+        key = str(class_id)
+        require(key not in names, f"Class ID collision after string normalization: {key!r}")
+        names[key] = name
+    return dict(data, names=names)
+
+
 def inventory(data_path, save_to=None):
     """Content hashes for images AND label bytes; fixed split, no dataset rewriting."""
     import math
     from PIL import Image
-    data = YAML.load(data_path)
+    data = data_identity_config(YAML.load(data_path))
     root = Path(data["path"])
     rows, splits = [], {}
     for split, expected in COUNTS.items():
