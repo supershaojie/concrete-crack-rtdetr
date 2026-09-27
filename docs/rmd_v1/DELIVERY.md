@@ -1,6 +1,8 @@
 # RMD v1 实施交付
 
-从母版 `a0459d6a652cb702699087c88fa39a3e4c4087ec` 创建独立分支 `exp-rtdetr-r18-lite-rmd-v1`，本地目录为 `D:\MyProjects\Crack_RTDETR-rmd_v1`。主工作区及其他实验均保留。实施源码与最终固定 SHA 的发布命令一同交付；发布记录将在本文件和 server_commands.md 中明确区分实施提交与仅文档的交付提交，避免提交内容自引用自己的 hash。
+实施提交：**`614249029759fa58f8847b33bcd87f7a174b04b6`**，已普通推送到 `origin/exp-rtdetr-r18-lite-rmd-v1`。服务器命令固定此完整 SHA。随后只补交付文档的提交属于同一分支，模型和工具代码与上述实施提交相同；分开记录可避免在提交内容中自引用自己的 hash。
+
+直接母版为 `a0459d6a652cb702699087c88fa39a3e4c4087ec`；本地目录为 `D:\MyProjects\Crack_RTDETR-rmd_v1`。主工作区及其他实验均保留。已实际读取原 model YAML、任务/parser、LIF/CBR、decoder、matcher/DN/损失、Trainer/Validator、optimizer/AMP/clip/EMA/checkpoint、AutoBackend、初始化与母版文档。
 
 实现、公式、接线与操作语义见 [README.md](README.md)，完整任务规格见 [SPECIFICATION.md](SPECIFICATION.md)。
 
@@ -16,7 +18,9 @@
 - nc80 公共初始化 hash 核验通过。实际 nc1 Trainer 重建 552 个 state 项与母版完全相等，543/552 原同形状态加载，9 个原分类适配；20,149,765 可训练参数，新增 0。
 - 数据图像/标签逐文件 hash 和划分计数通过：train 6048/45573 GT，val 1728/12840 GT，test 864/6663 GT。
 - 新进程 FP32 AutoBackend/fuse/zeros warmup → 16 张真实 val、44 个 GT、4800 个 query 通过；隔离母版使用同一 warmup 修复，实际预测最大绝对差为 0，LIF BN 保留。此项不代表完整 val/test。
-- 原生 checkpoint/恢复的小型 CPU 夹具与启动门禁/末尾评估故障/失败打包检查由仓库内测试提供；精确运行结果在发布验证记录中列明。
+- 7 项核心测试、5 项操作/故障测试通过。原生 checkpoint → 新 Python → optimizer/EMA/scaler 逐项恢复、epoch 20→21、后续真实模型 forward/backward/更新通过（CPU B2/160 合成数据夹具，不是正式容量证据）。缺失门槛、NOT_APPLICABLE、错误绑定、无有效更新、末尾评估失败、缺 test 打包等故障测试通过。Bash 语法、Python 编译与 Git diff 检查通过。
+- 在上述实施 SHA 上实际执行 `preflight --local`，163.3 秒完成；核心正确性 PASS，整体 PENDING，未执行真实训练 micro-batch。另在该 SHA 上新进程重跑真实 val 生命周期与 5 项操作测试，均通过。15 段服务器 Bash 命令均仅做语法检查，未执行。
+- 实际生成并逐文件核对本地 LIGHT 包，保留 PENDING 和缺失训练/val/test 的状态；不含 `.pt`/`.pth` 权重、数据集或合成训练夹具。包身份见验证摘要，不加入 Git。
 
 母版模块保留证据：
 
@@ -28,5 +32,7 @@
 两个原文件、模型 YAML、原 decoder、原 loss 与 Trainer 均无修改。唯一原文件修改是 AutoBackend warmup 的一行有限零输入修复；新增逻辑在实验包装和入口中。
 
 服务器仍需验证 B16/640 AMP 容量、原生 AMP checkpoint 恢复、固定 900 秒/16 个真实训练 micro-batch 边界内的有效更新及已训练母版生效性。本机没有默认历史母版 run 的 best.pt，不能报告 APPLICABILITY_PASS。新增训练开销尚无配对测量。未启动正式长训、未进行完整独立 val 或 test。
+
+Windows 直连 GitHub 曾被重置，已按当前系统启用的本地代理为单次 Git 命令设置代理后完成普通推送；未更改 origin、全局 Git 网络设置或其他分支。发布时继续核对远端完整分支 SHA。详细本机验证摘要见 [LOCAL_VALIDATION.json](LOCAL_VALIDATION.json)；运行证据保留在本 worktree 的 `outputs/rmd_v1/`，训练产物/权重未入 Git。
 
 下一步按 [server_commands.md](server_commands.md) 分段执行同步、prepare、preflight；任何 PENDING/FAIL/NOT_APPLICABLE 均不会被另一个 PASS 掩盖，start 会拒绝。

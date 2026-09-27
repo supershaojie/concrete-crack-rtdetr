@@ -1,0 +1,278 @@
+{
+  "generated_utc": "2026-09-27T17:41:58.505796+00:00",
+  "implementation_commit": "614249029759fa58f8847b33bcd87f7a174b04b6",
+  "base": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "branch": "exp-rtdetr-r18-lite-rmd-v1",
+  "origin": "https://github.com/supershaojie/concrete-crack-rtdetr.git",
+  "scope": "Local bounded implementation checks; formal server training, full val and test were not executed.",
+  "runtime": {
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "python": "3.9.25",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_bytes": 6442123264,
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR-rmd_v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "ultralytics_version": "8.4.21",
+    "criterion_source": "D:\\MyProjects\\Crack_RTDETR-rmd_v1\\ultralytics-main\\ultralytics\\models\\rtdetr\\rmd_v1.py",
+    "commit": "614249029759fa58f8847b33bcd87f7a174b04b6",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    },
+    "historical_server": {
+      "python": "3.10.13",
+      "torch": "2.1.2+cu121",
+      "gpu": "RTX4090"
+    }
+  },
+  "tested_code_digest": "39d5334f19f73cd81c317cf7370e2c3fa113c62fc99355907f3e0f62ebefbecb",
+  "implementation_lf_sha256": {
+    "configs/rmd_v1.json": "549fcb21aeea027f3c0337c224e9e9b37da5422c37dffbabccdb44e2f1d90d8b",
+    "tools/rmd_v1.py": "4f4516cf0bdf78ff3837c17eb9a112666e403659eed33b911e68f0c6f87dff06",
+    "tools/rmd_v1_common.py": "b7da0b98c68c1a423c50bec96e96d5ac77c529254f112abd315b963e2cbd08ae",
+    "tools/rmd_v1_preflight.py": "a48e1f9a0de1ae57686447ef62665c1e4260a5ab4372dcc5db02773ba2c8eaa3",
+    "tools/rmd_v1_eval.py": "914f52275a1127d3c5afd2be157a0b0f543435b0319a1c724f3fe419b72565dc",
+    "tools/rmd_v1.sh": "cbff37a6fac30cf6c7a5177c4ebdfc3b8c232e35de649435e86aea33db97b615",
+    "tools/sync_rmd_v1.sh": "f8b69b651cd964484bb64a7760cfea80e3be722f84bf87d105e18a9cb0609d63",
+    "tools/check_rmd_v1.py": "f77e2cd9857c779f34fb5b3bb12b63617859fdac7d2a488e9945c37a35bda6d3",
+    "tools/check_rmd_v1_ops.py": "72f7cfee0924722afe4edd655bb8eefd8ef4aaddb93d1cbe99db962832122ed9",
+    "ultralytics-main/ultralytics/models/rtdetr/rmd_v1.py": "d0555ff846f6279b432ac65dbbbe3eaadff94be7a4ffb480e6543c3d7c94b4cb",
+    "ultralytics-main/ultralytics/nn/autobackend.py": "1879db86b5b9b3346426e48411d86d2196319984057ffa637ddc0cf45be78230"
+  },
+  "prepare": {
+    "status": "PASS",
+    "binding": "b9bd33eae62b8b811e2357551311fdd0328b6dfa400647e23d4c37f2f811a4d3",
+    "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "local_controlled_init_sha256": "47eaf517f5132443597ef29a8b8534190bc67738b93091ac7adbd47fda865e17",
+    "formal_args_fields": 109,
+    "dataset": {
+      "train": {
+        "images": 6048,
+        "boxes": 45573,
+        "content_sha256": "2b282f8477436b6de45842a2c25752d1ecef6aa9782cb886e361ef2f4766393a"
+      },
+      "val": {
+        "images": 1728,
+        "boxes": 12840,
+        "content_sha256": "7e155d3fb00dcdb49a53bfc2994cdf0dced6021fc163b5fa999a0f18e4942f0f"
+      },
+      "test": {
+        "images": 864,
+        "boxes": 6663,
+        "content_sha256": "b7f2cb357be7ce0376b0c1a4d928ee22eba07cfd4ba8131c4dc838450f3bda8d"
+      }
+    },
+    "initialization_audit": {
+      "native_states": 552,
+      "all_values_exact": true,
+      "parameters": 20149765,
+      "trainable": 20149765,
+      "added_parameters": 0,
+      "criterion_source": "D:\\MyProjects\\Crack_RTDETR-rmd_v1\\ultralytics-main\\ultralytics\\models\\rtdetr\\rmd_v1.py"
+    }
+  },
+  "core_tests": {
+    "status": "PASS",
+    "tests": 7,
+    "elapsed_seconds": 39.45300000000134,
+    "evidence": {
+      "native_resume": {
+        "status": "PASS",
+        "epoch": 21,
+        "checkpoint_schema": "original trainer.save_model",
+        "optimizer_ema_scaler_restored": true,
+        "new_process_training_update": true,
+        "fixture": "CPU B2/160; not capacity evidence"
+      },
+      "new_process": {
+        "status": "PASS",
+        "output": "FRESH_PROCESS_PASS (1, 300, 5)",
+        "real_val": "PENDING: separate actual-data lifecycle check"
+      },
+      "native_rebuild": {
+        "native_states": 552,
+        "all_values_exact": true,
+        "parameters": 20149765,
+        "trainable": 20149765,
+        "added_parameters": 0,
+        "criterion_source": "D:\\MyProjects\\Crack_RTDETR-rmd_v1\\ultralytics-main\\ultralytics\\models\\rtdetr\\rmd_v1.py"
+      },
+      "real_e0_K50": {
+        "outputs_exact": true,
+        "rng_exact": true,
+        "gradients_exact": true,
+        "native_adamw_update_exact": true,
+        "forward_calls": 1,
+        "cdn_calls": 1,
+        "hooks_after": 0
+      },
+      "real_e20_K1": {
+        "outputs_exact": true,
+        "rng_exact": true,
+        "gradients_exact": true,
+        "native_adamw_update_exact": true,
+        "forward_calls": 1,
+        "cdn_calls": 1,
+        "hooks_after": 0
+      },
+      "architecture": {
+        "parameters": 20149765,
+        "added": 0,
+        "state_keys": 552,
+        "exception_hook_cleanup": true
+      }
+    },
+    "failures": [],
+    "commit": "614249029759fa58f8847b33bcd87f7a174b04b6"
+  },
+  "operations_tests": {
+    "status": "PASS",
+    "tests": 5,
+    "failures": [],
+    "scope": "isolated fault fixtures, not a formal run",
+    "executed_against_commit": "614249029759fa58f8847b33bcd87f7a174b04b6"
+  },
+  "bounded_local_preflight": {
+    "status": "PENDING",
+    "binding": "b9bd33eae62b8b811e2357551311fdd0328b6dfa400647e23d4c37f2f811a4d3",
+    "started": "2026-09-27T17:35:46.612289+00:00",
+    "finished": "2026-09-27T17:38:29.899004+00:00",
+    "elapsed_seconds": 163.28100000000268,
+    "micro_batches": 0,
+    "reserved_micro_batch_slots": 0,
+    "capacity": {
+      "status": "PENDING",
+      "reason": "Server B16/640 AMP capacity required; local checks never substitute a smaller batch"
+    },
+    "resume": {
+      "status": "PENDING"
+    },
+    "lifecycle": {
+      "status": "PENDING",
+      "reason": "Run the separate real-val lifecycle or server preflight"
+    },
+    "applicability": {
+      "status": "APPLICABILITY_PENDING",
+      "reason": "Trained original mother checkpoint and >=8 real B16 batches required"
+    },
+    "incremental_training_overhead": "PENDING: no paired timing measurement"
+  },
+  "independent_local_lifecycle": {
+    "status": "PASS",
+    "scope": "one_real_val_batch",
+    "split": "val",
+    "checkpoint_sha256": "64c0b5073d66c5957f5a1b50d70e5098ae5bce3388f9dbcfa8dbb73eae76739f",
+    "settings": {
+      "imgsz": 640,
+      "batch": 16,
+      "workers": 0,
+      "half": false,
+      "conf": 0.001,
+      "iou": 0.7,
+      "max_det": 300,
+      "augment": false,
+      "rect": false,
+      "seed": 42,
+      "data": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\crack.yaml",
+      "device": "0",
+      "split": "val",
+      "plots": false,
+      "project": "D:\\MyProjects\\Crack_RTDETR-rmd_v1\\outputs\\rmd_v1\\local_checks\\committed_real_val_mother_control",
+      "name": "plots",
+      "exist_ok": false,
+      "save_json": false,
+      "save_txt": false
+    },
+    "policy": "corrected_sorted_conf_mask_v1",
+    "images": 16,
+    "ground_truth": 44,
+    "predictions": 4800,
+    "parameters_unfused": 20149765,
+    "autobackend": {
+      "device": "cuda:0",
+      "fp16": false,
+      "warmup": "zeros/actual CUDA path",
+      "lif_bn_preserved": true
+    },
+    "mother_control": {
+      "same_zeros_warmup_fix": true,
+      "real_batch_max_abs": 0.0,
+      "state_keys_equal": true
+    },
+    "predictions_sha256": "93108cb5075d7ad567230acc1af3e480bc655ddfcc6f6e5e4b23b5017250b535",
+    "started": "2026-09-27T17:40:27.442445+00:00",
+    "finished": "2026-09-27T17:40:34.853046+00:00"
+  },
+  "independent_local_lifecycle_commit": "614249029759fa58f8847b33bcd87f7a174b04b6",
+  "lifecycle_limit": "Public controlled initialization checkpoint in a fresh Python process on local RTX2060. One actual B16/640 val batch only; no model-quality or full val/test claim. It does not replace server capacity/resume/applicability gates.",
+  "syntax": {
+    "status": "PASS",
+    "bash_blocks": 15,
+    "server_commands_executed": false,
+    "shell_scripts": 2,
+    "python_files": 8
+  },
+  "git_diff_check": "PASS",
+  "formal_training_executed": false,
+  "full_validation_executed": false,
+  "test_inference_executed": false,
+  "server_commands_executed": false,
+  "required_server_checks": [
+    "Original B16/640 AMP with native accumulation and a real finite optimizer update",
+    "Full native AMP optimizer/EMA/scaler recovery in a new process and subsequent effective update",
+    "Actual server FP32 checkpoint/AutoBackend/fuse/zeros warmup/real-val lifecycle",
+    "Original trained mother checkpoint with verified source SHA; >=8 valid B16/640 batches, K>=2 GT coverage >=0.50 and mean(abs(w-1)) >=0.01; total preflight <=16 micro-batches and <=900 seconds"
+  ],
+  "local_evidence": [
+    {
+      "path": "outputs/rmd_v1/checks/20260927T173542_ed2b17ed/report.json",
+      "sha256": "08463f7fca460327aeefebec708c4e4d393d00d108c443297bea97babbc86796"
+    },
+    {
+      "path": "outputs/rmd_v1/local_checks/committed_real_val_mother_control/metrics.json",
+      "sha256": "35e66469e2a50ba9113b3dd17bc2a7789ec0d3fabfda583bcca564ef02eeea3b"
+    },
+    {
+      "path": "outputs/rmd_v1/local_checks/operations.json",
+      "sha256": "beec43daab73637990cb1616c9571130ee0bc17a9167439f743b733a52ae2034"
+    },
+    {
+      "path": "outputs/rmd_v1/local_checks/public_rebuild.json",
+      "sha256": "e84ca20dd6e999bb5c1009fc8dc377a31ad7f663ecc2fcae3a4a6db92f1b73fe"
+    },
+    {
+      "path": "outputs/rmd_v1/prepare.json",
+      "sha256": "98e15c0d1ba59601f62bcc2493f3d1803154c83cfac6dd482bdac7d26d94d7e0"
+    }
+  ],
+  "local_light_pack": {
+    "status": "PASS",
+    "manifest_verified": true,
+    "scope": "PENDING evidence export; no training weights or full val/test results exist",
+    "path": "outputs\\rmd_v1\\packages\\rmd_v1_LIGHT_20260927T174222_3f3d63f5.tar.gz",
+    "sha256": "6a555947ce73682544aa1ab8cb2028099053d70b7bd0fc51f9c84b8da6f94b6b",
+    "files": 61,
+    "weights": {
+      "best": {
+        "exists": false,
+        "included": false,
+        "bytes": null,
+        "sha256": null
+      },
+      "last": {
+        "exists": false,
+        "included": false,
+        "bytes": null,
+        "sha256": null
+      }
+    },
+    "includes_predictions": false
+  }
+}
