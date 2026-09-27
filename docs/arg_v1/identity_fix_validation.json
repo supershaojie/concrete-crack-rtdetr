@@ -1,0 +1,62 @@
+{
+  "created": "2026-09-27T17:58:43.298857+00:00",
+  "old_code_commit": "e6d6ce11783e57cdd3377f6b5a103665218df065",
+  "fixed_code_commit": "ef9cb7e05e5557f7dd06c95cf2361998a284adc9",
+  "environment": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.9.25",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe"
+  },
+  "code_scope": {
+    "changed_identity_source_files": [
+      "tools/arg_v1_common.py",
+      "tools/check_arg_v1_identity.py"
+    ],
+    "unchanged": "ARG loss/model, mother modules, initialization, training/eval recipes, preflight gates and sync script",
+    "source_lf_sha256": {
+      "tools/arg_v1_common.py": "0fb2a3988877c17790bcd7bf2acd67d33fe1dc8a949c993b956e082e6f1bb27a",
+      "tools/check_arg_v1_identity.py": "337286462f589e12aeb092cc78cc93390efc9296b6bfc68c400c970b9ef68aa1"
+    }
+  },
+  "old_regression": {
+    "status": "PASS",
+    "scope": "Regression reproduced against actual old common.py with same temporary IO fixture",
+    "old_commit": "e6d6ce11783e57cdd3377f6b5a103665218df065",
+    "observed_error": "Data identity changed since prepare",
+    "tests": 1
+  },
+  "identity": {
+    "status": "PASS",
+    "tests": 7,
+    "scope": "temporary YAML/image/label/JSON IO; actual prepare/inventory/binding; fixture source/runtime/recipe and git archive; no server or GPU"
+  },
+  "lifecycle": {
+    "status": "PASS",
+    "tests": 6,
+    "scope": "mocked server control and gates; real temporary lock/package/hash IO; no server dispatch"
+  },
+  "upgrade_command_fixture": {
+    "status": "PASS",
+    "tests": 4,
+    "scope": "Extracted delivered Python blocks; real disposable Git linked worktree fast-forward, full evidence backup/hash/rename, actual prepare/inventory and git archive; server sync fetch/tmux/process controls/source contract/runtime/recipe use fixtures. Not a server run."
+  },
+  "syntax": {
+    "status": "PASS",
+    "bash_blocks": 16,
+    "embedded_python_blocks": 3,
+    "source_python_files": 2,
+    "whitespace": "PASS"
+  },
+  "server": {
+    "executed": false,
+    "gpu_preflight": "PENDING",
+    "formal_training_started": false,
+    "required_order": [
+      "backup_and_fast_forward",
+      "reprepare_with_original_init_and_full_identity_comparison",
+      "rerun_preflight",
+      "status",
+      "separate_manual_start_after_required_checks"
+    ]
+  }
+}

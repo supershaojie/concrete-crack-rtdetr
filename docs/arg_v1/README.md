@@ -86,6 +86,8 @@ prepare 调用未改的 `init_c19_lif_v1.initialize` 组合初始化，输出 `o
 从未使用母版 best 或任何其他实验训练权重。初始化存在时核对摘要并复用，拒绝不明文件。
 数据仍是 crack_det 原划分：train6048/45573GT、val1728/12840GT、test864/6663GT。
 prepare 清点图像/标签、尺寸与逐文件 SHA256；后续绑定重新读取实际内容，数据较大时需等待哈希。
+数据身份中的 `config.names` 统一使用字符串类别键，prepare 与 binding 共用该规范；规范化键冲突会报错。原 YAML 不改写，其字节哈希及所有数据身份字段仍完整校验。
+从旧 v1 SHA 升级且尚未训练时，使用 [server_commands.md](server_commands.md) 的备份/fast-forward/重新 prepare 流程，并重跑 preflight；不直接用不同 SHA 调同步脚本，也不复用旧预检结果。
 
 源身份包括完整 Git SHA、LF源码清单、原模块原始字节和LF摘要、解释器、torch/CUDA/GPU、ultralytics与criterion实际导入路径。
 不升级依赖。训练期间 `actual_setup.json` 记录实际args、scaler、优化器组和重建参数证明。

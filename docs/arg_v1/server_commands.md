@@ -1,46 +1,154 @@
-# ARG v1 服务器分段命令
+# ARG v1 数据身份修复：已有 worktree 升级命令
 
-固定训练代码提交：`e6d6ce11783e57cdd3377f6b5a103665218df065`。
+本次固定训练代码提交：`ef9cb7e05e5557f7dd06c95cf2361998a284adc9`。
+适用旧提交：`e6d6ce11783e57cdd3377f6b5a103665218df065`；旧 prepare 已完成、preflight 因 names 键类型失败、正式训练尚未启动。
 分支：`exp-rtdetr-r18-lite-arg-v1`。母版：`a0459d6a652cb702699087c88fa39a3e4c4087ec`。
-代码提交已普通推送并核对远端。后续交付文档提交只记录此代码提交的证据和命令；服务器保持固定代码SHA，不执行泛化的git pull。
+后续交付文档提交只记录此代码提交的证据和命令；服务器固定到上面的代码 SHA，不执行泛化的 git pull。
 
-这些命令由用户在服务器执行。本轮未连接服务器、未派发正式训练。每一段完成后再执行下一段；preflight不会自动启动200epoch训练。
+这些命令由用户在服务器执行。本轮未连接服务器、未派发正式训练，服务器 GPU 预检仍待执行。依次执行第 1～4 段；正式 start 单列于第 5 段。
 
-## 1. 同步（首条服务器命令）
+## 1. 升级旧 worktree 并保存证据（首条服务器命令）
 
-完整复制此块。fetch和脚本内部fetch都有120秒上限、30秒低速超时；失败立即退出，不循环重试。
+原 `sync_arg_v1.sh` 同时拒绝不同 HEAD 和不同 `sync.json`，不能直接用新 SHA 调它升级。
+下段先检查旧 SHA、仓库关系、干净工作区和无训练状态，在原操作锁内完整备份 `outputs/arg_v1` 并逐文件核验 SHA256，再用 `merge --ff-only` 更新本实验 worktree。主工作区不切分支。
+旧 sync/prepare/preflight 活动记录移入备份的 `retired_active/`，随后调用新 SHA 的原同步脚本生成新 sync。旧失败 preflight 子目录、日志、初始化权重与 provenance 均保留；不使用 reset、clean 或删除输出目录。
+备份需要约一个旧 `outputs/arg_v1` 的额外磁盘空间，完成前不会改代码或移走旧记录。
+
+完整复制此块。两次 fetch 均有 120 秒上限、30 秒低速超时；失败退出，不自动重试。
 
 ```bash
-bash <<'ARG_SYNC'
+bash <<'ARG_UPGRADE'
 set -Eeuo pipefail
 MAIN=/root/autodl-tmp/projects/Crack_RTDETR
-SHA=e6d6ce11783e57cdd3377f6b5a103665218df065
-timeout 120s git -C "$MAIN" -c http.lowSpeedLimit=1024 -c http.lowSpeedTime=30 fetch --no-tags origin exp-rtdetr-r18-lite-arg-v1
+WORK=/root/autodl-tmp/projects/Crack_RTDETR-arg_v1
+PY=/root/miniconda3/envs/rtdetr/bin/python
+OLD=e6d6ce11783e57cdd3377f6b5a103665218df065
+SHA=ef9cb7e05e5557f7dd06c95cf2361998a284adc9
+BRANCH=exp-rtdetr-r18-lite-arg-v1
+[[ $(git -C "$MAIN" remote get-url origin) == https://github.com/supershaojie/concrete-crack-rtdetr.git ]]
+[[ -f "$WORK/.git" ]]
+[[ $(cd "$WORK" && realpath "$(git rev-parse --git-common-dir)") == $(cd "$MAIN" && realpath "$(git rev-parse --git-common-dir)") ]]
+[[ $(git -C "$WORK" branch --show-current) == "$BRANCH" ]]
+[[ $(git -C "$WORK" rev-parse HEAD) == "$OLD" ]]
+[[ -z $(git -C "$WORK" status --porcelain --untracked-files=all) ]]
+timeout 120s git -C "$MAIN" -c http.lowSpeedLimit=1024 -c http.lowSpeedTime=30 fetch --no-tags origin "$BRANCH"
 git -C "$MAIN" cat-file -e "$SHA^{commit}"
+git -C "$MAIN" merge-base --is-ancestor "$OLD" "$SHA"
 git -C "$MAIN" merge-base --is-ancestor "$SHA" FETCH_HEAD
-SCRIPT=$(mktemp /tmp/sync_arg_v1.XXXXXX.sh)
-trap 'rm -f -- "$SCRIPT"' EXIT
-git -C "$MAIN" show "$SHA:tools/sync_arg_v1.sh" > "$SCRIPT"
-bash "$SCRIPT" "$SHA"
-ARG_SYNC
+export ARG_V1_MAIN="$MAIN" PYTHONPATH="$WORK/ultralytics-main:$WORK/tools"
+export PYTHONUNBUFFERED=1 YOLO_AUTOINSTALL=false
+"$PY" - "$WORK" "$MAIN" "$OLD" "$SHA" <<'PY'
+from datetime import datetime, timezone
+from pathlib import Path
+import shutil, subprocess, sys
+from arg_v1 import operation_lock, active_workers, has_tmux
+from arg_v1_common import ROOT, MAIN, OUT, RUN, INIT, SOURCE, SOURCE_SHA256, read_json, write_json, sha256, require, git
+
+work, main, old, target = sys.argv[1:]
+require(ROOT.resolve() == Path(work).resolve() and MAIN.resolve() == Path(main).resolve(), "Wrong experiment paths")
+with operation_lock():
+    require(git("rev-parse", "HEAD") == old and not git("status", "--porcelain", "--untracked-files=all"), "Old SHA or clean state changed")
+    require(not active_workers() and not has_tmux(), "ARG worker/tmux exists; preserve and inspect status")
+    require(not RUN.exists() and not (OUT / "training_identity.json").exists(), "Training identity/run exists; this upgrade is pre-training only")
+    require(not any((OUT / "dispatches").glob("*")), "Dispatch evidence exists; inspect before upgrading")
+    require(not (OUT / "identity_upgrade.json").exists(), "Prior upgrade receipt exists; inspect its phase/backup")
+    plan = read_json(OUT / "prepare.json", {})
+    require(plan.get("status") == "PASS" and plan["code"]["commit"] == old, "Expected old successful prepare")
+    require(read_json(OUT / "sync.json", {}).get("commit") == old, "Expected old sync identity")
+    require(sha256(SOURCE) == SOURCE_SHA256 == plan["source_sha256"], "Source initialization changed")
+    require(sha256(INIT) == plan["init_sha256"] == read_json(OUT / "initialization.json")["output_sha256"], "Existing init/provenance changed")
+    require(plan["args"]["seed"] == 42, "Unexpected original seed")
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S_%fZ")
+    backup = OUT.parent / ("arg_v1_before_names_fix_" + stamp + "_" + old[:12])
+    require(not OUT.is_symlink() and not any(p.is_symlink() for p in OUT.rglob("*")), "Inspect output symlinks before copying")
+    shutil.copytree(OUT, backup, ignore=shutil.ignore_patterns("operation.lock"))
+    manifest = {}
+    for p in sorted(OUT.rglob("*")):
+        if p.is_file() and p.name != "operation.lock":
+            rel = p.relative_to(OUT).as_posix()
+            digest = sha256(p)
+            require(sha256(backup / rel) == digest, "Backup hash mismatch: " + rel)
+            manifest[rel] = digest
+    write_json(backup / "backup_manifest.json", dict(old_commit=old, target_commit=target, files=manifest))
+    receipt = dict(old_commit=old, target_commit=target, backup=str(backup), phase="BACKED_UP")
+    write_json(OUT / "identity_upgrade.json", receipt)
+    print("Verified evidence backup:", backup, flush=True)
+    subprocess.run(["git", "-C", work, "merge", "--ff-only", target], check=True, timeout=60)
+    require(git("rev-parse", "HEAD") == target, "Upgrade did not reach exact target")
+    retired = backup / "retired_active"
+    retired.mkdir()
+    for name in ("sync.json", "prepare.json", "preflight.json"):
+        p = OUT / name
+        if p.exists():
+            p.rename(retired / name)
+    receipt["phase"] = "UPGRADED_SYNC_REQUIRED"
+    write_json(OUT / "identity_upgrade.json", receipt)
+    subprocess.run(["bash", str(ROOT / "tools/sync_arg_v1.sh"), target], check=True, timeout=150)
+    receipt["phase"] = "UPGRADED_REPREPARE_REQUIRED"
+    write_json(OUT / "identity_upgrade.json", receipt)
+    print("Upgrade complete; original init retained. Next: section 2 prepare.", flush=True)
+PY
+ARG_UPGRADE
 ```
 
-成功创建/复用 `/root/autodl-tmp/projects/Crack_RTDETR-arg_v1`。主工作区不切分支。
-已有同名分支、不同SHA的worktree或未提交变化会保留并拒绝同步；不要reset/clean覆盖它们。
-
-## 2. prepare（必须等同步成功）
+成功后查看 `outputs/arg_v1/identity_upgrade.json` 中的备份路径和阶段。完整备份在 worktree 的 `outputs/arg_v1_before_names_fix_UTC时间_e6d6ce11783e/`，不位于会被重写的活动输出目录内。
+若仅末尾 sync 的网络 fetch 失败，且 receipt 为 `UPGRADED_SYNC_REQUIRED`、HEAD 已是新 SHA，可单独重试下面的同步命令，然后继续第 2 段；不要重跑只接受旧 SHA 的整个升级块：
 
 ```bash
-bash /root/autodl-tmp/projects/Crack_RTDETR-arg_v1/tools/arg_v1.sh prepare
+bash /root/autodl-tmp/projects/Crack_RTDETR-arg_v1/tools/sync_arg_v1.sh ef9cb7e05e5557f7dd06c95cf2361998a284adc9
+```
+
+其他中断或校验失败先保留现场，检查 receipt、HEAD 和备份；不要用强制同步覆盖差异。
+
+## 2. 重新 prepare 并核对原身份（必须等升级和同步成功）
+
+旧 JSON 的 names 已是字符串键，修复后可以比较；本次重新 prepare 是为了让 prepare 中的代码身份、数据清单和源码快照明确绑定新 SHA。
+保留的 `arg_v1_init.pt` 与 `initialization.json` 会按原哈希复用，不重新初始化。下面在 prepare 前后核对原公共初始化、seed42 和完整训练参数，并逐项比较旧/新数据身份；任何真实变化都会停止。
+
+```bash
+bash <<'ARG_PREPARE'
+set -Eeuo pipefail
+WORK=/root/autodl-tmp/projects/Crack_RTDETR-arg_v1
+export ARG_V1_MAIN=/root/autodl-tmp/projects/Crack_RTDETR
+export PYTHONPATH="$WORK/ultralytics-main:$WORK/tools" PYTHONUNBUFFERED=1 YOLO_AUTOINSTALL=false
+/root/miniconda3/envs/rtdetr/bin/python - <<'PY'
+from pathlib import Path
+from arg_v1 import operation_lock
+from arg_v1_common import OUT, INIT, SOURCE, SOURCE_SHA256, prepare, git, read_json, write_json, sha256, require
+
+target = "ef9cb7e05e5557f7dd06c95cf2361998a284adc9"
+with operation_lock():
+    upgrade = read_json(OUT / "identity_upgrade.json", {})
+    require(upgrade.get("target_commit") == target and upgrade.get("phase") in ("UPGRADED_SYNC_REQUIRED", "UPGRADED_REPREPARE_REQUIRED", "REPREPARED"), "Missing completed upgrade/backup receipt")
+    require(git("rev-parse", "HEAD") == target and read_json(OUT / "sync.json", {}).get("commit") == target, "Run new-SHA sync first")
+    backup = Path(upgrade["backup"])
+    manifest = read_json(backup / "backup_manifest.json")["files"]
+    for name in ("prepare.json", "initialization.json"):
+        require(sha256(backup / name) == manifest[name], "Old evidence hash changed: " + name)
+    previous = read_json(backup / "prepare.json")
+    require(sha256(INIT) == previous["init_sha256"] and sha256(SOURCE) == previous["source_sha256"] == SOURCE_SHA256, "Original initialization changed")
+    require(sha256(OUT / "initialization.json") == manifest["initialization.json"], "Original init provenance changed")
+    current = prepare()
+    require(current["code"]["commit"] == target, "Prepare is still bound to old code")
+    for field in ("args", "data", "source_sha256", "init_sha256"):
+        require(current[field] == previous[field], "Real identity difference after reprepare: " + field)
+    require(current["args"]["seed"] == 42, "Seed changed")
+    upgrade.update(phase="REPREPARED", preserved_fields=["args", "data", "source_sha256", "init_sha256"], preflight="MUST_RERUN")
+    write_json(OUT / "identity_upgrade.json", upgrade)
+    print("Prepare PASS: new code SHA; original data, initialization and full recipe unchanged. Rerun preflight.", flush=True)
+PY
+ARG_PREPARE
 ```
 
 须已存在主仓库的 `configs/crack_autodl.yaml`、完整crack_det划分和 `weights/rtdetr_r18_lite_imagenet_backbone_init.pt`。
 数据逐文件SHA读取可能需要数分钟，进度按1000图输出。
 AMP自检还要求主仓库的 `yolo26n.pt`（或weights同名文件）和 `ultralytics-main/ultralytics/assets/bus.jpg`；缺失时短检报错，不会联网绕过或关闭AMP。
 
-prepare建立 `outputs/arg_v1/arg_v1_init.pt`、`prepare.json`、`train_args.yaml`、`recipe_diff.json`、数据清单与源码快照。
+本段生成新 `prepare.json`、`train_args.yaml`、`recipe_diff.json`、数据清单与源码快照。旧文件在完整备份中。若比较失败，不执行 preflight/start；保留新旧记录定位真实差异。
 
 ## 3. 一次有界 preflight（必须等prepare成功）
+
+必须重新运行。旧失败 preflight 已备份，不能沿用旧结果或手动改为 PASS；新预检会完整执行 binding 并绑定新 SHA。
 
 ```bash
 bash /root/autodl-tmp/projects/Crack_RTDETR-arg_v1/tools/arg_v1.sh preflight --seconds 900 --micro-batches 16
@@ -61,11 +169,25 @@ bash /root/autodl-tmp/projects/Crack_RTDETR-arg_v1/tools/arg_v1.sh probe
 
 ```bash
 bash /root/autodl-tmp/projects/Crack_RTDETR-arg_v1/tools/arg_v1.sh status
+/root/miniconda3/envs/rtdetr/bin/python - <<'PY'
+import json
+from pathlib import Path
+p = Path("/root/autodl-tmp/projects/Crack_RTDETR-arg_v1/outputs/arg_v1/preflight.json")
+if p.is_file():
+    result = json.loads(p.read_text())
+    print(json.dumps({"status": result.get("status"), "code_sha": result.get("binding", {}).get("code", {}).get("commit"),
+        "start_eligible": result.get("start_eligible", False), "checks": result.get("checks"),
+        "error": result.get("error"), "boundary_error": result.get("boundary_error")}, indent=2, ensure_ascii=False))
+else:
+    print("Preflight NOT_RUN; start is not eligible")
+PY
 ```
 
-检查preflight每项状态、`start_eligible`、是否已有worker/tmux/run。该命令不会启动或恢复训练。
+检查新 SHA、preflight 每项状态、`start_eligible`、是否已有 worker/tmux/run。失败时也可执行 status；该命令不会启动或恢复训练。
 
 ## 5. 正式 start（必须等必需短检通过）
+
+本段独立手动执行：新 preflight 必须绑定 `ef9cb7e05e5557f7dd06c95cf2361998a284adc9`，`start_eligible=true`，且 cpu、cuda_b16_amp、mechanism、new_process_val、resume 分别 PASS。start 入口还会重新核验完整数据、源码、初始化和配方，以及有效更新证据。不要把它接在升级或 preflight 命令后自动执行。
 
 ```bash
 bash /root/autodl-tmp/projects/Crack_RTDETR-arg_v1/tools/arg_v1.sh start

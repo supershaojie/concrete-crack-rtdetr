@@ -1,6 +1,7 @@
-# ARG v1 实施交付
+# ARG v1 数据身份修复交付
 
-训练代码完整SHA：`e6d6ce11783e57cdd3377f6b5a103665218df065`。
+本次训练代码完整 SHA：`ef9cb7e05e5557f7dd06c95cf2361998a284adc9`。
+服务器待升级旧 SHA：`e6d6ce11783e57cdd3377f6b5a103665218df065`，适用状态为已 prepare、names 键类型导致 preflight 失败、尚未正式 start。
 独立分支：`exp-rtdetr-r18-lite-arg-v1`；母版：`a0459d6a652cb702699087c88fa39a3e4c4087ec`。
 代码已普通commit/push；封版时通过 `git ls-remote --heads origin refs/heads/exp-rtdetr-r18-lite-arg-v1` 核对远端与本地完整SHA一致。
 随后单独提交此交付文档和验证摘要，以便文档能真实引用已经存在的代码SHA；服务器命令固定使用上面的代码提交。
@@ -12,7 +13,24 @@ Python：`/root/miniconda3/envs/rtdetr/bin/python`；tmux：`arg-v1-training`。
 正式run：`/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/arg_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug`。
 证据目录：本实验worktree的 `outputs/arg_v1/`。
 
-## 已实施
+## 本次修复与验证
+
+`tools/arg_v1_common.py` 在生成 inventory 时调用同一个 `data_identity_config()`，复制配置并将 names 类别编号转为字符串键。prepare 与 binding 都经过该路径，JSON 保存/读取前后身份相同；`0` 与 `"0"` 发生键冲突时明确报错，即使类别名相同也不会覆盖。
+完整 `data == plan["data"]` 校验保留，YAML 文件本身及其原始字节哈希不变。没有修改 ARG 损失、母版结构、初始化、训练/评估配方、预检门禁或同步脚本。
+
+本轮验证如下；详细范围见 [identity_fix_validation.json](identity_fix_validation.json)：
+
+- 旧 SHA 的真实 `arg_v1_common.py` 在同一夹具中复现 `Data identity changed since prepare`。
+- 新增 7 项身份回归测试 PASS：实际 prepare/inventory/binding 与 JSON 往返；字符串键；冲突拒绝；类别名变化；真实图像/标签/YAML 字节变化；真实图像/GT 数量变化；独立修改 names、路径、各级哈希和数量均拒绝。
+- 既有 6 项生命周期/启动门禁测试 PASS。
+- 交付命令的 4 项本地临时 Git worktree 测试 PASS：实际 fast-forward、完整备份/哈希/旧记录迁移、实际重新 prepare；脏目录、已有训练目录、初始化变化分别拒绝。服务器 sync 网络、tmux/进程控制、模型环境与配方使用夹具，未在服务器执行。
+- Python 语法、16 个 Bash 命令块语法、3 个内嵌 Python 块语法和 `git diff --check` PASS。
+
+服务器升级按 [server_commands.md](server_commands.md) 第 1～4 段完成“备份与升级 → 重新 prepare → 新 preflight → status”。命令处理原 sync 的 HEAD/sync.json 双重限制，保留整个旧输出的独立备份与失败证据。原初始化文件及 provenance 按哈希复用，seed42 与全部参数、数据身份在重新 prepare 后逐项对照旧记录。正式 start 单列，只在必需预检通过后执行，仍使用 `arg-v1-training`。
+
+本轮未运行服务器 GPU 预检或长训练，也未重复运行下述历史数学/模型/GPU检查。
+
+## 原 v1 已实施（历史记录）
 
 - `arg_loss.py` 固定ARG公式、显式repair几何、停止权重梯度、1D GIoU、最终常规层唯一接线、r=0原路径和DN补零顺序。
 - `arg_model.py` 可导入model/trainer，实际get_model重建后生效，原生优化/AMP/clip/EMA/checkpoint，epoch恢复与有界机制日志。
@@ -22,7 +40,7 @@ Python：`/root/miniconda3/envs/rtdetr/bin/python`；tmux：`arg-v1-training`。
 
 公式与接入细节、原参数依据、异常恢复和打包约定完整见 [README.md](README.md)。无需访问聊天截图或附件才能运行。
 
-## 已验证事实
+## 原 v1 已验证事实（历史记录，本轮未全部重跑）
 
 | 范围 | 结果 |
 |---|---|
@@ -59,6 +77,6 @@ Python：`/root/miniconda3/envs/rtdetr/bin/python`；tmux：`arg-v1-training`。
 终端三项loss不代表全部L0；不能把ARG下降当作mAP改进。
 后续只有有效结果时再考虑等系数等权1D GIoU对照。本次未增加消融长训、旧第三方案或其他检测模块。
 
-下一条可执行命令是 [server_commands.md](server_commands.md) 第1段完整同步块，已包含真实40位SHA。
-后续按“同步→prepare→preflight→status→start→日志→val→test→pack”分段执行，不能无条件连跑preflight与训练。
+下一条可执行命令是 [server_commands.md](server_commands.md) 第1段完整旧 worktree 升级块，已包含新旧真实40位SHA。
+后续按“升级→重新prepare→新preflight→status→单独start→日志→val→test→pack”分段执行，不能无条件连跑preflight与训练。
 若训练正常结束但final_eval失败，用val恢复评估，保留原异常与exit1，不用resume重训。
