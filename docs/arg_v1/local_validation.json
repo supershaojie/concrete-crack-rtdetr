@@ -1,0 +1,317 @@
+{
+  "code_commit": "e6d6ce11783e57cdd3377f6b5a103665218df065",
+  "executed_head_before_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "identity_note": "Checks executed on the uncommitted implementation; the committed source is byte-identical after LF normalization.",
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "D:\\MyProjects\\Crack_RTDETR-arg_v1\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "D:\\MyProjects\\Crack_RTDETR-arg_v1\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "cbr_module": "D:\\MyProjects\\Crack_RTDETR-arg_v1\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    },
+    "criterion": "D:\\MyProjects\\Crack_RTDETR-arg_v1\\ultralytics-main\\ultralytics\\models\\rtdetr\\arg_loss.py",
+    "gpu_bytes": 6442123264,
+    "formula": {
+      "version": "ARG-v1",
+      "lambda_arg": 0.2,
+      "epsilon_w": 0.05,
+      "eps_num": 1e-07
+    }
+  },
+  "source_lf_sha256": {
+    "docs/arg_v1/README.md": "1405962dda3b35c9ff7b58e0fd627f14ce85b2398948a2bc7a00c23eb2d030ca",
+    "tools/arg_v1.py": "3e882629ac73846bb3112e0d9a40eadf81c3ece4bb5a50955734c1ed33aa3ca7",
+    "tools/arg_v1.sh": "ac6c8bcc0bdc7161ff928d796dc348e8cc78a3cfea6ab50df4948cf4564bc30a",
+    "tools/arg_v1_common.py": "33f1b4b24a1d058bea621ed98abad849794465b29924ae51d2ff65885b9433ff",
+    "tools/arg_v1_preflight.py": "8c83298f1a92f38ede2ce41ed566ae445b96398e03a0555f57b843b434ebcacb",
+    "tools/check_arg_v1.py": "2f9627f206fb6a981ad92864d4ee710a8041951eba9b70528ef8d7cc58fbad49",
+    "tools/check_arg_v1_lifecycle.py": "5826f41725241453ff64ce4fc8a3c9038d3bae35bd28fcff5e881f68aa48a46c",
+    "tools/check_arg_v1_ops.py": "3ec6e7df658934fa294984cf7b8b2af780a1a7afe9dbee7adf16ba04d7104e0d",
+    "tools/check_arg_v1_setup.py": "015528f68f61b6537bcbca6133533a18ef52142b57cf314539d0ea850056e3aa",
+    "tools/sync_arg_v1.sh": "46476670473ab6d98d3b60db24746a31054577a327d957c7ad6e4ba57d8ed015",
+    "ultralytics-main/ultralytics/models/rtdetr/arg_loss.py": "d86a2600d2b4ab8d0f1c1007365c99ca8c4aee63cfa20857bc5da36acf8f85a4",
+    "ultralytics-main/ultralytics/models/rtdetr/arg_model.py": "36cc1436439f4f4e840ed25c45176fc2148e61e3d541c958de008870a09f7d08",
+    "ultralytics-main/ultralytics/models/rtdetr/arg_val.py": "46eee426c87bd6a41e96f771a49d5d70809c67a1165a965331430df634493a2e",
+    "ultralytics-main/ultralytics/nn/autobackend.py": "1879db86b5b9b3346426e48411d86d2196319984057ffa637ddc0cf45be78230"
+  },
+  "math": {
+    "status": "PASS",
+    "tests": 5
+  },
+  "routing": {
+    "status": "PASS",
+    "evidence": [
+      {
+        "dn": false,
+        "epoch": 0,
+        "calls": 4,
+        "keys": [
+          "loss_class",
+          "loss_bbox",
+          "loss_giou",
+          "loss_class_aux",
+          "loss_bbox_aux",
+          "loss_giou_aux",
+          "loss_class_dn",
+          "loss_bbox_dn",
+          "loss_giou_dn",
+          "loss_class_aux_dn",
+          "loss_bbox_aux_dn",
+          "loss_giou_aux_dn"
+        ]
+      },
+      {
+        "dn": false,
+        "epoch": 20,
+        "calls": 4,
+        "keys": [
+          "loss_class",
+          "loss_bbox",
+          "loss_giou",
+          "loss_class_aux",
+          "loss_bbox_aux",
+          "loss_giou_aux",
+          "loss_class_dn",
+          "loss_bbox_dn",
+          "loss_giou_dn",
+          "loss_class_aux_dn",
+          "loss_bbox_aux_dn",
+          "loss_giou_aux_dn",
+          "loss_arg"
+        ]
+      },
+      {
+        "dn": true,
+        "epoch": 0,
+        "calls": 4,
+        "keys": [
+          "loss_class",
+          "loss_bbox",
+          "loss_giou",
+          "loss_class_aux",
+          "loss_bbox_aux",
+          "loss_giou_aux",
+          "loss_class_dn",
+          "loss_bbox_dn",
+          "loss_giou_dn",
+          "loss_class_aux_dn",
+          "loss_bbox_aux_dn",
+          "loss_giou_aux_dn"
+        ]
+      },
+      {
+        "dn": true,
+        "epoch": 20,
+        "calls": 4,
+        "keys": [
+          "loss_class",
+          "loss_bbox",
+          "loss_giou",
+          "loss_class_aux",
+          "loss_bbox_aux",
+          "loss_giou_aux",
+          "loss_class_dn",
+          "loss_bbox_dn",
+          "loss_giou_dn",
+          "loss_class_aux_dn",
+          "loss_bbox_aux_dn",
+          "loss_giou_aux_dn",
+          "loss_arg"
+        ]
+      }
+    ]
+  },
+  "model": {
+    "status": "PASS",
+    "shape": "synthetic B2/160 CPU; not formal B16 capacity",
+    "states": 552,
+    "parameters": 20149765,
+    "r0_loss": 227.7435760498047,
+    "r0_forward_exact": true,
+    "r0_gradients_exact": true,
+    "r0_native_optimizer_update_exact": true,
+    "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "arg_only_gradients": {
+      "model.26.cbr.offset_out.weight": 0.010240929201245308,
+      "model.26.cbr.query_proj.weight": 6.170113192638382e-05,
+      "model.26.dec_bbox_head.2.layers.2.weight": 0.660397469997406,
+      "model.19.cv1.conv.weight": 0.030616842210292816
+    },
+    "new_process_resume": {
+      "status": "PASS",
+      "epoch": 20,
+      "ramp": 1.0,
+      "optimizer_exact": true,
+      "ema_exact": true,
+      "scaler_exact": true,
+      "scaler_scope": "CPU disabled scaler; CUDA state tested by server preflight",
+      "validation_scope": "synthetic inference; real val pending server"
+    }
+  },
+  "optimizer_groups": [
+    {
+      "count": 130,
+      "lr": 0.0005,
+      "betas": [
+        0.937,
+        0.999
+      ],
+      "weight_decay": 0.0001,
+      "param_group": "weight",
+      "eps": 1e-08,
+      "amsgrad": false,
+      "maximize": false,
+      "foreach": null,
+      "capturable": false,
+      "differentiable": false,
+      "fused": null,
+      "decoupled_weight_decay": true
+    },
+    {
+      "count": 81,
+      "lr": 0.0005,
+      "betas": [
+        0.937,
+        0.999
+      ],
+      "weight_decay": 0.0,
+      "param_group": "bn",
+      "eps": 1e-08,
+      "amsgrad": false,
+      "maximize": false,
+      "foreach": null,
+      "capturable": false,
+      "differentiable": false,
+      "fused": null,
+      "decoupled_weight_decay": true
+    },
+    {
+      "count": 134,
+      "lr": 0.0005,
+      "betas": [
+        0.937,
+        0.999
+      ],
+      "weight_decay": 0.0,
+      "param_group": "bias",
+      "eps": 1e-08,
+      "amsgrad": false,
+      "maximize": false,
+      "foreach": null,
+      "capturable": false,
+      "differentiable": false,
+      "fused": null,
+      "decoupled_weight_decay": true
+    }
+  ],
+  "local_lifecycle": {
+    "status": "PASS",
+    "scope": "local FP32 B1/640 real val; not formal B16 capacity or full val/test",
+    "checkpoint_sha256": "de837dcb4b177ac85a1c90d2d999f854297304d4f522dc32b856cc763fac0832",
+    "mother_parity": {
+      "before_fuse_exact": true,
+      "after_fuse_exact": true,
+      "lif_bn_preserved": true,
+      "fusion_max_abs": 1.043081283569336e-07,
+      "fusion_atol": 2e-05,
+      "fusion_rtol": 0.0002
+    },
+    "real_val_images": 1,
+    "warmup": [
+      {
+        "shape": [
+          1,
+          3,
+          640,
+          640
+        ],
+        "finite": true,
+        "zero": true
+      }
+    ],
+    "predictions_sha256": "588739cd64a1a84b2015ec7d49fc94aa644c10f559a9757994a32845786aabae"
+  },
+  "actual_setup": {
+    "status": "PASS",
+    "scope": "local native setup only; B2/160/workers0 diagnostic overrides, not capacity",
+    "amp": [
+      "\u001b[34m\u001b[1mAMP: \u001b[0mrunning Automatic Mixed Precision (AMP) checks...",
+      "\u001b[34m\u001b[1mAMP: \u001b[0mchecks passed ✅"
+    ],
+    "scaler": {
+      "scale": 65536.0,
+      "growth_factor": 2.0,
+      "backoff_factor": 0.5,
+      "growth_interval": 2000,
+      "_growth_tracker": 0
+    },
+    "accumulate": 32,
+    "rebuild": {
+      "equal_states": 552,
+      "trainable": 20149765,
+      "native_reconstruction": true,
+      "formula": {
+        "version": "ARG-v1",
+        "lambda_arg": 0.2,
+        "epsilon_w": 0.05,
+        "eps_num": 1e-07
+      }
+    }
+  },
+  "operations": {
+    "status": "PASS",
+    "tests": 6,
+    "scope": "mocked server control and gates; real temporary lock/package/hash IO; no server dispatch"
+  },
+  "data": {
+    "splits": {
+      "train": {
+        "images": 6048,
+        "boxes": 45573,
+        "content_sha256": "d85217afbfe5c481e84a46a1d8ef4f3d0baa2f5a0ad763b85a16d6bbcff2f331"
+      },
+      "val": {
+        "images": 1728,
+        "boxes": 12840,
+        "content_sha256": "371cbd0615a21c86192074f16ed64d3af82a692d98f9735cbd43e1327f0e70f2"
+      },
+      "test": {
+        "images": 864,
+        "boxes": 6663,
+        "content_sha256": "24f572485a7fce8962742c9aee3c29846e246a4cea666e0c14ae6f9521be1a3c"
+      }
+    },
+    "content_sha256": "0a876103059d3abc9b9dbedad9dbea0a7a1a3f38b19760dbab7c503fc61bb915",
+    "config_sha256": "5daaa65f29498570e743232ef3e62a407bc0f2a2e4e6b1f95fbec0bdf288cfc9",
+    "config": {
+      "path": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det",
+      "train": "images/train",
+      "val": "images/val",
+      "test": "images/test",
+      "names": {
+        "0": "crack"
+      }
+    }
+  },
+  "server_preflight": {
+    "status": "PENDING",
+    "reason": "No server work was executed; local 6GiB GPU checks are not B16 capacity evidence"
+  },
+  "formal_training": "PENDING",
+  "full_val": "PENDING",
+  "full_test": "PENDING",
+  "measured_training_overhead": "PENDING"
+}

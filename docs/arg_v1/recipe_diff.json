@@ -1,0 +1,888 @@
+{
+  "fields": 109,
+  "changed": [
+    "model",
+    "name",
+    "save_dir"
+  ],
+  "rows": [
+    {
+      "field": "task",
+      "original": "detect",
+      "arg": "detect",
+      "original_type": "str",
+      "arg_type": "str",
+      "changed": false
+    },
+    {
+      "field": "mode",
+      "original": "train",
+      "arg": "train",
+      "original_type": "str",
+      "arg_type": "str",
+      "changed": false
+    },
+    {
+      "field": "model",
+      "original": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+      "arg": "/root/autodl-tmp/projects/Crack_RTDETR-arg_v1/outputs/arg_v1/arg_v1_init.pt",
+      "original_type": "str",
+      "arg_type": "str",
+      "changed": true
+    },
+    {
+      "field": "data",
+      "original": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+      "arg": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+      "original_type": "str",
+      "arg_type": "str",
+      "changed": false
+    },
+    {
+      "field": "epochs",
+      "original": 200,
+      "arg": 200,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "time",
+      "original": null,
+      "arg": null,
+      "original_type": "NoneType",
+      "arg_type": "NoneType",
+      "changed": false
+    },
+    {
+      "field": "patience",
+      "original": 50,
+      "arg": 50,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "batch",
+      "original": 16,
+      "arg": 16,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "imgsz",
+      "original": 640,
+      "arg": 640,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "save",
+      "original": true,
+      "arg": true,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "save_period",
+      "original": -1,
+      "arg": -1,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "cache",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "device",
+      "original": "0",
+      "arg": "0",
+      "original_type": "str",
+      "arg_type": "str",
+      "changed": false
+    },
+    {
+      "field": "workers",
+      "original": 8,
+      "arg": 8,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "project",
+      "original": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+      "arg": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+      "original_type": "str",
+      "arg_type": "str",
+      "changed": false
+    },
+    {
+      "field": "name",
+      "original": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "arg": "arg_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "original_type": "str",
+      "arg_type": "str",
+      "changed": true
+    },
+    {
+      "field": "exist_ok",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "pretrained",
+      "original": true,
+      "arg": true,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "optimizer",
+      "original": "AdamW",
+      "arg": "AdamW",
+      "original_type": "str",
+      "arg_type": "str",
+      "changed": false
+    },
+    {
+      "field": "verbose",
+      "original": true,
+      "arg": true,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "seed",
+      "original": 42,
+      "arg": 42,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "deterministic",
+      "original": true,
+      "arg": true,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "single_cls",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "rect",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "cos_lr",
+      "original": true,
+      "arg": true,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "close_mosaic",
+      "original": 10,
+      "arg": 10,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "resume",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "amp",
+      "original": true,
+      "arg": true,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "fraction",
+      "original": 1.0,
+      "arg": 1.0,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "profile",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "freeze",
+      "original": null,
+      "arg": null,
+      "original_type": "NoneType",
+      "arg_type": "NoneType",
+      "changed": false
+    },
+    {
+      "field": "multi_scale",
+      "original": 0.0,
+      "arg": 0.0,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "compile",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "overlap_mask",
+      "original": true,
+      "arg": true,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "mask_ratio",
+      "original": 4,
+      "arg": 4,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "dropout",
+      "original": 0.0,
+      "arg": 0.0,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "val",
+      "original": true,
+      "arg": true,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "split",
+      "original": "val",
+      "arg": "val",
+      "original_type": "str",
+      "arg_type": "str",
+      "changed": false
+    },
+    {
+      "field": "save_json",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "conf",
+      "original": null,
+      "arg": null,
+      "original_type": "NoneType",
+      "arg_type": "NoneType",
+      "changed": false
+    },
+    {
+      "field": "iou",
+      "original": 0.7,
+      "arg": 0.7,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "max_det",
+      "original": 300,
+      "arg": 300,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "half",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "dnn",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "plots",
+      "original": true,
+      "arg": true,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "end2end",
+      "original": null,
+      "arg": null,
+      "original_type": "NoneType",
+      "arg_type": "NoneType",
+      "changed": false
+    },
+    {
+      "field": "source",
+      "original": null,
+      "arg": null,
+      "original_type": "NoneType",
+      "arg_type": "NoneType",
+      "changed": false
+    },
+    {
+      "field": "vid_stride",
+      "original": 1,
+      "arg": 1,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "stream_buffer",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "visualize",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "augment",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "agnostic_nms",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "classes",
+      "original": null,
+      "arg": null,
+      "original_type": "NoneType",
+      "arg_type": "NoneType",
+      "changed": false
+    },
+    {
+      "field": "retina_masks",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "embed",
+      "original": null,
+      "arg": null,
+      "original_type": "NoneType",
+      "arg_type": "NoneType",
+      "changed": false
+    },
+    {
+      "field": "show",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "save_frames",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "save_txt",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "save_conf",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "save_crop",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "show_labels",
+      "original": true,
+      "arg": true,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "show_conf",
+      "original": true,
+      "arg": true,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "show_boxes",
+      "original": true,
+      "arg": true,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "line_width",
+      "original": null,
+      "arg": null,
+      "original_type": "NoneType",
+      "arg_type": "NoneType",
+      "changed": false
+    },
+    {
+      "field": "format",
+      "original": "torchscript",
+      "arg": "torchscript",
+      "original_type": "str",
+      "arg_type": "str",
+      "changed": false
+    },
+    {
+      "field": "keras",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "optimize",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "int8",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "dynamic",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "simplify",
+      "original": true,
+      "arg": true,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "opset",
+      "original": null,
+      "arg": null,
+      "original_type": "NoneType",
+      "arg_type": "NoneType",
+      "changed": false
+    },
+    {
+      "field": "workspace",
+      "original": null,
+      "arg": null,
+      "original_type": "NoneType",
+      "arg_type": "NoneType",
+      "changed": false
+    },
+    {
+      "field": "nms",
+      "original": false,
+      "arg": false,
+      "original_type": "bool",
+      "arg_type": "bool",
+      "changed": false
+    },
+    {
+      "field": "lr0",
+      "original": 0.0005,
+      "arg": 0.0005,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "lrf",
+      "original": 0.01,
+      "arg": 0.01,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "momentum",
+      "original": 0.937,
+      "arg": 0.937,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "weight_decay",
+      "original": 0.0001,
+      "arg": 0.0001,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "warmup_epochs",
+      "original": 5,
+      "arg": 5,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "warmup_momentum",
+      "original": 0.8,
+      "arg": 0.8,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "warmup_bias_lr",
+      "original": 0.1,
+      "arg": 0.1,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "box",
+      "original": 7.5,
+      "arg": 7.5,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "cls",
+      "original": 0.5,
+      "arg": 0.5,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "dfl",
+      "original": 1.5,
+      "arg": 1.5,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "pose",
+      "original": 12.0,
+      "arg": 12.0,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "kobj",
+      "original": 1.0,
+      "arg": 1.0,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "rle",
+      "original": 1.0,
+      "arg": 1.0,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "angle",
+      "original": 1.0,
+      "arg": 1.0,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "nbs",
+      "original": 64,
+      "arg": 64,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "hsv_h",
+      "original": 0.015,
+      "arg": 0.015,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "hsv_s",
+      "original": 0.5,
+      "arg": 0.5,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "hsv_v",
+      "original": 0.35,
+      "arg": 0.35,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "degrees",
+      "original": 5,
+      "arg": 5,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "translate",
+      "original": 0.1,
+      "arg": 0.1,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "scale",
+      "original": 0.4,
+      "arg": 0.4,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "shear",
+      "original": 1.5,
+      "arg": 1.5,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "perspective",
+      "original": 0.0002,
+      "arg": 0.0002,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "flipud",
+      "original": 0.2,
+      "arg": 0.2,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "fliplr",
+      "original": 0.5,
+      "arg": 0.5,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "bgr",
+      "original": 0.0,
+      "arg": 0.0,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "mosaic",
+      "original": 0.8,
+      "arg": 0.8,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "mixup",
+      "original": 0.05,
+      "arg": 0.05,
+      "original_type": "float",
+      "arg_type": "float",
+      "changed": false
+    },
+    {
+      "field": "cutmix",
+      "original": 0,
+      "arg": 0,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "copy_paste",
+      "original": 0,
+      "arg": 0,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "copy_paste_mode",
+      "original": "flip",
+      "arg": "flip",
+      "original_type": "str",
+      "arg_type": "str",
+      "changed": false
+    },
+    {
+      "field": "auto_augment",
+      "original": null,
+      "arg": null,
+      "original_type": "NoneType",
+      "arg_type": "NoneType",
+      "changed": false
+    },
+    {
+      "field": "erasing",
+      "original": 0,
+      "arg": 0,
+      "original_type": "int",
+      "arg_type": "int",
+      "changed": false
+    },
+    {
+      "field": "cfg",
+      "original": null,
+      "arg": null,
+      "original_type": "NoneType",
+      "arg_type": "NoneType",
+      "changed": false
+    },
+    {
+      "field": "tracker",
+      "original": "botsort.yaml",
+      "arg": "botsort.yaml",
+      "original_type": "str",
+      "arg_type": "str",
+      "changed": false
+    },
+    {
+      "field": "save_dir",
+      "original": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "arg": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/arg_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "original_type": "str",
+      "arg_type": "str",
+      "changed": true
+    }
+  ],
+  "formula": {
+    "version": "ARG-v1",
+    "lambda_arg": 0.2,
+    "epsilon_w": 0.05,
+    "eps_num": 1e-07
+  }
+}
