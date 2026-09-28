@@ -653,6 +653,55 @@
     "origin": "https://github.com/supershaojie/concrete-crack-rtdetr.git",
     "https": "Two bounded ls-remote attempts failed: Recv failure: Connection was reset.",
     "ssh": "Verified GitHub ED25519 fingerprint using official docs, strict host checking with task-local known_hosts; authentication denied (publickey).",
-    "fingerprint_source": "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints"
-  }
+    "fingerprint_source": "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints",
+    "push": {
+      "command": [
+        "git",
+        "-c",
+        "http.lowSpeedLimit=1024",
+        "-c",
+        "http.lowSpeedTime=20",
+        "push",
+        "-u",
+        "origin",
+        "exp-rtdetr-r18-lite-geo-v1"
+      ],
+      "exit_code": 0,
+      "stdout": "branch 'exp-rtdetr-r18-lite-geo-v1' set up to track 'origin/exp-rtdetr-r18-lite-geo-v1'.\n",
+      "stderr": "remote: \nremote: Create a pull request for 'exp-rtdetr-r18-lite-geo-v1' on GitHub by visiting:        \nremote:      https://github.com/supershaojie/concrete-crack-rtdetr/pull/new/exp-rtdetr-r18-lite-geo-v1        \nremote: \nTo https://github.com/supershaojie/concrete-crack-rtdetr.git\n * [new branch]      exp-rtdetr-r18-lite-geo-v1 -> exp-rtdetr-r18-lite-geo-v1\n"
+    }
+  },
+  "committed_prepare": {
+    "status": "PASS",
+    "commit": "3bc172c6f22470a00abb2ab6a434e22663406e78"
+  },
+  "local_preflight_entry": {
+    "status": "PENDING",
+    "start_eligible": false,
+    "reason": "Windows local checks do not qualify formal server B16/640 AMP; execute delivered server preflight",
+    "elapsed_seconds": 7.187000000005355
+  },
+  "real_pack_cli": {
+    "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\outputs\\geo_v1\\GEO_v1_INCOMPLETE_20260929_013031.tar.gz",
+    "exists": true,
+    "bytes": 3432326,
+    "sha256": "103280881575c907d5b39849430ff50200080a96ed598eb9e7318dcf9a3e080b",
+    "status": "INCOMPLETE",
+    "missing": [
+      "training_identity.json",
+      "actual_setup.json",
+      "training_completed.json",
+      "mechanism.jsonl",
+      "offline_summary.json",
+      "training_source_snapshot.tar.gz",
+      "val: complete evaluation/export/curves/lock",
+      "test: complete evaluation/export/curves/lock",
+      "preflight PASS",
+      "training results.csv",
+      "best.pt",
+      "last.pt",
+      "successful worker Python exit"
+    ]
+  },
+  "server_command_syntax": null
 }
