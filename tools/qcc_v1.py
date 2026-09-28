@@ -572,7 +572,7 @@ def finish():
     return result
 
 
-def main():
+def build_parser():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
     p = sub.add_parser("prepare", help="Reuse fixed snapshot or inventory once; initialize from public weights")
@@ -587,7 +587,11 @@ def main():
     for name in ("val", "test"):
         sub.add_parser(name).add_argument("--recover-export", action="store_true", help="Explicit repeat only for an old successful evaluation missing its export")
     sub.add_parser("_worker", help=argparse.SUPPRESS).add_argument("--dispatch", required=True)
-    args = parser.parse_args()
+    return parser
+
+
+def main(argv=None):
+    args = build_parser().parse_args(argv)
     if args.command == "status":
         result = dict(status(), materials=completeness())
     elif args.command == "_worker":

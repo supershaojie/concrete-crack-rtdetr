@@ -202,13 +202,21 @@ def run(folder):
         write_json(folder / "gpu.json", report)
 
 
-if __name__ == "__main__":
+def build_parser():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_qccument("--folder", type=Path, required=True)
-    parser.add_qccument("--reload", type=Path)
-    args = parser.parse_args()
+    parser.add_argument("--folder", type=Path, required=True)
+    parser.add_argument("--reload", type=Path)
+    return parser
+
+
+def main(argv=None):
+    args = build_parser().parse_args(argv)
     torch.set_num_threads(4)
     if args.reload:
         reload_and_val(args.folder, args.reload)
     else:
         run(args.folder)
+
+
+if __name__ == "__main__":
+    main()
