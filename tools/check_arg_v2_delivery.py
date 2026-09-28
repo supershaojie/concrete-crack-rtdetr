@@ -150,6 +150,25 @@ class Completion(unittest.TestCase):
         self.assertEqual(recovered, first)
         self.assertEqual(self.calls, ["val"])
 
+    def test_lock_write_failure_preserves_complete_report_and_does_not_reinfer(self):
+        def publish(path, value):
+            if Path(path) == self.out / "val_lock.json":
+                raise OSError("injected lock publication failure")
+            return common.write_json(path, value)
+        with patch.object(evaluation, "write_json", side_effect=publish):
+            with self.assertRaisesRegex(OSError, "lock publication failure"):
+                app.finish()
+        self.assertFalse((self.out / "val_lock.json").exists())
+        reports = list((self.out / "evaluations").glob("*/metrics.json"))
+        self.assertEqual(len(reports), 1)
+        self.assertEqual(common.read_json(reports[0])["status"], "PASS")
+        failure = common.read_json(reports[0].with_name("publication_failure.json"))
+        self.assertEqual(failure["status"], "FAIL")
+        self.assertTrue(failure["evaluation_completed"])
+        self.assertEqual(app.finish()["status"], "PASS")
+        self.assertEqual(self.calls, ["val", "test"])
+        self.assertEqual(common.read_json(reports[0].with_name("publication_failure.json")), failure)
+
     def test_missing_export_refuses_implicit_replay_and_pack_reports_gap(self):
         first = evaluation.evaluate("val")
         Path(first["predictions"]["path"]).unlink()

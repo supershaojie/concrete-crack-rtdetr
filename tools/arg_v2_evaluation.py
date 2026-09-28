@@ -132,6 +132,7 @@ def evaluate(split, recover_export=False, during_final_eval=False):
     validator = ARGv2Validator(args=settings, save_dir=folder / "plots")
     validator.export_path = folder / (split + "_predictions_gt.jsonl.gz")
     validator.export_identity = export_identity
+    complete_report_published = False
     try:
         init_seeds(42, deterministic=True)
         metrics = validator(model=context["best"])
@@ -148,9 +149,11 @@ def evaluate(split, recover_export=False, during_final_eval=False):
             images=len(validator.arg_seen), gt_boxes=validator.arg_gt_count, queries_per_image=300,
             actual_settings=validator.actual_settings, predictions=file_info(validator.export_path), curves=file_info(curves),
             ended=now())
-        # Durable complete report first; a subsequent process can publish a missing lock.
-        write_json(folder / "metrics.json", report)
         validate_record(report, split, context)
+        # Durable validated report first; a publication failure must not turn a
+        # completed evaluation into a failed inference that runs again on retry.
+        write_json(folder / "metrics.json", report)
+        complete_report_published = True
         write_json(lock_path, report)
         failure = read_json(OUT / "final_eval.json", {})
         if locked or (split == "val" and failure.get("status") == "FINAL_EVAL_FAILED"):
@@ -158,6 +161,11 @@ def evaluate(split, recover_export=False, during_final_eval=False):
                 original_final_eval=failure, previous_lock=locked, report=report["report"], created=now()))
         return report
     except BaseException as error:
-        report.update(status="FAIL", error=repr(error), traceback=traceback.format_exc(), ended=now())
-        write_json(folder / "metrics.json", report)
+        failure = dict(status="FAIL", error=repr(error), traceback=traceback.format_exc(), ended=now())
+        if complete_report_published:
+            write_json(folder / "publication_failure.json", dict(failure, report=report["report"],
+                       phase="lock_or_recovery_publication", evaluation_completed=True))
+        else:
+            report.update(failure)
+            write_json(folder / "metrics.json", report)
         raise
