@@ -103,5 +103,7 @@ finish正常交付一个COMPLETE包；status/pack不推理、不重扫原数据�
 [GitHub公钥指纹](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints)
 核验，但本机publickey认证失败；没有关闭主机校验或修改全局SSH配置。
 随后对原HTTPS origin的正常git push成功。保留这些真实网络失败记录，不将它们算作训练失败。
-最终远端文档提交在交付后另行核对；功能代码与文档SHA区分，服务器命令固定上述功能SHA。
+后续纯文档推送及最终ls-remote查询再次遇网络故障，尚未确认送达；功能代码的正常push
+已有成功回执。纯文档保存在本地提交并纳入bundle。具体提交及传输回执见本地交付目录
+`TRANSFER_STATUS.json`；服务器命令固定上述已推送功能SHA，不把未推送文档算作训练代码。
 另附可用git fetch读取的代码/文档bundle作网络故障备用，不包含数据、权重、凭据或训练产物。
