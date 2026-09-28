@@ -1,0 +1,696 @@
+{
+  "authority": "docs/c19_lif_v1/resolved_formal_config.yaml",
+  "fields": 109,
+  "changes": [
+    {
+      "field": "model",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1/weights/c19_lif_v1_controlled_init.pt",
+      "dtr": "/root/autodl-tmp/projects/Crack_RTDETR-dtr_v1/outputs/dtr_v1/dtr_v1_init.pt",
+      "reason": "experiment/path identity"
+    },
+    {
+      "field": "project",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+      "dtr": "/root/autodl-tmp/projects/Crack_RTDETR-dtr_v1/runs/c_series",
+      "reason": "experiment/path identity"
+    },
+    {
+      "field": "name",
+      "mother": "c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "dtr": "dtr_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "reason": "experiment/path identity"
+    },
+    {
+      "field": "save_dir",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "dtr": "/root/autodl-tmp/projects/Crack_RTDETR-dtr_v1/runs/c_series/dtr_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "reason": "experiment/path identity"
+    }
+  ],
+  "all_fields": [
+    {
+      "field": "task",
+      "mother": "detect",
+      "dtr": "detect",
+      "unchanged": true
+    },
+    {
+      "field": "mode",
+      "mother": "train",
+      "dtr": "train",
+      "unchanged": true
+    },
+    {
+      "field": "model",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1/weights/c19_lif_v1_controlled_init.pt",
+      "dtr": "/root/autodl-tmp/projects/Crack_RTDETR-dtr_v1/outputs/dtr_v1/dtr_v1_init.pt",
+      "unchanged": false
+    },
+    {
+      "field": "data",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+      "dtr": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+      "unchanged": true
+    },
+    {
+      "field": "epochs",
+      "mother": 200,
+      "dtr": 200,
+      "unchanged": true
+    },
+    {
+      "field": "time",
+      "mother": null,
+      "dtr": null,
+      "unchanged": true
+    },
+    {
+      "field": "patience",
+      "mother": 50,
+      "dtr": 50,
+      "unchanged": true
+    },
+    {
+      "field": "batch",
+      "mother": 16,
+      "dtr": 16,
+      "unchanged": true
+    },
+    {
+      "field": "imgsz",
+      "mother": 640,
+      "dtr": 640,
+      "unchanged": true
+    },
+    {
+      "field": "save",
+      "mother": true,
+      "dtr": true,
+      "unchanged": true
+    },
+    {
+      "field": "save_period",
+      "mother": -1,
+      "dtr": -1,
+      "unchanged": true
+    },
+    {
+      "field": "cache",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "device",
+      "mother": "0",
+      "dtr": "0",
+      "unchanged": true
+    },
+    {
+      "field": "workers",
+      "mother": 8,
+      "dtr": 8,
+      "unchanged": true
+    },
+    {
+      "field": "project",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+      "dtr": "/root/autodl-tmp/projects/Crack_RTDETR-dtr_v1/runs/c_series",
+      "unchanged": false
+    },
+    {
+      "field": "name",
+      "mother": "c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "dtr": "dtr_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "unchanged": false
+    },
+    {
+      "field": "exist_ok",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "pretrained",
+      "mother": true,
+      "dtr": true,
+      "unchanged": true
+    },
+    {
+      "field": "optimizer",
+      "mother": "AdamW",
+      "dtr": "AdamW",
+      "unchanged": true
+    },
+    {
+      "field": "verbose",
+      "mother": true,
+      "dtr": true,
+      "unchanged": true
+    },
+    {
+      "field": "seed",
+      "mother": 42,
+      "dtr": 42,
+      "unchanged": true
+    },
+    {
+      "field": "deterministic",
+      "mother": true,
+      "dtr": true,
+      "unchanged": true
+    },
+    {
+      "field": "single_cls",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "rect",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "cos_lr",
+      "mother": true,
+      "dtr": true,
+      "unchanged": true
+    },
+    {
+      "field": "close_mosaic",
+      "mother": 10,
+      "dtr": 10,
+      "unchanged": true
+    },
+    {
+      "field": "resume",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "amp",
+      "mother": true,
+      "dtr": true,
+      "unchanged": true
+    },
+    {
+      "field": "fraction",
+      "mother": 1.0,
+      "dtr": 1.0,
+      "unchanged": true
+    },
+    {
+      "field": "profile",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "freeze",
+      "mother": null,
+      "dtr": null,
+      "unchanged": true
+    },
+    {
+      "field": "multi_scale",
+      "mother": 0.0,
+      "dtr": 0.0,
+      "unchanged": true
+    },
+    {
+      "field": "compile",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "overlap_mask",
+      "mother": true,
+      "dtr": true,
+      "unchanged": true
+    },
+    {
+      "field": "mask_ratio",
+      "mother": 4,
+      "dtr": 4,
+      "unchanged": true
+    },
+    {
+      "field": "dropout",
+      "mother": 0.0,
+      "dtr": 0.0,
+      "unchanged": true
+    },
+    {
+      "field": "val",
+      "mother": true,
+      "dtr": true,
+      "unchanged": true
+    },
+    {
+      "field": "split",
+      "mother": "val",
+      "dtr": "val",
+      "unchanged": true
+    },
+    {
+      "field": "save_json",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "conf",
+      "mother": null,
+      "dtr": null,
+      "unchanged": true
+    },
+    {
+      "field": "iou",
+      "mother": 0.7,
+      "dtr": 0.7,
+      "unchanged": true
+    },
+    {
+      "field": "max_det",
+      "mother": 300,
+      "dtr": 300,
+      "unchanged": true
+    },
+    {
+      "field": "half",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "dnn",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "plots",
+      "mother": true,
+      "dtr": true,
+      "unchanged": true
+    },
+    {
+      "field": "end2end",
+      "mother": null,
+      "dtr": null,
+      "unchanged": true
+    },
+    {
+      "field": "source",
+      "mother": null,
+      "dtr": null,
+      "unchanged": true
+    },
+    {
+      "field": "vid_stride",
+      "mother": 1,
+      "dtr": 1,
+      "unchanged": true
+    },
+    {
+      "field": "stream_buffer",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "visualize",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "augment",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "agnostic_nms",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "classes",
+      "mother": null,
+      "dtr": null,
+      "unchanged": true
+    },
+    {
+      "field": "retina_masks",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "embed",
+      "mother": null,
+      "dtr": null,
+      "unchanged": true
+    },
+    {
+      "field": "show",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "save_frames",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "save_txt",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "save_conf",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "save_crop",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "show_labels",
+      "mother": true,
+      "dtr": true,
+      "unchanged": true
+    },
+    {
+      "field": "show_conf",
+      "mother": true,
+      "dtr": true,
+      "unchanged": true
+    },
+    {
+      "field": "show_boxes",
+      "mother": true,
+      "dtr": true,
+      "unchanged": true
+    },
+    {
+      "field": "line_width",
+      "mother": null,
+      "dtr": null,
+      "unchanged": true
+    },
+    {
+      "field": "format",
+      "mother": "torchscript",
+      "dtr": "torchscript",
+      "unchanged": true
+    },
+    {
+      "field": "keras",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "optimize",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "int8",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "dynamic",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "simplify",
+      "mother": true,
+      "dtr": true,
+      "unchanged": true
+    },
+    {
+      "field": "opset",
+      "mother": null,
+      "dtr": null,
+      "unchanged": true
+    },
+    {
+      "field": "workspace",
+      "mother": null,
+      "dtr": null,
+      "unchanged": true
+    },
+    {
+      "field": "nms",
+      "mother": false,
+      "dtr": false,
+      "unchanged": true
+    },
+    {
+      "field": "lr0",
+      "mother": 0.0005,
+      "dtr": 0.0005,
+      "unchanged": true
+    },
+    {
+      "field": "lrf",
+      "mother": 0.01,
+      "dtr": 0.01,
+      "unchanged": true
+    },
+    {
+      "field": "momentum",
+      "mother": 0.937,
+      "dtr": 0.937,
+      "unchanged": true
+    },
+    {
+      "field": "weight_decay",
+      "mother": 0.0001,
+      "dtr": 0.0001,
+      "unchanged": true
+    },
+    {
+      "field": "warmup_epochs",
+      "mother": 5,
+      "dtr": 5,
+      "unchanged": true
+    },
+    {
+      "field": "warmup_momentum",
+      "mother": 0.8,
+      "dtr": 0.8,
+      "unchanged": true
+    },
+    {
+      "field": "warmup_bias_lr",
+      "mother": 0.1,
+      "dtr": 0.1,
+      "unchanged": true
+    },
+    {
+      "field": "box",
+      "mother": 7.5,
+      "dtr": 7.5,
+      "unchanged": true
+    },
+    {
+      "field": "cls",
+      "mother": 0.5,
+      "dtr": 0.5,
+      "unchanged": true
+    },
+    {
+      "field": "dfl",
+      "mother": 1.5,
+      "dtr": 1.5,
+      "unchanged": true
+    },
+    {
+      "field": "pose",
+      "mother": 12.0,
+      "dtr": 12.0,
+      "unchanged": true
+    },
+    {
+      "field": "kobj",
+      "mother": 1.0,
+      "dtr": 1.0,
+      "unchanged": true
+    },
+    {
+      "field": "rle",
+      "mother": 1.0,
+      "dtr": 1.0,
+      "unchanged": true
+    },
+    {
+      "field": "angle",
+      "mother": 1.0,
+      "dtr": 1.0,
+      "unchanged": true
+    },
+    {
+      "field": "nbs",
+      "mother": 64,
+      "dtr": 64,
+      "unchanged": true
+    },
+    {
+      "field": "hsv_h",
+      "mother": 0.015,
+      "dtr": 0.015,
+      "unchanged": true
+    },
+    {
+      "field": "hsv_s",
+      "mother": 0.5,
+      "dtr": 0.5,
+      "unchanged": true
+    },
+    {
+      "field": "hsv_v",
+      "mother": 0.35,
+      "dtr": 0.35,
+      "unchanged": true
+    },
+    {
+      "field": "degrees",
+      "mother": 5,
+      "dtr": 5,
+      "unchanged": true
+    },
+    {
+      "field": "translate",
+      "mother": 0.1,
+      "dtr": 0.1,
+      "unchanged": true
+    },
+    {
+      "field": "scale",
+      "mother": 0.4,
+      "dtr": 0.4,
+      "unchanged": true
+    },
+    {
+      "field": "shear",
+      "mother": 1.5,
+      "dtr": 1.5,
+      "unchanged": true
+    },
+    {
+      "field": "perspective",
+      "mother": 0.0002,
+      "dtr": 0.0002,
+      "unchanged": true
+    },
+    {
+      "field": "flipud",
+      "mother": 0.2,
+      "dtr": 0.2,
+      "unchanged": true
+    },
+    {
+      "field": "fliplr",
+      "mother": 0.5,
+      "dtr": 0.5,
+      "unchanged": true
+    },
+    {
+      "field": "bgr",
+      "mother": 0.0,
+      "dtr": 0.0,
+      "unchanged": true
+    },
+    {
+      "field": "mosaic",
+      "mother": 0.8,
+      "dtr": 0.8,
+      "unchanged": true
+    },
+    {
+      "field": "mixup",
+      "mother": 0.05,
+      "dtr": 0.05,
+      "unchanged": true
+    },
+    {
+      "field": "cutmix",
+      "mother": 0,
+      "dtr": 0,
+      "unchanged": true
+    },
+    {
+      "field": "copy_paste",
+      "mother": 0,
+      "dtr": 0,
+      "unchanged": true
+    },
+    {
+      "field": "copy_paste_mode",
+      "mother": "flip",
+      "dtr": "flip",
+      "unchanged": true
+    },
+    {
+      "field": "auto_augment",
+      "mother": null,
+      "dtr": null,
+      "unchanged": true
+    },
+    {
+      "field": "erasing",
+      "mother": 0,
+      "dtr": 0,
+      "unchanged": true
+    },
+    {
+      "field": "cfg",
+      "mother": null,
+      "dtr": null,
+      "unchanged": true
+    },
+    {
+      "field": "tracker",
+      "mother": "botsort.yaml",
+      "dtr": "botsort.yaml",
+      "unchanged": true
+    },
+    {
+      "field": "save_dir",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "dtr": "/root/autodl-tmp/projects/Crack_RTDETR-dtr_v1/runs/c_series/dtr_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "unchanged": false
+    }
+  ],
+  "algorithm_only": {
+    "id": "DTR-v1-dnmedian-excess",
+    "enabled": true,
+    "lambda_dtr": 0.2,
+    "delta": 0.05,
+    "scale_floor_pixels": 1.0,
+    "ramp_start": 5,
+    "ramp_full": 20
+  },
+  "server_paths": "historical paths; prepare/sync fail explicitly if actual facts differ"
+}

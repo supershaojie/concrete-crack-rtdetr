@@ -1,0 +1,9 @@
+{
+  "id": "DTR-v1-dnmedian-excess",
+  "enabled": true,
+  "lambda_dtr": 0.2,
+  "delta": 0.05,
+  "scale_floor_pixels": 1.0,
+  "ramp_start": 5,
+  "ramp_full": 20
+}

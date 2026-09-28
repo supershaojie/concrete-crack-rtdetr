@@ -1,0 +1,46 @@
+{
+  "config": {
+    "path": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det",
+    "train": "images/train",
+    "val": "images/val",
+    "test": "images/test",
+    "names": {
+      "0": "crack"
+    }
+  },
+  "config_sha256": "5daaa65f29498570e743232ef3e62a407bc0f2a2e4e6b1f95fbec0bdf288cfc9",
+  "splits": {
+    "train": {
+      "images": 6048,
+      "boxes": 45573,
+      "content_sha256": "d85217afbfe5c481e84a46a1d8ef4f3d0baa2f5a0ad763b85a16d6bbcff2f331"
+    },
+    "val": {
+      "images": 1728,
+      "boxes": 12840,
+      "content_sha256": "371cbd0615a21c86192074f16ed64d3af82a692d98f9735cbd43e1327f0e70f2"
+    },
+    "test": {
+      "images": 864,
+      "boxes": 6663,
+      "content_sha256": "24f572485a7fce8962742c9aee3c29846e246a4cea666e0c14ae6f9521be1a3c"
+    }
+  },
+  "content_sha256": "0a876103059d3abc9b9dbedad9dbea0a7a1a3f38b19760dbab7c503fc61bb915",
+  "manifest_sha256": "6fd41d0769710f19be466c8ca5cf9cd006e9ad1b9d63d44ecf3813a2240d13ce",
+  "directory_stamps": {
+    "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\images\\train": 1782892582502937300,
+    "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\images\\val": 1782892593831440100,
+    "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\images\\test": 1782892585065346900,
+    "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\labels\\train": 1782892582504932200,
+    "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\labels\\val": 1782892593834430200,
+    "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\labels\\test": 1782892585066344400
+  },
+  "created": "2026-09-28T17:15:02.541231+00:00",
+  "reused": {
+    "identity": "D:\\MyProjects\\Crack_RTDETR-arg_v1\\outputs\\arg_v1\\local_inventory.json",
+    "manifest": "D:\\MyProjects\\Crack_RTDETR-arg_v1\\outputs\\arg_v1\\local_data_manifest.jsonl.gz",
+    "sha256": "e82a58dbbb9619dec3ce4b5699163ac67e4c773143b664fa63f673f6508b3a11"
+  },
+  "verification": "Confirmed immutable snapshot; no repeated content scan. In-place edits require explicit refresh."
+}
