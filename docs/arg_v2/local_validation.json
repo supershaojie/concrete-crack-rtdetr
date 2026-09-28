@@ -1,0 +1,425 @@
+{
+  "created_utc": "2026-09-28T07:38:10.959074+00:00",
+  "status": "LOCAL_CHECKS_PASS_SERVER_PENDING",
+  "formula": {
+    "version": "ARG-v2-q2",
+    "lambda_arg": 0.2,
+    "epsilon_w": 0.05,
+    "gamma_quality": 2.0,
+    "eps_num": 1e-07
+  },
+  "branch": "exp-rtdetr-r18-lite-arg-v2",
+  "code_commit": "5e7fde5e8393107a4f6c9df9d8282e81a7d03b62",
+  "tests_executed_before_code_commit": true,
+  "test_runtime_head": "ef9cb7e05e5557f7dd06c95cf2361998a284adc9",
+  "test_source_context": "v2 working tree based on ef9cb7e; committed after the recorded checks",
+  "code_commit_source_content_matches_current_files": true,
+  "source_lf_sha256": {
+    "docs/arg_v2/README.md": "d640c9ed23c374ce1500c22fe55411163b227f435c11e3bc74ba942fb3d2461e",
+    "docs/arg_v2/formal_args.yaml": "58c5f0a98a5da06858e64a861a4735b197c5ba2af6dcbb6b794d9eef2d0caa0f",
+    "docs/arg_v2/recipe_diff.json": "866e4f2c507a090c185f83031119471103b99f37f26b1594a3d8d6db4c731b40",
+    "tools/arg_v2.py": "7b577964f2f488015f74441cba7daa3712939ba9a186bbc3ae48c232f0fbce68",
+    "tools/arg_v2.sh": "2726ee6cda7f74d83739717bfd73d00e8c53dd8a86fa4fdbc8e054d798486f21",
+    "tools/arg_v2_common.py": "19706720500b4a135a243585e3e5688409fca4d46cfc141c213cd712a45a66b1",
+    "tools/arg_v2_evaluation.py": "409089153df269ec45704e17e2d4f61b91b28b11fdbcff68296d35215e8d58f1",
+    "tools/arg_v2_package.py": "eb42887005ff17482dfa518585b46b8fcf7c5953eb68f4eec098a7ba00ae754e",
+    "tools/arg_v2_preflight.py": "e1a6b64f0b4952b559d61c3acb0e218acae03d12d744d375b897d2e09e1d8b35",
+    "tools/check_arg_v2.py": "f60d9deb781ba47040b144936e18fdc56fc649cea4f866b7c4b14fa330c00130",
+    "tools/check_arg_v2_delivery.py": "b250693ddbd3d581e8723a56dcf80c171b4e91772a375d33db294567649986b7",
+    "tools/check_arg_v2_identity.py": "950b42d606220fde5ec0e93ca853622fd5a92a6d83546d8c36015e0c4ecbdef2",
+    "tools/check_arg_v2_lifecycle.py": "00224a0928d4fb84d0ed9d8eb043a1da23c55a67e5b72f80ea6a0d0db9240aaf",
+    "tools/check_arg_v2_ops.py": "85ff92a3b3463f6041bdbf29260a3f6765a45768ff6cd19dffee7518f3282043",
+    "tools/check_arg_v2_setup.py": "d81b7cb35a31ec6a891188600f592f84f75bb306646b9cdaf3fcaeb61ca435c0",
+    "tools/sync_arg_v2.sh": "b65878b1d142d33baa6589d777f54a552f74beaa6342f54c251ca0e082287915",
+    "ultralytics-main/ultralytics/models/rtdetr/arg_v2_loss.py": "6138491bf926b14022fc82c8fe1226cb2cd3cf969d1718de20eed7d3969fa0ef",
+    "ultralytics-main/ultralytics/models/rtdetr/arg_v2_model.py": "06bd299036ec652921d6a65c5cdf235b90df9a2b92907782c6173a26062c02b3",
+    "ultralytics-main/ultralytics/models/rtdetr/arg_v2_val.py": "f1dd6a18d9b08ac50aaf91a2081d33e98083b672192dbc761104ad04f065c53f"
+  },
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "C:\\Users\\o'v'o\\.codex\\worktrees\\arg-v2\\Crack_RTDETR\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "C:\\Users\\o'v'o\\.codex\\worktrees\\arg-v2\\Crack_RTDETR\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "ef9cb7e05e5557f7dd06c95cf2361998a284adc9",
+    "cbr_module": "C:\\Users\\o'v'o\\.codex\\worktrees\\arg-v2\\Crack_RTDETR\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    },
+    "criterion": "C:\\Users\\o'v'o\\.codex\\worktrees\\arg-v2\\Crack_RTDETR\\ultralytics-main\\ultralytics\\models\\rtdetr\\arg_v2_loss.py",
+    "gpu_bytes": 6442123264,
+    "formula": {
+      "version": "ARG-v2-q2",
+      "lambda_arg": 0.2,
+      "epsilon_w": 0.05,
+      "gamma_quality": 2.0,
+      "eps_num": 1e-07
+    }
+  },
+  "checks": {
+    "math": {
+      "status": "PASS",
+      "tests": 7
+    },
+    "routing": {
+      "status": "PASS",
+      "evidence": [
+        {
+          "dn": false,
+          "epoch": 0,
+          "calls": 4,
+          "keys": [
+            "loss_class",
+            "loss_bbox",
+            "loss_giou",
+            "loss_class_aux",
+            "loss_bbox_aux",
+            "loss_giou_aux",
+            "loss_class_dn",
+            "loss_bbox_dn",
+            "loss_giou_dn",
+            "loss_class_aux_dn",
+            "loss_bbox_aux_dn",
+            "loss_giou_aux_dn"
+          ]
+        },
+        {
+          "dn": false,
+          "epoch": 20,
+          "calls": 4,
+          "keys": [
+            "loss_class",
+            "loss_bbox",
+            "loss_giou",
+            "loss_class_aux",
+            "loss_bbox_aux",
+            "loss_giou_aux",
+            "loss_class_dn",
+            "loss_bbox_dn",
+            "loss_giou_dn",
+            "loss_class_aux_dn",
+            "loss_bbox_aux_dn",
+            "loss_giou_aux_dn",
+            "loss_arg"
+          ]
+        },
+        {
+          "dn": true,
+          "epoch": 0,
+          "calls": 4,
+          "keys": [
+            "loss_class",
+            "loss_bbox",
+            "loss_giou",
+            "loss_class_aux",
+            "loss_bbox_aux",
+            "loss_giou_aux",
+            "loss_class_dn",
+            "loss_bbox_dn",
+            "loss_giou_dn",
+            "loss_class_aux_dn",
+            "loss_bbox_aux_dn",
+            "loss_giou_aux_dn"
+          ]
+        },
+        {
+          "dn": true,
+          "epoch": 20,
+          "calls": 4,
+          "keys": [
+            "loss_class",
+            "loss_bbox",
+            "loss_giou",
+            "loss_class_aux",
+            "loss_bbox_aux",
+            "loss_giou_aux",
+            "loss_class_dn",
+            "loss_bbox_dn",
+            "loss_giou_dn",
+            "loss_class_aux_dn",
+            "loss_bbox_aux_dn",
+            "loss_giou_aux_dn",
+            "loss_arg"
+          ]
+        }
+      ]
+    },
+    "mother_and_model": {
+      "status": "PASS",
+      "shape": "synthetic B2/160 CPU; not formal B16 capacity",
+      "states": 552,
+      "parameters": 20149765,
+      "r0_loss": 227.7435760498047,
+      "r0_forward_exact": true,
+      "r0_gradients_exact": true,
+      "r0_native_optimizer_update_exact": true,
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+      "arg_only_gradients": {
+        "model.26.cbr.offset_out.weight": 0.0005668344674631953,
+        "model.26.cbr.query_proj.weight": 3.4151510135416174e-06,
+        "model.26.dec_bbox_head.2.layers.2.weight": 0.036552928388118744,
+        "model.19.cv1.conv.weight": 0.001694639795459807
+      },
+      "new_process_resume": {
+        "status": "PASS",
+        "epoch": 20,
+        "ramp": 1.0,
+        "optimizer_exact": true,
+        "ema_exact": true,
+        "scaler_exact": true,
+        "scaler_scope": "CPU disabled scaler; CUDA state tested by server preflight",
+        "validation_scope": "synthetic inference; real val pending server"
+      }
+    },
+    "data_identity": {
+      "status": "PASS",
+      "tests": 10,
+      "scope": "temporary YAML/image/label/JSON IO; actual prepare/inventory/binding; fixture source/runtime/recipe and git archive; no server or GPU"
+    },
+    "operations": {
+      "status": "PASS",
+      "tests": 6,
+      "scope": "mocked server control and gates; real temporary lock/package/hash IO; no server dispatch"
+    },
+    "delivery_lifecycle": {
+      "status": "PASS",
+      "tests": 10,
+      "scope": "synthetic evaluator/completed-run fixtures; real exporter, locks, archives, hashes and recovery IO; no formal val/test inference"
+    },
+    "local_real_fp32": {
+      "status": "PASS",
+      "scope": "local FP32 B1/640 real val; not formal B16 capacity or full val/test",
+      "mother_parity": {
+        "before_fuse_exact": true,
+        "after_fuse_exact": true,
+        "lif_bn_preserved": true,
+        "fusion_max_abs": 1.043081283569336e-07,
+        "fusion_atol": 2e-05,
+        "fusion_rtol": 0.0002
+      },
+      "real_val_images": 1,
+      "warmup": [
+        {
+          "shape": [
+            1,
+            3,
+            640,
+            640
+          ],
+          "finite": true,
+          "zero": true
+        }
+      ],
+      "checkpoint_sha256": "4b723dc04d84687faebd919086e8f86a34a4986fd963fa5fd45837b1423ec528",
+      "predictions_sha256": "d451daaffe5714b2e7af5d7db0f6936fa30c84dd65f96f4c83ef19de095880da"
+    },
+    "native_trainer_setup": {
+      "status": "PASS",
+      "scope": "local native setup only; B2/160/workers0 diagnostic overrides, not capacity",
+      "rebuild": {
+        "equal_states": 552,
+        "trainable": 20149765,
+        "native_reconstruction": true,
+        "formula": {
+          "version": "ARG-v2-q2",
+          "lambda_arg": 0.2,
+          "epsilon_w": 0.05,
+          "gamma_quality": 2.0,
+          "eps_num": 1e-07
+        }
+      },
+      "amp_check_passed": true,
+      "scaler": {
+        "scale": 65536.0,
+        "growth_factor": 2.0,
+        "backoff_factor": 0.5,
+        "growth_interval": 2000,
+        "_growth_tracker": 0
+      },
+      "accumulate": 32,
+      "diagnostic_overrides": {
+        "batch": 2,
+        "imgsz": 160,
+        "workers": 0
+      },
+      "optimizer_update_scope": "No optimizer update in this setup check"
+    },
+    "saved_data_manifest": {
+      "status": "PASS",
+      "scope": "Saved v1 inventory/manifest internally verified against v2 path mapping, config and expected split counts; raw dataset not rehashed",
+      "rows": 8640,
+      "record_sha256": "44e159545ed5355bb481fd2ccf90c4a5b99c72a3a4cc0eccfd51ef216f6ba006",
+      "manifest_sha256": "e82a58dbbb9619dec3ce4b5699163ac67e4c773143b664fa63f673f6508b3a11",
+      "raw_files_rehashed": false,
+      "splits": {
+        "train": {
+          "images": 6048,
+          "boxes": 45573,
+          "content_sha256": "d85217afbfe5c481e84a46a1d8ef4f3d0baa2f5a0ad763b85a16d6bbcff2f331"
+        },
+        "val": {
+          "images": 1728,
+          "boxes": 12840,
+          "content_sha256": "371cbd0615a21c86192074f16ed64d3af82a692d98f9735cbd43e1327f0e70f2"
+        },
+        "test": {
+          "images": 864,
+          "boxes": 6663,
+          "content_sha256": "24f572485a7fce8962742c9aee3c29846e246a4cea666e0c14ae6f9521be1a3c"
+        }
+      }
+    },
+    "static": {
+      "status": "PASS",
+      "python_files": 14,
+      "bash_scripts": 2,
+      "cli_help": [
+        "prepare",
+        "preflight",
+        "status",
+        "start",
+        "resume",
+        "val",
+        "test",
+        "finish",
+        "pack",
+        "recheck-data",
+        "probe"
+      ],
+      "recipe_fields": 109,
+      "only_new_v2_files": true,
+      "mother": {
+        "lif_down": {
+          "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+          "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+        },
+        "cbr": {
+          "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+          "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+        }
+      },
+      "diff_check": true,
+      "server_command_bash_blocks": 15,
+      "server_command_syntax": "PASS",
+      "code_commit": "5e7fde5e8393107a4f6c9df9d8282e81a7d03b62"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "outputs/arg_v2/local_checks/checks.json",
+      "bytes": 51188,
+      "sha256": "082e75484256679a4eeb2d4765db63081209191b5dcc073237af34a369bf7741"
+    },
+    {
+      "path": "outputs/arg_v2/local_checks/diagnostic_resume.reload.json",
+      "bytes": 285,
+      "sha256": "3f17a88e63550f53d6e0932dadf851a74620deb39d851fbbaed3b64d54200f30"
+    },
+    {
+      "path": "outputs/arg_v2/local_identity.json",
+      "bytes": 191,
+      "sha256": "89ca784d9765a7d05f58d85b84190ac12ce0621f73f82e52699acd78d70fe330"
+    },
+    {
+      "path": "outputs/arg_v2/local_ops.json",
+      "bytes": 145,
+      "sha256": "85c28d12e33c03a2c729c64063d02b902674c6f839d6af92bed80bca9903c183"
+    },
+    {
+      "path": "outputs/arg_v2/local_delivery.json",
+      "bytes": 186,
+      "sha256": "6adf8567c2202a59ae2884f75bd7e431ddbc99a464c8db26545a0dedc3a2df54"
+    },
+    {
+      "path": "outputs/arg_v2/local_lifecycle_alias/lifecycle.json",
+      "bytes": 4939,
+      "sha256": "d7b0cc5c260a62df39a4537823714bb8c8c7d9dbad1101b44381f745ba1c23b2"
+    },
+    {
+      "path": "outputs/arg_v2/local_setup.json",
+      "bytes": 5472,
+      "sha256": "136bee8ff0fe4bc6cc9b9a69ef1242b55346e87b790227a7b74b300a64533b86"
+    },
+    {
+      "path": "outputs/arg_v2/local_saved_data_verification.json",
+      "bytes": 1366,
+      "sha256": "e4bb4d39bac22899b354c34949091ff8698da6d9a55c08eb9ba0e8ad7bdb6e75"
+    },
+    {
+      "path": "outputs/arg_v2/local_static.json",
+      "bytes": 859,
+      "sha256": "eda19862e44387eb7dd46064b935e9e749eb3f08ed78c1e13b39ca368ea3db73"
+    }
+  ],
+  "preserved_initial_local_failure": {
+    "artifact": {
+      "path": "outputs/arg_v2/local_lifecycle/lifecycle.json",
+      "bytes": 3272,
+      "sha256": "6f728dca242a4c1307122f0ba9d5d8f820d5cc7783a44528f0ea20677d671649"
+    },
+    "status": "FAIL",
+    "error": "FileNotFoundError(2, 'No such file or directory')",
+    "resolution": "Same physical checkout exposed through D:/MyProjects/Crack_RTDETR-arg_v2 junction; upstream quote-filtering path issue; no public loader/model code change",
+    "successful_artifact": {
+      "path": "outputs/arg_v2/local_lifecycle_alias/lifecycle.json",
+      "bytes": 4939,
+      "sha256": "d7b0cc5c260a62df39a4537823714bb8c8c7d9dbad1101b44381f745ba1c23b2"
+    }
+  },
+  "server": {
+    "B16_640_AMP_capacity_effective_update": {
+      "status": "PENDING",
+      "reason": "Not run on server in this task"
+    },
+    "CUDA_scaler_and_overflow": {
+      "status": "PENDING",
+      "reason": "Not run on server in this task"
+    },
+    "new_process_real_FP32_val": {
+      "status": "PENDING",
+      "reason": "Not run on server in this task"
+    },
+    "CUDA_resume_optimizer_EMA_scaler": {
+      "status": "PENDING",
+      "reason": "Not run on server in this task"
+    },
+    "formal_training": {
+      "status": "PENDING",
+      "reason": "Not run on server in this task"
+    },
+    "full_val": {
+      "status": "PENDING",
+      "reason": "Not run on server in this task"
+    },
+    "full_test": {
+      "status": "PENDING",
+      "reason": "Not run on server in this task"
+    },
+    "training_overhead": {
+      "status": "PENDING",
+      "reason": "Not run on server in this task"
+    },
+    "accuracy_change": {
+      "status": "PENDING",
+      "reason": "Not run on server in this task"
+    }
+  },
+  "notes": [
+    "Saved dataset evidence was reused and internally verified; raw files were not rehashed locally.",
+    "CPU disabled scaler equality and local GPU B1 validation do not imply server B16 capacity or CUDA scaler resume.",
+    "Delivery lifecycle tests use a synthetic evaluator; they are not formal val/test inference.",
+    "No formal long training, full val, or test was started.",
+    "Primary and v1 worktrees were not edited."
+  ],
+  "delivery_recovery_test_base_commit": "37b0ee0693a2a657e3c9c60338be9441c472cea9",
+  "delivery_recovery_test_source_context": "Recovery patch working tree before the final code commit; 10 lifecycle tests passed after this patch."
+}
