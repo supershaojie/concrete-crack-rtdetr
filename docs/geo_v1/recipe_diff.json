@@ -1,0 +1,907 @@
+{
+  "fields": 109,
+  "authoritative": "docs/c19_lif_v1/c2_args.yaml",
+  "actual_archive_checked": false,
+  "changes": [
+    {
+      "field": "model",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+      "geo": "/root/autodl-tmp/projects/Crack_RTDETR-geo_v1/outputs/geo_v1/geo_v1_public_init.pt",
+      "reason": "experiment/path identity"
+    },
+    {
+      "field": "name",
+      "mother": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "geo": "geo_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "reason": "experiment/path identity"
+    },
+    {
+      "field": "save_dir",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "geo": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/geo_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "reason": "experiment/path identity"
+    }
+  ],
+  "unchanged": [
+    "task",
+    "mode",
+    "data",
+    "epochs",
+    "time",
+    "patience",
+    "batch",
+    "imgsz",
+    "save",
+    "save_period",
+    "cache",
+    "device",
+    "workers",
+    "project",
+    "exist_ok",
+    "pretrained",
+    "optimizer",
+    "verbose",
+    "seed",
+    "deterministic",
+    "single_cls",
+    "rect",
+    "cos_lr",
+    "close_mosaic",
+    "resume",
+    "amp",
+    "fraction",
+    "profile",
+    "freeze",
+    "multi_scale",
+    "compile",
+    "overlap_mask",
+    "mask_ratio",
+    "dropout",
+    "val",
+    "split",
+    "save_json",
+    "conf",
+    "iou",
+    "max_det",
+    "half",
+    "dnn",
+    "plots",
+    "end2end",
+    "source",
+    "vid_stride",
+    "stream_buffer",
+    "visualize",
+    "augment",
+    "agnostic_nms",
+    "classes",
+    "retina_masks",
+    "embed",
+    "show",
+    "save_frames",
+    "save_txt",
+    "save_conf",
+    "save_crop",
+    "show_labels",
+    "show_conf",
+    "show_boxes",
+    "line_width",
+    "format",
+    "keras",
+    "optimize",
+    "int8",
+    "dynamic",
+    "simplify",
+    "opset",
+    "workspace",
+    "nms",
+    "lr0",
+    "lrf",
+    "momentum",
+    "weight_decay",
+    "warmup_epochs",
+    "warmup_momentum",
+    "warmup_bias_lr",
+    "box",
+    "cls",
+    "dfl",
+    "pose",
+    "kobj",
+    "rle",
+    "angle",
+    "nbs",
+    "hsv_h",
+    "hsv_s",
+    "hsv_v",
+    "degrees",
+    "translate",
+    "scale",
+    "shear",
+    "perspective",
+    "flipud",
+    "fliplr",
+    "bgr",
+    "mosaic",
+    "mixup",
+    "cutmix",
+    "copy_paste",
+    "copy_paste_mode",
+    "auto_augment",
+    "erasing",
+    "cfg",
+    "tracker"
+  ],
+  "formula": {
+    "name": "GEO-v1-envelope-K3",
+    "enabled": true,
+    "lambda_geo": 0.2,
+    "topk": 3,
+    "eps_area": 1e-09,
+    "ramp_start": 5,
+    "ramp_full": 20
+  },
+  "comparison": [
+    {
+      "field": "task",
+      "mother": "detect",
+      "geo": "detect",
+      "unchanged": true,
+      "type": "str"
+    },
+    {
+      "field": "mode",
+      "mother": "train",
+      "geo": "train",
+      "unchanged": true,
+      "type": "str"
+    },
+    {
+      "field": "model",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+      "geo": "/root/autodl-tmp/projects/Crack_RTDETR-geo_v1/outputs/geo_v1/geo_v1_public_init.pt",
+      "unchanged": false,
+      "type": "str"
+    },
+    {
+      "field": "data",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+      "geo": "/root/autodl-tmp/projects/Crack_RTDETR/configs/crack_autodl.yaml",
+      "unchanged": true,
+      "type": "str"
+    },
+    {
+      "field": "epochs",
+      "mother": 200,
+      "geo": 200,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "time",
+      "mother": null,
+      "geo": null,
+      "unchanged": true,
+      "type": "NoneType"
+    },
+    {
+      "field": "patience",
+      "mother": 50,
+      "geo": 50,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "batch",
+      "mother": 16,
+      "geo": 16,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "imgsz",
+      "mother": 640,
+      "geo": 640,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "save",
+      "mother": true,
+      "geo": true,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "save_period",
+      "mother": -1,
+      "geo": -1,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "cache",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "device",
+      "mother": "0",
+      "geo": "0",
+      "unchanged": true,
+      "type": "str"
+    },
+    {
+      "field": "workers",
+      "mother": 8,
+      "geo": 8,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "project",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+      "geo": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+      "unchanged": true,
+      "type": "str"
+    },
+    {
+      "field": "name",
+      "mother": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "geo": "geo_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "unchanged": false,
+      "type": "str"
+    },
+    {
+      "field": "exist_ok",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "pretrained",
+      "mother": true,
+      "geo": true,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "optimizer",
+      "mother": "AdamW",
+      "geo": "AdamW",
+      "unchanged": true,
+      "type": "str"
+    },
+    {
+      "field": "verbose",
+      "mother": true,
+      "geo": true,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "seed",
+      "mother": 42,
+      "geo": 42,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "deterministic",
+      "mother": true,
+      "geo": true,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "single_cls",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "rect",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "cos_lr",
+      "mother": true,
+      "geo": true,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "close_mosaic",
+      "mother": 10,
+      "geo": 10,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "resume",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "amp",
+      "mother": true,
+      "geo": true,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "fraction",
+      "mother": 1.0,
+      "geo": 1.0,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "profile",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "freeze",
+      "mother": null,
+      "geo": null,
+      "unchanged": true,
+      "type": "NoneType"
+    },
+    {
+      "field": "multi_scale",
+      "mother": 0.0,
+      "geo": 0.0,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "compile",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "overlap_mask",
+      "mother": true,
+      "geo": true,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "mask_ratio",
+      "mother": 4,
+      "geo": 4,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "dropout",
+      "mother": 0.0,
+      "geo": 0.0,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "val",
+      "mother": true,
+      "geo": true,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "split",
+      "mother": "val",
+      "geo": "val",
+      "unchanged": true,
+      "type": "str"
+    },
+    {
+      "field": "save_json",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "conf",
+      "mother": null,
+      "geo": null,
+      "unchanged": true,
+      "type": "NoneType"
+    },
+    {
+      "field": "iou",
+      "mother": 0.7,
+      "geo": 0.7,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "max_det",
+      "mother": 300,
+      "geo": 300,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "half",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "dnn",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "plots",
+      "mother": true,
+      "geo": true,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "end2end",
+      "mother": null,
+      "geo": null,
+      "unchanged": true,
+      "type": "NoneType"
+    },
+    {
+      "field": "source",
+      "mother": null,
+      "geo": null,
+      "unchanged": true,
+      "type": "NoneType"
+    },
+    {
+      "field": "vid_stride",
+      "mother": 1,
+      "geo": 1,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "stream_buffer",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "visualize",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "augment",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "agnostic_nms",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "classes",
+      "mother": null,
+      "geo": null,
+      "unchanged": true,
+      "type": "NoneType"
+    },
+    {
+      "field": "retina_masks",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "embed",
+      "mother": null,
+      "geo": null,
+      "unchanged": true,
+      "type": "NoneType"
+    },
+    {
+      "field": "show",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "save_frames",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "save_txt",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "save_conf",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "save_crop",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "show_labels",
+      "mother": true,
+      "geo": true,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "show_conf",
+      "mother": true,
+      "geo": true,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "show_boxes",
+      "mother": true,
+      "geo": true,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "line_width",
+      "mother": null,
+      "geo": null,
+      "unchanged": true,
+      "type": "NoneType"
+    },
+    {
+      "field": "format",
+      "mother": "torchscript",
+      "geo": "torchscript",
+      "unchanged": true,
+      "type": "str"
+    },
+    {
+      "field": "keras",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "optimize",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "int8",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "dynamic",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "simplify",
+      "mother": true,
+      "geo": true,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "opset",
+      "mother": null,
+      "geo": null,
+      "unchanged": true,
+      "type": "NoneType"
+    },
+    {
+      "field": "workspace",
+      "mother": null,
+      "geo": null,
+      "unchanged": true,
+      "type": "NoneType"
+    },
+    {
+      "field": "nms",
+      "mother": false,
+      "geo": false,
+      "unchanged": true,
+      "type": "bool"
+    },
+    {
+      "field": "lr0",
+      "mother": 0.0005,
+      "geo": 0.0005,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "lrf",
+      "mother": 0.01,
+      "geo": 0.01,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "momentum",
+      "mother": 0.937,
+      "geo": 0.937,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "weight_decay",
+      "mother": 0.0001,
+      "geo": 0.0001,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "warmup_epochs",
+      "mother": 5,
+      "geo": 5,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "warmup_momentum",
+      "mother": 0.8,
+      "geo": 0.8,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "warmup_bias_lr",
+      "mother": 0.1,
+      "geo": 0.1,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "box",
+      "mother": 7.5,
+      "geo": 7.5,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "cls",
+      "mother": 0.5,
+      "geo": 0.5,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "dfl",
+      "mother": 1.5,
+      "geo": 1.5,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "pose",
+      "mother": 12.0,
+      "geo": 12.0,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "kobj",
+      "mother": 1.0,
+      "geo": 1.0,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "rle",
+      "mother": 1.0,
+      "geo": 1.0,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "angle",
+      "mother": 1.0,
+      "geo": 1.0,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "nbs",
+      "mother": 64,
+      "geo": 64,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "hsv_h",
+      "mother": 0.015,
+      "geo": 0.015,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "hsv_s",
+      "mother": 0.5,
+      "geo": 0.5,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "hsv_v",
+      "mother": 0.35,
+      "geo": 0.35,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "degrees",
+      "mother": 5,
+      "geo": 5,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "translate",
+      "mother": 0.1,
+      "geo": 0.1,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "scale",
+      "mother": 0.4,
+      "geo": 0.4,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "shear",
+      "mother": 1.5,
+      "geo": 1.5,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "perspective",
+      "mother": 0.0002,
+      "geo": 0.0002,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "flipud",
+      "mother": 0.2,
+      "geo": 0.2,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "fliplr",
+      "mother": 0.5,
+      "geo": 0.5,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "bgr",
+      "mother": 0.0,
+      "geo": 0.0,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "mosaic",
+      "mother": 0.8,
+      "geo": 0.8,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "mixup",
+      "mother": 0.05,
+      "geo": 0.05,
+      "unchanged": true,
+      "type": "float"
+    },
+    {
+      "field": "cutmix",
+      "mother": 0,
+      "geo": 0,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "copy_paste",
+      "mother": 0,
+      "geo": 0,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "copy_paste_mode",
+      "mother": "flip",
+      "geo": "flip",
+      "unchanged": true,
+      "type": "str"
+    },
+    {
+      "field": "auto_augment",
+      "mother": null,
+      "geo": null,
+      "unchanged": true,
+      "type": "NoneType"
+    },
+    {
+      "field": "erasing",
+      "mother": 0,
+      "geo": 0,
+      "unchanged": true,
+      "type": "int"
+    },
+    {
+      "field": "cfg",
+      "mother": null,
+      "geo": null,
+      "unchanged": true,
+      "type": "NoneType"
+    },
+    {
+      "field": "tracker",
+      "mother": "botsort.yaml",
+      "geo": "botsort.yaml",
+      "unchanged": true,
+      "type": "str"
+    },
+    {
+      "field": "save_dir",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "geo": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/geo_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "unchanged": false,
+      "type": "str"
+    }
+  ]
+}

@@ -1,0 +1,658 @@
+{
+  "status": "PASS for listed local scopes; server/full-training scopes PENDING",
+  "created": "2026-09-28T17:28:09.422467+00:00",
+  "code_note": "Checks ran on the uncommitted implementation based at a0459d6. These LF hashes identify the final delivered sources; commit identity is recorded separately after commit.",
+  "source_lf_sha256": {
+    "tools/check_geo_v1.py": "527fbbc16f70aea6149f192a98c97f1d3d6b6b7a442f2822ab7d1575af3d6ae0",
+    "tools/check_geo_v1_ops.py": "73be86487c3fff0698d724bce95204713e481d34c45a9938d117b57b6c5f306e",
+    "tools/geo_v1.py": "f33ff28527e1fce98b932df8754ddfcda3747c5dbb05f2fbbbde098267421872",
+    "tools/geo_v1.sh": "7e7a147bb8c51276f2f4fb2ac795fc9d6a4e40330d65058cb1af9b0ffa95c166",
+    "tools/geo_v1_common.py": "5217c1ee1a504ddb03e69ffba64ded299feb133d268df5da0aa83601bb4aec0a",
+    "tools/geo_v1_preflight.py": "ddf5bf3306a2f7125e00ab4df9e390ea2061d901e3b35e6a3a9a1a8677a0e4c8",
+    "tools/geo_v1_results.py": "c5ba22a0f172ec99e8fa0edd37ff8075229cfceb171600585c49366ba805dcfc",
+    "tools/sync_geo_v1.sh": "9025078d49d0a6a9e5209dca002980ceefbe3311b931f061bc98253db2a0988c",
+    "ultralytics-main/ultralytics/models/rtdetr/geo_loss.py": "9a43a2f4917c1b58f09c3399fa6b89bc1d8caa11f43c316f3d761ee20d087149",
+    "ultralytics-main/ultralytics/models/rtdetr/geo_model.py": "89c5ec36ca5e042c3393e362599643bbab24b2aeb0e7807d6676b42975867ac1",
+    "ultralytics-main/ultralytics/models/rtdetr/geo_val.py": "1ec94f4286d136ccd4bf1c5900cd6e6aa2796224dadd7d680e5beb7b840f56de",
+    "ultralytics-main/ultralytics/nn/autobackend.py": "1879db86b5b9b3346426e48411d86d2196319984057ffa637ddc0cf45be78230",
+    "ultralytics-main/ultralytics/utils/downloads.py": "8d1e79b45e1755b020f35b39e0a8406a722930a899158d1da5d2027129365194"
+  },
+  "runtime": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "torch": "2.7.1+cu118",
+    "cuda": "11.8",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "ultralytics": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\__init__.py",
+    "lif_down_module": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "cbr_module": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    },
+    "packages": {
+      "numpy": "2.0.2",
+      "torchvision": "0.22.1+cu118",
+      "opencv-python": "4.13.0.92",
+      "scipy": "1.13.1",
+      "albumentations": null
+    },
+    "criterion": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\models\\rtdetr\\geo_loss.py",
+    "model": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\models\\rtdetr\\geo_model.py",
+    "trainer": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\models\\rtdetr\\geo_model.py",
+    "validator": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\models\\rtdetr\\geo_val.py",
+    "gpu_bytes": 6442123264,
+    "formula": {
+      "name": "GEO-v1-envelope-K3",
+      "enabled": true,
+      "lambda_geo": 0.2,
+      "topk": 3,
+      "eps_area": 1e-09,
+      "ramp_start": 5,
+      "ramp_full": 20
+    },
+    "ddp": "UNVERIFIED"
+  },
+  "math": {
+    "status": "PASS",
+    "math_tests": 9,
+    "torch": "2.7.1+cu118",
+    "python": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "criterion": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\models\\rtdetr\\geo_loss.py"
+  },
+  "model": {
+    "status": "PASS",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    },
+    "parameters": 20149765,
+    "states": 552,
+    "fused_parameters": 19944965,
+    "rng_exact": true,
+    "disabled_and_zero": [
+      {
+        "enabled": false,
+        "epoch": 20,
+        "loss": 100.22745513916016,
+        "forward_loss_gradients_exact": true
+      },
+      {
+        "enabled": true,
+        "epoch": 5,
+        "loss": 100.52986145019531,
+        "forward_loss_gradients_exact": true
+      }
+    ],
+    "inference_exact": true,
+    "fused_inference_exact": true,
+    "optimized_total_contains_geo": true,
+    "checkpoint": "outputs\\geo_v1\\final_core_checks_v2\\model_checkpoint.pt",
+    "scope": "CPU B2/160 native reconstruction and real random-DN forward, synthetic images; not server B16"
+  },
+  "checkpoint_fresh_process": {
+    "status": "PASS",
+    "model": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\models\\rtdetr\\geo_model.py",
+    "criterion": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\models\\rtdetr\\geo_loss.py"
+  },
+  "operations": {
+    "status": "PASS",
+    "tests": 8,
+    "scope": "Temporary evidence fixtures, no server training or full val/test"
+  },
+  "help": {
+    "status": "PASS",
+    "commands": [
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\tools\\geo_v1.py",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "usage: geo_v1.py [-h]\n                 {prepare,status,start,resume,val,test,finish,pack,preflight,_preflight,_worker}\n                 ...\n\nGEO v1 explicit lifecycle:\nprepare/preflight/status/start/resume/val/test/finish/pack.\n\npositional arguments:\n  {prepare,status,start,resume,val,test,finish,pack,preflight,_preflight,_worker}\n\noptional arguments:\n  -h, --help            show this help message and exit\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\tools\\geo_v1.py",
+          "prepare",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "usage: geo_v1.py prepare [-h] [--refresh-data]\n\noptional arguments:\n  -h, --help      show this help message and exit\n  --refresh-data  Explicitly rescan changed data before any dispatch\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\tools\\geo_v1.py",
+          "preflight",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "usage: geo_v1.py preflight [-h] [--seconds SECONDS]\n                           [--micro-batches MICRO_BATCHES]\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --seconds SECONDS\n  --micro-batches MICRO_BATCHES\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\tools\\geo_v1.py",
+          "status",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "usage: geo_v1.py status [-h]\n\noptional arguments:\n  -h, --help  show this help message and exit\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\tools\\geo_v1.py",
+          "start",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "usage: geo_v1.py start [-h]\n\noptional arguments:\n  -h, --help  show this help message and exit\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\tools\\geo_v1.py",
+          "resume",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "usage: geo_v1.py resume [-h]\n\noptional arguments:\n  -h, --help  show this help message and exit\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\tools\\geo_v1.py",
+          "val",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "usage: geo_v1.py val [-h]\n\noptional arguments:\n  -h, --help  show this help message and exit\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\tools\\geo_v1.py",
+          "test",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "usage: geo_v1.py test [-h]\n\noptional arguments:\n  -h, --help  show this help message and exit\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\tools\\geo_v1.py",
+          "finish",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "usage: geo_v1.py finish [-h]\n\noptional arguments:\n  -h, --help  show this help message and exit\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\tools\\geo_v1.py",
+          "pack",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "usage: geo_v1.py pack [-h]\n\noptional arguments:\n  -h, --help  show this help message and exit\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\tools\\geo_v1.py",
+          "_preflight",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "usage: geo_v1.py _preflight [-h] [--seconds SECONDS]\n                            [--micro-batches MICRO_BATCHES]\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --seconds SECONDS\n  --micro-batches MICRO_BATCHES\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\tools\\geo_v1.py",
+          "_worker",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "usage: geo_v1.py _worker [-h] --dispatch DISPATCH\n\noptional arguments:\n  -h, --help           show this help message and exit\n  --dispatch DISPATCH\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\tools\\check_geo_v1.py",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "usage: check_geo_v1.py [-h] [--math-only] [--source SOURCE] [--output OUTPUT]\n                       [--reload RELOAD]\n\nExecutable CPU mathematical and native model/routing checks; no formal\ntraining/test.\n\noptional arguments:\n  -h, --help       show this help message and exit\n  --math-only\n  --source SOURCE\n  --output OUTPUT\n  --reload RELOAD\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\tools\\geo_v1_preflight.py",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "usage: geo_v1_preflight.py [-h] --folder FOLDER [--reload RELOAD] [--local]\n\nBounded native lifecycle check. Never starts the formal run or full val/test.\n\noptional arguments:\n  -h, --help       show this help message and exit\n  --folder FOLDER\n  --reload RELOAD\n  --local          Explicit local B2/160 CPU lifecycle only; cannot qualify\n                   formal start\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\tools\\check_geo_v1_ops.py",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "usage: check_geo_v1_ops.py [-h] [--output OUTPUT] [--skip-help]\n\nLifecycle regression checks with temporary evidence; never starts formal\ntraining/test.\n\noptional arguments:\n  -h, --help       show this help message and exit\n  --output OUTPUT\n  --skip-help\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:/Program Files/Git/bin/bash.exe",
+          "tools/geo_v1.sh",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "Usage: bash geo_v1.sh {prepare|preflight|status|start|resume|val|test|finish|pack} [options]\nSubcommand help: bash geo_v1.sh preflight --help (fixed server Python required)\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:/Program Files/Git/bin/bash.exe",
+          "-n",
+          "tools/geo_v1.sh"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:/Program Files/Git/bin/bash.exe",
+          "tools/sync_geo_v1.sh",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout": "Usage: bash sync_geo_v1.sh FULL_40_CHARACTER_SHA\nSafely create/reuse the fixed GEO worktree after a bounded git fetch.\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:/Program Files/Git/bin/bash.exe",
+          "-n",
+          "tools/sync_geo_v1.sh"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    ]
+  },
+  "native_lifecycle": {
+    "status": "PASS",
+    "scope": "LOCAL B2/160 CPU, no formal capacity claim",
+    "micro_batches": 1,
+    "updates": [
+      {
+        "scale_before": 1.0,
+        "scale_after": 1.0,
+        "skipped": false,
+        "updates": 1,
+        "cbr_parameter_changed": true,
+        "gradients": {
+          "present": 345,
+          "finite": true,
+          "max_abs": 7.662097454071045
+        }
+      }
+    ],
+    "checks": {
+      "cuda_b16_amp": {
+        "status": "PENDING"
+      },
+      "native_scale": {
+        "status": "PASS",
+        "updates": 1,
+        "note": "Original GradScaler only; no lower-scale fallback or retry extension"
+      },
+      "mechanism": {
+        "status": "PASS",
+        "ramp": 1.0,
+        "note": "Real augmented batch, finite GEO; zero activation is valid and not a training gate"
+      },
+      "resume": {
+        "status": "PASS",
+        "epoch": 20,
+        "ramp": 1,
+        "optimizer": true,
+        "ema": true,
+        "scaler": {},
+        "scheduler_last_epoch": 19,
+        "checkpoint_sha256": "224df589435ae528bb5ec66ffde17aadbdedbf2214eee2210647b431e007ddf9",
+        "scope": "local CPU diagnostic"
+      },
+      "new_process_val": {
+        "status": "PASS",
+        "warmup": [
+          {
+            "shape": [
+              1,
+              3,
+              640,
+              640
+            ],
+            "finite": true,
+            "zero": true,
+            "dtype": "torch.float32"
+          }
+        ],
+        "images": 1,
+        "actual_settings": {
+          "task": "detect",
+          "mode": "val",
+          "model": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\outputs\\geo_v1\\local_native\\diagnostic_train\\weights\\last.pt",
+          "data": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\outputs\\geo_v1\\local_data.yaml",
+          "epochs": 100,
+          "time": null,
+          "patience": 100,
+          "batch": 1,
+          "imgsz": 640,
+          "save": true,
+          "save_period": -1,
+          "cache": false,
+          "device": "0",
+          "workers": 0,
+          "project": null,
+          "name": null,
+          "exist_ok": false,
+          "pretrained": true,
+          "optimizer": "auto",
+          "verbose": true,
+          "seed": 42,
+          "deterministic": true,
+          "single_cls": false,
+          "rect": false,
+          "cos_lr": false,
+          "close_mosaic": 10,
+          "resume": false,
+          "amp": true,
+          "fraction": 1.0,
+          "profile": false,
+          "freeze": null,
+          "multi_scale": 0.0,
+          "compile": false,
+          "overlap_mask": true,
+          "mask_ratio": 4,
+          "dropout": 0.0,
+          "val": true,
+          "split": "val",
+          "save_json": false,
+          "conf": 0.001,
+          "iou": 0.7,
+          "max_det": 300,
+          "half": false,
+          "dnn": false,
+          "plots": false,
+          "end2end": null,
+          "source": null,
+          "vid_stride": 1,
+          "stream_buffer": false,
+          "visualize": false,
+          "augment": false,
+          "agnostic_nms": false,
+          "classes": null,
+          "retina_masks": false,
+          "embed": null,
+          "show": false,
+          "save_frames": false,
+          "save_txt": false,
+          "save_conf": false,
+          "save_crop": false,
+          "show_labels": true,
+          "show_conf": true,
+          "show_boxes": true,
+          "line_width": null,
+          "format": "torchscript",
+          "keras": false,
+          "optimize": false,
+          "int8": false,
+          "dynamic": false,
+          "simplify": true,
+          "opset": null,
+          "workspace": null,
+          "nms": false,
+          "lr0": 0.01,
+          "lrf": 0.01,
+          "momentum": 0.937,
+          "weight_decay": 0.0005,
+          "warmup_epochs": 3.0,
+          "warmup_momentum": 0.8,
+          "warmup_bias_lr": 0.1,
+          "box": 7.5,
+          "cls": 0.5,
+          "dfl": 1.5,
+          "pose": 12.0,
+          "kobj": 1.0,
+          "rle": 1.0,
+          "angle": 1.0,
+          "nbs": 64,
+          "hsv_h": 0.015,
+          "hsv_s": 0.7,
+          "hsv_v": 0.4,
+          "degrees": 0.0,
+          "translate": 0.1,
+          "scale": 0.5,
+          "shear": 0.0,
+          "perspective": 0.0,
+          "flipud": 0.0,
+          "fliplr": 0.5,
+          "bgr": 0.0,
+          "mosaic": 1.0,
+          "mixup": 0.0,
+          "cutmix": 0.0,
+          "copy_paste": 0.0,
+          "copy_paste_mode": "flip",
+          "auto_augment": "randaugment",
+          "erasing": 0.4,
+          "cfg": null,
+          "tracker": "botsort.yaml"
+        },
+        "metrics": {
+          "metrics/precision(B)": 0.0,
+          "metrics/recall(B)": 0.0,
+          "metrics/mAP50(B)": 0.0,
+          "metrics/mAP50-95(B)": 0.0,
+          "fitness": 0.0
+        },
+        "export": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\outputs\\geo_v1\\local_native\\one_real_val_batch\\val_predictions_gt.jsonl.gz",
+        "runtime": {
+          "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+          "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "torch": "2.7.1+cu118",
+          "cuda": "11.8",
+          "gpu": "NVIDIA GeForce RTX 2060",
+          "ultralytics": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\__init__.py",
+          "lif_down_module": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+          "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+          "cbr_module": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+          "module_hashes": {
+            "lif_down": {
+              "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+              "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+            },
+            "cbr": {
+              "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+              "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+            }
+          },
+          "criterion": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\models\\rtdetr\\geo_loss.py",
+          "model": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\models\\rtdetr\\geo_model.py",
+          "trainer": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\models\\rtdetr\\geo_model.py",
+          "validator": "C:\\Users\\o'v'o\\.codex\\worktrees\\geo-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\models\\rtdetr\\geo_val.py",
+          "gpu_bytes": 6442123264,
+          "formula": {
+            "name": "GEO-v1-envelope-K3",
+            "enabled": true,
+            "lambda_geo": 0.2,
+            "topk": 3,
+            "eps_area": 1e-09,
+            "ramp_start": 5,
+            "ramp_full": 20
+          },
+          "ddp": "UNVERIFIED"
+        },
+        "scope": "one real B1/640 FP32 val batch, not full val/test"
+      }
+    },
+    "elapsed_seconds": 23.405999999988126,
+    "diagnostics": {
+      "M": 12,
+      "images": 2,
+      "gt_count": 12,
+      "neighbor_count": 62,
+      "selected_count": 36,
+      "outside_edges": 25,
+      "active_matches_1e8": 8,
+      "active_matches_001": 3,
+      "E_sum": 0.31975536048412323,
+      "E_count": 62,
+      "E_max": 0.13006475567817688,
+      "gt_with_overlap": 8,
+      "match_mean_sum": 0.10658512264490128,
+      "per_image": [
+        {
+          "gt": 5,
+          "M": 5,
+          "neighbors": 4,
+          "m_i": 3
+        },
+        {
+          "gt": 7,
+          "M": 7,
+          "neighbors": 6,
+          "m_i": 3
+        }
+      ],
+      "raw_geo": 0.008882093243300915,
+      "finite": true,
+      "epoch_zero": 20,
+      "epoch_display": 21,
+      "ramp": 1.0,
+      "weighted": 0.001776418648660183,
+      "original_losses": {
+        "loss_class": 2.738527536392212,
+        "loss_bbox": 0.9477226138114929,
+        "loss_giou": 1.7117053270339966,
+        "loss_class_aux": 14.49443531036377,
+        "loss_bbox_aux": 2.7639341354370117,
+        "loss_giou_aux": 5.047966957092285,
+        "loss_class_dn": 0.3795211613178253,
+        "loss_bbox_dn": 0.5612491965293884,
+        "loss_giou_dn": 1.3504923582077026,
+        "loss_class_aux_dn": 0.8026745319366455,
+        "loss_bbox_aux_dn": 1.1224983930587769,
+        "loss_giou_aux_dn": 2.7009847164154053
+      }
+    }
+  },
+  "public_initialization": {
+    "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+    "init_sha256": "e54d0c12d4f4757887305217747f1e53a2168b7e31a1272929efe4f3d97b5c72",
+    "source_nc": 80,
+    "trainer_nc": 1,
+    "exact_loaded_tensors": 543,
+    "class_adaptation_tensors": 9
+  },
+  "data_snapshot": {
+    "data": {
+      "splits": {
+        "train": {
+          "images": 6048,
+          "boxes": 45573,
+          "content_sha256": "d85217afbfe5c481e84a46a1d8ef4f3d0baa2f5a0ad763b85a16d6bbcff2f331"
+        },
+        "val": {
+          "images": 1728,
+          "boxes": 12840,
+          "content_sha256": "371cbd0615a21c86192074f16ed64d3af82a692d98f9735cbd43e1327f0e70f2"
+        },
+        "test": {
+          "images": 864,
+          "boxes": 6663,
+          "content_sha256": "24f572485a7fce8962742c9aee3c29846e246a4cea666e0c14ae6f9521be1a3c"
+        }
+      },
+      "content_sha256": "0a876103059d3abc9b9dbedad9dbea0a7a1a3f38b19760dbab7c503fc61bb915",
+      "config_sha256": "5daaa65f29498570e743232ef3e62a407bc0f2a2e4e6b1f95fbec0bdf288cfc9",
+      "config": {
+        "path": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det",
+        "train": "images/train",
+        "val": "images/val",
+        "test": "images/test",
+        "names": {
+          "0": "crack"
+        }
+      }
+    },
+    "manifest_sha256": "e82a58dbbb9619dec3ce4b5699163ac67e4c773143b664fa63f673f6508b3a11",
+    "origin": {
+      "record": "D:\\MyProjects\\Crack_RTDETR-arg_v1\\outputs\\arg_v1\\local_inventory.json",
+      "record_sha256": "44e159545ed5355bb481fd2ccf90c4a5b99c72a3a4cc0eccfd51ef216f6ba006",
+      "manifest": "D:\\MyProjects\\Crack_RTDETR-arg_v1\\outputs\\arg_v1\\local_data_manifest.jsonl.gz",
+      "method": "reuse confirmed snapshot; no raw images/labels reread"
+    },
+    "no_raw_rescan": true,
+    "assumption": "Dataset immutable after confirmed snapshot; in-place edits require prepare --refresh-data before dispatch"
+  },
+  "pending": [
+    "Linux Py3.10/torch2.1.2+cu121 B16/640 native AMP/GradScaler effective update within 16 micro-batches/900s",
+    "server tmux dispatch and real full-run resume",
+    "200-epoch/patience50 experiment and AP effects",
+    "full formal FP32 val/test and complete result package on trained best",
+    "DDP"
+  ],
+  "local_diagnostic_failures_resolved": [
+    "Test harness needed nc=1 attribute normally set by native Trainer.set_model_attributes.",
+    "CPU multithread embedding reduction was not bitwise deterministic; strict native parity uses one CPU thread.",
+    "Existing loader removed apostrophes from absolute Windows paths; fixed existing-file resolution and revalidated new-process native resume/val.",
+    "Synthetic AMP fixture initially incorrectly made original matcher GT require gradients; fixed to real-batch detached GT; independent GEO geometry still tests GT detachment.",
+    "Git Bash fresh-help harness required relative script paths on Windows; all CLI fresh-process checks then passed."
+  ],
+  "git_transport": {
+    "origin": "https://github.com/supershaojie/concrete-crack-rtdetr.git",
+    "https": "Two bounded ls-remote attempts failed: Recv failure: Connection was reset.",
+    "ssh": "Verified GitHub ED25519 fingerprint using official docs, strict host checking with task-local known_hosts; authentication denied (publickey).",
+    "fingerprint_source": "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints"
+  }
+}

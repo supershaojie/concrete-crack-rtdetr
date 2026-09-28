@@ -452,6 +452,9 @@ def attempt_download_asset(
     # YOLOv3/5u updates
     file = str(file)
     file = checks.check_yolov5u_filename(file)
+    # Preserve literal apostrophes in existing local paths (e.g. Windows user names).
+    if Path(file.strip()).is_file():
+        return file.strip()
     file = Path(file.strip().replace("'", ""))
     if file.exists():
         return str(file)
