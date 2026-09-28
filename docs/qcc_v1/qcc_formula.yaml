@@ -1,0 +1,6 @@
+id: QCC-v1-capK3
+enabled: true
+lambda_qcc: 0.1
+topk: 3
+ramp_start: 5
+ramp_full: 20

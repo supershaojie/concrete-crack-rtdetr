@@ -1,0 +1,309 @@
+{
+  "status": "PASS_WITH_SERVER_PENDING",
+  "observed_date": "2026-09-28",
+  "base": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "branch": "exp-rtdetr-r18-lite-qcc-v1",
+  "formula": {
+    "status": "PASS",
+    "tests": 11
+  },
+  "model": {
+    "status": "PASS",
+    "rebuild": {
+      "equal_states": 552,
+      "parameters": 20149765,
+      "native_reconstruction": true,
+      "formula": {
+        "id": "QCC-v1-capK3",
+        "enabled": true,
+        "lambda_qcc": 0.1,
+        "topk": 3,
+        "ramp_start": 5,
+        "ramp_full": 20
+      }
+    },
+    "real_forward": "B2/160 CPU, restored RNG; exact original loss and all parameter gradients",
+    "cbr_final_routing": true,
+    "state_keys": 552,
+    "native_optimizer_step_equal": true,
+    "inference_equal": true,
+    "export_mode_equal": true,
+    "formal_capacity": "PENDING"
+  },
+  "lifecycle": {
+    "status": "PASS",
+    "runtime": {
+      "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+      "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+      "torch": "2.7.1+cu118",
+      "cuda": "11.8",
+      "gpu": "NVIDIA GeForce RTX 2060",
+      "ultralytics": "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\__init__.py",
+      "lif_down_module": "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+      "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+      "cbr_module": "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+      "module_hashes": {
+        "lif_down": {
+          "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+          "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+        },
+        "cbr": {
+          "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+          "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+        }
+      },
+      "criterion": "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\models\\rtdetr\\qcc_loss.py",
+      "gpu_bytes": 6442123264,
+      "formula": {
+        "id": "QCC-v1-capK3",
+        "enabled": true,
+        "lambda_qcc": 0.1,
+        "topk": 3,
+        "ramp_start": 5,
+        "ramp_full": 20
+      }
+    },
+    "checkpoint_sha256": "79e995c0a2ac1814feeaaa2fb323d40172c0a3a96c35301f8f0a6d2cf423f2e5",
+    "scope": "new-process native CPU optimizer/EMA resume (disabled scaler), GPU finite FP32 warmup and one real B1/640 val; NOT formal B16 or full val/test",
+    "resume": {
+      "status": "PASS",
+      "start_epoch": 20,
+      "optimizer_exact": true,
+      "ema_exact": true,
+      "scaler": "CPU disabled exact; CUDA PENDING"
+    },
+    "warmup": [
+      {
+        "shape": [
+          1,
+          3,
+          640,
+          640
+        ],
+        "finite": true,
+        "zero": true,
+        "dtype": "torch.float32"
+      }
+    ],
+    "real_val_images": 1,
+    "metrics": {
+      "metrics/precision(B)": 0.0,
+      "metrics/recall(B)": 0.0,
+      "metrics/mAP50(B)": 0.0,
+      "metrics/mAP50-95(B)": 0.0,
+      "fitness": 0.0
+    },
+    "export_sha256": "f8c240ced16cc3bcb72c73d2f81670864060b8d233e637c873bf1ee5a80c7360",
+    "actual_settings": {
+      "task": "detect",
+      "mode": "val",
+      "model": "D:\\MyProjects\\Crack_RTDETR\\outputs\\qcc_v1_local\\checks\\native_save\\last.pt",
+      "data": "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\outputs\\qcc_v1\\local_data.yaml",
+      "epochs": 100,
+      "time": null,
+      "patience": 100,
+      "batch": 1,
+      "imgsz": 640,
+      "save": true,
+      "save_period": -1,
+      "cache": false,
+      "device": "cuda:0",
+      "workers": 0,
+      "project": null,
+      "name": null,
+      "exist_ok": false,
+      "pretrained": true,
+      "optimizer": "auto",
+      "verbose": true,
+      "seed": 42,
+      "deterministic": true,
+      "single_cls": false,
+      "rect": false,
+      "cos_lr": false,
+      "close_mosaic": 10,
+      "resume": false,
+      "amp": true,
+      "fraction": 1.0,
+      "profile": false,
+      "freeze": null,
+      "multi_scale": 0.0,
+      "compile": false,
+      "overlap_mask": true,
+      "mask_ratio": 4,
+      "dropout": 0.0,
+      "val": true,
+      "split": "val",
+      "save_json": false,
+      "conf": 0.001,
+      "iou": 0.7,
+      "max_det": 300,
+      "half": false,
+      "dnn": false,
+      "plots": false,
+      "end2end": null,
+      "source": null,
+      "vid_stride": 1,
+      "stream_buffer": false,
+      "visualize": false,
+      "augment": false,
+      "agnostic_nms": false,
+      "classes": null,
+      "retina_masks": false,
+      "embed": null,
+      "show": false,
+      "save_frames": false,
+      "save_txt": false,
+      "save_conf": false,
+      "save_crop": false,
+      "show_labels": true,
+      "show_conf": true,
+      "show_boxes": true,
+      "line_width": null,
+      "format": "torchscript",
+      "keras": false,
+      "optimize": false,
+      "int8": false,
+      "dynamic": false,
+      "simplify": true,
+      "opset": null,
+      "workspace": null,
+      "nms": false,
+      "lr0": 0.01,
+      "lrf": 0.01,
+      "momentum": 0.937,
+      "weight_decay": 0.0005,
+      "warmup_epochs": 3.0,
+      "warmup_momentum": 0.8,
+      "warmup_bias_lr": 0.1,
+      "box": 7.5,
+      "cls": 0.5,
+      "dfl": 1.5,
+      "pose": 12.0,
+      "kobj": 1.0,
+      "rle": 1.0,
+      "angle": 1.0,
+      "nbs": 64,
+      "hsv_h": 0.015,
+      "hsv_s": 0.7,
+      "hsv_v": 0.4,
+      "degrees": 0.0,
+      "translate": 0.1,
+      "scale": 0.5,
+      "shear": 0.0,
+      "perspective": 0.0,
+      "flipud": 0.0,
+      "fliplr": 0.5,
+      "bgr": 0.0,
+      "mosaic": 1.0,
+      "mixup": 0.0,
+      "cutmix": 0.0,
+      "copy_paste": 0.0,
+      "copy_paste_mode": "flip",
+      "auto_augment": "randaugment",
+      "erasing": 0.4,
+      "cfg": null,
+      "tracker": "botsort.yaml"
+    }
+  },
+  "trainer_setup": {
+    "status": "PASS",
+    "scope": "local actual Trainer setup B2/160 workers0, original AMP; no optimizer update, NOT formal B16 capacity",
+    "runtime": {
+      "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+      "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+      "torch": "2.7.1+cu118",
+      "cuda": "11.8",
+      "gpu": "NVIDIA GeForce RTX 2060",
+      "ultralytics": "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\__init__.py",
+      "lif_down_module": "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\nn\\modules\\lif_down.py",
+      "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+      "cbr_module": "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\nn\\modules\\cbr.py",
+      "module_hashes": {
+        "lif_down": {
+          "raw_sha256": "5660d678aa3acd48336f5f2a6cd49edbe5ac365426edb6d80a3bb87e421a81ac",
+          "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+        },
+        "cbr": {
+          "raw_sha256": "6d2161de932c7bfa72707ee0e59a6f97d5733d2331ca01e54dd0e341c99e84b2",
+          "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+        }
+      },
+      "criterion": "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\ultralytics-main\\ultralytics\\models\\rtdetr\\qcc_loss.py",
+      "gpu_bytes": 6442123264,
+      "formula": {
+        "id": "QCC-v1-capK3",
+        "enabled": true,
+        "lambda_qcc": 0.1,
+        "topk": 3,
+        "ramp_start": 5,
+        "ramp_full": 20
+      }
+    },
+    "rebuild": {
+      "equal_states": 552,
+      "parameters": 20149765,
+      "native_reconstruction": true,
+      "formula": {
+        "id": "QCC-v1-capK3",
+        "enabled": true,
+        "lambda_qcc": 0.1,
+        "topk": 3,
+        "ramp_start": 5,
+        "ramp_full": 20
+      }
+    },
+    "amp": [
+      "\u001b[34m\u001b[1mAMP: \u001b[0mrunning Automatic Mixed Precision (AMP) checks...",
+      "\u001b[34m\u001b[1mAMP: \u001b[0mchecks passed ✅"
+    ],
+    "scaler": {
+      "scale": 65536.0,
+      "growth_factor": 2.0,
+      "backoff_factor": 0.5,
+      "growth_interval": 2000,
+      "_growth_tracker": 0
+    },
+    "accumulate": 32
+  },
+  "operations": {
+    "status": "PASS",
+    "tests": 7,
+    "scope": "temporary fixtures only: canonical classes, reused manifests, binding, read-only status/pack",
+    "errors": []
+  },
+  "full_recipe_fields": 109,
+  "formal_recipe": "docs/qcc_v1/formal_args.yaml",
+  "pending": {
+    "server_paths": "PENDING, supplied historical paths checked by delivered sync/prepare",
+    "server_data_snapshot": "PENDING, no new full inventory performed locally",
+    "native_amp_B16_640": "PENDING",
+    "fallback_amp_B16_640": "PENDING",
+    "server_effective_update": "PENDING",
+    "server_cuda_scaler_resume": "PENDING",
+    "formal_200_epochs": "PENDING, not started",
+    "formal_full_val_test": "PENDING, no test was run",
+    "onnx_tensorrt_artifact": "PENDING, export-mode tensor equivalence was tested",
+    "DDP": "UNVERIFIED, single GPU only"
+  },
+  "resolved_test_environment_notes": [
+    "Windows username contains apostrophes; native asset loader strips apostrophes from weight paths, so diagnostic checkpoints used the existing D:/MyProjects/Crack_RTDETR/outputs/qcc_v1_local path. No production loader change was made.",
+    "Bitwise CPU full-parameter gradient comparison uses one CPU thread to avoid native parallel embedding/scatter accumulation order differences.",
+    "Diagnostic lifecycle SHA is the checkpoint actually tested at that time; diagnostic training checkpoints may subsequently be regenerated. No diagnostic checkpoint qualifies for formal start.",
+    "Reports were produced in the uncommitted implementation worktree; a historical runtime Git HEAD alone is not an implementation identity. See the committed source files and the implementation SHA in DELIVERY.md."
+  ],
+  "implementation_source_lf_sha256": {
+    "tools/check_qcc_v1.py": "a7c9b1062bec61e5916faad8a8a661a32fd995be9d29db826c4585f5a5e7696a",
+    "tools/check_qcc_v1_lifecycle.py": "a1c9289f2cf11a5eaa4018e4c301ae56b98a236f67febb2a631bdb8424eddd43",
+    "tools/check_qcc_v1_ops.py": "4a295006494fbda51a81d8ed882e676d2be2d9a0c786026f7ce9de6de4e6b8d1",
+    "tools/qcc_v1.py": "f6c6e5bd8d6e110fc2179f3db2b0df81fa44f748bcc0f6722130c61e03e1a98f",
+    "tools/qcc_v1.sh": "ced18e576ffb7fc9c218093a31cc21b79bd69f383636400cf626e1dae59f6fa1",
+    "tools/qcc_v1_common.py": "45c194bd06a64cee48446f78a855ffadc5ee46ff9f5f356de51499317e1dce24",
+    "tools/qcc_v1_preflight.py": "eca0f50a165e944c7de684eb9c5b9f77cb87aa4589f271914de96ded39e2ed23",
+    "tools/sync_qcc_v1.sh": "993b3b9193b21cc65b1958b7ab9745ec7e6a0a806d90124ee2bf7de2c200087d",
+    "ultralytics-main/ultralytics/models/rtdetr/qcc_io.py": "8b60b174018afde6ca06856f621bb19329ce244601f7fbb4ba491cb1a2dce4a1",
+    "ultralytics-main/ultralytics/models/rtdetr/qcc_loss.py": "a3b339b013aef1f2f14cbd816837c9a5143e0258a6fd1d26861e0c5874fcb120",
+    "ultralytics-main/ultralytics/models/rtdetr/qcc_model.py": "abea4cc9c68d8fdc1760a1199e4a59ec09d91eac199ca6b5611c15f15f89c11b",
+    "ultralytics-main/ultralytics/models/rtdetr/qcc_val.py": "833defcdfc3d2e6e752d74fdcfaccedcb65d5c9dbabe962cf5bb394d65acb69b",
+    "ultralytics-main/ultralytics/nn/autobackend.py": "1879db86b5b9b3346426e48411d86d2196319984057ffa637ddc0cf45be78230"
+  }
+}

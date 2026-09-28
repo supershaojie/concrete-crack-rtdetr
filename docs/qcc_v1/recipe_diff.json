@@ -1,0 +1,36 @@
+{
+  "fields": 109,
+  "authoritative": "docs/c19_lif_v1/c2_args.yaml",
+  "paired_mother": "docs/c19_lif_v1/resolved_formal_config.yaml",
+  "complete_nonidentity_recipe_equal": true,
+  "actual_archive_checked": false,
+  "changes": [
+    {
+      "field": "model",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+      "qcc": "/root/autodl-tmp/projects/Crack_RTDETR-qcc_v1/outputs/qcc_v1/qcc_v1_init.pt",
+      "reason": "experiment/path identity"
+    },
+    {
+      "field": "name",
+      "mother": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "qcc": "qcc_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "reason": "experiment/path identity"
+    },
+    {
+      "field": "save_dir",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "qcc": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/qcc_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "reason": "experiment/path identity"
+    }
+  ],
+  "loss_parameters": {
+    "id": "QCC-v1-capK3",
+    "enabled": true,
+    "lambda_qcc": 0.1,
+    "topk": 3,
+    "ramp_start": 5,
+    "ramp_full": 20
+  },
+  "server_paths": "historical supplied paths; runtime sync/prepare verify; no remote server login was performed"
+}
