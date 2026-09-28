@@ -2,7 +2,7 @@
 
 以下使用用户给定的历史服务器路径；本轮未登录服务器，脚本会检查路径、origin、基座、公共权重、配置和导入来源，不会擅自移动已有目录。固定解释器：`/root/miniconda3/envs/rtdetr/bin/python`。正式 batch16 / 640 / AMP / AdamW / 累积4 不变。
 
-代码锚点（含可靠性修复）：`d2b5a27d53278ac72c94fcfac2636f3d808b0cc8`。算法/评估初始提交：`44a3811721049c01096f3ee985ead8779264f2ea`。交付文档属于后续纯文档提交。下面先 fetch，取得实际交付的完整 SHA，验证代码与锚点相同，再同步它；不伪造自引用 SHA，也不把旧代码 SHA 当作新文档提交。最终答复还提供了固定到实际推送交付 SHA 的首条命令。
+本次 CLI 修复代码锚点：`e1c6e874d0d168d5bdfdedc15d42cc48d1f68455`。修复了 GPU 预检入口两个 `add_qccument` 误写，新增 CLI 参数契约检查及旧 worktree 安全快进更新；公式、母版、配方和 GPU 资格不变。后续交付提交只更新文档。下面先 fetch，取得交付完整 SHA，验证代码与锚点相同，再同步。最终答复另提供固定到实际推送 SHA 的命令。
 
 ## 1. 同步独立 worktree
 
@@ -15,29 +15,39 @@ test "$(git -C "$QCC_MAIN" rev-parse --is-inside-work-tree)" = true
 test "$(git -C "$QCC_MAIN" remote get-url origin)" = https://github.com/supershaojie/concrete-crack-rtdetr.git
 timeout 120s git -C "$QCC_MAIN" -c http.lowSpeedLimit=1024 -c http.lowSpeedTime=30 fetch --no-tags origin exp-rtdetr-r18-lite-qcc-v1
 QCC_DELIVERY_SHA=$(git -C "$QCC_MAIN" rev-parse FETCH_HEAD)
-git -C "$QCC_MAIN" merge-base --is-ancestor d2b5a27d53278ac72c94fcfac2636f3d808b0cc8 "$QCC_DELIVERY_SHA"
-git -C "$QCC_MAIN" diff --exit-code d2b5a27d53278ac72c94fcfac2636f3d808b0cc8 "$QCC_DELIVERY_SHA" -- tools ultralytics-main configs docs/c19_lif_v1
+git -C "$QCC_MAIN" merge-base --is-ancestor e1c6e874d0d168d5bdfdedc15d42cc48d1f68455 "$QCC_DELIVERY_SHA"
+git -C "$QCC_MAIN" diff --exit-code e1c6e874d0d168d5bdfdedc15d42cc48d1f68455 "$QCC_DELIVERY_SHA" -- tools ultralytics-main configs docs/c19_lif_v1
 printf 'Verified delivery SHA: %s\n' "$QCC_DELIVERY_SHA"
 QCC_SYNC=$(mktemp /tmp/qcc_v1_sync.XXXXXX.sh)
 git -C "$QCC_MAIN" show "$QCC_DELIVERY_SHA:tools/sync_qcc_v1.sh" > "$QCC_SYNC"
 bash "$QCC_SYNC" "$QCC_DELIVERY_SHA"
 ```
 
-目标是 `/root/autodl-tmp/projects/Crack_RTDETR-qcc_v1`，分支 `exp-rtdetr-r18-lite-qcc-v1`。若同名目录/分支是另一 SHA 或有未提交内容，脚本保留它并报错，不 reset/clean/覆盖。原主工作区和 ARG worktree 不动。
+目标是 `/root/autodl-tmp/projects/Crack_RTDETR-qcc_v1`，分支 `exp-rtdetr-r18-lite-qcc-v1`。必须从 **Git 中的新提交提取同步脚本**，不能直接运行旧 worktree 的旧版脚本。已有旧版目录属于同一仓库、分支正确且干净时，以 `merge --ff-only --no-autostash --no-overwrite-ignore` 更新。未提交改动、未跟踪文件、被忽略文件冲突、分叉历史、活动 QCC 进程/锁/tmux，或已经正式派发/存在正式 run，都会拒绝更新并保留原内容；不自动 stash/reset/clean。原主工作区和 ARG worktree 不动。
 
-## 2. prepare（独立执行）
+更新前的 `sync.json` 保存在 `outputs/qcc_v1/history/sync_<旧完整SHA>.json`。更新后的 `sync.json` 记录实际 checkout SHA；如果快进完成后身份写入被中断，重执行同一同步命令可以安全续完。
 
-```bash
-bash /root/autodl-tmp/projects/Crack_RTDETR-qcc_v1/tools/qcc_v1.sh prepare
-```
-
-自动优先复用同机 `/root/autodl-tmp/projects/Crack_RTDETR-arg_v1/outputs/arg_v1/prepare.json` 及其清单。必须是相同源路径/划分/类别规范，记录 reused_from；没有合格身份才做一次原始数据 inventory。存在但不匹配的身份会报错，不悄悄假装复用。公共源固定为 `/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt`，必须满足 DELIVERY 中 SHA256。prepare 通过后保留 source snapshot、init、完整 args 和 recipe_diff。
-
-仅在确实改过数据、目录变更报警或主动要求重新核验时执行：
+## 2. CLI 检查与必要 prepare（复用既有数据身份）
 
 ```bash
-bash /root/autodl-tmp/projects/Crack_RTDETR-qcc_v1/tools/qcc_v1.sh prepare --recheck-data
+set -euo pipefail
+QCC_WORK=/root/autodl-tmp/projects/Crack_RTDETR-qcc_v1
+QCC_PY=/root/miniconda3/envs/rtdetr/bin/python
+"$QCC_PY" "$QCC_WORK/tools/qcc_v1_preflight.py" --help
+"$QCC_PY" "$QCC_WORK/tools/check_qcc_v1_cli.py"
+test -s "$QCC_WORK/outputs/qcc_v1/prepare.json"
+test -s "$QCC_WORK/outputs/qcc_v1/data_identity.json"
+test -s "$QCC_WORK/outputs/qcc_v1/data_manifest.jsonl.gz"
+test -s "$QCC_WORK/outputs/qcc_v1/qcc_v1_init.pt"
+QCC_DATA_GUARD=$(mktemp /tmp/qcc_v1_data.XXXXXX.sha256)
+sha256sum "$QCC_WORK/outputs/qcc_v1/data_identity.json" "$QCC_WORK/outputs/qcc_v1/data_manifest.jsonl.gz" > "$QCC_DATA_GUARD"
+bash "$QCC_WORK/tools/qcc_v1.sh" prepare
+sha256sum -c "$QCC_DATA_GUARD"
 ```
+
+这段用于已经 prepare 完成、仅预检 CLI 失败的服务器。`--help` 必须退出 0；CLI 检查只验证帮助、参数解析和子进程参数契约，不执行 GPU 工作或提供训练资格。先检查已有身份存在，避免缺失时意外进入首次 inventory。只校验已保存的两个身份文件摘要，不重新扫描 train/val/test，也不使用 `--recheck-data`。身份/配置/目录时间不一致会拒绝继续。
+
+代码 SHA 改变后必须重新 prepare：既有流程把旧记录写入 `history/prepare_<旧完整SHA>.json`，生成新源码快照并绑定真实代码 SHA；复用已有初始化及固定数据身份，完整配方保持。旧失败预检的详细记录留在原 `preflights/<时间>/`，不能作为新代码的预检资格。公共源仍是主工作区的 `weights/rtdetr_r18_lite_imagenet_backbone_init.pt`，必须满足 DELIVERY 中 SHA256。
 
 ## 3. 有界 preflight（独立执行）
 

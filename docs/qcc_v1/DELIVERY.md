@@ -2,6 +2,8 @@
 
 交付结果：**QCC-v1-capK3 已实现，本地必要检查 PASS；正式服务器检查/训练/完整评估 PENDING。没有运行正式训练或 test，没有涨点结论。**
 
+本次服务器 CLI 故障已修复：`qcc_v1_preflight.py` 的 `--folder` 和 `--reload` 均正确使用 `add_argument`。旧交付的编译检查没有覆盖 argparse 的运行时方法调用；本次先复现 `--help` 退出 1，再实际运行确认退出 0。6 项 CLI 检查和 7 项同步/身份夹具检查全部通过，结果见 `cli_fix_validation.json`。服务器此前 11 项公式/接线通过是用户提供的运行事实；GPU 预检尚待按更新后的 `server_commands.md` 重跑，不把 CLI 通过写成 GPU 通过。
+
 ## 身份
 
 | 项目 | 真实身份 |
@@ -10,12 +12,15 @@
 | 分支 | `exp-rtdetr-r18-lite-qcc-v1` |
 | 实际起点 | `a0459d6a652cb702699087c88fa39a3e4c4087ec`（直接母版，不从 ARG 起训） |
 | 算法、接线、评估/生命周期实现提交 | `44a3811721049c01096f3ee985ead8779264f2ea` |
-| 最终代码提交（含 prepare 原子快照修复） | `d2b5a27d53278ac72c94fcfac2636f3d808b0cc8` |
+| 首次交付的 prepare 原子快照修复 | `d2b5a27d53278ac72c94fcfac2636f3d808b0cc8` |
+| 本次 CLI 与旧 worktree 更新修复 | `e1c6e874d0d168d5bdfdedc15d42cc48d1f68455` |
 | 参考可靠性工具提交 | `ef9cb7e05e5557f7dd06c95cf2361998a284adc9` |
 | 本地独立工作区 | `C:/Users/o'v'o/.codex/worktrees/qcc-v1/Crack_RTDETR` |
 | 公共初始化 SHA256 | `fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e` |
 
-后续交付提交仅添加本文件和 server_commands.md，不改算法或评估代码。最终答复另列实际推送后的交付 SHA；不把代码 SHA 冒充包含本文的提交，不伪造本文的自引用 SHA。服务器同步命令读取已 fetch 的交付 SHA，先证明其在最终代码提交之上且代码路径没有变化，再保存真实 SHA 到 `sync.json`。prepare/preflight/start 绑定实际 checkout SHA、源码哈希、配方、公共初始化和数据快照。
+本次修复后的交付提交仅更新本文、server_commands.md 和 CLI 修复验证记录，不改算法或评估代码。最终答复另列实际推送后的完整交付 SHA。服务器同步命令验证交付在本次修复锚点之上且代码路径没有变化，再将真实 SHA 写入 `sync.json`。已有干净旧 worktree 会安全快进，归档旧 sync；随后重新 prepare 归档旧代码身份并复用已有数据身份，不全量扫描数据。prepare/preflight/start 继续绑定实际 checkout SHA、源码哈希、配方、公共初始化和数据快照。
+
+本次生产代码只改 CLI 解析器入口和同步脚本；已逐一检查全部 QCC 工具的参数注册、解析、子进程列表和 shell 参数转发。主入口的 `--folder`、恢复进程的 `--folder/--reload`、内部 `_preflight --seconds/--micro-batches` 以及 `_worker --dispatch` 都与解析器一致。`qcc_v1.py` 原有 22 个非 CLI 函数和 GPU 工具原有 3 个函数的 AST 完全不变；QCC 模型/公式、母版、完整配方、B16/640/AMP 和资格判定没有修改。新增 `check_qcc_v1_cli.py` 与 `check_qcc_v1_sync.py`，不会自动调用正式训练或 test。
 
 原工作区 `D:/MyProjects/Crack_RTDETR` 仍是用户原分支；未 reset/clean/强推/改 remote，未修改其他实验或历史。
 
@@ -52,7 +57,7 @@ QCC 仅对选中组的最终普通 logits 直接回传。q/框/GT/IoU/owner/topK
 
 ## 已完成检查
 
-详见 `local_validation.json` 与 `native_contract.json`。本机 Python 3.9.25、torch 2.7.1+cu118/CUDA 11.8、RTX 2060 6GB，实际 ultralytics 来自本 QCC 工作区（8.4.21），未升级环境。
+下面保留首次实现的历史检查，详见 `local_validation.json` 与 `native_contract.json`；其中工具源码哈希对应当时版本。本次只重做与修复相关的 CLI/同步检查，单独记录在 `cli_fix_validation.json`，不改写历史测试结果。本机 Python 3.9.25、torch 2.7.1+cu118/CUDA 11.8、RTX 2060 6GB，实际 ultralytics 来自本 QCC 工作区（8.4.21），未升级环境。
 
 | 检查 | 实际结论 |
 |---|---|

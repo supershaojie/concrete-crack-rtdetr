@@ -1,0 +1,198 @@
+{
+  "created_utc": "2026-09-28T09:09:27.869407+00:00",
+  "baseline_commit": "e5b616a1a73ac0d7aba057470ba7473104f29593",
+  "fix_commit": "e1c6e874d0d168d5bdfdedc15d42cc48d1f68455",
+  "scope": "CLI runtime repair, subprocess argv contracts, safe worktree upgrade and existing data identity reuse only",
+  "python": {
+    "executable": "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+    "version": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]"
+  },
+  "before_fix": {
+    "command": "python tools/qcc_v1_preflight.py --help",
+    "returncode": 1,
+    "error": "AttributeError: 'ArgumentParser' object has no attribute 'add_qccument'",
+    "line": 207
+  },
+  "after_fix_help": {
+    "command": [
+      "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+      "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\tools\\qcc_v1_preflight.py",
+      "--help"
+    ],
+    "returncode": 0,
+    "stdout": "usage: qcc_v1_preflight.py [-h] --folder FOLDER [--reload RELOAD]\n\nSingle bounded server check, isolated from all formal model/optimizer/RNG\nstate.\n\noptional arguments:\n  -h, --help       show this help message and exit\n  --folder FOLDER\n  --reload RELOAD\n",
+    "stderr": ""
+  },
+  "cli_check": {
+    "status": "PASS",
+    "tests": 6,
+    "commit": "e5b616a1a73ac0d7aba057470ba7473104f29593",
+    "dirty": "M tools/qcc_v1.py\n M tools/qcc_v1_preflight.py\n?? tools/check_qcc_v1_cli.py",
+    "help": [
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\tools\\qcc_v1.py",
+          "--help"
+        ],
+        "returncode": 0,
+        "stdout": "usage: qcc_v1.py [-h]\n                 {prepare,status,start,resume,finish,pack,preflight,_preflight,val,test,_worker}\n                 ...\n\nQCC independent lifecycle; safeguards ported from ef9cb7e, evaluation\nrewritten.\n\npositional arguments:\n  {prepare,status,start,resume,finish,pack,preflight,_preflight,val,test,_worker}\n    prepare             Reuse fixed snapshot or inventory once; initialize\n                        from public weights\n    _worker             ==SUPPRESS==\n\noptional arguments:\n  -h, --help            show this help message and exit\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\tools\\qcc_v1_preflight.py",
+          "--help"
+        ],
+        "returncode": 0,
+        "stdout": "usage: qcc_v1_preflight.py [-h] --folder FOLDER [--reload RELOAD]\n\nSingle bounded server check, isolated from all formal model/optimizer/RNG\nstate.\n\noptional arguments:\n  -h, --help       show this help message and exit\n  --folder FOLDER\n  --reload RELOAD\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\tools\\check_qcc_v1.py",
+          "--help"
+        ],
+        "returncode": 0,
+        "stdout": "usage: check_qcc_v1.py [-h] [--math-only] [--output OUTPUT]\n\nFocused QCC formula, native loss routing and real model equivalence checks.\n\noptional arguments:\n  -h, --help       show this help message and exit\n  --math-only\n  --output OUTPUT\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+          "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\tools\\check_qcc_v1_lifecycle.py",
+          "--help"
+        ],
+        "returncode": 0,
+        "stdout": "usage: check_qcc_v1_lifecycle.py [-h] --checkpoint CHECKPOINT --output OUTPUT\n                                 [--device DEVICE] [--setup-only]\n\nNew interpreter: native CPU resume, finite GPU warmup and ONE real B1 FP32 val\nbatch.\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --checkpoint CHECKPOINT\n  --output OUTPUT\n  --device DEVICE\n  --setup-only\n",
+        "stderr": ""
+      }
+    ],
+    "subprocess_argv": [
+      [
+        "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+        "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\tools\\qcc_v1.py",
+        "_preflight",
+        "--seconds",
+        "900",
+        "--micro-batches",
+        "16"
+      ],
+      [
+        "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+        "-u",
+        "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\tools\\qcc_v1.py",
+        "_worker",
+        "--dispatch",
+        "fixture_dispatch"
+      ],
+      [
+        "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+        "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\tools\\check_qcc_v1.py",
+        "--math-only",
+        "--output",
+        "fixture folder with spaces\\cpu"
+      ],
+      [
+        "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+        "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\tools\\qcc_v1_preflight.py",
+        "--folder",
+        "fixture folder with spaces"
+      ],
+      [
+        "D:\\miniconda3\\envs\\rtdetr\\python.exe",
+        "C:\\Users\\o'v'o\\.codex\\worktrees\\qcc-v1\\Crack_RTDETR\\tools\\qcc_v1_preflight.py",
+        "--folder",
+        "fixture folder with spaces",
+        "--reload",
+        "fixture folder with spaces\\last.pt"
+      ]
+    ],
+    "scope": "CLI parsing/help/argv only; no GPU or training qualification; no data inventory",
+    "errors": []
+  },
+  "sync_check": {
+    "status": "PASS",
+    "tests": 7,
+    "commit": "e5b616a1a73ac0d7aba057470ba7473104f29593",
+    "dirty": "M tools/qcc_v1.py\n M tools/qcc_v1_preflight.py\n M tools/sync_qcc_v1.sh\n?? tools/check_qcc_v1_cli.py\n?? tools/check_qcc_v1_sync.py",
+    "scope": "Temporary Git fixtures exercise shipped embedded sync and cached prepare; no real server fetch or raw inventory",
+    "errors": []
+  },
+  "tested_source_lf_sha256": {
+    "tools/qcc_v1.py": "bb70ca8102b0ca6b0b633f7e0dc9426ff06319e14828b3e7077a3c85c0ac1f3b",
+    "tools/qcc_v1_preflight.py": "e0546c634665c55ca58e294f8c2562eda9674f34fecc06805793631b07497c2e",
+    "tools/sync_qcc_v1.sh": "55e8cb235d74d669c11a52cdc8304c504784700cf3c346605ff2364722427c30",
+    "tools/check_qcc_v1_cli.py": "2bf108371b110811e1c4a186cf850b0661bfe1da9208d76d1b2a64df1c01448d",
+    "tools/check_qcc_v1_sync.py": "68c181429ecc6b0ae3dfb5b5eaa25d1ea51a55f8962cb06247bff159c346fb8e"
+  },
+  "test_revision_note": "Checks ran on the modified working tree before the fix commit. Original HEAD/dirty fields are retained. Source contents were then verified byte-for-byte after LF normalization against the actual fix commit.",
+  "audit": {
+    "actual_bad_calls_fixed": [
+      "qcc_v1_preflight.py: --folder registration",
+      "qcc_v1_preflight.py: --reload registration"
+    ],
+    "parameter_registration_and_parsing": "All four argparse entrypoints actually execute --help with exit 0",
+    "subprocess_argv": "CPU math --math-only/--output; GPU --folder; reload --folder/--reload; _preflight --seconds/--micro-batches; _worker --dispatch; shell \"$@\" and shlex.join checked",
+    "no_global_qcc_replacement": true
+  },
+  "preservation": {
+    "protected_paths_unchanged": [
+      "ultralytics-main",
+      "configs",
+      "docs/c19_lif_v1",
+      "docs/qcc_v1/formal_args.yaml",
+      "docs/qcc_v1/qcc_formula.yaml",
+      "docs/qcc_v1/recipe_diff.json",
+      "tools/qcc_v1_common.py"
+    ],
+    "existing_non_cli_function_ast_unchanged": {
+      "qcc_v1.py": [
+        "process_identity",
+        "active_workers",
+        "has_tmux",
+        "operation_lock",
+        "strict_amp_resources",
+        "status",
+        "file_info",
+        "run_bounded",
+        "preflight",
+        "guarded_preflight",
+        "checkpoint_identity",
+        "verify_preflight",
+        "dispatch",
+        "worker",
+        "evaluation_source",
+        "export_complete",
+        "finalize_weights",
+        "evaluate",
+        "offline_analysis",
+        "completeness",
+        "pack",
+        "finish"
+      ],
+      "qcc_v1_preflight.py": [
+        "close_workers",
+        "reload_and_val",
+        "run"
+      ]
+    },
+    "formula_mother_recipe_gpu_qualification_unchanged": true,
+    "data_inventory_executed": false,
+    "existing_prepare_path_test": "Real prepare() with temporary identities and Git archive; inventory and initialize patched to raise, old prepare history preserved, data identity/manifest/init bytes unchanged"
+  },
+  "other_checks": {
+    "python_compile": "PASS",
+    "bash_syntax": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "limitations": {
+    "server_gpu_preflight": "PENDING: server rerun required",
+    "server_sync_execution": "Not performed; embedded sync code tested against temporary Git worktrees",
+    "formal_training_executed": false,
+    "formal_test_executed": false,
+    "server_11_math_routing": "User-reported PASS before this CLI repair"
+  }
+}
