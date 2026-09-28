@@ -225,6 +225,8 @@ def binding(clean=True, verify_data=False):
     code = code_identity(clean)
     require(plan["code"] == code, "Prepared code identity changed; run prepare again before preflight/start")
     require(sha256(SOURCE) == SOURCE_SHA256 and sha256(INIT) == plan["init_sha256"], "Source/init changed")
+    require((OUT / "source_snapshot.tar.gz").is_file()
+        and sha256(OUT / "source_snapshot.tar.gz") == plan["source_snapshot_sha256"], "Prepared source snapshot missing/changed")
     path = data_config()
     require(not verify_data, "Full data verification is available only via prepare --recheck-data")
     data = cached_data()
@@ -257,11 +259,17 @@ def prepare(reuse_data=None, recheck_data=False):
     if prior:
         require(all(record[k] == prior[k] for k in ("args", "data", "source_sha256", "init_sha256")), "Existing prepare identity differs; preserved")
         if prior["code"] == code:
+            require((OUT / "source_snapshot.tar.gz").is_file()
+                and sha256(OUT / "source_snapshot.tar.gz") == prior["source_snapshot_sha256"], "Prepared source snapshot missing/changed")
             return prior
         require(not (OUT / "training_identity.json").exists(), "Prepared code changed after dispatch; existing experiment preserved")
         write_json(OUT / "history" / ("prepare_" + prior["code"]["commit"] + ".json"), prior)
     YAML.save(OUT / "train_args.yaml", args)
     write_json(OUT / "recipe_diff.json", diff)
-    write_json(OUT / "prepare.json", record)
-    subprocess.run(["git", "archive", "--format=tar.gz", "--output=" + str(OUT / "source_snapshot.tar.gz"), "HEAD"], cwd=ROOT, check=True, timeout=60)
+    snapshot = OUT / "source_snapshot.tar.gz"
+    temporary = snapshot.with_suffix(snapshot.suffix + ".tmp")
+    subprocess.run(["git", "archive", "--format=tar.gz", "--output=" + str(temporary), "HEAD"], cwd=ROOT, check=True, timeout=60)
+    os.replace(temporary, snapshot)
+    record["source_snapshot_sha256"] = sha256(snapshot)
+    write_json(OUT / "prepare.json", record)  # PASS only after all required evidence exists
     return record

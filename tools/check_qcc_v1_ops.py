@@ -47,8 +47,9 @@ class Operations(unittest.TestCase):
     def test_binding_no_inventory(self):
         with tempfile.TemporaryDirectory() as name:
             root=Path(name); source=root/'s'; init=root/'i'; source.write_text('s'); init.write_text('i')
+            snapshot=root/'source_snapshot.tar.gz'; snapshot.write_bytes(b'fixture')
             data={'fixture':'fixed'}; args={'batch':16}
-            write_json(root/'prepare.json',dict(status='PASS',data=data,args=args,code={'code':1},init_sha256=c.sha256(init)))
+            write_json(root/'prepare.json',dict(status='PASS',data=data,args=args,code={'code':1},init_sha256=c.sha256(init),source_snapshot_sha256=c.sha256(snapshot)))
             with patch.multiple(c,OUT=root,SOURCE=source,INIT=init,SOURCE_SHA256=c.sha256(source)),patch.object(c,'code_identity',return_value={'code':1}),patch.object(c,'cached_data',return_value=data),patch.object(c,'data_config',return_value=root/'data.yaml'),patch.object(c,'recipe',return_value=(args,{})),patch.object(c,'inventory',side_effect=AssertionError('inventory forbidden')):
                 self.assertEqual(c.binding()['data'],data)
 
