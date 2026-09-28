@@ -10,7 +10,7 @@
 - 核实 remote：`https://github.com/supershaojie/concrete-crack-rtdetr.git`。
 - 本地工作区：`C:/Users/o'v'o/.codex/worktrees/dtr-v1/Crack_RTDETR`。原 CSCEF 工作区、未提交文件及其他实验工作区保持。
 - 未发现非空适用 AGENTS.md。没有合并主分支、reset/clean、强推或改写历史。
-- 功能提交和后续纯文档提交分别记录；服务器命令固定功能提交，避免自引用提交 hash。见 `server_commands.md`。
+- 功能提交：`bb5cc3987c6b0df3c65ee9253e2bc63ba725a461`（包含初始实现 `82ae3098bea0931efcbcd6cc9132b9000e6c7453` 和 Windows 初始化路径修复）。后续纯文档提交不改功能代码；服务器命令固定此功能提交，避免自引用提交 hash。见 `server_commands.md`。
 - 基座直接取母版，没有引入 ARG/ARG v2/QCC/RMD/RDL/ROR/PEQ/TCR/GEO 算法或训练状态。
 
 ## 实际接入
@@ -68,6 +68,7 @@ disabled/ramp=0 直接走原损失，不新增分组/中位数或 RNG；val/infe
 2. ARG 参考 `ef9cb7e05e5557f7dd06c95cf2361998a284adc9`：只抽取有限零值 warmup、JSON 类别键规范化、原生模型重建后专门化、严格 AMP 结果检查、真实 step/scale 观察、限时子进程与退出证据、原始 query 导出模式。未复制 ARG 损失/模型算法、整套训练工具或低 scale fallback。
 3. 本版将快照复用、首次默认完整导出、缺锁补锁、status/pack 只读和一次完整包做成显式流程。已确认快照可复用时不再次全量 hash 图片/标签；后续校验 YAML/清单 hash、固定配置和六个 split 目录时间戳。**这不是连续文件监控；原地改写文件必须显式 prepare --refresh-data，不能声称每次重验所有图片内容。**
 4. 原训练期 val、损失日志、fitness=mAP50–95 和 best 保存逻辑不变（原生相等 fitness 的保存规则也保留）。原 final_eval 在训练自然完成后原本还会 strip 并再次 val；DTR 仅记录完成，把这次正式 FP32 评估交给训练后显式 finish。保留 best/last 原生完整恢复状态，避免提前多跑一次不带导出的 val。没有增加训练预算或改变 best 选择。
+5. 本地 prepare 实测发现原权重加载器会删除绝对 Windows 路径中的撇号；修复仅为在工作区内通过相对路径调用原初始化器，不改初始化值或母版框架。失败 checkpoint/错误记录保存在本实验 initialization_failures 下，修复后 prepare 已 PASS。
 
 ## 实际检查与 PENDING
 
@@ -83,6 +84,7 @@ disabled/ramp=0 直接走原损失，不新增分组/中位数或 RNG；val/infe
 - 同权重参数/张量键/推理输出/后处理一致；独立进程加载自定义 model/criterion，输出精确一致。
 - 独立新进程本地 B2/160 FP32 warmup 使用有限全零输入，一批真实 val=2 图，导出 600 普通 queries 和全部 GT。诊断权重和结果不能当作正式评估/涨点证据。
 - 每个 Python 主入口和所有子命令 --help 在新进程、非仓库 cwd 执行；同步脚本 bash -n 和 --help。
+- 已提交功能版本实际 prepare=PASS；本地有界 preflight 的 CPU 项 PASS，其余服务器项 PENDING、start_eligible=false，正确拒绝将本机小批检查冒充服务器资格。
 - 离线阈值统计（含空 GT/空预测）、排序/conf mask、缺锁补锁且不再推理、篡改拒绝、互斥锁、status/pack 不推理不扫描、默认含预测的 INCOMPLETE 包与 manifest 非自包含 hash。
 
 待服务器实际运行：
