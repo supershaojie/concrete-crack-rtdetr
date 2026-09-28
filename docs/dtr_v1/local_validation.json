@@ -3796,6 +3796,11 @@
       "scope": "CUDA full-model strict gradients",
       "status": "PENDING",
       "detail": "Strict tolerance retained; DTR/mother max abs 0.0002527237, native identical-graph repeat max abs 0.0003585815. Forward, L0, finite update and inference checks pass independently."
+    },
+    {
+      "scope": "prepare Windows absolute checkpoint path",
+      "status": "FIXED_PENDING_RECHECK",
+      "detail": "Native asset loader removes apostrophes; original initializer now receives a relative in-worktree output path. Failed init preserved under outputs/dtr_v1/initialization_failures."
     }
   ]
 }

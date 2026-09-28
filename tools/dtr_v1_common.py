@@ -191,7 +191,16 @@ def prepare(refresh=False, source=None, manifest=None):
         prior = read_json(OUT / "initialization.json")
         require(prior and prior["output_sha256"] == sha256(INIT), "Existing init lacks valid provenance")
     else:
-        write_json(OUT / "initialization.json", initialize(SOURCE, INIT))
+        # Native attempt_download_asset strips apostrophes from string weight
+        # paths. The managed Windows worktree may contain them in the username.
+        # Preserve the original initializer and pass an in-worktree relative path.
+        previous_cwd = Path.cwd()
+        try:
+            os.chdir(ROOT)
+            initialization = initialize(SOURCE, INIT.relative_to(ROOT))
+        finally:
+            os.chdir(previous_cwd)
+        write_json(OUT / "initialization.json", initialization)
     result = dict(status="PASS", created=now(), code=code, runtime=runtime(), args=args, data=data,
                   source_sha256=SOURCE_SHA256, init_sha256=sha256(INIT), recipe_diff=diff)
     prior = read_json(OUT / "prepare.json")
