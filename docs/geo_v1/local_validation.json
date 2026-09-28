@@ -647,7 +647,8 @@
     "CPU multithread embedding reduction was not bitwise deterministic; strict native parity uses one CPU thread.",
     "Existing loader removed apostrophes from absolute Windows paths; fixed existing-file resolution and revalidated new-process native resume/val.",
     "Synthetic AMP fixture initially incorrectly made original matcher GT require gradients; fixed to real-batch detached GT; independent GEO geometry still tests GT detachment.",
-    "Git Bash fresh-help harness required relative script paths on Windows; all CLI fresh-process checks then passed."
+    "Git Bash fresh-help harness required relative script paths on Windows; all CLI fresh-process checks then passed.",
+    "Command-block syntax harness initially used a Path.write_text keyword unavailable on local Python3.9; byte writing resolved it and all 14 real bash blocks passed bash -n."
   ],
   "git_transport": {
     "origin": "https://github.com/supershaojie/concrete-crack-rtdetr.git",
@@ -703,5 +704,9 @@
       "successful worker Python exit"
     ]
   },
-  "server_command_syntax": null
+  "server_command_syntax": {
+    "status": "PASS",
+    "blocks": 14,
+    "scope": "bash -n only; no server actions"
+  }
 }
