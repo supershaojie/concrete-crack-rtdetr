@@ -1,0 +1,31 @@
+{
+  "fields": 109,
+  "changes": [
+    {
+      "field": "model",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/weights/rtdetr_r18_lite_imagenet_backbone_init.pt",
+      "arg_v2": "/root/autodl-tmp/projects/Crack_RTDETR-arg_v2/outputs/arg_v2/arg_v2_init.pt",
+      "type": "str"
+    },
+    {
+      "field": "name",
+      "mother": "c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "arg_v2": "arg_v2_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "type": "str"
+    },
+    {
+      "field": "save_dir",
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug",
+      "arg_v2": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/arg_v2_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "type": "str"
+    }
+  ],
+  "loss_parameters": {
+    "version": "ARG-v2-q2",
+    "lambda_arg": 0.2,
+    "epsilon_w": 0.05,
+    "gamma_quality": 2.0,
+    "eps_num": 1e-07
+  },
+  "source": "docs/c19_lif_v1/c2_args.yaml"
+}
