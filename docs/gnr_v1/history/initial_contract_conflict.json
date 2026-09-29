@@ -1,6 +1,6 @@
 {
-  "status": "CONTRACT_MATCH",
-  "created_utc": "2026-09-29T10:54:03.003164+00:00",
+  "status": "CONTRACT_CONFLICT",
+  "created_utc": "2026-09-29T10:01:22.338929+00:00",
   "mother_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
   "environment": {
     "python": "3.9.25",
@@ -10,8 +10,8 @@
     "cuda_checks_executed": false
   },
   "document_vfl": {
-    "alpha": 0.25,
-    "gamma": 1.5
+    "alpha": 0.75,
+    "gamma": 2.0
   },
   "actual_model_criterion_vfl": {
     "alpha": 0.25,
@@ -171,7 +171,7 @@
       0.25079599022865295,
       0.25
     ],
-    "legacy_document_parameter_analytic": [
+    "document_parameter_analytic": [
       1.9702149316028715e-26,
       8.48456235824635e-11,
       0.0036532047670334578,
@@ -181,11 +181,10 @@
       0.75
     ],
     "max_abs_error_actual_parameters": 2.9802322387695312e-08,
-    "max_abs_error_legacy_document_parameters": 0.546917736530304,
+    "max_abs_error_document_parameters": 0.546917736530304,
     "rtol": 1e-06,
     "atol": 1e-07
   },
-  "parameter_resolution": "User-authorized 2026-09-29 erratum: read actual criterion.vfl parameters; original losses unchanged",
-  "scope": "mother source/parameter audit; see local_validation.json for GNR integration checks",
+  "implementation": "NOT_STARTED_PENDING_CONTRACT_RESOLUTION",
   "formal_training_started": false
 }

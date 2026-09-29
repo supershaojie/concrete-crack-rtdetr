@@ -1,0 +1,13 @@
+{
+  "name": "gnr_v1_actual_vfl",
+  "version": 1,
+  "beta": 0.5,
+  "ramp_start": 5,
+  "ramp_end": 20,
+  "vfl_source": "criterion.vfl.alpha/gamma",
+  "expected_vfl": {
+    "alpha": 0.25,
+    "gamma": 1.5
+  },
+  "nc": 1
+}

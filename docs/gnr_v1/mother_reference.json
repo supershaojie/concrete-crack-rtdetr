@@ -1,0 +1,51 @@
+{
+  "checkpoint_sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa",
+  "selection": "Training val selects best; freeze checkpoint/config before independent test",
+  "mAP50_95": 0.5245427221919051,
+  "runtime": {
+    "python": "3.10.13 (main, Sep 11 2023, 13:44:35) [GCC 11.2.0]",
+    "executable": "/root/miniconda3/envs/rtdetr/bin/python",
+    "torch": "2.1.2+cu121",
+    "cuda": "12.1",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "ultralytics": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/ultralytics-main/ultralytics/__init__.py",
+    "lif_down_module": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/ultralytics-main/ultralytics/nn/modules/lif_down.py",
+    "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+    "cbr_module": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/ultralytics-main/ultralytics/nn/modules/cbr.py",
+    "module_hashes": {
+      "lif_down": {
+        "raw_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+        "lf_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7"
+      },
+      "cbr": {
+        "raw_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+        "lf_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787"
+      }
+    }
+  },
+  "precision_recall_policy": "each model own maximum-F1 working point",
+  "splits": {
+    "val": {
+      "precision": 0.8655727028797452,
+      "recall": 0.835202492211838,
+      "mAP50": 0.8956724997170779,
+      "AP75": 0.5453045665315482,
+      "mAP50_95": 0.5245427221919051,
+      "policy": "corrected_sorted_conf_mask_v1",
+      "precision_recall_policy": "each model own maximum-F1 working point",
+      "archived_json_sha256": "45a1f17e11bc4e3437ee90a0c9a8f6e9c46d68556c14bd71a4bf9ba89c651619",
+      "source": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\val\\metrics.json"
+    },
+    "test": {
+      "precision": 0.8602393656297294,
+      "recall": 0.8353594476962329,
+      "mAP50": 0.8919968337794693,
+      "AP75": 0.5400236205750717,
+      "mAP50_95": 0.5220090191444802,
+      "policy": "corrected_sorted_conf_mask_v1",
+      "precision_recall_policy": "each model own maximum-F1 working point",
+      "archived_json_sha256": "51f9e6c0d225a545c6913783e872fc906580287bea9d01994ce6913c9ad8edaa",
+      "source": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\test\\metrics.json"
+    }
+  }
+}

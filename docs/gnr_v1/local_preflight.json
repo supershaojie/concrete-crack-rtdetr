@@ -1,0 +1,44 @@
+{
+  "status": "RESOURCE_ERROR",
+  "microbatches": 0,
+  "step_attempts": [],
+  "effective_updates": 0,
+  "scaler_skips": 0,
+  "gnr_epoch_context": 20,
+  "gnr_observed": [],
+  "reason": "OutOfMemoryError('CUDA out of memory. Tried to allocate 100.00 MiB. GPU 0 has a total capacity of 6.00 GiB of which 4.42 GiB is free. Of the allocated memory 501.30 MiB is allocated by PyTorch, and 50.70 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)')",
+  "elapsed_seconds": 223.65599999998813,
+  "binding": {
+    "sha256": "83eb91259d4280fc544d877efddcc4f1023a84a0478feb2f734546e2cf892dc4",
+    "identity": {
+      "functional_sha256": "e14cfd03a352f24db9443c5903a161ec2d55f81de353516b9a29ed53a4d17827",
+      "recipe_sha256": "252ea80449b671ac4091f1287f118593e515f1977a9b4144ebd0b2b03d8f873f",
+      "data_sha256": "589d61e09b4ee19476d51dcacb55912c0559e166c7d93583bcbd60b9a4399347",
+      "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+      "init_sha256": "33f9975adcd422ae27255e47fb7b57d40a34dfe93b3bcea3f02b90a5accad225",
+      "structure_sha256": "d0cf463fc0e665dc2f09e3590f92609a6b1f675618e7b882454a82849e69277f",
+      "run": "C:\\Users\\o'v'o\\.codex\\worktrees\\gnr-v1\\Crack_RTDETR\\runs\\c_series\\gnr_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "formula": {
+        "name": "gnr_v1_actual_vfl",
+        "version": 1,
+        "beta": 0.5,
+        "ramp_start": 5,
+        "ramp_end": 20,
+        "vfl_source": "criterion.vfl.alpha/gamma",
+        "expected_vfl": {
+          "alpha": 0.25,
+          "gamma": 1.5
+        },
+        "nc": 1
+      },
+      "runtime": {
+        "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+        "torch": "2.7.1+cu118",
+        "cuda": "11.8"
+      }
+    }
+  },
+  "peak_cuda_bytes": 525650944,
+  "exit_code": 1,
+  "folder": "C:\\Users\\o'v'o\\.codex\\worktrees\\gnr-v1\\Crack_RTDETR\\outputs\\gnr_v1\\preflight\\20260929T105533_881406Z"
+}

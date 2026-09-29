@@ -1,7 +1,7 @@
 """Reproduce the GNR document/mother VFL contract check without training.
 
-Exit 2 means the unmodified GNR v1 document conflicts with the pinned mother.
-This is a source/model audit, not a GNR implementation or training preflight.
+Exit 2 means the corrected GNR v1 parameter contract differs from the mother.
+The original conflict report is retained under docs/gnr_v1/history.
 """
 from __future__ import annotations
 
@@ -78,7 +78,7 @@ def audit():
     torch.testing.assert_close(actual, reference, rtol=1e-6, atol=1e-7)
     if not torch.isfinite(actual).all():
         raise RuntimeError("Non-finite mother derivative")
-    expected = {"alpha": .75, "gamma": 2.}
+    expected = {"alpha": .25, "gamma": 1.5}
     observed = {"alpha": criterion.vfl.alpha, "gamma": criterion.vfl.gamma}
     cfg = yaml.safe_load((ROOT / "docs/c19_lif_v1/resolved_formal_config.yaml").read_text(encoding="utf-8"))
     return {
@@ -100,11 +100,12 @@ def audit():
         "archived_recipe_fields": len(cfg),
         "negative_vfl_derivative_check": {"status": "PASS_CPU", "logits": z.detach().tolist(),
             "actual_autograd": actual.tolist(), "actual_parameter_analytic": reference.tolist(),
-            "document_parameter_analytic": document.tolist(),
+            "legacy_document_parameter_analytic": document.tolist(),
             "max_abs_error_actual_parameters": float((actual - reference).abs().max()),
-            "max_abs_error_document_parameters": float((actual - document).abs().max()),
+            "max_abs_error_legacy_document_parameters": float((actual - document).abs().max()),
             "rtol": 1e-6, "atol": 1e-7},
-        "implementation": "NOT_STARTED_PENDING_CONTRACT_RESOLUTION",
+        "parameter_resolution": "User-authorized 2026-09-29 erratum: read actual criterion.vfl parameters; original losses unchanged",
+        "scope": "mother source/parameter audit; see local_validation.json for GNR integration checks",
         "formal_training_started": False,
     }
 

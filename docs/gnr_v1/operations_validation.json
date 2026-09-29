@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "checks": {
+    "status_no_model_import": true,
+    "inaccessible_process_and_invalid_pid_do_not_break_status": true,
+    "kernel_lock_rejects_concurrent_writer_and_ignores_stale_owner_file": true,
+    "offline_incomplete_pack_manifest_readback_no_torch": true,
+    "zero_intervention_refuses_start": true,
+    "metadata_change_invalidates_snapshot": true,
+    "bash_syntax_and_python_tee_exit_separation": true
+  },
+  "linux_tmux_end_to_end": "PENDING: no Linux tmux server in this Windows development environment"
+}
