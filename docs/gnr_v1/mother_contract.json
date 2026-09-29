@@ -1,0 +1,190 @@
+{
+  "status": "CONTRACT_CONFLICT",
+  "created_utc": "2026-09-29T10:01:22.338929+00:00",
+  "mother_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "environment": {
+    "python": "3.9.25",
+    "torch": "2.7.1+cu118",
+    "execution_device": "cpu",
+    "cuda_available": true,
+    "cuda_checks_executed": false
+  },
+  "document_vfl": {
+    "alpha": 0.75,
+    "gamma": 2.0
+  },
+  "actual_model_criterion_vfl": {
+    "alpha": 0.25,
+    "gamma": 1.5
+  },
+  "standalone_class_defaults": {
+    "alpha": 0.75,
+    "gamma": 2.0
+  },
+  "criterion_constructor": "(self, nc: 'int' = 80, loss_gain: 'dict[str, float] | None' = None, aux_loss: 'bool' = True, use_fl: 'bool' = True, use_vfl: 'bool' = False, use_uni_match: 'bool' = False, uni_match_ind: 'int' = 0, gamma: 'float' = 1.5, alpha: 'float' = 0.25)",
+  "criterion_source": "ultralytics-main/ultralytics/models/utils/loss.py",
+  "source_lf_sha256": {
+    "ultralytics-main/ultralytics/nn/tasks.py": "c5a19e3eaf10acf2a5aa6a53e4a3f9afd01d7b79e4f9a41744af9755d6ebcbd8",
+    "ultralytics-main/ultralytics/models/utils/loss.py": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75",
+    "ultralytics-main/ultralytics/utils/loss.py": "47ef8869db5caa09f303ce9446921f77e9bc2a552956ba7e3c76410c8e4c5fc8",
+    "ultralytics-main/ultralytics/models/rtdetr/train.py": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+    "ultralytics-main/ultralytics/models/yolo/detect/train.py": "f8c993933a1cbe3b351f426188c45385ef499f1465063f0b4962956cce20807a",
+    "ultralytics-main/ultralytics/nn/modules/cbr.py": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+    "ultralytics-main/ultralytics/nn/modules/lif_down.py": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+    "ultralytics-main/ultralytics/nn/modules/transformer.py": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-lif-down.yaml": "14192de425c6b3718af8a9dc42373db25a0ea725bf608f270e7241b8a66d603a"
+  },
+  "model": {
+    "nc": 1,
+    "ordinary_queries": 300,
+    "decoder_layers": 3,
+    "parameters_unfused": 20149765,
+    "last_classifier_type": "Linear",
+    "last_classifier_weight_shape": [
+      1,
+      256
+    ],
+    "last_classifier_bias_shape": [
+      1
+    ],
+    "nc_shape_changes": [
+      {
+        "key": "model.26.dec_score_head.0.bias",
+        "nc80": [
+          80
+        ],
+        "nc1": [
+          1
+        ]
+      },
+      {
+        "key": "model.26.dec_score_head.0.weight",
+        "nc80": [
+          80,
+          256
+        ],
+        "nc1": [
+          1,
+          256
+        ]
+      },
+      {
+        "key": "model.26.dec_score_head.1.bias",
+        "nc80": [
+          80
+        ],
+        "nc1": [
+          1
+        ]
+      },
+      {
+        "key": "model.26.dec_score_head.1.weight",
+        "nc80": [
+          80,
+          256
+        ],
+        "nc1": [
+          1,
+          256
+        ]
+      },
+      {
+        "key": "model.26.dec_score_head.2.bias",
+        "nc80": [
+          80
+        ],
+        "nc1": [
+          1
+        ]
+      },
+      {
+        "key": "model.26.dec_score_head.2.weight",
+        "nc80": [
+          80,
+          256
+        ],
+        "nc1": [
+          1,
+          256
+        ]
+      },
+      {
+        "key": "model.26.denoising_class_embed.weight",
+        "nc80": [
+          80,
+          256
+        ],
+        "nc1": [
+          1,
+          256
+        ]
+      },
+      {
+        "key": "model.26.enc_score_head.bias",
+        "nc80": [
+          80
+        ],
+        "nc1": [
+          1
+        ]
+      },
+      {
+        "key": "model.26.enc_score_head.weight",
+        "nc80": [
+          80,
+          256
+        ],
+        "nc1": [
+          1,
+          256
+        ]
+      }
+    ]
+  },
+  "archived_recipe_fields": 109,
+  "negative_vfl_derivative_check": {
+    "status": "PASS_CPU",
+    "logits": [
+      -20.0,
+      -8.0,
+      -2.0,
+      0.0,
+      2.0,
+      8.0,
+      20.0
+    ],
+    "actual_autograd": [
+      4.821875048928708e-23,
+      1.287672524163952e-09,
+      0.0029518925584852695,
+      0.09014376997947693,
+      0.26061761379241943,
+      0.25079602003097534,
+      0.25
+    ],
+    "actual_parameter_analytic": [
+      1.2054688253410495e-22,
+      1.2870116083973926e-09,
+      0.0029518911615014076,
+      0.09014376997947693,
+      0.26061758399009705,
+      0.25079599022865295,
+      0.25
+    ],
+    "document_parameter_analytic": [
+      1.9702149316028715e-26,
+      8.48456235824635e-11,
+      0.0036532047670334578,
+      0.22371509671211243,
+      0.8075353503227234,
+      0.753267228603363,
+      0.75
+    ],
+    "max_abs_error_actual_parameters": 2.9802322387695312e-08,
+    "max_abs_error_document_parameters": 0.546917736530304,
+    "rtol": 1e-06,
+    "atol": 1e-07
+  },
+  "implementation": "NOT_STARTED_PENDING_CONTRACT_RESOLUTION",
+  "formal_training_started": false
+}
