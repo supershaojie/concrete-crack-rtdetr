@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "source_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "source_nc": 80,
+  "saved_nc": 1,
+  "seed": 42,
+  "new_cea_parameters": 0,
+  "parameter_count": 20149765,
+  "native_nc1_exact": true,
+  "adaptation": {
+    "loaded": 543,
+    "class_adaptation": [
+      "model.26.dec_score_head.0.bias",
+      "model.26.dec_score_head.0.weight",
+      "model.26.dec_score_head.1.bias",
+      "model.26.dec_score_head.1.weight",
+      "model.26.dec_score_head.2.bias",
+      "model.26.dec_score_head.2.weight",
+      "model.26.denoising_class_embed.weight",
+      "model.26.enc_score_head.bias",
+      "model.26.enc_score_head.weight"
+    ],
+    "missing": [],
+    "unexpected": []
+  },
+  "reload_exact": true,
+  "output_sha256": "41d5aed1aaceb3ddff2f6c345714d66773b8bb036f2ec97ee1094f27bbd96f25",
+  "scope": "Local controlled initialization; server generates and binds its own serialized init hash"
+}

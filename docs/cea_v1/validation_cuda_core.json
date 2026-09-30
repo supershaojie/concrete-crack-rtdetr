@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "tests": 8,
+  "failures": [],
+  "device": "cuda:0",
+  "torch": "2.7.1+cu118",
+  "python": "3.9.13 (tags/v3.9.13:6de2ca5, May 17 2022, 16:36:42) [MSC v.1929 64 bit (AMD64)]",
+  "gpu": "NVIDIA GeForce RTX 2060",
+  "seconds": 1.5,
+  "tolerances": {
+    "default_path": 0.0,
+    "score_probability_abs": 1e-06,
+    "fp32_anchor_abs": 1e-07,
+    "analytic_gradient_abs": 1e-08,
+    "analytic_gradient_rel": 1e-06
+  },
+  "evidence": {
+    "nondegenerate_aux_loss": 0.003956731408834457,
+    "FP32": {
+      "anchor_main_max_abs": 5.960464477539063e-08,
+      "score_probability_max_abs": 0.0
+    },
+    "AMP": {
+      "anchor_main_max_abs": 1.8596649169921875e-05,
+      "score_probability_max_abs": 0.0
+    },
+    "active_real_model_aux_loss": 5.939575930824503e-05
+  },
+  "scope": "Synthetic PyTorch contracts; not real-data B16/640 preflight or AP evidence",
+  "excluded": [
+    "test_07_model_fallback_optimizer_ema_checkpoint",
+    "test_09_native_trainer_checkpoint_resume",
+    "test_11_standalone_eval_export_reuse_and_offline_pack"
+  ],
+  "cuda_bitwise_full_model_gradient_update": "NOT_CLAIMED: native grid_sample backward is nondeterministic"
+}

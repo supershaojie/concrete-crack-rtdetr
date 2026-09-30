@@ -53,7 +53,7 @@ class CrackBoundaryRefinement(nn.Module):
         relative = torch.stack((left, right, top, bottom))
         return (center[..., None, None, None, :] + wh[..., None, None, None, :] * relative) * 2 - 1
 
-    def forward(self, p3, query, boxes, return_diagnostics=False):
+    def forward(self, p3, query, boxes, return_diagnostics=False, return_context=False):
         values = self.p3_proj(p3)
         batch, count = boxes.shape[:2]
         with torch.autocast(device_type=p3.device.type, enabled=False):
@@ -81,9 +81,12 @@ class CrackBoundaryRefinement(nn.Module):
             dl, dr, dt, db = displacement.unbind(-1)
             residual = torch.stack(((dl + dr) / 2, (dt + db) / 2, dr - dl, db - dt), -1)
             refined = original + residual
-        if return_diagnostics:
-            return refined, {"before": original, "after": refined, "tanh_offsets": unit,
-                             "displacement": displacement, "aggregation_weights": weights.squeeze(-1)}
+        if return_diagnostics or return_context:
+            details = {"before": original, "after": refined, "tanh_offsets": unit,
+                       "displacement": displacement, "aggregation_weights": weights.squeeze(-1)}
+            if return_context:
+                details["hidden"] = hidden.detach()
+            return refined, details
         return refined
 
 
@@ -104,7 +107,11 @@ class RTDETRDecoderCBR(RTDETRDecoder):
         """Explicit opt-in return; no hooks, mutable caches, or training state switches."""
         return self._forward_cbr(x, batch, True)
 
-    def _forward_cbr(self, x, batch, diagnostics):
+    def forward_with_context(self, x, batch=None):
+        """Same forward, explicit batch-local CEA context; default/inference is unchanged."""
+        return self._forward_cbr(x, batch, True, context=True)
+
+    def _forward_cbr(self, x, batch, diagnostics, context=False):
         from ultralytics.models.utils.ops import get_cdn_group
 
         p3 = x[0]
@@ -120,7 +127,7 @@ class RTDETRDecoderCBR(RTDETRDecoder):
             embed, refer_bbox, feats, shapes, self.dec_bbox_head, self.dec_score_head,
             self.query_pos_head, attn_mask=attn_mask, return_final_query=True,
         )
-        refined, details = self.cbr(p3, final_query, dec_bboxes[-1], return_diagnostics=True)
+        refined, details = self.cbr(p3, final_query, dec_bboxes[-1], return_diagnostics=True, return_context=context)
         dec_bboxes = torch.cat((dec_bboxes[:-1], refined.unsqueeze(0)), dim=0)
         raw = dec_bboxes, dec_scores, enc_bboxes, enc_scores, dn_meta
         if self.training:

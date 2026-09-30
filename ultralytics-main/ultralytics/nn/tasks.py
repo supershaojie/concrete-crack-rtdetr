@@ -817,7 +817,7 @@ class RTDETRDetectionModel(DetectionModel):
             [loss[k].detach() for k in ["loss_giou", "loss_class", "loss_bbox"]], device=img.device
         )
 
-    def predict(self, x, profile=False, visualize=False, batch=None, augment=False, embed=None):
+    def predict(self, x, profile=False, visualize=False, batch=None, augment=False, embed=None, return_cbr_context=False):
         """Perform a forward pass through the model.
 
         Args:
@@ -848,6 +848,8 @@ class RTDETRDetectionModel(DetectionModel):
                 if m.i == max_idx:
                     return torch.unbind(torch.cat(embeddings, 1), dim=0)
         head = self.model[-1]
+        if return_cbr_context:
+            return head.forward_with_context([y[j] for j in head.f], batch)
         x = head([y[j] for j in head.f], batch)  # head inference
         return x
 

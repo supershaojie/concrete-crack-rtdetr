@@ -1,0 +1,54 @@
+{
+  "origin": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1",
+  "best_sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa",
+  "metrics": {
+    "val": {
+      "checkpoint_sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa",
+      "precision_recall_policy": "each model own maximum-F1 working point",
+      "policy": "corrected_sorted_conf_mask_v1",
+      "precision": 0.8655727028797452,
+      "recall": 0.835202492211838,
+      "AP75": 0.5453045665315482,
+      "mAP50": 0.8956724997170779,
+      "mAP50_95": 0.5245427221919051,
+      "images": 1728,
+      "ground_truth": 12840,
+      "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+      "metrics_file_sha256": "45a1f17e11bc4e3437ee90a0c9a8f6e9c46d68556c14bd71a4bf9ba89c651619"
+    },
+    "test": {
+      "checkpoint_sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa",
+      "precision_recall_policy": "each model own maximum-F1 working point",
+      "policy": "corrected_sorted_conf_mask_v1",
+      "precision": 0.8602393656297294,
+      "recall": 0.8353594476962329,
+      "AP75": 0.5400236205750717,
+      "mAP50": 0.8919968337794693,
+      "mAP50_95": 0.5220090191444802,
+      "images": 864,
+      "ground_truth": 6663,
+      "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+      "metrics_file_sha256": "51f9e6c0d225a545c6913783e872fc906580287bea9d01994ce6913c9ad8edaa"
+    }
+  },
+  "data_inventory": {
+    "train": {
+      "images": 6048,
+      "boxes": 45573,
+      "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+      "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"
+    },
+    "val": {
+      "images": 1728,
+      "boxes": 12840,
+      "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+      "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+    },
+    "test": {
+      "images": 864,
+      "boxes": 6663,
+      "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+      "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "scope": "mother vs mother CUDA negative control, same weights/input/RNG; CEA class never used",
+  "loss_max_abs": 0.0,
+  "gradient_max_abs": 0.00048065185546875,
+  "maximum_parameter": "model.1.conv.weight",
+  "gradient_relative_l2": 4.65181262558481e-06,
+  "torch": "2.7.1+cu118",
+  "gpu": "NVIDIA GeForce RTX 2060",
+  "deterministic": true,
+  "cublas_workspace_config": ":4096:8",
+  "tolerance": 0.0,
+  "bitwise_gradient_equal": false
+}

@@ -1,0 +1,36 @@
+{
+  "archive": "D:\\rtdetr跑结果\\C19＋LIF：原 CBR＋LIF-Down v1\\training\\args.yaml",
+  "archive_sha256": "31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b",
+  "exact_model_aliases": [
+    {
+      "field": "model",
+      "original": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/weights/c19_lif_v1_controlled_init.pt",
+      "normalized": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1/weights/c19_lif_v1_controlled_init.pt",
+      "reason": "documented exact historical alias"
+    }
+  ],
+  "changes": {
+    "model": {
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1/weights/c19_lif_v1_controlled_init.pt",
+      "cea": "/root/autodl-tmp/projects/Crack_RTDETR-cea_v1/weights/cea_v1_controlled_init.pt",
+      "reason": "experiment identity/path"
+    },
+    "name": {
+      "mother": "c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "cea": "cea_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "reason": "experiment identity/path"
+    },
+    "project": {
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series",
+      "cea": "/root/autodl-tmp/projects/Crack_RTDETR-cea_v1/runs/c_series",
+      "reason": "experiment identity/path"
+    },
+    "save_dir": {
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "cea": "/root/autodl-tmp/projects/Crack_RTDETR-cea_v1/runs/c_series/cea_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug",
+      "reason": "experiment identity/path"
+    }
+  },
+  "compared_fields": 109,
+  "type_comparison": true
+}

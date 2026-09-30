@@ -1,0 +1,12 @@
+method: cea_v1
+enabled: true
+loss_weight: 0.10
+candidate_mix: 0.50
+advantage_eps: 1.0e-8
+scope: final_decoder_ordinary_matched_queries
+aux_gradient_scope: existing_cbr_score_weight_only
+teacher_precision: float32
+student_score_precision: float32
+tie_policy: current_first_then_position_index
+ramp_start_epoch: 5
+ramp_full_epoch: 20

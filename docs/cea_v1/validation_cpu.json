@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "tests": 11,
+  "failures": [],
+  "device": "cpu",
+  "torch": "2.7.1+cu118",
+  "python": "3.9.13 (tags/v3.9.13:6de2ca5, May 17 2022, 16:36:42) [MSC v.1929 64 bit (AMD64)]",
+  "gpu": null,
+  "seconds": 22.06199999997625,
+  "tolerances": {
+    "default_path": 0.0,
+    "score_probability_abs": 1e-06,
+    "fp32_anchor_abs": 1e-07,
+    "analytic_gradient_abs": 1e-08,
+    "analytic_gradient_rel": 1e-06
+  },
+  "evidence": {
+    "nondegenerate_aux_loss": 0.0020010548178106546,
+    "FP32": {
+      "anchor_main_max_abs": 0.0,
+      "score_probability_max_abs": 2.9802322387695312e-08
+    },
+    "fallback_output_loss_gradient_update_max_abs": 0.0,
+    "parameters": 20149765,
+    "active_real_model_aux_loss": 7.052739238133654e-05,
+    "native_checkpoint_resume": {
+      "epoch_saved": 0,
+      "epoch_restored": 1,
+      "optimizer": true,
+      "scaler": true,
+      "ema": true,
+      "config": true,
+      "parameter_keys_equal": true,
+      "precision": "native FP16 EMA/optimizer serialization; no microbatch-exact resume claim"
+    },
+    "independent_eval_export": {
+      "images": 2,
+      "queries": 600,
+      "query_indices": true,
+      "coordinate_inversion": true,
+      "ten_threshold_stats": true,
+      "reuse_without_inference": true,
+      "offline_pack_without_inference": true,
+      "no_weights_or_images_in_archive": true
+    }
+  },
+  "scope": "Synthetic PyTorch contracts; not real-data B16/640 preflight or AP evidence",
+  "excluded": [],
+  "cuda_bitwise_full_model_gradient_update": "tested with zero tolerance"
+}

@@ -1,0 +1,17 @@
+{
+  "status": "FAIL",
+  "scope": "initial CUDA zero-tolerance whole-model gradient comparison",
+  "device": "cuda:0",
+  "torch": "2.7.1+cu118",
+  "gpu": "NVIDIA GeForce RTX 2060",
+  "tolerance": 0,
+  "observed_max_absolute_difference": 9.441375732421875e-05,
+  "observed_max_relative_difference": 0.000526182004250586,
+  "reason": "Native grid_sample backward is nondeterministic on CUDA; exact CPU comparison passed. No tolerance widening.",
+  "full_local_report_sha256": "bbc17f0e2c86ff5b00a2158995a1fcf8c8b8aa58664f08dd04c63db171bd1342",
+  "later_check_with_CUBLAS_and_cudnn_determinism": {
+    "max_absolute_difference": 6.914138793945312e-05,
+    "max_relative_difference": 0.0013142174575477839,
+    "status": "FAIL_AT_ZERO_TOLERANCE"
+  }
+}
