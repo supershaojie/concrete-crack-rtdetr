@@ -1,0 +1,153 @@
+{
+  "base": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "source_contracts": [
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/cbr.py",
+      "parent_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "actual_sha256": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+      "unchanged": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/lif_down.py",
+      "parent_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "actual_sha256": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+      "unchanged": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/head.py",
+      "parent_sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+      "actual_sha256": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+      "unchanged": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/modules/transformer.py",
+      "parent_sha256": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602",
+      "actual_sha256": "b5261b0a9971292ec74a84935f614ca99cd00a38ad81ef773ed2456ae348a602",
+      "unchanged": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/nn/tasks.py",
+      "parent_sha256": "c5a19e3eaf10acf2a5aa6a53e4a3f9afd01d7b79e4f9a41744af9755d6ebcbd8",
+      "actual_sha256": "c5a19e3eaf10acf2a5aa6a53e4a3f9afd01d7b79e4f9a41744af9755d6ebcbd8",
+      "unchanged": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/utils/loss.py",
+      "parent_sha256": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75",
+      "actual_sha256": "f17c5cf77ea1d1ad250c6576126971a855a3f01f3320b63b04b16b35ad35bf75",
+      "unchanged": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/utils/ops.py",
+      "parent_sha256": "7d520895c245adafb06b07c6b330dabbd6a36a69cd0fe742cd71f2797f474dde",
+      "actual_sha256": "7d520895c245adafb06b07c6b330dabbd6a36a69cd0fe742cd71f2797f474dde",
+      "unchanged": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/models/rtdetr/train.py",
+      "parent_sha256": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+      "actual_sha256": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+      "unchanged": true
+    },
+    {
+      "path": "ultralytics-main/ultralytics/engine/trainer.py",
+      "parent_sha256": "18125ba895b64961cf0f7db29214aca27392176e65d72a9166fa818f00a1033a",
+      "actual_sha256": "18125ba895b64961cf0f7db29214aca27392176e65d72a9166fa818f00a1033a",
+      "unchanged": true
+    }
+  ],
+  "parameters_unfused": 20149765,
+  "decoder_layers": 3,
+  "queries": 300,
+  "CBR_rho": 0.1,
+  "loss_gain": {
+    "class": 1,
+    "bbox": 5,
+    "giou": 2,
+    "no_object": 0.1,
+    "mask": 1,
+    "dice": 1
+  },
+  "vfl": {
+    "alpha": 0.25,
+    "gamma": 1.5
+  },
+  "matcher": {
+    "cost": {
+      "class": 2,
+      "bbox": 5,
+      "giou": 2
+    },
+    "alpha": 0.25,
+    "gamma": 2.0
+  },
+  "dropout": [
+    {
+      "name": "model.9.dropout",
+      "p": 0
+    },
+    {
+      "name": "model.9.dropout1",
+      "p": 0
+    },
+    {
+      "name": "model.9.dropout2",
+      "p": 0
+    },
+    {
+      "name": "model.26.decoder.layers.0.dropout1",
+      "p": 0.0
+    },
+    {
+      "name": "model.26.decoder.layers.0.dropout2",
+      "p": 0.0
+    },
+    {
+      "name": "model.26.decoder.layers.0.dropout3",
+      "p": 0.0
+    },
+    {
+      "name": "model.26.decoder.layers.0.dropout4",
+      "p": 0.0
+    },
+    {
+      "name": "model.26.decoder.layers.1.dropout1",
+      "p": 0.0
+    },
+    {
+      "name": "model.26.decoder.layers.1.dropout2",
+      "p": 0.0
+    },
+    {
+      "name": "model.26.decoder.layers.1.dropout3",
+      "p": 0.0
+    },
+    {
+      "name": "model.26.decoder.layers.1.dropout4",
+      "p": 0.0
+    },
+    {
+      "name": "model.26.decoder.layers.2.dropout1",
+      "p": 0.0
+    },
+    {
+      "name": "model.26.decoder.layers.2.dropout2",
+      "p": 0.0
+    },
+    {
+      "name": "model.26.decoder.layers.2.dropout3",
+      "p": 0.0
+    },
+    {
+      "name": "model.26.decoder.layers.2.dropout4",
+      "p": 0.0
+    }
+  ],
+  "common_fix": "AutoBackend.warmup torch.empty -> torch.zeros; same shape/dtype/device, finite input",
+  "source_tools_reused": [
+    "init_c19_lif_v1.initialize",
+    "init_c19_lif_v1.build_training_model",
+    "c19_lif_v1_data.dataset_inventory"
+  ],
+  "failed_algorithm_imports": []
+}

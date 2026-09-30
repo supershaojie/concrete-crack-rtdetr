@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "scope": "synthetic CPU B2/160 native Trainer, NOT formal recipe or real data",
+  "independent_FP32_evidence_export": {
+    "status": "PASS",
+    "synthetic_images": 2,
+    "queries": 600,
+    "protocol": "corrected_sorted_conf_mask_v1",
+    "AP_not_performance_evidence": true
+  },
+  "initial_epoch": 0,
+  "resumed_start_epoch": 1,
+  "last_epoch": 1,
+  "checkpoint_optimizer_present": true,
+  "ema_updates_before": 2,
+  "ema_updates_after": 4,
+  "synthetic_real_trainer_microbatches": 4,
+  "ordinary_validation_loss_and_final_eval": "PASS",
+  "context_ramp_override": "GPC-only diagnostic epoch20",
+  "algorithm_config_restored": true,
+  "seconds": 24.14100000000326
+}

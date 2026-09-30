@@ -1,0 +1,94 @@
+{
+  "status": "PASS",
+  "device": "cpu",
+  "torch": "2.7.1+cu118",
+  "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+  "cuda": "11.8",
+  "seconds": 16.31199999997625,
+  "tests": 8,
+  "failures": [],
+  "skipped": [
+    {
+      "test": "test_small_cuda_amp (__main__.ModelTests)",
+      "reason": "Separate small CUDA/AMP engineering check"
+    }
+  ],
+  "evidence": {
+    "native_resume": {
+      "epoch_restored": 7,
+      "optimizer_steps_restored": 1,
+      "ema_updates": 1,
+      "scaler": "native_state_restored",
+      "limitation": "Parent epoch checkpoint uses half EMA/optimizer serialization; no exact microbatch replay claim"
+    },
+    "parameters": 20149765,
+    "added_parameters": 0,
+    "closed_max_gradient_difference": 0.0,
+    "native_repeat_max_gradient_difference": 0.0,
+    "closed_max_optimizer_parameter_difference": 0.0,
+    "native_repeat_max_optimizer_parameter_difference": 0.0,
+    "cuda_comparison": "exact",
+    "original_loss_keys": [
+      "loss_bbox",
+      "loss_bbox_aux",
+      "loss_bbox_aux_dn",
+      "loss_bbox_dn",
+      "loss_class",
+      "loss_class_aux",
+      "loss_class_aux_dn",
+      "loss_class_dn",
+      "loss_giou",
+      "loss_giou_aux",
+      "loss_giou_aux_dn",
+      "loss_giou_dn"
+    ],
+    "dn_num_split": [
+      200,
+      300
+    ],
+    "active": {
+      "source_gt": 3,
+      "invalid_gt": 0,
+      "eligible_gt": 3,
+      "clipped_gt": 0,
+      "vanished_gt": 0,
+      "pairs": 3,
+      "missing_matches": 0,
+      "clipped_fraction": 0.0,
+      "vanished_fraction": 0.0,
+      "missing_match_fraction": 0.0,
+      "loss_gpc": 2.98115414190496e-14,
+      "coverage": 1.0,
+      "mean_abs_normalized": 1.5729004587683448e-07,
+      "auxiliary_images": 4,
+      "aux_dn_none": true,
+      "ramp": 1.0,
+      "weighted_gpc": 2.981154268959902e-15,
+      "main_loss": 92.01590728759766,
+      "derived_seed": 5716195484745967203,
+      "selected": [
+        1,
+        0
+      ],
+      "shifts": [
+        [
+          8,
+          0
+        ],
+        [
+          -8,
+          -8
+        ]
+      ]
+    },
+    "zero_shift_loss": 0.0,
+    "tolerance": {
+      "atol": 0.0,
+      "rtol": 0.0
+    },
+    "checkpoint_model_ema_reload": "PASS",
+    "inference_export": "native_contract_equal"
+  },
+  "formal_B16_640_real_data_AMP": "PENDING",
+  "AP_performance": "NOT_TESTED"
+}

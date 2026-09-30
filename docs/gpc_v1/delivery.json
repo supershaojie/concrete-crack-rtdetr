@@ -1,0 +1,42 @@
+{
+  "status": "LOCAL_ENGINEERING_PASS_SERVER_PENDING",
+  "base": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "branch": "exp-rtdetr-r18-lite-gpc-v1",
+  "remote": "https://github.com/supershaojie/concrete-crack-rtdetr.git",
+  "functional_sha256": "0cadc7115e720363da7da27052c8c86d50408aaca263e6b7d9eaca76f84a218f",
+  "checks": {
+    "local_cpu_checks": {
+      "status": "PASS",
+      "seconds": 16.31199999997625,
+      "tests": 8
+    },
+    "local_cuda_checks": {
+      "status": "PASS",
+      "seconds": 8.875,
+      "tests": 8
+    },
+    "local_ops_checks": {
+      "status": "PASS",
+      "seconds": null,
+      "tests": 10
+    },
+    "local_pipeline_checks": {
+      "status": "PASS",
+      "seconds": 24.14100000000326,
+      "tests": null
+    }
+  },
+  "pending": [
+    "Server public untrained source SHA and nc1 controlled mapping",
+    "Authoritative server parent args and real dataset identity",
+    "Mother-best bounded mechanism diagnosis",
+    "Real B16/640 AMP main plus B8 auxiliary and effective native update",
+    "Linux tmux worker lifecycle on target server",
+    "Formal 200-epoch training and real independent val/test"
+  ],
+  "performance_evidence": false,
+  "formal_training_started": false,
+  "auto_package": false,
+  "source_changes": "Nine specified parent core files unchanged; GPC files added; finite AutoBackend warmup one-line fix",
+  "training_source_sha256": "ca1bc2c0041e0e4e5a819882c2b8bb2623e8ba62e89b10c107ee03bcbf4cb06b"
+}

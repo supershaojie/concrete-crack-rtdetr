@@ -1,0 +1,33 @@
+method: gpc_v1
+enabled: true
+loss_weight: 0.1
+aux_source_images: 4
+aux_pair_layout: originals_then_shifted
+aux_bn: eval_shared_running_statistics
+aux_gradients: both_views
+aux_dn: disabled
+aux_detection_loss: disabled
+shift_pixels: 8
+shift_choices_xy:
+- - -8
+  - -8
+- - -8
+  - 0
+- - -8
+  - 8
+- - 0
+  - -8
+- - 0
+  - 8
+- - 8
+  - -8
+- - 8
+  - 0
+- - 8
+  - 8
+pad_value_01: 0.4470588235294118
+coordinate_format: normalized_xyxy
+scale_floor_pixels: 1.0
+huber_delta: 1.0
+ramp_start_epoch: 5
+ramp_full_epoch: 20
