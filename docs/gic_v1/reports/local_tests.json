@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "tests": 8,
+  "failures": [],
+  "mother_sha": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+  "torch": "2.7.1+cu118",
+  "cuda_available": true,
+  "scope": "synthetic/math plus real model assembly; NOT a real-data B16 GPU preflight"
+}

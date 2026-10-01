@@ -309,6 +309,7 @@ class DETRLoss(nn.Module):
         gt_mask: torch.Tensor | None = None,
         postfix: str = "",
         match_indices: list[tuple] | None = None,
+        final_normal_context: dict | None = None,
     ) -> dict[str, torch.Tensor]:
         """Calculate losses for a single prediction layer.
 
@@ -342,11 +343,19 @@ class DETRLoss(nn.Module):
         if len(gt_bboxes):
             gt_scores[idx] = bbox_iou(pred_bboxes.detach(), gt_bboxes, xywh=True).squeeze(-1)
 
-        return {
+        losses = {
             **self._get_loss_class(pred_scores, targets, gt_scores, len(gt_bboxes), postfix),
             **self._get_loss_bbox(pred_bboxes, gt_bboxes, postfix),
             # **(self._get_loss_mask(masks, gt_mask, match_indices, postfix) if masks is not None and gt_mask is not None else {})
         }
+        if final_normal_context is not None and len(gt_bboxes):
+            # Explicit ordinary-final scope; aux and DN never receive this context.
+            # Pass the SAME matching, GT and original VFL q, with its original precision.
+            self._adjust_final_normal_class(
+                losses, pred_scores, pred_bboxes, gt_bboxes, gt_scores[idx],
+                idx, gt_cls[gt_idx], postfix, final_normal_context,
+            )
+        return losses
 
     def forward(
         self,
@@ -377,7 +386,8 @@ class DETRLoss(nn.Module):
         gt_cls, gt_bboxes, gt_groups = batch["cls"], batch["bboxes"], batch["gt_groups"]
 
         total_loss = self._get_loss(
-            pred_bboxes[-1], pred_scores[-1], gt_bboxes, gt_cls, gt_groups, postfix=postfix, match_indices=match_indices
+            pred_bboxes[-1], pred_scores[-1], gt_bboxes, gt_cls, gt_groups, postfix=postfix, match_indices=match_indices,
+            final_normal_context=kwargs.get("final_normal_context"),
         )
 
         if self.aux_loss:
@@ -404,6 +414,8 @@ class RTDETRDetectionLoss(DETRLoss):
         dn_bboxes: torch.Tensor | None = None,
         dn_scores: torch.Tensor | None = None,
         dn_meta: dict[str, Any] | None = None,
+        *,
+        final_normal_context: dict | None = None,
     ) -> dict[str, torch.Tensor]:
         """Forward pass to compute detection loss with optional denoising loss.
 
@@ -418,7 +430,7 @@ class RTDETRDetectionLoss(DETRLoss):
             (dict[str, torch.Tensor]): Dictionary containing total loss and denoising loss if applicable.
         """
         pred_bboxes, pred_scores = preds
-        total_loss = super().forward(pred_bboxes, pred_scores, batch)
+        total_loss = super().forward(pred_bboxes, pred_scores, batch, final_normal_context=final_normal_context)
 
         # Check for denoising metadata to compute denoising training loss
         if dn_meta is not None:

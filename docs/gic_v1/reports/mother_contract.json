@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "mother_sha": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "protected_lf_sha256": {
+    "ultralytics-main/ultralytics/nn/modules/cbr.py": "d6f35673489dade3fab4d360a9ac570fedccd25744afcc138e6c06fee134f787",
+    "ultralytics-main/ultralytics/nn/modules/lif_down.py": "26d480016114b679732015fc4567c2719aa86d16675a33f0fdd27a8d2eea3ee7",
+    "ultralytics-main/ultralytics/nn/modules/head.py": "c092316743055f02adc84589d843588631ffe705fb0777178e0362d81471f4bc",
+    "ultralytics-main/ultralytics/models/rtdetr/train.py": "7b13e6b1eb7f0962b76417abddbb44bc32edb6030f5eeb0caf6d56b091776e48",
+    "ultralytics-main/ultralytics/utils/loss.py": "47ef8869db5caa09f303ce9446921f77e9bc2a552956ba7e3c76410c8e4c5fc8",
+    "ultralytics-main/ultralytics/cfg/models/rt-detr/rtdetr-resnet18-lite-cbr-lif-down.yaml": "14192de425c6b3718af8a9dc42373db25a0ea725bf608f270e7241b8a66d603a"
+  },
+  "parameters_nc1_unfused": 20149765,
+  "num_queries": 300,
+  "decoder_layers": 3,
+  "vfl": {
+    "alpha": 0.25,
+    "gamma": 1.5
+  },
+  "matcher_cost": {
+    "class": 2,
+    "bbox": 5,
+    "giou": 2
+  },
+  "loss_gain": {
+    "class": 1,
+    "bbox": 5,
+    "giou": 2
+  },
+  "recipe_fields": 109,
+  "actual_args_sha256": "31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b",
+  "archived_metrics": {
+    "val": {
+      "sha256": "45a1f17e11bc4e3437ee90a0c9a8f6e9c46d68556c14bd71a4bf9ba89c651619",
+      "map50_95": 0.5245427221919051,
+      "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+      "protocol": "corrected_sorted_conf_mask_v1",
+      "checkpoint_sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa"
+    },
+    "test": {
+      "sha256": "51f9e6c0d225a545c6913783e872fc906580287bea9d01994ce6913c9ad8edaa",
+      "map50_95": 0.5220090191444802,
+      "commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+      "protocol": "corrected_sorted_conf_mask_v1",
+      "checkpoint_sha256": "24185828a44b79ea0709a45d3d8cd8780065533df9103f9317cc1bbb2f9710aa"
+    }
+  },
+  "reuse": {
+    "source_commit": "649a711ce3604066ff772599c2353e47f88a2268",
+    "files": [
+      "tools/gnr_v1_common.py: identity/data/recipe functions",
+      "tools/gnr_v1_eval.py: export and offline threshold infrastructure",
+      "tools/gnr_v1.py: process identity/kernel lock only"
+    ],
+    "no_foreign_loss_modules": true
+  }
+}

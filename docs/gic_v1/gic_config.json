@@ -1,0 +1,7 @@
+{
+  "version": "gic_v1",
+  "shift_px": 1.0,
+  "eta_max": 0.5,
+  "ramp_start_epoch": 4,
+  "ramp_duration": 15
+}

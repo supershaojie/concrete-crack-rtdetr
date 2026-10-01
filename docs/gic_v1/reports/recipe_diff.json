@@ -1,0 +1,30 @@
+{
+  "fields_checked": 109,
+  "alias": {
+    "actual": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/weights/c19_lif_v1_controlled_init.pt",
+    "archived": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1/weights/c19_lif_v1_controlled_init.pt",
+    "reason": "documented mother gatefix path drift; comparison copy only"
+  },
+  "other_differences": {},
+  "changes": {
+    "model": {
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/weights/c19_lif_v1_controlled_init.pt",
+      "gic": "/root/autodl-tmp/projects/Crack_RTDETR-gic_v1/weights/gic_v1_controlled_init.pt"
+    },
+    "name": {
+      "mother": "c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "gic": "gic_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug"
+    },
+    "save_dir": {
+      "mother": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug",
+      "gic": "/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/gic_v1_rtdetr_r18_lite_cbr_lif_e200_b16_onlineaug"
+    }
+  },
+  "loss_config": {
+    "version": "gic_v1",
+    "shift_px": 1.0,
+    "eta_max": 0.5,
+    "ramp_start_epoch": 4,
+    "ramp_duration": 15
+  }
+}

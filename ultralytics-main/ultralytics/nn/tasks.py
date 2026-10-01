@@ -769,6 +769,10 @@ class RTDETRDetectionModel(DetectionModel):
         """Initialize the loss criterion for the RTDETRDetectionModel."""
         from ultralytics.models.utils.loss import RTDETRDetectionLoss
 
+        if getattr(self, "gic_config", None) is not None:
+            from ultralytics.models.rtdetr.gic_loss import GICDetectionLoss
+
+            return GICDetectionLoss(nc=self.nc, use_vfl=True, config=self.gic_config)
         return RTDETRDetectionLoss(nc=self.nc, use_vfl=True)
 
     def loss(self, batch, preds=None):
@@ -786,6 +790,11 @@ class RTDETRDetectionModel(DetectionModel):
             self.criterion = self.init_criterion()
 
         img = batch["img"]
+        if getattr(self, "gic_config", None) is not None:
+            self.criterion.set_context(
+                epoch=self.gic_epoch, image_hw=img.shape[-2:],
+                collect=getattr(self, "gic_collect_diagnostics", False),
+            )
         # NOTE: preprocess gt_bbox and gt_labels to list.
         bs = img.shape[0]
         batch_idx = batch["batch_idx"]

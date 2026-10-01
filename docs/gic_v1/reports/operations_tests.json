@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "tests": 9,
+  "failures": [],
+  "scope": "fixtures; actual Linux tmux and official eval NOT_RUN locally"
+}
