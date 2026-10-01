@@ -1,0 +1,38 @@
+{
+  "status": "LOCAL_VERIFIED_SERVER_NOT_RUN",
+  "date": "2026-10-01",
+  "timezone": "Asia/Shanghai",
+  "parent": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "working_tree_HEAD_at_validation": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "working_tree_NCR_changes_were_uncommitted": true,
+  "checks": {
+    "core_tests": 11,
+    "ops_tests": 10,
+    "compileall": "PASSED",
+    "bash_syntax": "PASSED",
+    "git_diff_check": "PASSED",
+    "dataset_matches_parent_all_splits": true,
+    "CUDA_B16_640_FP32_steps": 1,
+    "CUDA_B16_640_AMP_steps": 1,
+    "smoke_scaler_init_scale": 128.0,
+    "server_environment": "NOT_RUN",
+    "live_tmux": "NOT_RUN",
+    "formal_training": "NOT_RUN",
+    "formal_val_test": "NOT_RUN",
+    "formal_complete_package": "NOT_RUN"
+  },
+  "files_sha256_lf": {
+    "tools/check_ncr_v1.py": "8c5e4030dbefbfb3c1ff069377326efed8de0448abec233b68f8a874add1a3a5",
+    "tools/check_ncr_v1_ops.py": "476b7d9eed16228e5323da12ca001de8f4e57a86eeca81b636bb0a85d7a38fec",
+    "tools/diagnose_ncr_v1_amp.py": "617285d31934f500ff9642b05abb9abe58b14eeb6c8754a749abb7ea568781a0",
+    "tools/ncr_v1.py": "2d41ec3afeb717269953cbe27413a400c056bc379613bcb21dd6d73a57a15ef1",
+    "tools/ncr_v1.sh": "8ef393814af8c824dcd27f7bfed2cb9191134ab86d91e960fca6aa18d1041846",
+    "tools/ncr_v1_common.py": "c362de908d906163060ac85b94e9a6aace2e26aa361eaebf141709c543e9c9da",
+    "tools/ncr_v1_parent_diagnostic.py": "2920b629c01650986eb0aed1813495755360c10dff2c050ec4f0990f17522ce3",
+    "tools/ncr_v1_results.py": "cc8ad13366d10500458167dd4c23482ccc95f5d62469698b6956e0037d3e1952",
+    "tools/ncr_v1_training.py": "0f6f5780d06728ba78d05acd0c4f3e97aefdc2421643ec8f244ced52b256d9f5",
+    "ultralytics-main/ultralytics/models/utils/loss.py": "2e9e052d701f00443446293b75b0ca119e513d6e837849da3a3b44cb5277e79a",
+    "ultralytics-main/ultralytics/models/utils/ncr.py": "1a6857d089a1838eecbaeb9186f7bc9bc44b07860a27adba931ece3839c844cf",
+    "ultralytics-main/ultralytics/nn/tasks.py": "eb4ffe199f5961dfbd3bd173cad916a90d7f7d875617a3d416cda05e5fda8580"
+  }
+}

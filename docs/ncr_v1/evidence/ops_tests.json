@@ -1,0 +1,8 @@
+{
+  "status": "PASSED",
+  "tests": 10,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "tmux_live": "NOT_RUN; target Linux tmux unavailable in local Windows checks"
+}

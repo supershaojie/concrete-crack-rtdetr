@@ -769,6 +769,10 @@ class RTDETRDetectionModel(DetectionModel):
         """Initialize the loss criterion for the RTDETRDetectionModel."""
         from ultralytics.models.utils.loss import RTDETRDetectionLoss
 
+        if getattr(self, "ncr_config", None) is not None:
+            from ultralytics.models.utils.ncr import NCRDetectionLoss
+
+            return NCRDetectionLoss(nc=self.nc, use_vfl=True, config=self.ncr_config)
         return RTDETRDetectionLoss(nc=self.nc, use_vfl=True)
 
     def loss(self, batch, preds=None):
@@ -809,12 +813,17 @@ class RTDETRDetectionModel(DetectionModel):
         dec_bboxes = torch.cat([enc_bboxes.unsqueeze(0), dec_bboxes])  # (7, bs, 300, 4)
         dec_scores = torch.cat([enc_scores.unsqueeze(0), dec_scores])
 
+        extra = {}
+        if getattr(self, "ncr_config", None) is not None:
+            extra = dict(input_hw=tuple(img.shape[-2:]), epoch=getattr(self, "ncr_epoch", None),
+                         collect_diagnostics=getattr(self, "ncr_collect_diagnostics", False) and self.training)
         loss = self.criterion(
-            (dec_bboxes, dec_scores), targets, dn_bboxes=dn_bboxes, dn_scores=dn_scores, dn_meta=dn_meta
+            (dec_bboxes, dec_scores), targets, dn_bboxes=dn_bboxes, dn_scores=dn_scores, dn_meta=dn_meta, **extra
         )
-        # NOTE: There are like 12 losses in RTDETR, backward with all losses but only show the main three losses.
+        # Each term enters backward once. NCR has its own display slot, never a bbox/class alias.
+        display = ["loss_giou", "loss_class", "loss_bbox"] + (["loss_ncr"] if extra else [])
         return sum(loss.values()), torch.as_tensor(
-            [loss[k].detach() for k in ["loss_giou", "loss_class", "loss_bbox"]], device=img.device
+            [loss[k].detach() for k in display], device=img.device
         )
 
     def predict(self, x, profile=False, visualize=False, batch=None, augment=False, embed=None):

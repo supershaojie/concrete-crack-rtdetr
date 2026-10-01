@@ -1,0 +1,318 @@
+{
+  "status": "FAILED",
+  "batch": 16,
+  "imgsz": 640,
+  "max_optimizer_steps": 2,
+  "steps": [
+    {
+      "amp": false,
+      "loss": 91.3257064819336,
+      "items": [
+        1.846763014793396,
+        6.530158042907715,
+        2.2387988567352295,
+        0.0003672909806482494
+      ],
+      "epoch": 19,
+      "diagnostics": {
+        "matches": 35,
+        "active_fraction_xy": [
+          0.5714285969734192,
+          0.6285714507102966
+        ],
+        "h_xy": [
+          {
+            "count": 35,
+            "mean": 0.4662339389324188,
+            "p50": 0.558024525642395,
+            "p90": 0.9467911720275879,
+            "max": 0.9724857211112976
+          },
+          {
+            "count": 35,
+            "mean": 0.3967045247554779,
+            "p50": 0.2511584758758545,
+            "p90": 0.9296445250511169,
+            "max": 0.9811674356460571
+          }
+        ],
+        "short_side_groups": {
+          "lt4px": {
+            "matches": 0,
+            "relative_center_error": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p90": null,
+              "max": null
+            }
+          },
+          "4to16px": {
+            "matches": 0,
+            "relative_center_error": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p90": null,
+              "max": null
+            }
+          },
+          "16to32px": {
+            "matches": 0,
+            "relative_center_error": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p90": null,
+              "max": null
+            }
+          },
+          "ge32px": {
+            "matches": 35,
+            "relative_center_error": {
+              "count": 70,
+              "mean": 0.16169628500938416,
+              "p50": 0.08597058057785034,
+              "p90": 0.4067239761352539,
+              "max": 0.6241853833198547
+            }
+          }
+        },
+        "raw": 0.0014691639225929976,
+        "lambda_eff": 0.25,
+        "weighted": 0.0003672909806482494,
+        "gradient_ratio": {
+          "status": "PASSED",
+          "definition": "abs(weighted NCR center gradient) / abs(5L1+2GIoU center gradient)",
+          "active_axes": 42,
+          "zero_base_axes": 0,
+          "ratio": {
+            "count": 42,
+            "mean": 0.004176223184913397,
+            "p50": 0.0029203761368989944,
+            "p90": 0.008675307966768742,
+            "max": 0.013942252844572067
+          },
+          "added_abs": {
+            "count": 42,
+            "mean": 0.0005966033204458654,
+            "p50": 0.00041719659930095077,
+            "p90": 0.0012393298093229532,
+            "max": 0.0019917504396289587
+          },
+          "base_abs": {
+            "count": 42,
+            "mean": 0.1428571492433548,
+            "p50": 0.1428571492433548,
+            "p90": 0.1428571492433548,
+            "max": 0.1428571492433548
+          }
+        }
+      },
+      "peak_allocated_bytes": 9609775104,
+      "optimizer_steps": 1,
+      "class_adaptation": [
+        {
+          "name": "model.26.dec_score_head.0.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+        },
+        {
+          "name": "model.26.dec_score_head.0.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+        },
+        {
+          "name": "model.26.dec_score_head.1.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+        },
+        {
+          "name": "model.26.dec_score_head.1.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+        },
+        {
+          "name": "model.26.dec_score_head.2.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+        },
+        {
+          "name": "model.26.dec_score_head.2.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+        },
+        {
+          "name": "model.26.denoising_class_embed.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+        },
+        {
+          "name": "model.26.enc_score_head.bias",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ],
+          "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+        },
+        {
+          "name": "model.26.enc_score_head.weight",
+          "source_shape": [
+            80,
+            256
+          ],
+          "target_shape": [
+            1,
+            256
+          ],
+          "rule": "Native RTDETRTrainer constructor at original RNG; exact C2 nc1 value"
+        }
+      ]
+    }
+  ],
+  "samples": [
+    {
+      "image": "crack_000001_brightness_contrast_strong.jpg",
+      "image_sha256": "f52412b0f7d6158df8c1e064cfc126a5ee447e7463dd663649f3ee5afd40d053",
+      "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+      "instances": 3
+    },
+    {
+      "image": "crack_000001_clahe_gamma_strong.jpg",
+      "image_sha256": "b597504f8cb893227a8bca17099be73259fc0ce94fadb8bd3e00ca5dce7c9f34",
+      "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+      "instances": 3
+    },
+    {
+      "image": "crack_000001_hflip.jpg",
+      "image_sha256": "3fa5f21f25af654368a3b78eb40bbc0cd6b863c21bd65ef48d442ef3a7135dfc",
+      "label_sha256": "f030619c297fa011407b673da42dd01a317e8e803e24e0597abab4b9db958301",
+      "instances": 3
+    },
+    {
+      "image": "crack_000001_noise_blur_strong.jpg",
+      "image_sha256": "0fd51ea323bcf061b3f8ff828c65f737cf66ca783f5b48e1e3dd3d3ff5c7a16a",
+      "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+      "instances": 3
+    },
+    {
+      "image": "crack_000001_original.jpg",
+      "image_sha256": "4ecb61e6b9ff09f8be6d574ad747a3bc4b183c900057765f4d7a81d1cfb8e31f",
+      "label_sha256": "0da6c072f182c5221828d7955c20d0818cb750fe57e4caea82464055e53bb6a3",
+      "instances": 3
+    },
+    {
+      "image": "crack_000001_vflip.jpg",
+      "image_sha256": "1db1f1e8f11a8f4745718cd64b3896dd9a666c54b90707cc8ef7fb8e3ac0ba4a",
+      "label_sha256": "adc6fec9ab70c1dea16b2be8f1d5f4ceb57fea39b008f2d7c6ca1adb4496b6ad",
+      "instances": 3
+    },
+    {
+      "image": "crack_000002_clahe_gamma_strong.jpg",
+      "image_sha256": "7487056da4da9e541c983c64a1836c9e23e40e9bb651979bf097aa6bc9354895",
+      "label_sha256": "4d78ebcbb39048f99833ba0191a8138366eafaaad82045fc519cf50d642bde6f",
+      "instances": 1
+    },
+    {
+      "image": "crack_000002_hflip.jpg",
+      "image_sha256": "bf784d6e3d352a7a01a486ce97806040745f83532e7a78b48ecee456f13dca7b",
+      "label_sha256": "4ba9247f050c933d9f62c5a8a304e9ea961599bbcfe5ae2d49e4fd45e3f04a64",
+      "instances": 1
+    },
+    {
+      "image": "crack_000002_original.jpg",
+      "image_sha256": "0857116b4e0fb503f879cd105d35abecf3d29cf29dd47cec4763c9ffa6f87b79",
+      "label_sha256": "4d78ebcbb39048f99833ba0191a8138366eafaaad82045fc519cf50d642bde6f",
+      "instances": 1
+    },
+    {
+      "image": "crack_000002_vflip.jpg",
+      "image_sha256": "f7db6d73bf9fbeb874d8debde9ff3d257c9186f0cd6a06ffd1c50d1d7dfe71ef",
+      "label_sha256": "84a18a9d8ff9ed4c6dacf42a0ce91c503f698873f8b92b27ac267e2785ded5ce",
+      "instances": 1
+    },
+    {
+      "image": "crack_000003_clahe_gamma_strong.jpg",
+      "image_sha256": "6e1c4c0dbc9461356d240a82a23ad16aad61ec2e1115df58f0874808119ad212",
+      "label_sha256": "643b00e3139c400405a1a6b6a36b9a2b000cff060fa2f3acd320fbd8bc02e947",
+      "instances": 2
+    },
+    {
+      "image": "crack_000003_hflip.jpg",
+      "image_sha256": "babe17496ec461bc97e23f214001dc4bc2e36a1d6bfed1be626cbb6fff7a97f1",
+      "label_sha256": "da8d92eacf49e6f105bc0947b8c15b0ad517655cd9739a3b6243bae791545aa0",
+      "instances": 2
+    },
+    {
+      "image": "crack_000003_noise_blur_strong.jpg",
+      "image_sha256": "9c4c2be0bbde8d01a47304da96c0c1bb10d36bad582838e97a36cb129c4be6de",
+      "label_sha256": "643b00e3139c400405a1a6b6a36b9a2b000cff060fa2f3acd320fbd8bc02e947",
+      "instances": 2
+    },
+    {
+      "image": "crack_000003_original.jpg",
+      "image_sha256": "3e1912ab0d373da1e11d42433223ffdfc446b0f8f389345068b8578d75a7d8d8",
+      "label_sha256": "643b00e3139c400405a1a6b6a36b9a2b000cff060fa2f3acd320fbd8bc02e947",
+      "instances": 2
+    },
+    {
+      "image": "crack_000003_vflip.jpg",
+      "image_sha256": "ce758bc407a3634467a506bf90fb2f97992ec97e24e01a1286b28e201471f916",
+      "label_sha256": "65dba5a583c5d157b5af6a82466b2fec5bda0b3b2f4d6b0973bfe8d251bb3a42",
+      "instances": 2
+    },
+    {
+      "image": "crack_000004_brightness_contrast_strong.jpg",
+      "image_sha256": "e2e88d94d4598694ee5e17e76385e6aa05e1783241fb3ac3bc95bf79fe8923d1",
+      "label_sha256": "2ff7c65b22ffe126dc4bc0135e6005b24964f12d82f7deb05ef2706ffd82d6e0",
+      "instances": 3
+    }
+  ],
+  "error": "RuntimeError('Nonfinite smoke gradient')",
+  "remaining": "NOT_RUN; no smaller batch/resolution, AMP change, or automatic retry"
+}

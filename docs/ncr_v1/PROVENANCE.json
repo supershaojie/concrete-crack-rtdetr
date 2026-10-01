@@ -1,0 +1,51 @@
+{
+  "parent_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "origin": "https://github.com/supershaojie/concrete-crack-rtdetr.git",
+  "branch": "exp-rtdetr-r18-lite-ncr-v1",
+  "parent_archive_local": "D:/rtdetr跑结果/C19＋LIF：原 CBR＋LIF-Down v1",
+  "public_init_sha256": "fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e",
+  "reused_unchanged_parent_tools": [
+    "init_c19_lif_v1.py",
+    "init_lif_down.py",
+    "lif_down_topology.py",
+    "c19_lif_v1_data.py",
+    "c19_lif_v1_results.py:postprocess,image_record"
+  ],
+  "parent_archive_files": {
+    "parent_args.yaml": "31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b",
+    "parent_dataset_inventory.json": "8567e1b4d1aae5f168fb18b633ed4357c7f0aba56c0041a6570647fb542d0446"
+  },
+  "no_other_new_loss_imported": true,
+  "data_identity": {
+    "yaml_sha256": "5738ceac3926404a2e4d10a448f6f3d92d654e9d533a4ba614c8d16f126fa9bb",
+    "config": {
+      "path": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det",
+      "train": "images/train",
+      "val": "images/val",
+      "test": "images/test",
+      "names": {
+        "0": "crack"
+      }
+    },
+    "splits": {
+      "train": {
+        "images": 6048,
+        "boxes": 45573,
+        "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77",
+        "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d"
+      },
+      "val": {
+        "images": 1728,
+        "boxes": 12840,
+        "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03",
+        "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd"
+      },
+      "test": {
+        "images": 864,
+        "boxes": 6663,
+        "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184",
+        "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51"
+      }
+    }
+  }
+}
