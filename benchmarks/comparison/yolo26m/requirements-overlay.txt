@@ -1,0 +1,9 @@
+# Private venv only; inherited Torch/TorchVision probed, never upgraded.
+numpy==1.26.4
+opencv-python==4.10.0.84
+ultralytics-thop==2.0.18
+polars==1.8.2
+pandas==2.2.3
+pytz==2024.2
+tzdata==2024.2
+tqdm==4.66.5

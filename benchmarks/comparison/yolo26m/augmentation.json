@@ -1,0 +1,61 @@
+{
+  "HSV": "additive H ((x+r_h*180)%180), S/V multiplicative, saturation LUT[0]=0; identical to mother and reference scratch adapter; v8.4.0 native formula agrees",
+  "MixUp_beta": [
+    32,
+    32
+  ],
+  "close": {
+    "one_based_epoch": 191,
+    "operations": [
+      "Mosaic",
+      "MixUp"
+    ],
+    "total_planned_epochs": 200,
+    "workers": "shutdown old prefetched iterator and recreate; no change to other transforms",
+    "zero_based_epoch": 190
+  },
+  "disabled": [
+    "Albumentations",
+    "CutMix",
+    "CopyPaste",
+    "BGR shuffle",
+    "TTA"
+  ],
+  "export_resize": "native fixed square letterbox auto=False then scale_boxes once",
+  "geometry": {
+    "box_filter": "native width,height>2; area ratio>0.1; aspect ratio<100; epsilon=1e-16",
+    "degrees": 5.0,
+    "perspective": 0.0002,
+    "scale": 0.4,
+    "shear": 1.5,
+    "translate": 0.1
+  },
+  "not_applicable": [
+    "classification auto_augment",
+    "classification erasing"
+  ],
+  "probabilities": {
+    "fliplr": 0.5,
+    "flipud": 0.2,
+    "mixup": 0.05,
+    "mosaic": 0.8
+  },
+  "remaining_non_equivalence": [
+    "Mosaic sampling uses each worker live buffer; loader prefetch=4 in v8.4.0 vs 2 in reference, so sampled images/RNG trajectory are not identical",
+    "Native model assigners, end2end selection and losses differ by architecture; no claim of identical outputs",
+    "Clipping/removal of zero-area Mosaic boxes and affine box filtering remain official v8.4.0; no offline label changes"
+  ],
+  "sequence": [
+    "Mosaic",
+    "CopyPaste(p=0)",
+    "RandomPerspective",
+    "MixUp",
+    "NoAlbumentations",
+    "MotherHSV",
+    "vertical flip",
+    "horizontal flip",
+    "Format(RGB)"
+  ],
+  "training_resize": "square stretch with normalized boxes; no pre-affine letterbox",
+  "validation_resize": "native fixed square letterbox scaleup=False after loader resize"
+}
