@@ -1,0 +1,446 @@
+{
+  "date": "2026-10-03 Asia/Shanghai",
+  "branch": "bench/yolov8m-scratch",
+  "actual_parent_commit": "74bc7d7168d4fdc199a54d1dc415c497dd0ddfce",
+  "remote_post_anchor_commits": [],
+  "source_parent_worktree_uncommitted_changes": [],
+  "scope": "Code delivery, synthetic CPU/CUDA verification only; no formal training or full dataset inference",
+  "initialization_type": "random",
+  "pretraining_source": null,
+  "pretrained_tensors_loaded": 0,
+  "architecture": {
+    "parameters_unfused": 25856899,
+    "prior_parameters_unfused": 25856899,
+    "scale": "m",
+    "native_fixed_DFL_elements": 16
+  },
+  "upstream": {
+    "commit": "f4d8f7765a490f3920e2d14c592a2967e347f185",
+    "compatibility_note": "Explicit weights_only=False for verified checkpoints on Torch 2.6+; preserve existing local asset paths containing apostrophes. No model/loss patch.",
+    "license": "AGPL-3.0",
+    "license_sha256": "e0eedba615d5cd1b986afb6c5b3a4b1ae33713e7e9dc74d19daec5e3221f9d2e",
+    "patch": "patches/0001-explicit-checkpoint-loading.patch",
+    "patch_sha256": "461f2d4ce4ed99e691517ea316df4ebfb9a434d5f773240e6ffc9a51340ccbe1",
+    "patched_source_sha256": "7588e53839944a7cd34cde919744a7903343f06acb2f24655c94aa397b213dfb",
+    "rejected_candidate": {
+      "commit": "6e43d1e1e5db72afbf686dee6745669bcb124b0a",
+      "reason": "Detect constructor unconditionally uses depthwise classification branch; rebuilding nc=1 changes official legacy YOLOv8 head and cannot fully transfer pretrained head. v8.3.20 has official parse_model legacy dispatch and original Conv classification branch.",
+      "tag": "v8.3.0"
+    },
+    "repository": "https://github.com/ultralytics/ultralytics.git",
+    "tag": "v8.3.20",
+    "tag_object": "3b6e1b124174107711942e4b85a93fab7c282c6f",
+    "version": "8.3.20",
+    "weights": {
+      "bytes": 52136884,
+      "download_verified": true,
+      "filename": "yolov8m.pt",
+      "pretraining": "COCO 80 classes",
+      "sha256": "5d4a90cdc7a21786cc59cd19778e9eafff836df9e2da32524737c7ee6efe4fe5",
+      "task": "detect",
+      "url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8m.pt"
+    }
+  },
+  "recipe_other_than_initialization_equals_parent": true,
+  "data": {
+    "status": "LIGHT_CHECKED",
+    "dataset_identity_sha256": "3401e485b40398ae096e8fd00101cae38b607ee1d6d1b5d5abba5c443e273483",
+    "splits": {
+      "test": {
+        "boxes": 6663,
+        "empty_labels": 0,
+        "images": 864,
+        "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51",
+        "labels": 864,
+        "orphan_labels": [],
+        "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184"
+      },
+      "train": {
+        "boxes": 45573,
+        "empty_labels": 0,
+        "images": 6048,
+        "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d",
+        "labels": 6048,
+        "orphan_labels": [],
+        "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77"
+      },
+      "val": {
+        "boxes": 12840,
+        "empty_labels": 0,
+        "images": 1728,
+        "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd",
+        "labels": 1728,
+        "orphan_labels": [],
+        "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03"
+      }
+    }
+  },
+  "data_checks": "Frozen prior list/label/size identities match; no full-image hash or dataset copy",
+  "environment": {
+    "cpu_nms": "passed",
+    "python": "C:\\Users\\o'v'o\\.codex\\worktrees\\bench-yolov8m\\Crack_RTDETR\\.envs\\yolov8m\\Scripts\\python.exe",
+    "python_version": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "torch_cuda_build": "11.8",
+    "versions": {
+      "matplotlib": "3.9.4",
+      "numpy": "1.26.4",
+      "opencv-python": "4.10.0.84",
+      "pandas": "2.2.3",
+      "pillow": "11.3.0",
+      "pyyaml": "6.0.3",
+      "scipy": "1.13.1",
+      "seaborn": "0.13.2",
+      "torch": "2.7.1+cu118",
+      "torchvision": "0.22.1+cu118",
+      "ultralytics-thop": "2.0.9"
+    }
+  },
+  "local_gpu": "NVIDIA GeForce RTX 2060, 6144 MiB, CUDA smoke",
+  "tests": {
+    "lifecycle_passed": 5,
+    "lifecycle_POSIX_skipped": 1,
+    "handoff": 3,
+    "initialization_guards": 3,
+    "integration": 10,
+    "inherited_source_patch_replay": "bootstrap passed"
+  },
+  "cuda_smoke": {
+    "amp_isolation": "FP32/FP16 comparison passed; model/BN/EMA/optimizer/Python/NumPy/CPU/CUDA RNG unchanged",
+    "export_evaluate": "Actual scratch best; production FP32 640 exporter and common evaluator, two synthetic images per split",
+    "formal_batch16_imgsz640_parallel_capacity": "NOT_TESTED",
+    "formal_training": false,
+    "initialization": {
+      "construction": "DetectionModel(official YAML dict with scale=m, nc=1), weights=None",
+      "destination_tensors": 475,
+      "head": "ultralytics.nn.modules.head.Detect",
+      "initialization_type": "random",
+      "model_yaml": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov8m-scratch\\Crack_RTDETR\\.vendor\\yolov8m-scratch\\ultralytics-v8.3.20\\ultralytics\\cfg\\models\\v8\\yolov8.yaml",
+      "model_yaml_sha256": "e23658a8a15f097b96376d33b3afa88e02d2e1d4a7b45949b61b783a959d4fe8",
+      "native_constants": "BN, Detect bias priors and fixed DFL projection retain official definitions",
+      "nc": 1,
+      "parameters_unfused": 25856899,
+      "pretrained_tensors_loaded": 0,
+      "pretraining_source": null,
+      "reg_max": 16,
+      "scale": "m",
+      "seed": 42,
+      "strides": [
+        8.0,
+        16.0,
+        32.0
+      ],
+      "transferred_elements": 0,
+      "transferred_keys": [],
+      "transferred_tensors": 0,
+      "yaml": {
+        "backbone": [
+          [
+            -1,
+            1,
+            "Conv",
+            [
+              64,
+              3,
+              2
+            ]
+          ],
+          [
+            -1,
+            1,
+            "Conv",
+            [
+              128,
+              3,
+              2
+            ]
+          ],
+          [
+            -1,
+            3,
+            "C2f",
+            [
+              128,
+              true
+            ]
+          ],
+          [
+            -1,
+            1,
+            "Conv",
+            [
+              256,
+              3,
+              2
+            ]
+          ],
+          [
+            -1,
+            6,
+            "C2f",
+            [
+              256,
+              true
+            ]
+          ],
+          [
+            -1,
+            1,
+            "Conv",
+            [
+              512,
+              3,
+              2
+            ]
+          ],
+          [
+            -1,
+            6,
+            "C2f",
+            [
+              512,
+              true
+            ]
+          ],
+          [
+            -1,
+            1,
+            "Conv",
+            [
+              1024,
+              3,
+              2
+            ]
+          ],
+          [
+            -1,
+            3,
+            "C2f",
+            [
+              1024,
+              true
+            ]
+          ],
+          [
+            -1,
+            1,
+            "SPPF",
+            [
+              1024,
+              5
+            ]
+          ]
+        ],
+        "ch": 3,
+        "head": [
+          [
+            -1,
+            1,
+            "nn.Upsample",
+            [
+              "None",
+              2,
+              "nearest"
+            ]
+          ],
+          [
+            [
+              -1,
+              6
+            ],
+            1,
+            "Concat",
+            [
+              1
+            ]
+          ],
+          [
+            -1,
+            3,
+            "C2f",
+            [
+              512
+            ]
+          ],
+          [
+            -1,
+            1,
+            "nn.Upsample",
+            [
+              "None",
+              2,
+              "nearest"
+            ]
+          ],
+          [
+            [
+              -1,
+              4
+            ],
+            1,
+            "Concat",
+            [
+              1
+            ]
+          ],
+          [
+            -1,
+            3,
+            "C2f",
+            [
+              256
+            ]
+          ],
+          [
+            -1,
+            1,
+            "Conv",
+            [
+              256,
+              3,
+              2
+            ]
+          ],
+          [
+            [
+              -1,
+              12
+            ],
+            1,
+            "Concat",
+            [
+              1
+            ]
+          ],
+          [
+            -1,
+            3,
+            "C2f",
+            [
+              512
+            ]
+          ],
+          [
+            -1,
+            1,
+            "Conv",
+            [
+              512,
+              3,
+              2
+            ]
+          ],
+          [
+            [
+              -1,
+              9
+            ],
+            1,
+            "Concat",
+            [
+              1
+            ]
+          ],
+          [
+            -1,
+            3,
+            "C2f",
+            [
+              1024
+            ]
+          ],
+          [
+            [
+              15,
+              18,
+              21
+            ],
+            1,
+            "Detect",
+            [
+              "nc"
+            ]
+          ]
+        ],
+        "nc": 1,
+        "scale": "m",
+        "scales": {
+          "l": [
+            1.0,
+            1.0,
+            512
+          ],
+          "m": [
+            0.67,
+            0.75,
+            768
+          ],
+          "n": [
+            0.33,
+            0.25,
+            1024
+          ],
+          "s": [
+            0.33,
+            0.5,
+            1024
+          ],
+          "x": [
+            1.0,
+            1.25,
+            512
+          ]
+        }
+      }
+    },
+    "native_fixed_DFL": "passed",
+    "native_lifecycle": {
+      "AMP": true,
+      "batch": 2,
+      "device": "cuda:0",
+      "epochs": 2,
+      "foreign_checkpoint_rejection": "passed",
+      "imgsz": 64,
+      "initialization_record_preserved": true,
+      "interrupted_after_epoch": 1,
+      "resumed_to_epoch": 2,
+      "zero_state_imports_during_first_epoch": "passed"
+    },
+    "scope": "SMOKE_ONLY_SYNTHETIC",
+    "state_imports_forbidden_during_construction": "passed"
+  },
+  "cuda_smoke_report_sha256": "f842c236d664393c3af2965e65478da7cca382c59b1f194f08d0bc11d3620643",
+  "cpu_smoke": null,
+  "historical_initialization": {
+    "old_YOLO": "COCO",
+    "new_YOLO": "random",
+    "existing_RTDETR": "ImageNet backbone"
+  },
+  "limitations": [
+    "No SSH/server operations performed",
+    "AutoDL Python/Torch/CUDA not yet executed",
+    "Formal batch16/imgsz640 simultaneous GPU memory capacity not measured",
+    "Real tmux and POSIX signal behavior not executed on Windows",
+    "No formal 200-epoch training or real-data val/test metrics"
+  ],
+  "file_sha256": {
+    "benchmarks/comparison/yolov8m/adapters.py": "60dcb45a1d47b4b7a26a5018f2a31ef76b07d844dd428c3c651d5d6e6bb8f3b3",
+    "benchmarks/comparison/yolov8m/bootstrap.py": "70b1e8e25963fbf91ab11c2b172f74892cfce2d56b83d21f9044a4976554f85a",
+    "benchmarks/comparison/yolov8m/data.py": "04111627d05df203d94ef71a039199d96980f7d50e2bb80d23c7dbd49080d9c4",
+    "benchmarks/comparison/yolov8m/export.py": "d03cf0fd4da7898208e3cc4aaf4fd5de9bc1090d227c8aafad04298cb1e7490e",
+    "benchmarks/comparison/yolov8m/initialization.json": "00923c8fb8f1d40fc163454a552f8b5caf90f232eac786e8e249a2e2424042c4",
+    "benchmarks/comparison/yolov8m/patches/0001-explicit-checkpoint-loading.patch": "461f2d4ce4ed99e691517ea316df4ebfb9a434d5f773240e6ffc9a51340ccbe1",
+    "benchmarks/comparison/yolov8m/recipe.yaml": "dcb0a1d81cc5b05776404e57d749f7cdb46867a6af6df077f0ce1de03c5d2bec",
+    "benchmarks/comparison/yolov8m/requirements-overlay.txt": "af044bd5b646b4dbeab84e45a998ec95f22293ca12066d6620f0a2f1a7dae61c",
+    "benchmarks/comparison/yolov8m/run.py": "24c010618c75eb20c2426a8e3b512c2955fbbb5fdf5d82b1f127e1f5ab765a47",
+    "benchmarks/comparison/yolov8m/smoke.py": "1b3fc57e068b8f69eb473a9e1b0beb76eba8673a0c9036222b1e2ba64b572d4e",
+    "benchmarks/comparison/yolov8m/stage.py": "c7ec91c49d70177c86b1f3b5eee64df944d7e9fdf1ba785de6808301d0f6d399",
+    "benchmarks/comparison/yolov8m/support.py": "9b3de1d6588fadf45f092084f255377541afd7a7741cb2f1e70781ba4e73bae6",
+    "benchmarks/comparison/yolov8m/test_initialization_guards.py": "d7870eecc1b4ceb56b72e3b150674ce34557128dd0cca2cc26e7716e2d2e0b7e",
+    "benchmarks/comparison/yolov8m/test_lifecycle.py": "2fe5dddfcbf87b040a4bce57ff0e0da5d4ed65b08b56c1db00b37eb5cd5568ff",
+    "benchmarks/comparison/yolov8m/test_scratch.py": "77a1bd9af5588c034ef0abd1b3a468bd6f72a32571a341e07607708202e886ff",
+    "benchmarks/comparison/yolov8m/upstream.lock.json": "0852d4473ff89b2470ec84a5db63954a3a803760fac4395c6567853772b0de28",
+    "scripts/legacy_yolo_jobs.py": "9271ffb457428aed7629b75e2aa703a043beb41b5d251b347e5d164b1fdb5337",
+    "scripts/test_scratch_handoff.py": "9def260b60f8270cde1e47e4327243ad9cd3024e0877230729a08929e9f7cd02",
+    "scripts/autodl_yolov8m.sh": "c2c3e208668c14bfe69461cb2c5f1b9a5603165b1ff1d0a34f3e7bd6058ec336"
+  }
+}

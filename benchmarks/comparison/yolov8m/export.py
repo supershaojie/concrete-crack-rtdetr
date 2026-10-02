@@ -8,7 +8,7 @@ from pathlib import Path
 import sys
 import uuid
 
-from support import COMMON, canonical, read_json, run_identity, sha256, write_json
+from support import COMMON, canonical, read_json, run_identity, sha256, write_json, validate_checkpoint
 
 SETTINGS = {'imgsz': 640, 'batch': 16, 'workers': 0, 'conf': 0.001, 'iou': 0.7,
             'max_det': 300, 'half': False, 'augment': False, 'rect': False, 'seed': 42,
@@ -48,11 +48,16 @@ def export_split(run, split, manifest, source_identity):
     training = read_json(run / 'train_status.json')
     if training['status'] != 'completed':
         raise ValueError('Select the finished training best before exporting val/test')
-    if run_identity(manifest, source_identity) != read_json(run / 'identity.json'):
+    expected_identity = read_json(run/'identity.json')
+    if run_identity(manifest, source_identity, run_id=read_json(run/'run_id.json')['run_id']) != expected_identity:
         raise ValueError('Code/source/recipe/data identity changed since training')
     checkpoint = run / 'train/weights/best.pt'
     if sha256(checkpoint) != training['best_sha256']:
         raise ValueError('Selected best checkpoint changed')
+    import torch
+    ckpt = torch.load(checkpoint, map_location='cpu', weights_only=False)
+    validate_checkpoint(ckpt, expected_identity)
+    del ckpt
     gt_path = run / 'gt' / (split+'.json')
     gt = read_json(gt_path)
     identity = {**read_json(run / 'identity.json'), 'checkpoint_sha256': training['best_sha256'],

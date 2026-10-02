@@ -9,14 +9,15 @@ from copy import copy, deepcopy
 from datetime import datetime
 import io
 import os
+import random
 from pathlib import Path
 import sys
 
 from support import (SOURCE, ROOT, LOCK, atomic_bytes, canonical, configure, digest, local_lock,
-                     read_json, write_json)
+                     read_json, write_json, initialization_record, model_yaml, model_config)
 
 if 'ultralytics' not in sys.modules:  # spawned workers must also import the official tree
-    configure(Path(os.environ.get('YOLOV8M_RUNTIME', ROOT / '.runtime/yolov8m/worker')),
+    configure(Path(os.environ.get('YOLOV8M_RUNTIME', ROOT / '.runtime/yolov8m-scratch/worker')),
               Path(os.environ.get('YOLOV8M_SOURCE', SOURCE)))
 import ultralytics
 if Path(ultralytics.__file__).resolve() != Path(os.environ['YOLOV8M_SOURCE']) / 'ultralytics/__init__.py':
@@ -194,16 +195,23 @@ def strict_amp_probe(model):
     device = next(model.parameters()).device
     if device.type != 'cuda':
         raise RuntimeError('Formal recipe requires CUDA device=0 and AMP')
-    probe = deepcopy(model).eval()
-    with torch.no_grad():
-        x = torch.zeros(1, 3, 64, 64, device=device)
-        with torch.autocast(device_type='cuda', enabled=False):
-            fp = probe(x)[0]
-        with torch.autocast(device_type='cuda', dtype=torch.float16):
-            amp = probe(x)[0]
-        if fp.shape != amp.shape or not torch.isfinite(fp).all() or not torch.isfinite(amp).all():
-            raise RuntimeError('Actual-model AMP probe failed; recipe is not silently changed')
-    del probe
+    py_state, np_state = random.getstate(), np.random.get_state()
+    try:
+        with torch.random.fork_rng(devices=[device]):
+            probe = deepcopy(model).eval()
+            with torch.no_grad():
+                x = torch.linspace(0,1,3*64*64,device=device).reshape(1,3,64,64)
+                with torch.autocast(device_type='cuda', enabled=False):
+                    fp = probe(x)[0]
+                with torch.autocast(device_type='cuda', dtype=torch.float16):
+                    amp = probe(x)[0]
+                if (fp.shape != amp.shape or not torch.isfinite(fp).all() or not torch.isfinite(amp).all()
+                        or not torch.allclose(fp, amp.float(), rtol=.1, atol=.5)):
+                    raise RuntimeError('Actual-model AMP accuracy probe failed; recipe is not silently changed')
+            del probe
+    finally:
+        random.setstate(py_state)
+        np.random.set_state(np_state)
     return True
 
 
@@ -244,16 +252,43 @@ class ComparisonTrainer(DetectionTrainer):
         loader.reset = lambda: reset_workers(loader)
         return loader
 
+    def setup_model(self):
+        if self.comparison_identity['initialization_type']=='random' and not self.args.resume:
+            source = Path(os.environ['YOLOV8M_SOURCE'])
+            if self.args.pretrained is not False or str(self.model) != str(model_yaml(source)):
+                raise ValueError('Scratch setup requires the verified official YAML and pretrained=False')
+            self.model = self.get_model(model_config(source), weights=None)
+            return None
+        return super().setup_model()
+
     def get_model(self, cfg=None, weights=None, verbose=True):
+        scratch = self.comparison_identity['initialization_type']=='random'
+        if scratch and not self.args.resume:
+            if weights is not None or self.args.pretrained is not False:
+                raise ValueError('New scratch training forbids all supplied weights')
+            if cfg != model_config(Path(os.environ['YOLOV8M_SOURCE'])):
+                raise ValueError('Scratch model must use the pinned official M YAML')
+        elif weights is None:
+            raise ValueError('COCO initialization or explicit resume requires verified weights')
         model = super().get_model(cfg, weights, verbose)
         record = model_identity(model, 1)
         if weights is None:
-            raise ValueError('Formal training requires verified COCO initialization or explicit resume')
+            record.update(initialization_record(Path(os.environ['YOLOV8M_SOURCE'])))
+            record.update(transferred_tensors=0, transferred_elements=0, transferred_keys=[],
+                          destination_tensors=len(model.state_dict()), weights_argument=None, resume=False,
+                          construction='ComparisonTrainer.setup_model -> get_model(weights=None) -> DetectionModel',
+                          fixed_parameters=[n for n,p in model.named_parameters() if not p.requires_grad])
+            write_json(self.comparison_run/'initialization.json', record)
+            return model
         state = weights.float().state_dict()
         transferred = intersect_dicts(state, model.state_dict())
         record.update(transferred_tensors=len(transferred), destination_tensors=len(model.state_dict()),
                       transferred_elements=sum(v.numel() for v in transferred.values()),
                       transferred_keys=sorted(transferred), missing_or_reshaped_keys=sorted(set(model.state_dict())-set(transferred)))
+        record.update(initialization_record(Path(os.environ['YOLOV8M_SOURCE'])))
+        record['restored_checkpoint_tensors'] = len(transferred) if self.args.resume else 0
+        if not self.args.resume:
+            record['pretrained_tensors_loaded'] = len(transferred)
         if not all(torch.equal(model.state_dict()[k], v) for k, v in transferred.items()):
             raise ValueError('Official pretrained transfer did not reproduce matching tensors')
         write_json(self.comparison_run / ('resume_model.json' if self.args.resume else 'initialization.json'), record)

@@ -31,7 +31,7 @@ from ultralytics.engine.results import Results
 from adapters import (ComparisonTrainer, CompleteValidator, IsolatedDataset, MotherHSV, SquarePredictor, reset_workers)
 from data import preflight, verify_inputs
 from export import evaluator_api, result_record
-from run import load_pretrained
+from run import load_initial_model
 
 COUNTS = {'mosaic': 0, 'mixup': 0, 'hsv': 0}
 
@@ -263,7 +263,7 @@ def main():
         write_json(args.output,{'status':'PASSED_CPU_INTEGRATION_TESTS','tests':tests.testsRun,
                                'model_forward_repeated':False,'formal_training_started':False})
         return
-    model,initialization=load_pretrained()
+    model,initialization=load_initial_model()
     model.args=get_cfg(overrides=recipe())
     model.train()
     torch.manual_seed(42)

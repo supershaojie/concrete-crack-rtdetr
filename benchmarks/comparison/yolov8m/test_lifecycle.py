@@ -78,12 +78,12 @@ class LifecycleTests(unittest.TestCase):
         result=subprocess.run([bash,'scripts/autodl_yolov8m.sh','start','--run-id','session_guard_test'],
                               cwd=ROOT,env=env,capture_output=True,text=True)
         self.assertEqual(result.returncode,73,result.stderr)
-        self.assertEqual((self.path/'calls').read_text().strip(),'has-session -t =comparison-yolov8m')
+        self.assertEqual((self.path/'calls').read_text().strip(),'has-session -t =comparison-yolov8m-scratch')
 
     def test_shell_existing_run_protection_before_bootstrap(self):
         bash=shutil.which('bash') or 'C:/Program Files/Git/bin/bash.exe'
         if not Path(bash).is_file(): self.skipTest('bash unavailable')
-        root=ROOT/'outputs/yolov8m'; root.mkdir(parents=True,exist_ok=True)
+        root=ROOT/'outputs/yolov8m-scratch'; root.mkdir(parents=True,exist_ok=True)
         with tempfile.TemporaryDirectory(prefix='guard_',dir=root) as name:
             retained=Path(name)/'retained.txt'; retained.write_text('old run')
             result=subprocess.run([bash,'scripts/autodl_yolov8m.sh','run','--run-id',Path(name).name],

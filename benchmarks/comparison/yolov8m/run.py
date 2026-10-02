@@ -13,7 +13,8 @@ import traceback
 import uuid
 
 from support import (ASSET, HERE, ROOT, SOURCE, canonical, checked_weight, configure, digest,
-                     local_lock, read_json, recipe, run_identity, sha256, status, write_json)
+                     local_lock, read_json, recipe, run_identity, sha256, status, write_json,
+                     initialization_type, initialization_record, model_config, model_yaml, validate_checkpoint)
 
 
 def load_pretrained():
@@ -39,6 +40,21 @@ def load_pretrained():
               'missing_or_reshaped_keys': sorted(set(model.state_dict())-set(transferred))}
     return model, record
 
+def load_initial_model(source=SOURCE):
+    if initialization_type()=='coco':
+        return load_pretrained()
+    from ultralytics.nn.tasks import DetectionModel
+    from ultralytics.utils.torch_utils import init_seeds
+    from adapters import model_identity
+    init_seeds(42, deterministic=True)
+    # Explicit scale on the pinned official dictionary; no YOLO(.pt), load() or state transfer.
+    model = DetectionModel(model_config(source), nc=1, verbose=False)
+    record = {**model_identity(model,1), **initialization_record(source),
+              'transferred_tensors':0, 'transferred_elements':0, 'transferred_keys':[],
+              'destination_tensors':len(model.state_dict()),
+              'construction':'DetectionModel(official YAML dict with scale=m, nc=1), weights=None'}
+    return model, record
+
 
 def check(args):
     identity = configure(args.output.parent / 'check_runtime', args.source)
@@ -47,8 +63,8 @@ def check(args):
     from ultralytics.cfg import get_cfg
     from bootstrap import environment_probe
     cfg = get_cfg(overrides=recipe())
-    model, record = load_pretrained()
-    write_json(args.output, {'status': 'VERIFIED_IMPORT_CONFIG_AND_PRETRAINED_NO_TRAINING',
+    model, record = load_initial_model(args.source)
+    write_json(args.output, {'status': 'VERIFIED_IMPORT_CONFIG_AND_INITIALIZATION_NO_TRAINING',
                'source': identity, 'environment': environment_probe(), 'expanded_args': vars(cfg),
                'initialization': record, 'unsupported_inactive_fields': {'cutmix': 'absent in v8.3.20'}})
     print(f'CHECK PASSED: nc=1 M, {record["transferred_tensors"]}/{record["destination_tensors"]} tensors transferred', flush=True)
@@ -61,12 +77,13 @@ def train(args, manifest, source):
     from ultralytics.cfg import get_cfg
     from adapters import ComparisonTrainer
     run = args.run
-    identity = run_identity(manifest, source)
+    identity = run_identity(manifest, source, run_id=read_json(run/'run_id.json')['run_id'])
     previous = read_json(run / 'train_status.json') if (run / 'train_status.json').exists() else {}
     if previous.get('status') == 'completed':
         raise ValueError('Training is already completed; use export/evaluate/summary')
     overrides = recipe()
-    overrides.update(model=str(checked_weight()), data=str(run / 'data.yaml'),
+    overrides.update(model=str(model_yaml(args.source)) if initialization_type()=='random' else str(checked_weight()),
+                     pretrained=initialization_type()=='coco', resume=False, data=str(run / 'data.yaml'),
                      project=str(run), name='train', exist_ok=True)
     if args.resume:
         if not (run / 'identity.json').is_file() or read_json(run / 'identity.json') != identity:
@@ -74,8 +91,7 @@ def train(args, manifest, source):
         last = run / 'train/weights/last.pt'
         # Only this run's own last checkpoint; no arbitrary pickle or automatic latest-run selection.
         ckpt = torch.load(last, map_location='cpu', weights_only=False)
-        if ckpt.get('comparison_identity') != identity or ckpt.get('optimizer') is None or not 0 <= ckpt['epoch'] < 199:
-            raise ValueError('Checkpoint model/data/config identity or resume state differs')
+        validate_checkpoint(ckpt, identity, resume=True)
         best = torch.load(run / 'train/weights/best.pt', map_location='cpu', weights_only=False)
         if best.get('comparison_identity') != identity or best['epoch']+1 != ckpt['comparison_best_epoch']:
             raise ValueError('Best/last save was interrupted between files; checkpoint pair needs inspection')
@@ -117,7 +133,7 @@ def train(args, manifest, source):
             'optimizer': type(t.optimizer).__name__, 'batch': t.batch_size,
             'train_loader_batch': t.train_loader.batch_size, 'val_loader_batch': t.test_loader.batch_size,
             'train_workers': t.train_loader.num_workers, 'val_workers': t.test_loader.num_workers,
-            'amp': t.amp, 'amp_probe': 'actual model, CUDA, 64x64 FP32/FP16 finite forward',
+            'amp': t.amp, 'amp_probe': 'isolated actual model, CUDA, 64x64 FP32/FP16; allclose rtol=0.1 atol=0.5; all RNG streams restored',
             'nominal_nbs': t.args.nbs, 'accumulate_after_warmup': t.accumulate,
             'warmup_iterations': max(round(t.args.warmup_epochs*len(t.train_loader)), 100),
             'accumulation_warmup': 'round(linear interpolation 1 -> nbs/batch), minimum 1',
@@ -175,7 +191,7 @@ def measure(args):
     import torch
     torch.set_num_threads(2)
     from thop import profile
-    model, record = load_pretrained()
+    model, record = load_initial_model(args.source)
     model = model.float().cpu().eval()
     values = {}
     for name, m in [('unfused', model), ('fused', deepcopy(model).fuse(verbose=False))]:
@@ -185,6 +201,7 @@ def measure(args):
                         'MACs': macs, 'GFLOPs_2x_MACs': 2*macs/1e9}
     write_json(args.output, {'nc': 1, 'imgsz': [640, 640], 'device': 'cpu', 'precision': 'FP32',
                'method': 'ultralytics-thop; one multiply-add = 2 FLOPs; unsupported ops depend on THOP',
+               'initialization':record,
                'speed': 'not measured; parallel GPU timing is not a paper speed benchmark', **values})
 
 
@@ -237,6 +254,7 @@ def main():
             if args.command == 'preflight':
                 status(args.run, step, 'running', command=sys.argv)
                 result = preflight(args.data, args.run, args.data_root, args.public_coco)
+                write_json(args.run/'run_id.json', {'run_id':uuid.uuid4().hex})
                 status(args.run, step, 'completed', exit_code=0, counts=result['splits'])
             else:
                 manifest = verify_inputs(args.run, ('train', 'val') if args.command == 'train' else (args.split,))

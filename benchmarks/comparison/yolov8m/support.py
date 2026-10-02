@@ -15,8 +15,8 @@ COMMON = HERE.parent
 sys.path.insert(0, str(COMMON))
 from common import canonical, digest, load_yaml, sha256
 
-SOURCE = ROOT / '.vendor/yolov8m/ultralytics-v8.3.20'
-ASSET = ROOT / '.runtime/yolov8m/assets/yolov8m.pt'
+SOURCE = ROOT / '.vendor/yolov8m-scratch/ultralytics-v8.3.20'
+ASSET = ROOT / '.runtime/yolov8m-scratch/assets/yolov8m.pt'
 RECIPE = HERE / 'recipe.yaml'
 LOCK = HERE / 'upstream.lock.json'
 
@@ -145,15 +145,47 @@ def configure(runtime, source=SOURCE):
 def recipe():
     return load_yaml(RECIPE)
 
+def initialization_type():
+    value = read_json(HERE/'initialization.json')['initialization_type']
+    if value not in ('random', 'coco'):
+        raise ValueError('Unknown initialization mode')
+    if (value == 'random') != (recipe()['pretrained'] is False):
+        raise ValueError('Recipe and explicit initialization mode disagree')
+    return value
 
-def run_identity(manifest, source_identity, require_clean=True):
+def model_yaml(source=SOURCE):
+    return Path(source)/'ultralytics/cfg/models/v8/yolov8.yaml'
+
+def model_config(source=SOURCE):
+    cfg = load_yaml(model_yaml(source))
+    cfg['scale'] = 'm'
+    return cfg
+
+def initialization_record(source=SOURCE):
+    mode = initialization_type()
+    return {'initialization_type':mode, 'pretraining_source':None if mode=='random' else 'COCO',
+            'pretrained_tensors_loaded':0 if mode=='random' else None,
+            'model_yaml':str(model_yaml(source).resolve()), 'model_yaml_sha256':sha256(model_yaml(source)),
+            'scale':'m', 'nc':1, 'seed':42,
+            'native_constants':'BN, Detect bias priors and fixed DFL projection retain official definitions'}
+
+def validate_checkpoint(ckpt, identity, resume=False):
+    if ckpt.get('comparison_identity') != identity:
+        raise ValueError('Checkpoint model/initialization/data/config/run identity differs')
+    if resume and (ckpt.get('optimizer') is None or not 0 <= ckpt['epoch'] < 199):
+        raise ValueError('Checkpoint is complete or missing resume state')
+
+
+def run_identity(manifest, source_identity, require_clean=True, run_id=None):
     if require_clean and git('status', '--porcelain', '--untracked-files=normal'):
         raise ValueError('Commit adapter changes before formal training; worktree must be clean')
-    return {'model': 'official_yolov8m_coco_to_crack', 'model_code_sha': git('rev-parse', 'HEAD'),
+    init = initialization_record(Path(source_identity['ultralytics_file']).parents[1])
+    return {'model': 'official_yolov8m_'+initialization_type()+'_to_crack',
+            **init, 'run_id':run_id, 'model_code_sha': git('rev-parse', 'HEAD'),
             'dataset_identity_sha256': manifest['dataset_identity_sha256'],
             'recipe_sha256': digest(canonical(recipe())), 'adapter_sha256': adapter_hash(),
             'upstream_commit': source_identity['commit'], 'patch_sha256': source_identity['patch_sha256'],
-            'initialization_sha256': read_json(LOCK)['weights']['sha256']}
+            'initialization_sha256': read_json(LOCK)['weights']['sha256'] if initialization_type()=='coco' else None}
 
 
 def status(run, step, state, **values):

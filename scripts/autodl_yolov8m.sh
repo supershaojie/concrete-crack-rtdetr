@@ -28,7 +28,7 @@ main() {
     if [[ "$mode" == --help || "$mode" == -h ]]; then
         printf '%s\n' 'Usage: bash scripts/autodl_yolov8m.sh start|run|start-resume|resume [options]' \
             'Options: --run-id ID --data YAML --data-root ROOT --public-coco DIR --base-python PYTHON' \
-            'start uses tmux comparison-yolov8m; run stays in this shell. Resume requires an explicit run-id.' \
+            'start uses tmux comparison-yolov8m-scratch; run stays in this shell. Resume requires an explicit run-id.' \
             'Runs bootstrap -> light preflight -> train -> export/evaluate val -> export/evaluate test -> summary.'
         return
     fi
@@ -55,7 +55,7 @@ main() {
     [[ "$run_id" =~ ^[a-zA-Z0-9][a-zA-Z0-9._-]{0,79}$ ]] || { printf 'Invalid run-id\n' >&2; return 64; }
     if [[ "$mode" == *resume && "$explicit_id" != 1 ]]; then printf 'Resume needs --run-id\n' >&2; return 64; fi
     cd "$root"
-    RUN="$root/outputs/yolov8m/$run_id"
+    RUN="$root/outputs/yolov8m-scratch/$run_id"
     ENTRY="$root/benchmarks/comparison/yolov8m/run.py"
     PY="$base"
     local options=(--run-id "$run_id" --data "$data" --base-python "$base")
@@ -63,18 +63,18 @@ main() {
     [[ -z "$public_coco" ]] || options+=(--public-coco "$public_coco")
     if [[ "$mode" == start* ]]; then
         command -v tmux >/dev/null || { printf 'tmux unavailable\n' >&2; return 69; }
-        if tmux has-session -t '=comparison-yolov8m' 2>/dev/null; then
-            printf 'Protected existing comparison-yolov8m session; inspect it before starting another run.\n' >&2
+        if tmux has-session -t '=comparison-yolov8m-scratch' 2>/dev/null; then
+            printf 'Protected existing comparison-yolov8m-scratch session; inspect it before starting another run.\n' >&2
             return 73
         fi
-        local next=run command gate="yolov8m-launch-${run_id}-${RANDOM}"
+        local next=run command window gate="yolov8m-scratch-launch-${run_id}-${RANDOM}"
         [[ "$mode" != start-resume ]] || next=resume
         printf -v command '%q ' "$BASH" "$script" "$next" "${options[@]}"
         # Gate the command so remain-on-exit is set before even a fast failure can occur.
-        tmux new-session -d -s comparison-yolov8m "tmux wait-for '$gate'; exec $command"
-        tmux set-option -t '=comparison-yolov8m' remain-on-exit on
+        window=$(tmux new-session -d -P -F '#{window_id}' -s comparison-yolov8m-scratch "tmux wait-for '$gate'; exec $command")
+        tmux set-option -w -t "$window" remain-on-exit on
         tmux wait-for -S "$gate"
-        printf 'Started comparison-yolov8m. Attach: tmux attach -t comparison-yolov8m\nRun: %s\n' "$RUN"
+        printf 'Started comparison-yolov8m-scratch. Attach: tmux attach -t comparison-yolov8m-scratch\nRun: %s\n' "$RUN"
         return
     fi
     if [[ "$mode" == run ]]; then
@@ -84,14 +84,17 @@ main() {
     fi
     local attempt=$run_id
     [[ "$mode" != resume ]] || attempt="${run_id}_resume_$(TZ=Asia/Shanghai date +%Y%m%d_%H%M%S)_${RANDOM}"
-    LAUNCH="$root/outputs/yolov8m_launch/$attempt"
+    LAUNCH="$root/outputs/yolov8m-scratch-launch/$attempt"
     mkdir -p "$(dirname "$LAUNCH")"
     mkdir "$LAUNCH"  # exclusive: no previous logs can be overwritten
     trap finish EXIT
     trap 'exit 130' INT
     trap 'exit 143' TERM
+    nvidia-smi --query-gpu=index,name,memory.total,memory.used,memory.free --format=csv || true
+    nvidia-smi --query-compute-apps=pid,process_name,used_memory --format=csv || true
+    printf '%s\n' 'GPU sharing is allowed. Batch16/640/AMP remain fixed; insufficient VRAM fails visibly.'
     run_stage bootstrap "$base" "$root/benchmarks/comparison/yolov8m/bootstrap.py" --base-python "$base"
-    PY=$(<"$root/.runtime/yolov8m/python_path.txt")
+    PY=$(<"$root/.runtime/yolov8m-scratch/python_path.txt")
     local inputs=(--data "$data")
     [[ -z "$data_root" ]] || inputs+=(--data-root "$data_root")
     [[ -z "$public_coco" ]] || inputs+=(--public-coco "$public_coco")

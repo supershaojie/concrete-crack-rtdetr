@@ -12,7 +12,7 @@ import urllib.request
 import uuid
 
 from support import (ASSET, HERE, LOCK, ROOT, SOURCE, checked_source, checked_weight,
-                     git, read_json, sha256, source_hash, write_json)
+                     git, read_json, sha256, source_hash, write_json, initialization_type)
 
 
 def environment_probe():
@@ -54,7 +54,7 @@ def bootstrap(args):
         call(['git', '-C', SOURCE, 'apply', '--check', patch])
         call(['git', '-C', SOURCE, 'apply', patch])
     checked_source()
-    if not ASSET.exists():
+    if initialization_type()=='coco' and not ASSET.exists():
         ASSET.parent.mkdir(parents=True, exist_ok=True)
         temporary = ASSET.with_suffix('.download')
         if temporary.exists():
@@ -63,8 +63,9 @@ def bootstrap(args):
         urllib.request.urlretrieve(lock['weights']['url'], temporary)
         checked_weight(temporary)
         temporary.rename(ASSET)
-    checked_weight()
-    state = ROOT / '.runtime/yolov8m'
+    if initialization_type()=='coco':
+        checked_weight()
+    state = ROOT / '.runtime/yolov8m-scratch'
     probe = [args.base_python, HERE / 'bootstrap.py', '--probe']
     base = subprocess.run([str(x) for x in probe], capture_output=True, text=True)
     write_json(state / 'base_environment_probe.json', {'exit_code': base.returncode,
@@ -74,7 +75,7 @@ def bootstrap(args):
             raise RuntimeError('Base dependencies incompatible; use default private venv (no base package changes)')
         python = Path(args.base_python).resolve()
     else:
-        env = ROOT / '.envs/yolov8m'
+        env = ROOT / '.envs/yolov8m-scratch'
         python = env / ('Scripts/python.exe' if os.name == 'nt' else 'bin/python')
         if not python.exists():
             call([args.base_python, '-m', 'venv', '--system-site-packages', env])
@@ -96,7 +97,7 @@ def bootstrap(args):
     write_json(state / 'environment_probe.json', {'exit_code': result.returncode,
                'stdout': result.stdout, 'stderr': result.stderr})
     if result.returncode:
-        raise RuntimeError('Isolated dependency probe failed; inspect .runtime/yolov8m/environment_probe.json: ' + result.stderr)
+        raise RuntimeError('Isolated dependency probe failed; inspect .runtime/yolov8m-scratch/environment_probe.json: ' + result.stderr)
     (state / 'python_path.txt').write_text(str(python.resolve()) + '\n', encoding='utf-8')
     check_output = state / ('check_' + uuid.uuid4().hex[:8] + '.json')
     call([python, HERE / 'run.py', 'check', '--output', check_output])

@@ -137,6 +137,18 @@ def preflight(data_yaml, run, data_root=None, public_coco=None, enforce_counts=T
                 'limits': 'No full image hash/decode/family audit; existing public historical evidence remains separate.'}
     manifest['dataset_identity_sha256'] = digest(canonical([
         {k: r.get(k) for k in ('split', 'image', 'image_bytes', 'label', 'label_sha256')} for r in records]))
+    if enforce_counts:
+        from support import ROOT
+        previous = read_json(ROOT/'docs/comparison/evidence/yolov8m_delivery_validation.json')['data']
+        for split in SPLITS:
+            for key in ('split_paths_sha256','label_inventory_sha256'):
+                if summaries[split][key] != previous['splits'][split][key]:
+                    errors.append({'split':split, 'field':key, 'expected':previous['splits'][split][key],
+                                   'actual':summaries[split][key], 'error':'Frozen manifest differs'})
+        if manifest['dataset_identity_sha256'] != previous['dataset_identity_sha256']:
+            errors.append({'error':'Frozen light data identity differs',
+                'expected':previous['dataset_identity_sha256'], 'actual':manifest['dataset_identity_sha256']})
+        manifest['status'] = 'INVALID' if errors else 'LIGHT_CHECKED'
     if errors:
         write_json(run / 'manifest.json', manifest)
         raise ValueError('Light preflight failed; see manifest.json errors')

@@ -1,0 +1,9 @@
+{
+  "initialization_type": "random",
+  "pretraining_source": null,
+  "pretrained_tensors_loaded": 0,
+  "model_yaml": "ultralytics/cfg/models/v8/yolov8.yaml",
+  "scale": "m",
+  "nc": 1,
+  "seed": 42
+}
