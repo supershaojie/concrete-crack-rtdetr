@@ -1,0 +1,11 @@
+# Known locations, not claims of existence. Missing inputs remain explicit in asset_index.json.
+windows:
+  c2: ['D:/rtdetr跑结果/c2 200e在线/c2_rtdetr_r18_lite_complete_retest_20260904.tar.gz']
+  cbr: ['D:/rtdetr跑结果/c19 CBR涨2/c19_cbr_test_small_20260907_132852_339107473']
+  lif: ['D:/rtdetr跑结果/LIF-Down涨/lif_down_complete_20260910_221150_853145.tar.gz']
+  mother: ['D:/rtdetr跑结果/C19＋LIF：原 CBR＋LIF-Down v1']
+server:
+  c2: ['/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug']
+  cbr: ['/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_rtdetr_r18_lite_cbr_e200_b16_onlineaug']
+  lif: ['/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/lif_down_rtdetr_r18_lite_e200_b16_onlineaug', '/root/autodl-tmp/projects/Crack_RTDETR-lif-down/outputs/lif_down']
+  mother: ['/root/autodl-tmp/projects/Crack_RTDETR/runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug', '/root/autodl-tmp/projects/Crack_RTDETR-c19-lif-v1-gatefix/outputs/c19_lif_v1']

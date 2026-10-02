@@ -1,0 +1,42 @@
+schema_version: 1
+source_commit: a0459d6a652cb702699087c88fa39a3e4c4087ec
+source_version: 8.4.21
+verification: static_source_checked_runtime_not_claimed
+observed_training_args:
+  evidence: observed_original_bytes_20261002
+  source: 'D:/rtdetr跑结果/C19＋LIF：原 CBR＋LIF-Down v1/training/args.yaml'
+  raw_copy: docs/comparison/evidence/mother_args.yaml
+  fields: 109
+  sha256: 31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b
+local_runtime_evidence: docs/comparison/evidence/augmentation_observed.json
+historical_runtime_limit: no_albumentations_in_archived_freeze_but_historical_import_not_replayed
+training_args_sha256_reference: 31029c8d3bcf0e2dc3cb7107fa7db316f37cd954eba21bf4fc854e2070fc476b
+source_files:
+  - ultralytics-main/ultralytics/models/rtdetr/val.py
+  - ultralytics-main/ultralytics/data/augment.py
+  - ultralytics-main/ultralytics/data/dataset.py
+  - ultralytics-main/ultralytics/data/base.py
+  - ultralytics-main/ultralytics/engine/trainer.py
+order: [stretch_resize, Mosaic, CopyPaste_disabled, RandomPerspective, MixUp, CutMix_disabled, optional_Albumentations, HSV, vertical_flip, horizontal_flip, Format]
+box_filter: 'RandomPerspective clips transformed boxes; keep width>2, height>2, area ratio>0.10 (relative to scaled original), aspect ratio<100. Detection has no segments. Mosaic clips and drops zero-area boxes.'
+items:
+  - {field: mosaic, configured_value: 0.8, effective: true, meaning: '4-image Mosaic, application probability 0.8, random center; partner selection from dataset buffer', closes: 'epoch index 190 (1-based 191) if training reaches it', source: 'data/augment.py:2416; engine/trainer.py:399', status: static_checked}
+  - {field: mixup, configured_value: 0.05, effective: true, meaning: 'Apply with p=0.05; mix ratio Beta(32,32), second sample uses the same pre_transform', closes: 'epoch index 190', source: 'data/augment.py:870,2454; data/dataset.py:237', status: static_checked}
+  - {field: degrees, configured_value: 5, effective: true, meaning: 'uniform angle [-5,5] degrees per RandomPerspective call', closes: never, source: 'data/augment.py:1093', status: static_checked}
+  - {field: translate, configured_value: 0.1, effective: true, meaning: 'independent output-center translation U(0.4,0.6) times output width/height', closes: never, source: 'data/augment.py:1106', status: static_checked}
+  - {field: scale, configured_value: 0.4, effective: true, meaning: 'uniform geometric scale [0.6,1.4]; distinct from changing training input resolution', closes: never, source: 'data/augment.py:1095', status: static_checked}
+  - {field: shear, configured_value: 1.5, effective: true, meaning: 'x/y tan(U[-1.5,1.5] degrees)', closes: never, source: 'data/augment.py:1101', status: static_checked}
+  - {field: perspective, configured_value: 0.0002, effective: true, meaning: 'x/y perspective coefficients U[-0.0002,0.0002]; composed T @ S @ R @ P @ C', closes: never, source: 'data/augment.py:1087', status: static_checked}
+  - {field: hsv_h, configured_value: 0.015, effective: true, meaning: 'additive hue shift U[-0.015,0.015]*180 modulo 180 (differs from older YOLOv5 multiplicative hue)', closes: never, source: 'data/augment.py:1411', status: static_checked}
+  - {field: hsv_s, configured_value: 0.5, effective: true, meaning: 'saturation multiplier U[0.5,1.5]; zero-saturation LUT preserved', closes: never, source: 'data/augment.py:1411', status: static_checked}
+  - {field: hsv_v, configured_value: 0.35, effective: true, meaning: 'value multiplier U[0.65,1.35], LUT uint8 clipping', closes: never, source: 'data/augment.py:1411', status: static_checked}
+  - {field: flipud, configured_value: 0.2, effective: true, meaning: 'vertical flip Bernoulli(0.2)', closes: never, source: 'data/augment.py:2458', status: static_checked}
+  - {field: fliplr, configured_value: 0.5, effective: true, meaning: 'horizontal flip Bernoulli(0.5)', closes: never, source: 'data/augment.py:2459', status: static_checked}
+  - {field: cutmix, configured_value: 0, effective: false, meaning: 'present in pipeline but p=0', closes: 'also forced to zero at index 190', source: 'data/augment.py:2455; data/dataset.py:237', status: static_checked}
+  - {field: copy_paste, configured_value: 0, effective: false, meaning: 'p=0; segmentation CopyPaste not active for box-only detection', closes: 'also forced to zero at index 190', source: 'data/augment.py:2428; data/dataset.py:237', status: static_checked}
+  - {field: bgr, configured_value: 0.0, effective: false, meaning: 'RTDETRDataset Format does not forward hyp.bgr; default 0 produces RGB', closes: never, source: 'models/rtdetr/val.py:88', status: static_checked}
+  - {field: erasing, configured_value: 0, effective: false, meaning: 'classification-only, absent from RT-DETR detection pipeline', closes: never, source: 'data/augment.py:v8_transforms', status: static_checked}
+  - {field: auto_augment, configured_value: null, effective: false, meaning: 'classification-only, absent from RT-DETR detection pipeline', closes: never, source: 'data/augment.py:v8_transforms', status: static_checked}
+  - {field: multi_scale, configured_value: 0.0, effective: false, meaning: 'training input size jitter disabled; not the geometric scale transform', closes: never, source: 'models/rtdetr/train.py:preprocess_batch', status: static_checked}
+  - {field: close_mosaic, configured_value: 10, effective: true, meaning: 'close Mosaic, MixUp, CopyPaste and CutMix; leave HSV, affine/perspective, flips and optional Albumentations', closes: 'epochs - close_mosaic', source: 'engine/trainer.py:399; data/dataset.py:237', status: static_checked}
+  - {field: implicit_albumentations, configured_value: null, effective: conditional, meaning: 'If import succeeds: Blur/MedianBlur/ToGray/CLAHE each p=0.01; other default transforms p=0. Archived pip_freeze has no albumentations entry. Do not add these to comparisons without runtime evidence.', closes: never, source: 'data/augment.py:1873-1900', status: historical_activation_not_directly_probed}

@@ -1,0 +1,2 @@
+# Preserve exact archived YAML bytes across Windows/Linux checkouts.
+*_args.yaml -text

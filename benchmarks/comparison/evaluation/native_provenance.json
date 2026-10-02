@@ -1,0 +1,16 @@
+{
+  "base_sha": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "origin_files": [
+    "ultralytics-main/ultralytics/utils/metrics.py",
+    "ultralytics-main/ultralytics/engine/validator.py"
+  ],
+  "copied_functions": {
+    "box_iou": "29deb1f0a256d04cae4c76cdb4cf581396611f5f98e2b6a2e2481959fc4082d7",
+    "smooth": "e2b157c7432f3c222dadfa640dd03d51ec9d473a96a6a9ec738b5f9971b5e55d",
+    "compute_ap": "4425575e5783f11a4a2055ed9e78f8a09ec738e6c6b78bc677e5be01378e402a",
+    "ap_per_class": "022da3a3da70b01ce81bfda6ecd21de9f5de40e7eed94cbaeaad3fc9bb98162c"
+  },
+  "match_predictions_sha256": "a98afe0dee5f68d8d583437da8f67734090ed6f38ecd30c2568d310dda610b5f",
+  "dependency_shim": "checks.check_version only tests NumPy >=2 for trapezoid availability; bodies unchanged",
+  "plots": "unsupported; evaluator always calls plot=False"
+}

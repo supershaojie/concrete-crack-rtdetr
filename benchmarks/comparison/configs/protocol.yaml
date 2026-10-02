@@ -1,0 +1,60 @@
+schema_version: 1
+scope: common_preparation_only
+base_sha: a0459d6a652cb702699087c88fa39a3e4c4087ec
+data:
+  class: crack
+  yolo_class_id: 0
+  common_coco_category_id: 1
+  torchvision_background_id: 0
+  split_policy: preserve_existing_train_val_test
+  reference_counts: {train: {images: 6048, boxes: 45573}, val: {images: 1728, boxes: 12840}, test: {images: 864, boxes: 6663}}
+  reference_counts_status: historical_reference_not_targets
+  missing_labels: unknown_until_explicitly_designated_negative
+  empty_existing_labels: legal_negative
+  image_id: one_based_enumeration_of_train_then_val_then_test_each_sorted_by_POSIX_root_relative_path
+  fingerprints:
+    raw_file: SHA256_of_original_bytes
+    canonical_json: UTF8_ensure_ascii_false_sort_keys_true_compact_separators_no_NaN_one_trailing_LF
+    split_paths_sha256: SHA256_UTF8_join_sorted_POSIX_root_relative_paths_with_LF_no_trailing_LF
+    label_inventory_sha256: SHA256_UTF8_join_label_relative_path_colon_raw_SHA256_in_split_image_order_with_LF_no_trailing_LF
+    image_inventory_sha256: SHA256_UTF8_join_image_relative_path_colon_raw_SHA256_in_split_image_order_with_LF_no_trailing_LF
+    dataset_identity_sha256: SHA256_canonical_JSON_of_three_split_path_label_and_image_inventory_hashes
+    historical_algorithm_source: tools/c19_lif_v1_data.py_at_base_sha
+    new_manifest_hash: distinct_from_historical_split_paths_sha256
+  family_policy: explicit_mapping_first_filename_inference_must_be_labelled_UNKNOWN_without_sufficient_mapping
+  paper_conclusion: existing_family_overlap_precludes_claims_of_unseen_original_image_generalization
+augmentation:
+  rule: match_mother_effective_types_probabilities_strength_and_close_schedule_where_equivalent
+  extra_implicit_augmentations: disable_unless_observed_effective_in_mother
+  config_only_inactive_fields: do_not_enable
+  exceptions: record_source_distribution_difference_reason_and_closest_implementation_before_training
+  mapping_template: {mother_item: null, target_transform: null, source_commit_and_lines: null, distribution: null, probability: null, schedule: null, equivalent: null, exception_reason: null, status: pending}
+  validation_test: no_random_training_augmentation_no_TTA
+training:
+  budget_reference: {epochs: 200, patience: 50, seed: 42, imgsz: 640, batch: 16}
+  ssd_input_exception: 512
+  optimizer_policy: per_model_reasonable_adaptation_disclosed_before_training
+  ablation_policy: full_mother_recipe_unchanged
+  checkpoint_selection: training_val_mAP50_95_freeze_same_best_for_independent_val_and_test
+  historical_training_val: native_validator_includes_old_sort_mask_bug_record_difference_do_not_reselect_old_best
+  seeds: single_42_no_search
+pretraining:
+  rtdetr_reference: {source: weights/rtdetr_r18_lite_imagenet_backbone_init.pt, sha256: fe8501bbcc1d1d5b366bdb10fd47d0fbb91edff1f9558f39e31683a550bcad8e, kind: ImageNet_backbone_not_mother_best}
+  comparison_models: their_own_official_pretrained_weights_and_separate_pretraining_dataset_disclosure
+evaluation:
+  policy: corrected_sorted_conf_mask_v1
+  public_coordinates: original_image_pixels_float_xyxy_no_rounding_or_clipping
+  prediction_precision: FP32_values_losslessly_serialized_as_JSON_numbers
+  historical_settings: {half: false, imgsz: 640, batch: 16, workers: 0, conf: 0.001, iou: 0.7, max_det: 300, augment: false, rect: false, seed: 42}
+  ap_iou_thresholds: [0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95]
+  confidence: sort_rows_descending_then_keep_score_strictly_greater_than_0.001
+  matching: native_greedy_IoU_descending_then_unique_prediction_then_unique_GT_per_threshold_no_scipy
+  integration: source_compute_ap_101_point_linear_interpolation_precision_envelope_trapezoidal_integration
+  PR: each_model_own_smoothed_max_F1_at_AP50_on_1000_point_confidence_grid
+  iou_0_7: native_postprocessing_argument_unused_by_RTDETR_no_NMS_added
+  max_detections: 300_per_image_after_confidence_sort_no_added_NMS
+  native_differences: require_per_model_record_of_NMS_topk_resize_letterbox_and_inverse_mapping
+  empty_predictions: explicit_record_for_every_GT_image_required
+  record_order: ascending_image_id_to_fix_global_score_tie_input_order
+  rounding_caches: cannot_certify_exact_AP_reproduction
+  no_automatic_full_inference: true

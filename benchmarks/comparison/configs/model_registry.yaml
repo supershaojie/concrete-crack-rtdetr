@@ -1,0 +1,29 @@
+schema_version: 1
+status: registration_only_no_adapters_or_training
+models:
+  - {order: 1, id: yolov5m, name: Original anchor-based YOLOv5m, upstream: 'https://github.com/ultralytics/yolov5', branch: bench/yolov5m, constraint: 'Do not substitute YOLOv5mu'}
+  - {order: 2, id: yolov8m, name: YOLOv8m, upstream: 'https://github.com/ultralytics/ultralytics', branch: bench/yolov8m}
+  - {order: 3, id: yolo11m, name: YOLO11m, upstream: 'https://github.com/ultralytics/ultralytics', branch: bench/yolo11m}
+  - {order: 4, id: yolov13l, name: YOLOv13-L, upstream: 'https://github.com/iMoonLab/yolov13', branch: bench/yolov13l, constraint: 'Official L; isolate bundled ultralytics from all other environments'}
+  - {order: 5, id: yolo26m, name: YOLO26m, upstream: 'https://github.com/ultralytics/ultralytics', branch: bench/yolo26m}
+  - {order: 6, id: fasterrcnn-r50-fpn, name: Faster R-CNN ResNet-50-FPN, upstream: 'https://github.com/pytorch/vision', branch: bench/fasterrcnn-r50-fpn, constraint: 'TorchVision 0 is background; crack is 1'}
+  - {order: 7, id: dfine-m, name: D-FINE-M, upstream: 'https://github.com/Peterande/D-FINE', branch: bench/dfine-m, constraint: 'COCO pretrained; distinguish Objects365 provenance'}
+  - {order: 8, id: ssd512-vgg16, name: SSD512-VGG16, upstream: 'https://github.com/open-mmlab/mmdetection/tree/main/configs/ssd', branch: bench/ssd512-vgg16, input_size: 512, constraint: 'Use native 512 config and report its size separately'}
+per_model_required_before_training:
+  official_commit: null
+  package_version: null
+  official_config: null
+  checkpoint_url: null
+  checkpoint_sha256: null
+  pretraining_dataset: null
+  environment_identity: null
+  augmentation_mapping: null
+  augmentation_exceptions: null
+  optimizer_and_schedule: null
+  native_postprocessing: null
+  export_adapter_verification: null
+historical_experiments:
+  c2: {name: C2, branch: exp-rtdetr-r18-lite-paperalign, historical_code_sha: 67c3078e54a657fd96d65fee657a75fbb1dae0d6, model_yaml: rtdetr-resnet18-lite.yaml, run: runs/c_series/c2_rtdetr_r18_lite_e200_b16_onlineaug}
+  cbr: {name: C2 + CBR, branch: exp-rtdetr-r18-lite-cbr, historical_code_sha: 025997e3c51eaf6933534308a95da6ebf97bff53, model_yaml: rtdetr-resnet18-lite-cbr.yaml, run: runs/c_series/c19_rtdetr_r18_lite_cbr_e200_b16_onlineaug}
+  lif: {name: C2 + LIF, branch: codex/lif-down, historical_code_sha: 0e95bbade3558b0d2b77c5531483c60810391d88, model_yaml: rtdetr-resnet18-lite-lif-down.yaml, run: runs/c_series/lif_down_rtdetr_r18_lite_e200_b16_onlineaug}
+  mother: {name: C2 + CBR + LIF, branch: codex/rtdetr-c19-lif-v1, historical_code_sha: a0459d6a652cb702699087c88fa39a3e4c4087ec, model_yaml: rtdetr-resnet18-lite-cbr-lif-down.yaml, run: runs/c_series/c19_lif_v1_rtdetr_r18_lite_e200_b16_onlineaug}
