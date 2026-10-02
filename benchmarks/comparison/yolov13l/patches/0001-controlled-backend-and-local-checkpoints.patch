@@ -1,0 +1,51 @@
+--- a/ultralytics/nn/tasks.py
++++ b/ultralytics/nn/tasks.py
+@@ -838,7 +838,7 @@
+                 with open(file, "rb") as f:
+                     ckpt = torch.load(f, pickle_module=safe_pickle)
+             else:
+-                ckpt = torch.load(file, map_location="cpu")
++                ckpt = torch.load(file, map_location="cpu", weights_only=False)
+ 
+     except ModuleNotFoundError as e:  # e.name is missing module name
+         if e.name == "models":
+@@ -858,7 +858,7 @@
+             f"run a command with an official Ultralytics model, i.e. 'yolo predict model=yolov8n.pt'"
+         )
+         check_requirements(e.name)  # install missing module
+-        ckpt = torch.load(file, map_location="cpu")
++        ckpt = torch.load(file, map_location="cpu", weights_only=False)
+ 
+     if not isinstance(ckpt, dict):
+         # File is likely a YOLO instance saved with i.e. torch.save(model, "saved_model.pt")
+--- a/ultralytics/utils/downloads.py
++++ b/ultralytics/utils/downloads.py
+@@ -435,6 +435,8 @@
+ 
+     # YOLOv3/5u updates
+     file = str(file)
++    if Path(file).is_file():  # preserve verified local paths, including apostrophes
++        return file
+     file = checks.check_yolov5u_filename(file)
+     file = Path(file.strip().replace("'", ""))
+     if file.exists():
+--- a/ultralytics/nn/modules/block.py
++++ b/ultralytics/nn/modules/block.py
+@@ -1177,6 +1177,17 @@
+     from torch.nn.functional import scaled_dot_product_attention as sdpa
+     logger.warning("FlashAttention is not available on this device. Using scaled_dot_product_attention instead.")
+ 
++
++# Comparison adapter: freeze the existing branch; do not replace attention math.
++import os as _comparison_os
++_comparison_backend = _comparison_os.environ.get("YOLOV13_ATTENTION_BACKEND", "native")
++if _comparison_backend not in {"native", "flash"}:
++    raise ValueError("YOLOV13_ATTENTION_BACKEND must be native or flash")
++if _comparison_backend == "flash" and not USE_FLASH_ATTN:
++    raise RuntimeError("Requested official FlashAttention is unavailable")
++if _comparison_backend == "native":
++    USE_FLASH_ATTN = False
++
+ class AAttn(nn.Module):
+     """
+     Area-attention module with the requirement of flash attention.

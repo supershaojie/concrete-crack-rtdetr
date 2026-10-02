@@ -1,0 +1,9 @@
+# Core runtime for the explicit --fresh-torch path. No demos/deployment/Flash/Albumentations.
+-r requirements-overlay.txt
+matplotlib==3.9.4
+pillow==11.3.0
+scipy==1.13.1
+PyYAML==6.0.3
+requests==2.32.3
+psutil==5.9.8
+packaging==24.2
