@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-03 Asia/Shanghai",
+  "branch": "bench/yolo11m-scratch",
+  "code_commit": "30ddef9139259df802587142f6d1ed46c99bb38a",
+  "parent_commit": "61c386bc722b11208453cab0808d8f6edb15385d",
+  "upstream_commit": "f4d8f7765a490f3920e2d14c592a2967e347f185",
+  "command_document": "docs/comparison/YOLO11M_SCRATCH_SERVER_COMMANDS.md",
+  "documentation_commit_policy": "Following docs-only commit adds these commands and receipt; execution pins code_commit.",
+  "validation": "docs/comparison/evidence/yolo11m_scratch_validation.json",
+  "server_login": false,
+  "formal_training": false,
+  "full_inference": false,
+  "other_experiments_stopped": false
+}
