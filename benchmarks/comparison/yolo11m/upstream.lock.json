@@ -1,0 +1,23 @@
+{
+  "commit": "f4d8f7765a490f3920e2d14c592a2967e347f185",
+  "compatibility_note": "Explicit weights_only=False for verified checkpoints on Torch 2.6+; preserve existing local asset paths containing apostrophes. No model/loss patch.",
+  "license": "AGPL-3.0",
+  "license_sha256": "e0eedba615d5cd1b986afb6c5b3a4b1ae33713e7e9dc74d19daec5e3221f9d2e",
+  "patch": "patches/0001-explicit-checkpoint-loading.patch",
+  "patch_sha256": "461f2d4ce4ed99e691517ea316df4ebfb9a434d5f773240e6ffc9a51340ccbe1",
+  "patched_source_sha256": "7588e53839944a7cd34cde919744a7903343f06acb2f24655c94aa397b213dfb",
+  "repository": "https://github.com/ultralytics/ultralytics.git",
+  "tag": "v8.3.20",
+  "tag_object": "3b6e1b124174107711942e4b85a93fab7c282c6f",
+  "version": "8.3.20",
+  "model": "YOLO11m",
+  "model_yaml": "ultralytics/cfg/models/11/yolo11.yaml",
+  "scale": "m",
+  "scaling": [
+    0.5,
+    1.0,
+    512
+  ],
+  "nc": 1,
+  "initialization_type": "random"
+}
