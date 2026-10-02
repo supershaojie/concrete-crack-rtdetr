@@ -439,7 +439,7 @@
     "benchmarks/comparison/yolov8m/test_lifecycle.py": "2fe5dddfcbf87b040a4bce57ff0e0da5d4ed65b08b56c1db00b37eb5cd5568ff",
     "benchmarks/comparison/yolov8m/test_scratch.py": "77a1bd9af5588c034ef0abd1b3a468bd6f72a32571a341e07607708202e886ff",
     "benchmarks/comparison/yolov8m/upstream.lock.json": "0852d4473ff89b2470ec84a5db63954a3a803760fac4395c6567853772b0de28",
-    "scripts/legacy_yolo_jobs.py": "9271ffb457428aed7629b75e2aa703a043beb41b5d251b347e5d164b1fdb5337",
+    "scripts/legacy_yolo_jobs.py": "09dff5d4646153032bf60fb42750393c7d58f42fb1ae98047a0ed255901288c7",
     "scripts/test_scratch_handoff.py": "9def260b60f8270cde1e47e4327243ad9cd3024e0877230729a08929e9f7cd02",
     "scripts/autodl_yolov8m.sh": "c2c3e208668c14bfe69461cb2c5f1b9a5603165b1ff1d0a34f3e7bd6058ec336"
   }
