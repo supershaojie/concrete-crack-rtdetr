@@ -715,7 +715,7 @@
     "benchmarks/comparison/yolov5m/upstream.patch": "d75552866e1c8be42bdfed09d48447da2ae0d858bcf04bb4e8d4fecff24ff2ad",
     "benchmarks/comparison/yolov5m/validation.py": "b0228ecf0b6b7e6a7ef0321c94693c6e0e9ccff6e068a29dbf2cae39e18af430",
     "benchmarks/comparison/yolov5m/worker.py": "ae51b73a4d36fde6ef7c3d4df3d970d13e4a89470d7c67e78adee38cc93f9b2d",
-    "scripts/legacy_yolo_jobs.py": "9271ffb457428aed7629b75e2aa703a043beb41b5d251b347e5d164b1fdb5337",
+    "scripts/legacy_yolo_jobs.py": "09dff5d4646153032bf60fb42750393c7d58f42fb1ae98047a0ed255901288c7",
     "scripts/test_scratch_handoff.py": "9def260b60f8270cde1e47e4327243ad9cd3024e0877230729a08929e9f7cd02",
     "scripts/autodl_yolov5m.sh": "081ffd462f4222654a415011a11d26052b3d80e3690cfc74fc48cf3d55453ef0"
   }

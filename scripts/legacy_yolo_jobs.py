@@ -149,7 +149,7 @@ def preserve_checkpoints(run,model,destination):
 
 
 def archive_metadata(run,model):
-    """Completed checkpoint epoch comes from existing small records; checkpoint bytes are never loaded."""
+    """Keep native status/CSV and inspect checkpoint epochs without unpickling model objects."""
     root=Path(run)
     paths=(['status.json','native/epoch_state.json','native/training_complete.json','native/results.csv']
            if model=='yolov5m' else ['train_status.json','training_progress.json','train/results.csv','identity.json'])
