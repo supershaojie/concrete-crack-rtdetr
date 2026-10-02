@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-03 Asia/Shanghai",
+  "branch": "bench/yolov13l-scratch",
+  "repository": "https://github.com/supershaojie/concrete-crack-rtdetr.git",
+  "parent_commit": "61c386bc722b11208453cab0808d8f6edb15385d",
+  "model_code_sha": "38b49c547ad1fd93d7b85ef9917fa812b1568eeb",
+  "official_commit": "73289949533efac82bb5f72ec19b746618656bd2",
+  "patch_sha256": "50c80a68320eda8f72918c5015692d4ddc99da759c9d2cc6e2fd4b654724af12",
+  "docs_note": "This receipt and the server-command document are a later docs-only commit; run the pinned model_code_sha.",
+  "server_worktree": "/root/autodl-tmp/projects/Crack_RTDETR-bench-yolov13l-scratch",
+  "tmux_session": "comparison-yolov13l-scratch",
+  "formal_training_started": false,
+  "server_login_performed": false,
+  "existing_runs_modified": false,
+  "new_YOLO_initialization": "random",
+  "existing_RTDETR_initialization": "ImageNet backbone"
+}
