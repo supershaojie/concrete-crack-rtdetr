@@ -85,3 +85,8 @@ ultralytics-main/docs/
 Thumbs.db
 runs_server/
 
+# Isolated official comparison implementations and local environments
+.vendor/
+.envs/
+.runtime/
+
