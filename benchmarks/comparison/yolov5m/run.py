@@ -7,14 +7,21 @@ from pathlib import Path
 import signal
 import subprocess
 import sys
+import uuid
 from datetime import datetime, timezone
 
-from support import HERE, PROJECT, atomic_json, environment, identity, read_json, sha256, write_json
+from support import (HERE, PROJECT, atomic_json, environment, identity, read_json, sha256, write_json,
+                     initialization_record)
 from assets import verify
 from data import inspect, save_check, make_gt
 
 def utc():
     return datetime.now(timezone.utc).isoformat()
+
+class ChildInterrupted(KeyboardInterrupt):
+    def __init__(self, code):
+        self.exit_code=128-code if code<0 else code
+        super().__init__('Child interrupted: '+str(code))
 
 def isolated_env():
     env=os.environ.copy()
@@ -35,21 +42,27 @@ def stage(run, name, command):
     process=None
     tee_code=0
     try:
-        with (run/(name+'.log')).open('x',encoding='utf-8') as log:
+        with (run/(name+'.log')).open('xb') as log:
             process=subprocess.Popen(command,cwd=PROJECT,env=isolated_env(),stdout=subprocess.PIPE,
-                                     stderr=subprocess.STDOUT,text=True,encoding='utf-8',errors='replace')
-            for line in process.stdout:
-                log.write(line)
+                                     stderr=subprocess.STDOUT)
+            while True:
+                block=process.stdout.read1(65536)
+                if not block:
+                    break
+                log.write(block)
                 log.flush()
-                print(line,end='',flush=True)
+                sys.stdout.buffer.write(block)
+                sys.stdout.buffer.flush()
             rc=process.wait()
         entry['process_exit_code']=rc
         entry['status']='completed' if rc==0 else 'failed'
         if rc:
+            if rc < 0 or rc in (130,143):
+                raise ChildInterrupted(rc)
             raise subprocess.CalledProcessError(rc,command)
     except BaseException as e:
         if process and process.poll() is None:
-            process.terminate()
+            process.send_signal(signal.SIGTERM)
             try:
                 process.wait(timeout=15)
             except subprocess.TimeoutExpired:
@@ -84,11 +97,18 @@ def prepare(a):
         # Import the actual evaluator policy; no independent copy of its metric implementation.
         sys.path.insert(0,str(HERE.parent/'evaluation'))
         from evaluate import POLICY_SHA
+        init=initialization_record(assets['upstream'])
+        checkpoint_identity={'run_id':uuid.uuid4().hex, 'code':identity(),
+                             'data_identity':manifest['dataset_identity_sha256'], 'initialization':init}
         frozen={'identity':identity(),'recipe':recipe,'hyp':__import__('yaml').safe_load((HERE/'hyp.yaml').read_text()),
+                'initialization':init, 'checkpoint_identity':checkpoint_identity,
+                'input_checksums':{p.name:sha256(p) for p in (a.run/'data').iterdir() if p.is_file()},
                 'assets':assets,'environment':environment(),
                 'data_identity':manifest['dataset_identity_sha256'],
                 'prediction_identity':{
                     'model':recipe['model'],'model_code_sha':identity()['project_commit'],
+                    'initialization_type':init['initialization_type'], 'pretraining_source':init['pretraining_source'],
+                    'pretrained_tensors_loaded':init['pretrained_tensors_loaded'], 'run_id':checkpoint_identity['run_id'],
                     'dataset_identity_sha256':manifest['dataset_identity_sha256'],
                     'evaluation_config_sha256':POLICY_SHA,
                     'postprocessing':recipe['evaluation'],
@@ -113,6 +133,9 @@ def guard(a):
         raise ValueError('Asset identity/path changed')
     if frozen['environment']!=environment():
         raise ValueError('Environment changed after freeze')
+    for name, expected in frozen['input_checksums'].items():
+        if sha256(a.run/'data'/name)!=expected:
+            raise ValueError('Frozen input artifact changed: '+name)
     return frozen
 
 def train(a):
@@ -202,7 +225,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('action',choices=['prepare','train','export','evaluate','pipeline','summary','resources'])
     p.add_argument('--run',type=Path,required=True)
-    p.add_argument('--assets',type=Path,default=PROJECT/'outputs/yolov5m/assets')
+    p.add_argument('--assets',type=Path,default=PROJECT/'outputs/yolov5m-scratch/assets')
     p.add_argument('--source-project',type=Path,default=Path('/root/autodl-tmp/projects/Crack_RTDETR'))
     p.add_argument('--data',type=Path)
     p.add_argument('--data-root',type=Path)
@@ -215,7 +238,9 @@ def main():
     if a.gt_cache:a.gt_cache=a.gt_cache.resolve()
     if a.resume and a.action!='train':
         p.error('--resume is only allowed with explicit train action')
+    signal_exit={'code':130}
     def interrupted(signum,frame):
+        signal_exit['code']=128+signum
         raise KeyboardInterrupt('signal '+str(signum))
     signal.signal(signal.SIGTERM,interrupted)
     signal.signal(signal.SIGINT,interrupted)
@@ -236,9 +261,11 @@ def main():
             guard(a)
             stage(a.run,'resources',worker(a.run,a.assets,'resources'))
         outcome='completed'
-    except KeyboardInterrupt:
+    except KeyboardInterrupt as exc:
         outcome='interrupted'
-        raise
+        raise SystemExit(getattr(exc,'exit_code',signal_exit['code']))
+    except subprocess.CalledProcessError as exc:
+        raise SystemExit(exc.returncode)
     finally:
         if owns_state and (a.run/'status.json').exists():
             state=read_json(a.run/'status.json')

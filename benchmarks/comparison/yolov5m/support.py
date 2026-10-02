@@ -17,7 +17,23 @@ def read_json(path):
     return json.loads(Path(path).read_text(encoding='utf-8'))
 
 def git(*args, cwd=PROJECT):
-    return subprocess.check_output(['git', '-C', str(cwd), *args], text=True).strip()
+    return subprocess.check_output(['git', '-c', 'safe.directory=' + str(Path(cwd).resolve()),
+                                    '-C', str(cwd), *args], text=True).strip()
+
+def initialization_type():
+    mode = read_json(HERE/'recipe.json')['initialization_type']
+    if mode not in ('random', 'coco'):
+        raise ValueError('Unknown initialization mode: ' + mode)
+    return mode
+
+def initialization_record(upstream):
+    mode = initialization_type()
+    yaml = Path(upstream)/'models/yolov5m.yaml'
+    return {'initialization_type':mode, 'pretraining_source':None if mode=='random' else 'COCO',
+            'pretrained_tensors_loaded':0 if mode=='random' else None,
+            'model_yaml':str(yaml), 'model_yaml_sha256':sha256(yaml),
+            'scale':'m', 'nc':1, 'seed':42,
+            'native_constants':'BN, Detect bias priors and anchors retain official initialization'}
 
 def identity():
     paths = sorted(p for p in HERE.rglob('*') if p.is_file() and p.suffix in {'.py', '.yaml', '.json', '.patch', '.txt'})

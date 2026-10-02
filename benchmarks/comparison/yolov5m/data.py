@@ -2,7 +2,7 @@
 from __future__ import annotations
 import argparse
 from pathlib import Path
-from support import canonical, digest, load_yaml, read_json, sha256, write_json
+from support import PROJECT, canonical, digest, load_yaml, read_json, sha256, write_json
 from dataset import SPLITS, label_for, parse_labels, resolve_splits
 
 EXPECTED = {'train': (6048, 45573), 'val': (1728, 12840), 'test': (864, 6663)}
@@ -52,6 +52,14 @@ def inspect(data_yaml, root, project, enforce_counts=True):
             raise ValueError(f'{split}: actual {(len(paths),boxes_count)} differs from {EXPECTED[split]}; source data unchanged')
         parts[split] = part
     identity = digest(canonical([{k:r[k] for k in ('split','image','image_bytes','label_sha256')} for r in rows]))
+    if enforce_counts:
+        previous = read_json(PROJECT/'docs/comparison/evidence/yolov5m_validation.json')['light_data']
+        differences = {s:{k:{'expected':previous['splits'][s][k], 'actual':parts[s][k]}
+                          for k in ('split_paths_sha256','label_inventory_sha256')
+                          if previous['splits'][s][k] != parts[s][k]} for s in SPLITS}
+        if any(differences.values()) or identity != previous['identity_sha256']:
+            raise ValueError('Frozen data differs: '+str({'splits':differences,
+                'expected_identity':previous['identity_sha256'], 'actual_identity':identity}))
     return {'status':'LIGHT_CHECKED', 'root':str(root), 'data_yaml':str(Path(data_yaml).resolve()),
             'data_yaml_sha256':sha256(data_yaml), 'resolution':resolution, 'splits':parts, 'records':rows,
             'dataset_identity_algorithm':'light_v1_sorted_paths_image_sizes_label_bytes_NOT_image_content_hash',

@@ -10,9 +10,25 @@ from unittest.mock import patch
 from PIL import Image
 from support import read_json
 from data import inspect, make_gt
-from run import stage
+from run import stage,ChildInterrupted
 
 class ControlTests(unittest.TestCase):
+    def test_child_signal_code_is_preserved(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            with self.assertRaises(ChildInterrupted) as caught:
+                stage(root,'signal_exit',[sys.executable,'-c','raise SystemExit(143)'])
+            self.assertEqual(caught.exception.exit_code,143)
+            state=read_json(root/'status.json')['stages']['signal_exit']
+            self.assertEqual((state['status'],state['process_exit_code']),('interrupted',143))
+
+    def test_binary_progress_retains_carriage_returns(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            stage(root,'progress',[sys.executable,'-c',
+                  "import sys; sys.stdout.buffer.write(b'one\\rtwo\\rthree\\n')"])
+            self.assertEqual((root/'progress.log').read_bytes(),b'one\rtwo\rthree\n')
+
     def test_real_exit_codes_and_existing_logs(self):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td)

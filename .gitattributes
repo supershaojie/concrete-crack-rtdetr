@@ -1,1 +1,4 @@
 *.sh text eol=lf
+benchmarks/comparison/** text eol=lf
+scripts/legacy_yolo_jobs.py text eol=lf
+scripts/test_scratch_handoff.py text eol=lf

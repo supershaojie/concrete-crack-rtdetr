@@ -41,14 +41,15 @@ def probe_collate(batch):
     return torch.stack([b[0] for b in batch]),torch.stack([b[1] for b in batch])
 
 def smoke(assets, output):
-    from worker import load_crack_model,preprocess,invert
+    from worker import build_initial_model,preprocess,invert
+    from assets import verify
     from utils.general import init_seeds
     from utils.loss import ComputeLoss
     init_seeds(42,deterministic=True)
     output.mkdir(parents=True,exist_ok=False)
     report={'data':'synthetic only','device':'cpu','formal_640_training':'NOT_RUN'}
     # Original single-class M; true forward, official loss, and one backward at 64 only.
-    model,loaded=load_crack_model(assets/'yolov5m.pt',training=True)
+    model,loaded=build_initial_model(verify(assets))
     hyp=load_yaml(HERE/'hyp.yaml')
     model.hyp={**hyp,'cls':hyp['cls']/80,'obj':hyp['obj']*(64/640)**2,'label_smoothing':0.0}
     model.train()

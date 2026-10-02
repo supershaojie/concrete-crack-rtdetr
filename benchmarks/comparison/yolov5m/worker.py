@@ -5,8 +5,9 @@ import json
 import os
 from pathlib import Path
 import sys
+sys.path.insert(0,str(Path(__file__).resolve().parent))
 
-from support import HERE, PROJECT, environment, read_json, write_json
+from support import HERE, PROJECT, environment, read_json, write_json, initialization_type, initialization_record
 from assets import verify
 
 def activate(assets):
@@ -48,8 +49,9 @@ def options(run, assets, resume=False):
     for key in ('epochs','patience','batch_size','workers','device','seed','optimizer','cos_lr',
                 'cache','multi_scale','rect','freeze','image_weights','quad','imgsz'):
         setattr(opt,key,recipe[key])
-    opt.weights = str(run/'native/weights/last.pt') if resume else str(assets/'yolov5m.pt')
-    opt.cfg = ''  # official checkpoint YAML, preserving anchors in pretrained transfer
+    scratch = initialization_type() == 'random'
+    opt.weights = str(run/'native/weights/last.pt') if resume else '' if scratch else str(assets/'yolov5m.pt')
+    opt.cfg = str(assets/'upstream/models/yolov5m.yaml') if scratch and not resume else ''
     opt.hyp = str(HERE/'hyp.yaml')
     opt.data = str(run/'data/data.yaml')
     opt.project, opt.name, opt.save_dir = str(run), 'native', str(run/'native')
@@ -65,13 +67,31 @@ def check_model(model, nc):
     if (model.yaml['depth_multiple'],model.yaml['width_multiple']) != (.67,.75):
         raise ValueError('Not the M scale')
     return {'head':'Detect', 'nc':head.nc, 'na':head.na, 'nl':head.nl,
+            'parameters_unfused':sum(p.numel() for p in model.parameters()), 'scale':'m',
+            'strides':model.stride.tolist(),
             'depth_multiple':.67, 'width_multiple':.75}
 
-def load_crack_model(weights, training=False):
+def build_initial_model(verified):
+    from models.yolo import Model
+    from utils.general import init_seeds
+    init_seeds(42, deterministic=True)
+    if initialization_type() == 'random':
+        # This branch never deserializes a checkpoint or imports a model state.
+        model = Model(str(Path(verified['upstream'])/'models/yolov5m.yaml'), ch=3, nc=1)
+        return model, {**initialization_record(verified['upstream']),
+                       'loaded_tensors':0, 'total_tensors':len(model.state_dict()),
+                       'construction':'official Model(YAML, ch=3, nc=1); no state import'}
+    return load_crack_model(verified['weights'], training=True)
+
+def load_crack_model(weights, training=False, expected_identity=None):
     import torch
     from models.yolo import Model
     from utils.general import intersect_dicts
+    if training and initialization_type() == 'random':
+        raise ValueError('Scratch initialization may not load external model state')
     ckpt = torch.load(weights, map_location='cpu', weights_only=False)
+    if expected_identity is not None and ckpt.get('comparison_identity') != expected_identity:
+        raise ValueError('Checkpoint belongs to another initialization/run')
     if training:
         check_model(ckpt['model'],80)
         model = Model(ckpt['model'].yaml, ch=3, nc=1)
@@ -117,14 +137,15 @@ def export(run, split, checkpoint):
     out = run/'evaluation'/(split+'_predictions.jsonl')
     if out.exists() or out.with_suffix('.partial').exists():
         raise FileExistsError('Prediction output/partial exists; inspect before retry')
-    model, ckpt_record = load_crack_model(checkpoint)
+    model, ckpt_record = load_crack_model(checkpoint, expected_identity=config['checkpoint_identity'])
     init_seeds(42, deterministic=True)
     device = select_device('0',batch_size=16)
     model = model.to(device).float().eval()  # deliberately unfused; no AutoShape or hidden threshold
     identity = dict(config['prediction_identity'])
     identity.update(checkpoint_sha256=sha256(checkpoint), split=split, checkpoint=str(checkpoint),
                     checkpoint_record=ckpt_record, runtime=environment(),
-                    official_pretraining=config['assets']['lock']['weights'])
+                    official_pretraining=config['initialization']['pretraining_source'],
+                    initialization=config['initialization'])
     partial = out.with_suffix('.partial')
     with partial.open('x',encoding='utf-8') as stream, torch.inference_mode():
         stream.write(json.dumps({'type':'metadata','schema_version':1,'identity':identity})+'\n')
@@ -181,7 +202,7 @@ def main():
         from models.yolo import Model
         from utils.general import init_seeds
         init_seeds(42,deterministic=True)
-        m,record=load_crack_model(verified['weights'],training=True)
+        m,record=build_initial_model(verified)
         write_json(a.run/'model_check.json',{**check_model(m,1),**record,'environment':environment(),
                    'train_module':train.__file__, 'upstream':verified['upstream']})
         write_json(a.run/'resolved_options.json',{k:str(v) if isinstance(v,Path) else v
@@ -195,8 +216,8 @@ def main():
             raise FileExistsError('Native training directory already exists')
         if a.resume:
             checkpoint=torch.load(opt.weights,map_location='cpu',weights_only=False)
-            if checkpoint.get('optimizer') is None or checkpoint['epoch']>=199:
-                raise ValueError('Checkpoint not resumable')
+            from bench_yolov5_runtime import validate_checkpoint
+            validate_checkpoint(checkpoint, a.run/'native', resume=True)
             stored=checkpoint['opt']
             for key in ('epochs','batch_size','imgsz','optimizer','seed','patience','cos_lr','data','save_dir'):
                 if stored[key]!=getattr(opt,key):
@@ -211,7 +232,8 @@ def main():
     elif a.action=='resources':
         from copy import deepcopy
         import thop
-        m,_=load_crack_model(a.run/'native/weights/best.pt')
+        m,_=load_crack_model(a.run/'native/weights/best.pt',
+                            expected_identity=read_json(a.run/'frozen.json')['checkpoint_identity'])
         results={}
         for fused in (False,True):
             model=deepcopy(m).eval()

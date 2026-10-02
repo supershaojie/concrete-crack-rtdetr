@@ -12,7 +12,7 @@ index 02d35b9..3df4f20 100644
  
          # Model compatibility updates
 diff --git a/train.py b/train.py
-index 8b5446e..c704c47 100644
+index 8b5446e..720e786 100644
 --- a/train.py
 +++ b/train.py
 @@ -16,6 +16,7 @@ Tutorial:   https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data
@@ -41,11 +41,13 @@ index 8b5446e..c704c47 100644
      train_path, val_path = data_dict['train'], data_dict['val']
      nc = 1 if single_cls else int(data_dict['nc'])  # number of classes
      names = {0: 'item'} if single_cls and len(data_dict['names']) != 1 else data_dict['names']  # class names
-@@ -120,16 +121,17 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+@@ -119,17 +120,19 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+     pretrained = weights.endswith('.pt')
      if pretrained:
          with torch_distributed_zero_first(LOCAL_RANK):
-             weights = attempt_download(weights)  # download if not found locally
+-            weights = attempt_download(weights)  # download if not found locally
 -        ckpt = torch.load(weights, map_location='cpu')  # load checkpoint to CPU to avoid CUDA memory leak
++            weights = bench.local_checkpoint(weights)  # verified explicit asset/resume; preserve literal paths
 +        ckpt = torch.load(weights, map_location='cpu', weights_only=False)  # load checkpoint to CPU to avoid CUDA memory leak
          model = Model(cfg or ckpt['model'].yaml, ch=3, nc=nc, anchors=hyp.get('anchors')).to(device)  # create
          exclude = ['anchor'] if (cfg or hyp.get('anchors')) and not resume else []  # exclude keys
@@ -57,11 +59,12 @@ index 8b5446e..c704c47 100644
      else:
          model = Model(cfg, ch=3, nc=nc, anchors=hyp.get('anchors')).to(device)  # create
 -    amp = check_amp(model)  # check AMP
-+    amp = cuda  # frozen AMP=True on CUDA; no check_amp download of another model
++    bench.record_initialization(save_dir, model, opt)
++    amp = bench.strict_amp_probe(model)  # isolated actual model; no substitute weights or RNG/BN changes
  
      # Freeze
      freeze = [f'model.{x}.' for x in (freeze if len(freeze) > 1 else range(freeze[0]))]  # layers to freeze
-@@ -220,7 +222,9 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+@@ -220,7 +223,9 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
  
          if not resume:
              if not opt.noautoanchor:
@@ -72,7 +75,7 @@ index 8b5446e..c704c47 100644
              model.half().float()  # pre-reduce anchor precision
  
          callbacks.run('on_pretrain_routine_end', labels, names)
-@@ -251,6 +255,8 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+@@ -251,6 +256,8 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
      scheduler.last_epoch = start_epoch - 1  # do not move
      scaler = torch.cuda.amp.GradScaler(enabled=amp)
      stopper, stop = EarlyStopping(patience=opt.patience), False
@@ -81,7 +84,7 @@ index 8b5446e..c704c47 100644
      compute_loss = ComputeLoss(model)  # init loss class
      callbacks.run('on_train_start')
      LOGGER.info(f'Image sizes {imgsz} train, {imgsz} val\n'
-@@ -258,6 +264,8 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+@@ -258,6 +265,8 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
                  f"Logging results to {colorstr('bold', save_dir)}\n"
                  f'Starting training for {epochs} epochs...')
      for epoch in range(start_epoch, epochs):  # epoch ------------------------------------------------------------------
@@ -90,15 +93,33 @@ index 8b5446e..c704c47 100644
          callbacks.run('on_train_epoch_start')
          model.train()
  
-@@ -388,6 +396,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
-                     torch.save(ckpt, w / f'epoch{epoch}.pt')
+@@ -371,6 +380,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+             if (not nosave) or (final_epoch and not evolve):  # if save
+                 ckpt = {
+                     'epoch': epoch,
++                    'comparison_identity': bench.checkpoint_identity(save_dir),
+                     'best_fitness': best_fitness,
+                     'model': deepcopy(de_parallel(model)).half(),
+                     'ema': deepcopy(ema.ema).half(),
+@@ -381,13 +391,14 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+                     'date': datetime.now().isoformat()}
+ 
+                 # Save last, best and delete
+-                torch.save(ckpt, last)
++                bench.save_checkpoint(ckpt, last)
+                 if best_fitness == fi:
+-                    torch.save(ckpt, best)
++                    bench.save_checkpoint(ckpt, best)
+                 if opt.save_period > 0 and epoch % opt.save_period == 0:
+-                    torch.save(ckpt, w / f'epoch{epoch}.pt')
++                    bench.save_checkpoint(ckpt, w / f'epoch{epoch}.pt')
                  del ckpt
                  callbacks.run('on_model_save', last, epoch, final_epoch, best_fitness, fi)
 +            bench.record_epoch(save_dir, epoch, stopper, stop, epochs)
  
          # EarlyStopping
          if RANK != -1:  # if DDP training
-@@ -402,27 +411,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+@@ -402,27 +413,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
      # end training -----------------------------------------------------------------------------------------------------
      if RANK in {-1, 0}:
          LOGGER.info(f'\n{epoch - start_epoch + 1} epochs completed in {(time.time() - t0) / 3600:.3f} hours.')

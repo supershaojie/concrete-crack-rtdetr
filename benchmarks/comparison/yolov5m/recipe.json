@@ -1,5 +1,7 @@
 {
-  "model": "original_anchor_based_yolov5m",
+  "model": "original_anchor_based_yolov5m_random",
+  "initialization_type": "random", "pretraining_source": null,
+  "pretrained_tensors_loaded": 0, "model_yaml": "models/yolov5m.yaml", "scale": "m",
   "nc": 1, "imgsz": 640, "epochs": 200, "patience": 50,
   "batch_size": 16, "workers": 8, "device": "0", "seed": 42,
   "nbs": 64, "amp": true, "deterministic": true,
