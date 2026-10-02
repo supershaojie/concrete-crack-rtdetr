@@ -1,7 +1,7 @@
 schema_version: 1
-status: registration_only_no_adapters_or_training
+status: yolov5m_adapter_available_no_formal_training_other_models_registration_only
 models:
-  - {order: 1, id: yolov5m, name: Original anchor-based YOLOv5m, upstream: 'https://github.com/ultralytics/yolov5', branch: bench/yolov5m, constraint: 'Do not substitute YOLOv5mu'}
+  - {order: 1, id: yolov5m, name: Original anchor-based YOLOv5m, upstream: 'https://github.com/ultralytics/yolov5', branch: bench/yolov5m, constraint: 'Do not substitute YOLOv5mu', adapter: benchmarks/comparison/yolov5m, lock: benchmarks/comparison/yolov5m/upstream.lock.json, recipe: benchmarks/comparison/yolov5m/recipe.json, status: integrated_not_formally_trained}
   - {order: 2, id: yolov8m, name: YOLOv8m, upstream: 'https://github.com/ultralytics/ultralytics', branch: bench/yolov8m}
   - {order: 3, id: yolo11m, name: YOLO11m, upstream: 'https://github.com/ultralytics/ultralytics', branch: bench/yolo11m}
   - {order: 4, id: yolov13l, name: YOLOv13-L, upstream: 'https://github.com/iMoonLab/yolov13', branch: bench/yolov13l, constraint: 'Official L; isolate bundled ultralytics from all other environments'}

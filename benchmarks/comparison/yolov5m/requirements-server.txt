@@ -1,0 +1,18 @@
+# Optional separate Python 3.10 environment. NEVER install into running rtdetr.
+# Install matched torch/torchvision separately; see server commands.
+numpy==1.26.4
+opencv-python==4.10.0.84
+Pillow==10.4.0
+PyYAML==6.0.2
+matplotlib==3.8.4
+pandas==2.2.3
+seaborn==0.13.2
+scipy==1.13.1
+tqdm==4.67.1
+thop==0.1.1.post2209072238
+tensorboard==2.17.1
+GitPython==3.1.43
+ipython==8.18.1
+psutil==6.1.1
+requests==2.32.3
+setuptools==75.8.0

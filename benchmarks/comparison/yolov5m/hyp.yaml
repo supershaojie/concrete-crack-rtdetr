@@ -1,0 +1,30 @@
+# Expanded v7.0 data/hyps/hyp.scratch-med.yaml, with predeclared overrides.
+# Loss/anchor fields retain the upstream medium recipe.
+lr0: 0.01
+lrf: 0.1
+momentum: 0.937
+weight_decay: 0.0005
+warmup_epochs: 5.0
+warmup_momentum: 0.8
+warmup_bias_lr: 0.1
+box: 0.05
+cls: 0.3
+cls_pw: 1.0
+obj: 0.7
+obj_pw: 1.0
+iou_t: 0.20
+anchor_t: 4.0
+fl_gamma: 0.0
+hsv_h: 0.015
+hsv_s: 0.5
+hsv_v: 0.35
+degrees: 5.0
+translate: 0.1
+scale: 0.4
+shear: 1.5
+perspective: 0.0002
+flipud: 0.2
+fliplr: 0.5
+mosaic: 0.8
+mixup: 0.05
+copy_paste: 0.0

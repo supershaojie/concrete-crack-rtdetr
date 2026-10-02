@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/ultralytics/yolov5.git",
+  "tag": "v7.0",
+  "commit": "915bbf294bb74c859f0b41f1c23bc395014ea679",
+  "tag_resolution": "git ls-remote refs/tags/v7.0, verified 2026-10-02 Asia/Shanghai",
+  "license": "GPL-3.0 (retain upstream LICENSE)",
+  "architecture": "models/yolov5m.yaml; depth=0.67 width=0.75 Detect anchors=3 levels=3",
+  "hyp_source": "data/hyps/hyp.scratch-med.yaml",
+  "weights": {
+    "url": "https://github.com/ultralytics/yolov5/releases/download/v7.0/yolov5m.pt",
+    "filename": "yolov5m.pt",
+    "bytes": 42806829,
+    "sha256": "61d933360ba5a7733a36764996c800287d973889d875227f5beedd2473a97a56",
+    "pretraining": "official COCO 80 classes",
+    "verification": "downloaded and hashed actual bytes 2026-10-02"
+  }
+}

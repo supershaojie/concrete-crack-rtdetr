@@ -1,0 +1,645 @@
+{
+  "date_beijing": "2026-10-02",
+  "formal_training": "NOT_EXECUTED",
+  "full_val_test": "NOT_EXECUTED",
+  "gpu": "NOT_USED",
+  "upstream": {
+    "repository": "https://github.com/ultralytics/yolov5.git",
+    "tag": "v7.0",
+    "commit": "915bbf294bb74c859f0b41f1c23bc395014ea679",
+    "tag_resolution": "git ls-remote refs/tags/v7.0, verified 2026-10-02 Asia/Shanghai",
+    "license": "GPL-3.0 (retain upstream LICENSE)",
+    "architecture": "models/yolov5m.yaml; depth=0.67 width=0.75 Detect anchors=3 levels=3",
+    "hyp_source": "data/hyps/hyp.scratch-med.yaml",
+    "weights": {
+      "url": "https://github.com/ultralytics/yolov5/releases/download/v7.0/yolov5m.pt",
+      "filename": "yolov5m.pt",
+      "bytes": 42806829,
+      "sha256": "61d933360ba5a7733a36764996c800287d973889d875227f5beedd2473a97a56",
+      "pretraining": "official COCO 80 classes",
+      "verification": "downloaded and hashed actual bytes 2026-10-02"
+    }
+  },
+  "light_data": {
+    "status": "LIGHT_CHECKED",
+    "splits": {
+      "test": {
+        "boxes": 6663,
+        "empty_labels": 0,
+        "images": 864,
+        "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51",
+        "labels": 864,
+        "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184"
+      },
+      "train": {
+        "boxes": 45573,
+        "empty_labels": 0,
+        "images": 6048,
+        "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d",
+        "labels": 6048,
+        "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77"
+      },
+      "val": {
+        "boxes": 12840,
+        "empty_labels": 0,
+        "images": 1728,
+        "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd",
+        "labels": 1728,
+        "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03"
+      }
+    },
+    "identity_algorithm": "light_v1_sorted_paths_image_sizes_label_bytes_NOT_image_content_hash",
+    "identity_sha256": "0f59a9b6cab5414f68fd5d79d12b0d69f645e7864ad37f227c6f15557d9349ad"
+  },
+  "cpu_smoke": {
+    "data": "synthetic only",
+    "device": "cpu",
+    "epoch_boundary": {
+      "epoch_index_189": [
+        [
+          2,
+          2,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1,
+          2
+        ]
+      ],
+      "epoch_index_190": [
+        [
+          1,
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          1
+        ]
+      ],
+      "marker_columns": [
+        "pre_transforms",
+        "mosaics",
+        "HSV",
+        "geometry"
+      ],
+      "non_mosaic_mixup": [
+        2,
+        0,
+        1,
+        2
+      ],
+      "retained_geometry_HSV": "passed",
+      "workers": 2
+    },
+    "formal_640_training": "NOT_RUN",
+    "letterbox": {
+      "inverse_max_abs_error": 1.6689300537109375e-06,
+      "shape": [
+        640,
+        640,
+        3
+      ]
+    },
+    "model": {
+      "backward": "passed",
+      "input": [
+        2,
+        3,
+        64,
+        64
+      ],
+      "loaded_tensors": 475,
+      "loss": 0.1860412061214447,
+      "loss_items": [
+        0.0913786068558693,
+        0.0016419965540990233,
+        0.0
+      ],
+      "missing_keys": [
+        "model.24.m.0.bias",
+        "model.24.m.0.weight",
+        "model.24.m.1.bias",
+        "model.24.m.1.weight",
+        "model.24.m.2.bias",
+        "model.24.m.2.weight"
+      ],
+      "total_tensors": 481
+    },
+    "public_evaluator": {
+      "AP50": 0.995,
+      "AP75": 0.995,
+      "mAP50_95": 0.9949999999999999,
+      "precision": 1.0,
+      "recall": 1.0
+    }
+  },
+  "native_synthetic_smoke": {
+    "images_train": 2,
+    "images_val": 2,
+    "imgsz": 64,
+    "device": "cpu",
+    "state": {
+      "completed_epochs": 1,
+      "best_epoch": 1,
+      "best_fitness": 0.0,
+      "selection": "native_training_val_mAP50_95_latest_tie",
+      "end_reason": "epoch_limit",
+      "mosaic_closed": true
+    }
+  },
+  "export_smoke": {
+    "device": "cpu (device selection mocked only)",
+    "formal_dataset": "NOT_RUN",
+    "images": 2,
+    "imgsz": 640,
+    "precision": "FP32",
+    "public_schema": "passed",
+    "status": "passed"
+  },
+  "environment": {
+    "GitPython": "3.1.43",
+    "Pillow": "11.3.0",
+    "PyYAML": "6.0.3",
+    "all_distributions": [
+      [
+        "GitPython",
+        "3.1.43"
+      ],
+      [
+        "Jinja2",
+        "3.1.6"
+      ],
+      [
+        "Markdown",
+        "3.9"
+      ],
+      [
+        "MarkupSafe",
+        "3.0.2"
+      ],
+      [
+        "PyQt5",
+        "5.15.11"
+      ],
+      [
+        "PyQt5-Qt5",
+        "5.15.2"
+      ],
+      [
+        "PyQt5_sip",
+        "12.17.1"
+      ],
+      [
+        "PyYAML",
+        "6.0.3"
+      ],
+      [
+        "Pygments",
+        "2.21.0"
+      ],
+      [
+        "Werkzeug",
+        "3.1.9"
+      ],
+      [
+        "absl-py",
+        "2.3.1"
+      ],
+      [
+        "asttokens",
+        "3.0.2"
+      ],
+      [
+        "autocommand",
+        "2.2.2"
+      ],
+      [
+        "backports.tarfile",
+        "1.2.0"
+      ],
+      [
+        "certifi",
+        "2026.2.25"
+      ],
+      [
+        "charset-normalizer",
+        "3.4.5"
+      ],
+      [
+        "colorama",
+        "0.4.6"
+      ],
+      [
+        "contourpy",
+        "1.3.0"
+      ],
+      [
+        "cycler",
+        "0.12.1"
+      ],
+      [
+        "decorator",
+        "5.3.1"
+      ],
+      [
+        "exceptiongroup",
+        "1.3.1"
+      ],
+      [
+        "executing",
+        "2.2.1"
+      ],
+      [
+        "filelock",
+        "3.19.1"
+      ],
+      [
+        "fonttools",
+        "4.60.2"
+      ],
+      [
+        "fsspec",
+        "2025.10.0"
+      ],
+      [
+        "gitdb",
+        "4.0.12"
+      ],
+      [
+        "grpcio",
+        "1.80.0"
+      ],
+      [
+        "idna",
+        "3.11"
+      ],
+      [
+        "importlib_metadata",
+        "8.0.0"
+      ],
+      [
+        "importlib_metadata",
+        "8.7.1"
+      ],
+      [
+        "importlib_resources",
+        "6.5.2"
+      ],
+      [
+        "inflect",
+        "7.3.1"
+      ],
+      [
+        "ipython",
+        "8.18.1"
+      ],
+      [
+        "jaraco.collections",
+        "5.1.0"
+      ],
+      [
+        "jaraco.context",
+        "5.3.0"
+      ],
+      [
+        "jaraco.functools",
+        "4.0.1"
+      ],
+      [
+        "jaraco.text",
+        "3.12.1"
+      ],
+      [
+        "jedi",
+        "0.19.2"
+      ],
+      [
+        "kiwisolver",
+        "1.4.7"
+      ],
+      [
+        "labelImg",
+        "1.8.6"
+      ],
+      [
+        "lxml",
+        "6.1.0"
+      ],
+      [
+        "matplotlib",
+        "3.9.4"
+      ],
+      [
+        "matplotlib-inline",
+        "0.2.2"
+      ],
+      [
+        "more-itertools",
+        "10.3.0"
+      ],
+      [
+        "mpmath",
+        "1.3.0"
+      ],
+      [
+        "networkx",
+        "3.2.1"
+      ],
+      [
+        "numpy",
+        "2.0.2"
+      ],
+      [
+        "opencv-python",
+        "4.13.0.92"
+      ],
+      [
+        "packaging",
+        "24.2"
+      ],
+      [
+        "packaging",
+        "26.0"
+      ],
+      [
+        "pandas",
+        "2.2.3"
+      ],
+      [
+        "parso",
+        "0.8.7"
+      ],
+      [
+        "pillow",
+        "11.3.0"
+      ],
+      [
+        "pip",
+        "23.0.1"
+      ],
+      [
+        "pip",
+        "26.0.1"
+      ],
+      [
+        "platformdirs",
+        "4.2.2"
+      ],
+      [
+        "polars",
+        "1.36.1"
+      ],
+      [
+        "polars-runtime-32",
+        "1.36.1"
+      ],
+      [
+        "prompt_toolkit",
+        "3.0.52"
+      ],
+      [
+        "protobuf",
+        "6.33.6"
+      ],
+      [
+        "psutil",
+        "7.2.2"
+      ],
+      [
+        "pure_eval",
+        "0.2.4"
+      ],
+      [
+        "pyparsing",
+        "3.3.2"
+      ],
+      [
+        "python-dateutil",
+        "2.9.0.post0"
+      ],
+      [
+        "pytz",
+        "2026.4"
+      ],
+      [
+        "requests",
+        "2.32.5"
+      ],
+      [
+        "scipy",
+        "1.13.1"
+      ],
+      [
+        "seaborn",
+        "0.13.2"
+      ],
+      [
+        "setuptools",
+        "79.0.1"
+      ],
+      [
+        "setuptools",
+        "80.9.0"
+      ],
+      [
+        "six",
+        "1.17.0"
+      ],
+      [
+        "smmap",
+        "5.0.3"
+      ],
+      [
+        "stack-data",
+        "0.6.3"
+      ],
+      [
+        "sympy",
+        "1.14.0"
+      ],
+      [
+        "tensorboard",
+        "2.17.1"
+      ],
+      [
+        "tensorboard-data-server",
+        "0.7.2"
+      ],
+      [
+        "tomli",
+        "2.0.1"
+      ],
+      [
+        "torch",
+        "2.7.1+cu118"
+      ],
+      [
+        "torchaudio",
+        "2.7.1+cu118"
+      ],
+      [
+        "torchvision",
+        "0.22.1+cu118"
+      ],
+      [
+        "tqdm",
+        "4.67.1"
+      ],
+      [
+        "traitlets",
+        "5.15.1"
+      ],
+      [
+        "typeguard",
+        "4.3.0"
+      ],
+      [
+        "typing_extensions",
+        "4.12.2"
+      ],
+      [
+        "typing_extensions",
+        "4.15.0"
+      ],
+      [
+        "tzdata",
+        "2026.4"
+      ],
+      [
+        "ultralytics",
+        "8.4.21"
+      ],
+      [
+        "ultralytics-thop",
+        "2.0.18"
+      ],
+      [
+        "urllib3",
+        "2.6.3"
+      ],
+      [
+        "wcwidth",
+        "0.9.1"
+      ],
+      [
+        "wheel",
+        "0.45.1"
+      ],
+      [
+        "wheel",
+        "0.45.1"
+      ],
+      [
+        "zipp",
+        "3.19.2"
+      ],
+      [
+        "zipp",
+        "3.23.0"
+      ]
+    ],
+    "executable": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov5m\\outputs\\yolov5m\\smoke-env\\Scripts\\python.exe",
+    "matplotlib": "3.9.4",
+    "numpy": "2.0.2",
+    "opencv-python": "4.13.0.92",
+    "pandas": "2.2.3",
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "scipy": "1.13.1",
+    "seaborn": "0.13.2",
+    "tensorboard": "2.17.1",
+    "thop": "NOT_INSTALLED",
+    "torch": "2.7.1+cu118",
+    "torchvision": "0.22.1+cu118",
+    "tqdm": "4.67.1"
+  },
+  "public_tests_passed": 5,
+  "adapter_control_tests_passed": 3,
+  "patch_clean_replay": "six files identical",
+  "launcher": {
+    "exit_0_and_7": "passed",
+    "tee_exit_codes": "passed",
+    "existing_output_protection": "passed",
+    "syntax": "passed",
+    "SIGTERM_interrupted_receipt": "passed",
+    "Linux_tmux_and_child_signal_cleanup": "NOT_VERIFIED"
+  }
+}

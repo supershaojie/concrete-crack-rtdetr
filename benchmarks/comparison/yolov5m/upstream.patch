@@ -1,0 +1,257 @@
+diff --git a/models/experimental.py b/models/experimental.py
+index 02d35b9..3df4f20 100644
+--- a/models/experimental.py
++++ b/models/experimental.py
+@@ -76,7 +76,7 @@ def attempt_load(weights, device=None, inplace=True, fuse=True):
+ 
+     model = Ensemble()
+     for w in weights if isinstance(weights, list) else [weights]:
+-        ckpt = torch.load(attempt_download(w), map_location='cpu')  # load
++        ckpt = torch.load(attempt_download(w), map_location='cpu', weights_only=False)  # load
+         ckpt = (ckpt.get('ema') or ckpt['model']).to(device).float()  # FP32 model
+ 
+         # Model compatibility updates
+diff --git a/train.py b/train.py
+index 8b5446e..c704c47 100644
+--- a/train.py
++++ b/train.py
+@@ -16,6 +16,7 @@ Tutorial:   https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data
+ """
+ 
+ import argparse
++import bench_yolov5_runtime as bench
+ import math
+ import os
+ import random
+@@ -92,7 +93,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+     # Loggers
+     data_dict = None
+     if RANK in {-1, 0}:
+-        loggers = Loggers(save_dir, weights, opt, hyp, LOGGER)  # loggers instance
++        loggers = Loggers(save_dir, weights, opt, hyp, LOGGER, include=('csv',))  # loggers instance
+ 
+         # Register actions
+         for k in methods(loggers):
+@@ -108,7 +109,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+     cuda = device.type != 'cpu'
+     init_seeds(opt.seed + 1 + RANK, deterministic=True)
+     with torch_distributed_zero_first(LOCAL_RANK):
+-        data_dict = data_dict or check_dataset(data)  # check if None
++        data_dict = data_dict or check_dataset(data, autodownload=False)  # fixed local data only
+     train_path, val_path = data_dict['train'], data_dict['val']
+     nc = 1 if single_cls else int(data_dict['nc'])  # number of classes
+     names = {0: 'item'} if single_cls and len(data_dict['names']) != 1 else data_dict['names']  # class names
+@@ -120,16 +121,17 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+     if pretrained:
+         with torch_distributed_zero_first(LOCAL_RANK):
+             weights = attempt_download(weights)  # download if not found locally
+-        ckpt = torch.load(weights, map_location='cpu')  # load checkpoint to CPU to avoid CUDA memory leak
++        ckpt = torch.load(weights, map_location='cpu', weights_only=False)  # load checkpoint to CPU to avoid CUDA memory leak
+         model = Model(cfg or ckpt['model'].yaml, ch=3, nc=nc, anchors=hyp.get('anchors')).to(device)  # create
+         exclude = ['anchor'] if (cfg or hyp.get('anchors')) and not resume else []  # exclude keys
+         csd = ckpt['model'].float().state_dict()  # checkpoint state_dict as FP32
+         csd = intersect_dicts(csd, model.state_dict(), exclude=exclude)  # intersect
+         model.load_state_dict(csd, strict=False)  # load
++        bench.record_transfer(save_dir, model, csd)
+         LOGGER.info(f'Transferred {len(csd)}/{len(model.state_dict())} items from {weights}')  # report
+     else:
+         model = Model(cfg, ch=3, nc=nc, anchors=hyp.get('anchors')).to(device)  # create
+-    amp = check_amp(model)  # check AMP
++    amp = cuda  # frozen AMP=True on CUDA; no check_amp download of another model
+ 
+     # Freeze
+     freeze = [f'model.{x}.' for x in (freeze if len(freeze) > 1 else range(freeze[0]))]  # layers to freeze
+@@ -220,7 +222,9 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+ 
+         if not resume:
+             if not opt.noautoanchor:
+-                check_anchors(dataset, model=model, thr=hyp['anchor_t'], imgsz=imgsz)  # run AutoAnchor
++                anchors_before = model.model[-1].anchors.detach().cpu().clone()
++                check_anchors(dataset, model=model, thr=hyp['anchor_t'], imgsz=imgsz)  # train only
++                bench.record_anchors(save_dir, anchors_before, model)
+             model.half().float()  # pre-reduce anchor precision
+ 
+         callbacks.run('on_pretrain_routine_end', labels, names)
+@@ -251,6 +255,8 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+     scheduler.last_epoch = start_epoch - 1  # do not move
+     scaler = torch.cuda.amp.GradScaler(enabled=amp)
+     stopper, stop = EarlyStopping(patience=opt.patience), False
++    bench.restore_stopper(stopper, save_dir, start_epoch)
++    bench.record_effective(save_dir, hyp, opt, amp, train_loader, lf, nw, accumulate, optimizer)
+     compute_loss = ComputeLoss(model)  # init loss class
+     callbacks.run('on_train_start')
+     LOGGER.info(f'Image sizes {imgsz} train, {imgsz} val\n'
+@@ -258,6 +264,8 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+                 f"Logging results to {colorstr('bold', save_dir)}\n"
+                 f'Starting training for {epochs} epochs...')
+     for epoch in range(start_epoch, epochs):  # epoch ------------------------------------------------------------------
++        if bench.close_augmentation(train_loader, epoch, epochs):
++            LOGGER.info(f'Closed Mosaic/MixUp at epoch index {epoch}; worker iterator rebuilt')
+         callbacks.run('on_train_epoch_start')
+         model.train()
+ 
+@@ -388,6 +396,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+                     torch.save(ckpt, w / f'epoch{epoch}.pt')
+                 del ckpt
+                 callbacks.run('on_model_save', last, epoch, final_epoch, best_fitness, fi)
++            bench.record_epoch(save_dir, epoch, stopper, stop, epochs)
+ 
+         # EarlyStopping
+         if RANK != -1:  # if DDP training
+@@ -402,27 +411,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+     # end training -----------------------------------------------------------------------------------------------------
+     if RANK in {-1, 0}:
+         LOGGER.info(f'\n{epoch - start_epoch + 1} epochs completed in {(time.time() - t0) / 3600:.3f} hours.')
+-        for f in last, best:
+-            if f.exists():
+-                strip_optimizer(f)  # strip optimizers
+-                if f is best:
+-                    LOGGER.info(f'\nValidating {f}...')
+-                    results, _, _ = validate.run(
+-                        data_dict,
+-                        batch_size=batch_size // WORLD_SIZE * 2,
+-                        imgsz=imgsz,
+-                        model=attempt_load(f, device).half(),
+-                        iou_thres=0.65 if is_coco else 0.60,  # best pycocotools at iou 0.65
+-                        single_cls=single_cls,
+-                        dataloader=val_loader,
+-                        save_dir=save_dir,
+-                        save_json=is_coco,
+-                        verbose=True,
+-                        plots=plots,
+-                        callbacks=callbacks,
+-                        compute_loss=compute_loss)  # val best model with plots
+-                    if is_coco:
+-                        callbacks.run('on_fit_epoch_end', list(mloss) + list(results) + lr, epoch, best_fitness, fi)
++        bench.complete(save_dir)  # retain resumable last/best; unified FP32 export follows externally
+ 
+         callbacks.run('on_train_end', last, best, epoch, results)
+ 
+diff --git a/utils/augmentations.py b/utils/augmentations.py
+index 1eae5db..4003158 100644
+--- a/utils/augmentations.py
++++ b/utils/augmentations.py
+@@ -72,7 +72,7 @@ def augment_hsv(im, hgain=0.5, sgain=0.5, vgain=0.5):
+         dtype = im.dtype  # uint8
+ 
+         x = np.arange(0, 256, dtype=r.dtype)
+-        lut_hue = ((x * r[0]) % 180).astype(dtype)
++        lut_hue = ((x + (r[0] - 1) * 180) % 180).astype(dtype)  # mother additive hue
+         lut_sat = np.clip(x * r[1], 0, 255).astype(dtype)
+         lut_val = np.clip(x * r[2], 0, 255).astype(dtype)
+ 
+diff --git a/utils/dataloaders.py b/utils/dataloaders.py
+index e107d1a..80d5970 100644
+--- a/utils/dataloaders.py
++++ b/utils/dataloaders.py
+@@ -456,7 +456,7 @@ class LoadImagesAndLabels(Dataset):
+         self.mosaic_border = [-img_size // 2, -img_size // 2]
+         self.stride = stride
+         self.path = path
+-        self.albumentations = Albumentations(size=img_size) if augment else None
++        self.albumentations = None  # frozen: historical activation unconfirmed; no implicit transforms
+ 
+         try:
+             f = []  # image files
+@@ -491,6 +491,8 @@ class LoadImagesAndLabels(Dataset):
+ 
+         # Display cache
+         nf, nm, ne, nc, n = cache.pop('results')  # found, missing, empty, corrupt, total
++        if nc or nm:
++            raise ValueError('Comparison data cannot drop corrupt images or missing labels: ' + str(cache.get('msgs')))
+         if exists and LOCAL_RANK in {-1, 0}:
+             d = f"Scanning {cache_path}... {nf} images, {nm + ne} backgrounds, {nc} corrupt"
+             tqdm(None, desc=prefix + d, total=n, initial=n, bar_format=TQDM_BAR_FORMAT)  # display cache results
+@@ -649,8 +651,7 @@ class LoadImagesAndLabels(Dataset):
+     #     #self.shuffled_vector = np.random.permutation(self.nF) if self.augment else np.arange(self.nF)
+     #     return self
+ 
+-    def __getitem__(self, index):
+-        index = self.indices[index]  # linear, shuffled, or image_weights
++    def _comparison_pre_transform(self, index):
+ 
+         hyp = self.hyp
+         mosaic = self.mosaic and random.random() < hyp['mosaic']
+@@ -659,10 +660,6 @@ class LoadImagesAndLabels(Dataset):
+             img, labels = self.load_mosaic(index)
+             shapes = None
+ 
+-            # MixUp augmentation
+-            if random.random() < hyp['mixup']:
+-                img, labels = mixup(img, labels, *self.load_mosaic(random.randint(0, self.n - 1)))
+-
+         else:
+             # Load image
+             img, (h0, w0), (h, w) = self.load_image(index)
+@@ -685,13 +682,25 @@ class LoadImagesAndLabels(Dataset):
+                                                  shear=hyp['shear'],
+                                                  perspective=hyp['perspective'])
+ 
++        return img, labels, shapes
++
++    def __getitem__(self, index):
++        index = self.indices[index]
++        hyp = self.hyp
++        img, labels, shapes = self._comparison_pre_transform(index)
++        # Independent p=0.05; partner takes its own Mosaic/non-Mosaic + geometry path.
++        if self.augment and random.random() < hyp['mixup']:
++            other, targets, _ = self._comparison_pre_transform(random.choice(self.indices))
++            img, labels = mixup(img, labels, other, targets)
++
+         nl = len(labels)  # number of labels
+         if nl:
+             labels[:, 1:5] = xyxy2xywhn(labels[:, 1:5], w=img.shape[1], h=img.shape[0], clip=True, eps=1E-3)
+ 
+         if self.augment:
+             # Albumentations
+-            img, labels = self.albumentations(img, labels)
++            if self.albumentations is not None:
++                img, labels = self.albumentations(img, labels)
+             nl = len(labels)  # update after albumentations
+ 
+             # HSV color-space
+@@ -1001,8 +1010,7 @@ def verify_image_label(args):
+             with open(im_file, 'rb') as f:
+                 f.seek(-2, 2)
+                 if f.read() != b'\xff\xd9':  # corrupt JPEG
+-                    ImageOps.exif_transpose(Image.open(im_file)).save(im_file, 'JPEG', subsampling=0, quality=100)
+-                    msg = f'{prefix}WARNING ⚠️ {im_file}: corrupt JPEG restored and saved'
++                    raise ValueError('Corrupt JPEG; comparison source data is read-only')
+ 
+         # verify labels
+         if os.path.isfile(lb_file):
+diff --git a/utils/general.py b/utils/general.py
+index c5b7389..874eae7 100644
+--- a/utils/general.py
++++ b/utils/general.py
+@@ -557,7 +557,7 @@ def check_dataset(data, autodownload=True):
+             dt = f'({round(time.time() - t, 1)}s)'
+             s = f"success ✅ {dt}, saved to {colorstr('bold', DATASETS_DIR)}" if r in (0, None) else f"failure {dt} ❌"
+             LOGGER.info(f"Dataset download {s}")
+-    check_font('Arial.ttf' if is_ascii(data['names']) else 'Arial.Unicode.ttf', progress=True)  # download fonts
++    # Comparison: no plotting fonts are needed; do not download during training.
+     return data  # dictionary
+ 
+ 
+@@ -917,7 +917,7 @@ def non_max_suppression(
+     # min_wh = 2  # (pixels) minimum box width and height
+     max_wh = 7680  # (pixels) maximum box width and height
+     max_nms = 30000  # maximum number of boxes into torchvision.ops.nms()
+-    time_limit = 0.5 + 0.05 * bs  # seconds to quit after
++    time_limit = float('inf')  # comparison: never silently omit images due to shared-machine latency
+     redundant = True  # require redundant detections
+     multi_label &= nc > 1  # multiple labels per box (adds 0.5ms/img)
+     merge = False  # use merge-NMS
+diff --git a/utils/metrics.py b/utils/metrics.py
+index 65ea463..f84bede 100644
+--- a/utils/metrics.py
++++ b/utils/metrics.py
+@@ -16,7 +16,7 @@ from utils import TryExcept, threaded
+ 
+ def fitness(x):
+     # Model fitness as a weighted combination of metrics
+-    w = [0.0, 0.0, 0.1, 0.9]  # weights for [P, R, mAP@0.5, mAP@0.5:0.95]
++    w = [0.0, 0.0, 0.0, 1.0]  # weights for [P, R, mAP@0.5, mAP@0.5:0.95]
+     return (x[:, :4] * w).sum(1)
+ 
+ 

@@ -1,0 +1,18 @@
+{
+  "model": "original_anchor_based_yolov5m",
+  "nc": 1, "imgsz": 640, "epochs": 200, "patience": 50,
+  "batch_size": 16, "workers": 8, "device": "0", "seed": 42,
+  "nbs": 64, "amp": true, "deterministic": true,
+  "optimizer": "SGD", "cos_lr": true,
+  "cache": null, "multi_scale": false, "rect": false, "freeze": [0],
+  "resume": false, "close_mosaic": 10, "image_weights": false, "quad": false,
+  "selection": "native_training_val_mAP50_95_latest_tie",
+  "evaluation": {
+    "precision": "FP32", "imgsz": 640, "batch": 16, "workers": 0,
+    "conf": 0.001, "nms_iou": 0.7, "max_det": 300,
+    "agnostic": false, "multi_label": false, "max_nms": 30000,
+    "augment": false, "rect": false, "seed": 42,
+    "inverse": "actual_resize_xy_gain_and_integer_letterbox_padding_no_clipping",
+    "nms_timeout": "disabled_to_prevent_silent_missing_predictions"
+  }
+}
