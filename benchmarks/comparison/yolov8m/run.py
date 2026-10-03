@@ -14,7 +14,7 @@ import uuid
 
 from support import (ASSET, HERE, ROOT, SOURCE, canonical, checked_weight, configure, digest,
                      local_lock, read_json, recipe, run_identity, sha256, status, write_json,
-                     initialization_type, initialization_record, model_config, model_yaml, validate_checkpoint)
+                     initialization_type, initialization_record, native_recipe, validate_checkpoint)
 
 
 def load_pretrained():
@@ -33,27 +33,20 @@ def load_pretrained():
     transferred = intersect_dicts(original.state_dict(), model.state_dict())
     if not all(torch.equal(model.state_dict()[k], v) for k, v in transferred.items()):
         raise ValueError('Pretrained parameter transfer differs')
-    record = {'coco': coco, 'crack': target, 'checkpoint_sha256': sha256(weight),
+    record = {**initialization_record(), 'coco': coco, 'crack': target, 'checkpoint_sha256': sha256(weight),
               'transferred_tensors': len(transferred), 'destination_tensors': len(model.state_dict()),
               'transferred_elements': sum(v.numel() for v in transferred.values()),
               'transferred_keys': sorted(transferred),
-              'missing_or_reshaped_keys': sorted(set(model.state_dict())-set(transferred))}
+              'missing_or_reshaped_keys': sorted(set(model.state_dict())-set(transferred)),
+              'pretrained_tensors_loaded':len(transferred), 'matching_values_verified_before_first_update':True,
+              'skip_reason':'six class-output tensors change nc80 -> nc1; all 469 matching tensors loaded'}
+    if len(transferred) != 469 or target['parameters_unfused'] != 25856899:
+        raise ValueError('Official pretrained coverage/architecture changed')
     return model, record
 
 def load_initial_model(source=SOURCE):
-    if initialization_type()=='coco':
-        return load_pretrained()
-    from ultralytics.nn.tasks import DetectionModel
-    from ultralytics.utils.torch_utils import init_seeds
-    from adapters import model_identity
-    init_seeds(42, deterministic=True)
-    # Explicit scale on the pinned official dictionary; no YOLO(.pt), load() or state transfer.
-    model = DetectionModel(model_config(source), nc=1, verbose=False)
-    record = {**model_identity(model,1), **initialization_record(source),
-              'transferred_tensors':0, 'transferred_elements':0, 'transferred_keys':[],
-              'destination_tensors':len(model.state_dict()),
-              'construction':'DetectionModel(official YAML dict with scale=m, nc=1), weights=None'}
-    return model, record
+    initialization_type()  # verify the committed explicit initialization choice
+    return load_pretrained()
 
 
 def check(args):
@@ -62,11 +55,13 @@ def check(args):
     torch.set_num_threads(2)
     from ultralytics.cfg import get_cfg
     from bootstrap import environment_probe
-    cfg = get_cfg(overrides=recipe())
+    cfg = get_cfg(overrides=native_recipe())
     model, record = load_initial_model(args.source)
     write_json(args.output, {'status': 'VERIFIED_IMPORT_CONFIG_AND_INITIALIZATION_NO_TRAINING',
                'source': identity, 'environment': environment_probe(), 'expanded_args': vars(cfg),
-               'initialization': record, 'unsupported_inactive_fields': {'cutmix': 'absent in v8.3.20'}})
+               'initialization': record, 'adapter_config':{'cutmix':recipe()['cutmix'],
+               'implementation':'augment_b19.DetectionCutMix', 'source':read_json(HERE/'augmentation.lock.json')},
+               'frozen_recipe':recipe()})
     print(f'CHECK PASSED: nc=1 M, {record["transferred_tensors"]}/{record["destination_tensors"]} tensors transferred', flush=True)
 
 
@@ -81,10 +76,10 @@ def train(args, manifest, source):
     previous = read_json(run / 'train_status.json') if (run / 'train_status.json').exists() else {}
     if previous.get('status') == 'completed':
         raise ValueError('Training is already completed; use export/evaluate/summary')
-    overrides = recipe()
-    overrides.update(model=str(model_yaml(args.source)) if initialization_type()=='random' else str(checked_weight()),
-                     pretrained=initialization_type()=='coco', resume=False, data=str(run / 'data.yaml'),
-                     project=str(run), name='train', exist_ok=True)
+    overrides = native_recipe()
+    overrides.update(model=str(checked_weight()),
+                     pretrained=True, resume=False, data=str(run / 'data.yaml'),
+                     project=str(run), name='train', exist_ok=False)
     if args.resume:
         if not (run / 'identity.json').is_file() or read_json(run / 'identity.json') != identity:
             raise ValueError('Explicit resume requires identical code, adapter, dataset and frozen recipe')
@@ -123,6 +118,8 @@ def train(args, manifest, source):
     (run / 'pip_freeze.txt').write_text(subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'], text=True), encoding='utf-8')
     trainer = ComparisonTrainer(overrides=overrides, run=run, manifest=manifest, identity=identity)
     write_json(run / 'expanded_train_args.json', vars(trainer.args))
+    write_json(run / 'adapter_config.json', {'cutmix':recipe()['cutmix'],
+               'initialization_type':initialization_type(), 'augmentation_source':read_json(HERE/'augmentation.lock.json')})
 
     def actual_setup(t):
         if t.batch_size != 16 or t.train_loader.batch_size != 16 or t.test_loader.batch_size != 16 or not t.amp:
@@ -141,15 +138,22 @@ def train(args, manifest, source):
             'parameter_groups': [{k: g.get(k) for k in ('lr', 'initial_lr', 'momentum', 'weight_decay', 'nesterov')}
                                   for g in t.optimizer.param_groups],
             'weight_decay_scaling': '0.0005 * batch16 * accumulate4 / nbs64 = 0.0005',
-            'native_validation': {'precision': 'FP16 on CUDA', 'conf': .001, 'iou': .7, 'max_det': 300,
+            'native_validation': {'precision': 'actual input dtype recorded per validation in native_validation.json', 'conf': .001, 'iou': .7, 'max_det': 300,
                                    'rect': False, 'batch': 16, 'selection': 'full precision native mAP50-95'},
             'environment': {'python': sys.version, 'torch': torch.__version__, 'cuda_build': torch.version.cuda,
-                            'device': str(t.device), 'gpu': torch.cuda.get_device_name(t.device)}})
+                            'device': str(t.device), 'gpu': torch.cuda.get_device_name(t.device)},
+            'augmentation':t.train_loader.dataset.transform_report,
+            'trainable_parameter_elements':sum(p.numel() for p in t.model.parameters() if p.requires_grad),
+            'fixed_parameters':[n for n,p in t.model.named_parameters() if not p.requires_grad],
+            'loss':{k:getattr(t.args,k) for k in ('box','cls','dfl')}})
 
     def epoch_done(t):
+        from augment_b19 import snapshot
         row = {'epoch': t.epoch+1, 'accumulate': t.accumulate, 'amp': t.amp, 'batch': t.batch_size,
                'learning_rates': t.lr, 'best_epoch': t.comparison_best_epoch, 'fitness': t.fitness,
-               'mosaic': t.train_loader.dataset.transforms.transforms[0].transforms[0].p,
+               'augmentation':t.train_loader.dataset.transform_report['probabilities'],
+               'augmentation_closed':t.train_loader.dataset.augmentation_closed,
+               'augmentation_counts_cumulative':snapshot(t.train_loader.dataset),
                'losses': t.tloss.detach().cpu().tolist()}
         with (run / 'epoch_trace.jsonl').open('a', encoding='utf-8') as stream:
             stream.write(canonical(row).decode())
@@ -254,7 +258,7 @@ def main():
             if args.command == 'preflight':
                 status(args.run, step, 'running', command=sys.argv)
                 result = preflight(args.data, args.run, args.data_root, args.public_coco)
-                write_json(args.run/'run_id.json', {'run_id':uuid.uuid4().hex})
+                write_json(args.run/'run_id.json', {'run_id':uuid.uuid4().hex, 'experiment':'yolov8m-coco-b19-pilot'})
                 status(args.run, step, 'completed', exit_code=0, counts=result['splits'])
             else:
                 manifest = verify_inputs(args.run, ('train', 'val') if args.command == 'train' else (args.split,))

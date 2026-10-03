@@ -14,10 +14,10 @@ from pathlib import Path
 import sys
 
 from support import (SOURCE, ROOT, LOCK, atomic_bytes, canonical, configure, digest, local_lock,
-                     read_json, write_json, initialization_record, model_yaml, model_config)
+                     read_json, write_json, initialization_record, recipe, validate_checkpoint)
 
 if 'ultralytics' not in sys.modules:  # spawned workers must also import the official tree
-    configure(Path(os.environ.get('YOLOV8M_RUNTIME', ROOT / '.runtime/yolov8m-scratch/worker')),
+    configure(Path(os.environ.get('YOLOV8M_RUNTIME', ROOT / '.runtime/yolov8m-coco-b19-pilot/worker')),
               Path(os.environ.get('YOLOV8M_SOURCE', SOURCE)))
 import ultralytics
 if Path(ultralytics.__file__).resolve() != Path(os.environ['YOLOV8M_SOURCE']) / 'ultralytics/__init__.py':
@@ -33,6 +33,7 @@ from ultralytics.models.yolo.detect.predict import DetectionPredictor
 from ultralytics.nn.modules import Detect
 from ultralytics.utils.torch_utils import convert_optimizer_state_dict_to_fp16, intersect_dicts
 from data import image_size, read_labels
+from augment_b19 import counters, snapshot, training_transforms
 
 
 class MotherHSV(augment.RandomHSV):
@@ -67,10 +68,13 @@ augment.Albumentations = NoAlbumentations
 
 
 class IsolatedDataset(YOLODataset):
-    def __init__(self, *args, manifest, split, cache_root, **kwargs):
+    def __init__(self, *args, manifest, split, cache_root, cutmix_probability=None, **kwargs):
         self.manifest = manifest
         self.split = split
         self.cache_root = Path(cache_root).resolve()
+        self.cutmix_probability = recipe()['cutmix'] if cutmix_probability is None else cutmix_probability
+        self.augmentation_closed = False
+        self.augmentation_counts = counters()
         self.records = [r for r in manifest['records'] if r['split'] == split]
         self.shared_root = Path(manifest['data_root']).resolve()
         if kwargs.get('cache') not in (False, None) or kwargs.get('rect', False):
@@ -105,6 +109,8 @@ class IsolatedDataset(YOLODataset):
                         raise ValueError('Label changed while building cache: ' + r['label'])
                     width, height = image_size(filename)
                     entries.append({'image': r['image'], 'width': width, 'height': height, 'boxes': boxes})
+                    if len(entries) % 500 == 0 or len(entries) == len(self.records):
+                        print(f'Isolated {self.split} label/header cache: {len(entries)}/{len(self.records)}',flush=True)
                 cached = {'identity': identity, 'format': 'yolov8m_header_labels_v1', 'entries': entries}
                 write_json(self.cache_path, cached)
             if len(cached['entries']) != len(self.im_files):
@@ -127,12 +133,19 @@ class IsolatedDataset(YOLODataset):
 
     def build_transforms(self, hyp=None):
         if self.augment:
-            transforms = augment.v8_transforms(self, self.imgsz, hyp, stretch=True)
+            transforms = training_transforms(self, self.imgsz, hyp, self.cutmix_probability)
         else:
             transforms = augment.Compose([augment.LetterBox((self.imgsz, self.imgsz), scaleup=False)])
         transforms.append(augment.Format(bbox_format='xywh', normalize=True, batch_idx=True,
                           mask_ratio=hyp.mask_ratio, mask_overlap=hyp.overlap_mask, bgr=0.0))
         return transforms
+
+    def close_mosaic(self, hyp):
+        # Old close_mosaic omits CutMix; this adapter owns all four switches.
+        hyp.mosaic = hyp.mixup = hyp.copy_paste = 0.0
+        self.cutmix_probability = 0.0
+        self.augmentation_closed = True
+        self.transforms = self.build_transforms(hyp)
 
 
 def reset_workers(loader):
@@ -147,11 +160,27 @@ class SquarePredictor(DetectionPredictor):
     def pre_transform(self, images):
         # v8.3.20 ignores rect=False here and enables auto padding for same-shaped inputs.
         letterbox = augment.LetterBox(self.imgsz, auto=False, stride=self.model.stride)
-        return [letterbox(image=im) for im in images]
+        self.inverse_geometry = []
+        transformed = []
+        for im in images:
+            h,w = im.shape[:2]
+            r = min(self.imgsz[0]/h, self.imgsz[1]/w)
+            resized = (round(w*r), round(h*r))
+            left = round((self.imgsz[1]-resized[0])/2-0.1)
+            top = round((self.imgsz[0]-resized[1])/2-0.1)
+            actual = letterbox(image=im)
+            if actual.shape[:2] != tuple(self.imgsz):
+                raise ValueError('Public letterbox output shape differs')
+            self.inverse_geometry.append({'gain_x':resized[0]/w, 'gain_y':resized[1]/h,
+                                          'left':left, 'top':top, 'resized':resized})
+            transformed.append(actual)
+        return transformed
 
     def postprocess(self, preds, img, orig_imgs):
         from ultralytics.engine.results import Results
         from ultralytics.utils import ops
+        if img.dtype != torch.float32:
+            raise ValueError('Public inference input must be FP32')
         # Same official NMS, without its time-budget early break (which can leave
         # later images empty under contention). No changes to IoU/ranking rules.
         predictions = ops.non_max_suppression(preds, self.args.conf, self.args.iou,
@@ -160,13 +189,26 @@ class SquarePredictor(DetectionPredictor):
         if not isinstance(orig_imgs, list):
             orig_imgs = ops.convert_torch2numpy_batch(orig_imgs)
         results = []
-        for pred, original, path in zip(predictions, orig_imgs, self.batch[0]):
-            pred[:, :4] = ops.scale_boxes(img.shape[2:], pred[:, :4], original.shape)
+        if len(self.inverse_geometry) != len(predictions):
+            raise ValueError('Missing actual per-image resize/padding metadata')
+        for pred, original, path, geometry in zip(predictions, orig_imgs, self.batch[0], self.inverse_geometry):
+            pred[:, [0,2]] = (pred[:, [0,2]]-geometry['left'])/geometry['gain_x']
+            pred[:, [1,3]] = (pred[:, [1,3]]-geometry['top'])/geometry['gain_y']
+            # Keep every NMS box after coordinate inversion. Clamping padding-only
+            # detections collapses them to zero area (invalid public schema) and
+            # removing those detections would erase false positives. The public
+            # matcher accepts finite positive-area boxes outside the image.
             results.append(Results(original, path=path, names=self.model.names, boxes=pred))
         return results
 
 
 class CompleteValidator(DetectionValidator):
+    def preprocess(self, batch):
+        result = super().preprocess(batch)
+        self.actual_precision = {'input_dtype':str(result['img'].dtype),
+                                 'half_argument':self.args.half, 'device':str(self.device)}
+        return result
+
     def postprocess(self, preds):
         from ultralytics.utils import ops
         return ops.non_max_suppression(preds, self.args.conf, self.args.iou,
@@ -221,6 +263,7 @@ class ComparisonTrainer(DetectionTrainer):
         self.comparison_manifest = manifest
         self.comparison_identity = identity
         self.comparison_best_epoch = None
+        self.comparison_optimizer_steps = 0
         from ultralytics.engine import trainer as native_trainer
         from ultralytics.utils import callbacks
         native_trainer.check_amp = strict_amp_probe
@@ -252,34 +295,11 @@ class ComparisonTrainer(DetectionTrainer):
         loader.reset = lambda: reset_workers(loader)
         return loader
 
-    def setup_model(self):
-        if self.comparison_identity['initialization_type']=='random' and not self.args.resume:
-            source = Path(os.environ['YOLOV8M_SOURCE'])
-            if self.args.pretrained is not False or str(self.model) != str(model_yaml(source)):
-                raise ValueError('Scratch setup requires the verified official YAML and pretrained=False')
-            self.model = self.get_model(model_config(source), weights=None)
-            return None
-        return super().setup_model()
-
     def get_model(self, cfg=None, weights=None, verbose=True):
-        scratch = self.comparison_identity['initialization_type']=='random'
-        if scratch and not self.args.resume:
-            if weights is not None or self.args.pretrained is not False:
-                raise ValueError('New scratch training forbids all supplied weights')
-            if cfg != model_config(Path(os.environ['YOLOV8M_SOURCE'])):
-                raise ValueError('Scratch model must use the pinned official M YAML')
-        elif weights is None:
+        if weights is None:
             raise ValueError('COCO initialization or explicit resume requires verified weights')
         model = super().get_model(cfg, weights, verbose)
         record = model_identity(model, 1)
-        if weights is None:
-            record.update(initialization_record(Path(os.environ['YOLOV8M_SOURCE'])))
-            record.update(transferred_tensors=0, transferred_elements=0, transferred_keys=[],
-                          destination_tensors=len(model.state_dict()), weights_argument=None, resume=False,
-                          construction='ComparisonTrainer.setup_model -> get_model(weights=None) -> DetectionModel',
-                          fixed_parameters=[n for n,p in model.named_parameters() if not p.requires_grad])
-            write_json(self.comparison_run/'initialization.json', record)
-            return model
         state = weights.float().state_dict()
         transferred = intersect_dicts(state, model.state_dict())
         record.update(transferred_tensors=len(transferred), destination_tensors=len(model.state_dict()),
@@ -289,9 +309,21 @@ class ComparisonTrainer(DetectionTrainer):
         record['restored_checkpoint_tensors'] = len(transferred) if self.args.resume else 0
         if not self.args.resume:
             record['pretrained_tensors_loaded'] = len(transferred)
+            if len(transferred) != 469 or len(model.state_dict()) != 475:
+                raise ValueError('Official nc80 -> nc1 transfer coverage changed')
+            record['skip_reasons'] = {k:{'reason':'nc=80 -> nc=1 class-output shape mismatch',
+                    'source_shape':list(state[k].shape), 'target_shape':list(model.state_dict()[k].shape)}
+                    for k in record['missing_or_reshaped_keys']}
         if not all(torch.equal(model.state_dict()[k], v) for k, v in transferred.items()):
             raise ValueError('Official pretrained transfer did not reproduce matching tensors')
-        write_json(self.comparison_run / ('resume_model.json' if self.args.resume else 'initialization.json'), record)
+        record['matching_values_verified_before_first_update'] = True
+        record['resume'] = bool(self.args.resume)
+        record['construction'] = ('official DetectionTrainer.get_model -> nc1 model.load(resume EMA); exact FP32 train state restored by resume_training'
+            if self.args.resume else 'official DetectionTrainer.get_model -> DetectionModel(original COCO yaml, nc=1) -> model.load(weights)')
+        destination = self.comparison_run / ('resume_model.json' if self.args.resume else 'initialization.json')
+        if not self.args.resume and destination.exists():
+            raise FileExistsError('Original initialization record is immutable')
+        write_json(destination, record)
         return model
 
     def validate(self):
@@ -308,7 +340,18 @@ class ComparisonTrainer(DetectionTrainer):
             'completed_epoch': self.epoch+1, 'best_epoch': self.comparison_best_epoch,
             'selection_metric': 'training_val_mAP50_95_full_precision', 'fitness': fitness,
             'best_fitness': self.best_fitness, 'native_fitness_0.1AP50_0.9mAP': native_fitness})
+        if hasattr(self.validator, 'actual_precision'):
+            write_json(self.comparison_run/'native_validation.json', {
+                **self.validator.actual_precision, 'imgsz':self.args.imgsz, 'batch':self.test_loader.batch_size,
+                'rect':False, 'conf':self.validator.args.conf, 'iou':self.validator.args.iou,
+                'max_det':self.validator.args.max_det, 'TTA':False,
+                'selection':'native full precision mAP50-95; ties select later epoch'})
         return metrics, fitness
+
+    def optimizer_step(self):
+        # Leave native unscale -> clip(10) -> scaler.step/update -> zero_grad -> EMA intact.
+        super().optimizer_step()
+        self.comparison_optimizer_steps += 1
 
     def save_model(self):
         # Native EMA, optimizer and args, with resumable identity and atomic writes.
@@ -319,15 +362,25 @@ class ComparisonTrainer(DetectionTrainer):
             'train_args': vars(self.args), 'train_metrics': {**self.metrics, 'fitness': self.fitness},
             'train_results': self.read_results_csv(), 'date': datetime.now().isoformat(),
             'version': ultralytics.__version__, 'license': 'AGPL-3.0', 'docs': 'https://docs.ultralytics.com',
-            'comparison_identity': self.comparison_identity, 'comparison_best_epoch': self.comparison_best_epoch}, buffer)
+            'comparison_identity': self.comparison_identity, 'comparison_best_epoch': self.comparison_best_epoch,
+            'comparison_initialization':read_json(self.comparison_run/'initialization.json'),
+            'pilot_recipe':recipe(), 'comparison_training_state':{
+                'model':cpu_state(self.model.state_dict()), 'optimizer':cpu_state(self.optimizer.state_dict()),
+                'ema':cpu_state(self.ema.ema.state_dict()), 'scaler':self.scaler.state_dict(),
+                'scheduler':self.scheduler.state_dict(), 'rng':capture_rng(),
+                'optimizer_steps':self.comparison_optimizer_steps,
+                'augmentation_closed':self.train_loader.dataset.augmentation_closed}}, buffer)
         raw = buffer.getvalue()
         atomic_bytes(self.last, raw)
         if self.best_fitness == self.fitness:
             atomic_bytes(self.best, raw)
 
     def resume_training(self, ckpt):
+        if self.resume:
+            validate_checkpoint(ckpt, self.comparison_identity, resume=True)
         super().resume_training(ckpt)
         if self.resume:
+            self.restore_training_state(ckpt)
             self.comparison_best_epoch = ckpt['comparison_best_epoch']
             self.stopper.best_fitness = self.best_fitness
             self.stopper.best_epoch = self.comparison_best_epoch
@@ -335,7 +388,57 @@ class ComparisonTrainer(DetectionTrainer):
             if self.start_epoch > self.epochs - self.args.close_mosaic:
                 self.train_loader.reset()  # base resume closes transforms after workers were created
 
+    def restore_training_state(self, ckpt):
+        state = ckpt['comparison_training_state']
+        self.model.load_state_dict(state['model'], strict=True)
+        self.optimizer.load_state_dict(state['optimizer'])
+        self.ema.ema.load_state_dict(state['ema'], strict=True)
+        self.scaler.load_state_dict(state['scaler'])
+        self.scheduler.load_state_dict(state['scheduler'])
+        self.comparison_optimizer_steps = state['optimizer_steps']
+        if read_json(self.comparison_run/'initialization.json') != ckpt['comparison_initialization']:
+            raise ValueError('Original initialization record differs on resume')
+        if state['augmentation_closed'] != self.train_loader.dataset.augmentation_closed:
+            raise ValueError('Saved close_mosaic state differs from resumed dataset')
+        restore_rng(state['rng'])
+        write_json(self.comparison_run/'resume_state.json', {'epoch':ckpt['epoch']+1,
+            'restored':['FP32 model','FP32 optimizer','FP32 EMA','scaler','scheduler','RNG','patience','augmentation state'],
+            'optimizer_steps':self.comparison_optimizer_steps, 'original_initialization_preserved':True,
+            'continuation':'native epoch-boundary resume; prefetched worker batches and cross-epoch pending gradients are not bitwise replayed'})
+
+    def _close_dataloader_mosaic(self):
+        super()._close_dataloader_mosaic()
+        write_json(self.comparison_run/'augmentation_closed.json', {
+            'zero_based_epoch':self.epochs-self.args.close_mosaic,
+            'closed':['mosaic','mixup','cutmix','copy_paste'],
+            'pipeline':self.train_loader.dataset.transform_report,
+            'counts_at_rebuild':snapshot(self.train_loader.dataset),
+            'worker_reset':'native epoch trigger resets iterator; resume also resets closed workers'})
+
     def final_eval(self):
         # Every epoch already validated. Preserve resumable best/last; the next step
         # exports the same selected best with explicit FP32, then invokes the public evaluator.
         print('Native training finished; separate FP32 public export/evaluation follows.', flush=True)
+
+
+def cpu_state(value):
+    if isinstance(value, torch.Tensor):
+        return value.detach().cpu().clone()
+    if isinstance(value, dict):
+        return {k:cpu_state(v) for k,v in value.items()}
+    if isinstance(value, (list,tuple)):
+        return type(value)(cpu_state(v) for v in value)
+    return deepcopy(value)
+
+
+def capture_rng():
+    return {'python':random.getstate(), 'numpy':np.random.get_state(), 'torch_cpu':torch.get_rng_state(),
+            'torch_cuda':torch.cuda.get_rng_state_all() if torch.cuda.is_available() else []}
+
+
+def restore_rng(state):
+    random.setstate(state['python'])
+    np.random.set_state(state['numpy'])
+    torch.set_rng_state(state['torch_cpu'])
+    if state['torch_cuda']:
+        torch.cuda.set_rng_state_all(state['torch_cuda'])

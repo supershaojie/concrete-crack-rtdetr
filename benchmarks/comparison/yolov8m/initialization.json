@@ -1,7 +1,7 @@
 {
-  "initialization_type": "random",
-  "pretraining_source": null,
-  "pretrained_tensors_loaded": 0,
+  "initialization_type": "coco_detection_pretrained",
+  "pretraining_source": "official COCO detection (80 classes)",
+  "source_sha256": "5d4a90cdc7a21786cc59cd19778e9eafff836df9e2da32524737c7ee6efe4fe5",
   "model_yaml": "ultralytics/cfg/models/v8/yolov8.yaml",
   "scale": "m",
   "nc": 1,

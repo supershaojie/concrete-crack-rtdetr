@@ -18,7 +18,7 @@ from stage import supervise
 
 class LifecycleTests(unittest.TestCase):
     def setUp(self):
-        root=ROOT/'outputs/yolov8m_validation'
+        root=ROOT/'outputs/yolov8m_coco_b19_pilot_validation'
         root.mkdir(parents=True,exist_ok=True)
         self.temp=tempfile.TemporaryDirectory(dir=root)
         self.path=Path(self.temp.name)
@@ -75,18 +75,18 @@ class LifecycleTests(unittest.TestCase):
                         '[[ "$1" == has-session ]] && exit 0\nexit 99\n',encoding='utf-8')
         mock.chmod(0o755)
         env=dict(os.environ,PATH=str(bindir)+os.pathsep+os.environ['PATH'],FAKE_TMUX_CALLS=(self.path/'calls').as_posix())
-        result=subprocess.run([bash,'scripts/autodl_yolov8m.sh','start','--run-id','session_guard_test'],
+        result=subprocess.run([bash,'scripts/autodl_yolov8m_coco_b19_pilot.sh','start','--run-id','session_guard_test'],
                               cwd=ROOT,env=env,capture_output=True,text=True)
         self.assertEqual(result.returncode,73,result.stderr)
-        self.assertEqual((self.path/'calls').read_text().strip(),'has-session -t =comparison-yolov8m-scratch')
+        self.assertEqual((self.path/'calls').read_text().strip(),'has-session -t =comparison-yolov8m-coco-b19-pilot')
 
     def test_shell_existing_run_protection_before_bootstrap(self):
         bash=shutil.which('bash') or 'C:/Program Files/Git/bin/bash.exe'
         if not Path(bash).is_file(): self.skipTest('bash unavailable')
-        root=ROOT/'outputs/yolov8m-scratch'; root.mkdir(parents=True,exist_ok=True)
+        root=ROOT/'outputs/yolov8m-coco-b19-pilot'; root.mkdir(parents=True,exist_ok=True)
         with tempfile.TemporaryDirectory(prefix='guard_',dir=root) as name:
             retained=Path(name)/'retained.txt'; retained.write_text('old run')
-            result=subprocess.run([bash,'scripts/autodl_yolov8m.sh','run','--run-id',Path(name).name],
+            result=subprocess.run([bash,'scripts/autodl_yolov8m_coco_b19_pilot.sh','run','--run-id',Path(name).name],
                                   cwd=ROOT,capture_output=True,text=True)
             self.assertEqual(result.returncode,73,result.stderr)
             self.assertEqual(retained.read_text(),'old run')

@@ -16,9 +16,9 @@ from unittest.mock import patch
 
 os.environ['CUDA_VISIBLE_DEVICES'] = ''  # this test never allocates a GPU
 from support import (HERE, ROOT, SOURCE, canonical, configure, local_lock, read_json, recipe,
-                     sha256, write_json)
+                     sha256, write_json, native_recipe)
 # Spawned workers re-execute this module; the parent's isolated runtime is inherited.
-configure(Path(os.environ.get('YOLOV8M_RUNTIME', ROOT / 'outputs/yolov8m_validation/smoke_runtime')), SOURCE)
+configure(Path(os.environ.get('YOLOV8M_RUNTIME', ROOT / 'outputs/yolov8m_coco_b19_pilot_validation/smoke_runtime')), SOURCE)
 import cv2
 import numpy as np
 import torch
@@ -32,6 +32,7 @@ from adapters import (ComparisonTrainer, CompleteValidator, IsolatedDataset, Mot
 from data import preflight, verify_inputs
 from export import evaluator_api, result_record
 from run import load_initial_model
+from augment_b19 import snapshot
 
 COUNTS = {'mosaic': 0, 'mixup': 0, 'hsv': 0}
 
@@ -57,8 +58,10 @@ class CountHSV(MotherHSV):
 class ObservedDataset(IsolatedDataset):
     def __getitem__(self, index):
         COUNTS.update(mosaic=0, mixup=0, hsv=0)
+        before = snapshot(self)
         result = super().__getitem__(index)
-        result['observed_operations'] = tuple(COUNTS[k] for k in ('mosaic', 'mixup', 'hsv'))
+        after = snapshot(self)
+        result['observed_operations'] = tuple(after[k]['triggered']-before[k]['triggered'] for k in ('mosaic','mixup','cutmix')) + (COUNTS['hsv'],)
         result['worker_pid'] = os.getpid()
         return result
 
@@ -84,7 +87,7 @@ def fixture(base):
 
 class IntegrationTests(unittest.TestCase):
     def setUp(self):
-        output = ROOT / 'outputs/yolov8m_validation'
+        output = ROOT / 'outputs/yolov8m_coco_b19_pilot_validation'
         output.mkdir(parents=True, exist_ok=True)
         self.tmp = tempfile.TemporaryDirectory(dir=output)
         self.base = Path(self.tmp.name)
@@ -95,7 +98,7 @@ class IntegrationTests(unittest.TestCase):
 
     def dataset(self, cls=IsolatedDataset, hyp=None):
         return cls(img_path=str(self.run/'train.txt'), imgsz=64, batch_size=2, augment=True,
-                   hyp=hyp or get_cfg(overrides=recipe()), rect=False, cache=False, data={'names': {0:'crack'}},
+                   hyp=hyp or get_cfg(overrides=native_recipe()), rect=False, cache=False, data={'names': {0:'crack'}},
                    manifest=self.manifest, split='train', cache_root=self.run/'cache')
 
     def test_cache_isolation_negatives_and_no_source_mutation(self):
@@ -143,17 +146,19 @@ class IntegrationTests(unittest.TestCase):
         np.testing.assert_array_equal(actual,expected)
 
     def test_epoch_191_actual_worker_batches(self):
-        hyp=get_cfg(overrides={**recipe(),'mosaic':1.0,'mixup':1.0})
-        with patch.object(augment,'Mosaic',CountMosaic), patch.object(augment,'MixUp',CountMixUp), patch.object(augment,'RandomHSV',CountHSV):
-            ds=self.dataset(ObservedDataset,hyp)
+        hyp=get_cfg(overrides={**native_recipe(),'mosaic':1.0,'mixup':1.0})
+        with patch.object(augment,'RandomHSV',CountHSV):
+            ds=ObservedDataset(img_path=str(self.run/'train.txt'), imgsz=64, batch_size=2, augment=True,
+                   hyp=hyp, rect=False, cache=False, data={'names':{0:'crack'}}, manifest=self.manifest,
+                   split='train', cache_root=self.run/'cache', cutmix_probability=1.0)
             loader=build_dataloader(ds,2,2,shuffle=False,rank=-1)
             loader.reset=lambda: reset_workers(loader)
             try:
                 self.assertEqual(loader.num_workers,2)
                 before=next(iter(loader))
-                self.assertTrue(all(m>0 and u>0 and h>0 for m,u,h in before['observed_operations']))
+                self.assertTrue(all(m>0 and u>0 and c>0 and h>0 for m,u,c,h in before['observed_operations']))
                 fake=ComparisonTrainer.__new__(ComparisonTrainer)
-                fake.train_loader=loader; fake.args=hyp; fake.epochs=200
+                fake.train_loader=loader; fake.args=hyp; fake.epochs=200; fake.comparison_run=self.run
                 # Execute the actual upstream epoch condition, without running 191 training epochs.
                 tree=ast.parse(textwrap.dedent(inspect.getsource(BaseTrainer._do_train)))
                 trigger=next(n for n in ast.walk(tree) if isinstance(n,ast.If) and any(
@@ -162,10 +167,11 @@ class IntegrationTests(unittest.TestCase):
                 code=compile(ast.fix_missing_locations(ast.Module(body=[trigger],type_ignores=[])),'upstream_epoch_trigger','exec')
                 exec(code,{'self':fake,'epoch':189})
                 still=next(iter(loader))
-                self.assertTrue(all(m>0 and u>0 for m,u,h in still['observed_operations']))
+                self.assertTrue(all(m>0 and u>0 and c>0 for m,u,c,h in still['observed_operations']))
                 exec(code,{'self':fake,'epoch':190})
                 after=[next(iter(loader)) for _ in range(3)]
-                self.assertTrue(all(m==0 and u==0 and h>0 for b in after for m,u,h in b['observed_operations']))
+                self.assertTrue(all(m==0 and u==0 and c==0 and h>0 for b in after for m,u,c,h in b['observed_operations']))
+                self.assertEqual(ds.transform_report['probabilities'],dict(mosaic=0.,mixup=0.,cutmix=0.,copy_paste=0.))
                 self.assertTrue(set(before['worker_pid']).isdisjoint({p for b in after for p in b['worker_pid']}))
             finally:
                 if hasattr(loader.iterator,'_shutdown_workers'):
@@ -226,7 +232,7 @@ class IntegrationTests(unittest.TestCase):
         with patch('adapters.build_dataloader',return_value=SimpleNamespace()) as build:
             trainer.get_dataloader('fixture',batch_size=32,mode='val')
             self.assertEqual(build.call_args.args[1:3],(16,0))
-        validator=CompleteValidator(args=get_cfg(overrides=recipe()))
+        validator=CompleteValidator(args=get_cfg(overrides=native_recipe()))
         validator.lb=[]
         with patch('ultralytics.utils.ops.non_max_suppression',return_value=[]) as nms:
             validator.postprocess(torch.zeros(1,5,1))
@@ -236,12 +242,13 @@ class IntegrationTests(unittest.TestCase):
     def test_resume_restores_patience_state_and_refreshes_closed_workers(self):
         from ultralytics.utils.torch_utils import EarlyStopping
         trainer=ComparisonTrainer.__new__(ComparisonTrainer)
+        trainer.comparison_identity={}
         trainer.resume=True; trainer.start_epoch=191; trainer.epochs=200; trainer.best_fitness=.5
         trainer.args=SimpleNamespace(close_mosaic=10,patience=50)
         trainer.stopper=EarlyStopping(50)
         resets=[]
         trainer.train_loader=SimpleNamespace(reset=lambda: resets.append(True))
-        with patch.object(BaseTrainer,'resume_training'):
+        with patch.object(BaseTrainer,'resume_training'), patch('adapters.validate_checkpoint'), patch.object(ComparisonTrainer,'restore_training_state'):
             trainer.resume_training({'comparison_best_epoch':151})
         self.assertEqual(resets,[True])
         self.assertFalse(trainer.stopper(200,.49))
@@ -264,7 +271,7 @@ def main():
                                'model_forward_repeated':False,'formal_training_started':False})
         return
     model,initialization=load_initial_model()
-    model.args=get_cfg(overrides=recipe())
+    model.args=get_cfg(overrides=native_recipe())
     model.train()
     torch.manual_seed(42)
     batch={'img':torch.rand(2,3,64,64),'batch_idx':torch.tensor([0,1]),

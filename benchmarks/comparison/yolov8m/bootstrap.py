@@ -5,6 +5,7 @@ import argparse
 import importlib.metadata as metadata
 import json
 import os
+import shutil
 from pathlib import Path
 import subprocess
 import sys
@@ -29,7 +30,8 @@ def environment_probe():
     torchvision.ops.nms(torch.tensor([[0., 0., 2., 2.]]), torch.tensor([0.5]), 0.7)
     versions = {n: metadata.version(n) for n in ('torch', 'torchvision', 'numpy', 'opencv-python',
         'pandas', 'seaborn', 'ultralytics-thop', 'pillow', 'scipy', 'matplotlib', 'pyyaml')}
-    return {'python': sys.executable, 'python_version': sys.version, 'versions': versions,
+    return {'python': sys.executable, 'sys_prefix':sys.prefix, 'sys_base_prefix':sys.base_prefix,
+            'python_version': sys.version, 'versions': versions,
             'torch_cuda_build': torch.version.cuda, 'cpu_nms': 'passed'}
 
 
@@ -54,63 +56,76 @@ def bootstrap(args):
         call(['git', '-C', SOURCE, 'apply', '--check', patch])
         call(['git', '-C', SOURCE, 'apply', patch])
     checked_source()
-    if initialization_type()=='coco' and not ASSET.exists():
+    initialization_type()
+    if not ASSET.exists():
         ASSET.parent.mkdir(parents=True, exist_ok=True)
-        temporary = ASSET.with_suffix('.download')
-        if temporary.exists():
-            raise FileExistsError('Incomplete prior download retained: ' + str(temporary))
-        print('Download official frozen URL: ' + lock['weights']['url'], flush=True)
-        urllib.request.urlretrieve(lock['weights']['url'], temporary)
-        checked_weight(temporary)
-        temporary.rename(ASSET)
-    if initialization_type()=='coco':
-        checked_weight()
-    state = ROOT / '.runtime/yolov8m-scratch'
+        if args.reuse_asset:
+            original = checked_weight(args.reuse_asset)
+            print('Reusing verified ORIGINAL COCO asset: ' + str(original), flush=True)
+            with original.open('rb') as src, ASSET.open('xb') as dst:
+                shutil.copyfileobj(src, dst)
+        else:
+            temporary = ASSET.with_suffix('.download')
+            if temporary.exists():
+                raise FileExistsError('Incomplete prior download retained: ' + str(temporary))
+            print('Download official frozen URL: ' + lock['weights']['url'], flush=True)
+            progress = {'last':-1}
+            def downloaded(block, size, total):
+                received = min(block*size,total) if total > 0 else block*size
+                if received-progress['last'] >= 5*1024*1024 or received == total:
+                    print(f'COCO asset: {received}/{total} bytes',flush=True)
+                    progress['last'] = received
+            urllib.request.urlretrieve(lock['weights']['url'], temporary, reporthook=downloaded)
+            checked_weight(temporary)
+            temporary.rename(ASSET)
+    checked_weight()
+    state = ROOT / '.runtime/yolov8m-coco-b19-pilot'
     probe = [args.base_python, HERE / 'bootstrap.py', '--probe']
     base = subprocess.run([str(x) for x in probe], capture_output=True, text=True)
     write_json(state / 'base_environment_probe.json', {'exit_code': base.returncode,
                'stdout': base.stdout, 'stderr': base.stderr, 'base_python': str(args.base_python)})
-    if args.reuse_base:
-        if base.returncode:
-            raise RuntimeError('Base dependencies incompatible; use default private venv (no base package changes)')
-        python = Path(args.base_python).resolve()
-    else:
-        env = ROOT / '.envs/yolov8m-scratch'
-        python = env / ('Scripts/python.exe' if os.name == 'nt' else 'bin/python')
-        if not python.exists():
-            call([args.base_python, '-m', 'venv', '--system-site-packages', env])
-        # Probe exact overlay versions before installing. --no-deps cannot upgrade inherited Torch.
-        code = ('import importlib.metadata as m,json; '
-                'names={d.metadata["Name"].lower() for d in m.distributions()}; '
-                'print(json.dumps({n:m.version(n) for n in names}))')
-        installed = json.loads(subprocess.check_output([str(python), '-c', code], text=True))
-        needed = []
-        for line in (HERE / 'requirements-overlay.txt').read_text().splitlines():
-            if line and not line.startswith('#'):
-                name, version = line.split('==')
-                if installed.get(name.lower()) != version:
-                    needed.append(line)
-        if needed:
-            call([python, '-m', 'pip', 'install', '--disable-pip-version-check', '--no-deps', *needed])
+    env = ROOT / '.envs/yolov8m-coco-b19-pilot'
+    python = env / ('Scripts/python.exe' if os.name == 'nt' else 'bin/python')
+    if not python.exists():
+        call([args.base_python, '-m', 'venv', '--copies', '--system-site-packages', env])
+    if python.is_symlink():
+        raise ValueError('Pilot venv Python must be a copy, not a link into the base environment')
+    actual = json.loads(subprocess.check_output([str(python), '-c',
+        'import sys,json; print(json.dumps({"python":sys.executable,"prefix":sys.prefix,"base":sys.base_prefix}))'], text=True))
+    if Path(actual['prefix']).resolve() != env.resolve() or Path(actual['prefix']).resolve() == Path(actual['base']).resolve():
+        raise ValueError('Refusing pip outside the private pilot environment: ' + str(actual))
+    # Probe exact overlay versions before installing. --no-deps cannot upgrade inherited Torch.
+    code = ('import importlib.metadata as m,json; '
+            'names={d.metadata["Name"].lower() for d in m.distributions()}; '
+            'print(json.dumps({n:m.version(n) for n in names}))')
+    installed = json.loads(subprocess.check_output([str(python), '-c', code], text=True))
+    needed = []
+    for line in (HERE / 'requirements-overlay.txt').read_text().splitlines():
+        if line and not line.startswith('#'):
+            name, version = line.split('==')
+            if installed.get(name.lower()) != version:
+                needed.append(line)
+    if needed:
+        call([python, '-m', 'pip', 'install', '--disable-pip-version-check', '--no-deps', *needed])
     result = subprocess.run([str(python), str(HERE / 'bootstrap.py'), '--probe'],
                             capture_output=True, text=True)
     write_json(state / 'environment_probe.json', {'exit_code': result.returncode,
                'stdout': result.stdout, 'stderr': result.stderr})
     if result.returncode:
-        raise RuntimeError('Isolated dependency probe failed; inspect .runtime/yolov8m-scratch/environment_probe.json: ' + result.stderr)
-    (state / 'python_path.txt').write_text(str(python.resolve()) + '\n', encoding='utf-8')
+        raise RuntimeError('Isolated dependency probe failed; inspect .runtime/yolov8m-coco-b19-pilot/environment_probe.json: ' + result.stderr)
+    (state / 'python_path.txt').write_text(str(python.absolute()) + '\n', encoding='utf-8')
     check_output = state / ('check_' + uuid.uuid4().hex[:8] + '.json')
     call([python, HERE / 'run.py', 'check', '--output', check_output])
     write_json(state / 'bootstrap.json', {'status': 'ASSETS_AND_IMPORT_VERIFIED_NO_TRAINING',
-        'upstream': lock, 'python': str(python.resolve()), 'environment': json.loads(result.stdout),
+        'upstream': lock, 'python': str(python.absolute()), 'environment': json.loads(result.stdout),
         'check_report': str(check_output)})
-    print('BOOTSTRAP COMPLETE. Python: ' + str(python.resolve()), flush=True)
+    print('BOOTSTRAP COMPLETE. Python: ' + str(python.absolute()), flush=True)
 
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--base-python', type=Path, default=Path(sys.executable))
-    p.add_argument('--reuse-base', action='store_true', help='Read-only reuse after successful dependency probe; never pip into it')
+    p.add_argument('--reuse-asset', type=Path, help='Read-only verified original official yolov8m.pt, copied into pilot assets')
     p.add_argument('--probe', action='store_true', help=argparse.SUPPRESS)
     args = p.parse_args()
     if args.probe:

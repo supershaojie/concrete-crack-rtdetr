@@ -15,7 +15,7 @@ SETTINGS = {'imgsz': 640, 'batch': 16, 'workers': 0, 'conf': 0.001, 'iou': 0.7,
             'agnostic_nms': False, 'classes': None, 'device': 0, 'save': False,
             'save_txt': False, 'save_conf': False, 'verbose': False}
 POSTPROCESSING = ('official YOLOv8 class-aware NMS conf>0.001 iou=0.7 max_det=300; '
-    '640 square letterbox auto=False; native scale_boxes clips and restores original pixels once; '
+    '640 square letterbox auto=False; inverse uses actual rounded resize gains x/y and integer left/top pad; no coordinate clipping or box filtering after NMS (padding-only false positives retained); '
     'Results.xyxy exported directly without another inverse transform; FP32, no TTA')
 
 
@@ -75,6 +75,10 @@ def export_split(run, split, manifest, source_identity):
     destination.parent.mkdir(parents=True, exist_ok=True)
     temporary = destination.with_name(destination.name + '.' + uuid.uuid4().hex + '.partial')
     model = YOLO(str(checkpoint), task='detect')
+    # Native compatibility key is half EMA; recover the stored selected EMA in FP32.
+    selected = torch.load(checkpoint, map_location='cpu', weights_only=False)
+    model.model.float().load_state_dict(selected['comparison_training_state']['ema'], strict=True)
+    del selected
     model_identity(model.model, 1)
     init_seeds(42, deterministic=True)
     images = sorted(gt['images'], key=lambda im: im['id'])
@@ -88,7 +92,8 @@ def export_split(run, split, manifest, source_identity):
             results = list(model.predict(source=[str(root / im['file_name']) for im in batch],
                           predictor=SquarePredictor, stream=True, **SETTINGS,
                           project=str(run / 'native_predict'), name=split, exist_ok=True))
-            if len(results) != len(batch) or model.predictor.model.fp16:
+            if (len(results) != len(batch) or model.predictor.model.fp16
+                    or next(model.predictor.model.model.parameters()).dtype != torch.float32):
                 raise ValueError('Missing result or unexpected FP16 predictor')
             for result, im in zip(results, batch):
                 if Path(result.path).resolve() != (root / im['file_name']).resolve():

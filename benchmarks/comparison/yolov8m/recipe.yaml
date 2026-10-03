@@ -1,5 +1,6 @@
-# Frozen before seeing any YOLOv8m result. Remaining defaults: official v8.3.20.
+# Independent COCO + B19 online-augmentation pilot; native model/trainer v8.3.20.
 task: detect
+initialization_type: coco_detection_pretrained
 model: yolov8m.yaml
 imgsz: 640
 epochs: 200
@@ -27,28 +28,30 @@ cos_lr: true
 warmup_epochs: 5.0
 warmup_momentum: 0.8
 warmup_bias_lr: 0.1
-hsv_h: 0.015
-hsv_s: 0.5
-hsv_v: 0.35
-degrees: 5.0
-translate: 0.1
-scale: 0.4
-shear: 1.5
-perspective: 0.0002
-flipud: 0.2
+hsv_h: 0.024
+hsv_s: 0.84
+hsv_v: 0.535
+degrees: 11.0
+translate: 0.17
+scale: 0.735
+shear: 3.5
+perspective: 0.00055
+flipud: 0.0
 fliplr: 0.5
-mosaic: 0.8
-mixup: 0.05
+mosaic: 1.0
+mixup: 0.135
+cutmix: 0.03
 close_mosaic: 10
 copy_paste: 0.0
 erasing: 0.0
 bgr: 0.0
 auto_augment: null
-# cutmix is absent in v8.3.20: do not pass it to get_cfg.
+# initialization_type and cutmix are adapter fields, consumed outside old get_cfg.
 save: true
 save_period: -1
 plots: true
-pretrained: false
+exist_ok: false
+pretrained: true
 single_cls: false
 classes: null
 # Native training validation; final export uses a separate FP32 entry point.
@@ -57,3 +60,7 @@ iou: 0.7
 max_det: 300
 agnostic_nms: false
 augment: false
+# Explicit native detection-loss weights, unchanged.
+box: 7.5
+cls: 0.5
+dfl: 1.5

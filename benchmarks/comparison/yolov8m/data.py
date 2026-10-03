@@ -90,7 +90,8 @@ def preflight(data_yaml, run, data_root=None, public_coco=None, enforce_counts=T
     files, resolution = resolve_splits(cfg, root, data_yaml.parent.parent)
     records, summaries, errors, seen = [], {}, [], set()
     for split in SPLITS:
-        for path in files[split]:
+        print(f'Light preflight {split}: {len(files[split])} paths; labels/stats and necessary headers only',flush=True)
+        for index,path in enumerate(files[split],1):
             rel = path.relative_to(root).as_posix()
             if rel in seen:
                 errors.append({'image': rel, 'error': 'Duplicate image path within/across actual splits'})
@@ -108,6 +109,8 @@ def preflight(data_yaml, run, data_root=None, public_coco=None, enforce_counts=T
             except (OSError, ValueError, UnicodeError) as exc:
                 errors.append({'image': rel, 'error': str(exc)})
             records.append(r)
+            if index % 500 == 0 or index == len(files[split]):
+                print(f'Light preflight {split}: {index}/{len(files[split])}',flush=True)
         part = [r for r in records if r['split'] == split]
         summaries[split] = {'images': len(part), 'labels': sum('label_sha256' in r for r in part),
                             'boxes': sum(len(r.get('boxes', [])) for r in part),

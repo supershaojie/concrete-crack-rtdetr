@@ -15,8 +15,8 @@ COMMON = HERE.parent
 sys.path.insert(0, str(COMMON))
 from common import canonical, digest, load_yaml, sha256
 
-SOURCE = ROOT / '.vendor/yolov8m-scratch/ultralytics-v8.3.20'
-ASSET = ROOT / '.runtime/yolov8m-scratch/assets/yolov8m.pt'
+SOURCE = ROOT / '.vendor/yolov8m-coco-b19-pilot/ultralytics-v8.3.20'
+ASSET = ROOT / '.runtime/yolov8m-coco-b19-pilot/assets/yolov8m.pt'
 RECIPE = HERE / 'recipe.yaml'
 LOCK = HERE / 'upstream.lock.json'
 
@@ -145,11 +145,13 @@ def configure(runtime, source=SOURCE):
 def recipe():
     return load_yaml(RECIPE)
 
+def native_recipe():
+    """Old get_cfg accepts native fields; the dataset consumes CutMix separately."""
+    return {k:v for k,v in recipe().items() if k not in ('initialization_type', 'cutmix')}
+
 def initialization_type():
     value = read_json(HERE/'initialization.json')['initialization_type']
-    if value not in ('random', 'coco'):
-        raise ValueError('Unknown initialization mode')
-    if (value == 'random') != (recipe()['pretrained'] is False):
+    if value != 'coco_detection_pretrained' or recipe()['initialization_type'] != value or recipe()['pretrained'] is not True:
         raise ValueError('Recipe and explicit initialization mode disagree')
     return value
 
@@ -162,9 +164,9 @@ def model_config(source=SOURCE):
     return cfg
 
 def initialization_record(source=SOURCE):
-    mode = initialization_type()
-    return {'initialization_type':mode, 'pretraining_source':None if mode=='random' else 'COCO',
-            'pretrained_tensors_loaded':0 if mode=='random' else None,
+    weight = read_json(LOCK)['weights']
+    return {'initialization_type':initialization_type(), 'pretraining_source':'official COCO detection (80 classes)',
+            'source_sha256':weight['sha256'], 'source_bytes':weight['bytes'], 'source_url':weight['url'],
             'model_yaml':str(model_yaml(source).resolve()), 'model_yaml_sha256':sha256(model_yaml(source)),
             'scale':'m', 'nc':1, 'seed':42,
             'native_constants':'BN, Detect bias priors and fixed DFL projection retain official definitions'}
@@ -172,7 +174,21 @@ def initialization_record(source=SOURCE):
 def validate_checkpoint(ckpt, identity, resume=False):
     if ckpt.get('comparison_identity') != identity:
         raise ValueError('Checkpoint model/initialization/data/config/run identity differs')
-    if resume and (ckpt.get('optimizer') is None or not 0 <= ckpt['epoch'] < 199):
+    state = ckpt.get('comparison_training_state', {})
+    required = {'model', 'optimizer', 'ema', 'scaler', 'scheduler', 'rng', 'augmentation_closed', 'optimizer_steps'}
+    if not required <= state.keys() or ckpt.get('pilot_recipe') != recipe():
+        raise ValueError('Pilot checkpoint is missing verified full training state/recipe')
+    if identity.get('scope') == 'PILOT_FORMAL':
+        saved = ckpt.get('train_args', {})
+        for key,value in native_recipe().items():
+            if key in ('model','resume'):
+                continue  # runtime paths/explicit resume replace these two values
+            actual = saved.get(key)
+            if (str(actual) != str(value) if key == 'device' else actual != value):
+                raise ValueError('Checkpoint native training configuration differs: ' + key)
+    if ckpt.get('comparison_initialization') is None or ckpt['comparison_initialization']['source_sha256'] != identity['source_sha256']:
+        raise ValueError('Original COCO initialization provenance is missing or different')
+    if resume and (state.get('optimizer') is None or not 0 <= ckpt['epoch'] < 199):
         raise ValueError('Checkpoint is complete or missing resume state')
 
 
@@ -180,12 +196,18 @@ def run_identity(manifest, source_identity, require_clean=True, run_id=None):
     if require_clean and git('status', '--porcelain', '--untracked-files=normal'):
         raise ValueError('Commit adapter changes before formal training; worktree must be clean')
     init = initialization_record(Path(source_identity['ultralytics_file']).parents[1])
-    return {'model': 'official_yolov8m_'+initialization_type()+'_to_crack',
-            **init, 'run_id':run_id, 'model_code_sha': git('rev-parse', 'HEAD'),
+    if run_id is None:
+        raise ValueError('Pilot requires a unique experiment/run UUID')
+    return {'model': 'official_yolov8m_coco_b19_pilot_to_crack',
+            **init, 'run_id':run_id, 'scope':'SMOKE_ONLY' if run_id.startswith('SMOKE_') else 'PILOT_FORMAL',
+            'model_code_sha': git('rev-parse', 'HEAD'),
             'dataset_identity_sha256': manifest['dataset_identity_sha256'],
             'recipe_sha256': digest(canonical(recipe())), 'adapter_sha256': adapter_hash(),
             'upstream_commit': source_identity['commit'], 'patch_sha256': source_identity['patch_sha256'],
-            'initialization_sha256': read_json(LOCK)['weights']['sha256'] if initialization_type()=='coco' else None}
+            'initialization_sha256': read_json(LOCK)['weights']['sha256'],
+            'b19_recipe_sha256':digest(canonical(recipe())),
+            'augmentation_source_sha256':digest(canonical(read_json(HERE/'augmentation.lock.json'))),
+            'training_preprocessing':'mother square stretch + additive MotherHSV; B19 online parameters only'}
 
 
 def status(run, step, state, **values):

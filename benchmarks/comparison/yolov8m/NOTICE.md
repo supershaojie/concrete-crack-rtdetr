@@ -14,3 +14,13 @@ The model architecture, detection loss, DFL and task-aligned assigner are the pi
 COCO initialization is the official detection asset in `upstream.lock.json`. No weights or
 third-party source checkout are committed to this project. Bootstrap preserves the official
 license and verifies the fixed commit, source contents, patch and weight checksum.
+
+`cutmix_reference.py` contains the three detection CutMix methods derived solely from
+Ultralytics v8.4.0 commit `f2d3aed634a5b0e4828024718d4a61ab2f83fb19`,
+`ultralytics/data/augment.py` (full file SHA256 in `augmentation.lock.json`).
+The class name/imports and removed documentation are the only excerpt changes.
+`augment_b19.py` adapts the old Instances/partner interfaces and adds worker-shared
+counters without changing those methods. This derived code remains AGPL-3.0:
+[fixed source](https://github.com/ultralytics/ultralytics/blob/f2d3aed634a5b0e4828024718d4a61ab2f83fb19/ultralytics/data/augment.py),
+[fixed license](https://github.com/ultralytics/ultralytics/blob/f2d3aed634a5b0e4828024718d4a61ab2f83fb19/LICENSE).
+No newer model, loss, assigner, optimizer or whole augmentation module is imported.
