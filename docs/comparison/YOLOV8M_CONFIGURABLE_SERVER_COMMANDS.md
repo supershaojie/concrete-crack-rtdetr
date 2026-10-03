@@ -222,4 +222,3 @@ git -C "$ARCHIVE_WORK" push -u origin "$ARCHIVE_BRANCH"
 33 项小型测试通过、1 项 POSIX 信号转发测试因 Windows 跳过：9 项配置/缓存/worker/启动保护，5 项 CutMix/坐标，4 项初始化 guard，10 项现有集成，5 项有效生命周期检查。真实 M 模型在 CPU、batch2/64、8 个合成训练图像上更新、保存、第1轮中断、恢复到第2轮；FP32 模型/optimizer/EMA/scaler/scheduler/RNG 恢复前逐项相等，raw decay0.0007 与 effective0.00056 不重复缩放。同一 best 完成两张合成 val/test 的公共 FP32 导出/评估。
 
 同一干净代码还通过两个 YAML 的实际 prepare/guard 与 Bash start/resume/finalize 派发检查：源 YAML 改动/移动后快照不变，派发不含候选 YAML，session 分离；该派发检查使用 mock tmux/资产路径，不执行训练。真实原始资产由独立 check 和 M-model smoke 核验。服务器资产/实际 tmux、正式200轮与服务器双任务 batch16/640/AMP 显存容量均未在本轮验证。
-
