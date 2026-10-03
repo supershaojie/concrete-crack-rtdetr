@@ -3,8 +3,9 @@
   "formal_training": false,
   "branch": "bench/yolov5m-coco-b19-pilot",
   "derivation_parent": "b6d38d6b2d72661d03322257ebc796849eb4d2f3",
+  "verified_code_commit": "07d77c16ec168bd9547cd5aac04817c1d5d46e39",
   "candidate_identity": {
-    "project_commit": "b6d38d6b2d72661d03322257ebc796849eb4d2f3",
+    "project_commit": "07d77c16ec168bd9547cd5aac04817c1d5d46e39",
     "adapter_sha256": "28eddd8dcd6193d2259f125780d04f3005c7d8c0fa3134ab21daa4e52141cc4e",
     "recipe_sha256": "f721e3e919ed47b1b0a3e956eee14f8e83dd7da74cacbc8249e866951c10994c",
     "hyp_sha256": "fe82f58def4e0c7e2ef90f237127c47c9450c31c44d6f3cbc9e8a3cae0be2af5",
@@ -476,7 +477,7 @@
     "all_compatible_tensors_loaded": true,
     "audit_timing": "immediately after load, before AutoAnchor/AMP/optimizer/first update",
     "b19_recipe_sha256": "fe82f58def4e0c7e2ef90f237127c47c9450c31c44d6f3cbc9e8a3cae0be2af5",
-    "b19_source_sha256": "f782b54cca8a9f0bd24792c7996332c6bc710b54cf9fe7dd2ae4e8b6e6cb057a",
+    "b19_source_sha256": "0f88cf586a72177b515269cb038738e79d82d71cc9ba3ffbe500f3766c85475a",
     "coco_source_sha256": "61d933360ba5a7733a36764996c800287d973889d875227f5beedd2473a97a56",
     "depth_multiple": 0.67,
     "head": "Detect",
@@ -739,7 +740,7 @@
       "all_compatible_tensors_loaded": true,
       "audit_timing": "immediately after load, before AutoAnchor/AMP/optimizer/first update",
       "b19_recipe_sha256": "fe82f58def4e0c7e2ef90f237127c47c9450c31c44d6f3cbc9e8a3cae0be2af5",
-      "b19_source_sha256": "f782b54cca8a9f0bd24792c7996332c6bc710b54cf9fe7dd2ae4e8b6e6cb057a",
+      "b19_source_sha256": "0f88cf586a72177b515269cb038738e79d82d71cc9ba3ffbe500f3766c85475a",
       "coco_source_sha256": "61d933360ba5a7733a36764996c800287d973889d875227f5beedd2473a97a56",
       "depth_multiple": 0.67,
       "head": "Detect",
@@ -994,9 +995,9 @@
       "label_smoothing": 0.0
     },
     "options": {
-      "weights": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final\\native\\weights\\last.pt",
+      "weights": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-code-07d77c1\\native\\weights\\last.pt",
       "cfg": "",
-      "data": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final\\data\\data.yaml",
+      "data": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-code-07d77c1\\data\\data.yaml",
       "hyp": {
         "lr0": 0.01,
         "lrf": 0.1,
@@ -1049,7 +1050,7 @@
       "optimizer": "SGD",
       "sync_bn": false,
       "workers": 0,
-      "project": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final",
+      "project": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-code-07d77c1",
       "name": "native",
       "exist_ok": false,
       "quad": false,
@@ -1066,7 +1067,7 @@
       "upload_dataset": false,
       "bbox_interval": -1,
       "artifact_alias": "latest",
-      "save_dir": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final\\native"
+      "save_dir": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-code-07d77c1\\native"
     },
     "amp_requested": true,
     "amp_actual": true,
@@ -1074,7 +1075,7 @@
     "actual_batch": 2,
     "nbs": 64,
     "post_warmup_accumulate": 32,
-    "warmup_accumulate": "round(linear(1,64/16)), minimum 1",
+    "warmup_accumulate": "round(linear(1,64/2)), minimum 1",
     "warmup_steps": 100,
     "loader_workers": 0,
     "seed": 42,
@@ -1240,7 +1241,11 @@
   "checks": {
     "control_tests": {
       "passed": 5,
-      "log_sha256": "2dacfe40071e60cbf837964530a63c26956b59116d6aa30aa71bc8a8dbbbe3bd"
+      "log_sha256": "ea85e96e51b20d8005b872f53a32bf7ca56ba2f7eb49bf5d6e21ebd6998dcdfb"
+    },
+    "partial_run_reporting": {
+      "passed": 1,
+      "log_sha256": "9086e371cfae00df9ce358d52962ae3816d3b39d4fd3504c32d67caeca29baeb"
     },
     "mock_tmux": {
       "passed": 1,
@@ -1259,33 +1264,33 @@
     "Parent v5 was aspect resize+LetterBox; pilot additionally corrects train stretch"
   ],
   "raw_evidence": {
-    "gpu-smoke-final/coco_b19_smoke.json": {
-      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final\\coco_b19_smoke.json",
-      "sha256": "41cb8f988553a8c983085dbf0cb51b9f3ef551f10886a539d11ee58ce7a1a186"
+    "gpu-smoke-code-07d77c1/coco_b19_smoke.json": {
+      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-code-07d77c1\\coco_b19_smoke.json",
+      "sha256": "856d67b43862ce68b7ca1eecfe52f2f03cf57fb1aa7fbb1cddd5820f7938a2e9"
     },
     "cpu-smoke-final/smoke.json": {
       "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\cpu-smoke-final\\smoke.json",
       "sha256": "074ba73a246f9af270ef8ff09e09eebf169f9432be017b8b6f40eb5f2e8036e5"
     },
-    "local-preflight-final/model_check.json": {
-      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\local-preflight-final\\model_check.json",
-      "sha256": "fb32528eb7642bfc8e8e55e3b1b41522b9017a22f7e3f7da73da04fa9a736e2b"
+    "preflight-code-07d77c1/model_check.json": {
+      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\preflight-code-07d77c1\\model_check.json",
+      "sha256": "b758a5a992fe03a4945a3e9d994879c8d75c8412a66e3f194753cd8e66af2c35"
     },
-    "gpu-smoke-final/summary.json": {
-      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final\\summary.json",
-      "sha256": "30e49cdde51d215d9ae1ee92df6280502ec5ce2f8042e2fae76a150d1971388f"
+    "gpu-smoke-code-07d77c1/summary.json": {
+      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-code-07d77c1\\summary.json",
+      "sha256": "c42f1636147c7735a7f2f6cd013097b700d5fe0b2da69b73af51520ee8d64999"
     },
-    "gpu-smoke-final/evaluation/val_unified_metrics.json": {
-      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final\\evaluation\\val_unified_metrics.json",
-      "sha256": "e7b54233aeb3be75b28e2dd19b5586e4716b5299332addcb7725ab74b3375ed6"
+    "gpu-smoke-code-07d77c1/evaluation/val_unified_metrics.json": {
+      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-code-07d77c1\\evaluation\\val_unified_metrics.json",
+      "sha256": "2f430a6b2e3422594e5bae4d9bdcb5d73ed20538020b09c17728a40ae4c0814f"
     },
-    "gpu-smoke-final/evaluation/test_unified_metrics.json": {
-      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final\\evaluation\\test_unified_metrics.json",
-      "sha256": "e02124c7995645094c137bc5a587fe92cc439738b8b5873f0c252acd75696c51"
+    "gpu-smoke-code-07d77c1/evaluation/test_unified_metrics.json": {
+      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-code-07d77c1\\evaluation\\test_unified_metrics.json",
+      "sha256": "b5dadd3508dc4d9ba35ac1ceb77759bbaf481756fbc2ff8d31b7430b6143c2db"
     },
-    "gpu-smoke-final.log": {
-      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final.log",
-      "sha256": "051957caab1fff3023f2146f3f7e65c55485240fec2da78760d508365956d8cc"
+    "gpu-smoke-code-07d77c1.log": {
+      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-code-07d77c1.log",
+      "sha256": "db2dccf3c870d34cac52b3f21201b8b315f3e1f7f7e01b2f4bac30638504795a"
     },
     "cpu-smoke-final.log": {
       "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\cpu-smoke-final.log",
