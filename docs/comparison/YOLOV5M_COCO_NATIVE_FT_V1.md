@@ -1,6 +1,6 @@
 # YOLOv5m 原生预处理与外部配置固定工具交付
 
-2026-10-03，Asia/Shanghai。开发分支 `bench/yolov5m-coco-native-ft-v1` 从指定、已验证 pilot 父提交 `07d77c16ec168bd9547cd5aac04817c1d5d46e39` 派生。实施前本地/远端均没有该分支；远端通过本机既有代理只读核实。独立本机工作树位于 `D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-bench-yolov5m-coco-native-ft-v1`，主项目 HEAD 和原未跟踪实验文件保留。实际实施 SHA 在后续身份补充中记录。
+2026-10-03，Asia/Shanghai。实施代码完整 SHA：`64da7e2f3041cb212f8c81f5e52bb68c457de8ea`，实际父提交：`07d77c16ec168bd9547cd5aac04817c1d5d46e39`。开发分支 `bench/yolov5m-coco-native-ft-v1` 从该指定、已验证 pilot 派生，后续提交只补身份文档，不改变运行代码。实施前本地/远端均没有该分支；远端通过本机既有代理只读核实。独立本机工作树位于 `D:/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-bench-yolov5m-coco-native-ft-v1`，主项目 HEAD 和原未跟踪实验文件保留。
 
 ## 实现
 
@@ -30,7 +30,7 @@
 
 另只读检查3张真实 train 图片，3072×4096→480×640→LetterBox640×640；每张3框均对齐，归一化坐标最大误差1.4603138e-6，导出逆变换误差0。没有全库图像哈希、划分、增强或复制。这3张旧固定 train 图含既有离线增强，只作为预处理 QA，不产生指标结论。
 
-相关检查：配置5项、现有控制5项、现有中断报告1项、mock tmux/两组会话/同名保护/恢复/参数拒绝1项；Python 编译、Bash语法、Git diff whitespace 检查通过。完整真实合成 native best 的公共640 FP32 val/test 导出与冻结公共 evaluator、空预测/AP fixture 通过。详细证据为 [验证 JSON](evidence/yolov5m_coco_native_ft_v1_validation.json)，大权重/日志只在 ignored outputs。
+相关检查：配置5项、现有控制5项、现有中断报告1项、mock tmux/两组会话/同名保护/恢复/参数拒绝1项；Python 编译、Bash语法、Git diff whitespace 检查通过。完整真实合成 native best 的公共640 FP32 val/test 导出与冻结公共 evaluator、空预测/AP fixture 通过。检查在指定父提交加实施修改的工作树完成，随后核实规范化运行源代码指纹与实际提交逐文件一致；smoke 的历史 code SHA 保留为当时父 HEAD，不伪改为提交后的 SHA。详细证据为 [验证 JSON](evidence/yolov5m_coco_native_ft_v1_validation.json)，大权重/日志只在 ignored outputs。
 
 未验证 AutoDL 实际环境、真实全数据训练/性能、GPU0 同时两个 batch16/imgsz640 的容量及真实 Linux tmux/POSIX 信号。所有 smoke 都有 SMOKE_ONLY_SYNTHETIC 身份，不可当正式实验、最优配置或新 run 初始化。首次候选同时改变优化、增强和训练预处理，应作为整体配方比较。
 

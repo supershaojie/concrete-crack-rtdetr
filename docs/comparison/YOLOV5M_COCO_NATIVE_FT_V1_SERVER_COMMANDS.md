@@ -4,7 +4,7 @@
 
 ## 1. 首次拉取和独立工作树
 
-下面的代码 SHA 在交付后的身份补充中固定为实际实施提交；当前完整命令也可直接从已推送分支解析一次并冻结。**已启动训练的工作树不执行 checkout/pull/reset。** 已有工作树 HEAD 不同就清楚停止，另行检查，不能覆盖它。
+固定实施代码 SHA：`64da7e2f3041cb212f8c81f5e52bb68c457de8ea`，实际父 SHA：`07d77c16ec168bd9547cd5aac04817c1d5d46e39`。分支随后只补交付身份文档，下面始终检出这一固定代码提交。**已启动训练的工作树不执行 checkout/pull/reset。** 已有工作树 HEAD 不同就清楚停止，另行检查，不能覆盖它。
 
 ```bash
 set -euo pipefail
@@ -13,7 +13,9 @@ WT=/root/autodl-tmp/projects/Crack_RTDETR-bench-yolov5m-coco-native-ft-v1
 BRANCH=bench/yolov5m-coco-native-ft-v1
 git -C "$SOURCE" remote get-url origin
 git -C "$SOURCE" fetch origin "$BRANCH"
-CODE_SHA="$(git -C "$SOURCE" rev-parse FETCH_HEAD)"
+CODE_SHA=64da7e2f3041cb212f8c81f5e52bb68c457de8ea
+git -C "$SOURCE" cat-file -e "$CODE_SHA^{commit}"
+git -C "$SOURCE" merge-base --is-ancestor "$CODE_SHA" FETCH_HEAD
 [[ "$CODE_SHA" =~ ^[0-9a-f]{40}$ ]]
 printf 'Fixed code SHA: %s\n' "$CODE_SHA"
 if [[ -e "$WT" ]]; then
