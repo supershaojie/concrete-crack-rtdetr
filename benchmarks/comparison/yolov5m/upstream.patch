@@ -12,7 +12,7 @@ index 02d35b9..3df4f20 100644
  
          # Model compatibility updates
 diff --git a/train.py b/train.py
-index 8b5446e..ed9c8c1 100644
+index 8b5446e..bcc5a0f 100644
 --- a/train.py
 +++ b/train.py
 @@ -16,6 +16,7 @@ Tutorial:   https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data
@@ -32,9 +32,12 @@ index 8b5446e..ed9c8c1 100644
  
          # Register actions
          for k in methods(loggers):
-@@ -108,7 +109,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+@@ -106,9 +107,9 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+     # Config
+     plots = not evolve and not opt.noplots  # create plots
      cuda = device.type != 'cpu'
-     init_seeds(opt.seed + 1 + RANK, deterministic=True)
+-    init_seeds(opt.seed + 1 + RANK, deterministic=True)
++    init_seeds(opt.seed + 1 + RANK, deterministic=opt.deterministic)
      with torch_distributed_zero_first(LOCAL_RANK):
 -        data_dict = data_dict or check_dataset(data)  # check if None
 +        data_dict = data_dict or check_dataset(data, autodownload=False)  # fixed local data only
@@ -60,10 +63,19 @@ index 8b5446e..ed9c8c1 100644
          model = Model(cfg, ch=3, nc=nc, anchors=hyp.get('anchors')).to(device)  # create
 -    amp = check_amp(model)  # check AMP
 +    bench.record_initialization(save_dir, model, opt)
-+    amp = bench.strict_amp_probe(model)  # isolated actual model; no substitute weights or RNG/BN changes
++    amp = bench.strict_amp_probe(model, opt.amp)  # isolated actual model; no substitute weights or RNG/BN changes
  
      # Freeze
      freeze = [f'model.{x}.' for x in (freeze if len(freeze) > 1 else range(freeze[0]))]  # layers to freeze
+@@ -150,7 +153,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+         loggers.on_params_update({"batch_size": batch_size})
+ 
+     # Optimizer
+-    nbs = 64  # nominal batch size
++    nbs = opt.nbs  # frozen run nominal batch size
+     accumulate = max(round(nbs / batch_size), 1)  # accumulate loss before optimizing
+     hyp['weight_decay'] *= batch_size * accumulate / nbs  # scale weight_decay
+     optimizer = smart_optimizer(model, opt.optimizer, hyp['lr0'], hyp['momentum'], hyp['weight_decay'])
 @@ -170,6 +173,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
      if pretrained:
          if resume:
@@ -81,18 +93,19 @@ index 8b5446e..ed9c8c1 100644
                                         gs,
                                         single_cls,
                                         hyp=hyp,
-@@ -220,7 +224,9 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+@@ -220,7 +224,10 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
  
          if not resume:
              if not opt.noautoanchor:
 -                check_anchors(dataset, model=model, thr=hyp['anchor_t'], imgsz=imgsz)  # run AutoAnchor
++                bench.prepare_anchor_audit(save_dir, dataset, imgsz, hyp['anchor_t'])
 +                anchors_before = model.model[-1].anchors.detach().cpu().clone()
 +                check_anchors(dataset, model=model, thr=hyp['anchor_t'], imgsz=imgsz)  # train only
 +                bench.record_anchors(save_dir, anchors_before, model)
              model.half().float()  # pre-reduce anchor precision
  
          callbacks.run('on_pretrain_routine_end', labels, names)
-@@ -251,13 +257,20 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+@@ -251,13 +258,20 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
      scheduler.last_epoch = start_epoch - 1  # do not move
      scaler = torch.cuda.amp.GradScaler(enabled=amp)
      stopper, stop = EarlyStopping(patience=opt.patience), False
@@ -107,22 +120,26 @@ index 8b5446e..ed9c8c1 100644
                  f"Logging results to {colorstr('bold', save_dir)}\n"
                  f'Starting training for {epochs} epochs...')
      for epoch in range(start_epoch, epochs):  # epoch ------------------------------------------------------------------
-+        if bench.close_augmentation(train_loader, epoch, epochs):
-+            LOGGER.info(f'Closed Mosaic/MixUp/CutMix/CopyPaste at epoch index {epoch}; worker iterator rebuilt')
++        if bench.close_augmentation(train_loader, epoch, epochs, opt.close_mosaic):
++            LOGGER.info(f'Closed native Mosaic/MixUp at epoch index {epoch}; worker iterator rebuilt')
 +        bench.begin_epoch(train_loader, epoch)
          callbacks.run('on_train_epoch_start')
          model.train()
  
-@@ -319,6 +332,8 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+@@ -319,8 +333,12 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
              if ni - last_opt_step >= accumulate:
                  scaler.unscale_(optimizer)  # unscale gradients
                  torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=10.0)  # clip gradients
 +                if not (save_dir/'first_update.json').exists():
 +                    bench.record_update(save_dir, model, optimizer, accumulate, ni)
++                scale_before = scaler.get_scale()
                  scaler.step(optimizer)  # optimizer.step
                  scaler.update()
++                bench.record_optimizer_step(optimizer, scale_before, scaler)
                  optimizer.zero_grad()
-@@ -348,7 +363,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+                 if ema:
+                     ema.update(model)
+@@ -348,7 +366,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
              final_epoch = (epoch + 1 == epochs) or stopper.possible_stop
              if not noval or final_epoch:  # Calculate mAP
                  results, maps, _ = validate.run(data_dict,
@@ -131,7 +148,7 @@ index 8b5446e..ed9c8c1 100644
                                                  imgsz=imgsz,
                                                  half=amp,
                                                  model=ema.ema,
-@@ -371,6 +386,8 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+@@ -371,6 +389,8 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
              if (not nosave) or (final_epoch and not evolve):  # if save
                  ckpt = {
                      'epoch': epoch,
@@ -140,7 +157,7 @@ index 8b5446e..ed9c8c1 100644
                      'best_fitness': best_fitness,
                      'model': deepcopy(de_parallel(model)).half(),
                      'ema': deepcopy(ema.ema).half(),
-@@ -381,13 +398,15 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+@@ -381,13 +401,15 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
                      'date': datetime.now().isoformat()}
  
                  # Save last, best and delete
@@ -154,12 +171,12 @@ index 8b5446e..ed9c8c1 100644
 +                    bench.save_checkpoint(ckpt, w / f'epoch{epoch}.pt')
                  del ckpt
                  callbacks.run('on_model_save', last, epoch, final_epoch, best_fitness, fi)
-+            bench.record_epoch(save_dir, epoch, stopper, stop, epochs)
++            bench.record_epoch(save_dir, epoch, stopper, stop, epochs, train_loader)
 +            bench.record_augmentation(save_dir, train_loader, epoch, optimizer, accumulate)
  
          # EarlyStopping
          if RANK != -1:  # if DDP training
-@@ -402,27 +421,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
+@@ -402,27 +424,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
      # end training -----------------------------------------------------------------------------------------------------
      if RANK in {-1, 0}:
          LOGGER.info(f'\n{epoch - start_epoch + 1} epochs completed in {(time.time() - t0) / 3600:.3f} hours.')
@@ -188,44 +205,59 @@ index 8b5446e..ed9c8c1 100644
  
          callbacks.run('on_train_end', last, best, epoch, results)
  
-diff --git a/utils/augmentations.py b/utils/augmentations.py
-index 1eae5db..4003158 100644
---- a/utils/augmentations.py
-+++ b/utils/augmentations.py
-@@ -72,7 +72,7 @@ def augment_hsv(im, hgain=0.5, sgain=0.5, vgain=0.5):
-         dtype = im.dtype  # uint8
+diff --git a/utils/autoanchor.py b/utils/autoanchor.py
+index bb5cf6e..e3d2eb8 100644
+--- a/utils/autoanchor.py
++++ b/utils/autoanchor.py
+@@ -4,6 +4,7 @@ AutoAnchor utils
+ """
  
-         x = np.arange(0, 256, dtype=r.dtype)
--        lut_hue = ((x * r[0]) % 180).astype(dtype)
-+        lut_hue = ((x + (r[0] - 1) * 180) % 180).astype(dtype)  # mother additive hue
-         lut_sat = np.clip(x * r[1], 0, 255).astype(dtype)
-         lut_val = np.clip(x * r[2], 0, 255).astype(dtype)
+ import random
++import bench_yolov5_runtime as bench
  
+ import numpy as np
+ import torch
+@@ -45,6 +46,8 @@ def check_anchors(dataset, model, thr=4.0, imgsz=640):
+     stride = m.stride.to(m.anchors.device).view(-1, 1, 1)  # model strides
+     anchors = m.anchors.clone() * stride  # current anchors
+     bpr, aat = metric(anchors.cpu().view(-1, 2))
++    if hasattr(dataset, '_comparison_save_dir'):
++        bench.record_anchor_fit(dataset, wh, anchors, thr, 'before')
+     s = f'\n{PREFIX}{aat:.2f} anchors/target, {bpr:.3f} Best Possible Recall (BPR). '
+     if bpr > 0.98:  # threshold to recompute
+         LOGGER.info(f'{s}Current anchors are a good fit to dataset ✅')
+@@ -62,6 +65,8 @@ def check_anchors(dataset, model, thr=4.0, imgsz=640):
+         else:
+             s = f'{PREFIX}Done ⚠️ (original anchors better than new anchors, proceeding with original anchors)'
+         LOGGER.info(s)
++    if hasattr(dataset, '_comparison_save_dir'):
++        bench.record_anchor_fit(dataset, wh, m.anchors * stride, thr, 'after')
+ 
+ 
+ def kmean_anchors(dataset='./data/coco128.yaml', n=9, img_size=640, thr=4.0, gen=1000, verbose=True):
 diff --git a/utils/dataloaders.py b/utils/dataloaders.py
-index e107d1a..9e700bb 100644
+index e107d1a..2a58714 100644
 --- a/utils/dataloaders.py
 +++ b/utils/dataloaders.py
-@@ -5,6 +5,7 @@ Dataloaders and dataset utils
- 
- import contextlib
- import glob
-+from b19_augment import make_counters, bump, detection_cutmix
- import hashlib
- import json
- import math
-@@ -454,9 +455,10 @@ class LoadImagesAndLabels(Dataset):
-         self.rect = False if image_weights else rect
-         self.mosaic = self.augment and not self.rect  # load 4 images at a time into a mosaic (only during training)
+@@ -456,7 +456,7 @@ class LoadImagesAndLabels(Dataset):
          self.mosaic_border = [-img_size // 2, -img_size // 2]
-+        self._comparison_counts = make_counters() if augment else None
          self.stride = stride
          self.path = path
 -        self.albumentations = Albumentations(size=img_size) if augment else None
-+        self.albumentations = None  # frozen: historical activation unconfirmed; no implicit transforms
++        self.albumentations = None  # no implicit external augmentation
  
          try:
              f = []  # image files
-@@ -491,6 +493,8 @@ class LoadImagesAndLabels(Dataset):
+@@ -486,11 +486,15 @@ class LoadImagesAndLabels(Dataset):
+             cache, exists = np.load(cache_path, allow_pickle=True).item(), True  # load dict
+             assert cache['version'] == self.cache_version  # matches current version
+             assert cache['hash'] == get_hash(self.label_files + self.im_files)  # identical hash
+-        except Exception:
+-            cache, exists = self.cache_labels(cache_path, prefix), False  # run cache ops
++        except Exception as error:
++            if (cache_path.parent / 'manifest.json').is_file():
++                raise ValueError('Frozen run label/shape cache invalid; no full image rescan') from error
++            cache, exists = self.cache_labels(cache_path, prefix), False  # bounded standalone probes
  
          # Display cache
          nf, nm, ne, nc, n = cache.pop('results')  # found, missing, empty, corrupt, total
@@ -234,58 +266,7 @@ index e107d1a..9e700bb 100644
          if exists and LOCAL_RANK in {-1, 0}:
              d = f"Scanning {cache_path}... {nf} images, {nm + ne} backgrounds, {nc} corrupt"
              tqdm(None, desc=prefix + d, total=n, initial=n, bar_format=TQDM_BAR_FORMAT)  # display cache results
-@@ -649,20 +653,18 @@ class LoadImagesAndLabels(Dataset):
-     #     #self.shuffled_vector = np.random.permutation(self.nF) if self.augment else np.arange(self.nF)
-     #     return self
- 
--    def __getitem__(self, index):
--        index = self.indices[index]  # linear, shuffled, or image_weights
-+    def _comparison_pre_transform(self, index):
- 
-         hyp = self.hyp
-         mosaic = self.mosaic and random.random() < hyp['mosaic']
-+        if self.augment:
-+            bump(self, 'pre_transform')
-         if mosaic:
-+            bump(self, 'mosaic_applied')
-             # Load mosaic
-             img, labels = self.load_mosaic(index)
-             shapes = None
- 
--            # MixUp augmentation
--            if random.random() < hyp['mixup']:
--                img, labels = mixup(img, labels, *self.load_mosaic(random.randint(0, self.n - 1)))
--
-         else:
-             # Load image
-             img, (h0, w0), (h, w) = self.load_image(index)
-@@ -685,15 +687,37 @@ class LoadImagesAndLabels(Dataset):
-                                                  shear=hyp['shear'],
-                                                  perspective=hyp['perspective'])
- 
-+        return img, labels, shapes
-+
-+    def __getitem__(self, index):
-+        index = self.indices[index]
-+        hyp = self.hyp
-+        img, labels, shapes = self._comparison_pre_transform(index)
-+        if self.augment:
-+            bump(self, 'samples')
-+        # Each train-only partner takes pre-transform only; never recursively mixes.
-+        if self.augment and random.random() < hyp['mixup']:
-+            other, targets, _ = self._comparison_pre_transform(random.choice(self.indices))
-+            img, labels = mixup(img, labels, other, targets)
-+            bump(self, 'mixup_triggered')
-+            bump(self, 'mixup_applied')
-+        if self.augment and random.random() < hyp['cutmix']:
-+            bump(self, 'cutmix_triggered')
-+            other, targets, _ = self._comparison_pre_transform(random.choice(self.indices))
-+            img, labels, outcome = detection_cutmix(img, labels, other, targets)
-+            bump(self, 'cutmix_' + outcome)
-+
-         nl = len(labels)  # number of labels
-         if nl:
-             labels[:, 1:5] = xyxy2xywhn(labels[:, 1:5], w=img.shape[1], h=img.shape[0], clip=True, eps=1E-3)
+@@ -691,7 +695,8 @@ class LoadImagesAndLabels(Dataset):
  
          if self.augment:
              # Albumentations
@@ -294,11 +275,8 @@ index e107d1a..9e700bb 100644
 +                img, labels = self.albumentations(img, labels)
              nl = len(labels)  # update after albumentations
  
-+            bump(self, 'hsv_applied')
              # HSV color-space
-             augment_hsv(img, hgain=hyp['hsv_h'], sgain=hyp['hsv_s'], vgain=hyp['hsv_v'])
- 
-@@ -727,12 +751,13 @@ class LoadImagesAndLabels(Dataset):
+@@ -727,12 +732,11 @@ class LoadImagesAndLabels(Dataset):
          # Loads 1 image from dataset index 'i', returns (im, original hw, resized hw)
          im, f, fn = self.ims[i], self.im_files[i], self.npy_files[i],
          if im is None:  # not cached in RAM
@@ -307,17 +285,15 @@ index e107d1a..9e700bb 100644
 -            else:  # read image
 -                im = cv2.imread(f)  # BGR
 -                assert im is not None, f'Image Not Found {f}'
-+            im = cv2.imread(f)  # pilot cache=False: source images read-only
++            im = cv2.imread(f)  # source read-only; ignore old offline npy caches
 +            assert im is not None, f'Image Not Found {f}'
              h0, w0 = im.shape[:2]  # orig hw
-+            if self.augment:  # explicit pilot train-only mother square stretch; val stays native
-+                if (h0, w0) != (self.img_size, self.img_size):
-+                    im = cv2.resize(im, (self.img_size, self.img_size), interpolation=cv2.INTER_LINEAR)
-+                return im, (h0, w0), im.shape[:2]
++            if (w0, h0) != tuple(self.shapes[i]):
++                raise ValueError('Original decoded shape differs from label cache: ' + f)
              r = self.img_size / max(h0, w0)  # ratio
              if r != 1:  # if sizes are not equal
                  interp = cv2.INTER_LINEAR if (self.augment or r > 1) else cv2.INTER_AREA
-@@ -1001,8 +1026,7 @@ def verify_image_label(args):
+@@ -1001,8 +1005,7 @@ def verify_image_label(args):
              with open(im_file, 'rb') as f:
                  f.seek(-2, 2)
                  if f.read() != b'\xff\xd9':  # corrupt JPEG
@@ -404,7 +380,7 @@ index 36df271..a91e079 100644
          self.draw.text(xy, text, fill=txt_color, font=self.font)
  
 diff --git a/val.py b/val.py
-index 7c610e8..9b8acd5 100644
+index 7c610e8..ced1e4a 100644
 --- a/val.py
 +++ b/val.py
 @@ -20,6 +20,7 @@ Usage - formats:
@@ -415,15 +391,15 @@ index 7c610e8..9b8acd5 100644
  import json
  import os
  import sys
-@@ -202,6 +203,8 @@ def run(
-                 targets = targets.to(device)
+@@ -203,6 +204,8 @@ def run(
              im = im.half() if half else im.float()  # uint8 to fp16/32
              im /= 255  # 0 - 255 to 0.0 - 1.0
+             nb, _, height, width = im.shape  # batch size, channels, height, width
 +        if training and batch_i == 0:
 +            bench.record_native_validation(save_dir, model, dataloader, im, batch_size, imgsz, conf_thres, iou_thres, max_det, augment)
-             nb, _, height, width = im.shape  # batch size, channels, height, width
  
          # Inference
+         with dt[1]:
 @@ -271,12 +274,17 @@ def run(
  
      # Compute metrics

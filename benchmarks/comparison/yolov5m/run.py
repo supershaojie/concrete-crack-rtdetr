@@ -8,12 +8,15 @@ import signal
 import subprocess
 import sys
 import uuid
+import shutil
 from datetime import datetime, timezone
 
 from support import (HERE, PROJECT, atomic_json, environment, identity, read_json, sha256, write_json,
                      initialization_record)
-from assets import verify
-from data import inspect, save_check, make_gt
+from assets import verify, prepare as prepare_assets, DEFAULT_CACHE
+from data import inspect, save_check, make_gt, attach_dimensions
+from config import read_yaml, resolve, freeze_config, snapshot, recipe, run_id
+from support import canonical, digest
 
 def utc():
     return datetime.now(timezone.utc).isoformat()
@@ -84,38 +87,54 @@ def stage(run, name, command):
 def worker(run, assets, action, *extra):
     return [sys.executable,str(HERE/'worker.py'),action,'--run',str(run),'--assets',str(assets),*extra]
 
-def prepare(a):
+def prepare(a, small_sample=False):
     if a.run.exists():
-        raise FileExistsError('Run output exists; choose a new name or explicit train --resume')
-    assets=verify(a.assets)
+        raise FileExistsError('Run output exists; choose a new run-id or use resume --run-id')
+    resolve(read_yaml(a.config))  # report invalid candidates before creating any runtime/run
+    assets=prepare_assets(a.assets,a.asset_cache)
     a.run.mkdir(parents=True,exist_ok=False)
     atomic_json(a.run/'status.json',{'created':utc(),'stages':{},'preparation':'running'})
     try:
-        manifest=inspect(a.data,a.data_root,a.source_project)
+        config=freeze_config(a.config,a.run)
+        manifest=inspect(a.data,a.data_root,a.source_project,enforce_counts=not small_sample)
+        attach_dimensions(manifest,a.source_project,a.dataset_cache,small_sample=small_sample)
         save_check(manifest,a.run/'data')
-        recipe=read_json(HERE/'recipe.json')
+        resolved_recipe=recipe(config)
         # Import the actual evaluator policy; no independent copy of its metric implementation.
         sys.path.insert(0,str(HERE.parent/'evaluation'))
         from evaluate import POLICY_SHA
-        init=initialization_record(assets['upstream'])
-        checkpoint_identity={'run_id':uuid.uuid4().hex, 'code':identity(),
+        init=initialization_record(assets['upstream'],config)
+        config_hash=digest(canonical(config))
+        checkpoint_identity={'run_id':a.run_id, 'run_uuid':uuid.uuid4().hex, 'code':identity(),
+                             'config_sha256':config_hash, 'scope':'SMOKE_ONLY_SYNTHETIC' if small_sample else 'FORMAL_CANDIDATE',
                              'data_identity':manifest['dataset_identity_sha256'], 'initialization':init}
-        frozen={'identity':identity(),'recipe':recipe,'hyp':__import__('yaml').safe_load((HERE/'hyp.yaml').read_text()),
+        frozen={'identity':identity(),'recipe':resolved_recipe,'hyp':read_yaml(a.run/'train_hyp.yaml'),
+                'scope':checkpoint_identity['scope'], 'config_sha256':config_hash,
+                'config_checksums':{name:sha256(a.run/name) for name in
+                                    ('user_config.yaml','resolved_config.yaml','train_hyp.yaml')},
+                'paths':{k:str(getattr(a,k)) if getattr(a,k) is not None else None for k in
+                         ('assets','source_project','data','data_root','gt_cache','dataset_cache')},
                 'initialization':init, 'checkpoint_identity':checkpoint_identity,
                 'input_checksums':{p.name:sha256(p) for p in (a.run/'data').iterdir() if p.is_file()},
                 'assets':assets,'environment':environment(),
                 'data_identity':manifest['dataset_identity_sha256'],
                 'prediction_identity':{
-                    'model':recipe['model'],'model_code_sha':identity()['project_commit'],
+                    'model':config['model'],'model_code_sha':identity()['project_commit'],
                     'initialization_type':init['initialization_type'], 'pretraining_source':init['pretraining_source'],
                     'pretrained_tensors_loaded':init['pretrained_tensors_loaded'], 'run_id':checkpoint_identity['run_id'],
                     'dataset_identity_sha256':manifest['dataset_identity_sha256'],
                     'evaluation_config_sha256':POLICY_SHA,
-                    'postprocessing':recipe['evaluation'],
+                    'config_sha256':config_hash, 'postprocessing':config['evaluation'],
                     'upstream_commit':assets['lock']['commit'],'patch_sha256':assets['patch_sha256']}}
         write_json(a.run/'frozen.json',frozen)
-        print(json.dumps(frozen,indent=2),flush=True)
+        print(json.dumps({k:frozen[k] for k in ('scope','identity','config_sha256','paths')},indent=2),flush=True)
         stage(a.run,'check',worker(a.run,a.assets,'check'))
+        model_check=read_json(a.run/'model_check.json')
+        if model_check['transferred_tensors'] != init['pretrained_tensors_loaded']:
+            raise ValueError('Actual official COCO compatible transfer differs from its pinned reference')
+        frozen['model_check_sha256']=sha256(a.run/'model_check.json')
+        frozen['resolved_options_sha256']=sha256(a.run/'resolved_options.json')
+        write_json(a.run/'frozen.json',frozen)
         state=read_json(a.run/'status.json');state['preparation']='completed';atomic_json(a.run/'status.json',state)
     except BaseException as e:
         state=read_json(a.run/'status.json')
@@ -127,8 +146,9 @@ def guard(a):
     if read_json(a.run/'status.json').get('preparation') != 'completed':
         raise ValueError('Preparation/import check has not completed')
     frozen=read_json(a.run/'frozen.json')
+    snapshot(a.run)
     if frozen['identity']!=identity():
-        raise ValueError('Code/config identity changed after freeze')
+        raise ValueError('Fixed code/defaults identity changed after freeze; keep this run at its training SHA')
     if frozen['assets']!=verify(a.assets):
         raise ValueError('Asset identity/path changed')
     if frozen['environment']!=environment():
@@ -136,16 +156,20 @@ def guard(a):
     for name, expected in frozen['input_checksums'].items():
         if sha256(a.run/'data'/name)!=expected:
             raise ValueError('Frozen input artifact changed: '+name)
+    for name in ('model_check','resolved_options'):
+        if sha256(a.run/(name+'.json')) != frozen[name+'_sha256']:
+            raise ValueError('Frozen runtime check changed: '+name)
+    current=inspect(a.data,a.data_root,a.source_project,enforce_counts=frozen['scope']!='SMOKE_ONLY_SYNTHETIC')
+    manifest=read_json(a.run/'data/manifest.json')
+    if current['dataset_identity_sha256']!=frozen['data_identity'] or current['data_yaml_sha256']!=manifest['data_yaml_sha256']:
+        raise ValueError('Data list/labels/sizes or source data YAML changed')
     return frozen
 
 def train(a):
     guard(a)
-    current=inspect(a.data,a.data_root,a.source_project)
-    if current['dataset_identity_sha256']!=read_json(a.run/'frozen.json')['data_identity']:
-        raise ValueError('Data list/labels/sizes changed')
     name='train'
     extra=[]
-    if a.resume:
+    if a.resume_training:
         if (a.run/'native/training_complete.json').exists():
             raise ValueError('Completed runs cannot resume')
         if not (a.run/'native/weights/last.pt').exists():
@@ -155,22 +179,29 @@ def train(a):
         extra=['--resume']
     stage(a.run,name,worker(a.run,a.assets,'train',*extra))
 
-def export(a):
-    guard(a)
+def retry_stage(run,name,command):
+    recorded=read_json(run/'status.json')['stages']
+    if name in recorded:
+        index=1
+        while name+'_retry_'+str(index) in recorded:
+            index+=1
+        name=name+'_retry_'+str(index)
+    stage(run,name,command)
+
+def export(a, splits=('val',)):
+    frozen=guard(a)
     manifest=read_json(a.run/'data/manifest.json')
-    # Lightweight recheck avoids exporting against labels changed during a long training run.
-    current=inspect(a.data,a.data_root,a.source_project)
-    if current['dataset_identity_sha256']!=manifest['dataset_identity_sha256']:
-        raise ValueError('Data changed since preparation')
     selected=read_json(a.run/'native/training_complete.json')
     best=a.run/'native/weights/best.pt'
     selection=a.run/'selected_best.json'
-    value={'checkpoint_sha256':sha256(best),**selected}
+    value={'checkpoint_sha256':sha256(best),'config_sha256':frozen['config_sha256'],
+           'checkpoint_identity':frozen['checkpoint_identity'],**selected}
     if selection.exists() and read_json(selection)!=value:
         raise ValueError('Selected best changed between split exports')
-    write_json(selection,value)
+    if not selection.exists():
+        write_json(selection,value)
     out=a.run/'evaluation';out.mkdir(exist_ok=True)
-    for split in ('val','test'):
+    for split in splits:
         gt_path=out/(split+'_gt.json')
         if not gt_path.exists():
             if a.gt_cache:
@@ -178,7 +209,7 @@ def export(a):
             else:
                 gt=None
                 roots=[a.source_project/'outputs/comparison_prepare',
-                       PROJECT.parent/'Crack_RTDETR-comparison-base/outputs/comparison_prepare']
+                       a.source_project.parent/'Crack_RTDETR-comparison-base/outputs/comparison_prepare']
                 candidates=sorted({p for root in roots for p in root.glob('*/coco/'+split+'.json')})
                 for cached in candidates:
                     try:
@@ -190,22 +221,66 @@ def export(a):
                 if gt is None:
                     gt=make_gt(manifest,split)
             write_json(gt_path,gt)
-        if not (out/(split+'_export.json')).exists():
-            stage(a.run,'export_'+split,worker(a.run,a.assets,'export','--split',split))
+        cached_gt=read_json(gt_path)
+        expected_gt=make_gt(manifest,split)  # frozen sizes/labels only; no image content reads
+        if (cached_gt['info']['dataset_identity_sha256']!=manifest['dataset_identity_sha256'] or
+            cached_gt['info']['split']!=split or any(cached_gt[k]!=expected_gt[k]
+            for k in ('images','annotations','categories'))):
+            raise ValueError('Public GT cache differs from frozen run labels/dimensions: '+split)
+        if (out/(split+'_export.json')).exists():
+            validate_cache(a.run,split)
+        else:
+            retry_stage(a.run,'export_'+split,worker(a.run,a.assets,'export','--split',split))
+            validate_cache(a.run,split)
 
-def evaluate(a):
+def validate_cache(run,split,metrics=False):
+    frozen=read_json(run/'frozen.json')
+    selected=read_json(run/'selected_best.json')
+    out=run/'evaluation'
+    receipt=read_json(out/(split+'_export.json'))
+    predictions=out/(split+'_predictions.jsonl')
+    gt=out/(split+'_gt.json')
+    if (selected['checkpoint_sha256']!=sha256(run/'native/weights/best.pt') or
+        receipt['status']!='completed' or receipt['checkpoint_sha256']!=selected['checkpoint_sha256'] or
+        receipt['config_sha256']!=frozen['config_sha256'] or receipt['checkpoint_identity']!=frozen['checkpoint_identity'] or
+        receipt['gt_sha256']!=sha256(gt) or receipt['predictions_sha256']!=sha256(predictions)):
+        raise ValueError('Export cache identity changed: '+split)
+    with predictions.open(encoding='utf-8') as stream:
+        header=json.loads(stream.readline())
+    expected={**frozen['prediction_identity'],'checkpoint_sha256':selected['checkpoint_sha256'],'split':split}
+    if header.get('type')!='metadata' or any(header['identity'].get(k)!=v for k,v in expected.items()):
+        raise ValueError('Prediction metadata differs from run snapshot: '+split)
+    if receipt['images']!=len(read_json(gt)['images']):
+        raise ValueError('Export coverage differs: '+split)
+    if metrics:
+        result=read_json(out/(split+'_unified_metrics.json'))
+        if (receipt.get('metrics_sha256')!=sha256(out/(split+'_unified_metrics.json')) or
+            result['policy_sha256']!=frozen['prediction_identity']['evaluation_config_sha256'] or
+            result['identity']!=header['identity'] or result['gt_sha256']!=sha256(gt) or
+            result.get('predictions_sha256')!=sha256(predictions) or result['images']!=receipt['images']):
+            raise ValueError('Public metrics cache identity changed: '+split)
+    return receipt
+
+def evaluate(a, splits=('val',)):
+    guard(a)
     out=a.run/'evaluation'
-    selected=read_json(a.run/'selected_best.json')
-    for split in ('val','test'):
-        receipt=read_json(out/(split+'_export.json'))
+    for split in splits:
+        validate_cache(a.run,split)
         predictions=out/(split+'_predictions.jsonl')
-        if receipt['checkpoint_sha256']!=selected['checkpoint_sha256'] or receipt['predictions_sha256']!=sha256(predictions):
-            raise ValueError('Export cache identity changed')
         target=out/(split+'_unified_metrics.json')
         if target.exists():
-            raise FileExistsError('Metrics already exist; use evaluator CLI with a new output for CPU recomputation')
-        stage(a.run,'evaluate_'+split,[sys.executable,str(HERE.parent/'evaluation/evaluate.py'),
+            validate_cache(a.run,split,metrics=True)
+            print('Reusing identity-checked public '+split+' metrics',flush=True)
+            continue
+        retry_stage(a.run,'evaluate_'+split,[sys.executable,str(HERE.parent/'evaluation/evaluate.py'),
               '--gt',str(out/(split+'_gt.json')),'--predictions',str(predictions),'--output',str(target)])
+        value=read_json(target)
+        value['predictions_sha256']=sha256(predictions)
+        atomic_json(target,value)
+        receipt=read_json(out/(split+'_export.json'))
+        receipt['metrics_sha256']=sha256(target)
+        atomic_json(out/(split+'_export.json'),receipt)
+        validate_cache(a.run,split,metrics=True)
     summary(a.run)
 
 def summary(run):
@@ -225,6 +300,10 @@ def summary(run):
     result={'native_training_val':native,
             'selected_best':read_json(run/'selected_best.json') if (run/'selected_best.json').exists() else 'NOT_SELECTED',
             'training':native,'output':str(run),'units':'raw values 0-1; percent=raw*100'}
+    if (run/'frozen.json').exists():
+        frozen=read_json(run/'frozen.json')
+        result.update(scope=frozen['scope'],run_id=frozen['checkpoint_identity']['run_id'],
+                      training_code_sha=frozen['identity']['project_commit'],config_sha256=frozen['config_sha256'])
     for split in ('val','test'):
         p=run/'evaluation'/(split+'_unified_metrics.json')
         if p.exists():
@@ -238,23 +317,75 @@ def summary(run):
     atomic_json(run/'summary.json',result)
     print(json.dumps(result,indent=2),flush=True)
 
+def finalize(a):
+    guard(a)
+    if not (a.run/'native/training_complete.json').is_file():
+        raise ValueError('finalize requires a fully completed run; incomplete training cannot be finalized')
+    validate_cache(a.run,'val',metrics=True)  # selection stage must already have completed
+    export(a,('test',))
+    evaluate(a,('test',))
+    summary(a.run)
+
+def archive(a):
+    frozen=guard(a)
+    for split in ('val','test'):
+        validate_cache(a.run,split,metrics=True)
+    if frozen['scope']!='FORMAL_CANDIDATE' or not (a.run/'native/training_complete.json').is_file():
+        raise ValueError('Only a finalized formal run may be archived as an experiment')
+    summary(a.run)
+    target=a.archive_dir.resolve()
+    target.mkdir(parents=True,exist_ok=False)
+    names=['user_config.yaml','resolved_config.yaml','train_hyp.yaml','frozen.json','model_check.json',
+           'selected_best.json','summary.json','status.json','native/training_complete.json',
+           'native/effective_training.json','native/initialization.json','native/autoanchor.json',
+           'native/results.csv','evaluation/val_unified_metrics.json','evaluation/test_unified_metrics.json']
+    for name in names:
+        path=a.run/name
+        if path.is_file():
+            dest=target/name;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(path,dest)
+    write_json(target/'archive_identity.json',{'training_code_sha':frozen['identity']['project_commit'],
+               'run_id':a.run_id,'config_sha256':frozen['config_sha256'],
+               'files':{name:sha256(target/name) for name in names if (target/name).is_file()}})
+    print('Frozen configuration and small results archived: '+str(target),flush=True)
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('action',choices=['prepare','train','export','evaluate','pipeline','summary','resources'])
-    p.add_argument('--run',type=Path,required=True)
-    p.add_argument('--assets',type=Path,default=PROJECT/'outputs/yolov5m-coco-b19-pilot/assets')
-    p.add_argument('--source-project',type=Path,default=Path('/root/autodl-tmp/projects/Crack_RTDETR'))
+    p.add_argument('action',choices=['prepare','start','resume','finalize','export','evaluate','summary','resources','archive'])
+    p.add_argument('--run-id',required=True,type=run_id)
+    p.add_argument('--config',type=Path,help='new run YAML; never needed for resume/finalize')
+    p.add_argument('--output-root',type=Path,default=PROJECT/'outputs/yolov5m-coco-native-ft-v1/runs')
+    p.add_argument('--assets',type=Path,help='prepared native source runtime (frozen per run)')
+    p.add_argument('--asset-cache',type=Path,default=DEFAULT_CACHE)
+    p.add_argument('--source-project',type=Path)
     p.add_argument('--data',type=Path)
     p.add_argument('--data-root',type=Path)
     p.add_argument('--gt-cache',type=Path,help='optional existing public COCO directory; checked against actual labels/IDs')
-    p.add_argument('--resume',action='store_true')
+    p.add_argument('--dataset-cache',type=Path,help='existing dimension/label dataset_manifest.json; lightweight identity checked')
+    p.add_argument('--archive-dir',type=Path)
     a=p.parse_args()
-    a.run,a.assets,a.source_project=a.run.resolve(),a.assets.resolve(),a.source_project.resolve()
-    a.data=(a.data or a.source_project/'configs/crack_autodl.yaml').resolve()
-    a.data_root=(a.data_root or a.source_project/'datasets/crack_det').resolve()
-    if a.gt_cache:a.gt_cache=a.gt_cache.resolve()
-    if a.resume and a.action!='train':
-        p.error('--resume is only allowed with explicit train action')
+    a.run=(a.output_root.resolve()/a.run_id)
+    a.resume_training=a.action=='resume'
+    fresh=a.action in ('prepare','start')
+    if fresh:
+        if a.config is None:p.error('new runs require --config YAML')
+        a.config=a.config.resolve()
+        a.assets=(a.assets or PROJECT/'outputs/yolov5m-coco-native-ft-v1/assets').resolve()
+        a.source_project=(a.source_project or Path('/root/autodl-tmp/projects/Crack_RTDETR')).resolve()
+        a.data=(a.data or a.source_project/'configs/crack_autodl.yaml').resolve()
+        a.data_root=(a.data_root or a.source_project/'datasets/crack_det').resolve()
+        for key in ('gt_cache','dataset_cache'):
+            if getattr(a,key):setattr(a,key,getattr(a,key).resolve())
+    else:
+        if a.config is not None:p.error('--config is only allowed for a new prepare/start run; resume uses its snapshot')
+        frozen=read_json(a.run/'frozen.json')
+        if frozen['checkpoint_identity']['run_id']!=a.run_id:p.error('Run directory/run-id identity mismatch')
+        for key,value in frozen['paths'].items():
+            supplied=getattr(a,key)
+            if supplied is not None and str(supplied.resolve())!=value:
+                p.error('Run path differs from frozen snapshot: '+key)
+            setattr(a,key,Path(value) if value is not None else None)
+    if (a.action=='archive') != (a.archive_dir is not None):
+        p.error('archive requires --archive-dir; other actions do not accept it')
     signal_exit={'code':130}
     def interrupted(signum,frame):
         signal_exit['code']=128+signum
@@ -266,14 +397,25 @@ def main():
     # Atomic lock guards concurrent invocations. Stale locks require explicit inspection.
     with lock.open('x',encoding='utf-8') as f:
         f.write(str(os.getpid()))
-    owns_state=a.action not in ('prepare','pipeline') or not a.run.exists()
+    owns_state=not fresh or not a.run.exists()
     outcome='failed'
     try:
-        if a.action in ('prepare','pipeline'):prepare(a)
-        if a.action in ('train','pipeline'):train(a)
-        if a.action in ('export','pipeline'):export(a)
-        if a.action in ('evaluate','pipeline'):evaluate(a)
-        if a.action=='summary':summary(a.run)
+        if fresh:prepare(a)
+        if a.action=='start':train(a)
+        if a.action=='resume':
+            if not (a.run/'native/training_complete.json').exists():
+                # Prepared-only runs can enter training without loading a foreign checkpoint.
+                a.resume_training=(a.run/'native/weights/last.pt').exists()
+                train(a)
+            else:
+                guard(a)
+                print('Training complete; continuing only this run public val stages',flush=True)
+        if a.action in ('export','start','resume'):export(a)
+        if a.action in ('evaluate','start','resume'):evaluate(a)
+        if a.action=='finalize':finalize(a)
+        if a.action=='archive':archive(a)
+        if a.action=='summary':
+            guard(a);summary(a.run)
         if a.action=='resources':
             guard(a)
             stage(a.run,'resources',worker(a.run,a.assets,'resources'))
@@ -284,11 +426,15 @@ def main():
     except subprocess.CalledProcessError as exc:
         raise SystemExit(exc.returncode)
     finally:
-        if owns_state and (a.run/'status.json').exists():
-            state=read_json(a.run/'status.json')
-            state['last_action']={'name':a.action,'status':outcome,'finished':utc()}
-            atomic_json(a.run/'status.json',state)
-        lock.unlink()
+        try:
+            if owns_state and (a.run/'status.json').exists():
+                state=read_json(a.run/'status.json')
+                state['last_action']={'name':a.action,'status':outcome,'finished':utc()}
+                atomic_json(a.run/'status.json',state)
+                if a.action in ('start','resume','finalize'):
+                    summary(a.run)  # interrupted/failed runs retain their real saved epoch count
+        finally:
+            lock.unlink()
 
 if __name__=='__main__':
     main()

@@ -1,86 +1,74 @@
-"""Prepare isolated pinned YOLOv5 and hash-verified original COCO assets."""
+"""One fresh patched source runtime, reusing pinned raw Git objects and original COCO bytes."""
 from __future__ import annotations
 import argparse
 from pathlib import Path
 import subprocess
-import shutil
-import urllib.request
-from support import HERE, git, read_json, sha256, write_json, initialization_type
+from support import HERE, git, read_json, sha256, write_json
+
+DEFAULT_CACHE = Path('/root/autodl-tmp/projects/Crack_RTDETR-bench-yolov5m-coco-b19-pilot/outputs/yolov5m-coco-b19-pilot/assets')
+
+def official_weight(path):
+    path = Path(path).resolve()
+    lock = read_json(HERE/'upstream.lock.json')['weights']
+    if not path.is_file() or path.stat().st_size != lock['bytes'] or sha256(path) != lock['sha256']:
+        raise ValueError('Official yolov5m.pt hash/size mismatch: ' + str(path))
+    return path
 
 def verify(root, mode=None):
-    mode = mode or initialization_type()
-    if mode=='coco':mode='coco_detection_pretrained'
-    if mode not in ('random', 'coco_detection_pretrained'):
-        raise ValueError('Unknown initialization mode')
+    if mode not in (None, 'coco', 'coco_detection_pretrained'):
+        raise ValueError('Native fine-tuning always starts from official COCO weights')
     root = Path(root).resolve()
     lock = read_json(HERE/'upstream.lock.json')
     upstream = root/'upstream'
     if git('rev-parse', 'HEAD', cwd=upstream) != lock['commit']:
         raise ValueError('Upstream HEAD differs from lock')
-    diff = subprocess.check_output(['git', '-c', 'safe.directory='+str(upstream),
+    diff = subprocess.check_output(['git', '-c', 'safe.directory='+upstream.as_posix(),
                                    '-C', str(upstream), 'diff', '--binary', '--no-ext-diff', 'HEAD'])
-    # Normalize CRLF emitted by Windows Git. Patch remains text and is replayed by git apply.
     expected = (HERE/'upstream.patch').read_bytes().replace(b'\r\n', b'\n')
     if diff.replace(b'\r\n', b'\n') != expected:
-        raise ValueError('Upstream modifications differ from the reviewed patch')
+        raise ValueError('Runtime source modifications differ from the reviewed native patch')
     if git('ls-files', '--others', '--exclude-standard', cwd=upstream):
-        raise ValueError('Untracked upstream files; refusing ambiguous runtime')
-    weights = root/'yolov5m.pt' if mode=='coco_detection_pretrained' else None
-    if weights and (weights.stat().st_size != lock['weights']['bytes'] or sha256(weights) != lock['weights']['sha256']):
-        raise ValueError('Official pretrained checkpoint hash/size mismatch')
-    if not (upstream/'models/yolov5m.yaml').is_file():
-        raise FileNotFoundError('Pinned official M architecture missing')
-    return {'upstream': str(upstream), 'weights': str(weights) if weights else None, 'lock': lock,
-            'initialization_type':mode,
+        raise ValueError('Untracked upstream source files; refusing ambiguous runtime')
+    record = read_json(root/'weights-source.json')
+    weights = official_weight(record['path'])
+    if record['sha256'] != lock['weights']['sha256']:
+        raise ValueError('Weight provenance record differs')
+    return {'upstream': str(upstream), 'weights': str(weights), 'lock': lock,
+            'initialization_type': 'coco_detection_pretrained',
             'patch_sha256': sha256(HERE/'upstream.patch')}
 
-def prepare(root, mode=None, weights_from=None):
-    mode = mode or initialization_type()
-    if mode=='coco':mode='coco_detection_pretrained'
-    if mode not in ('random', 'coco_detection_pretrained'):
-        raise ValueError('Unknown initialization mode')
-    root = Path(root).resolve()
-    root.mkdir(parents=True, exist_ok=True)
+def prepare(root, source_assets=DEFAULT_CACHE):
+    root, source_assets = Path(root).resolve(), Path(source_assets).resolve()
+    if root.exists():
+        return verify(root)  # no silent patch repair or cache replacement
+    if root == source_assets:
+        raise ValueError('New runtime must not overwrite an old patched asset directory')
     lock = read_json(HERE/'upstream.lock.json')
+    source = source_assets/'upstream'
+    if git('rev-parse', 'HEAD', cwd=source) != lock['commit']:
+        raise ValueError('Cached raw source Git commit differs from v7.0 lock')
+    weights = official_weight(source_assets/'yolov5m.pt')
+    root.mkdir(parents=True, exist_ok=False)
     upstream = root/'upstream'
-    if not upstream.exists():
-        subprocess.run(['git', 'clone', '--progress', '--depth', '1', '--branch', lock['tag'], lock['repository'], str(upstream)], check=True)
-    if git('rev-parse', 'HEAD', cwd=upstream) != lock['commit']:
-        raise ValueError('Tag/checkout differs from pinned full commit')
-    if not git('status', '--porcelain', cwd=upstream):
-        subprocess.run(['git', '-C', str(upstream), 'apply', '--check', str(HERE/'upstream.patch')], check=True)
-        subprocess.run(['git', '-C', str(upstream), 'apply', str(HERE/'upstream.patch')], check=True)
-    weights = root/'yolov5m.pt'
-    print('Source/patch ready: '+str(upstream),flush=True)
-    if mode=='coco_detection_pretrained' and not weights.exists() and weights_from:
-        source=Path(weights_from)
-        if source.stat().st_size != lock['weights']['bytes'] or sha256(source) != lock['weights']['sha256']:
-            raise ValueError('--weights-from must be the exact original official COCO asset')
-        shutil.copyfile(source,weights)
-        print('Reused hash-verified official COCO bytes: '+str(source),flush=True)
-    if mode=='coco_detection_pretrained' and not weights.exists():
-        partial = root/'yolov5m.pt.partial'
-        if partial.exists():
-            raise FileExistsError('Inspect/remove incomplete download explicitly: ' + str(partial))
-        with urllib.request.urlopen(lock['weights']['url'], timeout=120) as src, partial.open('xb') as dst:
-            while True:
-                block = src.read(1024*1024)
-                if not block:
-                    break
-                dst.write(block)
-                print(f'COCO download: {dst.tell()}/{lock["weights"]["bytes"]} bytes',flush=True)
-        if partial.stat().st_size != lock['weights']['bytes'] or sha256(partial) != lock['weights']['sha256']:
-            raise ValueError('Downloaded bytes do not match lock; partial retained')
-        partial.rename(weights)
-    result = verify(root, mode)
+    # Local clone reads committed objects, ignoring the old worktree's preprocessing patch.
+    # Independent objects survive a later cleanup of the old source checkout.
+    subprocess.run(['git', '-c', 'safe.directory='+source.as_posix(), '-c', 'safe.directory='+(source/'.git').as_posix(), 'clone', '--no-hardlinks',
+                    '--no-checkout', '--', str(source), str(upstream)], check=True)
+    subprocess.run(['git', '-C', str(upstream), 'config', 'core.autocrlf', 'false'], check=True)
+    subprocess.run(['git', '-C', str(upstream), 'checkout', '--detach', lock['commit']], check=True)
+    subprocess.run(['git', '-C', str(upstream), 'apply', '--check', str(HERE/'upstream.patch')], check=True)
+    subprocess.run(['git', '-C', str(upstream), 'apply', str(HERE/'upstream.patch')], check=True)
+    write_json(root/'weights-source.json', {'path': str(weights), 'sha256': sha256(weights),
+                                          'bytes': weights.stat().st_size, 'reused_without_copy': True})
+    result = verify(root)
     write_json(root/'verified.json', result)
+    print('Reused official weight bytes; fresh native source runtime: '+str(upstream), flush=True)
     return result
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--assets', type=Path, required=True)
+    p.add_argument('--assets', type=Path, required=True, help='new native runtime directory')
+    p.add_argument('--asset-cache', type=Path, default=DEFAULT_CACHE, help='existing pilot asset directory, read-only')
     p.add_argument('--verify-only', action='store_true')
-    p.add_argument('--initialization', choices=['random','coco','coco_detection_pretrained'], default=initialization_type())
-    p.add_argument('--weights-from',type=Path,help='optional existing ORIGINAL official yolov5m.pt; exact hash/size required')
     a = p.parse_args()
-    print(verify(a.assets,a.initialization) if a.verify_only else prepare(a.assets,a.initialization,a.weights_from))
+    print(verify(a.assets) if a.verify_only else prepare(a.assets, a.asset_cache))

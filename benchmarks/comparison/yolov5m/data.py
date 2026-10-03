@@ -1,6 +1,8 @@
 """Light list/label checks; never decode or hash image contents during preparation."""
 from __future__ import annotations
 import argparse
+import hashlib
+import os
 from pathlib import Path
 from support import PROJECT, canonical, digest, load_yaml, read_json, sha256, write_json
 from dataset import SPLITS, label_for, parse_labels, resolve_splits
@@ -68,6 +70,56 @@ def inspect(data_yaml, root, project, enforce_counts=True):
             'dataset_identity_algorithm':'light_v1_sorted_paths_image_sizes_label_bytes_NOT_image_content_hash',
             'dataset_identity_sha256':identity, 'image_decode':'NOT_RUN', 'image_content_hash':'NOT_RUN'}
 
+def attach_dimensions(manifest, source_project, cached=None, small_sample=False):
+    """Reuse the prior small size/label audit. Decode no pixels and check three headers."""
+    from PIL import Image
+    roots = [Path(source_project)/'outputs/comparison_prepare',
+             Path(source_project).parent/'Crack_RTDETR-comparison-base/outputs/comparison_prepare']
+    candidates = [Path(cached)] if cached else sorted({p for root in roots
+                  for p in root.glob('*/dataset_manifest.json')})
+    found = None
+    for path in candidates:
+        try:
+            previous = read_json(path)
+            inventory = {r['image']: r for r in previous['records']}
+            if len(inventory) != len(manifest['records']):
+                raise ValueError('Dimension manifest coverage differs')
+            for row in manifest['records']:
+                prior = inventory[row['image']]
+                for key in ('split','image_id','image_bytes','label_sha256'):
+                    if prior[key] != row[key]:
+                        raise ValueError('Dimension manifest data identity differs: '+row['image'])
+                if prior.get('exif_orientation',1) != 1:
+                    raise ValueError('Cached EXIF orientation differs')
+                if any(type(prior[k]) is not int or prior[k] <= 0 for k in ('width','height')):
+                    raise ValueError('Invalid cached dimensions')
+            found = inventory
+            manifest['dimensions_source'] = {'path':str(path.resolve()), 'sha256':sha256(path)}
+            break
+        except (ValueError, KeyError, OSError) as e:
+            if cached:
+                raise ValueError('Explicit dataset cache rejected: '+str(e)) from e
+            print('Dimension cache rejected: '+str(path)+': '+str(e), flush=True)
+    if found is None and not small_sample:
+        raise FileNotFoundError('No compatible prior dimension manifest. Supply --dataset-cache PATH to '
+                                'the existing comparison_prepare dataset_manifest.json; no full image scan is performed')
+    for row in manifest['records']:
+        if found:
+            row.update({key:found[row['image']][key] for key in ('width','height')})
+        else:  # used only by bounded synthetic tests, never a formal CLI fallback
+            with Image.open(Path(manifest['root'])/row['image']) as im:
+                row.update(width=im.width, height=im.height)
+    train = [r for r in manifest['records'] if r['split']=='train']
+    sampled = []
+    for index in sorted({0, len(train)//2, len(train)-1}):
+        row = train[index]
+        with Image.open(Path(manifest['root'])/row['image']) as im:
+            if im.size != (row['width'],row['height']) or im.getexif().get(274,1) != 1:
+                raise ValueError('Cached shape/EXIF mismatch: '+row['image'])
+        sampled.append(row['image'])
+    manifest['dimension_header_samples'] = sampled
+    return manifest
+
 def save_check(manifest, output):
     import yaml
     output = Path(output).resolve()
@@ -80,6 +132,23 @@ def save_check(manifest, output):
                                  for r in manifest['records'] if r['split']==split), encoding='utf-8')
         cfg[split] = target.as_posix()
     (output/'data.yaml').write_text(yaml.safe_dump(cfg, sort_keys=False), encoding='utf-8')
+    if all('width' in r and 'height' in r for r in manifest['records']):
+        # Materialize v7.0's label-cache format from already checked labels and
+        # sizes. Cache files live under this run, never beside source images.
+        import numpy as np
+        for split in SPLITS:
+            rows = [r for r in manifest['records'] if r['split']==split]
+            images = [str(Path(manifest['root'])/r['image']) for r in rows]
+            labels = [str(Path(manifest['root'])/r['label']) for r in rows]
+            size = sum(os.path.getsize(p) for p in labels+images)
+            hasher = hashlib.md5(str(size).encode())
+            hasher.update(''.join(labels+images).encode())
+            cache = {image:[np.asarray(row['boxes'],dtype=np.float32).reshape(-1,5),
+                            (row['width'],row['height']), []] for image,row in zip(images,rows)}
+            cache.update(hash=hasher.hexdigest(), version=.6, msgs=[],
+                         results=(len(rows),0,sum(not r['boxes'] for r in rows),0,len(rows)))
+            with (output/(split+'.cache')).open('xb') as stream:
+                np.save(stream, cache)
 
 def make_gt(manifest, split, cached=None):
     """Reuse independently validated COCO if supplied; otherwise read only image headers."""
@@ -109,6 +178,8 @@ def make_gt(manifest, split, cached=None):
             if im['id'] != r['image_id']:
                 raise ValueError('Cached stable image_id differs')
             w, h = im['width'], im['height']
+        elif 'width' in r and 'height' in r:
+            w, h = r['width'], r['height']
         else:
             with Image.open(Path(manifest['root'])/r['image']) as im:
                 if im.getexif().get(274,1) != 1:

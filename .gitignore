@@ -87,3 +87,6 @@ runs_server/
 
 # Independent comparison environments contain generated packages and binaries.
 .envs/
+
+# Per-run numerical candidates; the committed tool stays fixed.
+runtime_configs/

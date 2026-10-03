@@ -8,6 +8,16 @@ import random
 import numpy as np
 import torch
 
+PIPELINE = 'v7.0 native aspect resize -> Mosaic (native MixUp within Mosaic) or LetterBox -> RandomPerspective -> multiplicative RandomHSV -> flips -> native box clipping/filtering'
+OPTIMIZER_STEPS = 0
+CUMULATIVE_LR_DECAY = [0., 0., 0.]
+
+def groups(optimizer):
+    return [{'lr':g['lr'], 'initial_lr':g.get('initial_lr'), 'weight_decay':g.get('weight_decay',0.),
+             'momentum':g.get('momentum'), 'nesterov':g.get('nesterov'),
+             'betas':list(g['betas']) if 'betas' in g else None, 'eps':g.get('eps')}
+            for g in optimizer.param_groups]
+
 def save(path, value):
     path = Path(path)
     tmp = path.with_name(path.name+'.tmp')
@@ -29,16 +39,19 @@ def validate_checkpoint(ckpt, save_dir, resume=False):
     if resume:
         root = Path(save_dir)
         required = ('scaler','scheduler','last_opt_step','accumulate','rng_python','rng_numpy',
-                    'rng_torch','rng_cuda','train_generator','val_generator','initialization_sha256')
+                    'rng_torch','rng_cuda','train_generator','val_generator','initialization_sha256',
+                    'optimizer_steps','cumulative_lr_times_decay')
         state_native = ckpt.get('comparison_state', {})
         if any(k not in state_native for k in required) or ckpt.get('ema') is None or ckpt.get('updates') is None:
             raise ValueError('Pilot checkpoint lacks recoverable native scaler/scheduler/RNG/EMA state')
         from support import sha256
         if state_native['initialization_sha256'] != sha256(root/'initialization.json'):
             raise ValueError('Original initialization audit changed')
-        if ckpt['opt'].get('optimizer') != 'SGD' or not ckpt.get('optimizer') or len(ckpt['optimizer']['param_groups']) != 3:
-            raise ValueError('Pilot native optimizer/group identity differs')
-        if (root/'training_complete.json').exists() or ckpt.get('optimizer') is None or not 0 <= ckpt['epoch'] < 199:
+        from config import snapshot
+        config = snapshot(root.parent)
+        if ckpt['opt'].get('optimizer') != config['optimizer'] or not ckpt.get('optimizer') or len(ckpt['optimizer']['param_groups']) != 3:
+            raise ValueError('Native optimizer/group identity differs')
+        if (root/'training_complete.json').exists() or ckpt.get('optimizer') is None or not 0 <= ckpt['epoch'] < config['epochs']-1:
             raise ValueError('Checkpoint completed or not resumable')
         state = json.loads((root/'epoch_state.json').read_text(encoding='utf-8'))
         if state['completed_epochs'] != ckpt['epoch']+1 or state['end_reason'] != 'running':
@@ -79,8 +92,10 @@ def record_initialization(save_dir, model, opt):
                  'weights_argument':opt.weights,'cfg_argument':opt.cfg,'resume':False,
                  'checkpoint_identity':identity})
 
-def strict_amp_probe(model):
+def strict_amp_probe(model, requested=True):
     """A private copy, native constants intact; restore all RNG streams on success or failure."""
+    if not requested:
+        return False
     device = next(model.parameters()).device
     if device.type != 'cuda':
         raise RuntimeError('Formal recipe requires CUDA and AMP; use the explicit smoke entry point for CPU')
@@ -137,16 +152,47 @@ def record_transfer(save_dir, model, state, source, weights, resume):
           'anchor_levels':model.model[-1].nl, 'anchors_per_level':model.model[-1].na,
           'depth_multiple':model.yaml['depth_multiple'], 'width_multiple':model.yaml['width_multiple']})
 
+def prepare_anchor_audit(save_dir, dataset, imgsz, threshold):
+    dataset._comparison_save_dir = str(save_dir)
+    manifest = json.loads((Path(save_dir).parent/'data/manifest.json').read_text(encoding='utf-8'))
+    inventory = {str((Path(manifest['root'])/r['image']).resolve()):r for r in manifest['records'] if r['split']=='train'}
+    if set(map(lambda p:str(Path(p).resolve()), dataset.im_files)) != set(inventory):
+        raise ValueError('AutoAnchor dataset must contain exactly train images')
+    for path, shape in zip(dataset.im_files, dataset.shapes):
+        row = inventory[str(Path(path).resolve())]
+        if list(shape) != [row['width'], row['height']]:
+            raise ValueError('Native cache shapes differ from frozen original dimensions: '+path)
+    save(Path(save_dir)/'autoanchor.json', {'source_split':'train','enabled':True,
+        'imgsz':imgsz, 'threshold':threshold, 'images':len(dataset.im_files),
+        'shapes_checked_against_frozen_manifest':True,
+        'target_scale':'imgsz * original_wh / max(original_wh); native uniform(0.9,1.1) jitter',
+        'integer_resize_rounding':'pinned v7.0 load_image int truncation on resized h/w; AutoAnchor retains native continuous target approximation'})
+
+def record_anchor_fit(dataset, wh, anchors, threshold, phase):
+    root = Path(dataset._comparison_save_dir)
+    record = json.loads((root/'autoanchor.json').read_text(encoding='utf-8'))
+    ratio = wh.cpu()[:,None] / anchors.detach().cpu().view(-1,2)[None]
+    scores = torch.minimum(ratio,1/ratio).amin(2)
+    record[phase] = {'bpr':float((scores.amax(1)>1/threshold).float().mean()),
+                     'anchors_above_threshold':float((scores>1/threshold).float().sum(1).mean()),
+                     'anchors_pixel_units':anchors.detach().cpu().view(-1,2).tolist(),
+                     'target_wh_min':wh.amin(0).tolist(),'target_wh_max':wh.amax(0).tolist(),
+                     'targets':len(wh), 'native_jittered_targets':True}
+    save(root/'autoanchor.json', record)
+
 def record_anchors(save_dir, before, model):
     after = model.model[-1].anchors.detach().cpu()
-    save(Path(save_dir)/'autoanchor.json', {'source_split':'train', 'enabled':True,
+    record = json.loads((Path(save_dir)/'autoanchor.json').read_text(encoding='utf-8'))
+    if not all(key in record for key in ('before','after')):
+        raise RuntimeError('Native AutoAnchor failed or omitted BPR audit; inspect its log')
+    save(Path(save_dir)/'autoanchor.json', {**record,
         'changed':not torch.equal(before,after), 'before_grid_units':before.tolist(),
         'after_grid_units':after.tolist(), 'stride':model.stride.tolist()})
 
 def close_augmentation(loader, epoch, epochs=200, close=10):
     """Kill stale prefetched batches and worker copies once, retaining dataset/cache/sampler/generator."""
     ds = loader.dataset
-    if epoch < epochs-close or getattr(ds, '_comparison_closed', False):
+    if close == 0 or epoch < epochs-close or getattr(ds, '_comparison_closed', False):
         return False
     ds.mosaic = False
     ds.hyp = dict(ds.hyp)
@@ -162,22 +208,38 @@ def close_augmentation(loader, epoch, epochs=200, close=10):
     return True
 
 def record_effective(save_dir, hyp, opt, amp, loader, lf, warmup, accumulate, optimizer, model):
-    from b19_augment import PIPELINE
-    save(Path(save_dir)/'effective_training.json',
-         {'hyp_after_nc_imgsz_decay_scaling':hyp, 'options':vars(opt), 'amp_requested':True, 'amp_actual':bool(amp),
-          'amp_probe':'isolated actual model, 1x3x64x64; allclose rtol=0.1 atol=0.5; all RNG streams restored',
-          'actual_batch':opt.batch_size, 'nbs':64, 'post_warmup_accumulate':int(accumulate),
-          'warmup_accumulate':f'round(linear(1,64/{opt.batch_size})), minimum 1', 'warmup_steps':warmup,
-          'loader_workers':loader.num_workers, 'seed':opt.seed, 'deterministic':True,
+    global OPTIMIZER_STEPS, CUMULATIVE_LR_DECAY
+    OPTIMIZER_STEPS, CUMULATIVE_LR_DECAY = 0, [0.,0.,0.]
+    root = Path(save_dir)
+    target = root/'effective_training.json'
+    if opt.resume:
+        target = root/('effective_resume_'+str(len(list(root.glob('effective_resume_*.json')))+1)+'.json')
+    from config import snapshot, native_hyp
+    raw = native_hyp(snapshot(root.parent))
+    save(target,
+         {'hyp_raw':raw, 'hyp_after_nc_imgsz_decay_scaling':hyp, 'options':vars(opt), 'amp_requested':opt.amp, 'amp_actual':bool(amp),
+          'amp_probe':'isolated actual model, 1x3x64x64; RNG streams restored' if opt.amp else 'disabled by run snapshot',
+          'actual_batch':opt.batch_size, 'nbs':opt.nbs, 'post_warmup_accumulate':int(accumulate),
+          'effective_batch_after_warmup':opt.batch_size*int(accumulate),
+          'effective_decay':hyp['weight_decay'], 'decay_scale':opt.batch_size*int(accumulate)/opt.nbs,
+          'warmup_accumulate':f'round(linear(1,{opt.nbs}/{opt.batch_size})), minimum 1', 'warmup_steps':warmup,
+          'loader_workers':loader.num_workers, 'seed':opt.seed, 'deterministic':opt.deterministic,
           'optimizer_type':type(optimizer).__module__+'.'+type(optimizer).__name__,
           'all_parameters_trainable':all(p.requires_grad for p in model.parameters()),
           'trainable_parameters':sum(p.numel() for p in model.parameters() if p.requires_grad),
           'augmentation_pipeline':PIPELINE,
-          'copy_paste':0.0,'bgr':0.0,'albumentations':None,
+          'copy_paste':0.0,'cutmix':0.0,'albumentations':None,
           'native_validation':'actual loader/arguments/model/input dtypes in native_validation_calls.jsonl',
           'cosine_multiplier_by_epoch':[float(lf(e)) for e in range(opt.epochs+1)],
-          'optimizer_groups':[{'lr':g['lr'],'weight_decay':g['weight_decay'],'momentum':g.get('momentum'),
-                               'nesterov':g.get('nesterov')} for g in optimizer.param_groups]})
+          'optimizer_groups':groups(optimizer)})
+
+def record_optimizer_step(optimizer, scale_before, scaler):
+    global OPTIMIZER_STEPS
+    if scaler.get_scale() < scale_before:  # GradScaler skipped the overflowing update
+        return
+    OPTIMIZER_STEPS += 1
+    for index, group in enumerate(optimizer.param_groups):
+        CUMULATIVE_LR_DECAY[index] += float(group['lr']*group.get('weight_decay',0.))
 
 def native_state(save_dir, scaler, scheduler, last_opt_step, accumulate, train_loader, val_loader):
     from support import sha256
@@ -188,9 +250,13 @@ def native_state(save_dir, scaler, scheduler, last_opt_step, accumulate, train_l
             'rng_torch':torch.get_rng_state(),'rng_cuda':torch.cuda.get_rng_state_all(),
             'train_generator':train_loader.generator.get_state(),'val_generator':val_loader.generator.get_state(),
             'initialization_sha256':sha256(Path(save_dir)/'initialization.json'),
+            'optimizer_steps':OPTIMIZER_STEPS, 'cumulative_lr_times_decay':CUMULATIVE_LR_DECAY.copy(),
             'resume_semantics':'native epoch boundary, half checkpoint model/EMA; worker prefetch streams restart'}
 
 def restore_native_state(state, scaler, scheduler, train_loader, val_loader, device):
+    global OPTIMIZER_STEPS, CUMULATIVE_LR_DECAY
+    OPTIMIZER_STEPS = state['optimizer_steps']
+    CUMULATIVE_LR_DECAY = list(state['cumulative_lr_times_decay'])
     scaler.load_state_dict(state['scaler'])
     scheduler.load_state_dict(state['scheduler'])
     random.setstate(state['rng_python']);np.random.set_state(state['rng_numpy'])
@@ -209,14 +275,12 @@ def record_update(save_dir, model, optimizer, accumulate, ni):
         'gradient_tensors':len(grads),'all_gradients_finite':all(torch.isfinite(g).all().item() for g in grads),
         'nonzero_gradient_tensors':sum(bool(torch.count_nonzero(g)) for g in grads),
         'optimizer_type':type(optimizer).__module__+'.'+type(optimizer).__name__,
-        'groups':[{'lr':g['lr'],'weight_decay':g['weight_decay'],'momentum':g['momentum'],'nesterov':g['nesterov']} for g in optimizer.param_groups],
+        'groups':groups(optimizer),
         'order':'backward -> scaler.unscale -> native clip max_norm10 -> this audit -> scaler.step/update -> zero_grad -> EMA'})
 
 def begin_epoch(loader, epoch):
-    from b19_augment import snapshot
     global ACTIVE_EPOCH
     ACTIVE_EPOCH = epoch
-    loader._comparison_epoch_start = snapshot(loader.dataset)
 
 def record_native_metrics(save_dir, precision, recall, ap50, ap75, map95):
     raw={'precision':float(precision),'recall':float(recall),'AP50':float(ap50),
@@ -226,17 +290,14 @@ def record_native_metrics(save_dir, precision, recall, ap50, ap75, map95):
         'class':'crack','policy':'original v5 native validation, rect=True, NMS .6; separate from public metrics'})
 
 def record_augmentation(save_dir, loader, epoch, optimizer, accumulate):
-    from b19_augment import snapshot, PIPELINE
-    totals = snapshot(loader.dataset)
-    start = loader._comparison_epoch_start
     save(Path(save_dir)/f'augmentation_epoch_{epoch:03d}.json',{
         'epoch_index':epoch,'closed':bool(getattr(loader.dataset,'_comparison_closed',False)),
         'hyp':loader.dataset.hyp,'pipeline':PIPELINE,'workers':loader.num_workers,
-        'counter_scope':'executed loader transforms including prefetch; not exactly consumed batches',
-        'totals_this_process_segment':totals,'delta_since_epoch_start':{k:v-start[k] for k,v in totals.items()},
-        'cutmix_trigger_probability':.03,'cutmix_actual_probability':'data-dependent; count applied separately from skipped',
         'actual_accumulate_at_epoch_end':int(accumulate),
-        'optimizer_groups':[{'lr':g['lr'],'weight_decay':g['weight_decay'],'momentum':g['momentum']} for g in optimizer.param_groups]})
+        'optimizer_steps_total':OPTIMIZER_STEPS,
+        'cumulative_lr_times_decay_by_group':CUMULATIVE_LR_DECAY,
+        'decay_record_semantics':'sum(lr * group weight_decay) on successful updates; coupled SGD/Adam decay is not a separate multiplicative shrink',
+        'optimizer_groups':groups(optimizer)})
 
 def record_native_validation(save_dir, model, loader, tensor, batch, imgsz, conf, iou, max_det, tta):
     value={'requested_batch':batch,'loader_batch':loader.batch_size,'rect':loader.dataset.rect,
@@ -256,7 +317,7 @@ def restore_stopper(stopper, save_dir, start_epoch):
         stopper.best_fitness = d['best_fitness']
         stopper.possible_stop = start_epoch-1-stopper.best_epoch >= stopper.patience-1
 
-def record_epoch(save_dir, epoch, stopper, stop, epochs):
+def record_epoch(save_dir, epoch, stopper, stop, epochs, loader):
     root = Path(save_dir)
     current=json.loads((root/f'native_val_epoch_{epoch:03d}.json').read_text())
     best=json.loads((root/f'native_val_epoch_{stopper.best_epoch:03d}.json').read_text())
@@ -265,7 +326,7 @@ def record_epoch(save_dir, epoch, stopper, stop, epochs):
           'native_val_current':current,'native_val_best':best,
           'selection':'native_training_val_mAP50_95_latest_tie',
           'end_reason':'patience' if stop else 'epoch_limit' if epoch+1==epochs else 'running',
-          'mosaic_closed':epoch >= epochs-10})
+          'mosaic_closed':bool(getattr(loader.dataset,'_comparison_closed',False))})
 
 def complete(save_dir):
     path = Path(save_dir)/'epoch_state.json'

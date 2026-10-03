@@ -9,6 +9,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parent))
 
 from support import HERE, PROJECT, environment, read_json, write_json, initialization_type, initialization_record
 from assets import verify
+from config import OPTION_KEYS, snapshot
 
 def activate(assets):
     verified = verify(assets)
@@ -45,18 +46,19 @@ def options(run, assets, resume=False):
         opt = train.parse_opt()
     finally:
         sys.argv = old
-    recipe = read_json(HERE/'recipe.json')
-    for key in ('epochs','patience','batch_size','workers','device','seed','optimizer','cos_lr',
-                'cache','multi_scale','rect','freeze','image_weights','quad','imgsz'):
-        setattr(opt,key,[0] if key=='freeze' and recipe[key] is None else recipe[key])
-    scratch = initialization_type() == 'random'
-    opt.weights = str(run/'native/weights/last.pt') if resume else '' if scratch else str(assets/'yolov5m.pt')
-    opt.cfg = str(assets/'upstream/models/yolov5m.yaml') if scratch and not resume else ''
-    opt.hyp = str(HERE/'hyp.yaml')
+    config = snapshot(run)
+    for key in OPTION_KEYS:
+        setattr(opt,key,config[key])
+    opt.batch_size = config['batch']
+    opt.cache = 'ram' if config['cache'] else False  # disk caches would write beside source images
+    opt.freeze, opt.image_weights, opt.quad = list(config['freeze']), False, False
+    verified = verify(assets)
+    opt.weights = str(run/'native/weights/last.pt') if resume else verified['weights']
+    opt.cfg = ''  # preserve ALL shape-compatible COCO tensors, including anchors
+    opt.hyp = str(run/'train_hyp.yaml')  # raw gains; native scaling occurs once on every construction
     opt.data = str(run/'data/data.yaml')
     opt.project, opt.name, opt.save_dir = str(run), 'native', str(run/'native')
-    opt.resume, opt.noplots = resume, not recipe['plots']
-    opt.save_period = recipe['save_period']
+    opt.resume, opt.noplots = resume, not config['plots']
     opt.noval, opt.nosave, opt.noautoanchor, opt.exist_ok = False, False, False, False
     return opt
 
@@ -72,17 +74,13 @@ def check_model(model, nc):
             'strides':model.stride.tolist(),
             'depth_multiple':.67, 'width_multiple':.75}
 
-def build_initial_model(verified):
+def build_initial_model(verified, config=None):
     from models.yolo import Model
     from utils.general import init_seeds
-    init_seeds(42, deterministic=True)
-    if initialization_type() == 'random':
-        # This branch never deserializes a checkpoint or imports a model state.
-        model = Model(str(Path(verified['upstream'])/'models/yolov5m.yaml'), ch=3, nc=1)
-        return model, {**initialization_record(verified['upstream']),
-                       'loaded_tensors':0, 'total_tensors':len(model.state_dict()),
-                       'construction':'official Model(YAML, ch=3, nc=1); no state import'}
-    return load_crack_model(verified['weights'], training=True)
+    init_seeds(config['seed'] if config else 42, deterministic=config['deterministic'] if config else True)
+    model, record = load_crack_model(verified['weights'], training=True)
+    record.update(initialization_record(verified['upstream'], config))
+    return model, record
 
 def load_crack_model(weights, training=False, expected_identity=None):
     import torch
@@ -132,7 +130,7 @@ def validate_resume_options(checkpoint, opt):
     from support import load_yaml
     stored=checkpoint['opt']
     expected=dict(vars(opt))
-    expected['hyp']=load_yaml(HERE/'hyp.yaml')
+    expected['hyp']=load_yaml(opt.hyp)
     if set(stored)!=set(expected):
         raise ValueError('Resume option fields differ')
     for key in expected:
@@ -150,12 +148,17 @@ def export(run, split, checkpoint):
     gt = read_json(run/'evaluation'/(split+'_gt.json'))
     manifest = read_json(run/'data/manifest.json')
     config = read_json(run/'frozen.json')
+    resolved = snapshot(run)
+    evaluation = resolved['evaluation']
     out = run/'evaluation'/(split+'_predictions.jsonl')
     if out.exists() or out.with_suffix('.partial').exists():
         raise FileExistsError('Prediction output/partial exists; inspect before retry')
     model, ckpt_record = load_crack_model(checkpoint, expected_identity=config['checkpoint_identity'])
-    init_seeds(42, deterministic=True)
-    device = select_device('0',batch_size=16)
+    completion = read_json(run/'native/training_complete.json')
+    if ckpt_record['checkpoint_epoch'] != completion['best_epoch']:
+        raise ValueError('Actual best checkpoint epoch differs from completed run selection')
+    init_seeds(evaluation['seed'], deterministic=True)  # public protocol fixed independently of train determinism
+    device = select_device(resolved['device'],batch_size=evaluation['batch'])
     model = model.to(device).float().eval()  # deliberately unfused; no AutoShape or hidden threshold
     identity = dict(config['prediction_identity'])
     identity.update(checkpoint_sha256=sha256(checkpoint), split=split, checkpoint=str(checkpoint),
@@ -166,20 +169,20 @@ def export(run, split, checkpoint):
     with partial.open('x',encoding='utf-8') as stream, torch.inference_mode():
         stream.write(json.dumps({'type':'metadata','schema_version':1,'identity':identity})+'\n')
         images = sorted(gt['images'],key=lambda x:x['id'])
-        for start in range(0,len(images),16):
+        for start in range(0,len(images),evaluation['batch']):
             batch, transforms = [], []
-            ims = images[start:start+16]
+            ims = images[start:start+evaluation['batch']]
             for row in ims:
                 im = cv2.imread(str(Path(manifest['root'])/row['file_name']))
                 if im is None or im.shape[:2] != (row['height'],row['width']):
                     raise ValueError('Decode/dimensions differ: '+row['file_name'])
-                processed, transform = preprocess(im)
+                processed, transform = preprocess(im,evaluation['imgsz'])
                 batch.append(np.ascontiguousarray(processed[:,:,::-1].transpose(2,0,1)))
                 transforms.append(transform)
             tensor = torch.from_numpy(np.stack(batch)).to(device).float()/255
-            raw = model(tensor,augment=False)
-            detections = non_max_suppression(raw,conf_thres=.001,iou_thres=.7,
-                                             agnostic=False,multi_label=False,max_det=300)
+            raw = model(tensor,augment=evaluation['augment'])
+            detections = non_max_suppression(raw,conf_thres=evaluation['conf'],iou_thres=evaluation['nms_iou'],
+                                             agnostic=evaluation['agnostic'],multi_label=evaluation['multi_label'],max_det=evaluation['max_det'])
             if len(detections)!=len(ims):
                 raise RuntimeError('Incomplete NMS batch')
             for row,det,transform in zip(ims,detections,transforms):
@@ -194,31 +197,34 @@ def export(run, split, checkpoint):
                         'width':row['width'],'height':row['height'],'box_format':'xyxy',
                         'coordinate_space':'original_image_pixels','predictions':predictions}
                 stream.write(json.dumps(record,allow_nan=False)+'\n')
-            print(f'{split}: {min(start+16,len(images))}/{len(images)}',flush=True)
+            print(f"{split}: {min(start+evaluation['batch'],len(images))}/{len(images)}",flush=True)
     partial.rename(out)
     write_json(run/'evaluation'/(split+'_export.json'),{'status':'completed','images':len(images),
-               'predictions_sha256':sha256(out),'checkpoint_sha256':identity['checkpoint_sha256']})
+               'predictions_sha256':sha256(out),'checkpoint_sha256':identity['checkpoint_sha256'],
+               'gt_sha256':sha256(run/'evaluation'/(split+'_gt.json')),
+               'config_sha256':config['config_sha256'], 'checkpoint_identity':config['checkpoint_identity']})
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('action',choices=['check','train','export','resources','smoke'])
+    p.add_argument('action',choices=['check','train','export','resources'])
     p.add_argument('--assets',type=Path,required=True)
     p.add_argument('--run',type=Path,required=True)
     p.add_argument('--split',choices=['val','test'])
     p.add_argument('--resume',action='store_true')
     a=p.parse_args()
     a.run,a.assets=a.run.resolve(),a.assets.resolve()
-    if a.action in ('check','smoke','resources'):
+    if a.action in ('check','resources'):
         os.environ['CUDA_VISIBLE_DEVICES']=''
     verified=activate(a.assets)
+    config = snapshot(a.run)
     import torch
     torch.set_num_threads(4)
     if a.action=='check':
         import train
         from models.yolo import Model
         from utils.general import init_seeds
-        init_seeds(42,deterministic=True)
-        m,record=build_initial_model(verified)
+        init_seeds(config['seed'],deterministic=config['deterministic'])
+        m,record=build_initial_model(verified, config)
         write_json(a.run/'model_check.json',{**check_model(m,1),**record,'environment':environment(),
                    'train_module':train.__file__, 'upstream':verified['upstream']})
         write_json(a.run/'resolved_options.json',{k:str(v) if isinstance(v,Path) else v
@@ -258,9 +264,5 @@ def main():
                    'GMACs':macs/1e9,'GFLOPs_2_per_MAC':2*macs/1e9}
         write_json(a.run/'resources.json',{'nc':1,'input':[1,3,640,640],'counter':'thop; FLOPs=2*MACs',
                    'latency':'NOT_MEASURED',**results})
-    else:
-        from validation import smoke
-        smoke(a.assets,a.run)
-
 if __name__=='__main__':
     main()
