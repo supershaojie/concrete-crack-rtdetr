@@ -1,0 +1,60 @@
+WARNING ⚠️ Python>=3.10 is required, but Python==3.9.25 is currently installed 
+{"ultralytics_file": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov8m-coco-b19-pilot\\Crack_RTDETR\\.vendor\\yolov8m-coco-b19-pilot\\ultralytics-v8.3.20\\ultralytics\\__init__.py", "version": "8.3.20", "commit": "f4d8f7765a490f3920e2d14c592a2967e347f185", "patch_sha256": "461f2d4ce4ed99e691517ea316df4ebfb9a434d5f773240e6ffc9a51340ccbe1", "patched_source_sha256": "7588e53839944a7cd34cde919744a7903343f06acb2f24655c94aa397b213dfb", "adapter_sha256": "5bf4f0862f9abb91d8da0fb4f7b50dc731af9e88b3cbe267fa28103465af3e76", "settings_dir": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov8m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov8m_coco_b19_pilot_validation\\smoke_runtime\\ultralytics-settings", "python": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov8m-coco-b19-pilot\\Crack_RTDETR\\.envs\\yolov8m-coco-b19-pilot\\Scripts\\python.exe"}
+test_detection_cutmix_hard_labels_clipping_and_retention (__main__.B19Tests) ... Light preflight train: 8 paths; labels/stats and necessary headers only
+Light preflight train: 8/8
+train: {'images': 8, 'labels': 8, 'boxes': 4, 'empty_labels': 4, 'split_paths_sha256': '2f87e8e97c78da25cebaccf0da75c3113212624b15230060da48b8c98211a61e', 'label_inventory_sha256': 'fc9b7913f01ceb37968f621ec420e23d4b66491ae41954875d5ed2d71fd71c0a', 'orphan_labels': []}
+Light preflight val: 2 paths; labels/stats and necessary headers only
+Light preflight val: 2/2
+val: {'images': 2, 'labels': 2, 'boxes': 1, 'empty_labels': 1, 'split_paths_sha256': '42f06f6d44987c5bdd4c012406d68b4bb177dbc310667c3847aa0e6e0b77a08d', 'label_inventory_sha256': '03b61ddefa50584624f5800ba34b9e02e2e9b2b729639ef710386d4cb1c2ccf2', 'orphan_labels': []}
+Light preflight test: 2 paths; labels/stats and necessary headers only
+Light preflight test: 2/2
+test: {'images': 2, 'labels': 2, 'boxes': 1, 'empty_labels': 1, 'split_paths_sha256': '1c05a13b25c6c5b742ad7f5b840a03d2655e2d1c6d9e363ee21dcef52d907d28', 'label_inventory_sha256': '1a63b1437f21cddff05fbb7e3a0a9781ee5ce7d43258822ebf508300772e0e9f', 'orphan_labels': []}
+ok
+test_cutmix_skips_main_collision_and_insufficient_donor_overlap (__main__.B19Tests) ... Light preflight train: 8 paths; labels/stats and necessary headers only
+Light preflight train: 8/8
+train: {'images': 8, 'labels': 8, 'boxes': 4, 'empty_labels': 4, 'split_paths_sha256': '2f87e8e97c78da25cebaccf0da75c3113212624b15230060da48b8c98211a61e', 'label_inventory_sha256': 'fc9b7913f01ceb37968f621ec420e23d4b66491ae41954875d5ed2d71fd71c0a', 'orphan_labels': []}
+Light preflight val: 2 paths; labels/stats and necessary headers only
+Light preflight val: 2/2
+val: {'images': 2, 'labels': 2, 'boxes': 1, 'empty_labels': 1, 'split_paths_sha256': '42f06f6d44987c5bdd4c012406d68b4bb177dbc310667c3847aa0e6e0b77a08d', 'label_inventory_sha256': '03b61ddefa50584624f5800ba34b9e02e2e9b2b729639ef710386d4cb1c2ccf2', 'orphan_labels': []}
+Light preflight test: 2 paths; labels/stats and necessary headers only
+Light preflight test: 2/2
+test: {'images': 2, 'labels': 2, 'boxes': 1, 'empty_labels': 1, 'split_paths_sha256': '1c05a13b25c6c5b742ad7f5b840a03d2655e2d1c6d9e363ee21dcef52d907d28', 'label_inventory_sha256': '1a63b1437f21cddff05fbb7e3a0a9781ee5ce7d43258822ebf508300772e0e9f', 'orphan_labels': []}
+ok
+test_real_b19_chain_probabilities_and_bounded_train_partners (__main__.B19Tests) ... Light preflight train: 8 paths; labels/stats and necessary headers only
+Light preflight train: 8/8
+train: {'images': 8, 'labels': 8, 'boxes': 4, 'empty_labels': 4, 'split_paths_sha256': '2f87e8e97c78da25cebaccf0da75c3113212624b15230060da48b8c98211a61e', 'label_inventory_sha256': 'fc9b7913f01ceb37968f621ec420e23d4b66491ae41954875d5ed2d71fd71c0a', 'orphan_labels': []}
+Light preflight val: 2 paths; labels/stats and necessary headers only
+Light preflight val: 2/2
+val: {'images': 2, 'labels': 2, 'boxes': 1, 'empty_labels': 1, 'split_paths_sha256': '42f06f6d44987c5bdd4c012406d68b4bb177dbc310667c3847aa0e6e0b77a08d', 'label_inventory_sha256': '03b61ddefa50584624f5800ba34b9e02e2e9b2b729639ef710386d4cb1c2ccf2', 'orphan_labels': []}
+Light preflight test: 2 paths; labels/stats and necessary headers only
+Light preflight test: 2/2
+test: {'images': 2, 'labels': 2, 'boxes': 1, 'empty_labels': 1, 'split_paths_sha256': '1c05a13b25c6c5b742ad7f5b840a03d2655e2d1c6d9e363ee21dcef52d907d28', 'label_inventory_sha256': '1a63b1437f21cddff05fbb7e3a0a9781ee5ce7d43258822ebf508300772e0e9f', 'orphan_labels': []}
+Isolated train label/header cache: 8/8
+Isolated label cache: C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\tmp1325l0lq\run\cache\train\3067949f44d26d8c54b7d028f1c4890af0d6e4a07313303a8436f8e03cb39cf2.labels.json
+B19_ACTUAL_CHAIN_COUNTS {'mosaic': {'visits': 291, 'triggered': 291, 'applied': 291, 'skipped_geometry': 0}, 'mixup': {'visits': 256, 'triggered': 30, 'applied': 30, 'skipped_geometry': 0}, 'cutmix': {'visits': 256, 'triggered': 5, 'applied': 1, 'skipped_geometry': 4}}
+ok
+test_odd_rounding_uses_actual_resize_gains_and_integer_pad (__main__.B19Tests) ... Light preflight train: 8 paths; labels/stats and necessary headers only
+Light preflight train: 8/8
+train: {'images': 8, 'labels': 8, 'boxes': 4, 'empty_labels': 4, 'split_paths_sha256': '2f87e8e97c78da25cebaccf0da75c3113212624b15230060da48b8c98211a61e', 'label_inventory_sha256': 'fc9b7913f01ceb37968f621ec420e23d4b66491ae41954875d5ed2d71fd71c0a', 'orphan_labels': []}
+Light preflight val: 2 paths; labels/stats and necessary headers only
+Light preflight val: 2/2
+val: {'images': 2, 'labels': 2, 'boxes': 1, 'empty_labels': 1, 'split_paths_sha256': '42f06f6d44987c5bdd4c012406d68b4bb177dbc310667c3847aa0e6e0b77a08d', 'label_inventory_sha256': '03b61ddefa50584624f5800ba34b9e02e2e9b2b729639ef710386d4cb1c2ccf2', 'orphan_labels': []}
+Light preflight test: 2 paths; labels/stats and necessary headers only
+Light preflight test: 2/2
+test: {'images': 2, 'labels': 2, 'boxes': 1, 'empty_labels': 1, 'split_paths_sha256': '1c05a13b25c6c5b742ad7f5b840a03d2655e2d1c6d9e363ee21dcef52d907d28', 'label_inventory_sha256': '1a63b1437f21cddff05fbb7e3a0a9781ee5ce7d43258822ebf508300772e0e9f', 'orphan_labels': []}
+ok
+test_padding_only_predictions_remain_false_positives (__main__.B19Tests) ... Light preflight train: 8 paths; labels/stats and necessary headers only
+Light preflight train: 8/8
+train: {'images': 8, 'labels': 8, 'boxes': 4, 'empty_labels': 4, 'split_paths_sha256': '2f87e8e97c78da25cebaccf0da75c3113212624b15230060da48b8c98211a61e', 'label_inventory_sha256': 'fc9b7913f01ceb37968f621ec420e23d4b66491ae41954875d5ed2d71fd71c0a', 'orphan_labels': []}
+Light preflight val: 2 paths; labels/stats and necessary headers only
+Light preflight val: 2/2
+val: {'images': 2, 'labels': 2, 'boxes': 1, 'empty_labels': 1, 'split_paths_sha256': '42f06f6d44987c5bdd4c012406d68b4bb177dbc310667c3847aa0e6e0b77a08d', 'label_inventory_sha256': '03b61ddefa50584624f5800ba34b9e02e2e9b2b729639ef710386d4cb1c2ccf2', 'orphan_labels': []}
+Light preflight test: 2 paths; labels/stats and necessary headers only
+Light preflight test: 2/2
+test: {'images': 2, 'labels': 2, 'boxes': 1, 'empty_labels': 1, 'split_paths_sha256': '1c05a13b25c6c5b742ad7f5b840a03d2655e2d1c6d9e363ee21dcef52d907d28', 'label_inventory_sha256': '1a63b1437f21cddff05fbb7e3a0a9781ee5ce7d43258822ebf508300772e0e9f', 'orphan_labels': []}
+ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 2.880s
+
+OK

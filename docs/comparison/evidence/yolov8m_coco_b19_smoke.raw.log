@@ -1,0 +1,1192 @@
+WARNING âš ï¸ Python>=3.10 is required, but Python==3.9.25 is currently installed 
+Creating new Ultralytics Settings v0.0.6 file âœ… 
+View Ultralytics Settings with 'yolo settings' or at 'C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete\runtime\ultralytics-settings\settings.json'
+Update Settings with 'yolo settings key=value', i.e. 'yolo settings runs_dir=path/to/dir'. For help see https://docs.ultralytics.com/quickstart/#ultralytics-settings.
+{"ultralytics_file": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov8m-coco-b19-pilot\\Crack_RTDETR\\.vendor\\yolov8m-coco-b19-pilot\\ultralytics-v8.3.20\\ultralytics\\__init__.py", "version": "8.3.20", "commit": "f4d8f7765a490f3920e2d14c592a2967e347f185", "patch_sha256": "461f2d4ce4ed99e691517ea316df4ebfb9a434d5f773240e6ffc9a51340ccbe1", "patched_source_sha256": "7588e53839944a7cd34cde919744a7903343f06acb2f24655c94aa397b213dfb", "adapter_sha256": "5ff1936f27675f2faecf6f0f7d5c053599a14c593be694f5285f61e8fabb695a", "settings_dir": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov8m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov8m_coco_b19_pilot_validation\\pilot_complete\\runtime\\ultralytics-settings", "python": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov8m-coco-b19-pilot\\Crack_RTDETR\\.envs\\yolov8m-coco-b19-pilot\\Scripts\\python.exe"}
+Overriding model.yaml nc=80 with nc=1
+Transferred 469/475 items from pretrained weights
+Light preflight train: 64 paths; labels/stats and necessary headers only
+Light preflight train: 64/64
+train: {'images': 64, 'labels': 64, 'boxes': 32, 'empty_labels': 32, 'split_paths_sha256': '292e962c10b0d6c83f8c4977395b2adc7a645d9a5ab370e23e9f07b822865cad', 'label_inventory_sha256': '7333dc2b71318822e16a822e94fcdfd1fc4f6bf9eb8b6a79e9c8f48dfafd963f', 'orphan_labels': []}
+Light preflight val: 2 paths; labels/stats and necessary headers only
+Light preflight val: 2/2
+val: {'images': 2, 'labels': 2, 'boxes': 1, 'empty_labels': 1, 'split_paths_sha256': '4241ddb1dd27f2551df0bd12ed8547d622d1fe89873c135136ed11a7c7d37a71', 'label_inventory_sha256': 'c08d5ebc6b79d7ba5b6b0bdf6792e8706c89073f56616de3399728df7ee3dee0', 'orphan_labels': []}
+Light preflight test: 2 paths; labels/stats and necessary headers only
+Light preflight test: 2/2
+test: {'images': 2, 'labels': 2, 'boxes': 1, 'empty_labels': 1, 'split_paths_sha256': 'bfdeff5eba8148a3433f5632d47f8648babbd58d0e48ee469902b006713e4dae', 'label_inventory_sha256': '6eb051cd2680c5d91d19f89f51c5bdb60a99a8bbb58a2f8221cd5d2a31e74496', 'orphan_labels': []}
+Ultralytics 8.3.20 ðŸš€ Python-3.9.25 torch-2.7.1+cu118 CUDA:0 (NVIDIA GeForce RTX 2060, 6144MiB)
+[34m[1mengine\trainer: [0mtask=detect, mode=train, model=C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\.runtime\yolov8m-coco-b19-pilot\assets\yolov8m.pt, data=C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete\data.yaml, epochs=2, time=None, patience=50, batch=2, imgsz=64, save=True, save_period=-1, cache=False, device=0, workers=0, project=C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete, name=train, exist_ok=False, pretrained=True, optimizer=SGD, verbose=True, seed=42, deterministic=True, single_cls=False, rect=False, cos_lr=True, close_mosaic=0, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=0.001, iou=0.7, max_det=300, half=False, dnn=False, plots=False, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=True, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=5.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.024, hsv_s=0.84, hsv_v=0.535, degrees=11.0, translate=0.17, scale=0.735, shear=3.5, perspective=0.00055, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.135, copy_paste=0.0, copy_paste_mode=flip, auto_augment=None, erasing=0.0, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete\train
+Overriding model.yaml nc=80 with nc=1
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1      1392  ultralytics.nn.modules.conv.Conv             [3, 48, 3, 2]                 
+  1                  -1  1     41664  ultralytics.nn.modules.conv.Conv             [48, 96, 3, 2]                
+  2                  -1  2    111360  ultralytics.nn.modules.block.C2f             [96, 96, 2, True]             
+  3                  -1  1    166272  ultralytics.nn.modules.conv.Conv             [96, 192, 3, 2]               
+  4                  -1  4    813312  ultralytics.nn.modules.block.C2f             [192, 192, 4, True]           
+  5                  -1  1    664320  ultralytics.nn.modules.conv.Conv             [192, 384, 3, 2]              
+  6                  -1  4   3248640  ultralytics.nn.modules.block.C2f             [384, 384, 4, True]           
+  7                  -1  1   1991808  ultralytics.nn.modules.conv.Conv             [384, 576, 3, 2]              
+  8                  -1  2   3985920  ultralytics.nn.modules.block.C2f             [576, 576, 2, True]           
+  9                  -1  1    831168  ultralytics.nn.modules.block.SPPF            [576, 576, 5]                 
+ 10                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 11             [-1, 6]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 12                  -1  2   1993728  ultralytics.nn.modules.block.C2f             [960, 384, 2]                 
+ 13                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 14             [-1, 4]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 15                  -1  2    517632  ultralytics.nn.modules.block.C2f             [576, 192, 2]                 
+ 16                  -1  1    332160  ultralytics.nn.modules.conv.Conv             [192, 192, 3, 2]              
+ 17            [-1, 12]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 18                  -1  2   1846272  ultralytics.nn.modules.block.C2f             [576, 384, 2]                 
+ 19                  -1  1   1327872  ultralytics.nn.modules.conv.Conv             [384, 384, 3, 2]              
+ 20             [-1, 9]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 21                  -1  2   4207104  ultralytics.nn.modules.block.C2f             [960, 576, 2]                 
+ 22        [15, 18, 21]  1   3776275  ultralytics.nn.modules.head.Detect           [1, [192, 384, 576]]          
+Model summary: 295 layers, 25,856,899 parameters, 25,856,883 gradients, 79.1 GFLOPs
+
+Transferred 469/475 items from pretrained weights
+Freezing layer 'model.22.dfl.conv.weight'
+Isolated train label/header cache: 64/64
+Isolated label cache: C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete\cache\train\fbb7b57d9f82426d3902194d54c375542d890fb98b2f05825c663b8b4ce52f07.labels.json
+Isolated val label/header cache: 2/2
+Isolated label cache: C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete\cache\val\e3013950c6b7a0ad91ac109ac87fe3aea54b19024bbfa915c856f69a76a3d7f6.labels.json
+[34m[1moptimizer:[0m SGD(lr=0.01, momentum=0.937) with parameter groups 77 weight(decay=0.0), 84 weight(decay=0.0005), 83 bias(decay=0.0)
+Image sizes 64 train, 64 val
+Using 0 dataloader workers
+Logging results to [1mC:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete\train[0m
+Starting training for 2 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+  0%|          | 0/32 [00:00<?, ?it/s]        1/2     0.403G      3.069      3.929      2.368          1         64:   0%|          | 0/32 [00:00<?, ?it/s]        1/2     0.403G      3.069      3.929      2.368          1         64:   3%|¨†         | 1/32 [00:00<00:14,  2.14it/s]        1/2     0.403G      3.869      3.487      2.179          4         64:   3%|¨†         | 1/32 [00:00<00:14,  2.14it/s]        1/2     0.403G      3.869      3.487      2.179          4         64:   6%|¨ƒ         | 2/32 [00:00<00:08,  3.74it/s]        1/2     0.403G      3.213      2.807      1.734          6         64:   6%|¨ƒ         | 2/32 [00:00<00:08,  3.74it/s]        1/2     0.403G      3.213      2.807      1.734          6         64:   9%|¨         | 3/32 [00:00<00:05,  4.87it/s]        1/2     0.403G      2.445      2.152      1.318          1         64:   9%|¨         | 3/32 [00:00<00:05,  4.87it/s]        1/2     0.434G      2.321      1.956      1.337          2         64:   9%|¨         | 3/32 [00:00<00:05,  4.87it/s]        1/2     0.434G      2.321      1.956      1.337          2         64:  16%|¨€¨„        | 5/32 [00:00<00:03,  6.82it/s]        1/2     0.434G      2.644      2.294      1.525          6         64:  16%|¨€¨„        | 5/32 [00:00<00:03,  6.82it/s]        1/2     0.434G      2.774      2.547      1.695          3         64:  16%|¨€¨„        | 5/32 [00:01<00:03,  6.82it/s]        1/2     0.434G      2.774      2.547      1.695          3         64:  22%|¨€¨€¨‡       | 7/32 [00:01<00:03,  7.89it/s]        1/2     0.434G      2.931      2.769      1.772          1         64:  22%|¨€¨€¨‡       | 7/32 [00:01<00:03,  7.89it/s]        1/2     0.434G      3.241      2.936      1.881          4         64:  22%|¨€¨€¨‡       | 7/32 [00:01<00:03,  7.89it/s]        1/2     0.434G      3.241      2.936      1.881          4         64:  28%|¨€¨€¨‚       | 9/32 [00:01<00:02,  9.75it/s]        1/2     0.434G      3.408      3.046      1.909          4         64:  28%|¨€¨€¨‚       | 9/32 [00:01<00:02,  9.75it/s]        1/2     0.434G      3.428      2.982      1.886          4         64:  28%|¨€¨€¨‚       | 9/32 [00:01<00:02,  9.75it/s]        1/2     0.434G      3.428      2.982      1.886          4         64:  34%|¨€¨€¨€¨…      | 11/32 [00:01<00:02, 10.03it/s]        1/2     0.434G      3.478      3.082      1.877          4         64:  34%|¨€¨€¨€¨…      | 11/32 [00:01<00:02, 10.03it/s]        1/2     0.581G      3.478      3.019       1.83          4         64:  34%|¨€¨€¨€¨…      | 11/32 [00:01<00:02, 10.03it/s]        1/2     0.581G      3.478      3.019       1.83          4         64:  41%|¨€¨€¨€¨€      | 13/32 [00:01<00:02,  9.05it/s]        1/2     0.581G       3.23      2.812      1.699          1         64:  41%|¨€¨€¨€¨€      | 13/32 [00:01<00:02,  9.05it/s]        1/2     0.591G      3.241      2.809      1.716          2         64:  41%|¨€¨€¨€¨€      | 13/32 [00:01<00:02,  9.05it/s]        1/2     0.591G      3.241      2.809      1.716          2         64:  47%|¨€¨€¨€¨€¨ƒ     | 15/32 [00:01<00:01, 10.43it/s]        1/2     0.591G      3.348      2.889      1.761          1         64:  47%|¨€¨€¨€¨€¨ƒ     | 15/32 [00:01<00:01, 10.43it/s]        1/2     0.591G       3.46      2.941      1.771          7         64:  47%|¨€¨€¨€¨€¨ƒ     | 15/32 [00:02<00:01, 10.43it/s]        1/2     0.591G       3.46      2.941      1.771          7         64:  53%|¨€¨€¨€¨€¨€¨†    | 17/32 [00:02<00:01,  9.64it/s]        1/2     0.591G      3.268      2.783      1.672          2         64:  53%|¨€¨€¨€¨€¨€¨†    | 17/32 [00:02<00:01,  9.64it/s]        1/2     0.591G      3.297      2.755       1.67          4         64:  53%|¨€¨€¨€¨€¨€¨†    | 17/32 [00:02<00:01,  9.64it/s]        1/2     0.591G      3.297      2.755       1.67          4         64:  59%|¨€¨€¨€¨€¨€¨    | 19/32 [00:02<00:01, 11.03it/s]        1/2     0.591G      3.371      2.785      1.702          1         64:  59%|¨€¨€¨€¨€¨€¨    | 19/32 [00:02<00:01, 11.03it/s]        1/2     0.591G      3.341      2.741       1.67          2         64:  59%|¨€¨€¨€¨€¨€¨    | 19/32 [00:02<00:01, 11.03it/s]        1/2     0.591G      3.341      2.741       1.67          2         64:  66%|¨€¨€¨€¨€¨€¨€¨„   | 21/32 [00:02<00:00, 12.23it/s]        1/2     0.591G      3.422      2.808       1.72          2         64:  66%|¨€¨€¨€¨€¨€¨€¨„   | 21/32 [00:02<00:00, 12.23it/s]        1/2     0.591G      3.377      2.751      1.698          1         64:  66%|¨€¨€¨€¨€¨€¨€¨„   | 21/32 [00:02<00:00, 12.23it/s]        1/2     0.591G      3.377      2.751      1.698          1         64:  72%|¨€¨€¨€¨€¨€¨€¨€¨‡  | 23/32 [00:02<00:00, 11.44it/s]        1/2     0.591G      3.266      2.659      1.638          3         64:  72%|¨€¨€¨€¨€¨€¨€¨€¨‡  | 23/32 [00:02<00:00, 11.44it/s]        1/2     0.591G      3.281      2.714      1.648          2         64:  72%|¨€¨€¨€¨€¨€¨€¨€¨‡  | 23/32 [00:02<00:00, 11.44it/s]        1/2     0.591G      3.281      2.714      1.648          2         64:  78%|¨€¨€¨€¨€¨€¨€¨€¨‚  | 25/32 [00:02<00:00, 12.48it/s]        1/2     0.591G       3.34      2.772      1.679          4         64:  78%|¨€¨€¨€¨€¨€¨€¨€¨‚  | 25/32 [00:02<00:00, 12.48it/s]        1/2     0.591G      3.375      2.838      1.727          2         64:  78%|¨€¨€¨€¨€¨€¨€¨€¨‚  | 25/32 [00:02<00:00, 12.48it/s]        1/2     0.591G      3.375      2.838      1.727          2         64:  84%|¨€¨€¨€¨€¨€¨€¨€¨€¨… | 27/32 [00:02<00:00, 13.29it/s]        1/2     0.591G      3.409      2.883      1.726          4         64:  84%|¨€¨€¨€¨€¨€¨€¨€¨€¨… | 27/32 [00:02<00:00, 13.29it/s]        1/2     0.591G      3.463      2.922      1.752          3         64:  84%|¨€¨€¨€¨€¨€¨€¨€¨€¨… | 27/32 [00:02<00:00, 13.29it/s]        1/2     0.591G      3.463      2.922      1.752          3         64:  91%|¨€¨€¨€¨€¨€¨€¨€¨€¨€ | 29/32 [00:02<00:00, 12.35it/s]        1/2     0.591G      3.484       2.97      1.782          2         64:  91%|¨€¨€¨€¨€¨€¨€¨€¨€¨€ | 29/32 [00:03<00:00, 12.35it/s]        1/2     0.591G      3.427      2.924      1.747          3         64:  91%|¨€¨€¨€¨€¨€¨€¨€¨€¨€ | 29/32 [00:03<00:00, 12.35it/s]        1/2     0.591G      3.427      2.924      1.747          3         64:  97%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨ƒ| 31/32 [00:03<00:00, 13.19it/s]        1/2     0.591G      3.433       2.95      1.759          3         64:  97%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨ƒ| 31/32 [00:03<00:00, 13.19it/s]        1/2     0.591G      3.433       2.95      1.759          3         64: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 32/32 [00:03<00:00, 10.09it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):   0%|          | 0/1 [00:00<?, ?it/s]                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 1/1 [00:00<00:00,  3.92it/s]                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 1/1 [00:00<00:00,  3.92it/s]
+                   all          2          1          0          0          0          0
+Ultralytics 8.3.20 ðŸš€ Python-3.9.25 torch-2.7.1+cu118 CUDA:0 (NVIDIA GeForce RTX 2060, 6144MiB)
+[34m[1mengine\trainer: [0mtask=detect, mode=train, model=C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete\train\weights\last.pt, data=C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete\data.yaml, epochs=2, time=None, patience=50, batch=2, imgsz=64, save=True, save_period=-1, cache=False, device=0, workers=0, project=C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete, name=train, exist_ok=False, pretrained=True, optimizer=SGD, verbose=True, seed=42, deterministic=True, single_cls=False, rect=False, cos_lr=True, close_mosaic=0, resume=C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete\train\weights\last.pt, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=0.001, iou=0.7, max_det=300, half=False, dnn=False, plots=False, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=True, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=5.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.024, hsv_s=0.84, hsv_v=0.535, degrees=11.0, translate=0.17, scale=0.735, shear=3.5, perspective=0.00055, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.135, copy_paste=0.0, copy_paste_mode=flip, auto_augment=None, erasing=0.0, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete\train
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1      1392  ultralytics.nn.modules.conv.Conv             [3, 48, 3, 2]                 
+  1                  -1  1     41664  ultralytics.nn.modules.conv.Conv             [48, 96, 3, 2]                
+  2                  -1  2    111360  ultralytics.nn.modules.block.C2f             [96, 96, 2, True]             
+  3                  -1  1    166272  ultralytics.nn.modules.conv.Conv             [96, 192, 3, 2]               
+  4                  -1  4    813312  ultralytics.nn.modules.block.C2f             [192, 192, 4, True]           
+  5                  -1  1    664320  ultralytics.nn.modules.conv.Conv             [192, 384, 3, 2]              
+  6                  -1  4   3248640  ultralytics.nn.modules.block.C2f             [384, 384, 4, True]           
+  7                  -1  1   1991808  ultralytics.nn.modules.conv.Conv             [384, 576, 3, 2]              
+  8                  -1  2   3985920  ultralytics.nn.modules.block.C2f             [576, 576, 2, True]           
+  9                  -1  1    831168  ultralytics.nn.modules.block.SPPF            [576, 576, 5]                 
+ 10                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 11             [-1, 6]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 12                  -1  2   1993728  ultralytics.nn.modules.block.C2f             [960, 384, 2]                 
+ 13                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 14             [-1, 4]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 15                  -1  2    517632  ultralytics.nn.modules.block.C2f             [576, 192, 2]                 
+ 16                  -1  1    332160  ultralytics.nn.modules.conv.Conv             [192, 192, 3, 2]              
+ 17            [-1, 12]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 18                  -1  2   1846272  ultralytics.nn.modules.block.C2f             [576, 384, 2]                 
+ 19                  -1  1   1327872  ultralytics.nn.modules.conv.Conv             [384, 384, 3, 2]              
+ 20             [-1, 9]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 21                  -1  2   4207104  ultralytics.nn.modules.block.C2f             [960, 576, 2]                 
+ 22        [15, 18, 21]  1   3776275  ultralytics.nn.modules.head.Detect           [1, [192, 384, 576]]          
+Model summary: 295 layers, 25,856,899 parameters, 25,856,883 gradients, 79.1 GFLOPs
+
+Transferred 475/475 items from pretrained weights
+Freezing layer 'model.22.dfl.conv.weight'
+Isolated label cache: C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete\cache\train\fbb7b57d9f82426d3902194d54c375542d890fb98b2f05825c663b8b4ce52f07.labels.json
+Isolated label cache: C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete\cache\val\e3013950c6b7a0ad91ac109ac87fe3aea54b19024bbfa915c856f69a76a3d7f6.labels.json
+[34m[1moptimizer:[0m SGD(lr=0.01, momentum=0.937) with parameter groups 77 weight(decay=0.0), 84 weight(decay=0.0005), 83 bias(decay=0.0)
+Resuming training C:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete\train\weights\last.pt from epoch 2 to 2 total epochs
+Image sizes 64 train, 64 val
+Using 0 dataloader workers
+Logging results to [1mC:\Users\o'v'o\.codex\worktrees\yolov8m-coco-b19-pilot\Crack_RTDETR\outputs\yolov8m_coco_b19_pilot_validation\pilot_complete\train[0m
+Starting training for 2 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+  0%|          | 0/32 [00:00<?, ?it/s]        2/2     0.598G      4.662      3.148       2.09          5         64:   0%|          | 0/32 [00:00<?, ?it/s]        2/2     0.598G      4.662      3.148       2.09          5         64:   3%|¨†         | 1/32 [00:00<00:05,  5.37it/s]        2/2     0.598G      4.346      3.428       1.93          2         64:   3%|¨†         | 1/32 [00:00<00:05,  5.37it/s]        2/2     0.608G      2.897      2.325      1.286          1         64:   3%|¨†         | 1/32 [00:00<00:05,  5.37it/s]        2/2     0.608G      2.897      2.325      1.286          1         64:   9%|¨         | 3/32 [00:00<00:02, 10.30it/s]        2/2     0.608G      3.156      2.539      1.463          1         64:   9%|¨         | 3/32 [00:00<00:02, 10.30it/s]        2/2     0.608G      3.567      2.884      1.687          3         64:   9%|¨         | 3/32 [00:00<00:02, 10.30it/s]        2/2     0.608G      3.567      2.884      1.687          3         64:  16%|¨€¨„        | 5/32 [00:00<00:02, 12.35it/s]        2/2     0.608G      3.334       3.06       1.71          1         64:  16%|¨€¨„        | 5/32 [00:00<00:02, 12.35it/s]        2/2     0.608G        3.5      3.144      1.765          6         64:  16%|¨€¨„        | 5/32 [00:00<00:02, 12.35it/s]        2/2     0.608G        3.5      3.144      1.765          6         64:  22%|¨€¨€¨‡       | 7/32 [00:00<00:01, 13.26it/s]        2/2     0.608G      3.303      3.007      1.633          3         64:  22%|¨€¨€¨‡       | 7/32 [00:00<00:01, 13.26it/s]        2/2     0.608G      3.493      3.148      1.675          3         64:  22%|¨€¨€¨‡       | 7/32 [00:00<00:01, 13.26it/s]        2/2     0.608G      3.493      3.148      1.675          3         64:  28%|¨€¨€¨‚       | 9/32 [00:00<00:01, 13.83it/s]        2/2     0.608G      3.612       3.22      1.759          2         64:  28%|¨€¨€¨‚       | 9/32 [00:00<00:01, 13.83it/s]        2/2     0.608G      3.449      3.048      1.667          2         64:  28%|¨€¨€¨‚       | 9/32 [00:00<00:01, 13.83it/s]        2/2     0.608G      3.449      3.048      1.667          2         64:  34%|¨€¨€¨€¨…      | 11/32 [00:00<00:01, 11.09it/s]        2/2     0.608G      3.478       3.12      1.711          1         64:  34%|¨€¨€¨€¨…      | 11/32 [00:01<00:01, 11.09it/s]        2/2     0.608G      3.387      3.028      1.672          1         64:  34%|¨€¨€¨€¨…      | 11/32 [00:01<00:01, 11.09it/s]        2/2     0.608G      3.387      3.028      1.672          1         64:  41%|¨€¨€¨€¨€      | 13/32 [00:01<00:01, 12.22it/s]        2/2     0.608G      3.535        3.1      1.776          5         64:  41%|¨€¨€¨€¨€      | 13/32 [00:01<00:01, 12.22it/s]        2/2     0.608G      3.327      2.916       1.67          1         64:  41%|¨€¨€¨€¨€      | 13/32 [00:01<00:01, 12.22it/s]        2/2     0.608G      3.327      2.916       1.67          1         64:  47%|¨€¨€¨€¨€¨ƒ     | 15/32 [00:01<00:01, 13.00it/s]        2/2     0.608G      3.215      2.811      1.603          2         64:  47%|¨€¨€¨€¨€¨ƒ     | 15/32 [00:01<00:01, 13.00it/s]        2/2     0.608G      3.236      2.841      1.653          3         64:  47%|¨€¨€¨€¨€¨ƒ     | 15/32 [00:01<00:01, 13.00it/s]        2/2     0.608G      3.236      2.841      1.653          3         64:  53%|¨€¨€¨€¨€¨€¨†    | 17/32 [00:01<00:01, 13.61it/s]        2/2     0.608G      3.346      2.921      1.668          4         64:  53%|¨€¨€¨€¨€¨€¨†    | 17/32 [00:01<00:01, 13.61it/s]        2/2     0.608G      3.332      2.877      1.639          3         64:  53%|¨€¨€¨€¨€¨€¨†    | 17/32 [00:01<00:01, 13.61it/s]        2/2     0.608G      3.332      2.877      1.639          3         64:  59%|¨€¨€¨€¨€¨€¨    | 19/32 [00:01<00:00, 14.13it/s]        2/2     0.608G      3.315      2.882      1.658          1         64:  59%|¨€¨€¨€¨€¨€¨    | 19/32 [00:01<00:00, 14.13it/s]        2/2     0.608G      3.337      2.903      1.676          2         64:  59%|¨€¨€¨€¨€¨€¨    | 19/32 [00:01<00:00, 14.13it/s]        2/2     0.608G      3.337      2.903      1.676          2         64:  66%|¨€¨€¨€¨€¨€¨€¨„   | 21/32 [00:01<00:00, 12.68it/s]        2/2     0.608G      3.393       2.94      1.717          6         64:  66%|¨€¨€¨€¨€¨€¨€¨„   | 21/32 [00:01<00:00, 12.68it/s]        2/2     0.608G      3.246      2.818      1.642          0         64:  66%|¨€¨€¨€¨€¨€¨€¨„   | 21/32 [00:01<00:00, 12.68it/s]        2/2     0.608G      3.246      2.818      1.642          0         64:  72%|¨€¨€¨€¨€¨€¨€¨€¨‡  | 23/32 [00:01<00:00, 13.89it/s]        2/2     0.608G      3.187      2.781       1.61          1         64:  72%|¨€¨€¨€¨€¨€¨€¨€¨‡  | 23/32 [00:01<00:00, 13.89it/s]        2/2     0.608G      3.078      2.683      1.556          2         64:  72%|¨€¨€¨€¨€¨€¨€¨€¨‡  | 23/32 [00:01<00:00, 13.89it/s]        2/2     0.608G      3.078      2.683      1.556          2         64:  78%|¨€¨€¨€¨€¨€¨€¨€¨‚  | 25/32 [00:01<00:00, 14.27it/s]        2/2     0.608G      2.959      2.585      1.496          1         64:  78%|¨€¨€¨€¨€¨€¨€¨€¨‚  | 25/32 [00:01<00:00, 14.27it/s]        2/2     0.608G      2.972      2.599      1.501          2         64:  78%|¨€¨€¨€¨€¨€¨€¨€¨‚  | 25/32 [00:02<00:00, 14.27it/s]        2/2     0.608G      2.972      2.599      1.501          2         64:  84%|¨€¨€¨€¨€¨€¨€¨€¨€¨… | 27/32 [00:02<00:00, 14.42it/s]        2/2     0.608G      3.028      2.651      1.537          3         64:  84%|¨€¨€¨€¨€¨€¨€¨€¨€¨… | 27/32 [00:02<00:00, 14.42it/s]        2/2     0.608G      3.096      2.694      1.578          5         64:  84%|¨€¨€¨€¨€¨€¨€¨€¨€¨… | 27/32 [00:02<00:00, 14.42it/s]        2/2     0.608G      3.096      2.694      1.578          5         64:  91%|¨€¨€¨€¨€¨€¨€¨€¨€¨€ | 29/32 [00:02<00:00, 14.58it/s]        2/2     0.608G      3.002      2.614      1.528          2         64:  91%|¨€¨€¨€¨€¨€¨€¨€¨€¨€ | 29/32 [00:02<00:00, 14.58it/s]        2/2     0.608G      2.985      2.591      1.522          3         64:  91%|¨€¨€¨€¨€¨€¨€¨€¨€¨€ | 29/32 [00:02<00:00, 14.58it/s]        2/2     0.608G      2.985      2.591      1.522          3         64:  97%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨ƒ| 31/32 [00:02<00:00, 14.87it/s]        2/2     0.608G      3.009      2.649      1.544          1         64:  97%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨ƒ| 31/32 [00:02<00:00, 14.87it/s]        2/2     0.608G      3.009      2.649      1.544          1         64: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 32/32 [00:02<00:00, 13.37it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):   0%|          | 0/1 [00:00<?, ?it/s]                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 1/1 [00:00<00:00, 29.52it/s]
+                   all          2          1          0          0          0          0
+
+1 epochs completed in 0.007 hours.
+Native training finished; separate FP32 public export/evaluation follows.
+Export val: 2/2
+{"split": "val", "raw_0_1": {"P": 0.0, "R": 0.0, "AP50": 0.0, "AP75": 0.0, "mAP50-95": 0.0}, "percent": {"P": 0.0, "R": 0.0, "AP50": 0.0, "AP75": 0.0, "mAP50-95": 0.0}}
+Export test: 2/2
+{"split": "test", "raw_0_1": {"P": 0.0, "R": 0.0, "AP50": 0.0, "AP75": 0.0, "mAP50-95": 0.0}, "percent": {"P": 0.0, "R": 0.0, "AP50": 0.0, "AP75": 0.0, "mAP50-95": 0.0}}
+{
+  "scope": "SMOKE_ONLY_SYNTHETIC",
+  "formal_training": false,
+  "formal_batch16_imgsz640_parallel_capacity": "NOT_TESTED",
+  "device": "cuda",
+  "amp_isolation": "real COCO-adapted M; FP32/FP16 accuracy; model/BN/EMA/optimizer and all RNG streams unchanged",
+  "local_gpu": "NVIDIA GeForce RTX 2060",
+  "native_optimizer": {
+    "type": "SGD",
+    "groups": [
+      {
+        "lr": 0.01,
+        "momentum": 0.937,
+        "weight_decay": 0,
+        "nesterov": true
+      },
+      {
+        "lr": 0.01,
+        "momentum": 0.937,
+        "weight_decay": 0.0005,
+        "nesterov": true
+      },
+      {
+        "lr": 0.01,
+        "momentum": 0.937,
+        "weight_decay": 0.0,
+        "nesterov": true
+      }
+    ],
+    "trainable_elements": 25856883,
+    "loss_weights": {
+      "box": 7.5,
+      "cls": 0.5,
+      "dfl": 1.5
+    },
+    "nominal_accumulate_before_warmup": 32,
+    "augmentation": {
+      "pipeline": [
+        "Mosaic",
+        "CopyPaste(p=0)",
+        "RandomPerspective",
+        "MixUp",
+        "DetectionCutMix",
+        "NoAlbumentations",
+        "MotherHSV(additive hue)",
+        "flipud",
+        "fliplr",
+        "Format(RGB)"
+      ],
+      "training_resize": "square stretch; old BaseDataset.load_image(rect_mode=False)",
+      "partners": "only train get_image_and_label + bounded Mosaic/CopyPaste/Affine; no full-pipeline recursion",
+      "probabilities": {
+        "mosaic": 1.0,
+        "mixup": 0.135,
+        "cutmix": 0.03,
+        "copy_paste": 0.0
+      },
+      "geometry": {
+        "degrees": 11.0,
+        "translate": 0.17,
+        "scale": 0.735,
+        "shear": 3.5,
+        "perspective": 0.00055
+      },
+      "hsv": {
+        "hsv_h": 0.024,
+        "hsv_s": 0.84,
+        "hsv_v": 0.535
+      },
+      "flips": {
+        "flipud": 0.0,
+        "fliplr": 0.5
+      },
+      "cutmix": {
+        "source_commit": "f2d3aed634a5b0e4828024718d4a61ab2f83fb19",
+        "beta": 1.0,
+        "candidate_rectangles": 3,
+        "rule": "zero main-box intersection; donor retained IOA>=0.1; donor boxes clipped to patch",
+        "labels": "hard detection class IDs + concatenated Instances, no soft labels"
+      },
+      "counters": "worker-shared cumulative visits/triggered/applied/skipped_geometry; visits include bounded partner pre-transforms"
+    }
+  },
+  "nonzero_sgd_update": true,
+  "gradients": [
+    {
+      "tensors": 243,
+      "nonzero": 227,
+      "finite_scaled_gradients": false,
+      "scaler_before": 65536.0,
+      "scaler_after": 32768.0,
+      "native_amp_overflow_skip": true
+    },
+    {
+      "tensors": 243,
+      "nonzero": 235,
+      "finite_scaled_gradients": false,
+      "scaler_before": 32768.0,
+      "scaler_after": 16384.0,
+      "native_amp_overflow_skip": true
+    },
+    {
+      "tensors": 243,
+      "nonzero": 235,
+      "finite_scaled_gradients": false,
+      "scaler_before": 16384.0,
+      "scaler_after": 8192.0,
+      "native_amp_overflow_skip": true
+    },
+    {
+      "tensors": 243,
+      "nonzero": 235,
+      "finite_scaled_gradients": false,
+      "scaler_before": 8192.0,
+      "scaler_after": 4096.0,
+      "native_amp_overflow_skip": true
+    },
+    {
+      "tensors": 243,
+      "nonzero": 235,
+      "finite_scaled_gradients": false,
+      "scaler_before": 4096.0,
+      "scaler_after": 2048.0,
+      "native_amp_overflow_skip": true
+    },
+    {
+      "tensors": 243,
+      "nonzero": 235,
+      "finite_scaled_gradients": false,
+      "scaler_before": 2048.0,
+      "scaler_after": 1024.0,
+      "native_amp_overflow_skip": true
+    },
+    {
+      "tensors": 243,
+      "nonzero": 235,
+      "finite_scaled_gradients": true,
+      "scaler_before": 1024.0,
+      "scaler_after": 1024.0,
+      "native_amp_overflow_skip": false
+    },
+    {
+      "tensors": 243,
+      "nonzero": 235,
+      "finite_scaled_gradients": true,
+      "scaler_before": 1024.0,
+      "scaler_after": 1024.0,
+      "native_amp_overflow_skip": false
+    },
+    {
+      "tensors": 243,
+      "nonzero": 243,
+      "finite_scaled_gradients": false,
+      "scaler_before": 1024.0,
+      "scaler_after": 512.0,
+      "native_amp_overflow_skip": true
+    },
+    {
+      "tensors": 243,
+      "nonzero": 243,
+      "finite_scaled_gradients": false,
+      "scaler_before": 512.0,
+      "scaler_after": 256.0,
+      "native_amp_overflow_skip": true
+    },
+    {
+      "tensors": 243,
+      "nonzero": 235,
+      "finite_scaled_gradients": true,
+      "scaler_before": 256.0,
+      "scaler_after": 256.0,
+      "native_amp_overflow_skip": false
+    },
+    {
+      "tensors": 243,
+      "nonzero": 243,
+      "finite_scaled_gradients": true,
+      "scaler_before": 256.0,
+      "scaler_after": 256.0,
+      "native_amp_overflow_skip": false
+    },
+    {
+      "tensors": 243,
+      "nonzero": 235,
+      "finite_scaled_gradients": false,
+      "scaler_before": 256.0,
+      "scaler_after": 128.0,
+      "native_amp_overflow_skip": true
+    }
+  ],
+  "initialization": {
+    "construction": "official DetectionTrainer.get_model -> DetectionModel(original COCO yaml, nc=1) -> model.load(weights)",
+    "destination_tensors": 475,
+    "head": "ultralytics.nn.modules.head.Detect",
+    "initialization_type": "coco_detection_pretrained",
+    "matching_values_verified_before_first_update": true,
+    "missing_or_reshaped_keys": [
+      "model.22.cv3.0.2.bias",
+      "model.22.cv3.0.2.weight",
+      "model.22.cv3.1.2.bias",
+      "model.22.cv3.1.2.weight",
+      "model.22.cv3.2.2.bias",
+      "model.22.cv3.2.2.weight"
+    ],
+    "model_yaml": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov8m-coco-b19-pilot\\Crack_RTDETR\\.vendor\\yolov8m-coco-b19-pilot\\ultralytics-v8.3.20\\ultralytics\\cfg\\models\\v8\\yolov8.yaml",
+    "model_yaml_sha256": "e23658a8a15f097b96376d33b3afa88e02d2e1d4a7b45949b61b783a959d4fe8",
+    "native_constants": "BN, Detect bias priors and fixed DFL projection retain official definitions",
+    "nc": 1,
+    "parameters_unfused": 25856899,
+    "pretrained_tensors_loaded": 469,
+    "pretraining_source": "official COCO detection (80 classes)",
+    "reg_max": 16,
+    "restored_checkpoint_tensors": 0,
+    "resume": false,
+    "scale": "m",
+    "seed": 42,
+    "skip_reasons": {
+      "model.22.cv3.0.2.bias": {
+        "reason": "nc=80 -> nc=1 class-output shape mismatch",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ]
+      },
+      "model.22.cv3.0.2.weight": {
+        "reason": "nc=80 -> nc=1 class-output shape mismatch",
+        "source_shape": [
+          80,
+          192,
+          1,
+          1
+        ],
+        "target_shape": [
+          1,
+          192,
+          1,
+          1
+        ]
+      },
+      "model.22.cv3.1.2.bias": {
+        "reason": "nc=80 -> nc=1 class-output shape mismatch",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ]
+      },
+      "model.22.cv3.1.2.weight": {
+        "reason": "nc=80 -> nc=1 class-output shape mismatch",
+        "source_shape": [
+          80,
+          192,
+          1,
+          1
+        ],
+        "target_shape": [
+          1,
+          192,
+          1,
+          1
+        ]
+      },
+      "model.22.cv3.2.2.bias": {
+        "reason": "nc=80 -> nc=1 class-output shape mismatch",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ]
+      },
+      "model.22.cv3.2.2.weight": {
+        "reason": "nc=80 -> nc=1 class-output shape mismatch",
+        "source_shape": [
+          80,
+          192,
+          1,
+          1
+        ],
+        "target_shape": [
+          1,
+          192,
+          1,
+          1
+        ]
+      }
+    },
+    "source_bytes": 52136884,
+    "source_sha256": "5d4a90cdc7a21786cc59cd19778e9eafff836df9e2da32524737c7ee6efe4fe5",
+    "source_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8m.pt",
+    "strides": [
+      8.0,
+      16.0,
+      32.0
+    ],
+    "transferred_elements": 25889517,
+    "transferred_keys": [
+      "model.0.bn.bias",
+      "model.0.bn.num_batches_tracked",
+      "model.0.bn.running_mean",
+      "model.0.bn.running_var",
+      "model.0.bn.weight",
+      "model.0.conv.weight",
+      "model.1.bn.bias",
+      "model.1.bn.num_batches_tracked",
+      "model.1.bn.running_mean",
+      "model.1.bn.running_var",
+      "model.1.bn.weight",
+      "model.1.conv.weight",
+      "model.12.cv1.bn.bias",
+      "model.12.cv1.bn.num_batches_tracked",
+      "model.12.cv1.bn.running_mean",
+      "model.12.cv1.bn.running_var",
+      "model.12.cv1.bn.weight",
+      "model.12.cv1.conv.weight",
+      "model.12.cv2.bn.bias",
+      "model.12.cv2.bn.num_batches_tracked",
+      "model.12.cv2.bn.running_mean",
+      "model.12.cv2.bn.running_var",
+      "model.12.cv2.bn.weight",
+      "model.12.cv2.conv.weight",
+      "model.12.m.0.cv1.bn.bias",
+      "model.12.m.0.cv1.bn.num_batches_tracked",
+      "model.12.m.0.cv1.bn.running_mean",
+      "model.12.m.0.cv1.bn.running_var",
+      "model.12.m.0.cv1.bn.weight",
+      "model.12.m.0.cv1.conv.weight",
+      "model.12.m.0.cv2.bn.bias",
+      "model.12.m.0.cv2.bn.num_batches_tracked",
+      "model.12.m.0.cv2.bn.running_mean",
+      "model.12.m.0.cv2.bn.running_var",
+      "model.12.m.0.cv2.bn.weight",
+      "model.12.m.0.cv2.conv.weight",
+      "model.12.m.1.cv1.bn.bias",
+      "model.12.m.1.cv1.bn.num_batches_tracked",
+      "model.12.m.1.cv1.bn.running_mean",
+      "model.12.m.1.cv1.bn.running_var",
+      "model.12.m.1.cv1.bn.weight",
+      "model.12.m.1.cv1.conv.weight",
+      "model.12.m.1.cv2.bn.bias",
+      "model.12.m.1.cv2.bn.num_batches_tracked",
+      "model.12.m.1.cv2.bn.running_mean",
+      "model.12.m.1.cv2.bn.running_var",
+      "model.12.m.1.cv2.bn.weight",
+      "model.12.m.1.cv2.conv.weight",
+      "model.15.cv1.bn.bias",
+      "model.15.cv1.bn.num_batches_tracked",
+      "model.15.cv1.bn.running_mean",
+      "model.15.cv1.bn.running_var",
+      "model.15.cv1.bn.weight",
+      "model.15.cv1.conv.weight",
+      "model.15.cv2.bn.bias",
+      "model.15.cv2.bn.num_batches_tracked",
+      "model.15.cv2.bn.running_mean",
+      "model.15.cv2.bn.running_var",
+      "model.15.cv2.bn.weight",
+      "model.15.cv2.conv.weight",
+      "model.15.m.0.cv1.bn.bias",
+      "model.15.m.0.cv1.bn.num_batches_tracked",
+      "model.15.m.0.cv1.bn.running_mean",
+      "model.15.m.0.cv1.bn.running_var",
+      "model.15.m.0.cv1.bn.weight",
+      "model.15.m.0.cv1.conv.weight",
+      "model.15.m.0.cv2.bn.bias",
+      "model.15.m.0.cv2.bn.num_batches_tracked",
+      "model.15.m.0.cv2.bn.running_mean",
+      "model.15.m.0.cv2.bn.running_var",
+      "model.15.m.0.cv2.bn.weight",
+      "model.15.m.0.cv2.conv.weight",
+      "model.15.m.1.cv1.bn.bias",
+      "model.15.m.1.cv1.bn.num_batches_tracked",
+      "model.15.m.1.cv1.bn.running_mean",
+      "model.15.m.1.cv1.bn.running_var",
+      "model.15.m.1.cv1.bn.weight",
+      "model.15.m.1.cv1.conv.weight",
+      "model.15.m.1.cv2.bn.bias",
+      "model.15.m.1.cv2.bn.num_batches_tracked",
+      "model.15.m.1.cv2.bn.running_mean",
+      "model.15.m.1.cv2.bn.running_var",
+      "model.15.m.1.cv2.bn.weight",
+      "model.15.m.1.cv2.conv.weight",
+      "model.16.bn.bias",
+      "model.16.bn.num_batches_tracked",
+      "model.16.bn.running_mean",
+      "model.16.bn.running_var",
+      "model.16.bn.weight",
+      "model.16.conv.weight",
+      "model.18.cv1.bn.bias",
+      "model.18.cv1.bn.num_batches_tracked",
+      "model.18.cv1.bn.running_mean",
+      "model.18.cv1.bn.running_var",
+      "model.18.cv1.bn.weight",
+      "model.18.cv1.conv.weight",
+      "model.18.cv2.bn.bias",
+      "model.18.cv2.bn.num_batches_tracked",
+      "model.18.cv2.bn.running_mean",
+      "model.18.cv2.bn.running_var",
+      "model.18.cv2.bn.weight",
+      "model.18.cv2.conv.weight",
+      "model.18.m.0.cv1.bn.bias",
+      "model.18.m.0.cv1.bn.num_batches_tracked",
+      "model.18.m.0.cv1.bn.running_mean",
+      "model.18.m.0.cv1.bn.running_var",
+      "model.18.m.0.cv1.bn.weight",
+      "model.18.m.0.cv1.conv.weight",
+      "model.18.m.0.cv2.bn.bias",
+      "model.18.m.0.cv2.bn.num_batches_tracked",
+      "model.18.m.0.cv2.bn.running_mean",
+      "model.18.m.0.cv2.bn.running_var",
+      "model.18.m.0.cv2.bn.weight",
+      "model.18.m.0.cv2.conv.weight",
+      "model.18.m.1.cv1.bn.bias",
+      "model.18.m.1.cv1.bn.num_batches_tracked",
+      "model.18.m.1.cv1.bn.running_mean",
+      "model.18.m.1.cv1.bn.running_var",
+      "model.18.m.1.cv1.bn.weight",
+      "model.18.m.1.cv1.conv.weight",
+      "model.18.m.1.cv2.bn.bias",
+      "model.18.m.1.cv2.bn.num_batches_tracked",
+      "model.18.m.1.cv2.bn.running_mean",
+      "model.18.m.1.cv2.bn.running_var",
+      "model.18.m.1.cv2.bn.weight",
+      "model.18.m.1.cv2.conv.weight",
+      "model.19.bn.bias",
+      "model.19.bn.num_batches_tracked",
+      "model.19.bn.running_mean",
+      "model.19.bn.running_var",
+      "model.19.bn.weight",
+      "model.19.conv.weight",
+      "model.2.cv1.bn.bias",
+      "model.2.cv1.bn.num_batches_tracked",
+      "model.2.cv1.bn.running_mean",
+      "model.2.cv1.bn.running_var",
+      "model.2.cv1.bn.weight",
+      "model.2.cv1.conv.weight",
+      "model.2.cv2.bn.bias",
+      "model.2.cv2.bn.num_batches_tracked",
+      "model.2.cv2.bn.running_mean",
+      "model.2.cv2.bn.running_var",
+      "model.2.cv2.bn.weight",
+      "model.2.cv2.conv.weight",
+      "model.2.m.0.cv1.bn.bias",
+      "model.2.m.0.cv1.bn.num_batches_tracked",
+      "model.2.m.0.cv1.bn.running_mean",
+      "model.2.m.0.cv1.bn.running_var",
+      "model.2.m.0.cv1.bn.weight",
+      "model.2.m.0.cv1.conv.weight",
+      "model.2.m.0.cv2.bn.bias",
+      "model.2.m.0.cv2.bn.num_batches_tracked",
+      "model.2.m.0.cv2.bn.running_mean",
+      "model.2.m.0.cv2.bn.running_var",
+      "model.2.m.0.cv2.bn.weight",
+      "model.2.m.0.cv2.conv.weight",
+      "model.2.m.1.cv1.bn.bias",
+      "model.2.m.1.cv1.bn.num_batches_tracked",
+      "model.2.m.1.cv1.bn.running_mean",
+      "model.2.m.1.cv1.bn.running_var",
+      "model.2.m.1.cv1.bn.weight",
+      "model.2.m.1.cv1.conv.weight",
+      "model.2.m.1.cv2.bn.bias",
+      "model.2.m.1.cv2.bn.num_batches_tracked",
+      "model.2.m.1.cv2.bn.running_mean",
+      "model.2.m.1.cv2.bn.running_var",
+      "model.2.m.1.cv2.bn.weight",
+      "model.2.m.1.cv2.conv.weight",
+      "model.21.cv1.bn.bias",
+      "model.21.cv1.bn.num_batches_tracked",
+      "model.21.cv1.bn.running_mean",
+      "model.21.cv1.bn.running_var",
+      "model.21.cv1.bn.weight",
+      "model.21.cv1.conv.weight",
+      "model.21.cv2.bn.bias",
+      "model.21.cv2.bn.num_batches_tracked",
+      "model.21.cv2.bn.running_mean",
+      "model.21.cv2.bn.running_var",
+      "model.21.cv2.bn.weight",
+      "model.21.cv2.conv.weight",
+      "model.21.m.0.cv1.bn.bias",
+      "model.21.m.0.cv1.bn.num_batches_tracked",
+      "model.21.m.0.cv1.bn.running_mean",
+      "model.21.m.0.cv1.bn.running_var",
+      "model.21.m.0.cv1.bn.weight",
+      "model.21.m.0.cv1.conv.weight",
+      "model.21.m.0.cv2.bn.bias",
+      "model.21.m.0.cv2.bn.num_batches_tracked",
+      "model.21.m.0.cv2.bn.running_mean",
+      "model.21.m.0.cv2.bn.running_var",
+      "model.21.m.0.cv2.bn.weight",
+      "model.21.m.0.cv2.conv.weight",
+      "model.21.m.1.cv1.bn.bias",
+      "model.21.m.1.cv1.bn.num_batches_tracked",
+      "model.21.m.1.cv1.bn.running_mean",
+      "model.21.m.1.cv1.bn.running_var",
+      "model.21.m.1.cv1.bn.weight",
+      "model.21.m.1.cv1.conv.weight",
+      "model.21.m.1.cv2.bn.bias",
+      "model.21.m.1.cv2.bn.num_batches_tracked",
+      "model.21.m.1.cv2.bn.running_mean",
+      "model.21.m.1.cv2.bn.running_var",
+      "model.21.m.1.cv2.bn.weight",
+      "model.21.m.1.cv2.conv.weight",
+      "model.22.cv2.0.0.bn.bias",
+      "model.22.cv2.0.0.bn.num_batches_tracked",
+      "model.22.cv2.0.0.bn.running_mean",
+      "model.22.cv2.0.0.bn.running_var",
+      "model.22.cv2.0.0.bn.weight",
+      "model.22.cv2.0.0.conv.weight",
+      "model.22.cv2.0.1.bn.bias",
+      "model.22.cv2.0.1.bn.num_batches_tracked",
+      "model.22.cv2.0.1.bn.running_mean",
+      "model.22.cv2.0.1.bn.running_var",
+      "model.22.cv2.0.1.bn.weight",
+      "model.22.cv2.0.1.conv.weight",
+      "model.22.cv2.0.2.bias",
+      "model.22.cv2.0.2.weight",
+      "model.22.cv2.1.0.bn.bias",
+      "model.22.cv2.1.0.bn.num_batches_tracked",
+      "model.22.cv2.1.0.bn.running_mean",
+      "model.22.cv2.1.0.bn.running_var",
+      "model.22.cv2.1.0.bn.weight",
+      "model.22.cv2.1.0.conv.weight",
+      "model.22.cv2.1.1.bn.bias",
+      "model.22.cv2.1.1.bn.num_batches_tracked",
+      "model.22.cv2.1.1.bn.running_mean",
+      "model.22.cv2.1.1.bn.running_var",
+      "model.22.cv2.1.1.bn.weight",
+      "model.22.cv2.1.1.conv.weight",
+      "model.22.cv2.1.2.bias",
+      "model.22.cv2.1.2.weight",
+      "model.22.cv2.2.0.bn.bias",
+      "model.22.cv2.2.0.bn.num_batches_tracked",
+      "model.22.cv2.2.0.bn.running_mean",
+      "model.22.cv2.2.0.bn.running_var",
+      "model.22.cv2.2.0.bn.weight",
+      "model.22.cv2.2.0.conv.weight",
+      "model.22.cv2.2.1.bn.bias",
+      "model.22.cv2.2.1.bn.num_batches_tracked",
+      "model.22.cv2.2.1.bn.running_mean",
+      "model.22.cv2.2.1.bn.running_var",
+      "model.22.cv2.2.1.bn.weight",
+      "model.22.cv2.2.1.conv.weight",
+      "model.22.cv2.2.2.bias",
+      "model.22.cv2.2.2.weight",
+      "model.22.cv3.0.0.bn.bias",
+      "model.22.cv3.0.0.bn.num_batches_tracked",
+      "model.22.cv3.0.0.bn.running_mean",
+      "model.22.cv3.0.0.bn.running_var",
+      "model.22.cv3.0.0.bn.weight",
+      "model.22.cv3.0.0.conv.weight",
+      "model.22.cv3.0.1.bn.bias",
+      "model.22.cv3.0.1.bn.num_batches_tracked",
+      "model.22.cv3.0.1.bn.running_mean",
+      "model.22.cv3.0.1.bn.running_var",
+      "model.22.cv3.0.1.bn.weight",
+      "model.22.cv3.0.1.conv.weight",
+      "model.22.cv3.1.0.bn.bias",
+      "model.22.cv3.1.0.bn.num_batches_tracked",
+      "model.22.cv3.1.0.bn.running_mean",
+      "model.22.cv3.1.0.bn.running_var",
+      "model.22.cv3.1.0.bn.weight",
+      "model.22.cv3.1.0.conv.weight",
+      "model.22.cv3.1.1.bn.bias",
+      "model.22.cv3.1.1.bn.num_batches_tracked",
+      "model.22.cv3.1.1.bn.running_mean",
+      "model.22.cv3.1.1.bn.running_var",
+      "model.22.cv3.1.1.bn.weight",
+      "model.22.cv3.1.1.conv.weight",
+      "model.22.cv3.2.0.bn.bias",
+      "model.22.cv3.2.0.bn.num_batches_tracked",
+      "model.22.cv3.2.0.bn.running_mean",
+      "model.22.cv3.2.0.bn.running_var",
+      "model.22.cv3.2.0.bn.weight",
+      "model.22.cv3.2.0.conv.weight",
+      "model.22.cv3.2.1.bn.bias",
+      "model.22.cv3.2.1.bn.num_batches_tracked",
+      "model.22.cv3.2.1.bn.running_mean",
+      "model.22.cv3.2.1.bn.running_var",
+      "model.22.cv3.2.1.bn.weight",
+      "model.22.cv3.2.1.conv.weight",
+      "model.22.dfl.conv.weight",
+      "model.3.bn.bias",
+      "model.3.bn.num_batches_tracked",
+      "model.3.bn.running_mean",
+      "model.3.bn.running_var",
+      "model.3.bn.weight",
+      "model.3.conv.weight",
+      "model.4.cv1.bn.bias",
+      "model.4.cv1.bn.num_batches_tracked",
+      "model.4.cv1.bn.running_mean",
+      "model.4.cv1.bn.running_var",
+      "model.4.cv1.bn.weight",
+      "model.4.cv1.conv.weight",
+      "model.4.cv2.bn.bias",
+      "model.4.cv2.bn.num_batches_tracked",
+      "model.4.cv2.bn.running_mean",
+      "model.4.cv2.bn.running_var",
+      "model.4.cv2.bn.weight",
+      "model.4.cv2.conv.weight",
+      "model.4.m.0.cv1.bn.bias",
+      "model.4.m.0.cv1.bn.num_batches_tracked",
+      "model.4.m.0.cv1.bn.running_mean",
+      "model.4.m.0.cv1.bn.running_var",
+      "model.4.m.0.cv1.bn.weight",
+      "model.4.m.0.cv1.conv.weight",
+      "model.4.m.0.cv2.bn.bias",
+      "model.4.m.0.cv2.bn.num_batches_tracked",
+      "model.4.m.0.cv2.bn.running_mean",
+      "model.4.m.0.cv2.bn.running_var",
+      "model.4.m.0.cv2.bn.weight",
+      "model.4.m.0.cv2.conv.weight",
+      "model.4.m.1.cv1.bn.bias",
+      "model.4.m.1.cv1.bn.num_batches_tracked",
+      "model.4.m.1.cv1.bn.running_mean",
+      "model.4.m.1.cv1.bn.running_var",
+      "model.4.m.1.cv1.bn.weight",
+      "model.4.m.1.cv1.conv.weight",
+      "model.4.m.1.cv2.bn.bias",
+      "model.4.m.1.cv2.bn.num_batches_tracked",
+      "model.4.m.1.cv2.bn.running_mean",
+      "model.4.m.1.cv2.bn.running_var",
+      "model.4.m.1.cv2.bn.weight",
+      "model.4.m.1.cv2.conv.weight",
+      "model.4.m.2.cv1.bn.bias",
+      "model.4.m.2.cv1.bn.num_batches_tracked",
+      "model.4.m.2.cv1.bn.running_mean",
+      "model.4.m.2.cv1.bn.running_var",
+      "model.4.m.2.cv1.bn.weight",
+      "model.4.m.2.cv1.conv.weight",
+      "model.4.m.2.cv2.bn.bias",
+      "model.4.m.2.cv2.bn.num_batches_tracked",
+      "model.4.m.2.cv2.bn.running_mean",
+      "model.4.m.2.cv2.bn.running_var",
+      "model.4.m.2.cv2.bn.weight",
+      "model.4.m.2.cv2.conv.weight",
+      "model.4.m.3.cv1.bn.bias",
+      "model.4.m.3.cv1.bn.num_batches_tracked",
+      "model.4.m.3.cv1.bn.running_mean",
+      "model.4.m.3.cv1.bn.running_var",
+      "model.4.m.3.cv1.bn.weight",
+      "model.4.m.3.cv1.conv.weight",
+      "model.4.m.3.cv2.bn.bias",
+      "model.4.m.3.cv2.bn.num_batches_tracked",
+      "model.4.m.3.cv2.bn.running_mean",
+      "model.4.m.3.cv2.bn.running_var",
+      "model.4.m.3.cv2.bn.weight",
+      "model.4.m.3.cv2.conv.weight",
+      "model.5.bn.bias",
+      "model.5.bn.num_batches_tracked",
+      "model.5.bn.running_mean",
+      "model.5.bn.running_var",
+      "model.5.bn.weight",
+      "model.5.conv.weight",
+      "model.6.cv1.bn.bias",
+      "model.6.cv1.bn.num_batches_tracked",
+      "model.6.cv1.bn.running_mean",
+      "model.6.cv1.bn.running_var",
+      "model.6.cv1.bn.weight",
+      "model.6.cv1.conv.weight",
+      "model.6.cv2.bn.bias",
+      "model.6.cv2.bn.num_batches_tracked",
+      "model.6.cv2.bn.running_mean",
+      "model.6.cv2.bn.running_var",
+      "model.6.cv2.bn.weight",
+      "model.6.cv2.conv.weight",
+      "model.6.m.0.cv1.bn.bias",
+      "model.6.m.0.cv1.bn.num_batches_tracked",
+      "model.6.m.0.cv1.bn.running_mean",
+      "model.6.m.0.cv1.bn.running_var",
+      "model.6.m.0.cv1.bn.weight",
+      "model.6.m.0.cv1.conv.weight",
+      "model.6.m.0.cv2.bn.bias",
+      "model.6.m.0.cv2.bn.num_batches_tracked",
+      "model.6.m.0.cv2.bn.running_mean",
+      "model.6.m.0.cv2.bn.running_var",
+      "model.6.m.0.cv2.bn.weight",
+      "model.6.m.0.cv2.conv.weight",
+      "model.6.m.1.cv1.bn.bias",
+      "model.6.m.1.cv1.bn.num_batches_tracked",
+      "model.6.m.1.cv1.bn.running_mean",
+      "model.6.m.1.cv1.bn.running_var",
+      "model.6.m.1.cv1.bn.weight",
+      "model.6.m.1.cv1.conv.weight",
+      "model.6.m.1.cv2.bn.bias",
+      "model.6.m.1.cv2.bn.num_batches_tracked",
+      "model.6.m.1.cv2.bn.running_mean",
+      "model.6.m.1.cv2.bn.running_var",
+      "model.6.m.1.cv2.bn.weight",
+      "model.6.m.1.cv2.conv.weight",
+      "model.6.m.2.cv1.bn.bias",
+      "model.6.m.2.cv1.bn.num_batches_tracked",
+      "model.6.m.2.cv1.bn.running_mean",
+      "model.6.m.2.cv1.bn.running_var",
+      "model.6.m.2.cv1.bn.weight",
+      "model.6.m.2.cv1.conv.weight",
+      "model.6.m.2.cv2.bn.bias",
+      "model.6.m.2.cv2.bn.num_batches_tracked",
+      "model.6.m.2.cv2.bn.running_mean",
+      "model.6.m.2.cv2.bn.running_var",
+      "model.6.m.2.cv2.bn.weight",
+      "model.6.m.2.cv2.conv.weight",
+      "model.6.m.3.cv1.bn.bias",
+      "model.6.m.3.cv1.bn.num_batches_tracked",
+      "model.6.m.3.cv1.bn.running_mean",
+      "model.6.m.3.cv1.bn.running_var",
+      "model.6.m.3.cv1.bn.weight",
+      "model.6.m.3.cv1.conv.weight",
+      "model.6.m.3.cv2.bn.bias",
+      "model.6.m.3.cv2.bn.num_batches_tracked",
+      "model.6.m.3.cv2.bn.running_mean",
+      "model.6.m.3.cv2.bn.running_var",
+      "model.6.m.3.cv2.bn.weight",
+      "model.6.m.3.cv2.conv.weight",
+      "model.7.bn.bias",
+      "model.7.bn.num_batches_tracked",
+      "model.7.bn.running_mean",
+      "model.7.bn.running_var",
+      "model.7.bn.weight",
+      "model.7.conv.weight",
+      "model.8.cv1.bn.bias",
+      "model.8.cv1.bn.num_batches_tracked",
+      "model.8.cv1.bn.running_mean",
+      "model.8.cv1.bn.running_var",
+      "model.8.cv1.bn.weight",
+      "model.8.cv1.conv.weight",
+      "model.8.cv2.bn.bias",
+      "model.8.cv2.bn.num_batches_tracked",
+      "model.8.cv2.bn.running_mean",
+      "model.8.cv2.bn.running_var",
+      "model.8.cv2.bn.weight",
+      "model.8.cv2.conv.weight",
+      "model.8.m.0.cv1.bn.bias",
+      "model.8.m.0.cv1.bn.num_batches_tracked",
+      "model.8.m.0.cv1.bn.running_mean",
+      "model.8.m.0.cv1.bn.running_var",
+      "model.8.m.0.cv1.bn.weight",
+      "model.8.m.0.cv1.conv.weight",
+      "model.8.m.0.cv2.bn.bias",
+      "model.8.m.0.cv2.bn.num_batches_tracked",
+      "model.8.m.0.cv2.bn.running_mean",
+      "model.8.m.0.cv2.bn.running_var",
+      "model.8.m.0.cv2.bn.weight",
+      "model.8.m.0.cv2.conv.weight",
+      "model.8.m.1.cv1.bn.bias",
+      "model.8.m.1.cv1.bn.num_batches_tracked",
+      "model.8.m.1.cv1.bn.running_mean",
+      "model.8.m.1.cv1.bn.running_var",
+      "model.8.m.1.cv1.bn.weight",
+      "model.8.m.1.cv1.conv.weight",
+      "model.8.m.1.cv2.bn.bias",
+      "model.8.m.1.cv2.bn.num_batches_tracked",
+      "model.8.m.1.cv2.bn.running_mean",
+      "model.8.m.1.cv2.bn.running_var",
+      "model.8.m.1.cv2.bn.weight",
+      "model.8.m.1.cv2.conv.weight",
+      "model.9.cv1.bn.bias",
+      "model.9.cv1.bn.num_batches_tracked",
+      "model.9.cv1.bn.running_mean",
+      "model.9.cv1.bn.running_var",
+      "model.9.cv1.bn.weight",
+      "model.9.cv1.conv.weight",
+      "model.9.cv2.bn.bias",
+      "model.9.cv2.bn.num_batches_tracked",
+      "model.9.cv2.bn.running_mean",
+      "model.9.cv2.bn.running_var",
+      "model.9.cv2.bn.weight",
+      "model.9.cv2.conv.weight"
+    ],
+    "transferred_tensors": 469,
+    "yaml": {
+      "backbone": [
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            64,
+            3,
+            2
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            128,
+            3,
+            2
+          ]
+        ],
+        [
+          -1,
+          3,
+          "C2f",
+          [
+            128,
+            true
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            3,
+            2
+          ]
+        ],
+        [
+          -1,
+          6,
+          "C2f",
+          [
+            256,
+            true
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            512,
+            3,
+            2
+          ]
+        ],
+        [
+          -1,
+          6,
+          "C2f",
+          [
+            512,
+            true
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            768,
+            3,
+            2
+          ]
+        ],
+        [
+          -1,
+          3,
+          "C2f",
+          [
+            768,
+            true
+          ]
+        ],
+        [
+          -1,
+          1,
+          "SPPF",
+          [
+            768,
+            5
+          ]
+        ]
+      ],
+      "ch": 3,
+      "depth_multiple": 0.67,
+      "head": [
+        [
+          -1,
+          1,
+          "nn.Upsample",
+          [
+            "None",
+            2,
+            "nearest"
+          ]
+        ],
+        [
+          [
+            -1,
+            6
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "C2f",
+          [
+            512
+          ]
+        ],
+        [
+          -1,
+          1,
+          "nn.Upsample",
+          [
+            "None",
+            2,
+            "nearest"
+          ]
+        ],
+        [
+          [
+            -1,
+            4
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "C2f",
+          [
+            256
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            256,
+            3,
+            2
+          ]
+        ],
+        [
+          [
+            -1,
+            12
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "C2f",
+          [
+            512
+          ]
+        ],
+        [
+          -1,
+          1,
+          "Conv",
+          [
+            512,
+            3,
+            2
+          ]
+        ],
+        [
+          [
+            -1,
+            9
+          ],
+          1,
+          "Concat",
+          [
+            1
+          ]
+        ],
+        [
+          -1,
+          3,
+          "C2f",
+          [
+            768
+          ]
+        ],
+        [
+          [
+            15,
+            18,
+            21
+          ],
+          1,
+          "Detect",
+          [
+            "nc"
+          ]
+        ]
+      ],
+      "nc": 1,
+      "width_multiple": 0.75
+    }
+  },
+  "restore_before_next_update": "exact equality: FP32 training model, optimizer momentum/groups, EMA, scaler, scheduler, Python/NumPy/Torch CPU/CUDA RNG",
+  "lifecycle": {
+    "batch": 2,
+    "imgsz": 64,
+    "epochs": 2,
+    "amp": true,
+    "interrupted_after_epoch": 1,
+    "resumed_to_epoch": 2,
+    "initialization_record_preserved": true,
+    "foreign_checkpoint_rejection": "passed",
+    "native_resume_not_bitwise_worker_replay": true
+  },
+  "public_val": {
+    "images": 2,
+    "raw_0_1": {
+      "P": 0.0,
+      "R": 0.0,
+      "AP50": 0.0,
+      "AP75": 0.0,
+      "mAP50-95": 0.0
+    },
+    "best_checkpoint_sha256": "32de092c55e2512955b6c35125799981c517b009996bf633cde282507787a1ea",
+    "settings": {
+      "imgsz": 640,
+      "batch": 16,
+      "workers": 0,
+      "conf": 0.001,
+      "iou": 0.7,
+      "max_det": 300,
+      "half": false,
+      "augment": false,
+      "rect": false,
+      "seed": 42,
+      "agnostic_nms": false,
+      "classes": null,
+      "device": "0",
+      "save": false,
+      "save_txt": false,
+      "save_conf": false,
+      "verbose": false
+    }
+  },
+  "public_test": {
+    "images": 2,
+    "raw_0_1": {
+      "P": 0.0,
+      "R": 0.0,
+      "AP50": 0.0,
+      "AP75": 0.0,
+      "mAP50-95": 0.0
+    },
+    "best_checkpoint_sha256": "32de092c55e2512955b6c35125799981c517b009996bf633cde282507787a1ea",
+    "settings": {
+      "imgsz": 640,
+      "batch": 16,
+      "workers": 0,
+      "conf": 0.001,
+      "iou": 0.7,
+      "max_det": 300,
+      "half": false,
+      "augment": false,
+      "rect": false,
+      "seed": 42,
+      "agnostic_nms": false,
+      "classes": null,
+      "device": "0",
+      "save": false,
+      "save_txt": false,
+      "save_conf": false,
+      "verbose": false
+    }
+  },
+  "export_evaluate": "same selected smoke best; production FP32 640 exporter and shared evaluator; two synthetic images per split"
+}

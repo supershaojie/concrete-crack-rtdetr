@@ -1,2 +1,5 @@
 # Preserve exact archived YAML bytes across Windows/Linux checkouts.
 *_args.yaml -text
+
+# Preserve raw progress logs, including ANSI and carriage-return bytes.
+yolov8m_coco_b19_*.raw.log -text -diff
