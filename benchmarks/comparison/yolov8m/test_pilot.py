@@ -10,17 +10,29 @@ import gc
 import json
 from pathlib import Path
 import random
+import sys
 from unittest.mock import patch
 import uuid
 from support import (ROOT, ASSET, configure, read_json, native_recipe, recipe, run_identity,
-                     validate_checkpoint, write_json, sha256, checked_weight)
+                     validate_checkpoint, write_json, sha256, checked_weight, SOURCE, runtime_environment)
 
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--run',type=Path,required=True)
     p.add_argument('--device',choices=('cpu','cuda'),default='cpu')
-    a=p.parse_args(); run=a.run.absolute(); run.mkdir(parents=True,exist_ok=False)
+    p.add_argument('--config',type=Path,help='Freeze a strict candidate YAML, then apply explicitly recorded smoke batch2/64/2-epoch overrides')
+    p.add_argument('--train-images',type=int,choices=(8,64),default=64)
+    a=p.parse_args(); run=a.run.absolute()
+    config=None
+    smoke_id='SMOKE_'+uuid.uuid4().hex
+    if a.config:
+        from configuration import freeze_config,frozen_config
+        config=freeze_config(run,a.config.read_bytes(),
+            {'python':str(Path(sys.executable).resolve()),'source':str(SOURCE),'weights':str(ASSET)},
+            smoke_id,require_clean=False)
+    else:
+        run.mkdir(parents=True,exist_ok=False)
     source=configure(run/'runtime')
     import numpy as np
     import torch
@@ -59,7 +71,7 @@ def main():
     shared=run/'synthetic'
     for split in ('train','val','test'):
         (shared/'images'/split).mkdir(parents=True); (shared/'labels'/split).mkdir(parents=True)
-        for i in range(64 if split=='train' else 2):
+        for i in range(a.train_images if split=='train' else 2):
             # Textured synthetic inputs avoid degenerate all-constant BatchNorm gradients.
             pixels=np.random.default_rng(42+i).integers(0,256,(79+i%5,101+i%7,3),dtype=np.uint8)
             Image.fromarray(pixels).save(shared/'images'/split/(str(i)+'.jpg'))
@@ -67,8 +79,14 @@ def main():
     data=run/'source.yaml'; data.write_text(yaml.safe_dump({'path':shared.as_posix(),'names':{0:'crack'},
         **{s:'images/'+s for s in ('train','val','test')}}),encoding='utf-8')
     manifest=preflight(data,run,shared,enforce_counts=False)
-    ident=run_identity(manifest,source,require_clean=False,run_id='SMOKE_'+uuid.uuid4().hex)
-    write_json(run/'run_id.json',{'run_id':ident['run_id']}); write_json(run/'identity.json',ident)
+    environment=runtime_environment() if config is not None else None
+    if environment is not None:
+        write_json(run/'environment.json',environment)
+    ident=run_identity(manifest,source,require_clean=False,run_id=smoke_id,config=config,environment=environment,
+                       run_uuid=read_json(run/'run_id.json').get('run_uuid') if config is not None else None)
+    if config is None:
+        write_json(run/'run_id.json',{'run_id':ident['run_id']})
+    write_json(run/'identity.json',ident)
     gradients=[]; parameters={}
 
     class SmokeTrainer(ComparisonTrainer):
@@ -89,19 +107,21 @@ def main():
             gradients.append(row)
             return result
 
-    overrides=native_recipe()
+    overrides=native_recipe(config)
     overrides.update(model=str(ASSET),data=str(run/'data.yaml'),project=str(run),name='train',
         exist_ok=False,epochs=2,batch=2,imgsz=64,workers=0,plots=False,close_mosaic=0,amp=a.device=='cuda',device=device)
-    t=SmokeTrainer(overrides=overrides,run=run,manifest=manifest,identity=ident)
+    t=SmokeTrainer(overrides=overrides,run=run,manifest=manifest,identity=ident,config=config)
     def before_updates(trainer):
-        assert trainer.args.optimizer=='SGD' and type(trainer.optimizer) is torch.optim.SGD
-        assert all(g['nesterov'] for g in trainer.optimizer.param_groups)
+        expected=config or recipe()
+        assert type(trainer.optimizer).__name__==expected['optimizer']
+        if expected['optimizer']=='SGD':
+            assert all(g['nesterov'] for g in trainer.optimizer.param_groups)
         assert not trainer.model.model[-1].dfl.conv.weight.requires_grad
         assert torch.equal(trainer.model.model[-1].dfl.conv.weight.flatten().cpu(),torch.arange(16,dtype=torch.float32))
         assert [n for n,p in trainer.model.named_parameters() if not p.requires_grad]==['model.22.dfl.conv.weight']
         parameters['before']=next(trainer.model.parameters()).detach().cpu().clone()
         report['native_optimizer']={'type':type(trainer.optimizer).__name__,
-            'groups':[{k:g[k] for k in ('lr','momentum','weight_decay','nesterov')} for g in trainer.optimizer.param_groups],
+            'groups':[{k:g.get(k) for k in ('lr','initial_lr','momentum','betas','weight_decay','nesterov')} for g in trainer.optimizer.param_groups],
             'trainable_elements':sum(p.numel() for p in trainer.model.parameters() if p.requires_grad),
             'loss_weights':{k:getattr(trainer.args,k) for k in ('box','cls','dfl')},
             'nominal_accumulate_before_warmup':trainer.accumulate,'augmentation':trainer.train_loader.dataset.transform_report}
@@ -118,19 +138,22 @@ def main():
     assert any(g['finite_scaled_gradients'] and not g['native_amp_overflow_skip'] for g in gradients)
     report['nonzero_sgd_update']=True; report['gradients']=gradients
     ckpt=torch.load(t.last,map_location='cpu',weights_only=False)
-    validate_checkpoint(ckpt,ident,resume=True)
+    validate_checkpoint(ckpt,ident,resume=True,config=config)
+    assert ckpt['train_args']['weight_decay']==(config or recipe())['weight_decay']
     report['initialization']=read_json(run/'initialization.json')
     assert report['initialization']['transferred_tensors']==469
     for change in ({'run_id':'other-pilot'},{'initialization_type':'random'}, {'model':'other-model'},
                    {'run_id':'SMOKE_foreign'},{'initialization_type':'coco'}):
-        try: validate_checkpoint({**ckpt,'comparison_identity':{**ident,**change}},ident,resume=True)
+        try: validate_checkpoint({**ckpt,'comparison_identity':{**ident,**change}},ident,resume=True,config=config)
         except ValueError: pass
         else: raise AssertionError('Foreign checkpoint accepted')
     original_record=(run/'initialization.json').read_bytes()
     expected_state=ckpt['comparison_training_state']
     del t,ckpt; gc.collect(); torch.cuda.empty_cache()
     overrides.update(model=str(run/'train/weights/last.pt'),resume=str(run/'train/weights/last.pt'))
-    t=SmokeTrainer(overrides=overrides,run=run,manifest=manifest,identity=ident)
+    if config is not None:
+        config=frozen_config(run)
+    t=SmokeTrainer(overrides=overrides,run=run,manifest=manifest,identity=ident,config=config)
     def equal_state(x,y):
         if isinstance(x,torch.Tensor): return torch.equal(x,y.cpu())
         if isinstance(x,dict): return x.keys()==y.keys() and all(equal_state(v,y[k]) for k,v in x.items())
@@ -146,6 +169,9 @@ def main():
         assert equal_state(expected_state['rng'],capture_rng())
         assert trainer.comparison_optimizer_steps>0 and trainer.ema.updates>0
         assert trainer.optimizer.state and trainer.start_epoch==1
+        assert trainer.args.weight_decay==(config or recipe())['weight_decay']
+        report['resume_raw_weight_decay']=trainer.args.weight_decay
+        report['resume_effective_weight_decay']=[g['weight_decay'] for g in trainer.optimizer.param_groups]
         report['restore_before_next_update']='exact equality: FP32 training model, optimizer momentum/groups, EMA, scaler, scheduler, Python/NumPy/Torch CPU/CUDA RNG'
     t.add_callback('on_pretrain_routine_end',verify_restore)
     t.train()
@@ -155,7 +181,8 @@ def main():
         'interrupted_after_epoch':1,'resumed_to_epoch':2,'initialization_record_preserved':True,
         'foreign_checkpoint_rejection':'passed','native_resume_not_bitwise_worker_replay':True}
     completed={'status':'completed','completed_epoch':2,'best_epoch':t.comparison_best_epoch,
-        'best_sha256':sha256(t.best),'last_sha256':sha256(t.last),'scope':'SMOKE_ONLY'}
+        'best_sha256':sha256(t.best),'last_sha256':sha256(t.last),'scope':'SMOKE_ONLY',
+        'exit_code':0,'stop_reason':'epoch_limit'}
     write_json(run/'train_status.json',completed)
     del t,expected_state; gc.collect(); torch.cuda.empty_cache()
     from export import export_split,evaluate_split,SETTINGS
@@ -164,11 +191,13 @@ def main():
         for split in ('val','test'):
             result=export_split(run,split,manifest,source)
             assert result['images']==2
-            metrics=evaluate_split(run,split)
+            metrics=evaluate_split(run,split,manifest,source)
             report['public_'+split]={'images':result['images'],'raw_0_1':metrics['raw_0_1'],
                 'best_checkpoint_sha256':result['checkpoint_sha256'],'settings':result['settings']}
     assert report['public_val']['best_checkpoint_sha256']==report['public_test']['best_checkpoint_sha256']
     report['export_evaluate']='same selected smoke best; production FP32 640 exporter and shared evaluator; two synthetic images per split'
+    report['candidate_config_sha256']=ident.get('config_sha256')
+    report['smoke_overrides']={k:overrides[k] for k in ('epochs','batch','imgsz','workers','plots','close_mosaic','amp','device')}
     write_json(run/'pilot_smoke.json',report); print(json.dumps(report,indent=2),flush=True)
 
 

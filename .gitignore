@@ -90,3 +90,6 @@ runs_server/
 .envs/
 .runtime/
 
+# Candidate recipes have per-run hashes, independent of fixed implementation identity.
+runtime_configs/
+

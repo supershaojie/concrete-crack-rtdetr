@@ -14,11 +14,11 @@ from pathlib import Path
 import sys
 
 from support import (SOURCE, ROOT, LOCK, atomic_bytes, canonical, configure, digest, local_lock,
-                     read_json, write_json, initialization_record, recipe, validate_checkpoint)
+                     read_json, write_json, initialization_record, recipe, validate_checkpoint, native_recipe, sha256)
 
-if 'ultralytics' not in sys.modules:  # spawned workers must also import the official tree
-    configure(Path(os.environ.get('YOLOV8M_RUNTIME', ROOT / '.runtime/yolov8m-coco-b19-pilot/worker')),
-              Path(os.environ.get('YOLOV8M_SOURCE', SOURCE)))
+# Repeat path/version/source-content guards even if a worker pre-imported Ultralytics.
+configure(Path(os.environ.get('YOLOV8M_RUNTIME', ROOT / '.runtime/yolov8m-coco-b19-pilot/worker')),
+          Path(os.environ.get('YOLOV8M_SOURCE', SOURCE)))
 import ultralytics
 if Path(ultralytics.__file__).resolve() != Path(os.environ['YOLOV8M_SOURCE']) / 'ultralytics/__init__.py':
     raise RuntimeError('Refusing a mother/installed Ultralytics import')
@@ -68,10 +68,11 @@ augment.Albumentations = NoAlbumentations
 
 
 class IsolatedDataset(YOLODataset):
-    def __init__(self, *args, manifest, split, cache_root, cutmix_probability=None, **kwargs):
+    def __init__(self, *args, manifest, split, cache_root, cutmix_probability=None, reuse_cache=None, **kwargs):
         self.manifest = manifest
         self.split = split
         self.cache_root = Path(cache_root).resolve()
+        self.reuse_cache = Path(reuse_cache).resolve() if reuse_cache else None
         self.cutmix_probability = recipe()['cutmix'] if cutmix_probability is None else cutmix_probability
         self.augmentation_closed = False
         self.augmentation_counts = counters()
@@ -96,6 +97,14 @@ class IsolatedDataset(YOLODataset):
             'upstream': read_json(LOCK)['commit'], 'split': self.split,
             'root': str(self.shared_root), 'records': self.records}))
         self.cache_path = self.cache_root / self.split / (identity + '.labels.json')
+        reused = self.reuse_cache / self.split / self.cache_path.name if self.reuse_cache else None
+        if reused and reused.is_file():
+            # The active pilot cache is read-only: no locks or writes in its tree.
+            cached = read_json(reused)
+            if cached.get('identity') != identity or cached.get('format') != 'yolov8m_header_labels_v1':
+                raise ValueError('Reused label/size cache identity differs')
+            self.label_cache_provenance = {'reused_from': str(reused), 'sha256': sha256(reused)}
+            return self.labels_from_cache(cached)
         with local_lock(self.cache_path.with_suffix('.lock')):
             if self.cache_path.exists():
                 cached = read_json(self.cache_path)
@@ -115,6 +124,12 @@ class IsolatedDataset(YOLODataset):
                 write_json(self.cache_path, cached)
             if len(cached['entries']) != len(self.im_files):
                 raise ValueError('Incomplete local label cache')
+        self.label_cache_provenance = {'local_cache': str(self.cache_path), 'identity': identity}
+        return self.labels_from_cache(cached)
+
+    def labels_from_cache(self, cached):
+        if len(cached['entries']) != len(self.im_files):
+            raise ValueError('Incomplete label/size cache')
         labels = []
         for r, entry, filename in zip(self.records, cached['entries'], self.im_files):
             if entry['image'] != r['image'] or entry['boxes'] != r['boxes']:
@@ -124,7 +139,7 @@ class IsolatedDataset(YOLODataset):
                            'cls': boxes[:, :1], 'bboxes': boxes[:, 1:], 'segments': [],
                            'keypoints': None, 'normalized': True, 'bbox_format': 'xywh'})
         self.label_files = [str(self.shared_root / r['label']) for r in self.records]
-        print('Isolated label cache: ' + str(self.cache_path), flush=True)
+        print('Isolated label cache: ' + str(self.label_cache_provenance), flush=True)
         return labels
 
     def load_image(self, i, rect_mode=True):
@@ -258,10 +273,12 @@ def strict_amp_probe(model):
 
 
 class ComparisonTrainer(DetectionTrainer):
-    def __init__(self, *args, run, manifest, identity, **kwargs):
+    def __init__(self, *args, run, manifest, identity, config=None, reuse_cache=None, **kwargs):
         self.comparison_run = Path(run)
         self.comparison_manifest = manifest
         self.comparison_identity = identity
+        self.comparison_config = deepcopy(recipe() if config is None else config)
+        self.comparison_reuse_cache = reuse_cache
         self.comparison_best_epoch = None
         self.comparison_optimizer_steps = 0
         from ultralytics.engine import trainer as native_trainer
@@ -269,6 +286,18 @@ class ComparisonTrainer(DetectionTrainer):
         native_trainer.check_amp = strict_amp_probe
         callbacks.add_integration_callbacks = lambda instance: None
         super().__init__(*args, **kwargs)
+
+    def check_resume(self, overrides):
+        # Validate raw arguments before native setup scales decay into optimizer groups.
+        # Native check_resume otherwise permits batch/device/close_mosaic changes.
+        super().check_resume(overrides)
+        if self.comparison_identity.get('scope') == 'CONFIGURABLE_FORMAL':
+            for key, expected in native_recipe(self.comparison_config).items():
+                if key in ('model', 'resume'):
+                    continue
+                actual = getattr(self.args, key)
+                if (str(actual) != str(expected) if key == 'device' else actual != expected):
+                    raise ValueError('Actual native argument differs from frozen run: ' + key)
 
     def get_dataset(self):
         # Already checked, absolute data paths; no dataset download/font side effects.
@@ -282,15 +311,17 @@ class ComparisonTrainer(DetectionTrainer):
                                  args=copy(self.args), _callbacks=self.callbacks)
 
     def build_dataset(self, img_path, mode='train', batch=None):
-        return IsolatedDataset(img_path=img_path, imgsz=self.args.imgsz, batch_size=16,
+        return IsolatedDataset(img_path=img_path, imgsz=self.args.imgsz, batch_size=self.args.batch,
             augment=mode == 'train', hyp=copy(self.args), rect=False, cache=False, stride=32,
             pad=0.0, task='detect', data=self.data, manifest=self.comparison_manifest, split=mode,
-            cache_root=self.comparison_run / 'cache', prefix=mode + ': ')
+            cache_root=self.comparison_run / 'cache', prefix=mode + ': ',
+            cutmix_probability=self.comparison_config['cutmix'], reuse_cache=self.comparison_reuse_cache)
 
     def get_dataloader(self, dataset_path, batch_size=16, rank=0, mode='train'):
-        # Ignore base trainer's validation batch * 2. Both loaders use exactly 16.
-        dataset = self.build_dataset(dataset_path, mode, 16)
-        loader = build_dataloader(dataset, 16, self.args.workers if mode == 'train' else 0,
+        # Ignore native validation batch * 2; both use this run's physical batch.
+        physical_batch = getattr(self.args, 'batch', 16)
+        dataset = self.build_dataset(dataset_path, mode, physical_batch)
+        loader = build_dataloader(dataset, physical_batch, self.args.workers if mode == 'train' else 0,
                                   shuffle=mode == 'train', rank=-1)
         loader.reset = lambda: reset_workers(loader)
         return loader
@@ -305,7 +336,7 @@ class ComparisonTrainer(DetectionTrainer):
         record.update(transferred_tensors=len(transferred), destination_tensors=len(model.state_dict()),
                       transferred_elements=sum(v.numel() for v in transferred.values()),
                       transferred_keys=sorted(transferred), missing_or_reshaped_keys=sorted(set(model.state_dict())-set(transferred)))
-        record.update(initialization_record(Path(os.environ['YOLOV8M_SOURCE'])))
+        record.update(initialization_record(Path(os.environ['YOLOV8M_SOURCE']), self.comparison_config))
         record['restored_checkpoint_tensors'] = len(transferred) if self.args.resume else 0
         if not self.args.resume:
             record['pretrained_tensors_loaded'] = len(transferred)
@@ -364,10 +395,11 @@ class ComparisonTrainer(DetectionTrainer):
             'version': ultralytics.__version__, 'license': 'AGPL-3.0', 'docs': 'https://docs.ultralytics.com',
             'comparison_identity': self.comparison_identity, 'comparison_best_epoch': self.comparison_best_epoch,
             'comparison_initialization':read_json(self.comparison_run/'initialization.json'),
-            'pilot_recipe':recipe(), 'comparison_training_state':{
+            'pilot_recipe':self.comparison_config, 'comparison_training_state':{
                 'model':cpu_state(self.model.state_dict()), 'optimizer':cpu_state(self.optimizer.state_dict()),
                 'ema':cpu_state(self.ema.ema.state_dict()), 'scaler':self.scaler.state_dict(),
                 'scheduler':self.scheduler.state_dict(), 'rng':capture_rng(),
+                'stopper':{k:getattr(self.stopper,k) for k in ('best_fitness','best_epoch','possible_stop','patience')},
                 'optimizer_steps':self.comparison_optimizer_steps,
                 'augmentation_closed':self.train_loader.dataset.augmentation_closed}}, buffer)
         raw = buffer.getvalue()
@@ -377,15 +409,16 @@ class ComparisonTrainer(DetectionTrainer):
 
     def resume_training(self, ckpt):
         if self.resume:
-            validate_checkpoint(ckpt, self.comparison_identity, resume=True)
+            validate_checkpoint(ckpt, self.comparison_identity, resume=True,
+                                config=getattr(self, 'comparison_config', None))
         super().resume_training(ckpt)
         if self.resume:
             self.restore_training_state(ckpt)
             self.comparison_best_epoch = ckpt['comparison_best_epoch']
             self.stopper.best_fitness = self.best_fitness
             self.stopper.best_epoch = self.comparison_best_epoch
-            self.stopper.possible_stop = self.start_epoch - self.comparison_best_epoch >= self.args.patience - 1
-            if self.start_epoch > self.epochs - self.args.close_mosaic:
+            self.stopper.possible_stop = self.start_epoch - self.comparison_best_epoch >= self.stopper.patience - 1
+            if self.args.close_mosaic and self.start_epoch > self.epochs - self.args.close_mosaic:
                 self.train_loader.reset()  # base resume closes transforms after workers were created
 
     def restore_training_state(self, ckpt):
@@ -395,6 +428,11 @@ class ComparisonTrainer(DetectionTrainer):
         self.ema.ema.load_state_dict(state['ema'], strict=True)
         self.scaler.load_state_dict(state['scaler'])
         self.scheduler.load_state_dict(state['scheduler'])
+        if 'stopper' in state:
+            if state['stopper']['patience'] != self.stopper.patience:
+                raise ValueError('Saved early-stopping patience differs from frozen configuration')
+            for key,value in state['stopper'].items():
+                setattr(self.stopper,key,value)
         self.comparison_optimizer_steps = state['optimizer_steps']
         if read_json(self.comparison_run/'initialization.json') != ckpt['comparison_initialization']:
             raise ValueError('Original initialization record differs on resume')

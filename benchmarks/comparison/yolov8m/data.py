@@ -5,7 +5,7 @@ from collections import Counter, defaultdict
 import math
 from pathlib import Path
 
-from support import canonical, digest, load_yaml, read_json, sha256, write_json
+from support import atomic_bytes, canonical, digest, load_yaml, read_json, sha256, write_json
 from dataset import SPLITS, label_for, parse_labels, resolve_splits
 
 EXPECTED = {'train': (6048, 45573), 'val': (1728, 12840), 'test': (864, 6663)}
@@ -200,4 +200,64 @@ def verify_inputs(run, splits=SPLITS):
             raise ValueError('Image stat changed since preflight: ' + r['image'])
         if sha256(root / r['label']) != r['label_sha256']:
             raise ValueError('Label changed since preflight: ' + r['label'])
+    return manifest
+
+
+def discover_reuse_run(source, data_root):
+    """Look only for verified input inventories; never import another run's recipe."""
+    base = Path(source).resolve().parents[2] / 'outputs/yolov8m-coco-b19-pilot'
+    if not base.is_dir():
+        return None
+    for candidate in sorted(base.iterdir()):
+        if not (candidate / 'manifest.json').is_file() or not (candidate / 'input_checksums.json').is_file():
+            continue
+        manifest = read_json(candidate / 'manifest.json')
+        if (manifest.get('status') == 'LIGHT_CHECKED'
+                and Path(manifest['data_root']).resolve() == Path(data_root).resolve()
+                and all((manifest['splits'][s]['images'], manifest['splits'][s]['boxes']) == EXPECTED[s]
+                        for s in SPLITS)):
+            return candidate
+    return None
+
+
+def reuse_preflight(previous_run, data_yaml, run, data_root=None, enforce_counts=True):
+    """Reuse checked split/GT/header inventories after paths, label bytes and stats match."""
+    import yaml
+    previous_run, data_yaml, run = map(lambda p: Path(p).resolve(), (previous_run, data_yaml, run))
+    previous = verify_inputs(previous_run)
+    cfg = load_yaml(data_yaml)
+    if cfg.get('names') not in (['crack'], {0: 'crack'}, {'0': 'crack'}) or cfg.get('nc', 1) != 1:
+        raise ValueError('Expected the single YOLO class 0 = crack')
+    root = Path(data_root) if data_root else Path(cfg.get('path', data_yaml.parent))
+    root = (root if root.is_absolute() else data_yaml.parent / root).resolve()
+    if root != Path(previous['data_root']).resolve():
+        raise ValueError('Reused input cache belongs to another data root')
+    files, resolution = resolve_splits(cfg, root, data_yaml.parent.parent)
+    for split in SPLITS:
+        expected = [str((root / r['image']).resolve()) for r in previous['records'] if r['split'] == split]
+        if [str(p.resolve()) for p in files[split]] != expected:
+            raise ValueError('Actual YAML split/order differs from reusable manifest: ' + split)
+        if enforce_counts and (previous['splits'][split]['images'], previous['splits'][split]['boxes']) != EXPECTED[split]:
+            raise ValueError('Reusable manifest has incorrect split/box counts: ' + split)
+    if enforce_counts:
+        from support import ROOT
+        archived = read_json(ROOT / 'docs/comparison/evidence/yolov8m_delivery_validation.json')['data']
+        if previous['dataset_identity_sha256'] != archived['dataset_identity_sha256']:
+            raise ValueError('Reusable manifest differs from the frozen public data identity')
+    manifest = {**previous, 'data_yaml': str(data_yaml), 'data_yaml_sha256': sha256(data_yaml),
+                'resolution': resolution, 'reused_from': str(previous_run)}
+    for split in SPLITS:
+        part = [r for r in manifest['records'] if r['split'] == split]
+        atomic_bytes(run / (split + '.txt'), ('\n'.join(str(root / r['image']) for r in part) + '\n').encode())
+        if split != 'train':
+            # Check actual labels/dimensions and public IDs before copying the small GT JSON.
+            reuse_gt(previous_run / 'gt' / (split + '.json'), part, split)
+            atomic_bytes(run / 'gt' / (split + '.json'), (previous_run / 'gt' / (split + '.json')).read_bytes())
+    write_json(run / 'manifest.json', manifest)
+    derived = {'path': str(root), 'nc': 1, 'names': {0: 'crack'},
+               **{s: str(run / (s + '.txt')) for s in SPLITS}}
+    atomic_bytes(run / 'data.yaml', yaml.safe_dump(derived, allow_unicode=True, sort_keys=False).encode('utf-8'))
+    write_json(run / 'input_checksums.json', {name: sha256(run / name) for name in
+        ('manifest.json', 'data.yaml', 'train.txt', 'val.txt', 'test.txt', 'gt/val.json', 'gt/test.json')})
+    print('Reused read-only pilot manifest/GT: ' + str(previous_run), flush=True)
     return manifest

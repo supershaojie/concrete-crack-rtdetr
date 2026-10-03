@@ -23,6 +23,9 @@ class LifecycleTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory(dir=root)
         self.path=Path(self.temp.name)
         self.tee=shutil.which('tee') or 'C:/Program Files/Git/usr/bin/tee.exe'
+        self.bash_env=dict(os.environ)
+        if os.name=='nt':
+            self.bash_env['PATH']='C:/Program Files/Git/usr/bin'+os.pathsep+self.bash_env['PATH']
 
     def tearDown(self):
         self.temp.cleanup()
@@ -74,7 +77,7 @@ class LifecycleTests(unittest.TestCase):
         mock.write_text('#!/usr/bin/env bash\nprintf "%s\\n" "$*" >> "$FAKE_TMUX_CALLS"\n'
                         '[[ "$1" == has-session ]] && exit 0\nexit 99\n',encoding='utf-8')
         mock.chmod(0o755)
-        env=dict(os.environ,PATH=str(bindir)+os.pathsep+os.environ['PATH'],FAKE_TMUX_CALLS=(self.path/'calls').as_posix())
+        env=dict(self.bash_env,PATH=str(bindir)+os.pathsep+self.bash_env['PATH'],FAKE_TMUX_CALLS=(self.path/'calls').as_posix())
         result=subprocess.run([bash,'scripts/autodl_yolov8m_coco_b19_pilot.sh','start','--run-id','session_guard_test'],
                               cwd=ROOT,env=env,capture_output=True,text=True)
         self.assertEqual(result.returncode,73,result.stderr)
@@ -87,7 +90,7 @@ class LifecycleTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix='guard_',dir=root) as name:
             retained=Path(name)/'retained.txt'; retained.write_text('old run')
             result=subprocess.run([bash,'scripts/autodl_yolov8m_coco_b19_pilot.sh','run','--run-id',Path(name).name],
-                                  cwd=ROOT,capture_output=True,text=True)
+                                  cwd=ROOT,env=self.bash_env,capture_output=True,text=True)
             self.assertEqual(result.returncode,73,result.stderr)
             self.assertEqual(retained.read_text(),'old run')
 
