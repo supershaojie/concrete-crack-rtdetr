@@ -48,14 +48,15 @@ def options(run, assets, resume=False):
     recipe = read_json(HERE/'recipe.json')
     for key in ('epochs','patience','batch_size','workers','device','seed','optimizer','cos_lr',
                 'cache','multi_scale','rect','freeze','image_weights','quad','imgsz'):
-        setattr(opt,key,recipe[key])
+        setattr(opt,key,[0] if key=='freeze' and recipe[key] is None else recipe[key])
     scratch = initialization_type() == 'random'
     opt.weights = str(run/'native/weights/last.pt') if resume else '' if scratch else str(assets/'yolov5m.pt')
     opt.cfg = str(assets/'upstream/models/yolov5m.yaml') if scratch and not resume else ''
     opt.hyp = str(HERE/'hyp.yaml')
     opt.data = str(run/'data/data.yaml')
     opt.project, opt.name, opt.save_dir = str(run), 'native', str(run/'native')
-    opt.resume, opt.noplots = resume, True
+    opt.resume, opt.noplots = resume, not recipe['plots']
+    opt.save_period = recipe['save_period']
     opt.noval, opt.nosave, opt.noautoanchor, opt.exist_ok = False, False, False, False
     return opt
 
@@ -98,7 +99,10 @@ def load_crack_model(weights, training=False, expected_identity=None):
         state = intersect_dicts(ckpt['model'].float().state_dict(), model.state_dict())
         model.load_state_dict(state,strict=False)
         missing = sorted(set(model.state_dict())-set(state))
-        record = {'loaded_tensors':len(state),'total_tensors':len(model.state_dict()),'missing_keys':missing}
+        from bench_yolov5_runtime import transfer_audit
+        record = transfer_audit(model,state,ckpt['model'].state_dict(),weights)
+        record.update(initialization_record(Path(weights).parent/'upstream'), loaded_tensors=len(state),
+                      total_tensors=len(model.state_dict()),missing_keys=missing)
     else:
         model = (ckpt.get('ema') or ckpt['model']).float()
         record = {'checkpoint_epoch':ckpt['epoch']+1, 'EMA':ckpt.get('ema') is not None}
@@ -123,6 +127,18 @@ def invert(boxes, transform):
     boxes[:,[0,2]] = (boxes[:,[0,2]]-left)/gx
     boxes[:,[1,3]] = (boxes[:,[1,3]]-top)/gy
     return boxes
+
+def validate_resume_options(checkpoint, opt):
+    from support import load_yaml
+    stored=checkpoint['opt']
+    expected=dict(vars(opt))
+    expected['hyp']=load_yaml(HERE/'hyp.yaml')
+    if set(stored)!=set(expected):
+        raise ValueError('Resume option fields differ')
+    for key in expected:
+        # These fields describe entering resume, rather than the original run.
+        if key not in ('resume','weights','cfg') and stored[key]!=expected[key]:
+            raise ValueError('Resume option differs: '+key)
 
 def export(run, split, checkpoint):
     import cv2
@@ -218,10 +234,7 @@ def main():
             checkpoint=torch.load(opt.weights,map_location='cpu',weights_only=False)
             from bench_yolov5_runtime import validate_checkpoint
             validate_checkpoint(checkpoint, a.run/'native', resume=True)
-            stored=checkpoint['opt']
-            for key in ('epochs','batch_size','imgsz','optimizer','seed','patience','cos_lr','data','save_dir'):
-                if stored[key]!=getattr(opt,key):
-                    raise ValueError('Resume option differs: '+key)
+            validate_resume_options(checkpoint,opt)
         train.train(opt.hyp,opt,select_device(opt.device,batch_size=opt.batch_size),Callbacks())
         if not (a.run/'native/training_complete.json').is_file():
             raise RuntimeError('No training completion record')

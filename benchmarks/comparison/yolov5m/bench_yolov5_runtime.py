@@ -28,6 +28,16 @@ def validate_checkpoint(ckpt, save_dir, resume=False):
         raise ValueError('Checkpoint initialization/data/code/run identity differs')
     if resume:
         root = Path(save_dir)
+        required = ('scaler','scheduler','last_opt_step','accumulate','rng_python','rng_numpy',
+                    'rng_torch','rng_cuda','train_generator','val_generator','initialization_sha256')
+        state_native = ckpt.get('comparison_state', {})
+        if any(k not in state_native for k in required) or ckpt.get('ema') is None or ckpt.get('updates') is None:
+            raise ValueError('Pilot checkpoint lacks recoverable native scaler/scheduler/RNG/EMA state')
+        from support import sha256
+        if state_native['initialization_sha256'] != sha256(root/'initialization.json'):
+            raise ValueError('Original initialization audit changed')
+        if ckpt['opt'].get('optimizer') != 'SGD' or not ckpt.get('optimizer') or len(ckpt['optimizer']['param_groups']) != 3:
+            raise ValueError('Pilot native optimizer/group identity differs')
         if (root/'training_complete.json').exists() or ckpt.get('optimizer') is None or not 0 <= ckpt['epoch'] < 199:
             raise ValueError('Checkpoint completed or not resumable')
         state = json.loads((root/'epoch_state.json').read_text(encoding='utf-8'))
@@ -36,6 +46,8 @@ def validate_checkpoint(ckpt, save_dir, resume=False):
         best = torch.load(root/'weights/best.pt', map_location='cpu', weights_only=False)
         if best.get('comparison_identity') != ckpt['comparison_identity'] or best['epoch']+1 != state['best_epoch']:
             raise ValueError('Best/last checkpoint pair inconsistent')
+        if ckpt['best_fitness'] != state['best_fitness'] or state_native['scheduler']['last_epoch'] != ckpt['epoch']:
+            raise ValueError('Best fitness/scheduler/checkpoint state mismatch')
 
 def save_checkpoint(ckpt, path):
     path = Path(path)
@@ -58,6 +70,14 @@ def record_initialization(save_dir, model, opt):
                  'weights_argument':opt.weights, 'cfg_argument':opt.cfg, 'resume':False,
                  'parameters_unfused':sum(p.numel() for p in model.parameters()),
                  'model_tensors':len(model.state_dict()), 'checkpoint_identity':identity})
+        else:
+            transfer = json.loads((Path(save_dir)/'pretrained_load.json').read_text(encoding='utf-8'))
+            if transfer['source_sha256'] != init['coco_source_sha256'] or transfer['transferred_tensors'] != init['pretrained_tensors_loaded']:
+                raise ValueError('Official COCO provenance/transfer count differs from frozen identity')
+            save(Path(save_dir)/'initialization.json', {**init, **transfer,
+                 'construction':'official train.py compatible full state_dict transfer; before AMP and AutoAnchor',
+                 'weights_argument':opt.weights,'cfg_argument':opt.cfg,'resume':False,
+                 'checkpoint_identity':identity})
 
 def strict_amp_probe(model):
     """A private copy, native constants intact; restore all RNG streams on success or failure."""
@@ -84,12 +104,34 @@ def strict_amp_probe(model):
         np.random.set_state(np_state)
     return True
 
-def record_transfer(save_dir, model, state):
+def transfer_audit(model, state, source, weights):
+    from support import sha256
+    target = model.state_dict()
+    compatible = {k for k,v in source.items() if k in target and v.shape == target[k].shape}
+    if set(state) != compatible:
+        raise ValueError('Compatible COCO tensors were excluded from native transfer')
+    mismatches = [k for k,v in state.items() if not torch.equal(target[k].detach().cpu(), v.detach().cpu())]
+    if mismatches:
+        raise ValueError('Actual loaded values differ from source: '+str(mismatches))
+    skipped = {k:{'reason':'class-dependent tensor shape mismatch' if k in target else 'absent in target',
+                  'source_shape':list(v.shape),'target_shape':list(target[k].shape) if k in target else None}
+               for k,v in source.items() if k not in compatible}
+    if sum(p.numel() for p in model.parameters()) != 20871318:
+        raise ValueError('Unexpected unfused nc=1 YOLOv5m parameter count')
+    return {'transferred_tensors':len(state),'model_tensors':len(target),
+            'source_sha256':sha256(weights),'source_file':str(weights),
+            'all_compatible_tensors_loaded':True,'actual_value_equality_verified':True,
+            'audit_timing':'immediately after load, before AutoAnchor/AMP/optimizer/first update',
+            'skipped':skipped,'missing_keys':sorted(set(target)-set(state)),
+            'parameters_unfused':20871318}
+
+def record_transfer(save_dir, model, state, source, weights, resume):
     path = Path(save_dir)/'pretrained_load.json'
     if path.exists():
         path = Path(save_dir)/('resume_load_' + str(len(list(Path(save_dir).glob('resume_load_*.json')))+1) + '.json')
+    audit = transfer_audit(model, state, source, weights)
     save(path,
-         {'transferred_tensors':len(state), 'model_tensors':len(model.state_dict()),
+         {**audit, 'resume':bool(resume),
           'missing_keys':sorted(set(model.state_dict())-set(state)),
           'nc':model.model[-1].nc, 'head':type(model.model[-1]).__name__,
           'anchor_levels':model.model[-1].nl, 'anchors_per_level':model.model[-1].na,
@@ -108,7 +150,7 @@ def close_augmentation(loader, epoch, epochs=200, close=10):
         return False
     ds.mosaic = False
     ds.hyp = dict(ds.hyp)
-    for name in ('mosaic','mixup','copy_paste'):
+    for name in ('mosaic','mixup','cutmix','copy_paste'):
         ds.hyp[name] = 0.0
     ds._comparison_closed = True
     iterator = loader.iterator
@@ -119,16 +161,91 @@ def close_augmentation(loader, epoch, epochs=200, close=10):
     loader.iterator = torch.utils.data.DataLoader.__iter__(loader)
     return True
 
-def record_effective(save_dir, hyp, opt, amp, loader, lf, warmup, accumulate, optimizer):
+def record_effective(save_dir, hyp, opt, amp, loader, lf, warmup, accumulate, optimizer, model):
+    from b19_augment import PIPELINE
     save(Path(save_dir)/'effective_training.json',
          {'hyp_after_nc_imgsz_decay_scaling':hyp, 'options':vars(opt), 'amp_requested':True, 'amp_actual':bool(amp),
           'amp_probe':'isolated actual model, 1x3x64x64; allclose rtol=0.1 atol=0.5; all RNG streams restored',
           'actual_batch':opt.batch_size, 'nbs':64, 'post_warmup_accumulate':int(accumulate),
-          'warmup_accumulate':'round(linear(1,64/16)), minimum 1', 'warmup_steps':warmup,
+          'warmup_accumulate':f'round(linear(1,64/{opt.batch_size})), minimum 1', 'warmup_steps':warmup,
           'loader_workers':loader.num_workers, 'seed':opt.seed, 'deterministic':True,
+          'optimizer_type':type(optimizer).__module__+'.'+type(optimizer).__name__,
+          'all_parameters_trainable':all(p.requires_grad for p in model.parameters()),
+          'trainable_parameters':sum(p.numel() for p in model.parameters() if p.requires_grad),
+          'augmentation_pipeline':PIPELINE,
+          'copy_paste':0.0,'bgr':0.0,'albumentations':None,
+          'native_validation':'actual loader/arguments/model/input dtypes in native_validation_calls.jsonl',
           'cosine_multiplier_by_epoch':[float(lf(e)) for e in range(opt.epochs+1)],
           'optimizer_groups':[{'lr':g['lr'],'weight_decay':g['weight_decay'],'momentum':g.get('momentum'),
                                'nesterov':g.get('nesterov')} for g in optimizer.param_groups]})
+
+def native_state(save_dir, scaler, scheduler, last_opt_step, accumulate, train_loader, val_loader):
+    from support import sha256
+    # Native v5 intentionally zeros residual gradients at the next epoch start.
+    return {'scaler':scaler.state_dict(),'scheduler':scheduler.state_dict(),
+            'last_opt_step':int(last_opt_step),'accumulate':int(accumulate),
+            'rng_python':random.getstate(),'rng_numpy':np.random.get_state(),
+            'rng_torch':torch.get_rng_state(),'rng_cuda':torch.cuda.get_rng_state_all(),
+            'train_generator':train_loader.generator.get_state(),'val_generator':val_loader.generator.get_state(),
+            'initialization_sha256':sha256(Path(save_dir)/'initialization.json'),
+            'resume_semantics':'native epoch boundary, half checkpoint model/EMA; worker prefetch streams restart'}
+
+def restore_native_state(state, scaler, scheduler, train_loader, val_loader, device):
+    scaler.load_state_dict(state['scaler'])
+    scheduler.load_state_dict(state['scheduler'])
+    random.setstate(state['rng_python']);np.random.set_state(state['rng_numpy'])
+    torch.set_rng_state(state['rng_torch']);torch.cuda.set_rng_state_all(state['rng_cuda'])
+    # Workers are independent processes: restart instead of consuming stale prefetched batches.
+    for loader,key in ((train_loader,'train_generator'),(val_loader,'val_generator')):
+        if hasattr(loader.iterator,'_shutdown_workers'):
+            loader.iterator._shutdown_workers()
+        loader.generator.set_state(state[key])
+        loader.iterator = torch.utils.data.DataLoader.__iter__(loader)
+    return int(state['last_opt_step']),int(state['accumulate'])
+
+def record_update(save_dir, model, optimizer, accumulate, ni):
+    grads = [p.grad for p in model.parameters() if p.grad is not None]
+    save(Path(save_dir)/'first_update.json',{'batch_index_global':ni,'actual_accumulate':int(accumulate),
+        'gradient_tensors':len(grads),'all_gradients_finite':all(torch.isfinite(g).all().item() for g in grads),
+        'nonzero_gradient_tensors':sum(bool(torch.count_nonzero(g)) for g in grads),
+        'optimizer_type':type(optimizer).__module__+'.'+type(optimizer).__name__,
+        'groups':[{'lr':g['lr'],'weight_decay':g['weight_decay'],'momentum':g['momentum'],'nesterov':g['nesterov']} for g in optimizer.param_groups],
+        'order':'backward -> scaler.unscale -> native clip max_norm10 -> this audit -> scaler.step/update -> zero_grad -> EMA'})
+
+def begin_epoch(loader, epoch):
+    from b19_augment import snapshot
+    global ACTIVE_EPOCH
+    ACTIVE_EPOCH = epoch
+    loader._comparison_epoch_start = snapshot(loader.dataset)
+
+def record_native_metrics(save_dir, precision, recall, ap50, ap75, map95):
+    raw={'precision':float(precision),'recall':float(recall),'AP50':float(ap50),
+         'AP75':float(ap75),'mAP50_95':float(map95)}
+    save(Path(save_dir)/f'native_val_epoch_{ACTIVE_EPOCH:03d}.json',{
+        'epoch_index':ACTIVE_EPOCH,'raw':raw,'percent':{k:100*v for k,v in raw.items()},
+        'class':'crack','policy':'original v5 native validation, rect=True, NMS .6; separate from public metrics'})
+
+def record_augmentation(save_dir, loader, epoch, optimizer, accumulate):
+    from b19_augment import snapshot, PIPELINE
+    totals = snapshot(loader.dataset)
+    start = loader._comparison_epoch_start
+    save(Path(save_dir)/f'augmentation_epoch_{epoch:03d}.json',{
+        'epoch_index':epoch,'closed':bool(getattr(loader.dataset,'_comparison_closed',False)),
+        'hyp':loader.dataset.hyp,'pipeline':PIPELINE,'workers':loader.num_workers,
+        'counter_scope':'executed loader transforms including prefetch; not exactly consumed batches',
+        'totals_this_process_segment':totals,'delta_since_epoch_start':{k:v-start[k] for k,v in totals.items()},
+        'cutmix_trigger_probability':.03,'cutmix_actual_probability':'data-dependent; count applied separately from skipped',
+        'actual_accumulate_at_epoch_end':int(accumulate),
+        'optimizer_groups':[{'lr':g['lr'],'weight_decay':g['weight_decay'],'momentum':g['momentum']} for g in optimizer.param_groups]})
+
+def record_native_validation(save_dir, model, loader, tensor, batch, imgsz, conf, iou, max_det, tta):
+    value={'requested_batch':batch,'loader_batch':loader.batch_size,'rect':loader.dataset.rect,
+           'imgsz':imgsz,'first_batch_shape':list(tensor.shape),'conf':conf,'nms_iou':iou,
+           'max_det':max_det,'TTA':bool(tta),'input_dtype':str(tensor.dtype),
+           'parameter_dtype':str(next(model.parameters()).dtype),'workers':loader.num_workers,
+           'selection':'native val mAP50_95; public evaluation is separate'}
+    with (Path(save_dir)/'native_validation_calls.jsonl').open('a',encoding='utf-8') as stream:
+        stream.write(json.dumps(value)+'\n')
 
 def restore_stopper(stopper, save_dir, start_epoch):
     if start_epoch:
@@ -140,8 +257,12 @@ def restore_stopper(stopper, save_dir, start_epoch):
         stopper.possible_stop = start_epoch-1-stopper.best_epoch >= stopper.patience-1
 
 def record_epoch(save_dir, epoch, stopper, stop, epochs):
+    root = Path(save_dir)
+    current=json.loads((root/f'native_val_epoch_{epoch:03d}.json').read_text())
+    best=json.loads((root/f'native_val_epoch_{stopper.best_epoch:03d}.json').read_text())
     save(Path(save_dir)/'epoch_state.json',
          {'completed_epochs':epoch+1, 'best_epoch':stopper.best_epoch+1, 'best_fitness':float(stopper.best_fitness),
+          'native_val_current':current,'native_val_best':best,
           'selection':'native_training_val_mAP50_95_latest_tie',
           'end_reason':'patience' if stop else 'epoch_limit' if epoch+1==epochs else 'running',
           'mosaic_closed':epoch >= epochs-10})

@@ -85,3 +85,5 @@ ultralytics-main/docs/
 Thumbs.db
 runs_server/
 
+# Independent comparison environments contain generated packages and binaries.
+.envs/

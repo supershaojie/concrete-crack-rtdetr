@@ -58,7 +58,21 @@ def smoke(assets, output):
     assert torch.isfinite(loss).all()
     loss.backward()
     assert all(torch.isfinite(p.grad).all() for p in model.parameters() if p.grad is not None)
-    report['model']={**loaded,'input':[2,3,64,64],'loss':float(loss),'loss_items':items.tolist(),'backward':'passed'}
+    from utils.torch_utils import smart_optimizer
+    optimizer=smart_optimizer(model,'SGD',hyp['lr0'],hyp['momentum'],hyp['weight_decay'])
+    before=model.model[0].conv.weight.detach().clone()
+    nonzero=sum(bool(torch.count_nonzero(p.grad)) for p in model.parameters() if p.grad is not None)
+    assert nonzero>0 and all(p.requires_grad for p in model.parameters())
+    torch.nn.utils.clip_grad_norm_(model.parameters(),10.0)
+    optimizer.step()
+    assert not torch.equal(before,model.model[0].conv.weight)
+    report['model']={**loaded,'input':[2,3,64,64],'loss':float(loss),'loss_items':items.tolist(),
+                     'backward':'finite nonzero gradients','SGD_update':'actual first Conv weight changed',
+                     'optimizer_type':type(optimizer).__module__+'.'+type(optimizer).__name__,
+                     'nonzero_gradient_tensors':nonzero,'all_parameters_trainable':True}
+    from test_cutmix import verify_reference, geometry_cases
+    report['cutmix_reference_equivalence']=verify_reference()
+    report['cutmix_geometry']=geometry_cases()
     # Non-square/odd-dimension input catches separate x/y gain and padding rounding.
     im=np.zeros((79,133,3),dtype=np.uint8)
     processed,transform=preprocess(im,640)
@@ -73,12 +87,12 @@ def smoke(assets, output):
     with tempfile.TemporaryDirectory(dir=output) as td:
         root=Path(td)
         (root/'images').mkdir();(root/'labels').mkdir()
-        for i in range(8):
+        for i in range(64):
             pixels=np.full((80,112,3),(30+i*10,80,150),dtype=np.uint8)
             Image.fromarray(pixels).save(root/'images'/f'{i}.png')
             (root/'labels'/f'{i}.txt').write_text('0 .5 .5 .3 .3\n')
         dataset=TraceDataset(str(root/'images'),img_size=64,batch_size=2,augment=True,
-                             hyp={**hyp,'mosaic':1.0,'mixup':1.0},cache_images=False)
+                             hyp={**hyp,'mosaic':1.0,'mixup':1.0,'cutmix':0.0},cache_images=False)
         # MixUp must also operate on the non-Mosaic branch.
         dataset.hyp['mosaic']=0.0
         marker,_=dataset[0]
@@ -98,6 +112,37 @@ def smoke(assets, output):
         report['epoch_boundary']={'workers':2,'epoch_index_189':before.tolist(),'epoch_index_190':after.tolist(),
                 'marker_columns':['pre_transforms','mosaics','HSV','geometry'],
                 'non_mosaic_mixup':marker.tolist(),'retained_geometry_HSV':'passed'}
+        # Force each mixing probability to test the real chain and worker copies.
+        dataset=TraceDataset(str(root/'images'),img_size=64,batch_size=2,augment=True,
+                             hyp={**hyp,'mosaic':1.0,'mixup':1.0,'cutmix':1.0},cache_images=False)
+        raw,original_hw,resized_hw=dataset.load_image(0)
+        assert raw.shape[:2]==(64,64) and original_hw==(80,112) and resized_hw==(64,64)
+        from b19_augment import snapshot
+        loader=InfiniteDataLoader(dataset,batch_size=2,num_workers=2,collate_fn=probe_collate,
+                                 worker_init_fn=seed_worker,generator=torch.Generator().manual_seed(42))
+        active=torch.cat([m for m,_ in loader])
+        assert (active==torch.tensor([3,3,1,3])).all(),active
+        assert not close_augmentation(loader,189)
+        assert close_augmentation(loader,190)
+        shut=snapshot(dataset)
+        closed=torch.cat([m for m,_ in loader])
+        end=snapshot(dataset)
+        assert (closed==torch.tensor([1,0,1,1])).all(),closed
+        assert shut['mixup_applied']>0 and shut['cutmix_triggered']>0
+        assert shut['cutmix_applied']>0,shut
+        for key in ('mosaic_applied','mixup_triggered','cutmix_triggered'):
+            assert end[key]==shut[key],(key,shut,end)
+        loader.iterator._shutdown_workers()
+        # A resumed loader starting in the final ten epochs must close immediately.
+        resumed=InfiniteDataLoader(dataset,batch_size=2,num_workers=2,collate_fn=probe_collate,
+                                  worker_init_fn=seed_worker,generator=torch.Generator().manual_seed(42))
+        dataset._comparison_closed=False
+        assert close_augmentation(resumed,190)
+        assert (torch.cat([m for m,_ in resumed])==torch.tensor([1,0,1,1])).all()
+        resumed.iterator._shutdown_workers()
+        report['cutmix_chain_workers']={'workers':2,'forced_probabilities':'Mosaic/MixUp/CutMix=1 only for this smoke',
+           'before_close':shut,'after_close':end,'actual_applied':shut['cutmix_applied'],
+           'closed_worker_state':'passed','resume_at_190':'passed','train_stretch':'80x112 -> 64x64; no letterbox padding'}
     # Lossless public JSONL contract + empty predictions, reuse the existing evaluator fixtures.
     import sys
     sys.path.insert(0,str(HERE.parent/'evaluation'))

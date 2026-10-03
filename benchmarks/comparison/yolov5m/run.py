@@ -209,13 +209,30 @@ def evaluate(a):
     summary(a.run)
 
 def summary(run):
-    native=read_json(run/'native/training_complete.json') if (run/'native/training_complete.json').exists() else None
-    result={'training':native or 'NOT_EXECUTED','output':str(run),'units':'raw values 0-1; percent=raw*100'}
+    complete=run/'native/training_complete.json'
+    epoch_state=run/'native/epoch_state.json'
+    if complete.exists():
+        native={**read_json(complete),'completion':'completed'}
+    elif epoch_state.exists():
+        native={**read_json(epoch_state),'completion':'incomplete'}
+        if (run/'status.json').exists():
+            stages=read_json(run/'status.json')['stages']
+            attempts=[v for k,v in stages.items() if k.startswith('train')]
+            if attempts:
+                native['latest_train_attempt']=max(attempts,key=lambda v:v['started'])
+    else:
+        native='INCOMPLETE_NO_SAVED_EPOCH' if (run/'native').exists() else 'NOT_EXECUTED'
+    result={'native_training_val':native,
+            'selected_best':read_json(run/'selected_best.json') if (run/'selected_best.json').exists() else 'NOT_SELECTED',
+            'training':native,'output':str(run),'units':'raw values 0-1; percent=raw*100'}
     for split in ('val','test'):
         p=run/'evaluation'/(split+'_unified_metrics.json')
         if p.exists():
             d=read_json(p)
-            result[split]={k:d[k] for k in ('precision','recall','AP50','AP75','mAP50_95')}
+            raw={k:d[k] for k in ('precision','recall','AP50','AP75','mAP50_95')}
+            result[split]={'raw':raw,'percent':{k:100*v for k,v in raw.items()},
+                'ap_by_class':d['ap_by_class'],'identity':d['identity'],'gt_sha256':d['gt_sha256'],
+                'predictions_sha256':sha256(run/'evaluation'/(split+'_predictions.jsonl'))}
         else:
             result[split]='NOT_EXECUTED'
     atomic_json(run/'summary.json',result)
@@ -225,7 +242,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('action',choices=['prepare','train','export','evaluate','pipeline','summary','resources'])
     p.add_argument('--run',type=Path,required=True)
-    p.add_argument('--assets',type=Path,default=PROJECT/'outputs/yolov5m-scratch/assets')
+    p.add_argument('--assets',type=Path,default=PROJECT/'outputs/yolov5m-coco-b19-pilot/assets')
     p.add_argument('--source-project',type=Path,default=Path('/root/autodl-tmp/projects/Crack_RTDETR'))
     p.add_argument('--data',type=Path)
     p.add_argument('--data-root',type=Path)

@@ -1,0 +1,50 @@
+{
+  "augmentation_repository": "https://github.com/ultralytics/ultralytics",
+  "tag": "v8.4.0",
+  "annotated_tag_object": "6f6158be448c73471c000cf41db5cd9169300ed9",
+  "peeled_commit": "f2d3aed634a5b0e4828024718d4a61ab2f83fb19",
+  "augment_url": "https://github.com/ultralytics/ultralytics/blob/f2d3aed634a5b0e4828024718d4a61ab2f83fb19/ultralytics/data/augment.py",
+  "full_augment_file_sha256": "e31b60824bb2b1871b2b9a58c0db806a80b3b216f9c300fd28debfa4fe2e4855",
+  "reference_lines": "878-989; full original file retained in local verification outputs",
+  "license": "Ultralytics AGPL-3.0; adapted CutMix retains attribution and complete license",
+  "b19_run": "b19_y26n_diverse5x_e200_i640_b32_musgd_b8b9hybrid_s42",
+  "b19_project_anchor": "4a1b167dee2b0c7353d9d7ead2911383d1ebf1d6",
+  "b19_evidence_source": "E:\\PycharmProjects\\Tunnel_Disease_YOLO26\\.worktrees\\exp-yolo26n-b19-rsc-c2psa-v1\\tools\\experiments",
+  "b19_original_train_version_from_startup_log": "8.4.98",
+  "b19_original_training_source_commit": "NOT_ESTABLISHED_BY_VERSION_BANNER",
+  "b19_exact_launch_record_md": "not found locally; archived args and actual startup excerpt used",
+  "b19_args_sha256": "b08b915756bf85c91d3356586a651a37156d71867b84b6e8493d75c9568642b9",
+  "b19_startup_sha256": "7132cdd8c256a1b50452c9ad2b881d745257ead66886f3000342dc529926d27f",
+  "migrated_fields": {
+    "hsv_h": 0.024,
+    "hsv_s": 0.84,
+    "hsv_v": 0.535,
+    "degrees": 11.0,
+    "translate": 0.17,
+    "scale": 0.735,
+    "shear": 3.5,
+    "perspective": 0.00055,
+    "flipud": 0.0,
+    "fliplr": 0.5,
+    "bgr": 0.0,
+    "mosaic": 1.0,
+    "mixup": 0.135,
+    "cutmix": 0.03,
+    "copy_paste": 0.0
+  },
+  "not_migrated": [
+    "YOLO26 detector/loss/assigner/weights",
+    "MuSGD",
+    "batch32",
+    "lrf0.003",
+    "warmup3",
+    "patience60",
+    "dataset/preprocessing"
+  ],
+  "training_stretch_audit": "parent v5 actually used aspect resize + LetterBox; corrected only in this pilot to meet explicit request",
+  "parent_commit": "b6d38d6b2d72661d03322257ebc796849eb4d2f3",
+  "support_files_sha256": {
+    "ultralytics/utils/metrics.py": "a6e3069f52df548943bf1e4aed44b846d2bc1d85ba71197d3b39df5749d43ef9",
+    "ultralytics/utils/instance.py": "d759a179fbd323d7ed32a4a2ad7ba2562022d05c65a3abfce2abcdc5f44d5281"
+  }
+}

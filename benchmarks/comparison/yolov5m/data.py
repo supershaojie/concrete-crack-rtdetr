@@ -16,7 +16,10 @@ def inspect(data_yaml, root, project, enforce_counts=True):
     rows, parts, seen = [], {}, set()
     for split in SPLITS:
         paths, label_inventory, boxes_count, empty = [], [], 0, 0
-        for image in files[split]:
+        print(f'Light data check {split}: {len(files[split])} paths/labels/sizes; no image content reads',flush=True)
+        for number,image in enumerate(files[split],1):
+            if number%1000==0 or number==len(files[split]):
+                print(f'{split}: {number}/{len(files[split])}',flush=True)
             relative = image.relative_to(root).as_posix()
             if relative in seen:
                 raise ValueError('Duplicate image across/in split: ' + relative)

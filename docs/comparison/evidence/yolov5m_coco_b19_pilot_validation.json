@@ -1,0 +1,1303 @@
+{
+  "scope": "IMPLEMENTATION_AND_LOCAL_SYNTHETIC_VALIDATION_ONLY",
+  "formal_training": false,
+  "branch": "bench/yolov5m-coco-b19-pilot",
+  "derivation_parent": "b6d38d6b2d72661d03322257ebc796849eb4d2f3",
+  "candidate_identity": {
+    "project_commit": "b6d38d6b2d72661d03322257ebc796849eb4d2f3",
+    "adapter_sha256": "28eddd8dcd6193d2259f125780d04f3005c7d8c0fa3134ab21daa4e52141cc4e",
+    "recipe_sha256": "f721e3e919ed47b1b0a3e956eee14f8e83dd7da74cacbc8249e866951c10994c",
+    "hyp_sha256": "fe82f58def4e0c7e2ef90f237127c47c9450c31c44d6f3cbc9e8a3cae0be2af5",
+    "patch_sha256": "fb6270ec666972031c1b619c002ca742c9a01c2b42c714af7966c14021627afb"
+  },
+  "environment": {
+    "python": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\.envs\\yolov5m-coco-b19-pilot\\Scripts\\python.exe",
+    "prefix": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\.envs\\yolov5m-coco-b19-pilot",
+    "base_prefix": "D:\\miniconda3\\envs\\rtdetr",
+    "executable_realpath": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\.envs\\yolov5m-coco-b19-pilot\\Scripts\\python.exe",
+    "all_distributions": [
+      [
+        "GitPython",
+        "3.1.43"
+      ],
+      [
+        "Jinja2",
+        "3.1.6"
+      ],
+      [
+        "Markdown",
+        "3.9"
+      ],
+      [
+        "MarkupSafe",
+        "3.0.2"
+      ],
+      [
+        "PyQt5",
+        "5.15.11"
+      ],
+      [
+        "PyQt5-Qt5",
+        "5.15.2"
+      ],
+      [
+        "PyQt5_sip",
+        "12.17.1"
+      ],
+      [
+        "PyYAML",
+        "6.0.2"
+      ],
+      [
+        "PyYAML",
+        "6.0.3"
+      ],
+      [
+        "Pygments",
+        "2.21.0"
+      ],
+      [
+        "Werkzeug",
+        "3.1.9"
+      ],
+      [
+        "absl-py",
+        "2.3.1"
+      ],
+      [
+        "asttokens",
+        "3.0.2"
+      ],
+      [
+        "certifi",
+        "2026.2.25"
+      ],
+      [
+        "charset-normalizer",
+        "3.4.5"
+      ],
+      [
+        "colorama",
+        "0.4.6"
+      ],
+      [
+        "contourpy",
+        "1.3.0"
+      ],
+      [
+        "cycler",
+        "0.12.1"
+      ],
+      [
+        "decorator",
+        "5.3.1"
+      ],
+      [
+        "exceptiongroup",
+        "1.3.1"
+      ],
+      [
+        "executing",
+        "2.2.1"
+      ],
+      [
+        "filelock",
+        "3.19.1"
+      ],
+      [
+        "fonttools",
+        "4.60.2"
+      ],
+      [
+        "fsspec",
+        "2025.10.0"
+      ],
+      [
+        "gitdb",
+        "4.0.12"
+      ],
+      [
+        "grpcio",
+        "1.80.0"
+      ],
+      [
+        "idna",
+        "3.11"
+      ],
+      [
+        "importlib_metadata",
+        "8.7.1"
+      ],
+      [
+        "importlib_resources",
+        "6.5.2"
+      ],
+      [
+        "ipython",
+        "8.18.1"
+      ],
+      [
+        "jedi",
+        "0.19.2"
+      ],
+      [
+        "kiwisolver",
+        "1.4.7"
+      ],
+      [
+        "labelImg",
+        "1.8.6"
+      ],
+      [
+        "lxml",
+        "6.1.0"
+      ],
+      [
+        "matplotlib",
+        "3.8.4"
+      ],
+      [
+        "matplotlib",
+        "3.9.4"
+      ],
+      [
+        "matplotlib-inline",
+        "0.2.2"
+      ],
+      [
+        "mpmath",
+        "1.3.0"
+      ],
+      [
+        "networkx",
+        "3.2.1"
+      ],
+      [
+        "numpy",
+        "1.26.4"
+      ],
+      [
+        "numpy",
+        "2.0.2"
+      ],
+      [
+        "opencv-python",
+        "4.10.0.84"
+      ],
+      [
+        "opencv-python",
+        "4.13.0.92"
+      ],
+      [
+        "packaging",
+        "26.0"
+      ],
+      [
+        "pandas",
+        "2.2.3"
+      ],
+      [
+        "parso",
+        "0.8.7"
+      ],
+      [
+        "pillow",
+        "10.4.0"
+      ],
+      [
+        "pillow",
+        "11.3.0"
+      ],
+      [
+        "pip",
+        "23.0.1"
+      ],
+      [
+        "pip",
+        "26.0.1"
+      ],
+      [
+        "polars",
+        "1.36.1"
+      ],
+      [
+        "polars-runtime-32",
+        "1.36.1"
+      ],
+      [
+        "prompt_toolkit",
+        "3.0.52"
+      ],
+      [
+        "protobuf",
+        "6.33.6"
+      ],
+      [
+        "psutil",
+        "6.1.1"
+      ],
+      [
+        "psutil",
+        "7.2.2"
+      ],
+      [
+        "pure_eval",
+        "0.2.4"
+      ],
+      [
+        "pyparsing",
+        "3.3.2"
+      ],
+      [
+        "python-dateutil",
+        "2.9.0.post0"
+      ],
+      [
+        "pytz",
+        "2026.4"
+      ],
+      [
+        "requests",
+        "2.32.3"
+      ],
+      [
+        "requests",
+        "2.32.5"
+      ],
+      [
+        "scipy",
+        "1.13.1"
+      ],
+      [
+        "seaborn",
+        "0.13.2"
+      ],
+      [
+        "setuptools",
+        "75.8.0"
+      ],
+      [
+        "setuptools",
+        "80.9.0"
+      ],
+      [
+        "six",
+        "1.17.0"
+      ],
+      [
+        "smmap",
+        "5.0.3"
+      ],
+      [
+        "stack-data",
+        "0.6.3"
+      ],
+      [
+        "sympy",
+        "1.14.0"
+      ],
+      [
+        "tensorboard",
+        "2.17.1"
+      ],
+      [
+        "tensorboard-data-server",
+        "0.7.2"
+      ],
+      [
+        "thop",
+        "0.1.1-2209072238"
+      ],
+      [
+        "torch",
+        "2.7.1+cu118"
+      ],
+      [
+        "torchaudio",
+        "2.7.1+cu118"
+      ],
+      [
+        "torchvision",
+        "0.22.1+cu118"
+      ],
+      [
+        "tqdm",
+        "4.67.1"
+      ],
+      [
+        "traitlets",
+        "5.15.1"
+      ],
+      [
+        "typing_extensions",
+        "4.15.0"
+      ],
+      [
+        "tzdata",
+        "2026.4"
+      ],
+      [
+        "ultralytics",
+        "8.4.21"
+      ],
+      [
+        "ultralytics-thop",
+        "2.0.18"
+      ],
+      [
+        "urllib3",
+        "2.6.3"
+      ],
+      [
+        "wcwidth",
+        "0.9.1"
+      ],
+      [
+        "wheel",
+        "0.45.1"
+      ],
+      [
+        "zipp",
+        "3.23.0"
+      ]
+    ],
+    "package_import_paths": {
+      "torch": "D:\\miniconda3\\envs\\rtdetr\\lib\\site-packages\\torch\\__init__.py",
+      "torchvision": "D:\\miniconda3\\envs\\rtdetr\\lib\\site-packages\\torchvision\\__init__.py",
+      "numpy": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\.envs\\yolov5m-coco-b19-pilot\\lib\\site-packages\\numpy\\__init__.py",
+      "PIL": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\.envs\\yolov5m-coco-b19-pilot\\lib\\site-packages\\PIL\\__init__.py",
+      "cv2": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\.envs\\yolov5m-coco-b19-pilot\\lib\\site-packages\\cv2\\__init__.py",
+      "yaml": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\.envs\\yolov5m-coco-b19-pilot\\lib\\site-packages\\yaml\\__init__.py",
+      "pandas": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\.envs\\yolov5m-coco-b19-pilot\\lib\\site-packages\\pandas\\__init__.py",
+      "scipy": "D:\\miniconda3\\envs\\rtdetr\\lib\\site-packages\\scipy\\__init__.py",
+      "matplotlib": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\.envs\\yolov5m-coco-b19-pilot\\lib\\site-packages\\matplotlib\\__init__.py",
+      "IPython": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\.envs\\yolov5m-coco-b19-pilot\\lib\\site-packages\\IPython\\__init__.py"
+    },
+    "torch": "2.7.1+cu118",
+    "torchvision": "0.22.1+cu118",
+    "numpy": "1.26.4",
+    "Pillow": "10.4.0",
+    "opencv-python": "4.10.0.84",
+    "PyYAML": "6.0.2",
+    "scipy": "1.13.1",
+    "pandas": "2.2.3",
+    "seaborn": "0.13.2",
+    "matplotlib": "3.8.4",
+    "tqdm": "4.67.1",
+    "thop": "0.1.1-2209072238",
+    "tensorboard": "2.17.1",
+    "GitPython": "3.1.43"
+  },
+  "source": {
+    "augmentation_repository": "https://github.com/ultralytics/ultralytics",
+    "tag": "v8.4.0",
+    "annotated_tag_object": "6f6158be448c73471c000cf41db5cd9169300ed9",
+    "peeled_commit": "f2d3aed634a5b0e4828024718d4a61ab2f83fb19",
+    "augment_url": "https://github.com/ultralytics/ultralytics/blob/f2d3aed634a5b0e4828024718d4a61ab2f83fb19/ultralytics/data/augment.py",
+    "full_augment_file_sha256": "e31b60824bb2b1871b2b9a58c0db806a80b3b216f9c300fd28debfa4fe2e4855",
+    "reference_lines": "878-989; full original file retained in local verification outputs",
+    "license": "Ultralytics AGPL-3.0; adapted CutMix retains attribution and complete license",
+    "b19_run": "b19_y26n_diverse5x_e200_i640_b32_musgd_b8b9hybrid_s42",
+    "b19_project_anchor": "4a1b167dee2b0c7353d9d7ead2911383d1ebf1d6",
+    "b19_evidence_source": "E:\\PycharmProjects\\Tunnel_Disease_YOLO26\\.worktrees\\exp-yolo26n-b19-rsc-c2psa-v1\\tools\\experiments",
+    "b19_original_train_version_from_startup_log": "8.4.98",
+    "b19_original_training_source_commit": "NOT_ESTABLISHED_BY_VERSION_BANNER",
+    "b19_exact_launch_record_md": "not found locally; archived args and actual startup excerpt used",
+    "b19_args_sha256": "b08b915756bf85c91d3356586a651a37156d71867b84b6e8493d75c9568642b9",
+    "b19_startup_sha256": "7132cdd8c256a1b50452c9ad2b881d745257ead66886f3000342dc529926d27f",
+    "migrated_fields": {
+      "hsv_h": 0.024,
+      "hsv_s": 0.84,
+      "hsv_v": 0.535,
+      "degrees": 11.0,
+      "translate": 0.17,
+      "scale": 0.735,
+      "shear": 3.5,
+      "perspective": 0.00055,
+      "flipud": 0.0,
+      "fliplr": 0.5,
+      "bgr": 0.0,
+      "mosaic": 1.0,
+      "mixup": 0.135,
+      "cutmix": 0.03,
+      "copy_paste": 0.0
+    },
+    "not_migrated": [
+      "YOLO26 detector/loss/assigner/weights",
+      "MuSGD",
+      "batch32",
+      "lrf0.003",
+      "warmup3",
+      "patience60",
+      "dataset/preprocessing"
+    ],
+    "training_stretch_audit": "parent v5 actually used aspect resize + LetterBox; corrected only in this pilot to meet explicit request",
+    "parent_commit": "b6d38d6b2d72661d03322257ebc796849eb4d2f3",
+    "support_files_sha256": {
+      "ultralytics/utils/metrics.py": "a6e3069f52df548943bf1e4aed44b846d2bc1d85ba71197d3b39df5749d43ef9",
+      "ultralytics/utils/instance.py": "d759a179fbd323d7ed32a4a2ad7ba2562022d05c65a3abfce2abcdc5f44d5281"
+    }
+  },
+  "light_data": {
+    "identity_sha256": "0f59a9b6cab5414f68fd5d79d12b0d69f645e7864ad37f227c6f15557d9349ad",
+    "splits": {
+      "test": {
+        "boxes": 6663,
+        "empty_labels": 0,
+        "images": 864,
+        "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51",
+        "labels": 864,
+        "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184"
+      },
+      "train": {
+        "boxes": 45573,
+        "empty_labels": 0,
+        "images": 6048,
+        "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d",
+        "labels": 6048,
+        "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77"
+      },
+      "val": {
+        "boxes": 12840,
+        "empty_labels": 0,
+        "images": 1728,
+        "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd",
+        "labels": 1728,
+        "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03"
+      }
+    },
+    "image_decode": "NOT_RUN",
+    "image_content_hash": "NOT_RUN",
+    "source_data_read_only": true
+  },
+  "model_transfer": {
+    "actual_value_equality_verified": true,
+    "all_compatible_tensors_loaded": true,
+    "audit_timing": "immediately after load, before AutoAnchor/AMP/optimizer/first update",
+    "b19_recipe_sha256": "fe82f58def4e0c7e2ef90f237127c47c9450c31c44d6f3cbc9e8a3cae0be2af5",
+    "b19_source_sha256": "f782b54cca8a9f0bd24792c7996332c6bc710b54cf9fe7dd2ae4e8b6e6cb057a",
+    "coco_source_sha256": "61d933360ba5a7733a36764996c800287d973889d875227f5beedd2473a97a56",
+    "depth_multiple": 0.67,
+    "head": "Detect",
+    "initialization_type": "coco_detection_pretrained",
+    "loaded_tensors": 475,
+    "missing_keys": [
+      "model.24.m.0.bias",
+      "model.24.m.0.weight",
+      "model.24.m.1.bias",
+      "model.24.m.1.weight",
+      "model.24.m.2.bias",
+      "model.24.m.2.weight"
+    ],
+    "model_tensors": 481,
+    "model_yaml": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\assets\\upstream\\models\\yolov5m.yaml",
+    "model_yaml_sha256": "bba60aebda98612c22400cb966baaaddfc8408709e36c862f8c894b2af00789e",
+    "na": 3,
+    "native_constants": "BN, Detect bias priors and anchors retain official initialization",
+    "nc": 1,
+    "nl": 3,
+    "parameters_unfused": 20871318,
+    "pretrained_tensors_loaded": 475,
+    "pretraining_source": "COCO",
+    "scale": "m",
+    "seed": 42,
+    "skipped": {
+      "model.24.m.0.bias": {
+        "reason": "class-dependent tensor shape mismatch",
+        "source_shape": [
+          255
+        ],
+        "target_shape": [
+          18
+        ]
+      },
+      "model.24.m.0.weight": {
+        "reason": "class-dependent tensor shape mismatch",
+        "source_shape": [
+          255,
+          192,
+          1,
+          1
+        ],
+        "target_shape": [
+          18,
+          192,
+          1,
+          1
+        ]
+      },
+      "model.24.m.1.bias": {
+        "reason": "class-dependent tensor shape mismatch",
+        "source_shape": [
+          255
+        ],
+        "target_shape": [
+          18
+        ]
+      },
+      "model.24.m.1.weight": {
+        "reason": "class-dependent tensor shape mismatch",
+        "source_shape": [
+          255,
+          384,
+          1,
+          1
+        ],
+        "target_shape": [
+          18,
+          384,
+          1,
+          1
+        ]
+      },
+      "model.24.m.2.bias": {
+        "reason": "class-dependent tensor shape mismatch",
+        "source_shape": [
+          255
+        ],
+        "target_shape": [
+          18
+        ]
+      },
+      "model.24.m.2.weight": {
+        "reason": "class-dependent tensor shape mismatch",
+        "source_shape": [
+          255,
+          768,
+          1,
+          1
+        ],
+        "target_shape": [
+          18,
+          768,
+          1,
+          1
+        ]
+      }
+    },
+    "source_file": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\assets\\yolov5m.pt",
+    "source_sha256": "61d933360ba5a7733a36764996c800287d973889d875227f5beedd2473a97a56",
+    "strides": [
+      8.0,
+      16.0,
+      32.0
+    ],
+    "total_tensors": 481,
+    "train_module": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\assets\\upstream\\train.py",
+    "transferred_tensors": 475,
+    "upstream": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\assets\\upstream",
+    "width_multiple": 0.75
+  },
+  "gradient_SGD_CPU": {
+    "input": [
+      2,
+      3,
+      64,
+      64
+    ],
+    "loss": 0.1860412061214447,
+    "loss_items": [
+      0.0913786068558693,
+      0.0016419965540990233,
+      0.0
+    ],
+    "backward": "finite nonzero gradients",
+    "SGD_update": "actual first Conv weight changed",
+    "optimizer_type": "torch.optim.sgd.SGD",
+    "nonzero_gradient_tensors": 243,
+    "all_parameters_trainable": true
+  },
+  "cutmix_reference": {
+    "seeds": 100,
+    "pixels_and_absolute_labels_match_fixed_source": true,
+    "official_bbox_ioa_reference_used": true,
+    "outcomes": {
+      "applied": 84,
+      "no_donor": 15,
+      "no_free_area": 1
+    }
+  },
+  "cutmix_geometry": {
+    "base_boxes_preserved": true,
+    "classification_soft_labels": false,
+    "donor_IOA_threshold": 0.1,
+    "donor_clipped_to_patch": true,
+    "no_base_overlap_skip": "no_free_area",
+    "no_donor_skip": "no_donor"
+  },
+  "cutmix_worker_chain": {
+    "actual_applied": 8,
+    "after_close": {
+      "cutmix_applied": 8,
+      "cutmix_no_donor": 14,
+      "cutmix_no_free_area": 46,
+      "cutmix_triggered": 68,
+      "hsv_applied": 134,
+      "mixup_applied": 68,
+      "mixup_triggered": 68,
+      "mosaic_applied": 204,
+      "pre_transform": 272,
+      "samples": 134
+    },
+    "before_close": {
+      "cutmix_applied": 8,
+      "cutmix_no_donor": 14,
+      "cutmix_no_free_area": 46,
+      "cutmix_triggered": 68,
+      "hsv_applied": 68,
+      "mixup_applied": 68,
+      "mixup_triggered": 68,
+      "mosaic_applied": 204,
+      "pre_transform": 204,
+      "samples": 68
+    },
+    "closed_worker_state": "passed",
+    "forced_probabilities": "Mosaic/MixUp/CutMix=1 only for this smoke",
+    "resume_at_190": "passed",
+    "train_stretch": "80x112 -> 64x64; no letterbox padding",
+    "workers": 2
+  },
+  "epoch_boundary": {
+    "workers": 2,
+    "columns": [
+      "pre_transforms",
+      "mosaics",
+      "HSV",
+      "geometry"
+    ],
+    "index_189_unique_markers": [
+      [
+        2,
+        2,
+        1,
+        2
+      ]
+    ],
+    "index_190_unique_markers": [
+      [
+        1,
+        0,
+        1,
+        1
+      ]
+    ]
+  },
+  "public_letterbox": {
+    "inverse_max_abs_error": 1.6689300537109375e-06,
+    "shape": [
+      640,
+      640,
+      3
+    ]
+  },
+  "empty_prediction_evaluator_fixture": {
+    "AP50": 0.995,
+    "AP75": 0.995,
+    "mAP50_95": 0.9949999999999999,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  "native_GPU_lifecycle": {
+    "actual_native_SGD_update": {
+      "actual_accumulate": 1,
+      "all_gradients_finite": true,
+      "batch_index_global": 0,
+      "detect_bias_max_change": 0.0011377707123756409,
+      "gradient_tensors": 243,
+      "groups": [
+        {
+          "lr": 0.1,
+          "momentum": 0.8,
+          "nesterov": true,
+          "weight_decay": 0
+        },
+        {
+          "lr": 0.0,
+          "momentum": 0.8,
+          "nesterov": true,
+          "weight_decay": 0.0005
+        },
+        {
+          "lr": 0.0,
+          "momentum": 0.8,
+          "nesterov": true,
+          "weight_decay": 0.0
+        }
+      ],
+      "nonzero_gradient_tensors": 243,
+      "optimizer_type": "torch.optim.sgd.SGD",
+      "order": "backward -> scaler.unscale -> native clip max_norm10 -> this audit -> scaler.step/update -> zero_grad -> EMA"
+    },
+    "amp_isolation": "FP32/FP16 comparison passed; model/BN/EMA/optimizer/Python/NumPy/CPU/CUDA RNG unchanged",
+    "export_evaluate": "Actual synthetic COCO b19 best; production FP32 640 exporter and common evaluator, two synthetic images per split",
+    "formal_batch16_imgsz640_parallel_capacity": "NOT_TESTED",
+    "formal_training": false,
+    "initialization": {
+      "actual_source_equality": true,
+      "actual_value_equality_verified": true,
+      "all_compatible_tensors_loaded": true,
+      "audit_timing": "immediately after load, before AutoAnchor/AMP/optimizer/first update",
+      "b19_recipe_sha256": "fe82f58def4e0c7e2ef90f237127c47c9450c31c44d6f3cbc9e8a3cae0be2af5",
+      "b19_source_sha256": "f782b54cca8a9f0bd24792c7996332c6bc710b54cf9fe7dd2ae4e8b6e6cb057a",
+      "coco_source_sha256": "61d933360ba5a7733a36764996c800287d973889d875227f5beedd2473a97a56",
+      "depth_multiple": 0.67,
+      "head": "Detect",
+      "initialization_type": "coco_detection_pretrained",
+      "loaded_tensors": 475,
+      "missing_keys": [
+        "model.24.m.0.bias",
+        "model.24.m.0.weight",
+        "model.24.m.1.bias",
+        "model.24.m.1.weight",
+        "model.24.m.2.bias",
+        "model.24.m.2.weight"
+      ],
+      "model_tensors": 481,
+      "model_yaml": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\assets\\upstream\\models\\yolov5m.yaml",
+      "model_yaml_sha256": "bba60aebda98612c22400cb966baaaddfc8408709e36c862f8c894b2af00789e",
+      "na": 3,
+      "native_constants": "BN, Detect bias priors and anchors retain official initialization",
+      "nc": 1,
+      "nl": 3,
+      "official_only_reads": [
+        "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\assets\\yolov5m.pt",
+        "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\assets\\yolov5m.pt",
+        "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\assets\\yolov5m.pt"
+      ],
+      "parameters_unfused": 20871318,
+      "pretrained_tensors_loaded": 475,
+      "pretraining_source": "COCO",
+      "same_seed_fresh_rebuild": "passed",
+      "scale": "m",
+      "seed": 42,
+      "skipped": {
+        "model.24.m.0.bias": {
+          "reason": "class-dependent tensor shape mismatch",
+          "source_shape": [
+            255
+          ],
+          "target_shape": [
+            18
+          ]
+        },
+        "model.24.m.0.weight": {
+          "reason": "class-dependent tensor shape mismatch",
+          "source_shape": [
+            255,
+            192,
+            1,
+            1
+          ],
+          "target_shape": [
+            18,
+            192,
+            1,
+            1
+          ]
+        },
+        "model.24.m.1.bias": {
+          "reason": "class-dependent tensor shape mismatch",
+          "source_shape": [
+            255
+          ],
+          "target_shape": [
+            18
+          ]
+        },
+        "model.24.m.1.weight": {
+          "reason": "class-dependent tensor shape mismatch",
+          "source_shape": [
+            255,
+            384,
+            1,
+            1
+          ],
+          "target_shape": [
+            18,
+            384,
+            1,
+            1
+          ]
+        },
+        "model.24.m.2.bias": {
+          "reason": "class-dependent tensor shape mismatch",
+          "source_shape": [
+            255
+          ],
+          "target_shape": [
+            18
+          ]
+        },
+        "model.24.m.2.weight": {
+          "reason": "class-dependent tensor shape mismatch",
+          "source_shape": [
+            255,
+            768,
+            1,
+            1
+          ],
+          "target_shape": [
+            18,
+            768,
+            1,
+            1
+          ]
+        }
+      },
+      "source_file": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\assets\\yolov5m.pt",
+      "source_sha256": "61d933360ba5a7733a36764996c800287d973889d875227f5beedd2473a97a56",
+      "strides": [
+        8.0,
+        16.0,
+        32.0
+      ],
+      "total_tensors": 481,
+      "transferred_tensors": 475,
+      "width_multiple": 0.75
+    },
+    "native_lifecycle": {
+      "AMP": true,
+      "batch": 2,
+      "completion": {
+        "best_epoch": 2,
+        "best_fitness": 0.0,
+        "completed_epochs": 2,
+        "end_reason": "epoch_limit",
+        "mosaic_closed": true,
+        "native_val_best": {
+          "class": "crack",
+          "epoch_index": 1,
+          "percent": {
+            "AP50": 0.0,
+            "AP75": 0.0,
+            "mAP50_95": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          "policy": "original v5 native validation, rect=True, NMS .6; separate from public metrics",
+          "raw": {
+            "AP50": 0.0,
+            "AP75": 0.0,
+            "mAP50_95": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          }
+        },
+        "native_val_current": {
+          "class": "crack",
+          "epoch_index": 1,
+          "percent": {
+            "AP50": 0.0,
+            "AP75": 0.0,
+            "mAP50_95": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          "policy": "original v5 native validation, rect=True, NMS .6; separate from public metrics",
+          "raw": {
+            "AP50": 0.0,
+            "AP75": 0.0,
+            "mAP50_95": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          }
+        },
+        "selection": "native_training_val_mAP50_95_latest_tie"
+      },
+      "device": "cuda:0",
+      "epochs": 2,
+      "foreign_and_completed_checkpoint_rejection": "passed",
+      "imgsz": 64,
+      "initialization_record_preserved": true,
+      "interrupted_after_epoch": 1,
+      "native_recoverable_state": "scaler/scheduler/optimizer/EMA/RNG/loader generators preserved",
+      "official_COCO_only_at_first_epoch": true,
+      "resumed_to_epoch": 2
+    },
+    "native_validation_actual": [
+      {
+        "TTA": false,
+        "conf": 0.001,
+        "first_batch_shape": [
+          2,
+          3,
+          96,
+          96
+        ],
+        "imgsz": 64,
+        "input_dtype": "torch.float16",
+        "loader_batch": 2,
+        "max_det": 300,
+        "nms_iou": 0.6,
+        "parameter_dtype": "torch.float16",
+        "rect": true,
+        "requested_batch": 2,
+        "selection": "native val mAP50_95; public evaluation is separate",
+        "workers": 0
+      },
+      {
+        "TTA": false,
+        "conf": 0.001,
+        "first_batch_shape": [
+          2,
+          3,
+          96,
+          96
+        ],
+        "imgsz": 64,
+        "input_dtype": "torch.float16",
+        "loader_batch": 2,
+        "max_det": 300,
+        "nms_iou": 0.6,
+        "parameter_dtype": "torch.float16",
+        "rect": true,
+        "requested_batch": 2,
+        "selection": "native val mAP50_95; public evaluation is separate",
+        "workers": 0
+      }
+    ],
+    "scope": "SMOKE_ONLY_SYNTHETIC"
+  },
+  "native_GPU_effective_settings_smoke_only": {
+    "hyp_after_nc_imgsz_decay_scaling": {
+      "lr0": 0.01,
+      "lrf": 0.1,
+      "momentum": 0.937,
+      "weight_decay": 0.0005,
+      "warmup_epochs": 5.0,
+      "warmup_momentum": 0.8,
+      "warmup_bias_lr": 0.1,
+      "box": 0.05,
+      "cls": 0.0037500000000000007,
+      "cls_pw": 1.0,
+      "obj": 0.007000000000000001,
+      "obj_pw": 1.0,
+      "iou_t": 0.2,
+      "anchor_t": 4.0,
+      "fl_gamma": 0.0,
+      "hsv_h": 0.024,
+      "hsv_s": 0.84,
+      "hsv_v": 0.535,
+      "degrees": 11.0,
+      "translate": 0.17,
+      "scale": 0.735,
+      "shear": 3.5,
+      "perspective": 0.00055,
+      "flipud": 0.0,
+      "fliplr": 0.5,
+      "mosaic": 1.0,
+      "mixup": 0.135,
+      "copy_paste": 0.0,
+      "bgr": 0.0,
+      "cutmix": 0.03,
+      "label_smoothing": 0.0
+    },
+    "options": {
+      "weights": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final\\native\\weights\\last.pt",
+      "cfg": "",
+      "data": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final\\data\\data.yaml",
+      "hyp": {
+        "lr0": 0.01,
+        "lrf": 0.1,
+        "momentum": 0.937,
+        "weight_decay": 0.0005,
+        "warmup_epochs": 5.0,
+        "warmup_momentum": 0.8,
+        "warmup_bias_lr": 0.1,
+        "box": 0.05,
+        "cls": 0.0037500000000000007,
+        "cls_pw": 1.0,
+        "obj": 0.007000000000000001,
+        "obj_pw": 1.0,
+        "iou_t": 0.2,
+        "anchor_t": 4.0,
+        "fl_gamma": 0.0,
+        "hsv_h": 0.024,
+        "hsv_s": 0.84,
+        "hsv_v": 0.535,
+        "degrees": 11.0,
+        "translate": 0.17,
+        "scale": 0.735,
+        "shear": 3.5,
+        "perspective": 0.00055,
+        "flipud": 0.0,
+        "fliplr": 0.5,
+        "mosaic": 1.0,
+        "mixup": 0.135,
+        "copy_paste": 0.0,
+        "bgr": 0.0,
+        "cutmix": 0.03,
+        "label_smoothing": 0.0
+      },
+      "epochs": 2,
+      "batch_size": 2,
+      "imgsz": 64,
+      "rect": false,
+      "resume": true,
+      "nosave": false,
+      "noval": false,
+      "noautoanchor": false,
+      "noplots": false,
+      "evolve": null,
+      "bucket": "",
+      "cache": false,
+      "image_weights": false,
+      "device": "0",
+      "multi_scale": false,
+      "single_cls": false,
+      "optimizer": "SGD",
+      "sync_bn": false,
+      "workers": 0,
+      "project": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final",
+      "name": "native",
+      "exist_ok": false,
+      "quad": false,
+      "cos_lr": true,
+      "label_smoothing": 0.0,
+      "patience": 50,
+      "freeze": [
+        0
+      ],
+      "save_period": -1,
+      "seed": 42,
+      "local_rank": -1,
+      "entity": null,
+      "upload_dataset": false,
+      "bbox_interval": -1,
+      "artifact_alias": "latest",
+      "save_dir": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final\\native"
+    },
+    "amp_requested": true,
+    "amp_actual": true,
+    "amp_probe": "isolated actual model, 1x3x64x64; allclose rtol=0.1 atol=0.5; all RNG streams restored",
+    "actual_batch": 2,
+    "nbs": 64,
+    "post_warmup_accumulate": 32,
+    "warmup_accumulate": "round(linear(1,64/16)), minimum 1",
+    "warmup_steps": 100,
+    "loader_workers": 0,
+    "seed": 42,
+    "deterministic": true,
+    "optimizer_type": "torch.optim.sgd.SGD",
+    "all_parameters_trainable": true,
+    "trainable_parameters": 20871318,
+    "augmentation_pipeline": [
+      "train-only square stretch",
+      "Mosaic or single-image path",
+      "v5 random perspective",
+      "MixUp p=.135 with pre-transform-only train partner",
+      "CutMix p=.03 with pre-transform-only train partner",
+      "retained additive HSV",
+      "vertical flip p=0",
+      "horizontal flip p=.5",
+      "v5 label formatting"
+    ],
+    "copy_paste": 0.0,
+    "bgr": 0.0,
+    "albumentations": null,
+    "native_validation": "actual loader/arguments/model/input dtypes in native_validation_calls.jsonl",
+    "cosine_multiplier_by_epoch": [
+      1.0,
+      0.55,
+      0.09999999999999998
+    ],
+    "optimizer_groups": [
+      {
+        "lr": 0.01,
+        "weight_decay": 0,
+        "momentum": 0.8,
+        "nesterov": true
+      },
+      {
+        "lr": 0.01,
+        "weight_decay": 0.0005,
+        "momentum": 0.8,
+        "nesterov": true
+      },
+      {
+        "lr": 0.01,
+        "weight_decay": 0.0,
+        "momentum": 0.8,
+        "nesterov": true
+      }
+    ]
+  },
+  "native_GPU_AutoAnchor_smoke_only": {
+    "source_split": "train",
+    "enabled": true,
+    "changed": false,
+    "before_grid_units": [
+      [
+        [
+          1.25,
+          1.625
+        ],
+        [
+          2.0,
+          3.75
+        ],
+        [
+          4.125,
+          2.875
+        ]
+      ],
+      [
+        [
+          1.875,
+          3.8125
+        ],
+        [
+          3.875,
+          2.8125
+        ],
+        [
+          3.6875,
+          7.4375
+        ]
+      ],
+      [
+        [
+          3.625,
+          2.8125
+        ],
+        [
+          4.875,
+          6.1875
+        ],
+        [
+          11.65625,
+          10.1875
+        ]
+      ]
+    ],
+    "after_grid_units": [
+      [
+        [
+          1.25,
+          1.625
+        ],
+        [
+          2.0,
+          3.75
+        ],
+        [
+          4.125,
+          2.875
+        ]
+      ],
+      [
+        [
+          1.875,
+          3.8125
+        ],
+        [
+          3.875,
+          2.8125
+        ],
+        [
+          3.6875,
+          7.4375
+        ]
+      ],
+      [
+        [
+          3.625,
+          2.8125
+        ],
+        [
+          4.875,
+          6.1875
+        ],
+        [
+          11.65625,
+          10.1875
+        ]
+      ]
+    ],
+    "stride": [
+      8.0,
+      16.0,
+      32.0
+    ]
+  },
+  "formal_config_expected_NOT_SERVER_EXECUTED": {
+    "batch_train": 16,
+    "batch_native_val": 16,
+    "imgsz": 640,
+    "workers_train": 8,
+    "nbs": 64,
+    "post_warmup_accumulate_derived": 4,
+    "effective_weight_decay_derived": 0.0005,
+    "effective_loss_derived": {
+      "box": 0.05,
+      "cls": 0.00375,
+      "obj": 0.7
+    },
+    "epochs_max": 200,
+    "patience": 50
+  },
+  "checks": {
+    "control_tests": {
+      "passed": 5,
+      "log_sha256": "2dacfe40071e60cbf837964530a63c26956b59116d6aa30aa71bc8a8dbbbe3bd"
+    },
+    "mock_tmux": {
+      "passed": 1,
+      "log_sha256": "aeebb4dff5689ff01f8fb1fffb053714f8a9296372f200e787777732bde4c6f7"
+    },
+    "bash_syntax": "passed",
+    "asset_reuse_exact_official_source": "passed",
+    "summary_raw_percent_class_and_identity": "passed"
+  },
+  "limitations": [
+    "No SSH or server operations",
+    "No formal training/full-data val/test",
+    "No batch16/640 two-task GPU0 capacity test",
+    "Real Linux tmux/POSIX signals not exercised",
+    "Native half checkpoint and restarted worker streams do not imply bitwise uninterrupted equivalence",
+    "Parent v5 was aspect resize+LetterBox; pilot additionally corrects train stretch"
+  ],
+  "raw_evidence": {
+    "gpu-smoke-final/coco_b19_smoke.json": {
+      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final\\coco_b19_smoke.json",
+      "sha256": "41cb8f988553a8c983085dbf0cb51b9f3ef551f10886a539d11ee58ce7a1a186"
+    },
+    "cpu-smoke-final/smoke.json": {
+      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\cpu-smoke-final\\smoke.json",
+      "sha256": "074ba73a246f9af270ef8ff09e09eebf169f9432be017b8b6f40eb5f2e8036e5"
+    },
+    "local-preflight-final/model_check.json": {
+      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\local-preflight-final\\model_check.json",
+      "sha256": "fb32528eb7642bfc8e8e55e3b1b41522b9017a22f7e3f7da73da04fa9a736e2b"
+    },
+    "gpu-smoke-final/summary.json": {
+      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final\\summary.json",
+      "sha256": "30e49cdde51d215d9ae1ee92df6280502ec5ce2f8042e2fae76a150d1971388f"
+    },
+    "gpu-smoke-final/evaluation/val_unified_metrics.json": {
+      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final\\evaluation\\val_unified_metrics.json",
+      "sha256": "e7b54233aeb3be75b28e2dd19b5586e4716b5299332addcb7725ab74b3375ed6"
+    },
+    "gpu-smoke-final/evaluation/test_unified_metrics.json": {
+      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final\\evaluation\\test_unified_metrics.json",
+      "sha256": "e02124c7995645094c137bc5a587fe92cc439738b8b5873f0c252acd75696c51"
+    },
+    "gpu-smoke-final.log": {
+      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\gpu-smoke-final.log",
+      "sha256": "051957caab1fff3023f2146f3f7e65c55485240fec2da78760d508365956d8cc"
+    },
+    "cpu-smoke-final.log": {
+      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\cpu-smoke-final.log",
+      "sha256": "c78ed6b6b702d949b9f7cb043afb7c8a35ec7c66413c85684c814e001cfa501d"
+    },
+    "asset-reuse-check.log": {
+      "path": "C:\\Users\\o'v'o\\.codex\\worktrees\\yolov5m-coco-b19-pilot\\Crack_RTDETR\\outputs\\yolov5m-coco-b19-pilot\\asset-reuse-check.log",
+      "sha256": "0c3f21cf57a4cba873e17576245f6c860f473e0b21cb8aee8d8eaaa2c0348464"
+    }
+  },
+  "failed_attempts_preserved": [
+    "preflight-01: missing optional dependencies in new venv",
+    "gpu-smoke-01 and 02: plotting compatibility indentation; fixed before final checks"
+  ]
+}
