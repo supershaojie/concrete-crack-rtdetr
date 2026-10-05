@@ -38,7 +38,7 @@
 
 默认 `pack` 是只读审查包，排除 .pt，并明确不是权重备份；`--include-weights` 在合法完成后包含 best/last及哈希。收集配置、args、环境、初始化、优化器、增强、CSV/trace、状态/日志、GT/预测/公共指标、实现及公共协议和清单校验和；不装整个数据集、venv、vendor或重复缓存。训练中的审查包标记 `SNAPSHOT_INCOMPLETE_NOT_FORMAL_RESULTS`。
 
-`archive-config` 将候选 NOT_RUN 或真实冻结配置/身份/实际 args/轻量结果导出到 `docs/comparison/archives/yolov13l`。生成文件不会自动提交推送；Git 操作步骤见交付文档。训练期间归档写入 Git 可跟踪路径会使 worktree 变脏，因此完成 finalize/pack 后再归档并提交；需要继续原 run 时回到其冻结实施 SHA。
+`archive-config` 将候选 NOT_RUN 或真实冻结配置/身份/实际 args/轻量结果导出到 `docs/comparison/archives/yolov13l`，也接受显式 `--out`。生成文件不会自动提交推送；交付文档使用独立归档 worktree 和分支保存轻量证据，使训练 worktree 始终保持其冻结实施 SHA 和 clean 状态。直接写到训练 worktree 的可跟踪路径会使它变脏，提交后也改变 HEAD；此时必须恢复原冻结身份才能继续操作该 run。
 
 `measure` 可计数实际 nc1 fused/unfused 的 Conv/Linear/mm/bmm，包含执行的 AAttn/HyperACE 矩阵乘法，MACs×2。报告明确不含 BN、激活、softmax/exp、池化、门控/逐元素、插值、decode/NMS 等，不将该部分统计称为完整 FLOPs。作者自动 summary 的 THOP 数字不是本工具的完整复杂度证据。未做独占硬件速度实验，并行 GPU 的时间不能作为论文速度。
 
