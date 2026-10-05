@@ -1,0 +1,1439 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-05T19:15:56.517047+00:00",
+  "delivery_local_date": "2026-10-06",
+  "timezone": "Asia/Shanghai",
+  "scope": "IMPLEMENTATION_DELIVERY_WITH_LOCAL_SYNTHETIC_VERIFICATION; NO_FORMAL_SERVER_TRAINING",
+  "git": {
+    "branch": "bench/yolo26m-configurable",
+    "worktree": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable",
+    "base_sha": "a08b072a4608dfaa92e7f30a5b3dd0c1301d2a87",
+    "implementation_sha": "a25e6379be06970f1aa02fbb85d2c9a614a6436f",
+    "implementation_direct_parent_sha": "554f4533b1ac1ecf87fd7116cf9e33f8d7e128e9",
+    "later_documentation_head_is_not_frozen_training_identity": true,
+    "remote": "https://github.com/supershaojie/concrete-crack-rtdetr.git",
+    "push_verification": "Verify final documentation HEAD against ls-remote after committing; reported separately in delivery response."
+  },
+  "actual_source": {
+    "adapter_sha256": "3d167ae0c900297e22a18c8368f9231c90f623d28e601b2b7370c3ff461ba048",
+    "commit": "f2d3aed634a5b0e4828024718d4a61ab2f83fb19",
+    "patch_sha256": "5ac9d7d7ae159abd273d83d9b855e5964da848d54cc4f43b6dcca7a84b809e06",
+    "patched_source_sha256": "76c48978100e85144a1626e50641000031940768468a3178de0ea54389bea4bb",
+    "python": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.envs\\yolo26m-configurable\\Scripts\\python.exe",
+    "settings_dir": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\yolo26m-configurable-validation\\cuda-runtime\\ultralytics-settings",
+    "ultralytics_file": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.vendor\\yolo26m-configurable\\ultralytics-v8.4.0\\ultralytics\\__init__.py",
+    "version": "8.4.0",
+    "adapter_sha256_at_delivery": "3d167ae0c900297e22a18c8368f9231c90f623d28e601b2b7370c3ff461ba048",
+    "source_worktree_verified_again_at_delivery": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.vendor\\yolo26m-configurable\\ultralytics-v8.4.0",
+    "lock": {
+      "commit": "f2d3aed634a5b0e4828024718d4a61ab2f83fb19",
+      "compatibility_note": "Verified local paths including apostrophes; role-based bias warmup, original per-group target LR; epoch-boundary last optimizer step and pending gradient retention. No model/loss/assigner/MuSGD/postprocessing patch. Native torch_load already sets weights_only=False.",
+      "license": "AGPL-3.0",
+      "license_sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+      "patch": "patches/0001-local-path-warmup-resume.patch",
+      "patch_sha256": "5ac9d7d7ae159abd273d83d9b855e5964da848d54cc4f43b6dcca7a84b809e06",
+      "patched_source_sha256": "76c48978100e85144a1626e50641000031940768468a3178de0ea54389bea4bb",
+      "repository": "https://github.com/ultralytics/ultralytics.git",
+      "tag": "v8.4.0",
+      "version": "8.4.0",
+      "weights": {
+        "filename": "yolo26m.pt",
+        "url": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m.pt",
+        "task": "detect",
+        "pretraining": "COCO 80 classes",
+        "bytes": 44255705,
+        "sha256": "401cea9ab23ad19246ff7744859816bc599f350e93c9dd30367b6f0a0745d0b7",
+        "download_verified": true,
+        "expected_identity_source": "official GitHub release metadata; verify actual file before loading",
+        "verification_scope": "Actual delivery file matched bytes/SHA256; every later file must be rechecked. No server verification claim."
+      },
+      "model": "YOLO26m",
+      "model_yaml": "ultralytics/cfg/models/26/yolo26.yaml",
+      "scale": "m",
+      "scaling": [
+        0.5,
+        1.0,
+        512
+      ],
+      "end2end": true,
+      "reg_max": 1,
+      "critical_source_sha256": {
+        "ultralytics/optim/muon.py": "0ae6a4e0b39c555116221626e16cc69b0c3b9e17d1d4dfee40ea4b3d7ee057e7",
+        "ultralytics/engine/trainer.py": "837d2135d367a3101cb7eb8afcd5adf408d6fb257a8b0d5c67cfd819a4299e1a",
+        "ultralytics/utils/loss.py": "4fee4c40850e967605bed7bb72f36f6b926fbf2e5af3808c69f961cd786d59f4",
+        "ultralytics/nn/modules/head.py": "1f7eb0a5a37f85bf3ebf396e15f47618b8ec645dce84fd5bd289e1d6fd19dc1e",
+        "ultralytics/cfg/models/26/yolo26.yaml": "aca5c9d17afbfe843335d7b3abd930fe52af9946621f6fa289dc5d2b2f56d462"
+      }
+    }
+  },
+  "official_asset": {
+    "actual_file_verified": true,
+    "bytes": 44255705,
+    "sha256": "401cea9ab23ad19246ff7744859816bc599f350e93c9dd30367b6f0a0745d0b7",
+    "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.runtime\\yolo26m-configurable\\assets\\yolo26m.pt",
+    "actual_file_sha256_rechecked_at_delivery": "401cea9ab23ad19246ff7744859816bc599f350e93c9dd30367b6f0a0745d0b7"
+  },
+  "environment": {
+    "cpu_nms": "passed",
+    "pip_freeze_sha256": "333f62a507a5bf524609330047b2623e778a4f8fabeee1502f6f20b7b17690f9",
+    "python": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.envs\\yolo26m-configurable\\Scripts\\python.exe",
+    "python_executable_sha256": "8e515852328dac2170914937e804e24c5ddf273412441efa16709c1f1f651ac2",
+    "python_version": "3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]",
+    "sys_base_prefix": "D:\\miniconda3\\envs\\rtdetr",
+    "sys_prefix": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.envs\\yolo26m-configurable",
+    "torch_cuda_build": "11.8",
+    "versions": {
+      "matplotlib": "3.9.4",
+      "numpy": "1.26.4",
+      "opencv-python": "4.10.0.84",
+      "pandas": "2.2.3",
+      "pillow": "11.3.0",
+      "polars": "1.8.2",
+      "pyyaml": "6.0.3",
+      "scipy": "1.13.1",
+      "torch": "2.7.1+cu118",
+      "torchvision": "0.22.1+cu118",
+      "ultralytics-thop": "2.0.18"
+    }
+  },
+  "configuration": {
+    "common_field_count": 41,
+    "unchanged_common_values_from_v8_reference_via_fixed_yolo11_plan": 40,
+    "explicit_common_difference": {
+      "optimizer": {
+        "reference": "SGD",
+        "yolo26m": "MuSGD"
+      }
+    },
+    "default_equals_first_plan": true,
+    "planned_default": {
+      "epochs": 200,
+      "patience": 50,
+      "batch": 16,
+      "imgsz": 640,
+      "workers": 8,
+      "device": 0,
+      "seed": 42,
+      "deterministic": true,
+      "amp": true,
+      "cache": false,
+      "rect": false,
+      "multi_scale": false,
+      "nbs": 64,
+      "optimizer": "MuSGD",
+      "lr0": 0.01,
+      "lrf": 0.01,
+      "momentum": 0.937,
+      "weight_decay": 0.0005,
+      "warmup_epochs": 5.0,
+      "warmup_momentum": 0.8,
+      "warmup_bias_lr": 0.1,
+      "cos_lr": true,
+      "box": 7.5,
+      "cls": 0.5,
+      "dfl": 1.5,
+      "hsv_h": 0.0377,
+      "hsv_s": 0.98,
+      "hsv_v": 0.78,
+      "degrees": 18.2,
+      "translate": 0.26,
+      "scale": 0.95,
+      "shear": 5.85,
+      "perspective": 0.000845,
+      "flipud": 0.065,
+      "fliplr": 0.5,
+      "bgr": 0.0,
+      "mosaic": 1.0,
+      "mixup": 0.234,
+      "cutmix": 0.065,
+      "copy_paste": 0.0,
+      "close_mosaic": 5
+    },
+    "first_formal_run_status": "NOT_RUN",
+    "first_formal_run_directory_exists": false,
+    "unknown_MuSGD_internal_overrides_rejected": [
+      "muon",
+      "sgd",
+      "muon_w",
+      "sgd_w",
+      "beta2"
+    ]
+  },
+  "initialization": {
+    "initialization_type": "coco_detection_pretrained",
+    "pretraining_source": "official COCO detection (80 classes)",
+    "source_url": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m.pt",
+    "source_bytes": 44255705,
+    "source_sha256": "401cea9ab23ad19246ff7744859816bc599f350e93c9dd30367b6f0a0745d0b7",
+    "checkpoint_sha256": "401cea9ab23ad19246ff7744859816bc599f350e93c9dd30367b6f0a0745d0b7",
+    "model_yaml_sha256": "5336271d67d8cd38ed88c952eda27e7be992f7e82d61e4988f3bb66913f1c8fc",
+    "scale": "m",
+    "nc": 1,
+    "end2end": true,
+    "reg_max": 1,
+    "source_tensors": 768,
+    "destination_tensors": 768,
+    "transferred_tensors": 756,
+    "pretrained_tensors_loaded": 756,
+    "transferred_elements": 21829204,
+    "matching_values_verified_before_first_update": true,
+    "missing_or_reshaped_keys": [
+      "model.23.cv3.0.2.bias",
+      "model.23.cv3.0.2.weight",
+      "model.23.cv3.1.2.bias",
+      "model.23.cv3.1.2.weight",
+      "model.23.cv3.2.2.bias",
+      "model.23.cv3.2.2.weight",
+      "model.23.one2one_cv3.0.2.bias",
+      "model.23.one2one_cv3.0.2.weight",
+      "model.23.one2one_cv3.1.2.bias",
+      "model.23.one2one_cv3.1.2.weight",
+      "model.23.one2one_cv3.2.2.bias",
+      "model.23.one2one_cv3.2.2.weight"
+    ],
+    "skip_reasons": {
+      "model.23.cv3.0.2.bias": {
+        "reason": "nc80 -> nc1 class-output dimension only",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ]
+      },
+      "model.23.cv3.0.2.weight": {
+        "reason": "nc80 -> nc1 class-output dimension only",
+        "source_shape": [
+          80,
+          256,
+          1,
+          1
+        ],
+        "target_shape": [
+          1,
+          256,
+          1,
+          1
+        ]
+      },
+      "model.23.cv3.1.2.bias": {
+        "reason": "nc80 -> nc1 class-output dimension only",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ]
+      },
+      "model.23.cv3.1.2.weight": {
+        "reason": "nc80 -> nc1 class-output dimension only",
+        "source_shape": [
+          80,
+          256,
+          1,
+          1
+        ],
+        "target_shape": [
+          1,
+          256,
+          1,
+          1
+        ]
+      },
+      "model.23.cv3.2.2.bias": {
+        "reason": "nc80 -> nc1 class-output dimension only",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ]
+      },
+      "model.23.cv3.2.2.weight": {
+        "reason": "nc80 -> nc1 class-output dimension only",
+        "source_shape": [
+          80,
+          256,
+          1,
+          1
+        ],
+        "target_shape": [
+          1,
+          256,
+          1,
+          1
+        ]
+      },
+      "model.23.one2one_cv3.0.2.bias": {
+        "reason": "nc80 -> nc1 class-output dimension only",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ]
+      },
+      "model.23.one2one_cv3.0.2.weight": {
+        "reason": "nc80 -> nc1 class-output dimension only",
+        "source_shape": [
+          80,
+          256,
+          1,
+          1
+        ],
+        "target_shape": [
+          1,
+          256,
+          1,
+          1
+        ]
+      },
+      "model.23.one2one_cv3.1.2.bias": {
+        "reason": "nc80 -> nc1 class-output dimension only",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ]
+      },
+      "model.23.one2one_cv3.1.2.weight": {
+        "reason": "nc80 -> nc1 class-output dimension only",
+        "source_shape": [
+          80,
+          256,
+          1,
+          1
+        ],
+        "target_shape": [
+          1,
+          256,
+          1,
+          1
+        ]
+      },
+      "model.23.one2one_cv3.2.2.bias": {
+        "reason": "nc80 -> nc1 class-output dimension only",
+        "source_shape": [
+          80
+        ],
+        "target_shape": [
+          1
+        ]
+      },
+      "model.23.one2one_cv3.2.2.weight": {
+        "reason": "nc80 -> nc1 class-output dimension only",
+        "source_shape": [
+          80,
+          256,
+          1,
+          1
+        ],
+        "target_shape": [
+          1,
+          256,
+          1,
+          1
+        ]
+      }
+    },
+    "source_only_keys": []
+  },
+  "native_optimizer": {
+    "class": "ultralytics.optim.muon.MuSGD",
+    "decay_semantics": "mixed group applies decay to SGD component after Muon update; other groups use native optimizer rules",
+    "lr0": 0.01,
+    "lr_multiplier_pattern": "(?=.*23)(?=.*cv3)|proto\\.semseg|flow_model",
+    "muon": 0.5,
+    "name": "MuSGD",
+    "precision": "Muon Newton-Schulz native bfloat16; model AMP does not change optimizer algorithm",
+    "sgd": 0.5,
+    "source_sha256": "0ae6a4e0b39c555116221626e16cc69b0c3b9e17d1d4dfee40ea4b3d7ee057e7",
+    "target_momentum_or_beta1": 0.937,
+    "warmup": {
+      "after": "real bias roles start at warmup_bias_lr, others at zero; target each initial_lr*lf(epoch)",
+      "before": "native j==0 identifies bias; mismatches native v8.4.0 group order",
+      "patch_sha256": "5ac9d7d7ae159abd273d83d9b855e5964da848d54cc4f43b6dcca7a84b809e06",
+      "warmup_bias_lr": 0.1,
+      "warmup_epochs": 5.0,
+      "warmup_momentum": 0.8
+    },
+    "actual_group_summary": [
+      {
+        "index": 0,
+        "tensors": 0,
+        "elements": 0,
+        "empty": true,
+        "initial_lr": 0.03,
+        "use_muon": false,
+        "bias_warmup": false,
+        "weight_decay": 0.0005,
+        "nesterov": true,
+        "roles": []
+      },
+      {
+        "index": 1,
+        "tensors": 0,
+        "elements": 0,
+        "empty": true,
+        "initial_lr": 0.01,
+        "use_muon": false,
+        "bias_warmup": false,
+        "weight_decay": 0.0005,
+        "nesterov": true,
+        "roles": []
+      },
+      {
+        "index": 2,
+        "tensors": 24,
+        "elements": 7168,
+        "empty": false,
+        "initial_lr": 0.03,
+        "use_muon": false,
+        "bias_warmup": false,
+        "weight_decay": 0.0,
+        "nesterov": true,
+        "roles": [
+          "normalization"
+        ]
+      },
+      {
+        "index": 3,
+        "tensors": 100,
+        "elements": 20928,
+        "empty": false,
+        "initial_lr": 0.01,
+        "use_muon": false,
+        "bias_warmup": false,
+        "weight_decay": 0.0,
+        "nesterov": true,
+        "roles": [
+          "normalization"
+        ]
+      },
+      {
+        "index": 4,
+        "tensors": 30,
+        "elements": 7174,
+        "empty": false,
+        "initial_lr": 0.03,
+        "use_muon": false,
+        "bias_warmup": true,
+        "weight_decay": 0.0,
+        "nesterov": true,
+        "roles": [
+          "bias"
+        ]
+      },
+      {
+        "index": 5,
+        "tensors": 106,
+        "elements": 20952,
+        "empty": false,
+        "initial_lr": 0.01,
+        "use_muon": false,
+        "bias_warmup": true,
+        "weight_decay": 0.0,
+        "nesterov": true,
+        "roles": [
+          "bias"
+        ]
+      },
+      {
+        "index": 6,
+        "tensors": 30,
+        "elements": 1086976,
+        "empty": false,
+        "initial_lr": 0.03,
+        "use_muon": true,
+        "bias_warmup": false,
+        "weight_decay": 0.0005,
+        "nesterov": true,
+        "roles": [
+          "weight"
+        ]
+      },
+      {
+        "index": 7,
+        "tensors": 106,
+        "elements": 20631232,
+        "empty": false,
+        "initial_lr": 0.01,
+        "use_muon": true,
+        "bias_warmup": false,
+        "weight_decay": 0.0005,
+        "nesterov": true,
+        "roles": [
+          "weight"
+        ]
+      }
+    ],
+    "full_names_shapes_and_options": {
+      "path": "outputs/y26_cli_a25e637/default.json",
+      "bytes": 98826,
+      "sha256": "9a7604c186557aca722c52c4a915dbbba2b7547203110bbc6252fc75954510f7",
+      "storage": "ignored local verification output; not committed to Git"
+    },
+    "actual_current_code_default_and_first_plan_construction": [
+      {
+        "name": "default",
+        "argv": [
+          "C:/Program Files/Git/bin/bash.exe",
+          "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\scripts\\autodl_yolo26m_configurable.sh",
+          "check",
+          "--output",
+          "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\y26_cli_a25e637\\default.json",
+          "--python",
+          "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.envs\\yolo26m-configurable\\Scripts\\python.exe"
+        ],
+        "exit_code": 0,
+        "actual_class": "ultralytics.optim.muon.MuSGD",
+        "code_sha": "a25e6379be06970f1aa02fbb85d2c9a614a6436f",
+        "report": {
+          "path": "outputs/y26_cli_a25e637/default.json",
+          "bytes": 98826,
+          "sha256": "9a7604c186557aca722c52c4a915dbbba2b7547203110bbc6252fc75954510f7",
+          "storage": "ignored local verification output; not committed to Git"
+        }
+      },
+      {
+        "name": "first_plan",
+        "argv": [
+          "C:/Program Files/Git/bin/bash.exe",
+          "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\scripts\\autodl_yolo26m_configurable.sh",
+          "check",
+          "--output",
+          "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\y26_cli_a25e637\\first_plan.json",
+          "--python",
+          "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.envs\\yolo26m-configurable\\Scripts\\python.exe",
+          "--config",
+          "/d/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-bench-yolo26m-configurable/benchmarks/comparison/yolo26m/configs/y26m_musgd_aug_x13_01.yaml"
+        ],
+        "exit_code": 0,
+        "actual_class": "ultralytics.optim.muon.MuSGD",
+        "code_sha": "a25e6379be06970f1aa02fbb85d2c9a614a6436f",
+        "report": {
+          "path": "outputs/y26_cli_a25e637/first_plan.json",
+          "bytes": 98826,
+          "sha256": "9a7604c186557aca722c52c4a915dbbba2b7547203110bbc6252fc75954510f7",
+          "storage": "ignored local verification output; not committed to Git"
+        }
+      }
+    ]
+  },
+  "production_dataset_read_only_preflight": {
+    "data_root": "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det",
+    "data_yaml": "D:\\MyProjects\\Crack_RTDETR\\configs\\crack_autodl.yaml",
+    "data_yaml_sha256": "08b481f8735ce5c44a3b7304f4e4774d3cb32b45348e0ecb1606bd825d223f55",
+    "dataset_identity_sha256": "3401e485b40398ae096e8fd00101cae38b607ee1d6d1b5d5abba5c443e273483",
+    "errors": [],
+    "identity_algorithm": "light_v1_relative_paths_label_bytes_image_sizes_NO_image_content_hash",
+    "limits": "No full image hash/decode/family audit; existing public historical evidence remains separate.",
+    "schema_version": 1,
+    "splits": {
+      "test": {
+        "boxes": 6663,
+        "empty_labels": 0,
+        "images": 864,
+        "label_inventory_sha256": "1fd97357e0928f316204804936136c0250a4b0d8d14157c8e9e6ab56b9c92c51",
+        "labels": 864,
+        "orphan_labels": [],
+        "split_paths_sha256": "ec02d70a082a61552c7851ce22ea9187608f7aa5641f627e59dcdf4d8b349184"
+      },
+      "train": {
+        "boxes": 45573,
+        "empty_labels": 0,
+        "images": 6048,
+        "label_inventory_sha256": "9670978ddfb70e47e0805a04cd6160f72d86d3f82a0c06158a865de966e2267d",
+        "labels": 6048,
+        "orphan_labels": [],
+        "split_paths_sha256": "dc649b74f626d6fc6411fa55143f16d26562482cc838688529f215066b5f6c77"
+      },
+      "val": {
+        "boxes": 12840,
+        "empty_labels": 0,
+        "images": 1728,
+        "label_inventory_sha256": "0acca604d6d32e06cc7761947774529c97deee724a6cd0eaed910d05a29c61fd",
+        "labels": 1728,
+        "orphan_labels": [],
+        "split_paths_sha256": "ced5eb266b3447cd74f2975cbc6daf48c5ae5b1324390aab2bce0c4e0a13cf03"
+      }
+    },
+    "status": "LIGHT_CHECKED",
+    "matches_reference_dataset_identity": true,
+    "formal_training_started": false,
+    "historical_split_and_same_source_cross_split_audit_preserved": true,
+    "same_source_leakage_resolved": false,
+    "full_image_content_hash_performed": false
+  },
+  "checks": {
+    "module_unittest": {
+      "executed": 49,
+      "passed": 48,
+      "skipped": 1,
+      "failed": 0,
+      "skip_reason": "POSIX signal process termination unavailable on Windows",
+      "log": {
+        "path": "outputs/y26_unit_tests_a25e637.log",
+        "bytes": 60351,
+        "sha256": "2c5c6fd26107acc9e9b372c375c70adb12519059649e662b250f56d576e5ffc7",
+        "storage": "ignored local verification output; not committed to Git"
+      }
+    },
+    "public_preparation_unittest": {
+      "executed": 5,
+      "passed": 5,
+      "failed": 0,
+      "log": {
+        "path": "outputs/y26_public_tests.log",
+        "bytes": 758,
+        "sha256": "773a3f2770b1757b87164e7185b790f03c0fd25c4b560b0fa8e2bc205e08f914",
+        "storage": "ignored local verification output; not committed to Git"
+      }
+    },
+    "bash_wrapper_cli": {
+      "passed": 10,
+      "commands": [
+        {
+          "argv": [
+            "C:/Program Files/Git/bin/bash.exe",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\scripts\\autodl_yolo26m_configurable.sh",
+            "--help"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "C:/Program Files/Git/bin/bash.exe",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\scripts\\autodl_yolo26m_configurable.sh",
+            "check-config",
+            "--python",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.envs\\yolo26m-configurable\\Scripts\\python.exe"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "C:/Program Files/Git/bin/bash.exe",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\scripts\\autodl_yolo26m_configurable.sh",
+            "check-config",
+            "--set",
+            "lr0=0.005",
+            "--set",
+            "momentum=0.9",
+            "--set",
+            "mixup=0.18",
+            "--python",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.envs\\yolo26m-configurable\\Scripts\\python.exe"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "C:/Program Files/Git/bin/bash.exe",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\scripts\\autodl_yolo26m_configurable.sh",
+            "check-config",
+            "--set",
+            "optimizer=SGD",
+            "--python",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.envs\\yolo26m-configurable\\Scripts\\python.exe"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "C:/Program Files/Git/bin/bash.exe",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\scripts\\autodl_yolo26m_configurable.sh",
+            "check-config",
+            "--set",
+            "optimizer=AdamW",
+            "--set",
+            "lr0=0.001",
+            "--set",
+            "momentum=0.9",
+            "--python",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.envs\\yolo26m-configurable\\Scripts\\python.exe"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "C:/Program Files/Git/bin/bash.exe",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\scripts\\autodl_yolo26m_configurable.sh",
+            "config",
+            "--out",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\y26_cli_validation_v2\\candidate.yaml",
+            "--set",
+            "lr0=0.005",
+            "--set",
+            "momentum=0.9",
+            "--set",
+            "mixup=0.18",
+            "--python",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.envs\\yolo26m-configurable\\Scripts\\python.exe"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "C:/Program Files/Git/bin/bash.exe",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\scripts\\autodl_yolo26m_configurable.sh",
+            "status",
+            "--run-id",
+            "y26m_musgd_aug_x13_01",
+            "--python",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.envs\\yolo26m-configurable\\Scripts\\python.exe"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "C:/Program Files/Git/bin/bash.exe",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\scripts\\autodl_yolo26m_configurable.sh",
+            "archive-config",
+            "--run-id",
+            "y26m_musgd_aug_x13_01",
+            "--out",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\y26_cli_validation_v2\\planned_archive.json",
+            "--python",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.envs\\yolo26m-configurable\\Scripts\\python.exe"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "C:/Program Files/Git/bin/bash.exe",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\scripts\\autodl_yolo26m_configurable.sh",
+            "check",
+            "--output",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\y26_cli_validation_v2\\default_optimizer.json",
+            "--python",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.envs\\yolo26m-configurable\\Scripts\\python.exe"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "C:/Program Files/Git/bin/bash.exe",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\scripts\\autodl_yolo26m_configurable.sh",
+            "check",
+            "--output",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\y26_cli_validation_v2\\planned_optimizer.json",
+            "--config",
+            "/d/MyProjects/Crack_RTDETR/outputs/worktrees/Crack_RTDETR-bench-yolo26m-configurable/benchmarks/comparison/yolo26m/configs/y26m_musgd_aug_x13_01.yaml",
+            "--python",
+            "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\.envs\\yolo26m-configurable\\Scripts\\python.exe"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "report": {
+        "path": "outputs/y26_cli_validation_v2/commands.json",
+        "bytes": 5318,
+        "sha256": "a0554d783fce24fb9a87d944a8b9e166af49ffd2b4fb561b46134a82e36a4f35",
+        "storage": "ignored local verification output; not committed to Git"
+      },
+      "execution_code_sha": "554f4533b1ac1ecf87fd7116cf9e33f8d7e128e9",
+      "default_and_plan_rechecked_on_fixed_code": true
+    },
+    "bash_syntax": {
+      "status": "PASSED",
+      "argv": [
+        "C:/Program Files/Git/bin/bash.exe",
+        "-n",
+        "scripts/autodl_yolo26m_configurable.sh"
+      ]
+    },
+    "python_ast": {
+      "status": "PASSED",
+      "file_count": 22
+    },
+    "existing_model_entrypoints_help": {
+      "yolo11m": {
+        "path": "outputs/y26_existing_y11_help.log",
+        "bytes": 718,
+        "sha256": "1edaa8bfe9b24652f22acb215dce031091029e977a6b5ea755e8d41ba72ebdcd",
+        "storage": "ignored local verification output; not committed to Git"
+      },
+      "yolov8m": {
+        "path": "outputs/y26_existing_v8_help.log",
+        "bytes": 394,
+        "sha256": "1973418a1b10a10967f805bb33d5a28172e432b3bc8b84a6125e4134c6fd2f9f",
+        "storage": "ignored local verification output; not committed to Git"
+      },
+      "status": "PASSED"
+    },
+    "existing_code_and_public_protocol_unchanged": {
+      "status": "PASSED",
+      "compared_to_sha": "a08b072a4608dfaa92e7f30a5b3dd0c1301d2a87",
+      "paths": [
+        "benchmarks/comparison/yolo11m",
+        "benchmarks/comparison/yolov8m",
+        "benchmarks/comparison/evaluation",
+        "benchmarks/comparison/configs",
+        "benchmarks/comparison/common.py",
+        "benchmarks/comparison/dataset.py",
+        "scripts/autodl_yolo11m_configurable.sh",
+        "scripts/autodl_yolov8m_configurable.sh"
+      ]
+    },
+    "server_document_bash_blocks": {
+      "bash_blocks": 11,
+      "all_syntax_passed": true,
+      "execution": "syntax_only_no_training",
+      "results": [
+        {
+          "block": 1,
+          "exit_code": 0
+        },
+        {
+          "block": 2,
+          "exit_code": 0
+        },
+        {
+          "block": 3,
+          "exit_code": 0
+        },
+        {
+          "block": 4,
+          "exit_code": 0
+        },
+        {
+          "block": 5,
+          "exit_code": 0
+        },
+        {
+          "block": 6,
+          "exit_code": 0
+        },
+        {
+          "block": 7,
+          "exit_code": 0
+        },
+        {
+          "block": 8,
+          "exit_code": 0
+        },
+        {
+          "block": 9,
+          "exit_code": 0
+        },
+        {
+          "block": 10,
+          "exit_code": 0
+        },
+        {
+          "block": 11,
+          "exit_code": 0
+        }
+      ],
+      "report": "outputs/y26_document_commands_syntax.json"
+    }
+  },
+  "cuda_smoke": {
+    "status": "PASSED_CUDA_SMOKE_ONLY",
+    "run": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\yolo26m-configurable-validation\\SMOKE_ONLY_cuda_217b6a21",
+    "run_code_sha": "a25e6379be06970f1aa02fbb85d2c9a614a6436f",
+    "worktree_dirty_at_freeze": false,
+    "formal_training_started": false,
+    "scope_note": "Synthetic verification only; no production data training or accuracy claim",
+    "cuda_device": "NVIDIA GeForce RTX 2060",
+    "budget": {
+      "batch": 2,
+      "epochs": 2,
+      "imgsz": 64,
+      "nbs": 2,
+      "smoke_only_initial_loss_scale": 1,
+      "workers": 0
+    },
+    "actual_optimizer_updates": 4,
+    "saved_optimizer_steps": 2,
+    "optimizer_buffers": {
+      "populated_mixed_tensors": 136,
+      "populated_other_tensors": 260
+    },
+    "interrupted_epoch1_resume": true,
+    "E2ELoss_resume_matches_checkpoint": true,
+    "completed_training": {
+      "best_checkpoint": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\yolo26m-configurable-validation\\SMOKE_ONLY_cuda_217b6a21\\train\\weights\\best.pt",
+      "best_epoch": 2,
+      "best_sha256": "623e3ee0d6d6bec5f1a39801c6f0166c2feb71c16d887feb313457fe14aa1c75",
+      "best_training_val_mAP50_95": 0.0,
+      "completed_epoch": 2,
+      "configured_epochs": 2,
+      "exit_code": 0,
+      "last_checkpoint": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\yolo26m-configurable-validation\\SMOKE_ONLY_cuda_217b6a21\\train\\weights\\last.pt",
+      "last_sha256": "623e3ee0d6d6bec5f1a39801c6f0166c2feb71c16d887feb313457fe14aa1c75",
+      "stop_reason": "epoch_limit"
+    },
+    "summary": {
+      "best_checkpoint": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\yolo26m-configurable-validation\\SMOKE_ONLY_cuda_217b6a21\\train\\weights\\best.pt",
+      "best_epoch": 2,
+      "best_sha256": "623e3ee0d6d6bec5f1a39801c6f0166c2feb71c16d887feb313457fe14aa1c75",
+      "completed_epoch": 2,
+      "config_sha256": "45d6b4a117cc50958f566e873c1130ade8a36267c5486514f2303688302af7ba",
+      "dataset_identity_sha256": "41cf731d0ff9e0c067189084051ecad0200acad60f2e85a5d0618d97a052061d",
+      "errors": {
+        "final_test": null,
+        "public_val": null,
+        "training": null
+      },
+      "final_test_status": "completed",
+      "last_checkpoint": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\yolo26m-configurable-validation\\SMOKE_ONLY_cuda_217b6a21\\train\\weights\\last.pt",
+      "last_sha256": "623e3ee0d6d6bec5f1a39801c6f0166c2feb71c16d887feb313457fe14aa1c75",
+      "model_code_sha": "a25e6379be06970f1aa02fbb85d2c9a614a6436f",
+      "native_training_selection_separate": true,
+      "output": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\yolo26m-configurable-validation\\SMOKE_ONLY_cuda_217b6a21",
+      "preflight_status": "completed",
+      "public_val_status": "completed",
+      "scope": "SMOKE_ONLY",
+      "status": "finalized",
+      "stop_reason": "epoch_limit",
+      "training_exit_code": 0,
+      "training_status": "completed",
+      "tuning_status": "completed",
+      "unified_metrics_percent": {
+        "test": {
+          "AP50": 0.0,
+          "AP75": 0.0,
+          "P": 0.0,
+          "R": 0.0,
+          "mAP50-95": 0.0
+        },
+        "val": {
+          "AP50": 0.0,
+          "AP75": 0.0,
+          "P": 0.0,
+          "R": 0.0,
+          "mAP50-95": 0.0
+        }
+      }
+    },
+    "public_val": {
+      "AP50": 0.0,
+      "AP75": 0.0,
+      "P": 0.0,
+      "R": 0.0,
+      "mAP50-95": 0.0
+    },
+    "public_test": {
+      "AP50": 0.0,
+      "AP75": 0.0,
+      "P": 0.0,
+      "R": 0.0,
+      "mAP50-95": 0.0
+    },
+    "val_export": {
+      "NMS_IoU": "NOT_APPLICABLE",
+      "branch": "one-to-one",
+      "checkpoint_sha256": "623e3ee0d6d6bec5f1a39801c6f0166c2feb71c16d887feb313457fe14aa1c75",
+      "extra_IoU_NMS": false,
+      "images": 2,
+      "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\yolo26m-configurable-validation\\SMOKE_ONLY_cuda_217b6a21\\predictions\\val.jsonl.gz",
+      "precision": {
+        "attention_actual_dtypes": [
+          "torch.float32"
+        ],
+        "attention_implementation": "pinned Attention uses explicit q@k, softmax, v@attention",
+        "autocast": false,
+        "cudnn_allow_tf32": false,
+        "float32_matmul_precision": "highest",
+        "input_dtype": "torch.float32",
+        "matmul_allow_tf32": false,
+        "model_dtype": "torch.float32"
+      },
+      "settings": {
+        "agnostic_nms": false,
+        "augment": false,
+        "batch": 16,
+        "classes": null,
+        "conf": 0.001,
+        "device": 0,
+        "half": false,
+        "imgsz": 640,
+        "iou": 0.7,
+        "max_det": 300,
+        "rect": false,
+        "save": false,
+        "save_conf": false,
+        "save_txt": false,
+        "seed": 42,
+        "verbose": false,
+        "workers": 0
+      },
+      "sha256": "1f05d0fdb74366e4fba203628b674cf8cc97ad37608f030fb460ad09a11c35a6",
+      "status": "completed"
+    },
+    "test_export": {
+      "NMS_IoU": "NOT_APPLICABLE",
+      "branch": "one-to-one",
+      "checkpoint_sha256": "623e3ee0d6d6bec5f1a39801c6f0166c2feb71c16d887feb313457fe14aa1c75",
+      "extra_IoU_NMS": false,
+      "images": 2,
+      "path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\yolo26m-configurable-validation\\SMOKE_ONLY_cuda_217b6a21\\predictions\\test.jsonl.gz",
+      "precision": {
+        "attention_actual_dtypes": [
+          "torch.float32"
+        ],
+        "attention_implementation": "pinned Attention uses explicit q@k, softmax, v@attention",
+        "autocast": false,
+        "cudnn_allow_tf32": false,
+        "float32_matmul_precision": "highest",
+        "input_dtype": "torch.float32",
+        "matmul_allow_tf32": false,
+        "model_dtype": "torch.float32"
+      },
+      "settings": {
+        "agnostic_nms": false,
+        "augment": false,
+        "batch": 16,
+        "classes": null,
+        "conf": 0.001,
+        "device": 0,
+        "half": false,
+        "imgsz": 640,
+        "iou": 0.7,
+        "max_det": 300,
+        "rect": false,
+        "save": false,
+        "save_conf": false,
+        "save_txt": false,
+        "seed": 42,
+        "verbose": false,
+        "workers": 0
+      },
+      "sha256": "7293af41585071334e5a5dddc8e2865e6cc492eb72652445189171434ab6d208",
+      "status": "completed"
+    },
+    "preflight": {
+      "scope": "SMOKE_ONLY_PREFLIGHT",
+      "device": "cuda:0",
+      "batch": 2,
+      "imgsz": 64,
+      "fp32_backward": "passed",
+      "fp32_loss": 15.94362735748291,
+      "cuda_amp_accuracy": "passed",
+      "native_bfloat16_matrix_operations": "passed with actual MuSGD update",
+      "gradient_tensors": 396,
+      "model_copy_only": true,
+      "formal_optimizer_updates": 0,
+      "copy_only_optimizer_updates": 1,
+      "rng_restored": true,
+      "optimizer_buffers": {
+        "populated_mixed_tensors": 136,
+        "populated_other_tensors": 260
+      },
+      "E2ELoss": {
+        "after_copy_only_update": {
+          "final_o2m": 0.1,
+          "o2m": 0.1,
+          "o2m_copy": 0.8,
+          "o2o": 0.9,
+          "total": 1.0,
+          "updates": 1
+        },
+        "before": {
+          "final_o2m": 0.1,
+          "o2m": 0.8,
+          "o2m_copy": 0.8,
+          "o2o": 0.19999999999999996,
+          "total": 1.0,
+          "updates": 0
+        },
+        "formal_update_calls": 0,
+        "restored": true
+      },
+      "sample": {
+        "box_geometry": "normalized xywh -> independent x/y stretch verified",
+        "original_height": 35,
+        "original_width": 57,
+        "square_stretch": [
+          64,
+          64
+        ]
+      },
+      "loss_items": [
+        3.6396639347076416,
+        3.317795753479004,
+        0.0945456475019455
+      ]
+    },
+    "both_detection_branches_updated_parameter_count": 48,
+    "resume": {
+      "accumulate": 1,
+      "criterion": {
+        "final_o2m": 0.1,
+        "o2m": 0.1,
+        "o2m_copy": 0.8,
+        "o2o": 0.9,
+        "total": 1.0,
+        "updates": 1
+      },
+      "epoch": 1,
+      "last_opt_step": 1,
+      "limits": "Epoch-boundary recovery; worker RNG, prefetch buffers, sampler cursor and Mosaic buffer are not serialized. No bitwise continuation claim.",
+      "optimizer_steps": 2,
+      "optimizer_updates": 2,
+      "original_initialization_preserved": true,
+      "overflow_skips": 0,
+      "restored": [
+        "FP32 dual-branch model",
+        "native optimizer and both MuSGD buffers",
+        "FP32 EMA",
+        "AMP scaler",
+        "scheduler",
+        "E2ELoss epoch schedule",
+        "RNG",
+        "stopper",
+        "pending gradients",
+        "loader generators",
+        "augmentation phase/counters"
+      ]
+    },
+    "same_original_train_directory_resume": true,
+    "no_accuracy_claim": true,
+    "report": {
+      "path": "outputs/y26_cuda_smoke_v2.json",
+      "bytes": 139130,
+      "sha256": "5b7bb23cff005ca252b264960743e0470965fe324b2e155aadabca41625d55af",
+      "storage": "ignored local verification output; not committed to Git"
+    },
+    "earlier_failure_and_fix": {
+      "earlier_smoke_code_sha": "554f4533b1ac1ecf87fd7116cf9e33f8d7e128e9",
+      "failure": "Native get_cfg ignored checkpoint save_dir and incremented resume output to train2",
+      "fixed_in_sha": "a25e6379be06970f1aa02fbb85d2c9a614a6436f",
+      "regression_test_added": true,
+      "fresh_clean_head_cuda_smoke_passed": true
+    }
+  },
+  "complexity": {
+    "status": "MEASURED_PARTIAL_SUPPORTED_OPERATOR_COUNT; NOT_FULL_FLOPS",
+    "device": "CPU",
+    "input": [
+      1,
+      3,
+      640,
+      640
+    ],
+    "precision": "FP32",
+    "method": "torch.profiler with_flops with every unsupported operator reported; counted FLOPs are a partial lower bound",
+    "FLOPs_convention": "conv/matmul multiply-add=2; pointwise add/mul use profiler formula; MACs equivalent=FLOPs/2",
+    "measurements": {
+      "full_training_structure_unfused": {
+        "parameters": 21774430,
+        "trainable_parameters_at_measurement": 21774430,
+        "GFLOPs_counted_ops": 74.3386104,
+        "complete_total_GFLOPs": null,
+        "counted_operators": {
+          "aten::add": {
+            "FLOPs": 5546400,
+            "calls": 23
+          },
+          "aten::bmm": {
+            "FLOPs": 245760000,
+            "calls": 4
+          },
+          "aten::conv2d": {
+            "FLOPs": 74085990400,
+            "calls": 136
+          },
+          "aten::mul": {
+            "FLOPs": 1313600,
+            "calls": 3
+          }
+        },
+        "operators_without_FLOP_formula": {
+          "aten::_batch_norm_impl_index": 124,
+          "aten::_convolution": 136,
+          "aten::_reshape_alias": 9,
+          "aten::_softmax": 2,
+          "aten::_to_copy": 3,
+          "aten::_unsafe_view": 6,
+          "aten::alias": 2,
+          "aten::arange": 2,
+          "aten::as_strided": 107,
+          "aten::as_strided_": 140,
+          "aten::batch_norm": 124,
+          "aten::cat": 28,
+          "aten::chunk": 9,
+          "aten::clone": 4,
+          "aten::contiguous": 2,
+          "aten::convolution": 136,
+          "aten::copy_": 10,
+          "aten::detach": 3,
+          "aten::empty": 1028,
+          "aten::empty_like": 128,
+          "aten::empty_strided": 3,
+          "aten::expand": 13,
+          "aten::expand_as": 2,
+          "aten::fill_": 2,
+          "aten::flatten": 1,
+          "aten::floor_divide": 1,
+          "aten::gather": 2,
+          "aten::index": 1,
+          "aten::matmul": 4,
+          "aten::max": 1,
+          "aten::max_pool2d": 3,
+          "aten::max_pool2d_with_indices": 3,
+          "aten::mkldnn_convolution": 136,
+          "aten::narrow": 66,
+          "aten::native_batch_norm": 124,
+          "aten::ones": 2,
+          "aten::permute": 1,
+          "aten::remainder": 1,
+          "aten::repeat": 2,
+          "aten::reshape": 12,
+          "aten::resize_": 137,
+          "aten::resolve_conj": 8,
+          "aten::sigmoid": 1,
+          "aten::silu_": 115,
+          "aten::slice": 66,
+          "aten::softmax": 2,
+          "aten::split": 9,
+          "aten::split_with_sizes": 4,
+          "aten::squeeze_": 2,
+          "aten::sub": 1,
+          "aten::to": 3,
+          "aten::topk": 2,
+          "aten::transpose": 4,
+          "aten::unfold": 6,
+          "aten::unsqueeze": 5,
+          "aten::unsqueeze_": 2,
+          "aten::upsample_nearest2d": 2,
+          "aten::view": 18
+        },
+        "scope": "forward including both heads when unfused; no backward, optimizer or loss; profiling covers conv/matmul/bmm and supported pointwise add/mul only",
+        "uncounted_arithmetic": "BN, activation, softmax, division, reductions, decoding and top-k/ranking have no complete profiler FLOP formula; not silently counted as zero",
+        "output_shape": [
+          1,
+          300,
+          6
+        ],
+        "identity": {
+          "nc": 1,
+          "scale": "m",
+          "reg_max": 1,
+          "end2end": true,
+          "one_to_many_present": true,
+          "one_to_one_present": true
+        }
+      },
+      "official_deployment_fused": {
+        "parameters": 20350223,
+        "trainable_parameters_at_measurement": 1551,
+        "GFLOPs_counted_ops": 68.0928248,
+        "complete_total_GFLOPs": null,
+        "counted_operators": {
+          "aten::add": {
+            "FLOPs": 5546400,
+            "calls": 23
+          },
+          "aten::bmm": {
+            "FLOPs": 245760000,
+            "calls": 4
+          },
+          "aten::conv2d": {
+            "FLOPs": 67840204800,
+            "calls": 112
+          },
+          "aten::mul": {
+            "FLOPs": 1313600,
+            "calls": 3
+          }
+        },
+        "operators_without_FLOP_formula": {
+          "aten::_convolution": 112,
+          "aten::_reshape_alias": 9,
+          "aten::_softmax": 2,
+          "aten::_to_copy": 3,
+          "aten::_unsafe_view": 6,
+          "aten::alias": 2,
+          "aten::arange": 2,
+          "aten::as_strided": 104,
+          "aten::as_strided_": 116,
+          "aten::cat": 26,
+          "aten::chunk": 9,
+          "aten::clone": 4,
+          "aten::contiguous": 2,
+          "aten::convolution": 112,
+          "aten::copy_": 10,
+          "aten::detach": 3,
+          "aten::empty": 236,
+          "aten::empty_like": 4,
+          "aten::empty_strided": 3,
+          "aten::expand": 13,
+          "aten::expand_as": 2,
+          "aten::fill_": 2,
+          "aten::flatten": 1,
+          "aten::floor_divide": 1,
+          "aten::gather": 2,
+          "aten::index": 1,
+          "aten::matmul": 4,
+          "aten::max": 1,
+          "aten::max_pool2d": 3,
+          "aten::max_pool2d_with_indices": 3,
+          "aten::mkldnn_convolution": 112,
+          "aten::narrow": 63,
+          "aten::ones": 2,
+          "aten::permute": 1,
+          "aten::remainder": 1,
+          "aten::repeat": 2,
+          "aten::reshape": 12,
+          "aten::resize_": 113,
+          "aten::resolve_conj": 8,
+          "aten::sigmoid": 1,
+          "aten::silu_": 97,
+          "aten::slice": 63,
+          "aten::softmax": 2,
+          "aten::split": 9,
+          "aten::split_with_sizes": 4,
+          "aten::squeeze_": 2,
+          "aten::sub": 1,
+          "aten::to": 3,
+          "aten::topk": 2,
+          "aten::transpose": 4,
+          "aten::unfold": 6,
+          "aten::unsqueeze": 5,
+          "aten::unsqueeze_": 2,
+          "aten::upsample_nearest2d": 2,
+          "aten::view": 12
+        },
+        "scope": "forward including both heads when unfused; no backward, optimizer or loss; profiling covers conv/matmul/bmm and supported pointwise add/mul only",
+        "uncounted_arithmetic": "BN, activation, softmax, division, reductions, decoding and top-k/ranking have no complete profiler FLOP formula; not silently counted as zero",
+        "output_shape": [
+          1,
+          300,
+          6
+        ],
+        "identity": {
+          "nc": 1,
+          "scale": "m",
+          "reg_max": 1,
+          "end2end": true,
+          "one_to_many_present": false,
+          "one_to_one_present": true
+        }
+      }
+    },
+    "speed": "NOT_RUN; exclusive hardware timing was not performed",
+    "report": {
+      "path": "outputs/y26_complexity.json",
+      "bytes": 88780,
+      "sha256": "1e769c25d20a379a05c4dc6bc8c03d64e19c8c45b2cd8f84544b966f8e4893f5",
+      "storage": "ignored local verification output; not committed to Git"
+    }
+  },
+  "packages": [
+    {
+      "path": "outputs/y26_review_validation.tar.gz",
+      "bytes": 233838,
+      "sha256": "c1fa94fd3895a89565479dc3483904082f38845c7801112787c2e84489d64278",
+      "storage": "ignored local verification output; not committed to Git",
+      "scope": "SMOKE_ONLY_SYNTHETIC_VERIFICATION",
+      "model_code_sha": "a25e6379be06970f1aa02fbb85d2c9a614a6436f",
+      "includes_weights": false,
+      "file_count_excluding_manifest": 96,
+      "tar_member_count": 97,
+      "weights": [
+        {
+          "included": false,
+          "kind": "best",
+          "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\yolo26m-configurable-validation\\SMOKE_ONLY_cuda_217b6a21\\train\\weights\\best.pt",
+          "present": true,
+          "sha256": "623e3ee0d6d6bec5f1a39801c6f0166c2feb71c16d887feb313457fe14aa1c75"
+        },
+        {
+          "included": false,
+          "kind": "last",
+          "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\yolo26m-configurable-validation\\SMOKE_ONLY_cuda_217b6a21\\train\\weights\\last.pt",
+          "present": true,
+          "sha256": "623e3ee0d6d6bec5f1a39801c6f0166c2feb71c16d887feb313457fe14aa1c75"
+        }
+      ],
+      "all_member_bytes_and_sha256_checked": true,
+      "all_original_files_still_match_manifest_sha256": true,
+      "dataset_environment_and_cache_excluded": true
+    },
+    {
+      "path": "outputs/y26_weights_validation.tar.gz",
+      "bytes": 678861952,
+      "sha256": "03e927c4f4d68b1d73b5f76c194c9044459e82b6560c7ce7ffde6bcd8fac2a4f",
+      "storage": "ignored local verification output; not committed to Git",
+      "scope": "SMOKE_ONLY_SYNTHETIC_VERIFICATION",
+      "model_code_sha": "a25e6379be06970f1aa02fbb85d2c9a614a6436f",
+      "includes_weights": true,
+      "file_count_excluding_manifest": 98,
+      "tar_member_count": 99,
+      "weights": [
+        {
+          "included": true,
+          "kind": "best",
+          "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\yolo26m-configurable-validation\\SMOKE_ONLY_cuda_217b6a21\\train\\weights\\best.pt",
+          "present": true,
+          "sha256": "623e3ee0d6d6bec5f1a39801c6f0166c2feb71c16d887feb313457fe14aa1c75"
+        },
+        {
+          "included": true,
+          "kind": "last",
+          "original_path": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolo26m-configurable\\outputs\\yolo26m-configurable-validation\\SMOKE_ONLY_cuda_217b6a21\\train\\weights\\last.pt",
+          "present": true,
+          "sha256": "623e3ee0d6d6bec5f1a39801c6f0166c2feb71c16d887feb313457fe14aa1c75"
+        }
+      ],
+      "all_member_bytes_and_sha256_checked": true,
+      "all_original_files_still_match_manifest_sha256": true,
+      "dataset_environment_and_cache_excluded": true
+    }
+  ],
+  "archives": {
+    "first_plan": {
+      "path": "docs/comparison/archives/yolo26m/y26m_musgd_aug_x13_01_NOT_RUN.json",
+      "status": "NOT_RUN",
+      "model_code_sha": "a25e6379be06970f1aa02fbb85d2c9a614a6436f",
+      "sha256": "30fb418776bb1fcdcd64195a2dddc57abadf2867e628d76945e1c521d50a64ea",
+      "training_state_inherited": false
+    },
+    "actual_smoke": {
+      "status": "SMOKE_ONLY_SYNTHETIC_VERIFICATION",
+      "model_code_sha": "a25e6379be06970f1aa02fbb85d2c9a614a6436f",
+      "report": {
+        "path": "outputs/y26_smoke_archive.json",
+        "bytes": 165197,
+        "sha256": "4b17b22c5ac9c4e1f09d8c1b7589532487649fa7c1e4c0bb6820ba4ce431bd4e",
+        "storage": "ignored local verification output; not committed to Git"
+      }
+    },
+    "generation_is_separate_from_git_commit_and_push": true
+  },
+  "not_run": [
+    {
+      "check": "AutoDL server bootstrap and current environment",
+      "reason": "No remote server session used; independently prepared Windows environment verified instead"
+    },
+    {
+      "check": "Real Linux tmux attach/detach/switch-client",
+      "reason": "Windows host has no real Linux tmux; shell syntax and launcher simulation tests passed"
+    },
+    {
+      "check": "POSIX signal process termination",
+      "reason": "Windows platform; one unittest explicitly skipped"
+    },
+    {
+      "check": "Formal 200 epoch production training and full production val/test inference",
+      "reason": "User instructed delivery without formal server training; only bounded synthetic SMOKE_ONLY run executed"
+    },
+    {
+      "check": "Exclusive hardware speed and complete total FLOPs",
+      "reason": "No isolated timing; profiler unsupported arithmetic reported explicitly"
+    }
+  ],
+  "server_recheck_commands": "docs/comparison/YOLO26M_CONFIGURABLE_SERVER_COMMANDS.md",
+  "evidence_storage_note": "This concise evidence, first planned NOT_RUN archive and server instructions are Git tracked. Referenced ignored logs, source runtime, synthetic weights and packages stay local; they are not formal results or remote server proof.",
+  "main_worktree_preserved": {
+    "branch": "exp-rtdetr-r18-lite-cscef-v4",
+    "head": "f34502c43a88edc9cb1076bd996b9c3fc2d23e31",
+    "tracked_changes": [],
+    "staged_changes": [],
+    "user_untracked_files_left_in_place": true
+  }
+}
