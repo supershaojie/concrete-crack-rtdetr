@@ -1,0 +1,11 @@
+{
+  "initialization_type": "coco_detection_pretrained",
+  "pretraining_source": "official COCO detection (80 classes)",
+  "model_yaml": "ultralytics/cfg/models/11/yolo11.yaml",
+  "scale": "m",
+  "nc": 1,
+  "seed": 42,
+  "source_sha256": "d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95",
+  "source_bytes": 40684120,
+  "source_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11m.pt"
+}
