@@ -133,6 +133,22 @@ class ConfigurableTests(unittest.TestCase):
             trainer.get_dataloader('fixture',batch_size=32,mode='val')
             self.assertEqual(build.call_args.args[1:3],(8,0))
 
+    def test_native_resume_keeps_frozen_train_directory_instead_of_incrementing(self):
+        from ultralytics.cfg import get_save_dir
+        cfg=resolve_config({})
+        run=self.base/'resume_run'; weight=run/'train/weights/last.pt'
+        weight.parent.mkdir(parents=True)
+        saved={**native_recipe(cfg),'project':str(run),'name':'train','save_dir':str(run/'train')}
+        torch.save({'train_args':saved},weight)
+        trainer=ComparisonTrainer.__new__(ComparisonTrainer)
+        trainer.comparison_run=run; trainer.comparison_config=cfg; trainer.comparison_identity={}
+        trainer.args=get_cfg(overrides={**native_recipe(cfg),'resume':str(weight),'model':str(weight)})
+        with patch('adapters.validate_checkpoint'):
+            trainer.check_resume({})
+        self.assertFalse(trainer.args.exist_ok)
+        self.assertEqual(get_save_dir(trainer.args),(run/'train').resolve())
+        self.assertFalse((run/'train2').exists())
+
     def test_venv_path_preserves_symlink_and_checks_prefix(self):
         run,_ = self.freeze()
         with patch('configuration.frozen_config'):

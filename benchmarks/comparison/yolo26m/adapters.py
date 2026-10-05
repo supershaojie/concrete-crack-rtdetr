@@ -364,6 +364,9 @@ class ComparisonTrainer(DetectionTrainer):
             actual = getattr(self.args,key)
             if (str(actual) != str(expected) if key == 'device' else actual != expected):
                 raise ValueError('Native args differ from frozen run: '+key)
+        # get_cfg ignores save_dir in checkpoint overrides; explicitly restore it
+        # before BaseTrainer calls get_save_dir, keeping exist_ok=false unchanged.
+        self.args.save_dir = str((self.comparison_run/'train').resolve())
 
     def setup_model(self):
         source = Path(os.environ['YOLO26M_SOURCE'])

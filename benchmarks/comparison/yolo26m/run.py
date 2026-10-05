@@ -131,6 +131,8 @@ def train(args, manifest, source):
     (run / 'pip_freeze.txt').write_text(subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'], text=True), encoding='utf-8')
     trainer = ComparisonTrainer(overrides=overrides, run=run, manifest=manifest, identity=identity,
                                 config=config, reuse_cache=paths.get('label_cache'))
+    if trainer.save_dir.resolve() != (run/'train').resolve():
+        raise ValueError('Native trainer changed the frozen run output directory')
     write_json(run / 'expanded_train_args.json', vars(trainer.args))
     write_json(run / 'adapter_config.json', {'cutmix':config['cutmix'],
                'initialization_type':initialization_type(config), 'augmentation_source':read_json(HERE/'augmentation.lock.json')})

@@ -43,5 +43,3 @@ def measure_model(args):
         'speed':'not measured here; exclusive-hardware speed remains NOT_RUN'}
     write_json(args.output,result)
     return result
-
-
