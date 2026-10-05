@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "precedence": [
+    "committed_defaults",
+    "config_yaml_or_cloned_recipe",
+    "cli_set"
+  ],
+  "integers": {
+    "epochs": [
+      1,
+      10000
+    ],
+    "patience": [
+      0,
+      10000
+    ],
+    "batch": [
+      1,
+      128
+    ],
+    "workers": [
+      0,
+      128
+    ],
+    "close_mosaic": [
+      0,
+      10000
+    ],
+    "nbs": [
+      1,
+      65536
+    ]
+  },
+  "finite_numbers": {
+    "lr0": [
+      0,
+      1
+    ],
+    "lrf": [
+      0,
+      1
+    ],
+    "momentum": [
+      0,
+      1
+    ],
+    "weight_decay": [
+      0,
+      1
+    ],
+    "warmup_epochs": [
+      0,
+      10000
+    ],
+    "warmup_momentum": [
+      0,
+      1
+    ],
+    "warmup_bias_lr": [
+      0,
+      1
+    ],
+    "box": [
+      0,
+      100
+    ],
+    "cls": [
+      0,
+      100
+    ],
+    "dfl": [
+      0,
+      100
+    ],
+    "hsv_h": [
+      0,
+      1
+    ],
+    "hsv_s": [
+      0,
+      1
+    ],
+    "hsv_v": [
+      0,
+      1
+    ],
+    "degrees": [
+      0,
+      180
+    ],
+    "translate": [
+      0,
+      1
+    ],
+    "scale": [
+      0,
+      1
+    ],
+    "shear": [
+      0,
+      180
+    ],
+    "perspective": [
+      0,
+      0.001
+    ],
+    "flipud": [
+      0,
+      1
+    ],
+    "fliplr": [
+      0,
+      1
+    ],
+    "mosaic": [
+      0,
+      1
+    ],
+    "mixup": [
+      0,
+      1
+    ],
+    "cutmix": [
+      0,
+      1
+    ]
+  },
+  "booleans": [
+    "cos_lr",
+    "amp",
+    "deterministic"
+  ],
+  "optimizer": [
+    "MuSGD",
+    "SGD",
+    "Adam",
+    "AdamW"
+  ],
+  "native_fixed_optimizer_semantics": {
+    "MuSGD": {
+      "muon": 0.5,
+      "sgd": 0.5,
+      "grouping": "pinned build_optimizer; ndim>=2 mixed group; native regex 3x LR",
+      "warmup": "real bias roles; preserve per-group initial_lr"
+    },
+    "Adam_AdamW": {
+      "beta2": 0.999,
+      "eps": 1e-08,
+      "momentum": "beta1"
+    }
+  },
+  "fixed": {
+    "task": "detect",
+    "initialization_type": "coco_detection_pretrained",
+    "model": "yolo26m.pt",
+    "imgsz": 640,
+    "device": 0,
+    "seed": 42,
+    "cache": false,
+    "rect": false,
+    "multi_scale": false,
+    "freeze": null,
+    "resume": false,
+    "fraction": 1.0,
+    "val": true,
+    "copy_paste": 0.0,
+    "erasing": 0.0,
+    "bgr": 0.0,
+    "auto_augment": null,
+    "save": true,
+    "save_period": -1,
+    "plots": true,
+    "exist_ok": false,
+    "pretrained": true,
+    "single_cls": false,
+    "classes": null,
+    "conf": 0.001,
+    "iou": 0.7,
+    "max_det": 300,
+    "agnostic_nms": false,
+    "augment": false
+  },
+  "inactive_detection_fields": [
+    "erasing",
+    "auto_augment"
+  ],
+  "cross_constraints": [
+    "lr0>0",
+    "0<momentum<1",
+    "close_mosaic<=epochs",
+    "warmup_epochs<=epochs",
+    "any positive box/cls/dfl",
+    "Adam warmup_momentum must remain default"
+  ]
+}

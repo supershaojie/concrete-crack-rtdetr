@@ -1,0 +1,40 @@
+{
+  "commit": "f2d3aed634a5b0e4828024718d4a61ab2f83fb19",
+  "compatibility_note": "Verified local paths including apostrophes; role-based bias warmup, original per-group target LR; epoch-boundary last optimizer step and pending gradient retention. No model/loss/assigner/MuSGD/postprocessing patch. Native torch_load already sets weights_only=False.",
+  "license": "AGPL-3.0",
+  "license_sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+  "patch": "patches/0001-local-path-warmup-resume.patch",
+  "patch_sha256": "5ac9d7d7ae159abd273d83d9b855e5964da848d54cc4f43b6dcca7a84b809e06",
+  "patched_source_sha256": "76c48978100e85144a1626e50641000031940768468a3178de0ea54389bea4bb",
+  "repository": "https://github.com/ultralytics/ultralytics.git",
+  "tag": "v8.4.0",
+  "version": "8.4.0",
+  "weights": {
+    "filename": "yolo26m.pt",
+    "url": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m.pt",
+    "task": "detect",
+    "pretraining": "COCO 80 classes",
+    "bytes": 44255705,
+    "sha256": "401cea9ab23ad19246ff7744859816bc599f350e93c9dd30367b6f0a0745d0b7",
+    "download_verified": true,
+    "expected_identity_source": "official GitHub release metadata; verify actual file before loading",
+    "verification_scope": "Actual delivery file matched bytes/SHA256; every later file must be rechecked. No server verification claim."
+  },
+  "model": "YOLO26m",
+  "model_yaml": "ultralytics/cfg/models/26/yolo26.yaml",
+  "scale": "m",
+  "scaling": [
+    0.5,
+    1.0,
+    512
+  ],
+  "end2end": true,
+  "reg_max": 1,
+  "critical_source_sha256": {
+    "ultralytics/optim/muon.py": "0ae6a4e0b39c555116221626e16cc69b0c3b9e17d1d4dfee40ea4b3d7ee057e7",
+    "ultralytics/engine/trainer.py": "837d2135d367a3101cb7eb8afcd5adf408d6fb257a8b0d5c67cfd819a4299e1a",
+    "ultralytics/utils/loss.py": "4fee4c40850e967605bed7bb72f36f6b926fbf2e5af3808c69f961cd786d59f4",
+    "ultralytics/nn/modules/head.py": "1f7eb0a5a37f85bf3ebf396e15f47618b8ec645dce84fd5bd289e1d6fd19dc1e",
+    "ultralytics/cfg/models/26/yolo26.yaml": "aca5c9d17afbfe843335d7b3abd930fe52af9946621f6fa289dc5d2b2f56d462"
+  }
+}
