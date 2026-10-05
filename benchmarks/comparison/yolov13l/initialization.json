@@ -1,0 +1,15 @@
+{
+  "initialization_type": "coco_detection_pretrained",
+  "model": "iMoonLab YOLOv13-L",
+  "scale": "l",
+  "source_nc": 80,
+  "target_nc": 1,
+  "class_map": {"0": "crack"},
+  "pretrained": true,
+  "resume": false,
+  "asset_identity": "upstream.lock.json weights: official URL, actual bytes and SHA256 checked before deserialization",
+  "migration_identity": "upstream.lock.json measured_identity/transfer; per-run initialization.json verifies every matching tensor before optimizer update",
+  "policy": "Native DetectionModel nc80 to nc1 plus model.load; only demonstrated class-count-dependent shape mismatches initialize natively; no blanket reinitialization",
+  "protected_modules": ["FullPAD_Tunnel", "HyperACE", "AAttn", "ABlock", "A2C2f"],
+  "scratch_fallback": false
+}
