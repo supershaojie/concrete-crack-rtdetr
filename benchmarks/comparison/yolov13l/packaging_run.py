@@ -26,6 +26,11 @@ def verified_snapshot(run):
     if 'source' in paths:
         checked_source(Path(paths['source']))
     snapshot = summary(run,save=False,quiet=True)
+    if (run/'identity.json').is_file() and read_json(run/'identity.json').get('scope')=='CONFIGURABLE_FORMAL':
+        from support import verify_environment
+        from configuration import frozen_paths
+        frozen_paths(run)
+        verify_environment(run)
     if snapshot['training_status'] == 'completed':
         legal_completion(run,config)
         manifest = verify_inputs(run)
@@ -127,7 +132,8 @@ def archive_config(args):
             'config_identity':read_json(run/'config_identity.json'),
             'cli_overrides':read_json(run/'cli_overrides.json'), 'runtime_paths':read_json(run/'runtime_paths.json')}
         for name in ('native_args','expanded_train_args','actual_training_setup','initialization',
-                     'preflight_initialization','source_identity','environment','identity','launch_command'):
+                     'preflight_initialization','source_identity','environment','identity','launch_command',
+                     'attention_backend_resolution','training_flash_evidence','native_validation','startup_readiness'):
             if (run/(name+'.json')).is_file():
                 record[name] = read_json(run/(name+'.json'))
     else:

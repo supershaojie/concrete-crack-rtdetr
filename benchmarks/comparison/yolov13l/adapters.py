@@ -223,10 +223,21 @@ class SquarePredictor(DetectionPredictor):
 
 
 class CompleteValidator(DetectionValidator):
+    def __call__(self, *args, **kwargs):
+        from backend import attention_scope, flash_forward_count
+        before = flash_forward_count()
+        with attention_scope('native','training_validation'):
+            result = super().__call__(*args, **kwargs)
+            if flash_forward_count() != before:
+                raise RuntimeError('Training validation unexpectedly called Flash')
+            return result
+
     def preprocess(self, batch):
         result = super().preprocess(batch)
         self.actual_precision = {'input_dtype':str(result['img'].dtype),
-                                 'half_argument':self.args.half, 'device':str(self.device)}
+                                 'half_argument':self.args.half, 'device':str(self.device),
+                                 'attention_backend':'native','flash_calls':0,
+                                 'precision_semantics':'unmodified author validator; CUDA training val uses trainer.amp half setting'}
         return result
 
     def postprocess(self, preds):
@@ -319,7 +330,7 @@ AMP_PROBE_RECORD = None
 def strict_amp_probe(model):
     """Actual-model copy; original weights/BN/optimizer/EMA/scaler and all RNGs are untouched."""
     global AMP_PROBE_RECORD
-    from backend import ArithmeticAudit, native_fp32
+    from backend import ArithmeticAudit, native_fp32, attention_scope
     device = next(model.parameters()).device
     if device.type != 'cuda':
         raise RuntimeError('Formal recipe requires CUDA device=0 and AMP')
@@ -331,14 +342,15 @@ def strict_amp_probe(model):
             with torch.no_grad():
                 with native_fp32(), ArithmeticAudit(require_fp32=True) as fp_audit:
                     fp = probe(x)[0]
-                with torch.autocast('cuda', dtype=torch.float16), ArithmeticAudit() as amp_audit:
+                with attention_scope('native','AMP_reference'), torch.autocast('cuda', dtype=torch.float16), ArithmeticAudit() as amp_audit:
                     amp = probe(x)[0]
                 if (fp.shape != amp.shape or not torch.isfinite(fp).all() or not torch.isfinite(amp).all()
                         or not torch.allclose(fp,amp.float(),rtol=.1,atol=.5)):
                     raise RuntimeError('Actual-model AMP accuracy probe failed; no silent recipe changes')
             AMP_PROBE_RECORD = {'input':[1,3,64,64], 'rtol':.1, 'atol':.5,
                 'max_abs_error':float((fp-amp.float()).abs().max()),
-                'fp32':fp_audit.report(), 'amp':amp_audit.report(), 'flash_parity':'NOT_VERIFIED'}
+                'fp32':fp_audit.report(), 'amp':amp_audit.report(), 'reference_backend':'native',
+                'flash_parity':'NOT_VERIFIED', 'model_state_and_rng_preserved':True}
             del probe
     finally:
         random.setstate(py_state)
@@ -414,7 +426,9 @@ class ComparisonTrainer(DetectionTrainer):
             model_identity(weights, 80)
         # Native DetectionModel changes cfg['nc'] in place. Preserve the verified
         # source checkpoint YAML rather than aliasing it into the nc1 destination.
-        model = super().get_model(deepcopy(cfg if cfg is not None else weights.yaml), weights, verbose)
+        from backend import attention_scope
+        with attention_scope('native','model_construction'):
+            model = super().get_model(deepcopy(cfg if cfg is not None else weights.yaml), weights, verbose)
         record = model_identity(model, 1)
         record['source_model_identity'] = model_identity(weights, 1 if self.args.resume else 80)
         state = weights.float().state_dict()
@@ -566,7 +580,10 @@ def epoch_trace(t):
         'augmentation':t.train_loader.dataset.transform_report['probabilities'],
         'augmentation_closed':t.train_loader.dataset.augmentation_closed,
         'augmentation_counts_cumulative':snapshot(t.train_loader.dataset),
-        'losses':t.tloss.detach().cpu().tolist()}
+        'losses':t.tloss.detach().cpu().tolist(),
+        'train_attention_backend':t.comparison_identity.get('train_attention_backend'),
+        'eval_attention_backend':'native', 'flash_deterministic_backward':t.comparison_config['deterministic'],
+        'flash_evidence':__import__('backend').flash_evidence()}
 
 
 def cpu_state(value):

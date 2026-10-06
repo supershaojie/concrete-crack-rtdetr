@@ -44,7 +44,7 @@ main() {
     ENTRY="$root/benchmarks/comparison/yolov13l/run.py"
     export PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
     if [[ "$mode" == bootstrap ]]; then
-        base_python=${YOLOV13L_BASE_PYTHON:-python3}
+        base_python=${YOLOV13L_BASE_PYTHON:-/root/miniconda3/envs/rtdetr/bin/python}
         local bootstrap_args=("$@")
         while (( $# )); do
             if [[ "$1" == --fresh-torch ]]; then shift; continue; fi
@@ -55,7 +55,10 @@ main() {
         "$base_python" "$root/benchmarks/comparison/yolov13l/bootstrap.py" "${bootstrap_args[@]}"
         return
     fi
-    PY="$root/.envs/yolov13l-configurable/bin/python"
+    PY="$root/.envs/yolov13l-configurable-flash/bin/python"
+    if [[ -f "$root/.runtime/yolov13l-configurable/python_path.txt" ]]; then
+        PY=$(cat "$root/.runtime/yolov13l-configurable/python_path.txt")
+    fi
     local run_id='' pipeline_mode='' python_explicit=0 detach=0 option
     local forwarded=() candidates=() paths=() extras=()
     while (( $# )); do
@@ -129,6 +132,8 @@ main() {
         return
     fi
     [[ "$pipeline_mode" =~ ^(start|resume|finalize)$ ]] || { printf 'Invalid internal mode\n' >&2; return 64; }
+    source "$root/scripts/yolov13l_flash_network.sh"
+    yolov13l_flash_network
     MODE=$pipeline_mode
     command -v flock >/dev/null || { printf 'flock unavailable\n' >&2; return 69; }
     exec 9>"$RUN/.pipeline.lock"

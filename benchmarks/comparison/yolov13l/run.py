@@ -50,6 +50,9 @@ def check(args):
     from ultralytics.cfg import get_cfg
     from bootstrap import environment_probe
     resolved, _, _, _ = candidate(args.config, args.set, args.clone_config_from)
+    from backend import resolve_train_backend
+    resolution = resolve_train_backend(resolved['train_attention_backend'],resolved['amp'],resolved['deterministic'])
+    identity = configure(args.output.parent/'check_runtime',args.source,resolution)
     cfg = get_cfg(overrides=native_recipe(resolved))
     model, record = load_initial_model(args.source, args.weights, resolved)
     write_json(args.output, {'status': 'VERIFIED_IMPORT_CONFIG_AND_INITIALIZATION_NO_TRAINING',
@@ -161,7 +164,11 @@ def train(args, manifest, source):
             'train_workers': t.train_loader.num_workers, 'val_workers': t.test_loader.num_workers,
             'amp': t.amp, 'amp_probe': 'isolated actual model, CUDA, 64x64 FP32/FP16; allclose rtol=0.1 atol=0.5; all RNG streams restored',
             'amp_arithmetic_probe':t.amp_probe_record if t.amp else {'status':'NOT_REQUESTED'},
-            'attention_backend':'native', 'flash_parity':'NOT_VERIFIED',
+            'requested_train_attention_backend':source['requested_train_attention_backend'],
+            'train_attention_backend':source['train_attention_backend'], 'eval_attention_backend':'native',
+            'attention_backend_resolution':source['attention_backend_resolution'],
+            'flash_internal_half_casts':source['train_attention_backend']=='flash',
+            'flash_deterministic_backward':config['deterministic'], 'flash_parity':source['flash_parity'],
             'tf32':{'matmul':torch.backends.cuda.matmul.allow_tf32,'cudnn':torch.backends.cudnn.allow_tf32},
             'scaler_initial_scale_after_setup':t.scaler.get_scale(),
             'nominal_nbs': t.args.nbs, 'accumulate_after_warmup': t.accumulate,
@@ -202,7 +209,15 @@ def train(args, manifest, source):
 
     trainer.add_callback('on_pretrain_routine_end', actual_setup)
     trainer.add_callback('on_fit_epoch_end', epoch_done)
-    trainer.train()
+    from backend import attention_scope, flash_evidence, flash_forward_count
+    calls_before = flash_forward_count()
+    try:
+        with attention_scope(source['train_attention_backend'],'training',config['deterministic']):
+            trainer.train()
+            if source['train_attention_backend']=='flash' and flash_forward_count()==calls_before:
+                raise RuntimeError('Flash was requested but no actual flash_attn_func call occurred')
+    finally:
+        write_json(run/'training_flash_evidence.json',flash_evidence())
     completed = trainer.epoch + 1
     if completed != config['epochs'] and not (config['patience'] and
             completed-trainer.comparison_best_epoch >= config['patience']):
@@ -335,9 +350,20 @@ def prepare(args):
     checked_weight(paths['weights'])
     # Import only after strict candidate validation and dedicated settings setup.
     source = configure(ROOT/'.runtime/yolov13l-configurable/prepare', args.source)
-    freeze_config(run, raw, paths, run_id, overrides=overrides, origin=origin)
+    from backend import resolve_train_backend
+    resolution = resolve_train_backend(resolved['train_attention_backend'],resolved['amp'],resolved['deterministic'])
+    source = configure(ROOT/'.runtime/yolov13l-configurable/prepare',args.source,resolution)
+    from bootstrap import verify_frozen_environment
+    verify_frozen_environment()
+    if resolution['resolved']=='flash':
+        from flash_checks import verify_readiness
+        ready = verify_readiness(resolved,args.data,args.data_root)
+        resolution = {**resolution,'flash_parity':'AAttn_area1_4_PASSED; full_network_NOT_VERIFIED',
+                      'parity_readiness_report_sha256':ready['report_sha256'],'readiness_report_path':ready['report']}
+        source = configure(ROOT/'.runtime/yolov13l-configurable/prepare',args.source,resolution)
+    freeze_config(run, raw, paths, run_id, overrides=overrides, origin=origin,
+                  backend_resolution=resolution,environment=runtime_environment())
     write_json(run/'source_identity.json', source)
-    write_json(run/'environment.json', runtime_environment())
     status(run, 'prepared', 'completed', exit_code=0)
     print(json.dumps({'run':str(run), 'run_id':run_id, 'config_sha256':digest(canonical(resolved)),
         'initialization':'official COCO asset; resume=false; cloned recipes never inherit training state'}), flush=True)
@@ -364,7 +390,7 @@ def guard(run, operation):
     paths = frozen_paths(run)
     # Resume checkpoints contain author model objects: pin imports/backend before
     # deserializing any verified local checkpoint, including this launcher guard.
-    configure(run/'runtime',Path(paths['source']))
+    configure(run/'runtime',Path(paths['source']),read_json(run/'attention_backend_resolution.json'))
     verify_environment(run)
     with local_lock(run/'.pipeline.lock'), local_lock(run/'.run.lock'):
         if operation == 'finalize':

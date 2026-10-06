@@ -1,37 +1,8 @@
---- a/ultralytics/nn/tasks.py
-+++ b/ultralytics/nn/tasks.py
-@@ -838,7 +838,7 @@
-                 with open(file, "rb") as f:
-                     ckpt = torch.load(f, pickle_module=safe_pickle)
-             else:
--                ckpt = torch.load(file, map_location="cpu")
-+                ckpt = torch.load(file, map_location="cpu", weights_only=False)
- 
-     except ModuleNotFoundError as e:  # e.name is missing module name
-         if e.name == "models":
-@@ -858,7 +858,7 @@
-             f"run a command with an official Ultralytics model, i.e. 'yolo predict model=yolov8n.pt'"
-         )
-         check_requirements(e.name)  # install missing module
--        ckpt = torch.load(file, map_location="cpu")
-+        ckpt = torch.load(file, map_location="cpu", weights_only=False)
- 
-     if not isinstance(ckpt, dict):
-         # File is likely a YOLO instance saved with i.e. torch.save(model, "saved_model.pt")
---- a/ultralytics/utils/downloads.py
-+++ b/ultralytics/utils/downloads.py
-@@ -435,6 +435,8 @@
- 
-     # YOLOv3/5u updates
-     file = str(file)
-+    if Path(file).is_file():  # preserve verified local paths, including apostrophes
-+        return file
-     file = checks.check_yolov5u_filename(file)
-     file = Path(file.strip().replace("'", ""))
-     if file.exists():
+diff --git a/ultralytics/nn/modules/block.py b/ultralytics/nn/modules/block.py
+index 7bfad10..e37c52d 100644
 --- a/ultralytics/nn/modules/block.py
 +++ b/ultralytics/nn/modules/block.py
-@@ -1177,6 +1177,17 @@
+@@ -1177,6 +1177,19 @@ except Exception:
      from torch.nn.functional import scaled_dot_product_attention as sdpa
      logger.warning("FlashAttention is not available on this device. Using scaled_dot_product_attention instead.")
  
@@ -46,6 +17,65 @@
 +if _comparison_backend == "native":
 +    USE_FLASH_ATTN = False
 +
++FLASH_ATTN_DETERMINISTIC = True
++
  class AAttn(nn.Module):
      """
      Area-attention module with the requirement of flash attention.
+@@ -1234,6 +1247,8 @@ class AAttn(nn.Module):
+             B, N, _ = qk.shape
+         q, k = qk.split([C, C], dim=2)
+ 
++        if USE_FLASH_ATTN and not x.is_cuda:
++            raise RuntimeError("Strict Flash scope received a CPU attention tensor")
+         if x.is_cuda and USE_FLASH_ATTN:
+             q = q.view(B, N, self.num_heads, self.head_dim)
+             k = k.view(B, N, self.num_heads, self.head_dim)
+@@ -1242,7 +1257,11 @@ class AAttn(nn.Module):
+             x = flash_attn_func(
+                 q.contiguous().half(),
+                 k.contiguous().half(),
+-                v.contiguous().half()
++                v.contiguous().half(),
++                dropout_p=0.0,
++                softmax_scale=self.head_dim ** -0.5,
++                causal=False,
++                deterministic=FLASH_ATTN_DETERMINISTIC,
+             ).to(q.dtype)
+         else:
+             q = q.transpose(1, 2).view(B, self.num_heads, self.head_dim, N)
+diff --git a/ultralytics/nn/tasks.py b/ultralytics/nn/tasks.py
+index 3ee5a85..d7069e6 100644
+--- a/ultralytics/nn/tasks.py
++++ b/ultralytics/nn/tasks.py
+@@ -838,7 +838,7 @@ def torch_safe_load(weight, safe_only=False):
+                 with open(file, "rb") as f:
+                     ckpt = torch.load(f, pickle_module=safe_pickle)
+             else:
+-                ckpt = torch.load(file, map_location="cpu")
++                ckpt = torch.load(file, map_location="cpu", weights_only=False)
+ 
+     except ModuleNotFoundError as e:  # e.name is missing module name
+         if e.name == "models":
+@@ -858,7 +858,7 @@ def torch_safe_load(weight, safe_only=False):
+             f"run a command with an official Ultralytics model, i.e. 'yolo predict model=yolov8n.pt'"
+         )
+         check_requirements(e.name)  # install missing module
+-        ckpt = torch.load(file, map_location="cpu")
++        ckpt = torch.load(file, map_location="cpu", weights_only=False)
+ 
+     if not isinstance(ckpt, dict):
+         # File is likely a YOLO instance saved with i.e. torch.save(model, "saved_model.pt")
+diff --git a/ultralytics/utils/downloads.py b/ultralytics/utils/downloads.py
+index 690bc36..fef32b3 100644
+--- a/ultralytics/utils/downloads.py
++++ b/ultralytics/utils/downloads.py
+@@ -435,6 +435,8 @@ def attempt_download_asset(file, repo="ultralytics/assets", release="v8.3.0", **
+ 
+     # YOLOv3/5u updates
+     file = str(file)
++    if Path(file).is_file():  # preserve verified local paths, including apostrophes
++        return file
+     file = checks.check_yolov5u_filename(file)
+     file = Path(file.strip().replace("'", ""))
+     if file.exists():

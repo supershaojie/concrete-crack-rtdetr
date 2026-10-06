@@ -1,4 +1,4 @@
-# Only this experiment's venv, with --no-deps; reuse base Torch and other dependencies.
+# Pinned runtime packages for this experiment's fresh private venv; never install into base.
 numpy==1.26.4
 opencv-python==4.10.0.84
 pandas==2.2.3

@@ -12,13 +12,17 @@ def preflight_model_probe(model, config, run, manifest, device='cuda:0'):
     import torch
     from ultralytics.cfg import get_cfg
     from adapters import IsolatedDataset, capture_rng, restore_rng, strict_amp_probe, tensor_digest
-    from backend import ArithmeticAudit, native_fp32
+    from backend import ArithmeticAudit, native_fp32, attention_scope, resolve_train_backend, flash_evidence
     from augment_b19 import snapshot
     before = capture_rng()
     original_state = {k:tensor_digest(v) for k,v in model.state_dict().items()}
     try:
         if device.startswith('cuda') and not torch.cuda.is_available():
             raise RuntimeError('CUDA preflight NOT_RUN: no CUDA device; formal recipe was not changed')
+        # Formal runs already resolved once in prepare. CPU native unit checks are explicit.
+        resolution = (__import__('support').read_json(Path(run)/'attention_backend_resolution.json')
+                      if (Path(run)/'attention_backend_resolution.json').exists()
+                      else resolve_train_backend(config['train_attention_backend'],config['amp'],config['deterministic']))
         hyp = get_cfg(overrides=native_recipe(config))
         ds = IsolatedDataset(img_path=str(Path(run)/'train.txt'), imgsz=64, batch_size=2,
             augment=True, hyp=copy(hyp), rect=False, cache=False, data={'names':{0:'crack'}},
@@ -54,14 +58,14 @@ def preflight_model_probe(model, config, run, manifest, device='cuda:0'):
         probe.zero_grad(set_to_none=True)
         # This copy-only numerical check uses unit scaling; formal trainer retains native dynamic scaling.
         scaler = torch.cuda.amp.GradScaler(init_scale=1,enabled=config['amp'] and device.startswith('cuda'))
-        with torch.autocast(device_type='cuda' if device.startswith('cuda') else 'cpu',
+        with attention_scope(resolution['resolved'],'preflight_training',config['deterministic']), torch.autocast(device_type='cuda' if device.startswith('cuda') else 'cpu',
                             dtype=torch.float16 if device.startswith('cuda') else torch.bfloat16,
                             enabled=config['amp'] and device.startswith('cuda')):
             with ArithmeticAudit() as amp_audit:
                 loss,items = probe(batch)
+            scaler.scale(loss.sum()).backward()
         if not torch.isfinite(loss).all():
             raise ValueError('Actual-model preflight loss is nonfinite')
-        scaler.scale(loss.sum()).backward()
         gradients = [p.grad for p in probe.parameters() if p.grad is not None]
         if not gradients or not all(torch.isfinite(g).all() for g in gradients):
             raise ValueError('Actual-model preflight gradients are missing/nonfinite')
@@ -70,7 +74,8 @@ def preflight_model_probe(model, config, run, manifest, device='cuda:0'):
             'gradient_tensors':len(gradients), 'amp_requested':config['amp'],
             'cuda_amp_accuracy':'passed' if amp_accuracy else 'NOT_RUN',
             'fp32_backward':'passed', 'fp32_loss':float(fp_loss.sum()), 'probe_scaler_initial_scale':1,
-            'attention_backend':'native', 'flash_parity':'NOT_VERIFIED',
+            'train_attention_backend':resolution['resolved'], 'attention_backend_resolution':resolution,
+            'eval_attention_backend':'native', 'flash_parity':resolution['flash_parity'], 'flash_evidence':flash_evidence(),
             'fp32_arithmetic':fp_audit.report(), 'training_arithmetic':amp_audit.report(),
             'tf32':{'matmul':torch.backends.cuda.matmul.allow_tf32,'cudnn':torch.backends.cudnn.allow_tf32},
             'sample':{'original_width':w,'original_height':h, 'square_stretch':[64,64],

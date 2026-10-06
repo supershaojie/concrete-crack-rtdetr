@@ -79,7 +79,8 @@ def verify_arithmetic_receipt(run, split, done):
     report = read_json(audit_file)
     if (report.get('required_fp32') is not True or report.get('autocast') != {'cpu':False,'cuda':False}
             or report.get('parameter_dtype') != 'torch.float32'
-            or report.get('tf32') != {'matmul':False,'cudnn':False}):
+            or report.get('tf32') != {'matmul':False,'cudnn':False}
+            or report.get('flash_forward_calls',0) != 0 or report.get('internal_half_cast_calls',0) != 0):
         raise ValueError('Independent arithmetic precision policy differs')
 
 

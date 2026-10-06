@@ -1,4 +1,4 @@
-"""Explicit SMOKE_ONLY: synthetic data, 64 pixels, batch2, two epochs and same-run resume."""
+"""Legacy NATIVE synthetic checkpoint smoke at 64 pixels; never Flash 640 readiness."""
 from __future__ import annotations
 import argparse
 import os
@@ -42,7 +42,7 @@ def main():
     data_yaml.write_bytes(yaml.safe_dump({'path':str(shared),'train':'images/train','val':'images/val',
                                         'test':'images/test','names':{0:'crack'}}).encode())
     cfg={**recipe(),'epochs':2,'patience':0,'batch':2,'nbs':2,'workers':0,'imgsz':64,'warmup_epochs':0.,
-         'close_mosaic':1,'plots':True}
+         'close_mosaic':1,'plots':True,'train_attention_backend':'native'}
     paths={'python':str(Path(os.sys.executable).absolute()),'sys_prefix':str(Path(os.sys.prefix).absolute()),
            'source':str(SOURCE),'weights':str(ASSET),'data':str(data_yaml),'data_root':str(shared),
            'public_coco':None,'reuse_run':None,'label_cache':None}

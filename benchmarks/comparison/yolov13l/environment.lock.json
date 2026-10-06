@@ -1,1 +1,20 @@
-{"flash_parity":"NOT_VERIFIED","native_backend":"fixed","numpy":"1.26.4","observed":{"backend":"native","pip_freeze_sha256":"c0e1a267b3ba4ab7b99b6d1181f5b279551a1a5d5caa12f8389b864fbc54efb2","python":"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-configurable\\.envs\\yolov13l-configurable\\Scripts\\python.exe","python_version":"3.9.25 (main, Nov  3 2025, 22:44:01) [MSC v.1929 64 bit (AMD64)]","sys_prefix":"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-configurable\\.envs\\yolov13l-configurable","torch_cuda_build":"11.8","versions":{"huggingface-hub":"0.23.2","matplotlib":"3.9.4","numpy":"1.26.4","opencv-python":"4.10.0.84","pandas":"2.2.3","pillow":"11.3.0","pyyaml":"6.0.3","safetensors":"0.4.3","scipy":"1.13.1","seaborn":"0.13.2","torch":"2.7.1+cu118","torchvision":"0.22.1+cu118","ultralytics-thop":"2.0.9"}},"schema_version":1,"scope":"LOCAL_VALIDATION_REFERENCE_WINDOWS_NOT_SERVER_IDENTITY","server_policy":"Probe supported Torch/Vision pair and exact libraries in private copies venv; freeze actual server identity in .runtime and every run before training. Do not mechanically force this Windows lock on Linux.","supported_torch_vision_pairs":[["2.1.2","0.16.2"],["2.2.2","0.17.2"],["2.7.1","0.22.1"]]}
+{
+  "asset_measurement_status": "NOT_RUN: actual wheel hash must be recorded on compatible Linux server after metadata/ABI selection",
+  "asset_sha256": null,
+  "evaluation_backend": "native",
+  "flash_attention": "2.7.3",
+  "flash_source_commit": "89c5a7dd4e6a8644575bd0c04a286f48c42763ec",
+  "numpy": "1.26.4",
+  "pip": "24.3.1",
+  "python": "CPython3.10",
+  "schema_version": 3,
+  "scope": "Required private Linux Flash environment; actual server identity freezes after installation/import/ABI/CUDA checks, never reuse the old Windows reference lock",
+  "setuptools": "75.6.0",
+  "status": "SERVER_NOT_RUN",
+  "torch": "2.2.2+cu121",
+  "torchvision": "0.17.2+cu121",
+  "training_backend": "flash",
+  "typing_extensions": "4.12.2",
+  "venv": "--copies; include-system-site-packages=false",
+  "wheel": "0.45.1"
+}

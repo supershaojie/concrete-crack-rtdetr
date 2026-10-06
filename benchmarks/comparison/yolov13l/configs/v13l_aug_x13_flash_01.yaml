@@ -1,4 +1,4 @@
-# NOT_RUN: planned recipe inherited from v8_aug_x13_01; no further x1.3 scaling.
+# NOT_RUN: planned recipe inherited from v13l_aug_x13_flash_01 (same numerical v8_aug_x13_01 recipe); no further x1.3 scaling.
 epochs: 200
 patience: 50
 batch: 16

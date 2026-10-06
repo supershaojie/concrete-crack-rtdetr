@@ -1,4 +1,4 @@
-# Core runtime for the explicit --fresh-torch path. No demos/deployment/Flash/Albumentations.
+# Core fresh-private runtime. Flash is separately selected by official metadata/ABI.
 -r requirements-overlay.txt
 matplotlib==3.9.4
 pillow==11.3.0
@@ -7,3 +7,4 @@ PyYAML==6.0.3
 requests==2.32.3
 psutil==5.9.8
 packaging==24.2
+typing_extensions==4.12.2

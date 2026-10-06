@@ -30,6 +30,18 @@ are adapted; no newer model, loss or optimizer implementation is imported.
 
 Primary references:
 
+This Flash branch derives from the original COCO implementation
+`64f6639847a0b6a1c18f8f246ba27e274a4de3ad`. FlashAttention is pinned to
+Dao-AILab v2.7.3, source commit `89c5a7dd4e6a8644575bd0c04a286f48c42763ec`
+(BSD-3-Clause); runtime wheel URL/size/SHA256, extension and interface hashes
+are measured in the private installation receipt. The author AAttn layouts,
+scale and zero-dropout/noncausal semantics remain unchanged. The controlled
+patch explicitly enables deterministic Flash backward and strict CPU failure.
+Native FP32 evaluation retains the author's explicit matmul/stable-softmax branch.
+
+- [FlashAttention v2.7.3](https://github.com/Dao-AILab/flash-attention/releases/tag/v2.7.3)
+- [Pinned Flash interface](https://github.com/Dao-AILab/flash-attention/blob/89c5a7dd4e6a8644575bd0c04a286f48c42763ec/flash_attn/flash_attn_interface.py)
+
 - [Pinned author source](https://github.com/iMoonLab/yolov13/tree/73289949533efac82bb5f72ec19b746618656bd2)
 - [Official COCO asset](https://github.com/iMoonLab/yolov13/releases/download/yolov13/yolov13l.pt)
 - [CutMix source](https://github.com/ultralytics/ultralytics/blob/f2d3aed634a5b0e4828024718d4a61ab2f83fb19/ultralytics/data/augment.py)

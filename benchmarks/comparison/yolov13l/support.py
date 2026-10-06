@@ -120,12 +120,13 @@ def checked_weight(path=ASSET):
     return path
 
 
-def configure(runtime, source=SOURCE):
+def configure(runtime, source=SOURCE, backend_resolution=None):
     """Call BEFORE importing Ultralytics, including in spawned data workers."""
     sys.dont_write_bytecode = True
     if os.environ.get('YOLOV13L_FROZEN_RUN'):
         from configuration import frozen_config
         frozen_config(Path(os.environ['YOLOV13L_FROZEN_RUN']))
+        backend_resolution = read_json(Path(os.environ['YOLOV13L_FROZEN_RUN'])/'attention_backend_resolution.json')
     source, lock = checked_source(source)
     runtime = Path(runtime).resolve()
     runtime.mkdir(parents=True, exist_ok=True)
@@ -142,8 +143,13 @@ def configure(runtime, source=SOURCE):
         raise RuntimeError('Wrong ultralytics import: ' + str(actual))
     import torch
     from ultralytics.nn.modules import block
-    if block.USE_FLASH_ATTN:
-        raise RuntimeError('Frozen native attention backend unexpectedly changed')
+    # Construction/deserialization are native. Runtime phases use restoring scopes.
+    # Do not reset an already active training scope when a helper imports adapters.
+    if not hasattr(block, 'FLASH_ATTN_DETERMINISTIC'):
+        raise RuntimeError('Missing controlled deterministic Flash patch')
+    from backend import install_flash_observer
+    install_flash_observer()
+    resolution = backend_resolution or {'requested':'native','resolved':'native','reason':'native setup/import only','deterministic':True,'flash_parity':'NOT_VERIFIED'}
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False
     from ultralytics.utils import SETTINGS
@@ -157,9 +163,12 @@ def configure(runtime, source=SOURCE):
               'patched_source_sha256': lock['patched_source_sha256'], 'adapter_sha256': adapter_hash(),
               'settings_dir': os.environ['YOLO_CONFIG_DIR'], 'python': os.path.abspath(sys.executable),
               'sys_prefix': sys.prefix, 'sys_base_prefix': sys.base_prefix,
-              'train_attention_backend': 'native', 'eval_attention_backend': 'native',
-              'attention_operation': lock['backend_operation'], 'internal_flash_half_casts': False,
-              'tf32': False, 'flash_parity': 'NOT_VERIFIED'}
+              'train_attention_backend': resolution['resolved'], 'requested_train_attention_backend':resolution['requested'],
+              'attention_backend_resolution':resolution, 'eval_attention_backend': 'native',
+              'attention_operation': lock['backend_operation'], 'internal_flash_half_casts': resolution['resolved']=='flash',
+              'training_attention_operation':('official flash_attn_func; FP16 Q/K/V; deterministic backward; dropout=0 causal=false' if resolution['resolved']=='flash' else lock['backend_operation']),
+              'evaluation_attention_operation':lock['backend_operation'],
+              'tf32': False, 'flash_parity': resolution.get('flash_parity','NOT_VERIFIED')}
     print(json.dumps(result, ensure_ascii=False), flush=True)
     return result
 
@@ -250,8 +259,13 @@ def run_identity(manifest, source_identity, require_clean=True, run_id=None, con
             'recipe_sha256': digest(canonical(cfg)), 'adapter_sha256': adapter_hash(),
             'upstream_commit': source_identity['commit'], 'patch_sha256': source_identity['patch_sha256'],
             'patched_source_sha256': source_identity['patched_source_sha256'],
-            'train_attention_backend': 'native', 'eval_attention_backend': 'native',
-            'attention_operation':source_identity['attention_operation'], 'flash_parity':'NOT_VERIFIED',
+            'train_attention_backend': source_identity['train_attention_backend'], 'eval_attention_backend': 'native',
+            'requested_train_attention_backend':source_identity['requested_train_attention_backend'],
+            'attention_backend_resolution':source_identity['attention_backend_resolution'],
+            'flash_deterministic_backward':cfg['deterministic'] if source_identity['train_attention_backend']=='flash' else None,
+            'attention_operation':source_identity['attention_operation'], 'flash_parity':source_identity['flash_parity'],
+            'training_attention_operation':source_identity['training_attention_operation'],
+            'evaluation_attention_operation':source_identity['evaluation_attention_operation'],
             'initialization_sha256': read_json(LOCK)['weights']['sha256'],
             'b19_recipe_sha256':digest(canonical(cfg)),
             **({'config_sha256':digest(canonical(cfg))} if config is not None else {}),
@@ -268,6 +282,8 @@ def runtime_environment():
     freeze = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'], text=True)
     result['pip_freeze_sha256'] = digest('\n'.join(sorted(freeze.splitlines())).encode())
     result['python_executable_sha256'] = sha256(sys.executable)
+    flash_receipt=ROOT/'.runtime/yolov13l-configurable/flash-install/receipt.json'
+    result['flash_installation']=read_json(flash_receipt) if flash_receipt.exists() else {'status':'NOT_INSTALLED'}
     return result
 
 

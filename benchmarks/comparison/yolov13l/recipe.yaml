@@ -61,5 +61,5 @@ augment: false
 box: 7.5
 cls: 0.5
 dfl: 1.5
-train_attention_backend: native
+train_attention_backend: flash
 eval_attention_backend: native

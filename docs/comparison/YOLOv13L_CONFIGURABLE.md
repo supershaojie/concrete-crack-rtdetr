@@ -1,5 +1,8 @@
 # YOLOv13-L COCO 可配置对比实验
 
+本文件保留原 native 实施提交 `64f6639847a0b6a1c18f8f246ba27e274a4de3ad` 的历史说明。当前 `bench/yolov13l-flash-configurable` 的后端和环境要求见 [Flash 实施说明](YOLOv13L_FLASH_CONFIGURABLE.md)。旧实验继续使用旧工作树和原冻结提交。
+
+
 2026-10-05（Asia/Shanghai）。分支 `bench/yolov13l-configurable`。首轮 `v13l_aug_x13_01` 是 **NOT_RUN 计划**，本次交付不在服务器启动正式训练。训练代码 SHA 见同目录 `YOLOv13L_CONFIGURABLE_HANDOFF.md`；之后若只补文档，以该文件中的实施 SHA 创建训练 worktree，不以新的文档 HEAD 替换训练身份。
 
 ## 模型、初始化和配方身份

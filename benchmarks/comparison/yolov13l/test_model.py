@@ -72,7 +72,7 @@ class ModelTests(unittest.TestCase):
             _,run,manifest=fixture(Path(tmp))
             before=capture_rng()
             state={k:tensor_digest(v) for k,v in self.model.state_dict().items()}
-            result=preflight_model_probe(self.model,recipe(),run,manifest,device='cpu')
+            result=preflight_model_probe(self.model,{**recipe(),'train_attention_backend':'native'},run,manifest,device='cpu')
             after=capture_rng()
             self.assertEqual(before['python'],after['python'])
             self.assertEqual(before['numpy'][0],after['numpy'][0])
@@ -87,7 +87,8 @@ class ModelTests(unittest.TestCase):
             self.assertEqual(result['formal_optimizer_updates'],0)
 
     def test_backend_and_epoch_limit_are_validated_before_model_creation(self):
-        for key,value in (('train_attention_backend','flash'),('eval_attention_backend','flash'),('epochs',201)):
+        self.assertEqual(resolve_config({})['train_attention_backend'],'flash')
+        for key,value in (('train_attention_backend','invalid'),('eval_attention_backend','flash'),('epochs',201)):
             with self.subTest(key=key),self.assertRaises(ValueError): resolve_config({key:value})
         native=vars(get_cfg(overrides=native_recipe()))
         self.assertNotIn('cutmix',native)

@@ -26,7 +26,7 @@ NUM_RANGES = {
     'flipud': (0, 1), 'fliplr': (0, 1), 'mosaic': (0, 1), 'mixup': (0, 1), 'cutmix': (0, 1),
 }
 BOOL_FIELDS = ('cos_lr', 'amp', 'deterministic')
-TUNABLE = set(INT_RANGES) | set(NUM_RANGES) | set(BOOL_FIELDS) | {'optimizer'}
+TUNABLE = set(INT_RANGES) | set(NUM_RANGES) | set(BOOL_FIELDS) | {'optimizer', 'train_attention_backend'}
 
 def safe_run_id(value):
     if not isinstance(value, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,79}', value):
@@ -97,6 +97,10 @@ def resolve_config(user=None, overrides=None):
                 raise ValueError(key + ' must be a boolean')
         if not isinstance(values['optimizer'], str) or values['optimizer'] not in ('SGD', 'Adam', 'AdamW'):
             raise ValueError('optimizer must be SGD, Adam or AdamW; auto is forbidden')
+        if values['train_attention_backend'] not in ('flash', 'native', 'auto'):
+            raise ValueError('train_attention_backend must be flash, native or auto')
+        if values['train_attention_backend'] == 'flash' and (not values['amp'] or not values['deterministic']):
+            raise ValueError('Strict Flash requires amp=true and deterministic=true')
         if values['lr0'] <= 0 or not 0 < values['momentum'] < 1:
             raise ValueError('lr0 must be positive; momentum / Adam beta1 must be strictly between 0 and 1')
     if values['optimizer'] != 'SGD' and values['warmup_momentum'] != defaults['warmup_momentum']:
@@ -124,7 +128,7 @@ def candidate(config=None, items=(), clone=None):
     overrides = cli_overrides(items)
     return resolve_config(user, overrides), raw, overrides, origin
 
-def freeze_config(run, raw, paths, run_id, require_clean=True, overrides=None, origin=None, command=None, smoke=False):
+def freeze_config(run, raw, paths, run_id, require_clean=True, overrides=None, origin=None, command=None, smoke=False, backend_resolution=None, environment=None):
     import yaml
     safe_run_id(run_id)
     user = yaml_mapping(raw)
@@ -138,6 +142,13 @@ def freeze_config(run, raw, paths, run_id, require_clean=True, overrides=None, o
         resolved['imgsz'] = 64
     if require_clean and git('status', '--porcelain', '--untracked-files=normal'):
         raise ValueError('Commit implementation changes before preparing a formal run')
+    if backend_resolution is None:
+        from backend import resolve_train_backend
+        backend_resolution = resolve_train_backend(resolved['train_attention_backend'], resolved['amp'], resolved['deterministic'])
+    if (backend_resolution['requested'] != resolved['train_attention_backend'] or
+            backend_resolution['resolved'] not in ('native', 'flash') or
+            (resolved['train_attention_backend'] != 'auto' and backend_resolution['resolved'] != resolved['train_attention_backend'])):
+        raise ValueError('Backend resolution differs from requested configuration')
     run = Path(run).resolve()
     run.mkdir(parents=True, exist_ok=False)
     atomic_bytes(run/'user_config.yaml', raw)
@@ -145,6 +156,14 @@ def freeze_config(run, raw, paths, run_id, require_clean=True, overrides=None, o
     write_json(run/'cli_overrides.json', overrides or {})
     write_json(run/'config_input.json', origin or {'mode': 'yaml_bytes'})
     write_json(run/'runtime_paths.json', paths)
+    write_json(run/'attention_backend_resolution.json', backend_resolution)
+    if environment is not None:
+        write_json(run/'environment.json',environment)
+    if backend_resolution.get('readiness_report_path'):
+        readiness=Path(backend_resolution['readiness_report_path'])
+        if sha256(readiness)!=backend_resolution['parity_readiness_report_sha256']:
+            raise ValueError('Readiness evidence changed before configuration freeze')
+        atomic_bytes(run/'startup_readiness.json',readiness.read_bytes())
     write_json(run/'run_id.json', {'run_id': run_id, 'run_uuid': uuid.uuid4().hex, 'experiment': 'yolov13l-configurable'})
     argv = [str(v) for v in (command or [sys.executable, *sys.argv])]
     write_json(run/'launch_command.json', {'argv': argv, 'bash': shlex.join(argv),
@@ -157,9 +176,10 @@ def freeze_config(run, raw, paths, run_id, require_clean=True, overrides=None, o
     write_json(run/'native_args.json', vars(get_cfg(overrides=native)))
     from export import SETTINGS, POSTPROCESSING, evaluator_api
     files = ('user_config.yaml', 'resolved_config.yaml', 'cli_overrides.json', 'config_input.json',
-             'runtime_paths.json', 'run_id.json', 'launch_command.json', 'native_args.json')
+             'runtime_paths.json', 'run_id.json', 'launch_command.json', 'native_args.json', 'attention_backend_resolution.json')
+    files += tuple(name for name in ('environment.json','startup_readiness.json') if (run/name).is_file())
     write_json(run/'config_identity.json', {
-        'schema_version': 2, 'config_sha256': digest(canonical(resolved)),
+        'schema_version': 3, 'config_sha256': digest(canonical(resolved)), 'attention_backend_resolution':backend_resolution,
         'scope':'SMOKE_ONLY' if smoke else 'CONFIGURABLE_FORMAL',
         'worktree_dirty_at_freeze':bool(git('status','--porcelain','--untracked-files=normal')),
         'default_config_sha256': sha256(DEFAULT_CONFIG), 'recipe_sha256': sha256(HERE/'recipe.yaml'),
@@ -180,6 +200,8 @@ def frozen_config(run, check_code=True):
         if sha256(run/name) != expected:
             raise ValueError('Frozen run artifact changed: ' + name)
     resolved = load_yaml(run/'resolved_config.yaml')
+    if read_json(run/'attention_backend_resolution.json') != record['attention_backend_resolution']:
+        raise ValueError('Frozen requested/resolved attention backend changed')
     if digest(canonical(resolved)) != record['config_sha256']:
         raise ValueError('Frozen resolved configuration identity differs')
     if check_code and (git('rev-parse', 'HEAD') != record['model_code_sha']
@@ -203,11 +225,13 @@ def frozen_paths(run):
 
 def schema():
     defaults = resolve_config({})
-    return {'schema_version': 2, 'precedence': ['committed_defaults', 'config_yaml_or_cloned_recipe', 'cli_set'],
+    return {'schema_version': 3, 'precedence': ['committed_defaults', 'config_yaml_or_cloned_recipe', 'cli_set'],
             'integers': {k:list(v) for k,v in INT_RANGES.items()},
             'finite_numbers': {k:list(v) for k,v in NUM_RANGES.items()}, 'booleans': list(BOOL_FIELDS),
             'optimizer': ['SGD', 'Adam', 'AdamW'],
+            'train_attention_backend':['flash','native','auto'], 'backend_resolution':'once during prepare; hashed frozen requested/resolved/reason; never re-resolve resume',
             'fixed': {k: v for k, v in defaults.items() if k not in TUNABLE},
             'inactive_detection_fields': ['erasing', 'auto_augment'],
             'cross_constraints': ['lr0>0', '0<momentum<1', 'close_mosaic<=epochs',
-                'warmup_epochs<=epochs', 'any positive box/cls/dfl', 'Adam warmup_momentum must remain default']}
+                'warmup_epochs<=epochs', 'any positive box/cls/dfl', 'Adam warmup_momentum must remain default',
+                'flash requires amp=true and deterministic=true', 'eval_attention_backend=native']}

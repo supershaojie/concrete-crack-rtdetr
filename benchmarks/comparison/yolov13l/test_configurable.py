@@ -37,7 +37,7 @@ class ConfigurableTests(unittest.TestCase):
     def freeze(self,name='candidate',raw=b'{}\n',overrides=None):
         run = self.base/name
         paths = {'python':str(Path(sys.executable).absolute()),'sys_prefix':str(Path(sys.prefix).absolute())}
-        cfg = freeze_config(run,raw,paths,name,require_clean=False,overrides=overrides)
+        cfg = freeze_config(run,raw,paths,name,require_clean=False,overrides={'train_attention_backend':'native',**(overrides or {})})
         return run,cfg
 
     def test_defaults_are_exact_planned_x13_recipe_and_native_cfg(self):
@@ -49,7 +49,7 @@ class ConfigurableTests(unittest.TestCase):
         self.assertEqual(schema(),read_json(HERE/'config_schema.json'))
 
     def test_priority_scalar_types_full_yaml_and_duplicate_rejection(self):
-        path = self.base/'config.yaml'; path.write_bytes(b'lr0: 0.02\namp: false\nfreeze: null\n')
+        path = self.base/'config.yaml'; path.write_bytes(b'lr0: 0.02\namp: false\nfreeze: null\ntrain_attention_backend: native\n')
         cfg,_,overrides,_ = candidate(path,['lr0=0.005','amp=true','workers=0'])
         self.assertEqual(cfg['lr0'],.005); self.assertIs(cfg['amp'],True)
         self.assertIsNone(cfg['freeze']); self.assertIs(type(overrides['workers']),int)
@@ -76,7 +76,7 @@ class ConfigurableTests(unittest.TestCase):
             with self.subTest(cfg=cfg),self.assertRaises(ValueError): resolve_config(cfg)
         for name in ('../run','a/b','a b','-run','x'*81):
             with self.assertRaises(ValueError): safe_run_id(name)
-        self.assertEqual(resolve_config({},cli_overrides(['batch=8','amp=false']))['batch'],8)
+        self.assertEqual(resolve_config({},cli_overrides(['batch=8','amp=false','train_attention_backend=native']))['batch'],8)
 
     def test_candidate_file_edits_do_not_change_frozen_run_and_tampering_fails(self):
         path = self.base/'candidate.yaml'; path.write_bytes(b'lr0: 0.012\n')
