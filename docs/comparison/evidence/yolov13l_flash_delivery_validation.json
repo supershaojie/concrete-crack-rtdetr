@@ -1,1 +1,699 @@
-{"actual_Bash_CLI":{"shell_adamw.log":"7432720d45907433e5ec5a980f530d195df411742a1f0b04dd9d0bf3c2f2d549","shell_adamw_yaml.log":"e6eb2993597e3644ad25b48be0a91d2e9708b70ef2abb52d3819a4cb1859a57a","shell_auto.log":"2c7282c3374e3a1d8c70996c960069855723427cb5444f67e8ae022fae8886e5","shell_default.log":"f2944081a668f43ce5d5b1d7da2154fa1e9eb4b98dc3d33fc8af1cd585c095cc","shell_help.log":"ca9339a7b827fc977256c308e060b846618c328abe3f988f4ad6116b1051befc","shell_sgd.log":"1a8547fde1366c6457a3635e18373fe145ce05e4fa9149f1e80c51325100c101"},"adapter_sha256":"fa6830bb0493c3f263f169a25c27d477c6112e15f60a1f61944ace23ca0c7f4a","branch":"bench/yolov13l-flash-configurable","code_files_sha256":{"benchmarks/comparison/yolov13l/.gitattributes":"7c25eba098f1f2f34b2416eb6f49a50f9df5cffe526120ca1acdfcc3285c21c8","benchmarks/comparison/yolov13l/LICENSE.cutmix.txt":"0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0","benchmarks/comparison/yolov13l/NOTICE.md":"c204874e8553273bfe1dc6dcfe88a2e983fba0dfe5965dad5f6c9aab58278edc","benchmarks/comparison/yolov13l/adapters.py":"a7c5e0fadc28fb9cdc8662af9e09bdc688483271152bcdfda47c614d9ff09bda","benchmarks/comparison/yolov13l/augment_b19.py":"220627a4f030e80653ba7b2eb38ed969163246dcd352033e381c024f684e8cef","benchmarks/comparison/yolov13l/augmentation.lock.json":"52c29931eaf6aa5e193592691f58a275c0113ff8222a8d2392c974dbc2be7e74","benchmarks/comparison/yolov13l/backend.py":"3b837fae74c53a68816734531325ce55899f79a2557dc7e3ffa2947e317a8e2e","benchmarks/comparison/yolov13l/bootstrap.py":"538163be6c3e1c6772c17692f7d409462d05e5aaa71e12b739ed84a014f12358","benchmarks/comparison/yolov13l/config_schema.json":"fa2bb02bbaeaa8055ac9d7a0e0c64c5c84e79042aaaef5ad0cfb3bef5401c881","benchmarks/comparison/yolov13l/configs/v13l_aug_x13_01.yaml":"56fd69bfa754bb1acb6c4b19607291bbc50bb79915367fefc87da5523a456f0f","benchmarks/comparison/yolov13l/configs/v13l_aug_x13_flash_01.yaml":"37a1a4c9206ba63f199a348889233b62c1052822159a5d74d7bcd2e36437cad7","benchmarks/comparison/yolov13l/configuration.py":"12784c1bb930eac0fa2e79583a7d2b9b05c3ab028db4a1704420c3a2f7a3c5f6","benchmarks/comparison/yolov13l/cuda_smoke.py":"bb6d7848ed9e8b9660b8e00b3516850d9446931697f17b6b9d318ee094829954","benchmarks/comparison/yolov13l/cutmix_reference.py":"81611e47ab91c530e0bbdedf61f61cd0758ccb83489c68cd3d8a9f89fc54c250","benchmarks/comparison/yolov13l/data.py":"ce404940e230a797f90b97ae44e0f0121c307e8988b71db964688d5db15c3758","benchmarks/comparison/yolov13l/default_config.yaml":"b68ec0693af7e3573ecc40da21ca611cda4412b00467b84f870de937cd09391d","benchmarks/comparison/yolov13l/environment.lock.json":"9cab75be6eb422b4bac64b68b6d5296b9ba4839dcc5af7cc930a9fa7b5cbf83e","benchmarks/comparison/yolov13l/export.py":"f5a450eae8664e3fee2c702b1eb6f4626ccc2bae0b43d95daeee6c804a86fd80","benchmarks/comparison/yolov13l/flash_checks.py":"40855298b09287f44d85e3671438e091eeb21053977f8c16ab077a8fbff500e2","benchmarks/comparison/yolov13l/flash_install.py":"cc5a4d47d1203886910836e257eb5530b08e5e68d74596b8c45ad6e6a948f13e","benchmarks/comparison/yolov13l/initialization.json":"b9d038c2629853c6ff74661d3940f48378c811e2d153e26943034604f14253e5","benchmarks/comparison/yolov13l/initialization.lock.json":"89485cd1fa1004e63a244e897661c3eb645ca53b1df351cc08b7d65b420328e9","benchmarks/comparison/yolov13l/packaging_run.py":"2aef815e1f9264f76a0b8feb8fe37ac4b0bca7057800fed876d4f06b7bf3cd1d","benchmarks/comparison/yolov13l/patches/0001-controlled-backend-and-local-checkpoints.patch":"e7ab23b370ee8793c6db4ac4bffe80110275819b02ff79b7a6d4da66dc88deb7","benchmarks/comparison/yolov13l/recipe.yaml":"64e4ab7530e3317c0c24d8d853baa226f86b858c2b8b01b9634c67586ad01c5a","benchmarks/comparison/yolov13l/requirements-overlay.txt":"9a4ba117c07ee144bff74f1fd6cdf89682b120bec778dd067c692dde4d51bb01","benchmarks/comparison/yolov13l/requirements-runtime.txt":"df1897eef835bca044aa33b2296f115e1ef6ffceb9d89b79d509b4313a8a005d","benchmarks/comparison/yolov13l/run.py":"dd69a392092e2a912edee8c72d48659de73bcdbdfc70362cbc49f705edd3a305","benchmarks/comparison/yolov13l/smoke.py":"8a84081c918f4415d1340f1c1b5f71d10b8d5533f10319e07e6ada34304abeb5","benchmarks/comparison/yolov13l/stage.py":"c7ec91c49d70177c86b1f3b5eee64df944d7e9fdf1ba785de6808301d0f6d399","benchmarks/comparison/yolov13l/support.py":"03132bd4121b6ed9ef2d75d4265b05740880f9415ff49104fa7ea443cc8bffca","benchmarks/comparison/yolov13l/test_b19.py":"01e4096d78737771b78093366cdc27d8b00450389ce03d6bfeb69c83f404cdd1","benchmarks/comparison/yolov13l/test_configurable.py":"15415c2ca67a86385e3b6debb7d62b7bc0b1f857eef76e174702700c0889904f","benchmarks/comparison/yolov13l/test_flash_backend.py":"1a69240f0409a49a5a7bb913e3a07b7556fedb55c5e71006722d683f3ebeb53e","benchmarks/comparison/yolov13l/test_initialization_guards.py":"b7d6885e3ada304cd530e7dd1d8ea28cdbe8a4f62a341ca91cac6c7f8d6c45da","benchmarks/comparison/yolov13l/test_lifecycle.py":"994d4e1cf48fbd3f6498f752545fce25bdef5fd2f919c2e12760a583fbec3782","benchmarks/comparison/yolov13l/test_model.py":"01baa7e0772846bf5eb06dd471227db479591bfb00d65eba276d2ecbe5f2fa28","benchmarks/comparison/yolov13l/upstream.lock.json":"632310e349b1117c93d7a0338cef95df58ff89872cae2591b5311f61e925f3f5","benchmarks/comparison/yolov13l/verification.py":"7fc4f3f8a237deac3d4f97a09bd7c080b305e891ba6ad06f77eff8fffb500555"},"config_sha256":"09311ff91a891babebbc45290d00ad235600ff24574e34bab8fff02712f36acd","date":"2026-10-06 Asia/Shanghai","full_resolved_first_recipe":{"agnostic_nms":false,"amp":true,"augment":false,"auto_augment":null,"batch":16,"bgr":0.0,"box":7.5,"cache":false,"classes":null,"close_mosaic":5,"cls":0.5,"conf":0.001,"copy_paste":0.0,"cos_lr":true,"cutmix":0.065,"degrees":18.2,"deterministic":true,"device":0,"dfl":1.5,"epochs":200,"erasing":0.0,"eval_attention_backend":"native","exist_ok":false,"fliplr":0.5,"flipud":0.065,"fraction":1.0,"freeze":null,"hsv_h":0.0377,"hsv_s":0.98,"hsv_v":0.78,"imgsz":640,"initialization_type":"coco_detection_pretrained","iou":0.7,"lr0":0.01,"lrf":0.01,"max_det":300,"mixup":0.234,"model":"yolov13l.pt","momentum":0.937,"mosaic":1.0,"multi_scale":false,"nbs":64,"optimizer":"SGD","patience":50,"perspective":0.000845,"plots":true,"pretrained":true,"rect":false,"resume":false,"save":true,"save_period":-1,"scale":0.95,"seed":42,"shear":5.85,"single_cls":false,"task":"detect","train_attention_backend":"flash","translate":0.26,"val":true,"warmup_bias_lr":0.1,"warmup_epochs":5.0,"warmup_momentum":0.8,"weight_decay":0.0005,"workers":8},"local_strict_flash_readiness":{"error":"Strict Flash request failed; no fallback: Flash requires CUDA and Ampere or newer (capability >= 8.0)","formal_training_started":false,"status":"NOT_RUN","traceback":"Traceback (most recent call last):\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\benchmarks\\comparison\\yolov13l\\backend.py\", line 131, in resolve_train_backend\n    raise RuntimeError('Flash requires CUDA and Ampere or newer (capability >= 8.0)')\nRuntimeError: Flash requires CUDA and Ampere or newer (capability >= 8.0)\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\benchmarks\\comparison\\yolov13l\\flash_checks.py\", line 215, in main\n    result=check(args)\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\benchmarks\\comparison\\yolov13l\\flash_checks.py\", line 62, in check\n    resolution=resolve_train_backend(config['train_attention_backend'],config['amp'],config['deterministic'])\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\benchmarks\\comparison\\yolov13l\\backend.py\", line 136, in resolve_train_backend\n    raise RuntimeError('Strict Flash request failed; no fallback: '+str(exc)) from exc\nRuntimeError: Strict Flash request failed; no fallback: Flash requires CUDA and Ampere or newer (capability >= 8.0)\n"},"native_cuda_AMP_reference":{"Flash_training":"NOT_RUN: RTX2060 capability7.5 and Windows do not match required server Flash environment","capability":[7,5],"flash_calls":0,"gpu":"NVIDIA GeForce RTX 2060","probe":{"amp":{"MACs_by_operator":{"bmm_attention_and_hypergraph":2621440,"convolution":422145280,"mm_or_addmm":5242880},"backend":"official_native_matmul_stable_softmax","covered_GFLOPs_2x_MACs":0.8600192,"flash_forward_calls":0,"flops_exclusions":"Opaque Flash kernel MACs (if used), bias adds, BN, activation, exp/softmax, reductions, pooling, residual/gate/elementwise arithmetic, interpolation, decode and NMS; not complete FLOPs","flops_scope":"Conv/Linear and all executed mm/bmm products, including AAttn and HyperACE","internal_half_cast_calls":362,"observed_dtypes":{"aten._softmax.default|torch.float16,torch.float32":3,"aten.addmm.default|torch.float16":6,"aten.bmm.default|torch.float16":40,"aten.convolution.default|torch.float16":310,"aten.exp.default|torch.float32":16},"observed_operator_calls":{"aten._softmax.default":3,"aten._to_copy.default":380,"aten._unsafe_view.default":66,"aten.add.Tensor":93,"aten.addmm.default":6,"aten.avg_pool2d.default":2,"aten.bmm.default":40,"aten.cat.default":38,"aten.clone.default":32,"aten.convolution.default":310,"aten.cudnn_batch_norm.default":245,"aten.div.Tensor":19,"aten.exp.default":16,"aten.expand.default":68,"aten.gelu.default":4,"aten.max.dim":18,"aten.mean.dim":4,"aten.mul.Tensor":26,"aten.permute.default":34,"aten.sigmoid.default":1,"aten.silu_.default":165,"aten.split.Tensor":8,"aten.split_with_sizes.default":17,"aten.sub.Tensor":18,"aten.sum.dim_IntList":16,"aten.t.default":8,"aten.transpose.int":123,"aten.unsqueeze.default":3,"aten.upsample_nearest2d.default":4,"aten.view.default":187},"required_fp32":false},"atol":0.5,"flash_parity":"NOT_VERIFIED","fp32":{"MACs_by_operator":{"bmm_attention_and_hypergraph":524288,"convolution":422145280,"mm_or_addmm":7340032},"backend":"official_native_matmul_stable_softmax","covered_GFLOPs_2x_MACs":0.8600192,"flash_forward_calls":0,"flops_exclusions":"Opaque Flash kernel MACs (if used), bias adds, BN, activation, exp/softmax, reductions, pooling, residual/gate/elementwise arithmetic, interpolation, decode and NMS; not complete FLOPs","flops_scope":"Conv/Linear and all executed mm/bmm products, including AAttn and HyperACE","internal_half_cast_calls":0,"observed_dtypes":{"aten._softmax.default|torch.float32":3,"aten.addmm.default|torch.float32":6,"aten.bmm.default|torch.float32":38,"aten.convolution.default|torch.float32":310,"aten.exp.default|torch.float32":16,"aten.mm.default|torch.float32":2},"observed_operator_calls":{"aten._local_scalar_dense.default":3,"aten._softmax.default":3,"aten._unsafe_view.default":66,"aten.add.Tensor":99,"aten.addmm.default":6,"aten.arange.default":6,"aten.avg_pool2d.default":2,"aten.bmm.default":38,"aten.cat.default":40,"aten.clone.default":32,"aten.convolution.default":310,"aten.cudnn_batch_norm.default":245,"aten.div.Tensor":19,"aten.exp.default":16,"aten.expand.default":70,"aten.full.default":3,"aten.gelu.default":4,"aten.max.dim":18,"aten.mean.dim":4,"aten.mm.default":2,"aten.mul.Tensor":26,"aten.permute.default":34,"aten.sigmoid.default":1,"aten.silu_.default":165,"aten.split.Tensor":8,"aten.split_with_sizes.default":17,"aten.stack.default":3,"aten.sub.Tensor":18,"aten.sum.dim_IntList":16,"aten.t.default":8,"aten.transpose.int":125,"aten.unbind.int":1,"aten.unsqueeze.default":3,"aten.upsample_nearest2d.default":4,"aten.view.default":194},"required_fp32":true},"input":[1,3,64,64],"max_abs_error":0.0950927734375,"model_state_and_rng_preserved":true,"reference_backend":"native","rtol":0.1},"status":"PASSED_NATIVE_CUDA_AMP_REFERENCE_ONLY","torch":"2.7.1+cu118","weights_BN_RNG_preserved":true},"network_helper_test":"PASSED: fake accelerator with an undefined variable; -e/-u/-E/pipefail restored, both no_proxy forms include package domains","not_run":{"640_physical_batch16_real_training_smoke":"NOT_RUN: requires compatible server; no 64/128 substitute offered as proof","AAttn_Flash_parity":"NOT_VERIFIED: no compatible Flash device/environment; CPU fake observer is unit plumbing only","Linux_private_install":"NOT_RUN: local host Windows3.9/RTX2060; no AutoDL SSH endpoint supplied","exclusive_speed_and_full_network_equivalence":"NOT_RUN/NOT_VERIFIED; no such measurements or claims","formal_training_full_val_test":"NOT_RUN: new run is still planned; server checks must pass before start","real_Flash_CUDA_operator":"NOT_RUN: capability7.5 below required8.0, Flash2.7.3 not installed","real_tmux_and_POSIX_signal":"NOT_RUN: Windows host; lifecycle fake-session/exit/tee cases passed, POSIX test skipped"},"official_flash_release":{"compatible_metadata_candidates":[{"browser_download_url":"https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.3/flash_attn-2.7.3%2Bcu12torch2.2cxx11abiFALSE-cp310-cp310-linux_x86_64.whl","digest":null,"id":219540395,"name":"flash_attn-2.7.3+cu12torch2.2cxx11abiFALSE-cp310-cp310-linux_x86_64.whl","size":191240169},{"browser_download_url":"https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.3/flash_attn-2.7.3%2Bcu12torch2.2cxx11abiTRUE-cp310-cp310-linux_x86_64.whl","digest":null,"id":219541188,"name":"flash_attn-2.7.3+cu12torch2.2cxx11abiTRUE-cp310-cp310-linux_x86_64.whl","size":191238563}],"local_wheel_download_install":"NOT_RUN; Windows/RTX2060 incompatible; actual asset SHA256 recorded by Linux installer","source_commit":"89c5a7dd4e6a8644575bd0c04a286f48c42763ec","tag":"v2.7.3"},"only_recipe_difference_from_native":["train_attention_backend"],"parent_commit":"64f6639847a0b6a1c18f8f246ba27e274a4de3ad","passed_test_count":56,"public_native_FP32_reference":{"arithmetic":{"MACs_by_operator":{"bmm_attention_and_hypergraph":39321600,"mm_or_addmm":8574795776},"backend":"official_native_matmul_stable_softmax","covered_GFLOPs_2x_MACs":17.228234752,"flash_forward_calls":0,"flops_exclusions":"Opaque Flash kernel MACs (if used), bias adds, BN, activation, exp/softmax, reductions, pooling, residual/gate/elementwise arithmetic, interpolation, decode and NMS; not complete FLOPs","flops_scope":"Conv/Linear and all executed mm/bmm products, including AAttn and HyperACE","internal_half_cast_calls":0,"observed_dtypes":{"aten.bmm.default|torch.float32":6,"aten.exp.default|torch.float32":16,"aten.mm.default|torch.float32":374,"aten.softmax.int|torch.float32":3},"observed_operator_calls":{"aten.__and__.Tensor":1,"aten.__iand__.Tensor":1,"aten.__ilshift__.Scalar":1,"aten.__ior__.Tensor":1,"aten.__irshift__.Scalar":1,"aten.__ixor__.Tensor":1,"aten.__lshift__.Scalar":1,"aten.__or__.Tensor":1,"aten.__rshift__.Scalar":1,"aten.__xor__.Tensor":1,"aten._local_scalar_dense.default":1,"aten.abs.default":1,"aten.add.Tensor":664,"aten.add_.Tensor":1,"aten.amax.default":1,"aten.arange.default":6,"aten.avg_pool2d.default":2,"aten.batch_norm.default":58,"aten.bitwise_and.Scalar":2,"aten.bitwise_left_shift.Scalar_Tensor":2,"aten.bitwise_not.default":1,"aten.bitwise_or.Scalar":2,"aten.bitwise_right_shift.Scalar_Tensor":2,"aten.bitwise_xor.Scalar":2,"aten.bmm.default":6,"aten.cat.default":42,"aten.chunk.default":8,"aten.conv2d.default":310,"aten.copy_.default":377,"aten.diag_embed.default":187,"aten.div.Tensor":399,"aten.div_.Tensor":2,"aten.dropout.default":2,"aten.empty.memory_format":374,"aten.empty_like.default":1,"aten.eq.Scalar":1,"aten.eq.Tensor":1,"aten.exp.default":16,"aten.flatten.using_ints":34,"aten.floor_divide.default":3,"aten.floor_divide_.Tensor":1,"aten.full.default":3,"aten.ge.Scalar":1,"aten.ge.Tensor":1,"aten.gelu.default":4,"aten.gt.Scalar":4,"aten.gt.Tensor":1,"aten.index.Tensor":10,"aten.index_put_.default":4,"aten.is_nonzero.default":1,"aten.item.default":3,"aten.le.Scalar":1,"aten.le.Tensor":1,"aten.lift_fresh.default":9,"aten.linear.default":8,"aten.lt.Scalar":1,"aten.lt.Tensor":1,"aten.matmul.default":34,"aten.max.default":1,"aten.max.dim":20,"aten.mean.dim":4,"aten.meshgrid.indexing":3,"aten.mm.default":374,"aten.mul.Tensor":220,"aten.mul_.Tensor":1,"aten.ne.Scalar":1,"aten.ne.Tensor":1,"aten.neg.default":1,"aten.ones.default":4,"aten.permute.default":34,"aten.positive.default":1,"aten.pow.Scalar":2,"aten.pow.Tensor_Tensor":1,"aten.pow_.Tensor":1,"aten.reciprocal.default":2,"aten.remainder.Scalar_Tensor":2,"aten.remainder.Tensor":1,"aten.remainder_.Tensor":1,"aten.reshape.default":44,"aten.rsub.Scalar":2,"aten.select.int":5,"aten.sigmoid.default":1,"aten.silu_.default":165,"aten.slice.Tensor":28,"aten.softmax.int":3,"aten.split_with_sizes.default":19,"aten.sqrt.default":374,"aten.stack.default":3,"aten.sub.Tensor":211,"aten.sub_.Tensor":1,"aten.sum.dim_IntList":16,"aten.to.dtype":3,"aten.to.dtype_layout":1,"aten.transpose.int":126,"aten.unbind.int":2,"aten.uniform_.default":374,"aten.unsqueeze.default":3,"aten.upsample_nearest2d.vec":4,"aten.view.default":818,"aten.zeros.default":188,"torchvision._cuda_version.default":3,"torchvision.nms.default":2},"required_fp32":true},"formal_training_started":false,"images":["D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\images\\val\\crack_000002_brightness_contrast_strong.jpg","D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\images\\val\\crack_000002_noise_blur_strong.jpg"],"parameter_dtype":"torch.float32","results":2,"scope":"actual public predictor/NMS/letterbox API on two real val images; not 4090/batch16 readiness or formal metrics","status":"PASSED_CPU_PUBLIC_NATIVE_REFERENCE_640_BATCH2"},"schema":"matches actual resolver; full preset/default equality passed","schema_version":1,"scope":"Local implementation verification; real Flash/4090/Linux installation NOT_RUN; no server formal training","shared_unchanged":{"benchmarks/comparison/configs/protocol.yaml":{"sha256":"e51f27cd135c2e1b790d64deaa480ddd65a2f0e62c8dffdaf879506140842b95","unchanged_from_parent":true},"benchmarks/comparison/evaluation/evaluate.py":{"sha256":"e0ea8d3dd5b5c40e93c0c1da9bd57a8aa0a7271870bd664d98d9fb801330fb4d","unchanged_from_parent":true},"benchmarks/comparison/evaluation/native_metrics.py":{"sha256":"61cc3fb231f8b08c28904e003c0ca8fe1a9cc3d38aceb73a137caf80e9ec0634","unchanged_from_parent":true},"benchmarks/comparison/yolov13l/augment_b19.py":{"sha256":"220627a4f030e80653ba7b2eb38ed969163246dcd352033e381c024f684e8cef","unchanged_from_parent":true},"benchmarks/comparison/yolov13l/cutmix_reference.py":{"sha256":"81611e47ab91c530e0bbdedf61f61cd0758ccb83489c68cd3d8a9f89fc54c250","unchanged_from_parent":true},"benchmarks/comparison/yolov13l/data.py":{"sha256":"ce404940e230a797f90b97ae44e0f0121c307e8988b71db964688d5db15c3758","unchanged_from_parent":true}},"skipped_test_count":1,"syntax":{"AST":"PASSED","bash":"PASSED: lifecycle, setup worker and accelerator helper bash -n","python_files":23},"test_runtime":"Read-only old Windows native venv invoked against the new isolated vendor/code; no packages installed into old/base environment","tests":{"CPU_worker_data_integration":{"log":"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\cpu_integration.log","log_sha256":"3a9963baad69dfadd47c276ef5bd2ca89f8b1077ee9c390acb2472192ddd9376","passed":10,"skipped":0,"status":"PASSED","tests_run":10},"CutMix":{"log":"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\cutmix.log","log_sha256":"579773bf812a55f600dbb9894f1a007b917b0d28231915dc301f20bede336140","passed":5,"skipped":0,"status":"PASSED","tests_run":5},"actual_model_and_initialization":{"log":"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\test_model.log","log_sha256":"5662045ea32671cc571b1ceb46558ee39717992a372e00149c8285e530bdcc5c","passed":7,"skipped":0,"status":"PASSED","tests_run":7},"backend_phase_freeze_and_wheel":{"log":"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\backend_delivery_final.log","log_sha256":"ad99570d32fbde98ac63112095a7be8a1c6b9dbd49f4837e5124ffb81d3f414b","passed":10,"skipped":0,"status":"PASSED","tests_run":10},"configuration_and_archive":{"log":"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\test_configurable_final.log","log_sha256":"86310c1a44b4eacd5663e312fbce1799cb70874afa5c288d509afcc4521180fc","passed":12,"skipped":0,"status":"PASSED","tests_run":12},"initialization_guards":{"log":"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\test_initialization_guards.log","log_sha256":"2206a4c8250326c07bfdbb1c40587229e5ea88e7b27cfe88a6e08292d6e81466","passed":4,"skipped":0,"status":"PASSED","tests_run":4},"lifecycle_exit_and_tee":{"log":"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\test_lifecycle.log","log_sha256":"72e6e08f39cf92a96cdf524da9c922026b1f5492d875ea4ddeb4fd3453ddaea8","passed":3,"skipped":1,"status":"PASSED","tests_run":4},"public_evaluator":{"log":"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\public_evaluator.log","log_sha256":"2f42edd74ef28c6308dab55338107e67819e4be4ee3144de2754c421ec821fa7","passed":5,"skipped":0,"status":"PASSED","tests_run":5}},"upstream":{"backend_operation":"official explicit matmul + max-subtracted exp / sum; not torch SDPA","commit":"73289949533efac82bb5f72ec19b746618656bd2","compatibility_note":"Scoped author branch selection, explicit deterministic/dropout/scale/causal Flash kwargs, CPU-in-Flash guard and trusted local checkpoint compatibility; no attention formula, layout, architecture or initialization changes","default_backend":"flash","eval_backend":"native","license":"AGPL-3.0","license_sha256":"8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef","measured_identity":{"1":{"module_counts":{"A2C2f":2,"AAttn":16,"ABlock":16,"DSC3k2":6,"DSConv":58,"DownsampleConv":1,"FullPAD_Tunnel":7,"HyperACE":1},"parameters_unfused":27566874,"state_tensors":1568},"80":{"module_counts":{"A2C2f":2,"AAttn":16,"ABlock":16,"DSC3k2":6,"DSConv":58,"DownsampleConv":1,"FullPAD_Tunnel":7,"HyperACE":1},"parameters_unfused":27627783,"state_tensors":1568}},"model_yaml_sha256":"09654eb02148c31bf0ac1292ad6e8659a4a35a465ab5834eaff6773e3c3c7091","patch":"patches/0001-controlled-backend-and-local-checkpoints.patch","patch_sha256":"e7ab23b370ee8793c6db4ac4bffe80110275819b02ff79b7a6d4da66dc88deb7","patched_source_sha256":"159eb35b428625c445047d073b6202defaea66aadcf00aaa6747de266846c307","repository":"https://github.com/iMoonLab/yolov13.git","transfer":{"destination_tensors":1568,"missing_or_reshaped_keys":["model.32.cv3.0.2.bias","model.32.cv3.0.2.weight","model.32.cv3.1.2.bias","model.32.cv3.1.2.weight","model.32.cv3.2.2.bias","model.32.cv3.2.2.weight"],"protected_tensor_count":773,"skip_reasons":{"model.32.cv3.0.2.bias":{"reason":"nc80 -> nc1 class-output dimension only","source_shape":[80],"target_shape":[1]},"model.32.cv3.0.2.weight":{"reason":"nc80 -> nc1 class-output dimension only","source_shape":[80,256,1,1],"target_shape":[1,256,1,1]},"model.32.cv3.1.2.bias":{"reason":"nc80 -> nc1 class-output dimension only","source_shape":[80],"target_shape":[1]},"model.32.cv3.1.2.weight":{"reason":"nc80 -> nc1 class-output dimension only","source_shape":[80,256,1,1],"target_shape":[1,256,1,1]},"model.32.cv3.2.2.bias":{"reason":"nc80 -> nc1 class-output dimension only","source_shape":[80],"target_shape":[1]},"model.32.cv3.2.2.weight":{"reason":"nc80 -> nc1 class-output dimension only","source_shape":[80,256,1,1],"target_shape":[1,256,1,1]}},"transferred_elements":27694476,"transferred_tensors":1562},"version":"8.3.63","weights":{"asset_name":"yolov13l.pt","bytes":111819790,"github_asset_id":266185226,"github_digest":"sha256:f95ad5bbf3aa80a3df2a28ff4c623582ded6e02bb43d7cea9063c2b248e316cb","release_tag":"yolov13","sha256":"f95ad5bbf3aa80a3df2a28ff4c623582ded6e02bb43d7cea9063c2b248e316cb","trust_receipt":"Fetched official release URL, compared REST asset size/digest before any torch deserialization","url":"https://github.com/iMoonLab/yolov13/releases/download/yolov13/yolov13l.pt"}}}
+{
+  "actual_Bash_CLI": {
+    "shell_adamw.log": "7432720d45907433e5ec5a980f530d195df411742a1f0b04dd9d0bf3c2f2d549",
+    "shell_adamw_yaml.log": "e6eb2993597e3644ad25b48be0a91d2e9708b70ef2abb52d3819a4cb1859a57a",
+    "shell_auto.log": "2c7282c3374e3a1d8c70996c960069855723427cb5444f67e8ae022fae8886e5",
+    "shell_default.log": "f2944081a668f43ce5d5b1d7da2154fa1e9eb4b98dc3d33fc8af1cd585c095cc",
+    "shell_help.log": "ca9339a7b827fc977256c308e060b846618c328abe3f988f4ad6116b1051befc",
+    "shell_sgd.log": "1a8547fde1366c6457a3635e18373fe145ce05e4fa9149f1e80c51325100c101"
+  },
+  "adapter_sha256": "fa6830bb0493c3f263f169a25c27d477c6112e15f60a1f61944ace23ca0c7f4a",
+  "branch": "bench/yolov13l-flash-configurable",
+  "code_files_sha256": {
+    "benchmarks/comparison/yolov13l/.gitattributes": "7c25eba098f1f2f34b2416eb6f49a50f9df5cffe526120ca1acdfcc3285c21c8",
+    "benchmarks/comparison/yolov13l/LICENSE.cutmix.txt": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+    "benchmarks/comparison/yolov13l/NOTICE.md": "c204874e8553273bfe1dc6dcfe88a2e983fba0dfe5965dad5f6c9aab58278edc",
+    "benchmarks/comparison/yolov13l/adapters.py": "a7c5e0fadc28fb9cdc8662af9e09bdc688483271152bcdfda47c614d9ff09bda",
+    "benchmarks/comparison/yolov13l/augment_b19.py": "220627a4f030e80653ba7b2eb38ed969163246dcd352033e381c024f684e8cef",
+    "benchmarks/comparison/yolov13l/augmentation.lock.json": "52c29931eaf6aa5e193592691f58a275c0113ff8222a8d2392c974dbc2be7e74",
+    "benchmarks/comparison/yolov13l/backend.py": "3b837fae74c53a68816734531325ce55899f79a2557dc7e3ffa2947e317a8e2e",
+    "benchmarks/comparison/yolov13l/bootstrap.py": "538163be6c3e1c6772c17692f7d409462d05e5aaa71e12b739ed84a014f12358",
+    "benchmarks/comparison/yolov13l/config_schema.json": "fa2bb02bbaeaa8055ac9d7a0e0c64c5c84e79042aaaef5ad0cfb3bef5401c881",
+    "benchmarks/comparison/yolov13l/configs/v13l_aug_x13_01.yaml": "56fd69bfa754bb1acb6c4b19607291bbc50bb79915367fefc87da5523a456f0f",
+    "benchmarks/comparison/yolov13l/configs/v13l_aug_x13_flash_01.yaml": "37a1a4c9206ba63f199a348889233b62c1052822159a5d74d7bcd2e36437cad7",
+    "benchmarks/comparison/yolov13l/configuration.py": "12784c1bb930eac0fa2e79583a7d2b9b05c3ab028db4a1704420c3a2f7a3c5f6",
+    "benchmarks/comparison/yolov13l/cuda_smoke.py": "bb6d7848ed9e8b9660b8e00b3516850d9446931697f17b6b9d318ee094829954",
+    "benchmarks/comparison/yolov13l/cutmix_reference.py": "81611e47ab91c530e0bbdedf61f61cd0758ccb83489c68cd3d8a9f89fc54c250",
+    "benchmarks/comparison/yolov13l/data.py": "ce404940e230a797f90b97ae44e0f0121c307e8988b71db964688d5db15c3758",
+    "benchmarks/comparison/yolov13l/default_config.yaml": "b68ec0693af7e3573ecc40da21ca611cda4412b00467b84f870de937cd09391d",
+    "benchmarks/comparison/yolov13l/environment.lock.json": "9cab75be6eb422b4bac64b68b6d5296b9ba4839dcc5af7cc930a9fa7b5cbf83e",
+    "benchmarks/comparison/yolov13l/export.py": "f5a450eae8664e3fee2c702b1eb6f4626ccc2bae0b43d95daeee6c804a86fd80",
+    "benchmarks/comparison/yolov13l/flash_checks.py": "40855298b09287f44d85e3671438e091eeb21053977f8c16ab077a8fbff500e2",
+    "benchmarks/comparison/yolov13l/flash_install.py": "cc5a4d47d1203886910836e257eb5530b08e5e68d74596b8c45ad6e6a948f13e",
+    "benchmarks/comparison/yolov13l/initialization.json": "b9d038c2629853c6ff74661d3940f48378c811e2d153e26943034604f14253e5",
+    "benchmarks/comparison/yolov13l/initialization.lock.json": "89485cd1fa1004e63a244e897661c3eb645ca53b1df351cc08b7d65b420328e9",
+    "benchmarks/comparison/yolov13l/packaging_run.py": "2aef815e1f9264f76a0b8feb8fe37ac4b0bca7057800fed876d4f06b7bf3cd1d",
+    "benchmarks/comparison/yolov13l/patches/0001-controlled-backend-and-local-checkpoints.patch": "e7ab23b370ee8793c6db4ac4bffe80110275819b02ff79b7a6d4da66dc88deb7",
+    "benchmarks/comparison/yolov13l/recipe.yaml": "64e4ab7530e3317c0c24d8d853baa226f86b858c2b8b01b9634c67586ad01c5a",
+    "benchmarks/comparison/yolov13l/requirements-overlay.txt": "9a4ba117c07ee144bff74f1fd6cdf89682b120bec778dd067c692dde4d51bb01",
+    "benchmarks/comparison/yolov13l/requirements-runtime.txt": "df1897eef835bca044aa33b2296f115e1ef6ffceb9d89b79d509b4313a8a005d",
+    "benchmarks/comparison/yolov13l/run.py": "dd69a392092e2a912edee8c72d48659de73bcdbdfc70362cbc49f705edd3a305",
+    "benchmarks/comparison/yolov13l/smoke.py": "8a84081c918f4415d1340f1c1b5f71d10b8d5533f10319e07e6ada34304abeb5",
+    "benchmarks/comparison/yolov13l/stage.py": "c7ec91c49d70177c86b1f3b5eee64df944d7e9fdf1ba785de6808301d0f6d399",
+    "benchmarks/comparison/yolov13l/support.py": "03132bd4121b6ed9ef2d75d4265b05740880f9415ff49104fa7ea443cc8bffca",
+    "benchmarks/comparison/yolov13l/test_b19.py": "01e4096d78737771b78093366cdc27d8b00450389ce03d6bfeb69c83f404cdd1",
+    "benchmarks/comparison/yolov13l/test_configurable.py": "15415c2ca67a86385e3b6debb7d62b7bc0b1f857eef76e174702700c0889904f",
+    "benchmarks/comparison/yolov13l/test_flash_backend.py": "1a69240f0409a49a5a7bb913e3a07b7556fedb55c5e71006722d683f3ebeb53e",
+    "benchmarks/comparison/yolov13l/test_initialization_guards.py": "b7d6885e3ada304cd530e7dd1d8ea28cdbe8a4f62a341ca91cac6c7f8d6c45da",
+    "benchmarks/comparison/yolov13l/test_lifecycle.py": "994d4e1cf48fbd3f6498f752545fce25bdef5fd2f919c2e12760a583fbec3782",
+    "benchmarks/comparison/yolov13l/test_model.py": "01baa7e0772846bf5eb06dd471227db479591bfb00d65eba276d2ecbe5f2fa28",
+    "benchmarks/comparison/yolov13l/upstream.lock.json": "632310e349b1117c93d7a0338cef95df58ff89872cae2591b5311f61e925f3f5",
+    "benchmarks/comparison/yolov13l/verification.py": "7fc4f3f8a237deac3d4f97a09bd7c080b305e891ba6ad06f77eff8fffb500555"
+  },
+  "config_sha256": "09311ff91a891babebbc45290d00ad235600ff24574e34bab8fff02712f36acd",
+  "date": "2026-10-06 Asia/Shanghai",
+  "full_resolved_first_recipe": {
+    "agnostic_nms": false,
+    "amp": true,
+    "augment": false,
+    "auto_augment": null,
+    "batch": 16,
+    "bgr": 0.0,
+    "box": 7.5,
+    "cache": false,
+    "classes": null,
+    "close_mosaic": 5,
+    "cls": 0.5,
+    "conf": 0.001,
+    "copy_paste": 0.0,
+    "cos_lr": true,
+    "cutmix": 0.065,
+    "degrees": 18.2,
+    "deterministic": true,
+    "device": 0,
+    "dfl": 1.5,
+    "epochs": 200,
+    "erasing": 0.0,
+    "eval_attention_backend": "native",
+    "exist_ok": false,
+    "fliplr": 0.5,
+    "flipud": 0.065,
+    "fraction": 1.0,
+    "freeze": null,
+    "hsv_h": 0.0377,
+    "hsv_s": 0.98,
+    "hsv_v": 0.78,
+    "imgsz": 640,
+    "initialization_type": "coco_detection_pretrained",
+    "iou": 0.7,
+    "lr0": 0.01,
+    "lrf": 0.01,
+    "max_det": 300,
+    "mixup": 0.234,
+    "model": "yolov13l.pt",
+    "momentum": 0.937,
+    "mosaic": 1.0,
+    "multi_scale": false,
+    "nbs": 64,
+    "optimizer": "SGD",
+    "patience": 50,
+    "perspective": 0.000845,
+    "plots": true,
+    "pretrained": true,
+    "rect": false,
+    "resume": false,
+    "save": true,
+    "save_period": -1,
+    "scale": 0.95,
+    "seed": 42,
+    "shear": 5.85,
+    "single_cls": false,
+    "task": "detect",
+    "train_attention_backend": "flash",
+    "translate": 0.26,
+    "val": true,
+    "warmup_bias_lr": 0.1,
+    "warmup_epochs": 5.0,
+    "warmup_momentum": 0.8,
+    "weight_decay": 0.0005,
+    "workers": 8
+  },
+  "handoff_syntax": {
+    "Bash_blocks": 8,
+    "scope": "bash -n only; no server training executed",
+    "server_file_identical_to_main_block": true,
+    "status": "PASSED"
+  },
+  "implementation_code_sha": "6673ac43fa270c711a3bcf41a8f3c5bc88c80efb",
+  "local_strict_flash_readiness": {
+    "error": "Strict Flash request failed; no fallback: Flash requires CUDA and Ampere or newer (capability >= 8.0)",
+    "formal_training_started": false,
+    "status": "NOT_RUN",
+    "traceback": "Traceback (most recent call last):\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\benchmarks\\comparison\\yolov13l\\backend.py\", line 131, in resolve_train_backend\n    raise RuntimeError('Flash requires CUDA and Ampere or newer (capability >= 8.0)')\nRuntimeError: Flash requires CUDA and Ampere or newer (capability >= 8.0)\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\benchmarks\\comparison\\yolov13l\\flash_checks.py\", line 215, in main\n    result=check(args)\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\benchmarks\\comparison\\yolov13l\\flash_checks.py\", line 62, in check\n    resolution=resolve_train_backend(config['train_attention_backend'],config['amp'],config['deterministic'])\n  File \"D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\benchmarks\\comparison\\yolov13l\\backend.py\", line 136, in resolve_train_backend\n    raise RuntimeError('Strict Flash request failed; no fallback: '+str(exc)) from exc\nRuntimeError: Strict Flash request failed; no fallback: Flash requires CUDA and Ampere or newer (capability >= 8.0)\n"
+  },
+  "native_cuda_AMP_reference": {
+    "Flash_training": "NOT_RUN: RTX2060 capability7.5 and Windows do not match required server Flash environment",
+    "capability": [
+      7,
+      5
+    ],
+    "flash_calls": 0,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "probe": {
+      "amp": {
+        "MACs_by_operator": {
+          "bmm_attention_and_hypergraph": 2621440,
+          "convolution": 422145280,
+          "mm_or_addmm": 5242880
+        },
+        "backend": "official_native_matmul_stable_softmax",
+        "covered_GFLOPs_2x_MACs": 0.8600192,
+        "flash_forward_calls": 0,
+        "flops_exclusions": "Opaque Flash kernel MACs (if used), bias adds, BN, activation, exp/softmax, reductions, pooling, residual/gate/elementwise arithmetic, interpolation, decode and NMS; not complete FLOPs",
+        "flops_scope": "Conv/Linear and all executed mm/bmm products, including AAttn and HyperACE",
+        "internal_half_cast_calls": 362,
+        "observed_dtypes": {
+          "aten._softmax.default|torch.float16,torch.float32": 3,
+          "aten.addmm.default|torch.float16": 6,
+          "aten.bmm.default|torch.float16": 40,
+          "aten.convolution.default|torch.float16": 310,
+          "aten.exp.default|torch.float32": 16
+        },
+        "observed_operator_calls": {
+          "aten._softmax.default": 3,
+          "aten._to_copy.default": 380,
+          "aten._unsafe_view.default": 66,
+          "aten.add.Tensor": 93,
+          "aten.addmm.default": 6,
+          "aten.avg_pool2d.default": 2,
+          "aten.bmm.default": 40,
+          "aten.cat.default": 38,
+          "aten.clone.default": 32,
+          "aten.convolution.default": 310,
+          "aten.cudnn_batch_norm.default": 245,
+          "aten.div.Tensor": 19,
+          "aten.exp.default": 16,
+          "aten.expand.default": 68,
+          "aten.gelu.default": 4,
+          "aten.max.dim": 18,
+          "aten.mean.dim": 4,
+          "aten.mul.Tensor": 26,
+          "aten.permute.default": 34,
+          "aten.sigmoid.default": 1,
+          "aten.silu_.default": 165,
+          "aten.split.Tensor": 8,
+          "aten.split_with_sizes.default": 17,
+          "aten.sub.Tensor": 18,
+          "aten.sum.dim_IntList": 16,
+          "aten.t.default": 8,
+          "aten.transpose.int": 123,
+          "aten.unsqueeze.default": 3,
+          "aten.upsample_nearest2d.default": 4,
+          "aten.view.default": 187
+        },
+        "required_fp32": false
+      },
+      "atol": 0.5,
+      "flash_parity": "NOT_VERIFIED",
+      "fp32": {
+        "MACs_by_operator": {
+          "bmm_attention_and_hypergraph": 524288,
+          "convolution": 422145280,
+          "mm_or_addmm": 7340032
+        },
+        "backend": "official_native_matmul_stable_softmax",
+        "covered_GFLOPs_2x_MACs": 0.8600192,
+        "flash_forward_calls": 0,
+        "flops_exclusions": "Opaque Flash kernel MACs (if used), bias adds, BN, activation, exp/softmax, reductions, pooling, residual/gate/elementwise arithmetic, interpolation, decode and NMS; not complete FLOPs",
+        "flops_scope": "Conv/Linear and all executed mm/bmm products, including AAttn and HyperACE",
+        "internal_half_cast_calls": 0,
+        "observed_dtypes": {
+          "aten._softmax.default|torch.float32": 3,
+          "aten.addmm.default|torch.float32": 6,
+          "aten.bmm.default|torch.float32": 38,
+          "aten.convolution.default|torch.float32": 310,
+          "aten.exp.default|torch.float32": 16,
+          "aten.mm.default|torch.float32": 2
+        },
+        "observed_operator_calls": {
+          "aten._local_scalar_dense.default": 3,
+          "aten._softmax.default": 3,
+          "aten._unsafe_view.default": 66,
+          "aten.add.Tensor": 99,
+          "aten.addmm.default": 6,
+          "aten.arange.default": 6,
+          "aten.avg_pool2d.default": 2,
+          "aten.bmm.default": 38,
+          "aten.cat.default": 40,
+          "aten.clone.default": 32,
+          "aten.convolution.default": 310,
+          "aten.cudnn_batch_norm.default": 245,
+          "aten.div.Tensor": 19,
+          "aten.exp.default": 16,
+          "aten.expand.default": 70,
+          "aten.full.default": 3,
+          "aten.gelu.default": 4,
+          "aten.max.dim": 18,
+          "aten.mean.dim": 4,
+          "aten.mm.default": 2,
+          "aten.mul.Tensor": 26,
+          "aten.permute.default": 34,
+          "aten.sigmoid.default": 1,
+          "aten.silu_.default": 165,
+          "aten.split.Tensor": 8,
+          "aten.split_with_sizes.default": 17,
+          "aten.stack.default": 3,
+          "aten.sub.Tensor": 18,
+          "aten.sum.dim_IntList": 16,
+          "aten.t.default": 8,
+          "aten.transpose.int": 125,
+          "aten.unbind.int": 1,
+          "aten.unsqueeze.default": 3,
+          "aten.upsample_nearest2d.default": 4,
+          "aten.view.default": 194
+        },
+        "required_fp32": true
+      },
+      "input": [
+        1,
+        3,
+        64,
+        64
+      ],
+      "max_abs_error": 0.0950927734375,
+      "model_state_and_rng_preserved": true,
+      "reference_backend": "native",
+      "rtol": 0.1
+    },
+    "status": "PASSED_NATIVE_CUDA_AMP_REFERENCE_ONLY",
+    "torch": "2.7.1+cu118",
+    "weights_BN_RNG_preserved": true
+  },
+  "network_delivery_note": "Git direct connection failed; successful push and remote read used the already configured local proxy for single commands only; no global Git/proxy change",
+  "network_helper_test": "PASSED: fake accelerator with an undefined variable; -e/-u/-E/pipefail restored, both no_proxy forms include package domains",
+  "not_run": {
+    "640_physical_batch16_real_training_smoke": "NOT_RUN: requires compatible server; no 64/128 substitute offered as proof",
+    "AAttn_Flash_parity": "NOT_VERIFIED: no compatible Flash device/environment; CPU fake observer is unit plumbing only",
+    "Linux_private_install": "NOT_RUN: local host Windows3.9/RTX2060; no AutoDL SSH endpoint supplied",
+    "exclusive_speed_and_full_network_equivalence": "NOT_RUN/NOT_VERIFIED; no such measurements or claims",
+    "formal_training_full_val_test": "NOT_RUN: new run is still planned; server checks must pass before start",
+    "real_Flash_CUDA_operator": "NOT_RUN: capability7.5 below required8.0, Flash2.7.3 not installed",
+    "real_tmux_and_POSIX_signal": "NOT_RUN: Windows host; lifecycle fake-session/exit/tee cases passed, POSIX test skipped"
+  },
+  "official_flash_release": {
+    "compatible_metadata_candidates": [
+      {
+        "browser_download_url": "https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.3/flash_attn-2.7.3%2Bcu12torch2.2cxx11abiFALSE-cp310-cp310-linux_x86_64.whl",
+        "digest": null,
+        "id": 219540395,
+        "name": "flash_attn-2.7.3+cu12torch2.2cxx11abiFALSE-cp310-cp310-linux_x86_64.whl",
+        "size": 191240169
+      },
+      {
+        "browser_download_url": "https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.3/flash_attn-2.7.3%2Bcu12torch2.2cxx11abiTRUE-cp310-cp310-linux_x86_64.whl",
+        "digest": null,
+        "id": 219541188,
+        "name": "flash_attn-2.7.3+cu12torch2.2cxx11abiTRUE-cp310-cp310-linux_x86_64.whl",
+        "size": 191238563
+      }
+    ],
+    "local_wheel_download_install": "NOT_RUN; Windows/RTX2060 incompatible; actual asset SHA256 recorded by Linux installer",
+    "source_commit": "89c5a7dd4e6a8644575bd0c04a286f48c42763ec",
+    "tag": "v2.7.3"
+  },
+  "only_recipe_difference_from_native": [
+    "train_attention_backend"
+  ],
+  "parent_commit": "64f6639847a0b6a1c18f8f246ba27e274a4de3ad",
+  "passed_test_count": 56,
+  "planned_archive": {
+    "model_code_sha": "6673ac43fa270c711a3bcf41a8f3c5bc88c80efb",
+    "path": "docs/comparison/archives/yolov13l/v13l_aug_x13_flash_01_NOT_RUN.json",
+    "sha256": "c0b014981c54b899999353b30e4c6465902f44c474d9c5c8b0a6cf016e57986f",
+    "status": "NOT_RUN"
+  },
+  "public_native_FP32_reference": {
+    "arithmetic": {
+      "MACs_by_operator": {
+        "bmm_attention_and_hypergraph": 39321600,
+        "mm_or_addmm": 8574795776
+      },
+      "backend": "official_native_matmul_stable_softmax",
+      "covered_GFLOPs_2x_MACs": 17.228234752,
+      "flash_forward_calls": 0,
+      "flops_exclusions": "Opaque Flash kernel MACs (if used), bias adds, BN, activation, exp/softmax, reductions, pooling, residual/gate/elementwise arithmetic, interpolation, decode and NMS; not complete FLOPs",
+      "flops_scope": "Conv/Linear and all executed mm/bmm products, including AAttn and HyperACE",
+      "internal_half_cast_calls": 0,
+      "observed_dtypes": {
+        "aten.bmm.default|torch.float32": 6,
+        "aten.exp.default|torch.float32": 16,
+        "aten.mm.default|torch.float32": 374,
+        "aten.softmax.int|torch.float32": 3
+      },
+      "observed_operator_calls": {
+        "aten.__and__.Tensor": 1,
+        "aten.__iand__.Tensor": 1,
+        "aten.__ilshift__.Scalar": 1,
+        "aten.__ior__.Tensor": 1,
+        "aten.__irshift__.Scalar": 1,
+        "aten.__ixor__.Tensor": 1,
+        "aten.__lshift__.Scalar": 1,
+        "aten.__or__.Tensor": 1,
+        "aten.__rshift__.Scalar": 1,
+        "aten.__xor__.Tensor": 1,
+        "aten._local_scalar_dense.default": 1,
+        "aten.abs.default": 1,
+        "aten.add.Tensor": 664,
+        "aten.add_.Tensor": 1,
+        "aten.amax.default": 1,
+        "aten.arange.default": 6,
+        "aten.avg_pool2d.default": 2,
+        "aten.batch_norm.default": 58,
+        "aten.bitwise_and.Scalar": 2,
+        "aten.bitwise_left_shift.Scalar_Tensor": 2,
+        "aten.bitwise_not.default": 1,
+        "aten.bitwise_or.Scalar": 2,
+        "aten.bitwise_right_shift.Scalar_Tensor": 2,
+        "aten.bitwise_xor.Scalar": 2,
+        "aten.bmm.default": 6,
+        "aten.cat.default": 42,
+        "aten.chunk.default": 8,
+        "aten.conv2d.default": 310,
+        "aten.copy_.default": 377,
+        "aten.diag_embed.default": 187,
+        "aten.div.Tensor": 399,
+        "aten.div_.Tensor": 2,
+        "aten.dropout.default": 2,
+        "aten.empty.memory_format": 374,
+        "aten.empty_like.default": 1,
+        "aten.eq.Scalar": 1,
+        "aten.eq.Tensor": 1,
+        "aten.exp.default": 16,
+        "aten.flatten.using_ints": 34,
+        "aten.floor_divide.default": 3,
+        "aten.floor_divide_.Tensor": 1,
+        "aten.full.default": 3,
+        "aten.ge.Scalar": 1,
+        "aten.ge.Tensor": 1,
+        "aten.gelu.default": 4,
+        "aten.gt.Scalar": 4,
+        "aten.gt.Tensor": 1,
+        "aten.index.Tensor": 10,
+        "aten.index_put_.default": 4,
+        "aten.is_nonzero.default": 1,
+        "aten.item.default": 3,
+        "aten.le.Scalar": 1,
+        "aten.le.Tensor": 1,
+        "aten.lift_fresh.default": 9,
+        "aten.linear.default": 8,
+        "aten.lt.Scalar": 1,
+        "aten.lt.Tensor": 1,
+        "aten.matmul.default": 34,
+        "aten.max.default": 1,
+        "aten.max.dim": 20,
+        "aten.mean.dim": 4,
+        "aten.meshgrid.indexing": 3,
+        "aten.mm.default": 374,
+        "aten.mul.Tensor": 220,
+        "aten.mul_.Tensor": 1,
+        "aten.ne.Scalar": 1,
+        "aten.ne.Tensor": 1,
+        "aten.neg.default": 1,
+        "aten.ones.default": 4,
+        "aten.permute.default": 34,
+        "aten.positive.default": 1,
+        "aten.pow.Scalar": 2,
+        "aten.pow.Tensor_Tensor": 1,
+        "aten.pow_.Tensor": 1,
+        "aten.reciprocal.default": 2,
+        "aten.remainder.Scalar_Tensor": 2,
+        "aten.remainder.Tensor": 1,
+        "aten.remainder_.Tensor": 1,
+        "aten.reshape.default": 44,
+        "aten.rsub.Scalar": 2,
+        "aten.select.int": 5,
+        "aten.sigmoid.default": 1,
+        "aten.silu_.default": 165,
+        "aten.slice.Tensor": 28,
+        "aten.softmax.int": 3,
+        "aten.split_with_sizes.default": 19,
+        "aten.sqrt.default": 374,
+        "aten.stack.default": 3,
+        "aten.sub.Tensor": 211,
+        "aten.sub_.Tensor": 1,
+        "aten.sum.dim_IntList": 16,
+        "aten.to.dtype": 3,
+        "aten.to.dtype_layout": 1,
+        "aten.transpose.int": 126,
+        "aten.unbind.int": 2,
+        "aten.uniform_.default": 374,
+        "aten.unsqueeze.default": 3,
+        "aten.upsample_nearest2d.vec": 4,
+        "aten.view.default": 818,
+        "aten.zeros.default": 188,
+        "torchvision._cuda_version.default": 3,
+        "torchvision.nms.default": 2
+      },
+      "required_fp32": true
+    },
+    "formal_training_started": false,
+    "images": [
+      "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\images\\val\\crack_000002_brightness_contrast_strong.jpg",
+      "D:\\MyProjects\\Crack_RTDETR\\datasets\\crack_det\\images\\val\\crack_000002_noise_blur_strong.jpg"
+    ],
+    "parameter_dtype": "torch.float32",
+    "results": 2,
+    "scope": "actual public predictor/NMS/letterbox API on two real val images; not 4090/batch16 readiness or formal metrics",
+    "status": "PASSED_CPU_PUBLIC_NATIVE_REFERENCE_640_BATCH2"
+  },
+  "remote_implementation_verification": {
+    "actual_sha": "6673ac43fa270c711a3bcf41a8f3c5bc88c80efb",
+    "command": "git ls-remote origin refs/heads/bench/yolov13l-flash-configurable",
+    "scope": "verified after implementation push; before documentation-only handoff commit"
+  },
+  "schema": "matches actual resolver; full preset/default equality passed",
+  "schema_version": 1,
+  "scope": "Local implementation verification; real Flash/4090/Linux installation NOT_RUN; no server formal training",
+  "shared_unchanged": {
+    "benchmarks/comparison/configs/protocol.yaml": {
+      "sha256": "e51f27cd135c2e1b790d64deaa480ddd65a2f0e62c8dffdaf879506140842b95",
+      "unchanged_from_parent": true
+    },
+    "benchmarks/comparison/evaluation/evaluate.py": {
+      "sha256": "e0ea8d3dd5b5c40e93c0c1da9bd57a8aa0a7271870bd664d98d9fb801330fb4d",
+      "unchanged_from_parent": true
+    },
+    "benchmarks/comparison/evaluation/native_metrics.py": {
+      "sha256": "61cc3fb231f8b08c28904e003c0ca8fe1a9cc3d38aceb73a137caf80e9ec0634",
+      "unchanged_from_parent": true
+    },
+    "benchmarks/comparison/yolov13l/augment_b19.py": {
+      "sha256": "220627a4f030e80653ba7b2eb38ed969163246dcd352033e381c024f684e8cef",
+      "unchanged_from_parent": true
+    },
+    "benchmarks/comparison/yolov13l/cutmix_reference.py": {
+      "sha256": "81611e47ab91c530e0bbdedf61f61cd0758ccb83489c68cd3d8a9f89fc54c250",
+      "unchanged_from_parent": true
+    },
+    "benchmarks/comparison/yolov13l/data.py": {
+      "sha256": "ce404940e230a797f90b97ae44e0f0121c307e8988b71db964688d5db15c3758",
+      "unchanged_from_parent": true
+    }
+  },
+  "skipped_test_count": 1,
+  "syntax": {
+    "AST": "PASSED",
+    "bash": "PASSED: lifecycle, setup worker and accelerator helper bash -n",
+    "python_files": 23
+  },
+  "test_runtime": "Read-only old Windows native venv invoked against the new isolated vendor/code; no packages installed into old/base environment",
+  "tests": {
+    "CPU_worker_data_integration": {
+      "log": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\cpu_integration.log",
+      "log_sha256": "3a9963baad69dfadd47c276ef5bd2ca89f8b1077ee9c390acb2472192ddd9376",
+      "passed": 10,
+      "skipped": 0,
+      "status": "PASSED",
+      "tests_run": 10
+    },
+    "CutMix": {
+      "log": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\cutmix.log",
+      "log_sha256": "579773bf812a55f600dbb9894f1a007b917b0d28231915dc301f20bede336140",
+      "passed": 5,
+      "skipped": 0,
+      "status": "PASSED",
+      "tests_run": 5
+    },
+    "actual_model_and_initialization": {
+      "log": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\test_model.log",
+      "log_sha256": "5662045ea32671cc571b1ceb46558ee39717992a372e00149c8285e530bdcc5c",
+      "passed": 7,
+      "skipped": 0,
+      "status": "PASSED",
+      "tests_run": 7
+    },
+    "backend_phase_freeze_and_wheel": {
+      "log": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\backend_delivery_final.log",
+      "log_sha256": "ad99570d32fbde98ac63112095a7be8a1c6b9dbd49f4837e5124ffb81d3f414b",
+      "passed": 10,
+      "skipped": 0,
+      "status": "PASSED",
+      "tests_run": 10
+    },
+    "configuration_and_archive": {
+      "log": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\test_configurable_final.log",
+      "log_sha256": "86310c1a44b4eacd5663e312fbce1799cb70874afa5c288d509afcc4521180fc",
+      "passed": 12,
+      "skipped": 0,
+      "status": "PASSED",
+      "tests_run": 12
+    },
+    "initialization_guards": {
+      "log": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\test_initialization_guards.log",
+      "log_sha256": "2206a4c8250326c07bfdbb1c40587229e5ea88e7b27cfe88a6e08292d6e81466",
+      "passed": 4,
+      "skipped": 0,
+      "status": "PASSED",
+      "tests_run": 4
+    },
+    "lifecycle_exit_and_tee": {
+      "log": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\test_lifecycle.log",
+      "log_sha256": "72e6e08f39cf92a96cdf524da9c922026b1f5492d875ea4ddeb4fd3453ddaea8",
+      "passed": 3,
+      "skipped": 1,
+      "status": "PASSED",
+      "tests_run": 4
+    },
+    "public_evaluator": {
+      "log": "D:\\MyProjects\\Crack_RTDETR\\outputs\\worktrees\\Crack_RTDETR-bench-yolov13l-flash-configurable\\outputs\\flash-development\\public_evaluator.log",
+      "log_sha256": "2f42edd74ef28c6308dab55338107e67819e4be4ee3144de2754c421ec821fa7",
+      "passed": 5,
+      "skipped": 0,
+      "status": "PASSED",
+      "tests_run": 5
+    }
+  },
+  "upstream": {
+    "backend_operation": "official explicit matmul + max-subtracted exp / sum; not torch SDPA",
+    "commit": "73289949533efac82bb5f72ec19b746618656bd2",
+    "compatibility_note": "Scoped author branch selection, explicit deterministic/dropout/scale/causal Flash kwargs, CPU-in-Flash guard and trusted local checkpoint compatibility; no attention formula, layout, architecture or initialization changes",
+    "default_backend": "flash",
+    "eval_backend": "native",
+    "license": "AGPL-3.0",
+    "license_sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+    "measured_identity": {
+      "1": {
+        "module_counts": {
+          "A2C2f": 2,
+          "AAttn": 16,
+          "ABlock": 16,
+          "DSC3k2": 6,
+          "DSConv": 58,
+          "DownsampleConv": 1,
+          "FullPAD_Tunnel": 7,
+          "HyperACE": 1
+        },
+        "parameters_unfused": 27566874,
+        "state_tensors": 1568
+      },
+      "80": {
+        "module_counts": {
+          "A2C2f": 2,
+          "AAttn": 16,
+          "ABlock": 16,
+          "DSC3k2": 6,
+          "DSConv": 58,
+          "DownsampleConv": 1,
+          "FullPAD_Tunnel": 7,
+          "HyperACE": 1
+        },
+        "parameters_unfused": 27627783,
+        "state_tensors": 1568
+      }
+    },
+    "model_yaml_sha256": "09654eb02148c31bf0ac1292ad6e8659a4a35a465ab5834eaff6773e3c3c7091",
+    "patch": "patches/0001-controlled-backend-and-local-checkpoints.patch",
+    "patch_sha256": "e7ab23b370ee8793c6db4ac4bffe80110275819b02ff79b7a6d4da66dc88deb7",
+    "patched_source_sha256": "159eb35b428625c445047d073b6202defaea66aadcf00aaa6747de266846c307",
+    "repository": "https://github.com/iMoonLab/yolov13.git",
+    "transfer": {
+      "destination_tensors": 1568,
+      "missing_or_reshaped_keys": [
+        "model.32.cv3.0.2.bias",
+        "model.32.cv3.0.2.weight",
+        "model.32.cv3.1.2.bias",
+        "model.32.cv3.1.2.weight",
+        "model.32.cv3.2.2.bias",
+        "model.32.cv3.2.2.weight"
+      ],
+      "protected_tensor_count": 773,
+      "skip_reasons": {
+        "model.32.cv3.0.2.bias": {
+          "reason": "nc80 -> nc1 class-output dimension only",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ]
+        },
+        "model.32.cv3.0.2.weight": {
+          "reason": "nc80 -> nc1 class-output dimension only",
+          "source_shape": [
+            80,
+            256,
+            1,
+            1
+          ],
+          "target_shape": [
+            1,
+            256,
+            1,
+            1
+          ]
+        },
+        "model.32.cv3.1.2.bias": {
+          "reason": "nc80 -> nc1 class-output dimension only",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ]
+        },
+        "model.32.cv3.1.2.weight": {
+          "reason": "nc80 -> nc1 class-output dimension only",
+          "source_shape": [
+            80,
+            256,
+            1,
+            1
+          ],
+          "target_shape": [
+            1,
+            256,
+            1,
+            1
+          ]
+        },
+        "model.32.cv3.2.2.bias": {
+          "reason": "nc80 -> nc1 class-output dimension only",
+          "source_shape": [
+            80
+          ],
+          "target_shape": [
+            1
+          ]
+        },
+        "model.32.cv3.2.2.weight": {
+          "reason": "nc80 -> nc1 class-output dimension only",
+          "source_shape": [
+            80,
+            256,
+            1,
+            1
+          ],
+          "target_shape": [
+            1,
+            256,
+            1,
+            1
+          ]
+        }
+      },
+      "transferred_elements": 27694476,
+      "transferred_tensors": 1562
+    },
+    "version": "8.3.63",
+    "weights": {
+      "asset_name": "yolov13l.pt",
+      "bytes": 111819790,
+      "github_asset_id": 266185226,
+      "github_digest": "sha256:f95ad5bbf3aa80a3df2a28ff4c623582ded6e02bb43d7cea9063c2b248e316cb",
+      "release_tag": "yolov13",
+      "sha256": "f95ad5bbf3aa80a3df2a28ff4c623582ded6e02bb43d7cea9063c2b248e316cb",
+      "trust_receipt": "Fetched official release URL, compared REST asset size/digest before any torch deserialization",
+      "url": "https://github.com/iMoonLab/yolov13/releases/download/yolov13/yolov13l.pt"
+    }
+  }
+}
