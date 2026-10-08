@@ -2,6 +2,8 @@
 
 日期：2026-10-09（北京时间）。分支 `bench/fasterrcnn-r50-fpn-configurable`，实际父提交 `a25e6379be06970f1aa02fbb85d2c9a614a6436f`。上游参考 `torchvision v0.16.2` / `c6f39778e636ec40a69bdbc74386818c57a65af3`；正式环境 torch2.1.2 + torchvision0.16.2 + NumPy1.26.4。
 
+已普通提交并推送的实现版本：`1e6392329dc7d24952532280952c09ceae1918b3`。后续交付记录提交只补充此已验证版本的标识，下面的服务器拉取命令会取得该分支当前HEAD，并核验包含此实现。
+
 默认：标准 Faster R-CNN ResNet50-FPN，官方 COCO detection pretrained 后替换背景0/crack1两类头；SGD、lr0=0.02、200轮、batch16、640、seed42、无EMA、不早停。这是项目建议配方，学习率与增强不声称是完整官方默认，收敛需由真实val验证。公共主表保持 `corrected_sorted_conf_mask_v1`，test不参与选best。
 
 服务器目录/环境/数据/4090容量尚未由本次 Codex 登录核验。Codex 不SSH、不启动正式长训练或全量test、不停止其他实验。一次容量预检通过不保证两组并发全过程不OOM。所有实际服务器身份由执行回执提供。
@@ -23,6 +25,7 @@ else
   git -C "$FRCNN_PROJECT" merge --ff-only "origin/$FRCNN_BRANCH"
 fi
 cd "$FRCNN_PROJECT"
+git merge-base --is-ancestor 1e6392329dc7d24952532280952c09ceae1918b3 HEAD || exit 1
 git log -1 --format='%H %s'
 ```
 
