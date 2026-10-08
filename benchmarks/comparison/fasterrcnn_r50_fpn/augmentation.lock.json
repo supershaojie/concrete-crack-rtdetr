@@ -1,0 +1,44 @@
+{
+  "repository": "https://github.com/ultralytics/ultralytics.git",
+  "tag": "v8.4.0",
+  "commit": "f2d3aed634a5b0e4828024718d4a61ab2f83fb19",
+  "file": "ultralytics/data/augment.py",
+  "url": "https://github.com/ultralytics/ultralytics/blob/f2d3aed634a5b0e4828024718d4a61ab2f83fb19/ultralytics/data/augment.py",
+  "file_sha256": "e31b60824bb2b1871b2b9a58c0db806a80b3b216f9c300fd28debfa4fe2e4855",
+  "excerpt": "cutmix_reference.py",
+  "excerpt_sha256": "81611e47ab91c530e0bbdedf61f61cd0758ccb83489c68cd3d8a9f89fc54c250",
+  "license": "AGPL-3.0",
+  "license_sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+  "integration": "Mosaic/CopyPaste/Affine -> MixUp -> detection CutMix -> explicit Albumentations no-op -> additive MotherHSV -> flips -> Format; partners use only bounded pre-transform and train records",
+  "reference_pipeline": {
+    "repository": "https://github.com/ultralytics/ultralytics.git",
+    "commit": "f4d8f7765a490f3920e2d14c592a2967e347f185",
+    "tag": "v8.3.20",
+    "file": "ultralytics/data/augment.py",
+    "local_excerpt": "augmentation_reference.py",
+    "excerpt_sha256": "b092162d46cae15f60608ed349654e000bf256e17d7223ae391ce008d08b48fd",
+    "verbatim_class_sha256": {
+      "BaseTransform": "f00cc4dfce08811fb08ad4e328e71d2cd63d5e77824af4d16340091888583082",
+      "Compose": "45e130eea656f00ece3cb5b858df3a4f9661a40030b67c207b4071be29a391c9",
+      "BaseMixTransform": "9f788b11bd9e5abac1c83356a5b3a7575de025e3c2b2223c5f1f0fbcd7b471b3",
+      "Mosaic": "4fd22276b6e30a44dc6f913d97a54cb9b210a526e077eeccc7fba151b8328fde",
+      "MixUp": "87bbd3041fd6eb508b0e93eb926cfdd9d1868ce215741218f742192aa1b20ef7",
+      "RandomPerspective": "74ca8a6ac8052aaff99efd710a5c8a985649d36e95d8d075af27ebf540e1ad17",
+      "RandomHSV": "5284b192c1027d8193e1f72139ac6806dbd3e39eaf1cec8db4ead2e1fe7d9eac",
+      "RandomFlip": "a5ab199d61ce2cd8ad47d46f3822e6e629c6c3d75fcb59e3c11880f83f6cbaee",
+      "LetterBox": "504ecaba0534aa2acb647feaba41bf9664ace8533bed86255fa86d1dec64e7d6",
+      "CopyPaste": "b322d597314fcd618825f4eeaea46056e034e2d166c4ba57df4c882051b74edd",
+      "Format": "84b48f19ce040c113009a1d0f98af8ef34558849ef9b063992dc48068c60b190"
+    },
+    "project_reference": "a7b3d842df60adf28e5cf35c086c58ef752674f8",
+    "reason": "Keep v8_aug_x13_01 Mosaic/geometry/MixUp/Format semantics while using v8.4.0 model/loss/optimizer."
+  },
+  "standalone_files": {
+    "instances.py": "f37ad93ee8314e24614fae1f9fd05170c25ec6f38c1afd1e1cea6718eda21de0",
+    "geometry_ops.py": "2e3718d767e6cc1626060641358eef45796d0423ac3b0fa3dc9201eb7658dd61",
+    "cutmix_reference.py": "e025ec667144f2f46dccb0a1c94ff363d7a7d0134ac99938a0ddfb067b8dcec1",
+    "augment_b19.py": "e429bda1ac3b737430697e07317c8fd859310cb8a09071aee68a30a9b2325333"
+  },
+  "local_geometry_source": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "standalone_imports": "local-only; no ultralytics import; transform class bodies remain unchanged"
+}

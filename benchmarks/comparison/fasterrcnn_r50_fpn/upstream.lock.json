@@ -1,0 +1,43 @@
+{
+  "torch": {
+    "version": "2.1.2",
+    "wheel_index": "https://download.pytorch.org/whl/cu118",
+    "cuda": "11.8"
+  },
+  "vision": {
+    "repository": "https://github.com/pytorch/vision.git",
+    "tag": "v0.16.2",
+    "commit": "c6f39778e636ec40a69bdbc74386818c57a65af3",
+    "version": "0.16.2",
+    "license": "BSD-3-Clause",
+    "model": "torchvision/models/detection/faster_rcnn.py",
+    "training_reference": "references/detection/train.py",
+    "patches": [],
+    "source_sha256": "988ca36554828de0f4a38d06bb0a606992c0aaf230863eebb03eeba788abe448",
+    "license_sha256": "6502f676851cfe25f8af75531dfb32375b7325b73c37e7b43741fa422893e71d"
+  },
+  "augmentation": {
+    "repository": "https://github.com/ultralytics/ultralytics.git",
+    "tag": "v8.3.20",
+    "commit": "f4d8f7765a490f3920e2d14c592a2967e347f185",
+    "version": "8.3.20",
+    "license": "AGPL-3.0",
+    "license_sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+    "usage": "data and bbox augmentation only; no YOLO detector construction or weights",
+    "patches": [
+      "data_adapter.py: additive MotherHSV and explicit NoAlbumentations; read-only source/cache isolation"
+    ],
+    "source_sha256": "55ec50c86e70243a707e0dd957c4091988d5ea2157f84cb27a06941320cef0a7"
+  },
+  "reference_adapter_commit": "61c386bc722b11208453cab0808d8f6edb15385d",
+  "mother_commit": "a0459d6a652cb702699087c88fa39a3e4c4087ec",
+  "public_base": "529c456b9404f1d9ab66d82d2b2f9ec7e0c98545",
+  "hash_normalization": "CRLF_to_LF",
+  "coco_v1": {
+    "enum": "FasterRCNN_ResNet50_FPN_Weights.COCO_V1",
+    "url": "https://download.pytorch.org/models/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth",
+    "sha256": "258fb6c638b15964ddcdd1ae0748c5eef1be9e732750120cc857feed3faac384",
+    "bytes": 167502836,
+    "verification_source": "complete file actually downloaded and measured in this implementation on 2026-10-09"
+  }
+}
