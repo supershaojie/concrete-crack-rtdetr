@@ -1,0 +1,56 @@
+{
+  "repository": "https://github.com/ultralytics/ultralytics.git",
+  "tag": "v8.4.0",
+  "commit": "f2d3aed634a5b0e4828024718d4a61ab2f83fb19",
+  "file": "ultralytics/data/augment.py",
+  "url": "https://github.com/ultralytics/ultralytics/blob/f2d3aed634a5b0e4828024718d4a61ab2f83fb19/ultralytics/data/augment.py",
+  "file_sha256": "e31b60824bb2b1871b2b9a58c0db806a80b3b216f9c300fd28debfa4fe2e4855",
+  "excerpt": "cutmix_reference.py",
+  "excerpt_sha256": "054c2aa5d04b3d89487c4dbf9af280eabe42ca3c9e744c7684dce770ba55c230",
+  "license": "AGPL-3.0",
+  "license_sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+  "integration": "Mosaic/CopyPaste/Affine -> MixUp -> detection CutMix -> explicit Albumentations no-op -> additive MotherHSV -> flips -> Format; partners use only bounded pre-transform and train records",
+  "reference_pipeline": {
+    "repository": "https://github.com/ultralytics/ultralytics.git",
+    "commit": "f4d8f7765a490f3920e2d14c592a2967e347f185",
+    "tag": "v8.3.20",
+    "file": "ultralytics/data/augment.py",
+    "local_excerpt": "augmentation_reference.py",
+    "excerpt_sha256": "8ff2b54271405a08413f56f74889cfd2b7f5e7f55df23b6337b1599ea72ee5a7",
+    "verbatim_class_sha256": {
+      "BaseTransform": "f00cc4dfce08811fb08ad4e328e71d2cd63d5e77824af4d16340091888583082",
+      "Compose": "45e130eea656f00ece3cb5b858df3a4f9661a40030b67c207b4071be29a391c9",
+      "BaseMixTransform": "9f788b11bd9e5abac1c83356a5b3a7575de025e3c2b2223c5f1f0fbcd7b471b3",
+      "Mosaic": "4fd22276b6e30a44dc6f913d97a54cb9b210a526e077eeccc7fba151b8328fde",
+      "MixUp": "87bbd3041fd6eb508b0e93eb926cfdd9d1868ce215741218f742192aa1b20ef7",
+      "RandomPerspective": "74ca8a6ac8052aaff99efd710a5c8a985649d36e95d8d075af27ebf540e1ad17",
+      "RandomHSV": "5284b192c1027d8193e1f72139ac6806dbd3e39eaf1cec8db4ead2e1fe7d9eac",
+      "RandomFlip": "a5ab199d61ce2cd8ad47d46f3822e6e629c6c3d75fcb59e3c11880f83f6cbaee",
+      "LetterBox": "504ecaba0534aa2acb647feaba41bf9664ace8533bed86255fa86d1dec64e7d6",
+      "CopyPaste": "b322d597314fcd618825f4eeaea46056e034e2d166c4ba57df4c882051b74edd",
+      "Format": "84b48f19ce040c113009a1d0f98af8ef34558849ef9b063992dc48068c60b190"
+    },
+    "project_reference": "a7b3d842df60adf28e5cf35c086c58ef752674f8",
+    "reason": "Keep v8_aug_x13_01 Mosaic/geometry/MixUp/Format semantics while using v8.4.0 model/loss/optimizer.",
+    "source_excerpt_sha256": "b092162d46cae15f60608ed349654e000bf256e17d7223ae391ce008d08b48fd"
+  },
+  "project_reference_commit": "a25e6379be06970f1aa02fbb85d2c9a614a6436f",
+  "source_excerpt_sha256": "81611e47ab91c530e0bbdedf61f61cd0758ccb83489c68cd3d8a9f89fc54c250",
+  "isolated_data_only_files": {
+    "bbox_reference.py": "248c911c3242d402322dcf6e8dbb9e4a84aad4a1e74dab8e6e17de05236a6571",
+    "image_adapters.py": "cdb9b4c574dc516fe53e519c9f74fb6c5244291e756dc62108f4ea2296da8d75",
+    "augment_b19.py": "2367f14045adeaae3065452205c80c34d769f25733864108dddcf97f0c12c12f"
+  },
+  "bbox_sources": {
+    "instance.py": "4129acee63c76797bc246b8960ba212d696dcc8d1a044f1da1bdab3942b846d3",
+    "ops.py": "76c5cd772ad8c7fa7a8a8eb37b38a0f69f387714bb53ed74bdc787355bb620bd",
+    "metrics.py": "9ac3da5dcdb8e2775cd0d3c18673651ec2a456175cf93320167e4d0139596552"
+  },
+  "excluded_imports": "No Ultralytics package, model, loss, optimizer, trainer or Albumentations is imported.",
+  "light_data_adapter": {
+    "source": "benchmarks/comparison/yolo26m/data.py",
+    "source_project_commit": "a25e6379be06970f1aa02fbb85d2c9a614a6436f",
+    "source_lf_sha256": "ce404940e230a797f90b97ae44e0f0121c307e8988b71db964688d5db15c3758",
+    "adaptation": "Preserve reused GT bytes rather than rewriting info; D-FINE derives train COCO and native targets separately."
+  }
+}

@@ -1,0 +1,11 @@
+# Fresh isolated environment only. Compatible existing Torch/Torchvision is reused read-only.
+# Python 3.10.14 is the documented fresh-environment reference; 3.9+ supported by this adapter.
+torch==2.1.2
+torchvision==0.16.2
+numpy==1.26.4
+scipy==1.11.4
+Pillow==10.4.0
+opencv-python==4.10.0.84
+PyYAML==6.0.2
+matplotlib==3.8.4
+faster-coco-eval==1.6.7
