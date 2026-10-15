@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "kind": "implementation_spec_not_executed_results",
+  "input_handoff": "inputs/Chapter4_Visualization_Handoff_Final_20261015.zip",
+  "input_registry": "model_registry.json",
+  "input_order": "model_order.json",
+  "model_ids": [
+    "fasterrcnn_r50_fpn",
+    "yolov5m",
+    "yolov8m",
+    "yolo11m",
+    "yolov13l",
+    "yolo26m",
+    "rtdetr_c2",
+    "lcbr_detr"
+  ],
+  "display_names": [
+    "Faster R-CNN",
+    "YOLOv5m",
+    "YOLOv8m",
+    "YOLOv11m",
+    "YOLOv13-L",
+    "YOLOv26m",
+    "RT-DETR-R18",
+    "ours"
+  ],
+  "deferred_candidates": [
+    "D-FINE-M"
+  ],
+  "final_sample_count_default": 5,
+  "sample_count_configurable": [
+    4,
+    5,
+    6
+  ],
+  "candidate_count_target": 40,
+  "shared_cases_for_both_figures": true,
+  "sample_selection_status": "requires_real_predictions_and_image_review",
+  "display_policy": {
+    "score_threshold_initial": 0.25,
+    "threshold_scope": "one common threshold for all models and samples; visualization only",
+    "raw_formal_export_threshold": 0.001,
+    "source_metrics": "retain formal metrics; plotting does not replace AP protocol",
+    "gt_color": "#00A6A6",
+    "prediction_color": "#D62728",
+    "same_line_width_and_label_rule": true,
+    "max_detections": "native formal policy; no extra filtering or NMS",
+    "coordinates": "original-image pixels",
+    "shared_view_region_per_case": true,
+    "preserve_source_aspect_ratio": true
+  },
+  "layout": {
+    "models_axis": "rows",
+    "samples_axis": "columns",
+    "model_label_column": "left; one horizontal label per row; no rotated text",
+    "column_header_template": "Image {index}",
+    "detection_first_row": "Ground truth",
+    "heatmap_first_row": "Original",
+    "total_rows_with_reference": 9,
+    "same_model_order_for_both_figures": true,
+    "background": "#FFFFFF",
+    "rules": "top/header/bottom horizontal rules; no dense cell grid",
+    "font_preference": [
+      "Times New Roman",
+      "Liberation Serif"
+    ],
+    "model_label_font_pt": [
+      8,
+      9
+    ],
+    "ours_label_bold": true,
+    "model_labels_repeated_inside_cells": false,
+    "detections_in_heatmap_panels": false
+  },
+  "cam": {
+    "method": "Grad-CAM++",
+    "validation_status": "not_yet_implemented_or_gpu_verified",
+    "eval_mode": true,
+    "dtype": "FP32 using each model formal restoration",
+    "batch": 1,
+    "main_target_protocol": "native crack detection score for the same fixed GT-associated instances; record raw candidate/ROI/query mapping",
+    "gt_used_for": "instance correspondence only; not spatial masking or target loss",
+    "layer_policy": "choose by comparable functional stage/stride and validate gradients on validation samples; record actual modules",
+    "colormap": "jet",
+    "overlay_alpha": 0.45,
+    "normalization": "same finite positive-map per-map 0..1 algorithm for all panels; invalid/near-zero maps must fail explicitly",
+    "colorbar_label": "Relative response",
+    "compare_absolute_intensity_between_models": false,
+    "mask_outside_gt_or_prediction_boxes": false,
+    "original_model_detach_semantics_preserved": true,
+    "explain_cbr_localization_using": "final refined boxes, matched IoU and ablation evidence; class CAM alone is not module-specific proof",
+    "raw_cam_storage": "compressed native-resolution map plus transform and target metadata"
+  },
+  "output": {
+    "stems": [
+      "detection_comparison",
+      "heatmap_comparison"
+    ],
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "raster_target_dpi": [
+      300,
+      600
+    ],
+    "verify_actual_pixel_and_physical_sizes": true,
+    "package_limit_bytes_exclusive": 100000000,
+    "model_cache_independent": true,
+    "record_case_and_protocol_fingerprints": true,
+    "include_selected_images_and_gt": true,
+    "include_selected_predictions_and_cam": true,
+    "include_all_test_per_image_statistics": true,
+    "retain_full_test_caches_on_server": true,
+    "include_weights": false,
+    "include_full_dataset": false
+  },
+  "server": {
+    "launcher_suggested": "scripts/autodl_chapter4_visualization.sh",
+    "tmux_session_suggested": "ch4-vis-eight",
+    "model_execution": "separate pinned Python/source process per model",
+    "protect_existing_training": true,
+    "add_model_reuses_existing_cases_and_results": true
+  }
+}

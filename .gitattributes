@@ -1,0 +1,5 @@
+scripts/autodl_chapter4_visualization.sh text eol=lf
+.gitattributes text eol=lf
+benchmarks/visualization/chapter4/** text eol=lf
+configs/chapter4_visual*.json text eol=lf
+docs/chapter4_visualization* text eol=lf

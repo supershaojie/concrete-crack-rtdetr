@@ -1,0 +1,97 @@
+{
+  "validation_date": "2026-10-16 Asia/Shanghai",
+  "scope": "LOCAL_CPU_AND_ARCHIVE_ONLY; no native model restoration, inference or real CAM executed",
+  "input_archive": {
+    "name": "Chapter4_Visualization_Codex_Implementation_20261015.zip",
+    "bytes": 27465708,
+    "sha256": "9de4ed73bc71db63b056767d39c0cb83f18d43e59ba2bb954bf1579b47fa07d8"
+  },
+  "prompt_and_visual_spec_read_in_full": true,
+  "registry_sha256": "f65df0b907ab574c18eb9e08ad91fdb01d145913c835eb95a071fd26e16cf3f8",
+  "handoff_files_sha256_checked": 960,
+  "fixed_test_images": 864,
+  "fixed_test_gt_boxes": 6663,
+  "local_test_image_sizes_and_label_sha256_all_match": true,
+  "cache_checks": [
+    {
+      "model_id": "fasterrcnn_r50_fpn",
+      "images": 864,
+      "boxes": 133946,
+      "formal_source_sha256": "85e17aca7353db72fe0e1023669a4b883cd7b9f49b15186793375122411fa950"
+    },
+    {
+      "model_id": "yolov5m",
+      "images": 864,
+      "boxes": 147791,
+      "formal_source_sha256": "23ba81ed646a91c47938118b00cd60a1019615dd77df0f6c7ff0f09b8e062085"
+    },
+    {
+      "model_id": "yolov13l",
+      "images": 864,
+      "boxes": 81448,
+      "formal_source_sha256": "7fc919bd4b29a048a6ea283be6a6dd7297b19ac72fab93f204f4edcdc37d559c"
+    },
+    {
+      "model_id": "rtdetr_c2",
+      "images": 864,
+      "boxes": 259200,
+      "formal_source_sha256": "91c957c2e778bec7b0a983a1408b28313ff1165df72e26ee2f7630634041fc92"
+    }
+  ],
+  "c2_precision": {
+    "original_bbox_format": "top-left xywh",
+    "bbox_decimals": 3,
+    "score_decimals": 5,
+    "join": "verified file_name; never numeric image_id",
+    "boxes": 259200
+  },
+  "cpu_tests": {
+    "passed": 17,
+    "failed": 0,
+    "log_sha256": "e62f1944b1fb36d7a5af2e3603160950d8ca4dbdf7a1541e5514c7e18bfae886",
+    "gradcampp_check": "NumPy equation/invalid-response checks; no real autograd assertion",
+    "cam_grouping_and_recovery": "explicit mocked unit fixture only"
+  },
+  "actual_offline_statistics_rows": 6912,
+  "actual_layout_check": {
+    "rows": 9,
+    "columns": 5,
+    "pixels": [
+      3240,
+      4275
+    ],
+    "dpi": 450,
+    "inches": [
+      7.2,
+      9.5
+    ],
+    "confirmed_by_image_view": true,
+    "contains_only_four_real_caches_and_twenty_labeled_pending_cells": true,
+    "advantage_cases_selected": false,
+    "scientific_final": false
+  },
+  "shell_checks": {
+    "bash_syntax": "passed",
+    "help_entry": "passed",
+    "tmux_quoting_and_existing_name_suffix": "mocked tmux only; passed with spaces/apostrophe",
+    "actual_tmux_started": false
+  },
+  "packing_checks": {
+    "zip_member_sha256_and_crc": "passed on explicit unit fixture",
+    "exclusive_byte_bound": "passed including over-limit refusal",
+    "missing_required_review_materials": "refused",
+    "actual_server_result_package": "not_generated_locally"
+  },
+  "pending_server_checks": [
+    "Eight actual checkpoint SHA and pinned environment/import restoration",
+    "Three fixed-image native/cache class-count-coordinate-score parity per model",
+    "Three validation-image fixed-layer real autograd, shape and non-square inverse checks per model",
+    "Forty real Grad-CAM++ cells and unchanged parameters/BN/detections",
+    "Real visual review of candidate images/GT and diverse five-case selection",
+    "Final two-figure visual QA and complete review ZIP actual bytes <100000000"
+  ],
+  "dfine_m": "deferred; not loaded or run",
+  "input_visual_spec_sha256": "be2d8a91b7426e34d71363f83c7606b12ecab2b7e994270c9df2e03e786c86aa",
+  "repository_visual_spec_sha256": "1211db9dbd3f8912eee47fbaf88ee9f7180a73a6a1b926c391831c3af538ca63",
+  "visual_spec_normalization": "trailing blank line removed; JSON values unchanged"
+}

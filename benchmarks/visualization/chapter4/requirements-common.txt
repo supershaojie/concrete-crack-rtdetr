@@ -1,0 +1,4 @@
+numpy==1.26.4
+Pillow==10.4.0
+reportlab==4.2.5
+tqdm==4.66.5

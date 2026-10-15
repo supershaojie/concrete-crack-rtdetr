@@ -79,3 +79,6 @@ ultralytics-main/docs/
 # =========================
 .DS_Store
 Thumbs.db
+
+# Isolated Chapter 4 analysis environment and generated artifacts
+.venv-ch4/

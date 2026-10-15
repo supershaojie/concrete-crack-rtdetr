@@ -22,3 +22,10 @@ This project focuses on concrete crack detection using the Ultralytics implement
 ## Notes
 
 Large files such as datasets, training outputs, logs and model weights are not tracked by Git.
+
+## Chapter 4 visualization
+
+The isolated eight-model detection comparison and Grad-CAM++ pipeline is documented in
+[docs/chapter4_visualization.md](docs/chapter4_visualization.md), including server checkout,
+CPU preflight, tmux, resumable caches, visual case review and a strictly sub-100MB review ZIP.
+The default matrix uses the same five images as columns, Faster R-CNN first and ours last.

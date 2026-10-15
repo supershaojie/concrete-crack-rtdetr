@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "model_ids": ["fasterrcnn_r50_fpn", "yolov5m", "yolov8m", "yolo11m", "yolov13l", "yolo26m", "rtdetr_c2", "lcbr_detr"],
+  "deferred_candidates": ["D-FINE-M"],
+  "sample_count": 5,
+  "candidate_count": 40,
+  "display_threshold": 0.25,
+  "formal_export_threshold": 0.001,
+  "layout": {"width_inches": 7.2, "max_height_inches": 9.5, "dpi": 450, "overlay_alpha": 0.45},
+  "cam": {
+    "method": "ch4-gradcampp-gradient-powers-1.0",
+    "layer_policy": "fixed equal-weight stride8/16/32 classification-connected detection features v1",
+    "target": "arithmetic mean of the same fixed GT-associated native crack detection probabilities",
+    "minimum_correspondence_iou": 0.1,
+    "normalization": "per-scale positive min-max; equal-weight mean including unused=zero; full-image min-max",
+    "weighting_epsilon": 0.000001,
+    "gradient_floor": 0.000000000001,
+    "positive_response_floor": 0.000000000001,
+    "colormap": "JET-256-linear-segments-v1",
+    "batch": 1
+  },
+  "smoke_tolerance": {"input_pixel_atol": 0.002, "coordinate_rtol": 0.000001, "score_atol": 0.00002},
+  "smoke_sample_count": 3,
+  "validation_sample_count": 3,
+  "package_limit_bytes_exclusive": 100000000
+}
